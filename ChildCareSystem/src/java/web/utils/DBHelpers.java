@@ -20,8 +20,8 @@ import javax.sql.DataSource;
 public class DBHelpers implements Serializable{
     public static Connection makeConnection() throws NamingException, SQLException {
         Context currentContext = new InitialContext();
-        Context tomcatContext = (Context)currentContext.lookup("java:comp/env");
-        DataSource ds = (DataSource) tomcatContext.lookup("DB2021");
+        Context tomcatContext = (Context)currentContext.lookup("java:comp/env"); //default
+        DataSource ds = (DataSource) tomcatContext.lookup("SWP391"); //name
         Connection con = ds.getConnection();
         return con;
     }
