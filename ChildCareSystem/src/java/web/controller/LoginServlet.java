@@ -11,15 +11,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.tblIdentity.IdentityDAO;
+import web.tblIdentity.IdentityDTO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author Admin
  */
-public class DispatchServlet extends HttpServlet {
-private static final String ADD="AddCustomerServlet";
-private static final String LOGIN="LoginServlet";
-private static final String LOGOUT="LogOutServlet";
+public class LoginServlet extends HttpServlet {
+private static final String SUCCESS="index.html";
 private static final String ERROR="error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +34,24 @@ private static final String ERROR="error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login") ) {
-                url= LOGIN;
-            }
-            else if(button.equalsIgnoreCase("Register") ) {
-                url= ADD;
-            }
-            else if(button.equalsIgnoreCase("LogOut")){
-                url=LOGOUT;
-            }
-            
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        String url=ERROR;
+        try{
+            String phoneNum= request.getParameter("phoneNum");
+            String password= request.getParameter("password");
+            IdentityDAO dao = new IdentityDAO();
+            String epassword= dao.sha256(password);
+           IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
+           HttpSession session = request.getSession();
+           if(identity!=null){
+               session.setAttribute("LOGIN_USER", identity);
+               url=SUCCESS;  
+        }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            log("Error at LoginController:"+e.toString());
+        }finally{
+            response.sendRedirect(url);
         }
     }
 

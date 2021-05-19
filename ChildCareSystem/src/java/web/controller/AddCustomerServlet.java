@@ -11,16 +11,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import web.tblCustomer.CustomerDAO;
+import web.tblCustomer.CustomerDTO;
+import web.tblCustomer.CustomerError;
+import web.tblIdentity.IdentityDAO;
+import web.tblIdentity.IdentityDTO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author Admin
  */
-public class DispatchServlet extends HttpServlet {
-private static final String ADD="AddCustomerServlet";
-private static final String LOGIN="LoginServlet";
-private static final String LOGOUT="LogOutServlet";
-private static final String ERROR="error.jsp";
+public class AddCustomerServlet extends HttpServlet {
+private static final String ERROR="register.jsp";
+private static final String SUCCESS="login.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,23 +36,48 @@ private static final String ERROR="error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login") ) {
-                url= LOGIN;
-            }
-            else if(button.equalsIgnoreCase("Register") ) {
-                url= ADD;
-            }
-            else if(button.equalsIgnoreCase("LogOut")){
-                url=LOGOUT;
-            }
-            
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+       String url=ERROR;
+       try{
+           String fullName= request.getParameter("fullName");
+           String email= request.getParameter("email");
+           String address= request.getParameter("address");
+           String phoneNum= request.getParameter("phoneNum");
+           String password = request.getParameter("password");
+           String cpassword= request.getParameter("cpassword");
+           String birthday = request.getParameter("birthday");
+           String citizenID= request.getParameter("citizenID");
+           String roleID= request.getParameter("roleID");
+           CustomerDAO dao= new CustomerDAO();
+           CustomerError error= new CustomerError();
+           boolean check= dao.checkPassword(password, cpassword);
+           if(!check){
+               error.setPasswordError("Password and Confirm password are unmatch!!");
+               request.setAttribute("ERROR", error);         
+           } else{
+           boolean check1 = dao.checkDuplicate(citizenID);
+           if(check1){
+               error.setCitizenIDError("Citizen is existed!!");
+               request.setAttribute("ERROR", error);
+       }
+           else {
+               IdentityDAO dao1= new IdentityDAO();
+               String epassword= dao1.sha256(password);
+               IdentityDTO identity= new IdentityDTO(phoneNum, epassword, roleID);
+               dao1.addIdentity(identity);
+               String identityID = dao1.queryID(phoneNum);
+               CustomerDTO cus= new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
+               dao.addCustomer(cus);
+               url=SUCCESS;
+           }
+       }
+       }
+       catch(Exception e){
+       log("Error at CreateController: "+ e.toString());
+       } finally{
+           request.getRequestDispatcher(url).forward(request, response);
+       }      
     }
+       
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -21,7 +21,7 @@ public class DBHelpers implements Serializable{
     public static Connection makeConnection() throws NamingException, SQLException {
         Context currentContext = new InitialContext();
         Context tomcatContext = (Context)currentContext.lookup("java:comp/env");
-        DataSource ds = (DataSource) tomcatContext.lookup("DB2021");
+        DataSource ds = (DataSource) tomcatContext.lookup("SWP391");
         Connection con = ds.getConnection();
         return con;
     }
