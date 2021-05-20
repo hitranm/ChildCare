@@ -16,8 +16,10 @@
         <form action="DispatchServlet" method="POST">
             FullName<input type="text" name="fullName" value="" required="true"> </br>
             Email<input type="text" name="email" value="" pattern="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$" required="true"></br>
+            ${ERROR.emailError}</br>
             Address<input type="text" name="address" value=""></br>
             Phone Number<input type="text" name="phoneNum" pattern="[0-9]{10}" required="true"></br>
+            ${ERROR1.phoneNumError}</br>
             Password<input type="password" name="password" pattern="[a-z0-9_-]{6,50}$" required="true"></br>
             ${ERROR.passwordError}</br>
             Confirm Password<input type="password" name="cpassword" pattern="[a-z0-9_-]{6,50}$" required="true"></br>

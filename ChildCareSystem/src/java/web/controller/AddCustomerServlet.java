@@ -16,6 +16,7 @@ import web.tblCustomer.CustomerDTO;
 import web.tblCustomer.CustomerError;
 import web.tblIdentity.IdentityDAO;
 import web.tblIdentity.IdentityDTO;
+import web.tblIdentity.IdentityError;
 
 /**
  *
@@ -49,26 +50,39 @@ private static final String SUCCESS="login.jsp";
            String roleID= request.getParameter("roleID");
            CustomerDAO dao= new CustomerDAO();
            CustomerError error= new CustomerError();
+           IdentityError error1= new IdentityError();
            boolean check= dao.checkPassword(password, cpassword);
+           boolean check2= dao.checkEmail(email);
            if(!check){
                error.setPasswordError("Password and Confirm password are unmatch!!");
                request.setAttribute("ERROR", error);         
            } else{
-           boolean check1 = dao.checkDuplicate(citizenID);
+           boolean check1 = dao.checkCitizenID(citizenID);
            if(check1){
-               error.setCitizenIDError("Citizen is existed!!");
+               error.setCitizenIDError("Citizen has been used!!");
                request.setAttribute("ERROR", error);
        }
+           if(check2){
+               error.setEmailError("Email has been used!!");
+               request.setAttribute("ERROR", error);
+           }
+           
            else {
                IdentityDAO dao1= new IdentityDAO();
                String epassword= dao1.sha256(password);
+               boolean check3= dao1.checkPhoneNum(phoneNum);
+               if(check3){
+                   error1.setPhoneNumError("Phone Number has been used!!");
+                   request.setAttribute("ERROR1", error1);
+               }else {
                IdentityDTO identity= new IdentityDTO(phoneNum, epassword, roleID);
                dao1.addIdentity(identity);
                String identityID = dao1.queryID(phoneNum);
                CustomerDTO cus= new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
                dao.addCustomer(cus);
                url=SUCCESS;
-           }
+                     }
+                 }
        }
        }
        catch(Exception e){

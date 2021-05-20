@@ -12,6 +12,7 @@ package web.tblCustomer;
 public class CustomerError {
     private String citizenIDError;
     private String passwordError;
+    private String emailError;
 
     public CustomerError() {
     }
@@ -30,6 +31,14 @@ public class CustomerError {
 
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
+    }
+
+    public String getEmailError() {
+        return emailError;
+    }
+
+    public void setEmailError(String emailError) {
+        this.emailError = emailError;
     }
     
 }

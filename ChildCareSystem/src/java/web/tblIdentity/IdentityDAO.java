@@ -118,4 +118,31 @@ public class IdentityDAO {
         }
         return identityID;
     }
+          public boolean checkPhoneNum(String phoneNum) throws SQLException{
+        boolean check=false;
+        Connection conn= null;
+        PreparedStatement stm= null;
+        ResultSet rs=null;
+        try{
+            conn=DBHelpers.makeConnection();
+            if(conn!=null){
+            String sql="SELECT PhoneNumber "
+                    + " FROM tblIdentity"
+                    +" WHERE PhoneNumber=?";
+           stm=conn.prepareStatement(sql);
+           stm.setString(1, phoneNum);
+           rs=stm.executeQuery();
+           if(rs.next()){
+               check=true;
+           }
+      }  
+      }catch(Exception e) {
+            
+        }finally{
+            if(rs!=null) rs.close();
+            if(stm!=null) stm.close();
+            if(conn!=null) conn.close();
+            }
+        return check;
+        }
 }

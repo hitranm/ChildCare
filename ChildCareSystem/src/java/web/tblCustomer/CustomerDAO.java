@@ -41,7 +41,7 @@ public class CustomerDAO {
             if(conn!=null) conn.close();
         }
     }
-     public boolean checkDuplicate(String citizenID) throws SQLException{
+     public boolean checkCitizenID(String citizenID) throws SQLException{
         boolean check=false;
         Connection conn= null;
         PreparedStatement stm= null;
@@ -78,5 +78,31 @@ public class CustomerDAO {
              
      }
 }
-
+public boolean checkEmail(String email) throws SQLException{
+        boolean check=false;
+        Connection conn= null;
+        PreparedStatement stm= null;
+        ResultSet rs=null;
+        try{
+            conn=DBHelpers.makeConnection();
+            if(conn!=null){
+            String sql="SELECT Email "
+                    + " FROM tblCustomer"
+                    +" WHERE Email=?";
+           stm=conn.prepareStatement(sql);
+           stm.setString(1, email);
+           rs=stm.executeQuery();
+           if(rs.next()){
+               check=true;
+           }
+      }  
+      }catch(Exception e) {
+            
+        }finally{
+            if(rs!=null) rs.close();
+            if(stm!=null) stm.close();
+            if(conn!=null) conn.close();
+            }
+        return check;
+        }
 }
