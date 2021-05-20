@@ -49,7 +49,7 @@ private static final String ERROR="error.jsp";
         }
         catch(Exception e){
             e.printStackTrace();
-            log("Error at LoginController:"+e.toString());
+            log("Error at LoginServlet:"+e.toString());
         }finally{
             response.sendRedirect(url);
         }

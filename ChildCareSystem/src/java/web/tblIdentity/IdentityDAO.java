@@ -19,7 +19,7 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class IdentityDAO {
-     public static void addIdentity(IdentityDTO identity) throws ClassNotFoundException, SQLException{
+     public boolean addIdentity(IdentityDTO identity) throws ClassNotFoundException, SQLException{
         Connection conn=null;
         PreparedStatement stm=null;
         try{
@@ -30,7 +30,9 @@ public class IdentityDAO {
                 stm.setString(1, identity.getPhoneNum());
                 stm.setString(2, identity.getPassword());
                 stm.setString(3, identity.getRoleID());
-                stm.executeUpdate();
+                int row= stm.executeUpdate();
+                if(row>0)
+                    return true;
             }
             
             
@@ -40,6 +42,7 @@ public class IdentityDAO {
             if(stm!=null) stm.close();
             if(conn!=null) conn.close();
         }
+        return false;
     }
      public static String sha256(String password) {
         try {

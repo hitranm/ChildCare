@@ -16,7 +16,7 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class CustomerDAO {
-        public static void addCustomer(CustomerDTO cus) throws ClassNotFoundException, SQLException{
+        public boolean addCustomer(CustomerDTO cus) throws ClassNotFoundException, SQLException{
         Connection conn=null;
         PreparedStatement stm=null;
         try{
@@ -30,7 +30,9 @@ public class CustomerDAO {
                 stm.setString(4, cus.getAddress());
                 stm.setString(5, cus.getBirthday());
                 stm.setString(6, cus.getCitizenID());
-                stm.executeUpdate();
+               int row= stm.executeUpdate();
+               if(row>0)
+                   return true;
             }
             
             
@@ -40,6 +42,7 @@ public class CustomerDAO {
             if(stm!=null) stm.close();
             if(conn!=null) conn.close();
         }
+        return false;
     }
      public boolean checkCitizenID(String citizenID) throws SQLException{
         boolean check=false;

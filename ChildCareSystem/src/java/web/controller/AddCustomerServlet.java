@@ -39,7 +39,7 @@ private static final String SUCCESS="login.jsp";
         response.setContentType("text/html;charset=UTF-8");
        String url=ERROR;
        try{
-           String fullName= request.getParameter("fullName");
+           String fullName=request.getParameter("fullName");
            String email= request.getParameter("email");
            String address= request.getParameter("address");
            String phoneNum= request.getParameter("phoneNum");
@@ -76,17 +76,20 @@ private static final String SUCCESS="login.jsp";
                    request.setAttribute("ERROR1", error1);
                }else {
                IdentityDTO identity= new IdentityDTO(phoneNum, epassword, roleID);
-               dao1.addIdentity(identity);
+               boolean flag= dao1.addIdentity(identity);
+               if(flag){
                String identityID = dao1.queryID(phoneNum);
                CustomerDTO cus= new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
-               dao.addCustomer(cus);
+               boolean flag1= dao.addCustomer(cus);
+               if(flag1)
                url=SUCCESS;
-                     }
+               }      
+               }
                  }
        }
        }
        catch(Exception e){
-       log("Error at CreateController: "+ e.toString());
+       log("Error at AddCustomerServlet: "+ e.toString());
        } finally{
            request.getRequestDispatcher(url).forward(request, response);
        }      
