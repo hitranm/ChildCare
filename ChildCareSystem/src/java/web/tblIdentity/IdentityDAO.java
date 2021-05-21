@@ -44,7 +44,7 @@ public class IdentityDAO {
         }
         return false;
     }
-     public static String sha256(String password) {
+     public String sha256(String password) {
         try {
             // Static getInstance method is called with hashing SHA
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -102,7 +102,7 @@ public class IdentityDAO {
         try{
             conn = DBHelpers.makeConnection();
             if(conn!=null){
-                String sql = "SELECT IdentityID "
+                String sql = "SELECT IdentityID"
                         + " FROM tblIdentity "
                         +" WHERE PhoneNumber=?";
                 stm = conn.prepareStatement(sql);

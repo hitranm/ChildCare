@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.tblCustomer.CustomerDAO;
+import web.tblCustomer.CustomerDTO;
 import web.tblIdentity.IdentityDAO;
 import web.tblIdentity.IdentityDTO;
 
@@ -20,8 +22,8 @@ import web.tblIdentity.IdentityDTO;
  * @author Admin
  */
 public class LoginServlet extends HttpServlet {
-private static final String SUCCESS="index.html";
-private static final String ERROR="error.jsp";
+private static final String SUCCESS="home.jsp";
+private static final String ERROR="login.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,12 +42,17 @@ private static final String ERROR="error.jsp";
             String password= request.getParameter("password");
             IdentityDAO dao = new IdentityDAO();
             String epassword= dao.sha256(password);
+            CustomerDAO dao1= new CustomerDAO();
            IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
            HttpSession session = request.getSession();
            if(identity!=null){
-               session.setAttribute("LOGIN_USER", identity);
+               String name= dao1.queryCustomer(phoneNum);
+               session.setAttribute("LOGIN_USER", name);
                url=SUCCESS;  
-        }
+        } else{
+               String msg="Phone number or password is not correct!";
+               request.setAttribute("MSG", msg);
+           }
         }
         catch(Exception e){
             e.printStackTrace();

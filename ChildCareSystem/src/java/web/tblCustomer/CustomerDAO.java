@@ -108,4 +108,30 @@ public boolean checkEmail(String email) throws SQLException{
             }
         return check;
         }
+        public String queryCustomer(String phoneNum) throws SQLException{
+        String fullName="";
+        Connection conn=null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try{
+            conn = DBHelpers.makeConnection();
+            if(conn!=null){
+                String sql = "SELECT FullName "
+                        + " FROM tblIdentity "
+                        +" WHERE PhoneNumber=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, phoneNum);
+                rs= stm.executeQuery();
+                if(rs.next()){
+                   fullName= rs.getString("FullName");
+                }
+            }
+        }catch(Exception e){}
+        finally{
+            if(rs!=null) rs.close();
+            if(stm!=null) stm.close();
+            if(conn!=null) conn.close();            
+        }
+        return fullName;
+        }
 }

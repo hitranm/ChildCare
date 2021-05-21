@@ -7,16 +7,19 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.tblCustomer.CustomerDAO;
 import web.tblCustomer.CustomerDTO;
 import web.tblCustomer.CustomerError;
 import web.tblIdentity.IdentityDAO;
 import web.tblIdentity.IdentityDTO;
 import web.tblIdentity.IdentityError;
+import web.utils.RegisterValidation;
 
 /**
  *
@@ -24,7 +27,7 @@ import web.tblIdentity.IdentityError;
  */
 public class AddCustomerServlet extends HttpServlet {
 private static final String ERROR="register.jsp";
-private static final String SUCCESS="login.jsp";
+private static final String SUCCESS="home.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,11 +51,31 @@ private static final String SUCCESS="login.jsp";
            String birthday = request.getParameter("birthday");
            String citizenID= request.getParameter("citizenID");
            String roleID= request.getParameter("roleID");
+           HttpSession session = request.getSession();
            CustomerDAO dao= new CustomerDAO();
+           RegisterValidation errors= new RegisterValidation();
            CustomerError error= new CustomerError();
            IdentityError error1= new IdentityError();
            boolean check= dao.checkPassword(password, cpassword);
            boolean check2= dao.checkEmail(email);
+           boolean foundError=false;
+           if(phoneNum.trim().length()!=10){
+               foundError=true;
+               errors.setPhoneNumberError("Phone Number must be 10 numbers!");
+           }
+           if(!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})")){
+           foundError= true;
+           errors.setPasswordError("Password must contain at least 1 upper case letter, lowercase letter and numbers!");
+       }
+           if(citizenID.trim().length()!=12){
+               foundError= true;
+               error.setCitizenIDError("CitizenID must be 12 characters !!");
+           }
+           if(foundError){
+               request.setAttribute("SIGNUP_ERROR", errors);
+           }
+           else{
+           
            if(!check){
                error.setPasswordError("Password and Confirm password are unmatch!!");
                request.setAttribute("ERROR", error);         
@@ -81,13 +104,16 @@ private static final String SUCCESS="login.jsp";
                String identityID = dao1.queryID(phoneNum);
                CustomerDTO cus= new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
                boolean flag1= dao.addCustomer(cus);
-               if(flag1)
+               if(flag1){
+                   session.setAttribute("LOGIN_USER", cus.getFullName());
                url=SUCCESS;
+               }
                }      
                }
                  }
        }
        }
+       }  
        catch(Exception e){
        log("Error at AddCustomerServlet: "+ e.toString());
        } finally{

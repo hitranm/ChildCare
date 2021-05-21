@@ -17,6 +17,11 @@ public class CustomerDTO {
     private String birthday;
     private String citizenID;
 
+    public CustomerDTO() {
+    }
+
+  
+
     public String getFullName() {
         return fullName;
     }
