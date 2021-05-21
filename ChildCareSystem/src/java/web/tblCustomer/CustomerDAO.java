@@ -117,8 +117,8 @@ public boolean checkEmail(String email) throws SQLException{
             conn = DBHelpers.makeConnection();
             if(conn!=null){
                 String sql = "SELECT FullName "
-                        + " FROM tblIdentity "
-                        +" WHERE PhoneNumber=?";
+                        + " FROM tblCustomer C, tblIdentity I "
+                        +" WHERE C.IdentityID = I.IdentityID AND PhoneNumber=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, phoneNum);
                 rs= stm.executeQuery();

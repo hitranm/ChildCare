@@ -15,7 +15,7 @@
         <form action="DispatchServlet" method="POST">
             PhoneNum <input type="text" name="phoneNum" value="" pattern="[0-9]{10}" required="true"> </br>
             Password<input type="password" name="password" value="" required="true"> </br>
-            ${MSG}
+            ${requestScope.MSG}</br>
             <input type="submit" name="btAction" value="Login">
         </form>
         
