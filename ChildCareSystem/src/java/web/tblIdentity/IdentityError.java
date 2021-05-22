@@ -10,14 +10,14 @@ package web.tblIdentity;
  * @author Admin
  */
 public class IdentityError {
-    private String phoneNumError;
+    private String phoneNumDupError;
 
-    public String getPhoneNumError() {
-        return phoneNumError;
+    public String getPhoneNumDupError() {
+        return phoneNumDupError;
     }
 
-    public void setPhoneNumError(String phoneNumError) {
-        this.phoneNumError = phoneNumError;
+    public void setPhoneNumDupError(String phoneNumDupError) {
+        this.phoneNumDupError = phoneNumDupError;
     }
     
 }

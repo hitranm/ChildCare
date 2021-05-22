@@ -10,35 +10,35 @@ package web.tblCustomer;
  * @author Admin
  */
 public class CustomerError {
-    private String citizenIDError;
+    private String citizenIDDupError;
     private String passwordError;
-    private String emailError;
+    private String emailDupError;
 
     public CustomerError() {
     }
 
-    public String getCitizenIDError() {
-        return citizenIDError;
+    public String getCitizenIDDupError() {
+        return citizenIDDupError;
     }
 
     public String getPasswordError() {
         return passwordError;
     }
 
-    public void setCitizenIDError(String citizenIDError) {
-        this.citizenIDError = citizenIDError;
+    public void setCitizenIDDupError(String citizenIDDupError) {
+        this.citizenIDDupError = citizenIDDupError;
     }
 
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
     }
 
-    public String getEmailError() {
-        return emailError;
+    public String getEmailDupError() {
+        return emailDupError;
     }
 
-    public void setEmailError(String emailError) {
-        this.emailError = emailError;
+    public void setEmailDupError(String emailDupError) {
+        this.emailDupError = emailDupError;
     }
     
 }

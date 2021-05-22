@@ -51,7 +51,7 @@ private static final String ERROR="login.jsp";
                url=SUCCESS;  
         } else{
                String msg="Phone number or password is not correct!";
-               request.setAttribute("MSG", msg);
+               request.setAttribute("Message", msg);
            }
         }
         catch(Exception e){

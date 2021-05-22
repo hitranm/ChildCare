@@ -26,8 +26,10 @@ import web.utils.RegisterValidation;
  * @author Admin
  */
 public class AddCustomerServlet extends HttpServlet {
-private static final String ERROR="login.jsp";
-private static final String SUCCESS="home.jsp";
+
+    private static final String ERROR = "reload_login.jsp";
+    private static final String SUCCESS = "home.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,86 +42,79 @@ private static final String SUCCESS="home.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String url=ERROR;
-       try{
-           String fullName=request.getParameter("fullName");
-           String email= request.getParameter("email");
-           String address= request.getParameter("address");
-           String phoneNum= request.getParameter("phoneNum");
-           String password = request.getParameter("password");
-           String cpassword= request.getParameter("cpassword");
-           String birthday = request.getParameter("birthday");
-           String citizenID= request.getParameter("citizenID");
-           String roleID= request.getParameter("roleID");
-           HttpSession session = request.getSession();
-           CustomerDAO dao= new CustomerDAO();
-           RegisterValidation errors= new RegisterValidation();
-           CustomerError error= new CustomerError();
-           IdentityError error1= new IdentityError();
-           boolean check= dao.checkPassword(password, cpassword);
-           boolean check2= dao.checkEmail(email);
-           boolean foundError=false;
-           if(phoneNum.trim().length()!=10){
-               foundError=true;
-               errors.setPhoneNumberError("Phone Number must be 10 numbers!");
-           }
-           if(!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})")){
-           foundError= true;
-           errors.setPasswordError("Invalid format!");
-           }
-           if(citizenID.trim().length()!=12){
-               foundError= true;
-               errors.setCitizenIDError("Invalid format!");
-           }
-           if(foundError){
-               request.setAttribute("SIGNUP_ERROR", errors);
-           }
-           
-           if(!check){
-               error.setPasswordError("Password and Confirm password are unmatch!!");
-               request.setAttribute("ERROR", error);         
-           } 
-           boolean check1 = dao.checkCitizenID(citizenID);
-           if(check1){
-               error.setCitizenIDError("CitizenID has been used!!");
-               request.setAttribute("ERROR", error);
-       }
-            if(check2){
-               error.setEmailError("Email has been used!!");
-               request.setAttribute("ERROR", error);
-           }
-            IdentityDAO dao1= new IdentityDAO();
-            boolean check3= dao1.checkPhoneNum(phoneNum);
-               if(check3){
-                   error1.setPhoneNumError("Phone Number has been used!!");
-                   request.setAttribute("ERROR1", error1);
-               }
-           else {            
-               String epassword= dao1.sha256(password);
-               IdentityDTO identity= new IdentityDTO(phoneNum, epassword, roleID);
-               boolean flag= dao1.addIdentity(identity);
-               if(flag){
-               String identityID = dao1.queryID(phoneNum);
-               CustomerDTO cus= new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
-               boolean flag1= dao.addCustomer(cus);
-               if(flag1){
-                   session.setAttribute("LOGIN_USER", cus.getFullName());
-               url=SUCCESS;
-               }
-               }      
-               }
-                 }
-       
-       
-                
-         
-       catch(Exception e){
-       log("Error at AddCustomerServlet: "+ e.toString());
-       } finally{
-           request.getRequestDispatcher(url).forward(request, response);
-       }      
+        String url = ERROR;
+        try {
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            String phoneNum = request.getParameter("phoneNum");
+            String password = request.getParameter("password");
+            String cpassword = request.getParameter("cpassword");
+            String birthday = request.getParameter("birthday");
+            String citizenID = request.getParameter("citizenID");
+            String roleID = request.getParameter("roleID");
+            HttpSession session = request.getSession();
+            CustomerDAO dao = new CustomerDAO();
+            RegisterValidation errors = new RegisterValidation();
+            CustomerError error = new CustomerError();
+            IdentityError error1 = new IdentityError();
+            boolean check = dao.checkPassword(password, cpassword);
+            boolean check2 = dao.checkEmail(email);
+            boolean foundError = false;
+            if (phoneNum.trim().length() != 10) {
+                foundError = true;
+                errors.setPhoneNumberError("Phone Number must be 10 numbers!");
+            }
+            if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})")) {
+                foundError = true;
+                errors.setPasswordError("Invalid format!");
+            }
+            if (citizenID.trim().length() != 12) {
+                foundError = true;
+                errors.setCitizenIDError("Invalid format!");
+            }
+            if (foundError) {
+                request.setAttribute("SIGNUP_ERROR", errors);
+            }
+
+            if (!check) {
+                error.setPasswordError("Password and Confirm password are unmatch!!");
+                request.setAttribute("ERROR", error);
+            }
+            boolean check1 = dao.checkCitizenID(citizenID);
+            if (check1) {
+                error.setCitizenIDDupError("CitizenID has been used!!");
+                request.setAttribute("ERROR", error);
+            }
+            if (check2) {
+                error.setEmailDupError("Email has been used!!");
+                request.setAttribute("ERROR", error);
+            }
+            IdentityDAO dao1 = new IdentityDAO();
+            boolean check3 = dao1.checkPhoneNum(phoneNum);
+            if (check3) {
+                error1.setPhoneNumDupError("Phone Number has been used!!");
+                request.setAttribute("ERROR1", error1);
+            } else if(!foundError && check==true && !check1 && !check2 && !check3) {
+                String epassword = dao1.sha256(password);
+                IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
+                boolean flag = dao1.addIdentity(identity);
+                if (flag) {
+                    String identityID = dao1.queryID(phoneNum);
+                    CustomerDTO cus = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
+                    boolean flag1 = dao.addCustomer(cus);
+                    if (flag1) {
+                        session.setAttribute("LOGIN_USER", cus.getFullName());
+                        url = SUCCESS;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log("Error at AddCustomerServlet: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
-       
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
