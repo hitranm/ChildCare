@@ -96,6 +96,7 @@
                     <input type="password" name="password" required="true">
                     <span></span>
                     <label>Password</label>
+                    </br>${requestScope.Message}
                 </div>
                 <button type="submit" class="btn btn-primary" name="btAction" value="Login">Login</button></br>
             </form>

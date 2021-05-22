@@ -58,7 +58,7 @@ private static final String ERROR="login.jsp";
             e.printStackTrace();
             log("Error at LoginServlet:"+e.toString());
         }finally{
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

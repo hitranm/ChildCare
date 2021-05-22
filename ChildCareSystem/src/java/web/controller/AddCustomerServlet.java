@@ -95,7 +95,8 @@ public class AddCustomerServlet extends HttpServlet {
             if (check3) {
                 error1.setPhoneNumDupError("Phone Number has been used!!");
                 request.setAttribute("ERROR1", error1);
-            } else if(!foundError && check==true && !check1 && !check2 && !check3) {
+            } 
+            if(!foundError && check && !check1 && !check2 && !check3) {
                 String epassword = dao1.sha256(password);
                 IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
                 boolean flag = dao1.addIdentity(identity);
