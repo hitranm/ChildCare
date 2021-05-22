@@ -20,15 +20,15 @@
             ${ERROR.emailError}</br>
             Address<input type="text" name="address" value=""></br>
             Phone Number<input type="text" name="phoneNum" required="true"></br>
-            ${SIGNUP_ERROR.phoneNumberError}
+            ${SIGNUP_ERROR.phoneNumberError}</br>
             ${ERROR1.phoneNumError}</br>
             Password<input type="password" name="password" required="true"></br>
-            ${SIGNUP_ERROR.passwordError}
+            ${SIGNUP_ERROR.passwordError}</br>
             ${ERROR.passwordError}</br>
             Confirm Password<input type="password" name="cpassword" required="true"></br>
             Birthday<input type="date" name="birthday" value=""></br>
             CitizenID<input type="text" name="citizenID" required="true"></br>
-            ${SIGNUP_ERROR.citizenIDError}
+            ${SIGNUP_ERROR.citizenIDError}</br>
             ${ERROR.citizenIDError}</br>
             <input type="hidden" name="roleID" value="3">
             <input type="submit" name="btAction" value="Register">

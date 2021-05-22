@@ -26,7 +26,7 @@ import web.utils.RegisterValidation;
  * @author Admin
  */
 public class AddCustomerServlet extends HttpServlet {
-private static final String ERROR="register.jsp";
+private static final String ERROR="login.jsp";
 private static final String SUCCESS="home.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,39 +65,37 @@ private static final String SUCCESS="home.jsp";
            }
            if(!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})")){
            foundError= true;
-           errors.setPasswordError("Password must contain at least 1 upper case letter, lowercase letter and numbers!");
-       }
+           errors.setPasswordError("Invalid format!");
+           }
            if(citizenID.trim().length()!=12){
                foundError= true;
-               error.setCitizenIDError("CitizenID must be 12 characters !!");
+               errors.setCitizenIDError("Invalid format!");
            }
            if(foundError){
                request.setAttribute("SIGNUP_ERROR", errors);
            }
-           else{
            
            if(!check){
                error.setPasswordError("Password and Confirm password are unmatch!!");
                request.setAttribute("ERROR", error);         
-           } else{
+           } 
            boolean check1 = dao.checkCitizenID(citizenID);
            if(check1){
-               error.setCitizenIDError("Citizen has been used!!");
+               error.setCitizenIDError("CitizenID has been used!!");
                request.setAttribute("ERROR", error);
        }
-           if(check2){
+            if(check2){
                error.setEmailError("Email has been used!!");
                request.setAttribute("ERROR", error);
            }
-           
-           else {
-               IdentityDAO dao1= new IdentityDAO();
-               String epassword= dao1.sha256(password);
-               boolean check3= dao1.checkPhoneNum(phoneNum);
+            IdentityDAO dao1= new IdentityDAO();
+            boolean check3= dao1.checkPhoneNum(phoneNum);
                if(check3){
                    error1.setPhoneNumError("Phone Number has been used!!");
                    request.setAttribute("ERROR1", error1);
-               }else {
+               }
+           else {            
+               String epassword= dao1.sha256(password);
                IdentityDTO identity= new IdentityDTO(phoneNum, epassword, roleID);
                boolean flag= dao1.addIdentity(identity);
                if(flag){
@@ -111,9 +109,10 @@ private static final String SUCCESS="home.jsp";
                }      
                }
                  }
-       }
-       }
-       }  
+       
+       
+                
+         
        catch(Exception e){
        log("Error at AddCustomerServlet: "+ e.toString());
        } finally{
