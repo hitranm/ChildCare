@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package web.tblIdentity;
+package web.models.tblIdentity;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import web.tblCustomer.CustomerDTO;
+import web.models.tblCustomer.CustomerDTO;
 import web.utils.DBHelpers;
 
 /**

@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.tblCustomer.CustomerDAO;
-import web.tblCustomer.CustomerDTO;
-import web.tblCustomer.CustomerError;
-import web.tblIdentity.IdentityDAO;
-import web.tblIdentity.IdentityDTO;
-import web.tblIdentity.IdentityError;
+import web.models.tblCustomer.CustomerDAO;
+import web.models.tblCustomer.CustomerDTO;
+import web.models.tblCustomer.CustomerError;
+import web.models.tblIdentity.IdentityDAO;
+import web.models.tblIdentity.IdentityDTO;
+import web.models.tblIdentity.IdentityError;
 import web.utils.RegisterValidation;
 
 /**

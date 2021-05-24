@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.tblCustomer.CustomerDAO;
-import web.tblCustomer.CustomerDTO;
-import web.tblIdentity.IdentityDAO;
-import web.tblIdentity.IdentityDTO;
+import web.models.tblCustomer.CustomerDAO;
+import web.models.tblCustomer.CustomerDTO;
+import web.models.tblIdentity.IdentityDAO;
+import web.models.tblIdentity.IdentityDTO;
 
 /**
  *
