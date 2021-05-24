@@ -64,14 +64,17 @@ public class AddCustomerServlet extends HttpServlet {
             if (phoneNum.trim().length() != 10) {
                 foundError = true;
                 errors.setPhoneNumberError("Phone Number must be 10 numbers!");
+                request.setAttribute("FOUND_ERROR", true);
             }
             if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})")) {
                 foundError = true;
                 errors.setPasswordError("Invalid format!");
+                request.setAttribute("FOUND_ERROR", true);
             }
             if (citizenID.trim().length() != 12) {
                 foundError = true;
                 errors.setCitizenIDError("Invalid format!");
+                request.setAttribute("FOUND_ERROR", true);
             }
             if (foundError) {
                 request.setAttribute("SIGNUP_ERROR", errors);
@@ -80,21 +83,25 @@ public class AddCustomerServlet extends HttpServlet {
             if (!check) {
                 error.setPasswordError("Password and Confirm password are unmatch!!");
                 request.setAttribute("ERROR", error);
+                request.setAttribute("FOUND_ERROR", true);
             }
             boolean check1 = dao.checkCitizenID(citizenID);
             if (check1) {
                 error.setCitizenIDDupError("CitizenID has been used!!");
                 request.setAttribute("ERROR", error);
+                request.setAttribute("FOUND_ERROR", true);
             }
             if (check2) {
                 error.setEmailDupError("Email has been used!!");
                 request.setAttribute("ERROR", error);
+                request.setAttribute("FOUND_ERROR", true);
             }
             IdentityDAO dao1 = new IdentityDAO();
             boolean check3 = dao1.checkPhoneNum(phoneNum);
             if (check3) {
                 error1.setPhoneNumDupError("Phone Number has been used!!");
                 request.setAttribute("ERROR1", error1);
+                request.setAttribute("FOUND_ERROR", true);
             } 
             if(!foundError && check && !check1 && !check2 && !check3) {
                 String epassword = dao1.sha256(password);

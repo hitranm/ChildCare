@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +30,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                     <c:set var="errors" value="${requestScope.FOUND_ERROR}"/>
+                    <c:if test="${errors}">
+                        <script type="text/javascript">
+                            $(window).on('load', function () {
+                                $('#exampleModal').modal('show');
+                            });
+                        </script>
+                    </c:if>
                     <div class="modal-body">
                         <form action="DispatchServlet" method="POST">
                             <div class="form-group">
