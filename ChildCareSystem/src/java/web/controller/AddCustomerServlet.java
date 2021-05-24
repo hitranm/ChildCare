@@ -27,7 +27,7 @@ import web.utils.RegisterValidation;
  */
 public class AddCustomerServlet extends HttpServlet {
 
-    private static final String ERROR = "reload_login.jsp";
+    private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "home.jsp";
 
     /**
@@ -42,6 +42,7 @@ public class AddCustomerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
             String fullName = request.getParameter("fullName");
@@ -100,7 +101,7 @@ public class AddCustomerServlet extends HttpServlet {
             boolean check3 = dao1.checkPhoneNum(phoneNum);
             if (check3) {
                 error1.setPhoneNumDupError("Phone Number has been used!!");
-                request.setAttribute("ERROR1", error1);
+                request.setAttribute("error", error1);
                 request.setAttribute("FOUND_ERROR", true);
             } 
             if(!foundError && check && !check1 && !check2 && !check3) {

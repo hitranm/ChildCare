@@ -15,7 +15,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
+
         <title>Login Page</title>
 
     </head>
@@ -30,7 +30,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                     <c:set var="errors" value="${requestScope.FOUND_ERROR}"/>
+                    <c:set var="errors" value="${requestScope.FOUND_ERROR}"/>
                     <c:if test="${errors}">
                         <script type="text/javascript">
                             $(window).on('load', function () {
@@ -38,6 +38,15 @@
                             });
                         </script>
                     </c:if>
+                    <c:set var="ERROR1" value="${requestScope.ERROR.emailDupError}"/>
+                    <c:set var="ERROR2" value="${requestScope.ERROR.passwordError}"/>
+                    <c:set var="ERROR3" value="${requestScope.ERROR.citizenIDDupError}"/>
+                    <c:set var="ERROR4" value="${requestScope.error.phoneNumDupError}"/>
+                    <c:set var="SIGN_UP1" value="${requestScope.SIGNUP_ERROR.phoneNumberError}"/>
+                    <c:set var="SIGN_UP2" value="${requestScope.SIGNUP_ERROR.passwordError}"/>
+                    <c:set var="SIGN_UP3" value="${requestScope.SIGNUP_ERROR.citizenIDError}"/>
+                    
+
                     <div class="modal-body">
                         <form action="DispatchServlet" method="POST">
                             <div class="form-group">
@@ -47,7 +56,12 @@
                             <div class="form-group">
                                 <label for="email">Email address</label>
                                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" required="true">
-                                ${ERROR.emailDupError}
+                                <c:if test="${ERROR1!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${ERROR.emailDupError}
+                                    </div>
+                                </c:if>
+
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                             <div class="form-group">
@@ -57,19 +71,40 @@
                             <div class="form-group">
                                 <label for="phoneNumber">Phone Number</label>
                                 <input type="text" class="form-control" id="phoneNumber" name="phoneNum" placeholder="Phone Number" required="true">
-                                ${SIGNUP_ERROR.phoneNumberError}
-                                ${ERROR1.phoneNumDupError}
+                                <c:if test="${SIGNUP_ERROR1!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${SIGNUP_ERROR.phoneNumberError}
+                                    </div>
+                                </c:if>
+                                
+                                <c:if test="${ERROR4!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${error.phoneNumDupError}
+                                    </div>
+                                </c:if>
+                                
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Password" required="true">
-                                ${SIGNUP_ERROR.passwordError}
-                                ${ERROR.passwordError}
+                                <c:if test="${SIGNUP_ERROR2!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${SIGNUP_ERROR.passwordError}
+                                    </div>
+                                </c:if>
+                                
+                                
+                                
                                 <small id="passwordHelp" class="form-text text-muted">Password must contain at least 1 uppercase, lowercase, number and must be 6 characters</small>
                             </div>
                             <div class="form-group">
                                 <label for="cpassword">Confirm password</label>
                                 <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required="true">
+                                <c:if test="${ERROR2!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${ERROR.passwordError}
+                                    </div>
+                                </c:if>
                             </div>
                             <div class="form-group">
                                 <label for="birthday">DOB</label>
@@ -78,8 +113,18 @@
                             <div class="form-group">
                                 <label for="citizenID">CitizenID</label>
                                 <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CitizenID" required="true">
-                                ${SIGNUP_ERROR.citizenIDError}
-                                ${ERROR.citizenIDDupError}
+                                <c:if test="${SIGNUP_ERROR3!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${SIGNUP_ERROR.citizenIDError}
+                                    </div>
+                                </c:if>
+                                
+                                <c:if test="${ERROR3!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${ERROR.citizenIDDupError}
+                                    </div>
+                                </c:if>
+                                
                                 <small id="citizenIDHelp" class="form-text text-muted">Must be 12 numbers</small>
                             </div>
                             <input type="hidden" name="roleID" value="3">
@@ -105,7 +150,13 @@
                     <input type="password" name="password" required="true">
                     <span></span>
                     <label>Password</label>
-                    </br>${requestScope.Message}
+                    <c:set var="login_error" value="${requestScope.Message}"/>
+                    <c:if test="${Message!=null}">
+                        <div class="alert alert-danger" role="alert">
+                            ${requestScope.Message}
+                        </div>
+                    </c:if>
+
                 </div>
                 <button type="submit" class="btn btn-primary" name="btAction" value="Login">Login</button></br>
             </form>
