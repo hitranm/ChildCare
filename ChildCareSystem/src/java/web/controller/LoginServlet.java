@@ -11,16 +11,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.tblCustomer.CustomerDAO;
+import web.tblCustomer.CustomerDTO;
+import web.tblIdentity.IdentityDAO;
+import web.tblIdentity.IdentityDTO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author Admin
  */
-public class DispatchServlet extends HttpServlet {
-private static final String ADD="AddCustomerServlet";
-private static final String LOGIN="LoginServlet";
-private static final String LOGOUT="LogOutServlet";
-private static final String ERROR="error.jsp";
+public class LoginServlet extends HttpServlet {
+private static final String SUCCESS="home.jsp";
+private static final String ERROR="login.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,20 +37,28 @@ private static final String ERROR="error.jsp";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
-        try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login") ) {
-                url= LOGIN;
-            }
-            else if(button.equalsIgnoreCase("Register") ) {
-                url= ADD;
-            }
-            else if(button.equalsIgnoreCase("LogOut")){
-                url=LOGOUT;
-            }
-            
-        } finally {
+        String url=ERROR;
+        try{
+            String phoneNum= request.getParameter("phoneNum");
+            String password= request.getParameter("password");
+            IdentityDAO dao = new IdentityDAO();
+            String epassword= dao.sha256(password);
+            CustomerDAO dao1= new CustomerDAO();
+           IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
+           HttpSession session = request.getSession();
+           if(identity!=null){
+               String name= dao1.queryCustomer(phoneNum);
+               session.setAttribute("LOGIN_USER", name);
+               url=SUCCESS;  
+        } else{
+               String msg="Phone number or password is not correct!";
+               request.setAttribute("Message", msg);
+           }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            log("Error at LoginServlet:"+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

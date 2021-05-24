@@ -11,16 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author HOANGKHOI
+ * @author Admin
  */
-public class DispatchServlet extends HttpServlet {
-private static final String ADD="AddCustomerServlet";
-private static final String LOGIN="LoginServlet";
-private static final String LOGOUT="LogOutServlet";
-private static final String ERROR="error.jsp";
+public class LogOutServlet extends HttpServlet {
+private static final String LOGIN="login.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,21 +32,16 @@ private static final String ERROR="error.jsp";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
-        try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login") ) {
-                url= LOGIN;
+       String url = LOGIN;
+        try{
+            HttpSession session = request.getSession(false);
+            if(session!=null){
+                session.invalidate(); // huy attributes
             }
-            else if(button.equalsIgnoreCase("Register") ) {
-                url= ADD;
-            }
-            else if(button.equalsIgnoreCase("LogOut")){
-                url=LOGOUT;
-            }
+        }catch(Exception e){
             
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        }finally{
+            response.sendRedirect(url);
         }
     }
 
