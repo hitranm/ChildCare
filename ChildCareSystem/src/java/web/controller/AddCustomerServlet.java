@@ -67,7 +67,7 @@ public class AddCustomerServlet extends HttpServlet {
                 errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
                 request.setAttribute("FOUND_ERROR", true);
             }
-            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9_-]{6,}$")) {
+            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
                 foundError = true;
                 errors.setPasswordError("Không đúng định dạng!");
                 request.setAttribute("FOUND_ERROR", true);
