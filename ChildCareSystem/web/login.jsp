@@ -25,7 +25,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">REGISTER FORM</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">PHIẾU ĐĂNG KÝ</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -42,114 +42,123 @@
                     <c:set var="ERROR2" value="${requestScope.ERROR.passwordError}"/>
                     <c:set var="ERROR3" value="${requestScope.ERROR.citizenIDDupError}"/>
                     <c:set var="ERROR4" value="${requestScope.error.phoneNumDupError}"/>
-                    <c:set var="SIGN_UP1" value="${requestScope.SIGNUP_ERROR.phoneNumberError}"/>
-                    <c:set var="SIGN_UP2" value="${requestScope.SIGNUP_ERROR.passwordError}"/>
-                    <c:set var="SIGN_UP3" value="${requestScope.SIGNUP_ERROR.citizenIDError}"/>
-                    
+                    <c:set var="SIGNUP1" value="${requestScope.SIGNUP_ERROR.phoneNumberError}"/>
+                    <c:set var="SIGNUP2" value="${requestScope.SIGNUP_ERROR.passwordError}"/>
+                    <c:set var="SIGNUP3" value="${requestScope.SIGNUP_ERROR.citizenIDError}"/>
+
 
                     <div class="modal-body">
                         <form action="DispatchServlet" method="POST">
                             <div class="form-group">
-                                <label for="fullNanme">Full Name</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="fullName" required="true">
+                                <label for="fullNanme">Họ và tên</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="Họ và tên" name="fullName" required="true">
                             </div>
+                            <div class="form-row">
+                                <div class="col">
                             <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" required="true">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="true">
                                 <c:if test="${ERROR1!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${ERROR.emailDupError}
                                     </div>
                                 </c:if>
-
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
+                                </div>
+                                <div class="col">
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
-                            </div>
-                            <div class="form-group">
-                                <label for="phoneNumber">Phone Number</label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNum" placeholder="Phone Number" required="true">
-                                <c:if test="${SIGNUP_ERROR1!=null}">
+                                <label for="phoneNumber">Số điện thoại</label>
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNum" placeholder="Phone" required="true">
+                                <c:if test="${SIGNUP1!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${SIGNUP_ERROR.phoneNumberError}
                                     </div>
                                 </c:if>
-                                
                                 <c:if test="${ERROR4!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${error.phoneNumDupError}
                                     </div>
                                 </c:if>
-                                
+                            </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Password" required="true">
-                                <c:if test="${SIGNUP_ERROR2!=null}">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="col">
+                            <div class="form-group">
+                                <label for="password">Mật khẩu</label>
+                                <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Mật khẩu" required="true">
+                                <c:if test="${SIGNUP2!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${SIGNUP_ERROR.passwordError}
                                     </div>
                                 </c:if>
-                                
-                                
-                                
-                                <small id="passwordHelp" class="form-text text-muted">Password must contain at least 1 uppercase, lowercase, number and must be 6 characters</small>
+
+
+
+                                <small id="passwordHelp" class="form-text text-muted">Mật khẩu phải dài ít nhất 6 kí tự và không có kí tự đặc biệt</small>
                             </div>
+                                </div>
+                                <div class="col">
                             <div class="form-group">
-                                <label for="cpassword">Confirm password</label>
-                                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required="true">
+                                <label for="cpassword">Xác nhận mật khẩu</label>
+                                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Mật khẩu" required="true">
                                 <c:if test="${ERROR2!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${ERROR.passwordError}
                                     </div>
                                 </c:if>
                             </div>
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <label for="birthday">DOB</label>
+                                <label for="birthday">Ngày sinh</label>
                                 <input type="date" class="form-control" name="birthday" id="birthday">
                             </div>
                             <div class="form-group">
-                                <label for="citizenID">CitizenID</label>
-                                <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CitizenID" required="true">
-                                <c:if test="${SIGNUP_ERROR3!=null}">
+                                <label for="citizenID">CCCD</label>
+                                <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CCCD" required="true">
+                                <c:if test="${SIGNUP3!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${SIGNUP_ERROR.citizenIDError}
                                     </div>
                                 </c:if>
-                                
+
                                 <c:if test="${ERROR3!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${ERROR.citizenIDDupError}
                                     </div>
                                 </c:if>
-                                
-                                <small id="citizenIDHelp" class="form-text text-muted">Must be 12 numbers</small>
+
+                                <small id="citizenIDHelp" class="form-text text-muted">Gồm 12 số</small>
                             </div>
                             <input type="hidden" name="roleID" value="3">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
 
-                                <button type="submit" class="btn btn-primary" name="btAction" value="Register">Register</button>
+                                <button type="submit" class="btn btn-primary" name="btAction" value="Register">Đăng ký</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="center">
-            <h1>Login</h1>
+            <h1>ĐĂNG NHẬP</h1>
             <form action="DispatchServlet" method="POST">
                 <div class="txt_field">
                     <input type="text" name="phoneNum" required="true">
-                    <span></span>
-                    <label>Phone Number</label>
+                    
+                    <label>SĐT</label>
                 </div>
                 <div class ="txt_field">
                     <input type="password" name="password" required="true">
                     <span></span>
-                    <label>Password</label>
+                    <label>Mật khẩu</label>
                     <c:set var="login_error" value="${requestScope.Message}"/>
                     <c:if test="${Message!=null}">
                         <div class="alert alert-danger" role="alert">
@@ -158,10 +167,10 @@
                     </c:if>
 
                 </div>
-                <button type="submit" class="btn btn-primary" name="btAction" value="Login">Login</button></br>
+                <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
             </form>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Register 
+                Đăng ký 
             </button>
 
 

@@ -64,17 +64,17 @@ public class AddCustomerServlet extends HttpServlet {
             boolean foundError = false;
             if (phoneNum.trim().length() != 10) {
                 foundError = true;
-                errors.setPhoneNumberError("Phone Number must be 10 numbers!");
+                errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
                 request.setAttribute("FOUND_ERROR", true);
             }
-            if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})")) {
+            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9_-]{6,}$")) {
                 foundError = true;
-                errors.setPasswordError("Invalid format!");
+                errors.setPasswordError("Không đúng định dạng!");
                 request.setAttribute("FOUND_ERROR", true);
             }
             if (citizenID.trim().length() != 12) {
                 foundError = true;
-                errors.setCitizenIDError("Invalid format!");
+                errors.setCitizenIDError("Không đúng định dạng!");
                 request.setAttribute("FOUND_ERROR", true);
             }
             if (foundError) {
@@ -82,25 +82,25 @@ public class AddCustomerServlet extends HttpServlet {
             }
 
             if (!check) {
-                error.setPasswordError("Password and Confirm password are unmatch!!");
+                error.setPasswordError("Mật khẩu xác nhận không trùng khớp!!");
                 request.setAttribute("ERROR", error);
                 request.setAttribute("FOUND_ERROR", true);
             }
             boolean check1 = dao.checkCitizenID(citizenID);
             if (check1) {
-                error.setCitizenIDDupError("CitizenID has been used!!");
+                error.setCitizenIDDupError("CCCD đã được sử dụng!!");
                 request.setAttribute("ERROR", error);
                 request.setAttribute("FOUND_ERROR", true);
             }
             if (check2) {
-                error.setEmailDupError("Email has been used!!");
+                error.setEmailDupError("Email đã được sử dụng!!");
                 request.setAttribute("ERROR", error);
                 request.setAttribute("FOUND_ERROR", true);
             }
             IdentityDAO dao1 = new IdentityDAO();
             boolean check3 = dao1.checkPhoneNum(phoneNum);
             if (check3) {
-                error1.setPhoneNumDupError("Phone Number has been used!!");
+                error1.setPhoneNumDupError("Số điện thoại đã được sử dụng!!");
                 request.setAttribute("error", error1);
                 request.setAttribute("FOUND_ERROR", true);
             } 
