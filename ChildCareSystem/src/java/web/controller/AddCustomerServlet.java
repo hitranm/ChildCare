@@ -5,6 +5,7 @@
  */
 package web.controller;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblIdentity.IdentityError;
 import web.utils.RegisterValidation;
+import web.utils.SendEmail;
 
 /**
  *
@@ -28,7 +30,7 @@ import web.utils.RegisterValidation;
 public class AddCustomerServlet extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "home.jsp";
+    private static final String SUCCESS = "verify.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,6 +61,7 @@ public class AddCustomerServlet extends HttpServlet {
             RegisterValidation errors = new RegisterValidation();
             CustomerError error = new CustomerError();
             IdentityError error1 = new IdentityError();
+           
             boolean check = dao.checkPassword(password, cpassword);
             boolean check2 = dao.checkEmail(email);
             boolean foundError = false;
@@ -67,7 +70,7 @@ public class AddCustomerServlet extends HttpServlet {
                 errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
                 request.setAttribute("FOUND_ERROR", true);
             }
-            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9_-]{6,}$")) {
+            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
                 foundError = true;
                 errors.setPasswordError("Không đúng định dạng!");
                 request.setAttribute("FOUND_ERROR", true);
@@ -105,7 +108,20 @@ public class AddCustomerServlet extends HttpServlet {
                 request.setAttribute("FOUND_ERROR", true);
             } 
             if(!foundError && check && !check1 && !check2 && !check3) {
-                String epassword = dao1.sha256(password);
+                   SendEmail sm = new SendEmail();  		
+                   String code = sm.getRandom();  
+                   CustomerDTO cus = new CustomerDTO(email,code);
+           boolean test = sm.sendEmail(cus);
+           
+      		//check if the email send successfully
+           if(test){
+               session.setAttribute("authcode", cus);
+               url=SUCCESS;
+           }else{
+               String msg="Vui lòng check lại mail đăng ký có tồn tại hay không";
+      		  request.setAttribute("FAIL_EMAIL", msg);
+      	   } 
+                /*String epassword = dao1.sha256(password);
                 IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
                 boolean flag = dao1.addIdentity(identity);
                 if (flag) {
@@ -116,7 +132,7 @@ public class AddCustomerServlet extends HttpServlet {
                         session.setAttribute("LOGIN_USER", cus.getFullName());
                         url = SUCCESS;
                     }
-                }
+                }*/
             }
         } catch (Exception e) {
             log("Error at AddCustomerServlet: " + e.toString());

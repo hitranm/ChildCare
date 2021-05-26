@@ -16,8 +16,22 @@ public class CustomerDTO {
     private String address;
     private String birthday;
     private String citizenID;
+    private String code;
 
     public CustomerDTO() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public CustomerDTO(String email, String code) {
+        this.email = email;
+        this.code = code;
     }
 
   
