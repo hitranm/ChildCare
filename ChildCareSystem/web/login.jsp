@@ -21,7 +21,7 @@
     </head>
     <body>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -56,64 +56,64 @@
                             </div>
                             <div class="form-row">
                                 <div class="col">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="${param.email}" placeholder="Email" required="true">
-                                <c:if test="${ERROR1!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${ERROR.emailDupError}
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="${param.email}" placeholder="Email" required="true">
+                                        <c:if test="${ERROR1!=null}">
+                                            <div class="alert alert-danger" role="alert">
+                                                ${ERROR.emailDupError}
+                                            </div>
+                                        </c:if>
                                     </div>
-                                </c:if>
-                            </div>
                                 </div>
                                 <div class="col">
-                            <div class="form-group">
-                                <label for="phoneNumber">Số điện thoại</label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" placeholder="Số điện thoại" required="true">
-                                <c:if test="${SIGNUP1!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${SIGNUP_ERROR.phoneNumberError}
+                                    <div class="form-group">
+                                        <label for="phoneNumber">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" placeholder="Số điện thoại" required="true">
+                                        <c:if test="${SIGNUP1!=null}">
+                                            <div class="alert alert-danger" role="alert">
+                                                ${SIGNUP_ERROR.phoneNumberError}
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${ERROR4!=null}">
+                                            <div class="alert alert-danger" role="alert">
+                                                ${error.phoneNumDupError}
+                                            </div>
+                                        </c:if>
                                     </div>
-                                </c:if>
-                                <c:if test="${ERROR4!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${error.phoneNumDupError}
-                                    </div>
-                                </c:if>
-                            </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="address">Địa chỉ</label>
                                 <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" value="${param.address}">
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="col">
-                            <div class="form-group">
-                                <label for="password">Mật khẩu</label>
-                                <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Mật khẩu" required="true">
-                                <c:if test="${SIGNUP2!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${SIGNUP_ERROR.passwordError}
+                                    <div class="form-group">
+                                        <label for="password">Mật khẩu</label>
+                                        <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Mật khẩu" required="true">
+                                        <c:if test="${SIGNUP2!=null}">
+                                            <div class="alert alert-danger" role="alert">
+                                                ${SIGNUP_ERROR.passwordError}
+                                            </div>
+                                        </c:if>
+
+
+
+                                        <small id="passwordHelp" class="form-text text-muted">Mật khẩu phải dài ít nhất 6 kí tự và không có kí tự đặc biệt</small>
                                     </div>
-                                </c:if>
-
-
-
-                                <small id="passwordHelp" class="form-text text-muted">Mật khẩu phải dài ít nhất 6 kí tự và không có kí tự đặc biệt</small>
-                            </div>
                                 </div>
                                 <div class="col">
-                            <div class="form-group">
-                                <label for="cpassword">Xác nhận mật khẩu</label>
-                                <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Mật khẩu" required="true">
-                                <c:if test="${ERROR2!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${ERROR.passwordError}
+                                    <div class="form-group">
+                                        <label for="cpassword">Xác nhận mật khẩu</label>
+                                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Mật khẩu" required="true">
+                                        <c:if test="${ERROR2!=null}">
+                                            <div class="alert alert-danger" role="alert">
+                                                ${ERROR.passwordError}
+                                            </div>
+                                        </c:if>
                                     </div>
-                                </c:if>
-                            </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -137,13 +137,13 @@
 
                                 <small id="citizenIDHelp" class="form-text text-muted">Gồm 12 số</small>
                             </div>
-                            <input type="hidden" name="roleID" value="3">
+                            <input type="hidden" name="roleID" value="1">
                             </div>
-                                <c:if test="${FAIL_EMAIL!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${FAIL_EMAIL}
-                                    </div>
-                                </c:if>
+                            <c:if test="${FAIL_EMAIL!=null}">
+                                <div class="alert alert-danger" role="alert">
+                                    ${FAIL_EMAIL}
+                                </div>
+                            </c:if>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
 
@@ -152,13 +152,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="center">
+        </div>-->
+        
             <h1>ĐĂNG NHẬP</h1>
             <form action="DispatchServlet" method="POST">
                 <div class="txt_field">
                     <input type="text" name="phoneNum" required="true">
-                    
+
                     <label>SĐT</label>
                 </div>
                 <div class ="txt_field">
@@ -173,12 +173,13 @@
                     </c:if>
 
                 </div>
-                    <a href="forgot_pass.jsp"> Quên mật khẩu </a>
-                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
+                <a href="forgot_pass.jsp"> Quên mật khẩu </a>
+                <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
             </form>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Đăng ký 
-            </button>
+            <a href="./register.jsp">Đăng ký</a>
+            <!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Đăng ký 
+                        </button>-->
 
     </body>
 </html>
