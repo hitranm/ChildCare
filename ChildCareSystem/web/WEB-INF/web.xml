@@ -20,6 +20,18 @@
         <servlet-name>VerifyServlet</servlet-name>
         <servlet-class>web.controller.VerifyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgotPassServlet</servlet-name>
+        <servlet-class>web.controller.ForgotPassServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPassServlet</servlet-name>
+        <servlet-class>web.controller.ResetPassServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetNewPassServlet</servlet-name>
+        <servlet-class>web.controller.SetNewPassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>VerifyServlet</servlet-name>
         <url-pattern>/VerifyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassServlet</servlet-name>
+        <url-pattern>/ForgotPassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassServlet</servlet-name>
+        <url-pattern>/ResetPassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetNewPassServlet</servlet-name>
+        <url-pattern>/SetNewPassServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

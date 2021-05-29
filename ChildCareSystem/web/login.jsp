@@ -173,7 +173,8 @@
                     </c:if>
 
                 </div>
-                <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
+                    <a href="forgot_pass.jsp"> Quên mật khẩu </a>
+                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
             </form>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Đăng ký 

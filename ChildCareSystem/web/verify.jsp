@@ -12,11 +12,11 @@
         <title>Verify Page</title>
     </head>
     <body>
-        <span>We already send a verification  code to your email. </span>
+        <span>Chúng tôi đã gửi mã xác thực về email của bạn. Vui lòng kiểm tra email. </span>
         
         <form action="DispatchServlet" method="POST">
-            Nhập mã xác thực email <input type="text" name="authcode" >
-            <input type="submit" name="btAction" value="Verify">
+            Nhập mã xác thực email <input type="text" name="authcode" ></br>
+            <button type="submit" name="btAction" value="Verify">Xác thực </button>
             <input type="hidden" name="fullName" value="${param.fullName}">
             <input type="hidden" name="email" value="${param.email}">
             <input type="hidden" name="phoneNum" value="${param.phoneNum}">
