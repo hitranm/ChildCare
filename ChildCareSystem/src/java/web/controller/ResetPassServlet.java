@@ -11,20 +11,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblCustomer.CustomerDTO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author Admin
  */
-public class DispatchServlet extends HttpServlet {
-private static final String ADD="AddCustomerServlet";
-private static final String LOGIN="LoginServlet";
-private static final String LOGOUT="LogOutServlet";
-private static final String ERROR="error.jsp";
-private static final String VERIFY="VerifyServlet";
-private static final String FORGOT="ForgotPassServlet";
-private static final String RESETPASSWORD="ResetPassServlet";
-private static final String SETNEWPASSWORD="SetNewPassServlet";
+public class ResetPassServlet extends HttpServlet {
+private static final String ERROR="verify_pass_forgot.jsp";
+private static final String SUCCESS="newpassword.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,35 +33,23 @@ private static final String SETNEWPASSWORD="SetNewPassServlet";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
-        try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login") ) {
-                url= LOGIN;
+        String url=ERROR;
+        try{
+            HttpSession session = request.getSession();
+            CustomerDTO cus = (CustomerDTO) session.getAttribute("authcode");
+            String code = request.getParameter("authcode");
+            if (code.equals(cus.getCode())) {
+                url=SUCCESS;
+            } else{
+                 String msg="Mã số xác thực không đúng vui lòng kiểm tra lại";
+                request.setAttribute("WRONG_CODE", msg);
             }
-            else if(button.equalsIgnoreCase("Register") ) {
-                url= ADD;
-            }
-            else if(button.equalsIgnoreCase("LogOut")){
-                url=LOGOUT;
-            }
-            else if(button.equalsIgnoreCase("Verify")){
-                url=VERIFY;
-            }
-            else if(button.equalsIgnoreCase("VerifyPass")){
-                url=RESETPASSWORD;
-            }
-            else if(button.equalsIgnoreCase("ResetPass")){
-                url=SETNEWPASSWORD;
-            }
-            else if(button.equalsIgnoreCase("Forgot")){
-                url=FORGOT;
-            }
-            
-        } finally {
+        }catch(Exception e){
+            log("Error at ResetPassServlet: "+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
+                
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

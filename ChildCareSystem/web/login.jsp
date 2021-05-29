@@ -45,19 +45,20 @@
                     <c:set var="SIGNUP1" value="${requestScope.SIGNUP_ERROR.phoneNumberError}"/>
                     <c:set var="SIGNUP2" value="${requestScope.SIGNUP_ERROR.passwordError}"/>
                     <c:set var="SIGNUP3" value="${requestScope.SIGNUP_ERROR.citizenIDError}"/>
+                    <c:set var="FAIL_EMAIL" value="${requestScope.FAIL_EMAIL}"/>
 
 
                     <div class="modal-body">
                         <form action="DispatchServlet" method="POST">
                             <div class="form-group">
                                 <label for="fullNanme">Họ và tên</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Họ và tên" name="fullName" required="true">
+                                <input type="text" class="form-control" id="fullName" value="${param.fullName}" placeholder="Họ và tên" name="fullName" required="true">
                             </div>
                             <div class="form-row">
                                 <div class="col">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="true">
+                                <input type="email" class="form-control" id="email" name="email" value="${param.email}" placeholder="Email" required="true">
                                 <c:if test="${ERROR1!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${ERROR.emailDupError}
@@ -68,7 +69,7 @@
                                 <div class="col">
                             <div class="form-group">
                                 <label for="phoneNumber">Số điện thoại</label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNum" placeholder="Phone" required="true">
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" placeholder="Số điện thoại" required="true">
                                 <c:if test="${SIGNUP1!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${SIGNUP_ERROR.phoneNumberError}
@@ -84,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" value="${param.address}">
                             </div>
                             
                             <div class="form-row">
@@ -117,11 +118,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="birthday">Ngày sinh</label>
-                                <input type="date" class="form-control" name="birthday" id="birthday">
+                                <input type="date" class="form-control" name="birthday" value="${param.birthday}" id="birthday">
                             </div>
                             <div class="form-group">
                                 <label for="citizenID">CCCD</label>
-                                <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CCCD" required="true">
+                                <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CCCD" value="${param.citizenID}" required="true">
                                 <c:if test="${SIGNUP3!=null}">
                                     <div class="alert alert-danger" role="alert">
                                         ${SIGNUP_ERROR.citizenIDError}
@@ -138,6 +139,11 @@
                             </div>
                             <input type="hidden" name="roleID" value="3">
                             </div>
+                                <c:if test="${FAIL_EMAIL!=null}">
+                                    <div class="alert alert-danger" role="alert">
+                                        ${FAIL_EMAIL}
+                                    </div>
+                                </c:if>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
 
@@ -167,15 +173,12 @@
                     </c:if>
 
                 </div>
-                <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
+                    <a href="forgot_pass.jsp"> Quên mật khẩu </a>
+                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
             </form>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Đăng ký 
             </button>
-
-
-
-
 
     </body>
 </html>

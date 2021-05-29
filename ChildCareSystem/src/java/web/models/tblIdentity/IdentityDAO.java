@@ -148,4 +148,32 @@ public class IdentityDAO {
             }
         return check;
         }
+          public boolean updatePass(String pass, String phoneNum) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn=DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblIdentity SET Password=? WHERE PhoneNumber=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, pass);
+                stm.setString(2, phoneNum);
+                
+                int row= stm.executeUpdate();
+                if(row>0)
+                    return true;
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } return false;
+       }
 }
