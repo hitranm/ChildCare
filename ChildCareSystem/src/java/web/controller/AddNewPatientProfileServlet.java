@@ -5,62 +5,69 @@
  */
 package web.controller;
 
+
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
-import web.models.tblIdentity.IdentityDAO;
-import web.models.tblIdentity.IdentityDTO;
 
 /**
  *
- * @author Admin
+ * @author nguye
  */
-public class LoginServlet extends HttpServlet {
+public class AddNewPatientProfileServlet extends HttpServlet {
 
-    private static final String SUCCESS = "home.jsp";
-    private static final String ERROR = "login.jsp";
+    private static final String SUCCESS = "MainUserPageServlet";
+    private static final String ERROR = "error.jsp";
+    private static final String INVALID = "AddNewCategoryController";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
-            String phoneNum = request.getParameter("phoneNum");
-            String password = request.getParameter("password");
-            IdentityDAO dao = new IdentityDAO();
-            String epassword = dao.sha256(password);
-            CustomerDAO dao1 = new CustomerDAO();
-            IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
-            HttpSession session = request.getSession();
-            if (identity != null) {
-                String name = dao1.queryCustomer(phoneNum);
-                String id = dao1.queryCustomerID(phoneNum);
-                session.setAttribute("LOGIN_USER", name);
-                session.setAttribute("USER_ID", id);
-                url = SUCCESS;
+            String id = request.getParameter("txtID");
+            String name = request.getParameter("txtName");
+            String description = request.getParameter("txtDescription");
+
+            boolean valid = true;
+            CategoryErrorObject errorObj = new CategoryErrorObject();
+            if (id.trim().isEmpty()) {
+                errorObj.setIdError("Category ID is not supposed to be empty");
+                valid = false;
+            }
+            if (!id.trim().isEmpty() && !id.matches("[0-9]{3}")) {
+                errorObj.setIdError("Category ID must be numberical, 3 digits");
+                valid = false;
+            }
+            if (name.trim().isEmpty()) {
+                errorObj.setNameError("Category Name is not supposed to be empty");
+                valid = false;
+            }
+            if (!name.trim().isEmpty() && name.length() < 4) {
+                errorObj.setNameError("Category Name information of computer is greater than 4 characters");
+                valid = false;
+            }
+            CategoryDAO dao = new CategoryDAO();
+            if (dao.getCategoryByID(id) != null) {
+                errorObj.setIdError("This Category ID is existed. Choose another one");
+                valid = false;
+            }
+            CategoryDTO category = new CategoryDTO(id, name, description);
+            if (valid) {
+                if (dao.insert(category)) {
+                    url = SUCCESS;
+                } else {
+                    request.setAttribute("ERROR", "Insert failed, cannot find the Product ID: " + id + ", please go back and try again");
+                }
             } else {
-                String msg = "Phone number or password is not correct!";
-                request.setAttribute("Message", msg);
+                url = INVALID;
+                request.setAttribute("INVALID", errorObj);
             }
         } catch (Exception e) {
+            log("ERROR at CreateNewCategoryController: " + e.getMessage());
             e.printStackTrace();
-            log("Error at LoginServlet:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
