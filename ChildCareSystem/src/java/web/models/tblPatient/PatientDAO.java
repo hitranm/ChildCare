@@ -24,8 +24,8 @@ public class PatientDAO {
             if(conn!=null){
                 String sql= "INSERT INTO tblPatient(PatientName, Gender, CustomerID, Birthday) VALUES(?,?,?,?)";
                 stm=conn.prepareStatement(sql);
-                stm.setString(1, patient.getPatientName());
-                stm.setString(2, patient.getGender());
+                stm.setNString(1, patient.getPatientName());
+                stm.setByte(2, Byte.parseByte(patient.getGender()));
                 stm.setString(3, patient.getCustomerID());
                 stm.setString(4, patient.getBirthday());
                int row= stm.executeUpdate();

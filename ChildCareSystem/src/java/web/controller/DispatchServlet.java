@@ -25,6 +25,7 @@ private static final String VERIFY="VerifyServlet";
 private static final String FORGOT="ForgotPassServlet";
 private static final String RESETPASSWORD="ResetPassServlet";
 private static final String SETNEWPASSWORD="SetNewPassServlet";
+private static final String ADDNEWPATIENT="AddNewPatientProfileServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,6 +62,9 @@ private static final String SETNEWPASSWORD="SetNewPassServlet";
             }
             else if(button.equalsIgnoreCase("Forgot")){
                 url=FORGOT;
+            }
+            else if (button.equalsIgnoreCase("AddNewPatientProfile")) {
+                url=ADDNEWPATIENT;
             }
             
         } finally {

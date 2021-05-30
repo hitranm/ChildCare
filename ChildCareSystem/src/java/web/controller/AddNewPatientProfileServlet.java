@@ -5,12 +5,16 @@
  */
 package web.controller;
 
-
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblPatient.PatientDAO;
+import web.models.tblPatient.PatientDTO;
+import web.models.tblPatient.PatientError;
 
 /**
  *
@@ -18,55 +22,49 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddNewPatientProfileServlet extends HttpServlet {
 
-    private static final String SUCCESS = "MainUserPageServlet";
+    private static final String SUCCESS = "home.jsp";
     private static final String ERROR = "error.jsp";
-    private static final String INVALID = "AddNewCategoryController";
+    private static final String INVALID = "addNewPatient.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String id = request.getParameter("txtID");
             String name = request.getParameter("txtName");
-            String description = request.getParameter("txtDescription");
+            String gender = request.getParameter("txtGender");
+            String birthday = request.getParameter("txtBirthday");
 
             boolean valid = true;
-            CategoryErrorObject errorObj = new CategoryErrorObject();
-            if (id.trim().isEmpty()) {
-                errorObj.setIdError("Category ID is not supposed to be empty");
-                valid = false;
-            }
-            if (!id.trim().isEmpty() && !id.matches("[0-9]{3}")) {
-                errorObj.setIdError("Category ID must be numberical, 3 digits");
-                valid = false;
-            }
+            PatientError errorObj = new PatientError();
             if (name.trim().isEmpty()) {
-                errorObj.setNameError("Category Name is not supposed to be empty");
+                errorObj.setPatientNameError("Patient Name is not supposed to be empty");
                 valid = false;
             }
-            if (!name.trim().isEmpty() && name.length() < 4) {
-                errorObj.setNameError("Category Name information of computer is greater than 4 characters");
+            if (gender.trim().isEmpty()) {
+                errorObj.setGenderError("Patient Gender is not supposed to be empty");
                 valid = false;
             }
-            CategoryDAO dao = new CategoryDAO();
-            if (dao.getCategoryByID(id) != null) {
-                errorObj.setIdError("This Category ID is existed. Choose another one");
-                valid = false;
-            }
-            CategoryDTO category = new CategoryDTO(id, name, description);
+            PatientDAO dao = new PatientDAO();
+//            if (dao.getCategoryByID(id) != null) {
+//                errorObj.setIdError("This Category ID is existed. Choose another one");
+//                valid = false;
+//            }
+            HttpSession session = request.getSession();
+            String customerID = (String) session.getAttribute("USER_ID");
+            PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
             if (valid) {
-                if (dao.insert(category)) {
+                if (dao.addPatient(patient)) {
                     url = SUCCESS;
                 } else {
-                    request.setAttribute("ERROR", "Insert failed, cannot find the Product ID: " + id + ", please go back and try again");
+                    request.setAttribute("ERROR", "Insert failed, please go back and try again");
                 }
             } else {
                 url = INVALID;
                 request.setAttribute("INVALID", errorObj);
             }
-        } catch (Exception e) {
-            log("ERROR at CreateNewCategoryController: " + e.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            log("ERROR at AddNewPatientServlet: " + e.getMessage());
             e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
