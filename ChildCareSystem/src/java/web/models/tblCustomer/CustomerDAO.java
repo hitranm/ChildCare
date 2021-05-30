@@ -44,7 +44,8 @@ public class CustomerDAO {
         }
         return false;
     }
-     public boolean checkCitizenID(String citizenID) throws SQLException{
+        
+    public boolean checkCitizenID(String citizenID) throws SQLException{
         boolean check=false;
         Connection conn= null;
         PreparedStatement stm= null;
@@ -108,6 +109,7 @@ public boolean checkEmail(String email) throws SQLException{
             }
         return check;
         }
+
         public String queryCustomer(String phoneNum) throws SQLException{
         String fullName="";
         Connection conn=null;

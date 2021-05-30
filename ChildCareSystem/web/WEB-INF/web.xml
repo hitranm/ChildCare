@@ -24,6 +24,10 @@
         <servlet-name>ViewBlogServlet</servlet-name>
         <servlet-class>web.controller.ViewBlogServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddStaffServlet</servlet-name>
+        <servlet-class>web.controller.AddStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ViewBlogServlet</servlet-name>
         <url-pattern>/ViewBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaffServlet</servlet-name>
+        <url-pattern>/AddStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

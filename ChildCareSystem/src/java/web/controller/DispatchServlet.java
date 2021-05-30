@@ -24,6 +24,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String LOGOUT = "LogOutServlet";
     private static final String ERROR = "error.jsp";
     private final String CREATE_BLOG = "CreateBlogServlet";
+    private final String ADD_STAFF = "AddStaffServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,6 +51,8 @@ public class DispatchServlet extends HttpServlet {
                 url = LOGOUT;           
             } else if (button.equals("Create")) {
                 url = CREATE_BLOG;
+            } else if (button.equalsIgnoreCase("AddStaff")) {
+                url = ADD_STAFF;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
