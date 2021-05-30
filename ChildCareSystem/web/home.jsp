@@ -14,6 +14,6 @@
     <body>
         <h1>Welcome ${sessionScope.LOGIN_USER}</h1>
         <a href="createBlog.jsp">Tạo blog</a>
-        <a href="viewBlogList.jsp">Xem các bài viết của bạn</a>
+        <a href="DispatchServlet?btAction=ViewAllBlogs">Xem các bài viết của bạn</a>
     </body>
 </html>

@@ -85,13 +85,6 @@ public class BlogDAO implements Serializable {
                     }
                     this.blogList.add(dto);
                 }
-                System.out.println(blogList);
-                
-       //     }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error " + e);
-
         } finally {
             if (rs != null) {
                 rs.close();

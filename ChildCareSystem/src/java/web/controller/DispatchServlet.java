@@ -25,6 +25,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private final String CREATE_BLOG = "CreateBlogServlet";
     private final String ADD_STAFF = "AddStaffServlet";
+    private final String VIEW_BLOGS = "ViewBlogServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,6 +54,8 @@ public class DispatchServlet extends HttpServlet {
                 url = CREATE_BLOG;
             } else if (button.equalsIgnoreCase("AddStaff")) {
                 url = ADD_STAFF;
+            } else if (button.equalsIgnoreCase("ViewAllBlogs")) {
+                url = VIEW_BLOGS;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
