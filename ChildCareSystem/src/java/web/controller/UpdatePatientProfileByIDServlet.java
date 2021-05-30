@@ -6,7 +6,7 @@
 package web.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,17 +20,20 @@ import web.models.tblPatient.PatientError;
  *
  * @author nguye
  */
-public class AddNewPatientProfileServlet extends HttpServlet {
+public class UpdatePatientProfileByIDServlet extends HttpServlet {
 
     private static final String SUCCESS = "ViewPatientProfileServlet";
     private static final String ERROR = "error.jsp";
-    private static final String INVALID = "addNewPatient.jsp";
+    private static final String INVALID = "LoadPatientProfileByIDServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        String idURL = "?id=" + request.getParameter("txtID");
+
         try {
+            String id = request.getParameter("txtID");
             String name = request.getParameter("txtName");
             String gender = request.getParameter("txtGender");
             String birthday = request.getParameter("txtBirthday");
@@ -50,28 +53,31 @@ public class AddNewPatientProfileServlet extends HttpServlet {
                 valid = false;
             }
             PatientDAO dao = new PatientDAO();
-//            if (dao.getCategoryByID(id) != null) {
-//                errorObj.setIdError("This Category ID is existed. Choose another one");
+//            if (dao.getUserByID(userID) != null) {
+//                errorObj.setIdError("This User ID is existed. Choose another one");
 //                valid = false;
 //            }
             HttpSession session = request.getSession();
             String customerID = (String) session.getAttribute("USER_ID");
-            PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
+            PatientDTO patient = new PatientDTO(id,name, gender, birthday, customerID);
             if (valid) {
-                if (dao.addPatient(patient)) {
+                if (dao.update(patient)) {
                     url = SUCCESS;
+                    idURL = "";
+
                 } else {
-                    request.setAttribute("ERROR", "Insert failed, please go back and try again");
+                    request.setAttribute("ERROR", "Update failed, cannot find the User ID: " + id + ", please go back and try again");
                 }
             } else {
-                url = INVALID;
+                url = INVALID + "?id=" + id;
                 request.setAttribute("INVALID", errorObj);
+                request.getRequestDispatcher(url).forward(request, response);
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            log("ERROR at AddNewPatientServlet: " + e.getMessage());
+        } catch (Exception e) {
+            log("ERROR at UpdateUserController: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(url + idURL).forward(request, response);
         }
     }
 

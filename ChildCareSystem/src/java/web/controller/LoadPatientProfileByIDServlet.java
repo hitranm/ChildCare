@@ -6,7 +6,12 @@
 package web.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +24,7 @@ import web.models.tblPatient.PatientDTO;
  *
  * @author nguye
  */
-public class ViewPatientProfileServlet extends HttpServlet {
+public class LoadPatientProfileByIDServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +36,23 @@ public class ViewPatientProfileServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpSession session = req.getSession();
-            String customerID = (String) session.getAttribute("USER_ID");
+            String id = request.getParameter("id");
             PatientDAO dao1 = new PatientDAO();
-            List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
-            request.setAttribute("listPatients", listPatients);
-        } catch (Exception e) {
-            log("ERROR at ViewPatientProfileServlet: " + e.getMessage());
+            PatientDTO patient = dao1.getPatientByID(id);
+//            String birthday = patient.getBirthday();
+//            System.out.println(patient.getBirthday());
+//            Date date1 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
+//            System.out.println(date1);
+
+            request.setAttribute("patient", patient);
+
+        } catch (SQLException e) {
+            log("ERROR at LoadPatientProfileByIDServlet: " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("viewPatientProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("updatePatientProfile.jsp").forward(request, response);
         }
     }
 
@@ -59,7 +68,11 @@ public class ViewPatientProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(LoadPatientProfileByIDServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -73,7 +86,11 @@ public class ViewPatientProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(LoadPatientProfileByIDServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
