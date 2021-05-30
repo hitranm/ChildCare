@@ -64,10 +64,16 @@
                                         <label for="password">Mật khẩu</label>
                                         <input type="password" class="form-control" name="password" value="" required="true" id="password">
                                     </div>
+                                    <c:set var="login_error" value="${requestScope.Message}"/>
+                                    <c:if test="${Message!=null}">
+                                        <div class="alert alert-danger" role="alert">
+                                            ${requestScope.Message}
+                                        </div>
+                                    </c:if>
                                     <div class="d-flex mb-5 align-items-center">
                                         <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span> 
                                     </div>
-                                    <input type="submit" value="Đăng nhập" class="btn btn-block btn-primary">
+                                   <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button>
                                 </form>
                             </div>
                         </div>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,7 +72,7 @@
                                 <a class="nav-link" href="#">Bài viết</a>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="#">Giới thiệu</a>
+                                <a class="nav-link" href="ViewPatientProfileServlet">Hồ sơ bệnh nhân</a>
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Liên hệ</a>
@@ -84,12 +85,21 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav">
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="login.jsp">Đăng nhập</a>
-                            </li>
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="register.jsp">Đăng ký</a>
-                            </li>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.LOGIN_USER}">
+                                    <li>
+                                        <a href="#" class="nav-link">${sessionScope.LOGIN_USER}</a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="login.jsp">Đăng nhập</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="register.jsp">Đăng ký</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
                         </ul>
                     </div>
                 </nav>

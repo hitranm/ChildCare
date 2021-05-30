@@ -54,8 +54,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("LOGIN_USER", name);
                 session.setAttribute("USER_ID", id);
                 url = SUCCESS;
+
             } else {
-                String msg = "Phone number or password is not correct!";
+                String msg = "Số điện thoại hoặc mật khẩu không đúng!";
                 request.setAttribute("Message", msg);
             }
         } catch (Exception e) {
