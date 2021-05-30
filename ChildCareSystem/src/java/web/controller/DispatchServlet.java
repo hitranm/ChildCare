@@ -17,15 +17,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author HOANGKHOI
  */
 public class DispatchServlet extends HttpServlet {
-private static final String ADD="AddCustomerServlet";
-private static final String LOGIN="LoginServlet";
-private static final String LOGOUT="LogOutServlet";
-private static final String ERROR="error.jsp";
-private static final String VERIFY="VerifyServlet";
-private static final String FORGOT="ForgotPassServlet";
-private static final String RESETPASSWORD="ResetPassServlet";
-private static final String SETNEWPASSWORD="SetNewPassServlet";
-private static final String ADDNEWPATIENT="AddNewPatientProfileServlet";
+
+    private static final String ADD = "AddCustomerServlet";
+    private static final String LOGIN = "LoginServlet";
+    private static final String LOGOUT = "LogOutServlet";
+    private static final String ERROR = "error.jsp";
+    private static final String VERIFY = "VerifyServlet";
+    private static final String FORGOT = "ForgotPassServlet";
+    private static final String RESETPASSWORD = "ResetPassServlet";
+    private static final String SETNEWPASSWORD = "SetNewPassServlet";
+    private static final String ADDNEWPATIENT = "AddNewPatientProfileServlet";
+    private static final String UPDATEPATIENTPROFILE = "UpdatePatientProfileByIDServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,31 +45,26 @@ private static final String ADDNEWPATIENT="AddNewPatientProfileServlet";
         String url = ERROR;
         try {
             String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login") ) {
-                url= LOGIN;
+            if (button.equalsIgnoreCase("Login")) {
+                url = LOGIN;
+            } else if (button.equalsIgnoreCase("Register")) {
+                url = ADD;
+            } else if (button.equalsIgnoreCase("LogOut")) {
+                url = LOGOUT;
+            } else if (button.equalsIgnoreCase("Verify")) {
+                url = VERIFY;
+            } else if (button.equalsIgnoreCase("VerifyPass")) {
+                url = RESETPASSWORD;
+            } else if (button.equalsIgnoreCase("ResetPass")) {
+                url = SETNEWPASSWORD;
+            } else if (button.equalsIgnoreCase("Forgot")) {
+                url = FORGOT;
+            } else if (button.equalsIgnoreCase("AddNewPatientProfile")) {
+                url = ADDNEWPATIENT;
+            } else if (button.equalsIgnoreCase("UpdatePatientProfile")) {
+                url = UPDATEPATIENTPROFILE;
             }
-            else if(button.equalsIgnoreCase("Register") ) {
-                url= ADD;
-            }
-            else if(button.equalsIgnoreCase("LogOut")){
-                url=LOGOUT;
-            }
-            else if(button.equalsIgnoreCase("Verify")){
-                url=VERIFY;
-            }
-            else if(button.equalsIgnoreCase("VerifyPass")){
-                url=RESETPASSWORD;
-            }
-            else if(button.equalsIgnoreCase("ResetPass")){
-                url=SETNEWPASSWORD;
-            }
-            else if(button.equalsIgnoreCase("Forgot")){
-                url=FORGOT;
-            }
-            else if (button.equalsIgnoreCase("AddNewPatientProfile")) {
-                url=ADDNEWPATIENT;
-            }
-            
+
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
