@@ -16,10 +16,11 @@
         <h2>Welcome ${sessionScope.USER_ID}</h2>
 
         <h2>Patient management</h2>
-        <h3> <a href="ViewPatientProfileServlet">Create new Patient Profile</a> </h3>
+        <h3> <a href="ViewPatientProfileServlet">View Patient Profile</a> </h3>
 
         <h3> <a href="addNewPatient.jsp">Create new Patient Profile</a> </h3>
-       
+        
+        <h3><a href="index.html">Home Page</a></h3>
 
 </body>
 </html>
