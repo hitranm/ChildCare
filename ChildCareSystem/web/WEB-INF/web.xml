@@ -86,7 +86,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>DispatchServlet</welcome-file>
     </welcome-file-list>
     <resource-ref>
         <res-ref-name>SWP391</res-ref-name>

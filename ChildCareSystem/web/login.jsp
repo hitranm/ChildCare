@@ -10,176 +10,90 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./css/login.css">
+
 
         <title>Login Page</title>
 
     </head>
     <body>
-
-<!--        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">PHIẾU ĐĂNG KÝ</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <!--        <h1>ĐĂNG NHẬP</h1>
+                <form action="DispatchServlet" method="POST">
+                    <div class="txt_field">
+                        <input type="text" name="phoneNum" required="true">    
+                        <label>SĐT</label>
                     </div>
-                    <c:set var="errors" value="${requestScope.FOUND_ERROR}"/>
-                    <c:if test="${errors}">
-                        <script type="text/javascript">
-                            $(window).on('load', function () {
-                                $('#exampleModal').modal('show');
-                            });
-                        </script>
-                    </c:if>
-                    <c:set var="ERROR1" value="${requestScope.ERROR.emailDupError}"/>
-                    <c:set var="ERROR2" value="${requestScope.ERROR.passwordError}"/>
-                    <c:set var="ERROR3" value="${requestScope.ERROR.citizenIDDupError}"/>
-                    <c:set var="ERROR4" value="${requestScope.error.phoneNumDupError}"/>
-                    <c:set var="SIGNUP1" value="${requestScope.SIGNUP_ERROR.phoneNumberError}"/>
-                    <c:set var="SIGNUP2" value="${requestScope.SIGNUP_ERROR.passwordError}"/>
-                    <c:set var="SIGNUP3" value="${requestScope.SIGNUP_ERROR.citizenIDError}"/>
-                    <c:set var="FAIL_EMAIL" value="${requestScope.FAIL_EMAIL}"/>
+                    <div class ="txt_field">
+                        <input type="password" name="password" required="true">
+                        <span></span>
+                        <label>Mật khẩu</label>
+        <c:set var="login_error" value="${requestScope.Message}"/>
+        <c:if test="${Message!=null}">
+            <div class="alert alert-danger" role="alert">
+            ${requestScope.Message}
+        </div>
+        </c:if>
 
+    </div>
+    <a href="forgot_pass.jsp"> Quên mật khẩu </a>
+    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
+</form>
+<a href="./register.jsp">Đăng ký</a>-->
 
-                    <div class="modal-body">
-                        <form action="DispatchServlet" method="POST">
-                            <div class="form-group">
-                                <label for="fullNanme">Họ và tên</label>
-                                <input type="text" class="form-control" id="fullName" value="${param.fullName}" placeholder="Họ và tên" name="fullName" required="true">
-                            </div>
-                            <div class="form-row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="${param.email}" placeholder="Email" required="true">
-                                        <c:if test="${ERROR1!=null}">
-                                            <div class="alert alert-danger" role="alert">
-                                                ${ERROR.emailDupError}
-                                            </div>
-                                        </c:if>
-                                    </div>
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="./images/background1.png" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 contents">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="mb-4">
+                                    <h3>Đăng nhập</h3>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group">
+                                <form action="DispatchServlet" method="post">
+                                    <div class="form-group first">
                                         <label for="phoneNumber">Số điện thoại</label>
-                                        <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" placeholder="Số điện thoại" required="true">
-                                        <c:if test="${SIGNUP1!=null}">
-                                            <div class="alert alert-danger" role="alert">
-                                                ${SIGNUP_ERROR.phoneNumberError}
-                                            </div>
-                                        </c:if>
-                                        <c:if test="${ERROR4!=null}">
-                                            <div class="alert alert-danger" role="alert">
-                                                ${error.phoneNumDupError}
-                                            </div>
-                                        </c:if>
+                                        <input type="text" name="phoneNum" value="" required="true" class="form-control" id="phoneNumber">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" value="${param.address}">
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col">
-                                    <div class="form-group">
+                                    <div class="form-group last mb-4">
                                         <label for="password">Mật khẩu</label>
-                                        <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Mật khẩu" required="true">
-                                        <c:if test="${SIGNUP2!=null}">
-                                            <div class="alert alert-danger" role="alert">
-                                                ${SIGNUP_ERROR.passwordError}
-                                            </div>
-                                        </c:if>
-
-
-
-                                        <small id="passwordHelp" class="form-text text-muted">Mật khẩu phải dài ít nhất 6 kí tự và không có kí tự đặc biệt</small>
+                                        <input type="password" class="form-control" name="password" value="" required="true" id="password">
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="cpassword">Xác nhận mật khẩu</label>
-                                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Mật khẩu" required="true">
-                                        <c:if test="${ERROR2!=null}">
-                                            <div class="alert alert-danger" role="alert">
-                                                ${ERROR.passwordError}
-                                            </div>
-                                        </c:if>
+                                    <div class="d-flex mb-5 align-items-center">
+                                        <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span> 
                                     </div>
-                                </div>
+                                    <input type="submit" value="Đăng nhập" class="btn btn-block btn-primary">
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="birthday">Ngày sinh</label>
-                                <input type="date" class="form-control" name="birthday" value="${param.birthday}" id="birthday">
-                            </div>
-                            <div class="form-group">
-                                <label for="citizenID">CCCD</label>
-                                <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CCCD" value="${param.citizenID}" required="true">
-                                <c:if test="${SIGNUP3!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${SIGNUP_ERROR.citizenIDError}
-                                    </div>
-                                </c:if>
-
-                                <c:if test="${ERROR3!=null}">
-                                    <div class="alert alert-danger" role="alert">
-                                        ${ERROR.citizenIDDupError}
-                                    </div>
-                                </c:if>
-
-                                <small id="citizenIDHelp" class="form-text text-muted">Gồm 12 số</small>
-                            </div>
-                            <input type="hidden" name="roleID" value="1">
-                            </div>
-                            <c:if test="${FAIL_EMAIL!=null}">
-                                <div class="alert alert-danger" role="alert">
-                                    ${FAIL_EMAIL}
-                                </div>
-                            </c:if>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-
-                                <button type="submit" class="btn btn-primary" name="btAction" value="Register">Đăng ký</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>-->
-        
-            <h1>ĐĂNG NHẬP</h1>
-            <form action="DispatchServlet" method="POST">
-                <div class="txt_field">
-                    <input type="text" name="phoneNum" required="true">
+        </div>
 
-                    <label>SĐT</label>
-                </div>
-                <div class ="txt_field">
-                    <input type="password" name="password" required="true">
-                    <span></span>
-                    <label>Mật khẩu</label>
-                    <c:set var="login_error" value="${requestScope.Message}"/>
-                    <c:if test="${Message!=null}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.Message}
-                        </div>
-                    </c:if>
 
-                </div>
-                <a href="forgot_pass.jsp"> Quên mật khẩu </a>
-                <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
-            </form>
-            <a href="./register.jsp">Đăng ký</a>
-            <!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Đăng ký 
-                        </button>-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            $(function () {
+                'use strict';
 
+                $('.form-control').on('input', function () {
+                    var $field = $(this).closest('.form-group');
+                    if (this.value) {
+                        $field.addClass('field--not-empty');
+                    } else {
+                        $field.removeClass('field--not-empty');
+                    }
+                });
+
+            });
+        </script>
     </body>
 </html>
