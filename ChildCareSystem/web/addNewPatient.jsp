@@ -23,16 +23,16 @@
                 </tr>
                 <tr>
                     <td>Patient Gender</td>
-                    <td>: <input type="text" name="txtGender" value="${param.txtBrand}">
+                    <td>: <input type="text" name="txtGender" value="${param.txtGender}">
                         <font color="red">${requestScope.INVALID.genderError}</font></td>
                 </tr>
                 <tr>
                     <td>Patient Birthday</td>
-                    <td>: <input type="date" name="txtBirthday" value="${param.txtPrice}">
+                    <td>: <input type="date" name="txtBirthday" value="${param.txtBithday}">
                         <font color="red">${requestScope.INVALID.birthdayError}</font></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> <button type="submit" name="btAction" value="CreateNewPatient"> Create </button></td>
+                    <td colspan="2"> <button type="submit" name="btAction" value="AddNewPatientProfile"> Create </button></td>
                 </tr>
 
             </table>

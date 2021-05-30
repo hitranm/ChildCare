@@ -32,6 +32,10 @@
         <servlet-name>SetNewPassServlet</servlet-name>
         <servlet-class>web.controller.SetNewPassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewPatientProfileServlet</servlet-name>
+        <servlet-class>web.controller.AddNewPatientProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>SetNewPassServlet</servlet-name>
         <url-pattern>/SetNewPassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewPatientProfileServlet</servlet-name>
+        <url-pattern>/AddNewPatientProfileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
