@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : home
     Created on : May 30, 2021, 3:31:54 PM
     Author     : HOANGKHOI
@@ -384,7 +384,7 @@
                             </div>
                             <div class="right-post-date">
                                 24 Tháng Năm, 2021
-                            </div>              
+                            </div>
                         </div>
 
                         <div class="right-post-card">
@@ -394,7 +394,7 @@
                             </div>
                             <div class="right-post-date">
                                 24 Tháng Năm, 2021
-                            </div>              
+                            </div>
                         </div>
                     </div>
 

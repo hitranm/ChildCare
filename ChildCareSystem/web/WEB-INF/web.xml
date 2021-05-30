@@ -40,6 +40,18 @@
         <servlet-name>ViewPatientProfileServlet</servlet-name>
         <servlet-class>web.controller.ViewPatientProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadPatientProfileByIDServlet</servlet-name>
+        <servlet-class>web.controller.LoadPatientProfileByIDServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePatientProfileByIDServlet</servlet-name>
+        <servlet-class>web.controller.UpdatePatientProfileByIDServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePatientProfileByIDServlet</servlet-name>
+        <servlet-class>web.controller.DeletePatientProfileByIDServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -79,6 +91,18 @@
     <servlet-mapping>
         <servlet-name>ViewPatientProfileServlet</servlet-name>
         <url-pattern>/ViewPatientProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadPatientProfileByIDServlet</servlet-name>
+        <url-pattern>/LoadPatientProfileByIDServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePatientProfileByIDServlet</servlet-name>
+        <url-pattern>/UpdatePatientProfileByIDServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePatientProfileByIDServlet</servlet-name>
+        <url-pattern>/DeletePatientProfileByIDServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

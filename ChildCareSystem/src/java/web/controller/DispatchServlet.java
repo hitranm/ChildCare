@@ -28,6 +28,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String RESETPASSWORD = "ResetPassServlet";
     private static final String SETNEWPASSWORD = "SetNewPassServlet";
     private static final String ADDNEWPATIENT = "AddNewPatientProfileServlet";
+    private static final String UPDATEPATIENTPROFILE = "UpdatePatientProfileByIDServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,6 +64,8 @@ public class DispatchServlet extends HttpServlet {
                 url = FORGOT;
             } else if (button.equalsIgnoreCase("AddNewPatientProfile")) {
                 url = ADDNEWPATIENT;
+            } else if (button.equalsIgnoreCase("UpdatePatientProfile")) {
+                url = UPDATEPATIENTPROFILE;
             }
 
         } finally {

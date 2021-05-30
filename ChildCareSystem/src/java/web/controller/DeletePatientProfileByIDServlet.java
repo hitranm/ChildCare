@@ -6,44 +6,38 @@
 package web.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import web.models.tblPatient.PatientDAO;
-import web.models.tblPatient.PatientDTO;
 
 /**
  *
  * @author nguye
  */
-public class ViewPatientProfileServlet extends HttpServlet {
+public class DeletePatientProfileByIDServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+     private static final String SUCCESS = "ViewPatientProfileServlet";
+    private static final String ERROR = "error.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpSession session = req.getSession();
-            String customerID = (String) session.getAttribute("USER_ID");
-            PatientDAO dao1 = new PatientDAO();
-            List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
-            request.setAttribute("listPatients", listPatients);
+            String id = request.getParameter("id");
+            PatientDAO dao = new PatientDAO();
+            if (dao.delete(id)) {
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR", "Delete Fail, Cannot find the Patient ID: " + id + ", because it is not existed or has been deleted");
+            }
         } catch (Exception e) {
-            log("ERROR at ViewPatientProfileServlet: " + e.getMessage());
+            log("ERROR at DeletePatientProfileByIDServlet: " + e.getMessage());
         } finally {
-            request.getRequestDispatcher("viewPatientProfile.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
