@@ -10,8 +10,10 @@ package web.models.tblPatient;
  * @author nguye
  */
 public class PatientError {
+
     private String patientNameError;
     private String genderError;
+    private String birthdayError;
 
     public String getPatientNameError() {
         return patientNameError;
@@ -28,6 +30,14 @@ public class PatientError {
     public void setGenderError(String genderError) {
         this.genderError = genderError;
     }
+
+    public String getBirthdayError() {
+        return birthdayError;
+    }
+
+    public void setBirthdayError(String birthdayError) {
+        this.birthdayError = birthdayError;
+    }
     
-    
+
 }

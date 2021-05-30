@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addNewPatient
-    Created on : May 29, 2021, 11:53:17 PM
+    Document   : updatePatientProfile
+    Created on : May 30, 2021, 11:40:48 AM
     Author     : nguye
 --%>
 
@@ -10,10 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add new Patient</title>
+        <title>Update Patient Profile</title>
     </head>
     <body>
-        <h1>Add new Patient information</h1>
+        <h1>Update Patient Profile</h1>
         <form action="DispatchServlet" method="POST" name="f1">
             <table>
                 <tr>
@@ -45,3 +45,4 @@
         <a href="home.jsp">Back to Homepage</a>
     </body>
 </html>
+
