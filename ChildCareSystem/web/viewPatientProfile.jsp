@@ -38,7 +38,7 @@
                                 </c:url>
                                 <td><a href="${updateLink}">Update</a> </td>
 
-                                <c:url value="deletePatient" var="deleteLink">
+                                <c:url value="DeletePatientProfileByIDServlet" var="deleteLink">
                                     <c:param name="id" value="${dto2.patientID}"/>
                                 </c:url>
                                 <td><a onclick="return confirmation()" href="${deleteLink}">Delete</a> </td>
@@ -56,5 +56,11 @@
     <h3> <a href="addNewPatient.jsp">Create new Patient Profile</a> </h3>
 
     <a href="home.jsp">Back to Home.jsp</a>        
+    <script>
+        function confirmation() {
+            var r = confirm("Are you sure you want to delete this?");
+            return r;
+        }
+    </script>
 </body>
 </html>

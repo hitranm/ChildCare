@@ -141,4 +141,63 @@ public class PatientDAO {
         }
         return result;
     }
+
+    public boolean update(PatientDTO patient) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblPatient SET PatientName=?, Gender=?, Birthday=? WHERE PatientID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setNString(1, patient.getPatientName());
+                stm.setByte(2, Byte.parseByte(patient.getGender()));
+                stm.setString(3, patient.getBirthday());
+                stm.setString(4, patient.getPatientID());
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM tblPatient WHERE PatientID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
 }

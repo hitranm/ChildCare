@@ -59,7 +59,7 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
 //            }
             HttpSession session = request.getSession();
             String customerID = (String) session.getAttribute("USER_ID");
-            PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
+            PatientDTO patient = new PatientDTO(id,name, gender, birthday, customerID);
             if (valid) {
                 if (dao.update(patient)) {
                     url = SUCCESS;
