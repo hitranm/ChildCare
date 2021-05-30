@@ -48,6 +48,8 @@ private static final String ERROR="login.jsp";
            HttpSession session = request.getSession();
            if(identity!=null){
                String name= dao1.queryCustomer(phoneNum);
+               
+               session.setAttribute("IDENTITY_ID", dao.queryID(phoneNum));
                session.setAttribute("LOGIN_USER", name);
                url=SUCCESS;  
         } else{

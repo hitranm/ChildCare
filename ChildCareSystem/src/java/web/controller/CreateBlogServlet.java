@@ -65,9 +65,11 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
             BlogDAO dao = new BlogDAO();
             if (session != null) {
-                String identityID = (String) session.getAttribute("IdentityID");
-                StaffDAO sdao = new StaffDAO();
-                authorID = sdao.queryStaff(identityID);
+                String identityID = (String) session.getAttribute("IDENTITY_ID");
+                StaffDAO staffDAO = new StaffDAO();
+                System.out.println("identityID: " + identityID);
+                authorID = staffDAO.queryStaff(identityID);
+                System.out.println("authorID: " + authorID);
                 boolean result = dao.createBlog(title, authorID, body, categoryID);
                 if (result) {
                     url = VIEWBLOG_PAGE;
@@ -75,8 +77,7 @@ public class CreateBlogServlet extends HttpServlet {
             }
             }
         } catch (SQLException ex) {
-            String errMsg = ex.getMessage();
-            log("CreateNewAccountServlet _ SQL: " + errMsg);
+            log("CreateNewAccountServlet _ SQL: " + ex.getMessage());
         } catch (NamingException ex) {
             log("CreateNewAccountServlet _ Naming: " + ex.getMessage());
         } finally {

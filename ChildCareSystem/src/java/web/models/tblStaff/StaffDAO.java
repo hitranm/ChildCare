@@ -130,7 +130,7 @@ public class StaffDAO implements Serializable {
         return check;
     }
 
-    public String queryStaff(String IdentityID) throws NamingException, SQLException {
+    public String queryStaff(String identityID) throws NamingException, SQLException {
 
         Connection con = null;
         PreparedStatement stm = null;
@@ -142,12 +142,13 @@ public class StaffDAO implements Serializable {
             if (con != null) {
                 String sql = "Select StaffID "
                         + "From tblStaff S, tblIdentity I "
-                        + "Where S.IdentityID = I.IdentityID AND I.IndentityID = ?";
+                        + "Where I.IdentityID = ? AND S.IdentityID = I.IdentityID ";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, IdentityID);
+                stm.setString(1, identityID);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     staffID = rs.getString("StaffID");
+                    
                 }
             }
         } finally {
@@ -163,5 +164,6 @@ public class StaffDAO implements Serializable {
         }
         return staffID;
     }
+    
 
 }
