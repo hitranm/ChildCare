@@ -111,6 +111,7 @@ public class AddCustomerServlet extends HttpServlet {
                 if (flag) {
                     String identityID = dao1.queryID(phoneNum);
                     CustomerDTO cus = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
+                    session.setAttribute("IdentityID", identityID);
                     boolean flag1 = dao.addCustomer(cus);
                     if (flag1) {
                         session.setAttribute("LOGIN_USER", cus.getFullName());

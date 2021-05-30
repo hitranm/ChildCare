@@ -16,6 +16,14 @@
         <servlet-name>LogOutServlet</servlet-name>
         <servlet-class>web.controller.LogOutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateBlogServlet</servlet-name>
+        <servlet-class>web.controller.CreateBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBlogServlet</servlet-name>
+        <servlet-class>web.controller.ViewBlogServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/LogOutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBlogServlet</servlet-name>
+        <url-pattern>/CreateBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBlogServlet</servlet-name>
+        <url-pattern>/ViewBlogServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

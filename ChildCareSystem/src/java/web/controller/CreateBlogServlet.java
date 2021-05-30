@@ -7,23 +7,26 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblBlog.BlogDAO;
+import web.models.tblBlog.BlogError;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author DELL
  */
-public class DispatchServlet extends HttpServlet {
+public class CreateBlogServlet extends HttpServlet {
 
-    private static final String ADD = "AddCustomerServlet";
-    private static final String LOGIN = "LoginServlet";
-    private static final String LOGOUT = "LogOutServlet";
-    private static final String ERROR = "error.jsp";
-    private final String CREATE_BLOG = "CreateBlogServlet";
+    private final String VIEWBLOG_PAGE = "viewBlogList.jsp";
+    private final String ERROR_PAGE = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,22 +41,47 @@ public class DispatchServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession(false);
+        String url = ERROR_PAGE;
+        String title = request.getParameter("txtTitle");
+        String body = request.getParameter("txtBody");
+        String categoryID = request.getParameter("category");
+        //String authorID = "200001";
+        String authorID;
+        BlogError err = new BlogError();
+        boolean foundErr = false;
         try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login")) {
-                url = LOGIN;
-            } else if (button.equalsIgnoreCase("Register")) {
-                url = ADD;
-            } else if (button.equalsIgnoreCase("LogOut")) {
-                url = LOGOUT;           
-            } else if (button.equals("Create")) {
-                url = CREATE_BLOG;
+            if (title.trim() == "") {
+                foundErr = true;
+                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
             }
+            if (body.trim() == "") {
+                foundErr = true;
+                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
+            }
+            if (foundErr) {
+                request.setAttribute("CREATE_ERROR", err);
+            } else {
+            BlogDAO dao = new BlogDAO();
+            if (session != null) {
+                String identityID = (String) session.getAttribute("IdentityID");
+                StaffDAO sdao = new StaffDAO();
+                authorID = sdao.queryStaff(identityID);
+                boolean result = dao.createBlog(title, authorID, body, categoryID);
+                if (result) {
+                    url = VIEWBLOG_PAGE;
+                }
+            }
+            }
+        } catch (SQLException ex) {
+            String errMsg = ex.getMessage();
+            log("CreateNewAccountServlet _ SQL: " + errMsg);
+        } catch (NamingException ex) {
+            log("CreateNewAccountServlet _ Naming: " + ex.getMessage());
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        } finally {
             out.close();
         }
     }

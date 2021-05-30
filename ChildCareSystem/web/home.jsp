@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>HOME PAGE</title>
     </head>
     <body>
         <h1>Welcome ${sessionScope.LOGIN_USER}</h1>
+        <a href="createBlog.jsp">Tạo blog</a>
+        <a href="viewBlogList.jsp">Xem các bài viết của bạn</a>
     </body>
 </html>

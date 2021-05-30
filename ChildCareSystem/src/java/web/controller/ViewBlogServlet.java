@@ -7,24 +7,27 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblBlog.BlogDAO;
+import web.models.tblBlog.BlogDTO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author DELL
  */
-public class DispatchServlet extends HttpServlet {
-
-    private static final String ADD = "AddCustomerServlet";
-    private static final String LOGIN = "LoginServlet";
-    private static final String LOGOUT = "LogOutServlet";
-    private static final String ERROR = "error.jsp";
-    private final String CREATE_BLOG = "CreateBlogServlet";
-
+public class ViewBlogServlet extends HttpServlet {
+    private final String VIEW_BLOG_PAGE = "viewBlogList.jsp";
+    private final String ERROR_PAGE = "error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,27 +40,30 @@ public class DispatchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
         PrintWriter out = response.getWriter();
+        String url = VIEW_BLOG_PAGE;
         try {
-            String button = request.getParameter("btAction");
-            if (button.equalsIgnoreCase("Login")) {
-                url = LOGIN;
-            } else if (button.equalsIgnoreCase("Register")) {
-                url = ADD;
-            } else if (button.equalsIgnoreCase("LogOut")) {
-                url = LOGOUT;           
-            } else if (button.equals("Create")) {
-                url = CREATE_BLOG;
-            }
+            /* TODO output your page here. You may use following sample code. */
+            
+            BlogDAO dao = new BlogDAO();
+            dao.viewBlogList();
+            
+            List<BlogDTO> result = dao.getBlogList();
+//            List<BlogDTO> result = dao.getBlogList();
+            request.setAttribute("BLOG_LIST", result);
+        } catch (SQLException ex) {
+            log("ViewBlogServlet _ SQL: " + ex.getMessage());
+            url = ERROR_PAGE;
+        } catch (NamingException ex) {
+            log("ViewBlogServlet _ Naming: " + ex.getMessage());
+            url = ERROR_PAGE;
+        } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        } finally {
             out.close();
         }
     }
-
+            
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
