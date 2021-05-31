@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
+import web.models.tblIdentity.IdentityDAO;
 import web.utils.SendEmail;
 
 /**
@@ -37,10 +38,13 @@ private static final String SUCCESS="verify_pass_forgot.jsp";
        String url=ERROR;
        try{
            String email= request.getParameter("email");
+           String phoneNum= request.getParameter("phoneNum");
            CustomerDAO dao= new CustomerDAO();
+           IdentityDAO dao1= new IdentityDAO();
            HttpSession session= request.getSession();
            boolean check= dao.checkEmail(email);
-           if(check){
+           boolean check1= dao1.checkPhoneNum(phoneNum);
+           if(check && check1){
                SendEmail sm = new SendEmail();  		
                    String code = sm.getRandom();  
                    CustomerDTO cus = new CustomerDTO(email,code);
@@ -53,7 +57,7 @@ private static final String SUCCESS="verify_pass_forgot.jsp";
            }
            }
            else{
-               String msg="Email chưa được đăng ký";
+               String msg="Email hoặc số điện thoại chưa được đăng ký";
       	       request.setAttribute("ERROR_EMAIL", msg);
       	   } 
            

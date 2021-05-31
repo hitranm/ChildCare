@@ -21,7 +21,7 @@ import web.utils.DBHelpers;
  */
 public class IdentityDAO {
 
-    public boolean addIdentity(IdentityDTO identity) throws ClassNotFoundException, SQLException {
+    public boolean addIdentity(IdentityDTO identity) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -38,9 +38,8 @@ public class IdentityDAO {
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+        } 
+        finally {
             if (stm != null) {
                 stm.close();
             }
