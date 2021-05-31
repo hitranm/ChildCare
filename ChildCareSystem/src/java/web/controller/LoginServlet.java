@@ -44,16 +44,17 @@ public class LoginServlet extends HttpServlet {
             String phoneNum = request.getParameter("phoneNum");
             String password = request.getParameter("password");
             IdentityDAO dao = new IdentityDAO();
-            String epassword= dao.sha256(password);
-            CustomerDAO dao1= new CustomerDAO();
+            String epassword = dao.sha256(password);
+            CustomerDAO dao1 = new CustomerDAO();
            IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
            HttpSession session = request.getSession();
-           if(identity!=null){
+           if(identity != null){
                String name= dao1.queryCustomer(phoneNum);
-
                session.setAttribute("IDENTITY_ID", dao.queryID(phoneNum));
                session.setAttribute("LOGIN_USER", name);
+               System.out.println(session.getAttribute("LOGIN_USER"));
                url=SUCCESS;
+               
         } else{
                String msg="Phone number or password is not correct!";
                request.setAttribute("Message", msg);

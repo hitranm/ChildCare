@@ -28,6 +28,7 @@
         <c:if test="${empty result}">
             Bạn chưa có bài viết nào!
         </c:if>
+        <a href="createBlog.jsp">Tạo bài viết</a>
         <a href="home.jsp">Trở về trang chủ</a>    
     </body>
 </html>

@@ -30,7 +30,10 @@ public class DispatchServlet extends HttpServlet {
     private static final String SETNEWPASSWORD = "SetNewPassServlet";
     private static final String ADDNEWPATIENT = "AddNewPatientProfileServlet";
     private static final String UPDATEPATIENTPROFILE = "UpdatePatientProfileByIDServlet";
-
+    private static final String ADD_STAFF = "AddStaffServlet";
+    private static final String CREATE_BLOG = "CreateBlogServlet";
+    private static final String VIEW_BLOG = "ViewBlogServlet";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +48,7 @@ public class DispatchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
-        PrintWriter out = response.getWriter();
+
         try {
             String button = request.getParameter("btAction");
             if (button == null) {
@@ -68,10 +71,16 @@ public class DispatchServlet extends HttpServlet {
                 url = ADDNEWPATIENT;
             } else if (button.equalsIgnoreCase("UpdatePatientProfile")) {
                 url = UPDATEPATIENTPROFILE;
+            } else if (button.equalsIgnoreCase("AddStaff")) {
+                url = ADD_STAFF;
+            } else if (button.equalsIgnoreCase("CreateBlog")) {
+                url = CREATE_BLOG;
+            } else if (button.equalsIgnoreCase("ViewBlog")) {
+                url = VIEW_BLOG;
             }
 
         } finally {
-            out.close();
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

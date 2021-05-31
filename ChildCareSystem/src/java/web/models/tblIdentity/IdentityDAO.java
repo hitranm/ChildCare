@@ -75,7 +75,7 @@ public class IdentityDAO {
         }
     }
 
-    public IdentityDTO checkLogin(String phoneNum, String password) throws SQLException {
+    public IdentityDTO checkLogin(String phoneNum, String password) throws SQLException, NamingException {
         IdentityDTO identity = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -96,7 +96,6 @@ public class IdentityDAO {
                     identity = new IdentityDTO(identityID, roleID);
                 }
             }
-        } catch (Exception e) {
         } finally {
             if (rs != null) {
                 rs.close();
@@ -144,7 +143,7 @@ public class IdentityDAO {
         return identityID;
     }
 
-    public boolean checkPhoneNum(String phoneNum) throws SQLException {
+    public boolean checkPhoneNum(String phoneNum) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -162,8 +161,6 @@ public class IdentityDAO {
                     check = true;
                 }
             }
-        } catch (Exception e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -175,32 +172,39 @@ public class IdentityDAO {
                 conn.close();
             }
         }
-          public boolean updatePass(String pass, String phoneNum) throws SQLException {
+        return false;
+    }
+          
+
+    
+
+    public boolean updatePass(String pass, String phoneNum) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
-            conn=DBHelpers.makeConnection();
+            conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "UPDATE tblIdentity SET Password=? WHERE PhoneNumber=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, pass);
                 stm.setString(2, phoneNum);
 
-                int row= stm.executeUpdate();
-                if(row>0)
+                int row = stm.executeUpdate();
+                if (row > 0) {
                     return true;
-
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
-
             if (stm != null) {
                 stm.close();
             }
             if (conn != null) {
                 conn.close();
             }
-        } return false;
-       }
+        }
+
+        return false;
+    }
+
 }
+

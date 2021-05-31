@@ -52,29 +52,27 @@ public class CreateBlogServlet extends HttpServlet {
         BlogError err = new BlogError();
         boolean foundErr = false;
         try {
-            if (title.trim() == "") {
+            if (title.trim().equals("")) {
                 foundErr = true;
                 err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
             }
-            if (body.trim() == "") {
+            if (body.trim().equals("")) {
                 foundErr = true;
                 err.setDescriptionErr("Bạn không được để trống Nội dụng!");
             }
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", err);
             } else {
-            BlogDAO dao = new BlogDAO();
-            if (session != null) {
-                String identityID = (String) session.getAttribute("IDENTITY_ID");
-                StaffDAO staffDAO = new StaffDAO();
-                System.out.println("identityID: " + identityID);
-                authorID = staffDAO.queryStaff(identityID);
-                System.out.println("authorID: " + authorID);
-                boolean result = dao.createBlog(title, authorID, body, categoryID);
-                if (result) {
-                    url = VIEWBLOG_PAGE;
+                BlogDAO dao = new BlogDAO();
+                if (session != null) {
+                    String identityID = (String) session.getAttribute("IDENTITY_ID");
+                    StaffDAO staffDAO = new StaffDAO();
+                    authorID = staffDAO.queryStaff(identityID);
+                    boolean result = dao.createBlog(title, authorID, body, categoryID);
+                    if (result) {
+                        url = VIEWBLOG_PAGE;
+                    }
                 }
-            }
             }
         } catch (SQLException ex) {
             log("CreateNewAccountServlet _ SQL: " + ex.getMessage());

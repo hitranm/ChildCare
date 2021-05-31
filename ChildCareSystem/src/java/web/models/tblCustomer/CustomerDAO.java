@@ -18,7 +18,7 @@ import web.utils.DBHelpers;
  */
 public class CustomerDAO {
 
-    public boolean addCustomer(CustomerDTO cus) throws ClassNotFoundException, SQLException {
+    public boolean addCustomer(CustomerDTO cus) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -38,8 +38,6 @@ public class CustomerDAO {
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -51,7 +49,7 @@ public class CustomerDAO {
         return false;
     }
 
-    public boolean checkCitizenID(String citizenID) throws SQLException {
+    public boolean checkCitizenID(String citizenID) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -69,8 +67,6 @@ public class CustomerDAO {
                     check = true;
                 }
             }
-        } catch (Exception e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -96,7 +92,7 @@ public class CustomerDAO {
         }
     }
 
-    public boolean checkEmail(String email) throws SQLException {
+    public boolean checkEmail(String email) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -114,8 +110,6 @@ public class CustomerDAO {
                     check = true;
                 }
             }
-        } catch (Exception e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -130,7 +124,7 @@ public class CustomerDAO {
         return check;
     }
 
-    public String queryCustomer(String phoneNum) throws SQLException {
+    public String queryCustomer(String phoneNum) throws SQLException, NamingException {
         String fullName = "";
         Connection conn = null;
         PreparedStatement stm = null;
@@ -144,20 +138,25 @@ public class CustomerDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, phoneNum);
                 rs = stm.executeQuery();
-                if(rs.next()){
-                   fullName= rs.getString("FullName");
+                if (rs.next()) {
+                    fullName = rs.getString("FullName");
                 }
             }
-        }
-        finally{
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return fullName;
     }
 
-    public String queryCustomerID(String phoneNum) throws SQLException {
+    public String queryCustomerID(String phoneNum) throws SQLException, NamingException {
         String CustomerID = "";
         Connection conn = null;
         PreparedStatement stm = null;
@@ -175,7 +174,6 @@ public class CustomerDAO {
                     CustomerID = rs.getString("CustomerID");
                 }
             }
-        } catch (Exception e) {
         } finally {
             if (rs != null) {
                 rs.close();
