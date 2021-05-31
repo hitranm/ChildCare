@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.naming.NamingException;
 import web.utils.DBHelpers;
 
 /**
@@ -143,21 +144,15 @@ public class CustomerDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, phoneNum);
                 rs = stm.executeQuery();
-                if (rs.next()) {
-                    fullName = rs.getString("FullName");
+                if(rs.next()){
+                   fullName= rs.getString("FullName");
                 }
             }
-        } catch (Exception e) {
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+        }
+        finally{
+            if(rs != null) rs.close();
+            if(stm != null) stm.close();
+            if(conn != null) conn.close();
         }
         return fullName;
     }

@@ -7,29 +7,26 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblBlog.BlogDAO;
+import web.models.tblBlog.BlogError;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
- * @author HOANGKHOI
+ * @author DELL
  */
-public class DispatchServlet extends HttpServlet {
+public class CreateBlogServlet extends HttpServlet {
 
-    private static final String HOME_PAGE = "home.jsp";
-    private static final String ADD = "AddCustomerServlet";
-    private static final String LOGIN = "LoginServlet";
-    private static final String LOGOUT = "LogOutServlet";
-    private static final String ERROR = "error.jsp";
-    private static final String VERIFY = "VerifyServlet";
-    private static final String FORGOT = "ForgotPassServlet";
-    private static final String RESETPASSWORD = "ResetPassServlet";
-    private static final String SETNEWPASSWORD = "SetNewPassServlet";
-    private static final String ADDNEWPATIENT = "AddNewPatientProfileServlet";
-    private static final String UPDATEPATIENTPROFILE = "UpdatePatientProfileByIDServlet";
+    private final String VIEWBLOG_PAGE = "viewBlogList.jsp";
+    private final String ERROR_PAGE = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,33 +41,48 @@ public class DispatchServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession(false);
+        String url = ERROR_PAGE;
+        String title = request.getParameter("txtTitle");
+        String body = request.getParameter("txtBody");
+        String categoryID = request.getParameter("category");
+        //String authorID = "200001";
+        String authorID;
+        BlogError err = new BlogError();
+        boolean foundErr = false;
         try {
-            String button = request.getParameter("btAction");
-            if (button == null) {
-                url = HOME_PAGE;
-            } else if (button.equalsIgnoreCase("Login")) {
-                url = LOGIN;
-            } else if (button.equalsIgnoreCase("Register")) {
-                url = ADD;
-            } else if (button.equalsIgnoreCase("LogOut")) {
-                url = LOGOUT;
-            } else if (button.equalsIgnoreCase("Verify")) {
-                url = VERIFY;
-            } else if (button.equalsIgnoreCase("VerifyPass")) {
-                url = RESETPASSWORD;
-            } else if (button.equalsIgnoreCase("ResetPass")) {
-                url = SETNEWPASSWORD;
-            } else if (button.equalsIgnoreCase("Forgot")) {
-                url = FORGOT;
-            } else if (button.equalsIgnoreCase("AddNewPatientProfile")) {
-                url = ADDNEWPATIENT;
-            } else if (button.equalsIgnoreCase("UpdatePatientProfile")) {
-                url = UPDATEPATIENTPROFILE;
+            if (title.trim() == "") {
+                foundErr = true;
+                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
             }
-
+            if (body.trim() == "") {
+                foundErr = true;
+                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
+            }
+            if (foundErr) {
+                request.setAttribute("CREATE_ERROR", err);
+            } else {
+            BlogDAO dao = new BlogDAO();
+            if (session != null) {
+                String identityID = (String) session.getAttribute("IDENTITY_ID");
+                StaffDAO staffDAO = new StaffDAO();
+                System.out.println("identityID: " + identityID);
+                authorID = staffDAO.queryStaff(identityID);
+                System.out.println("authorID: " + authorID);
+                boolean result = dao.createBlog(title, authorID, body, categoryID);
+                if (result) {
+                    url = VIEWBLOG_PAGE;
+                }
+            }
+            }
+        } catch (SQLException ex) {
+            log("CreateNewAccountServlet _ SQL: " + ex.getMessage());
+        } catch (NamingException ex) {
+            log("CreateNewAccountServlet _ Naming: " + ex.getMessage());
         } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }

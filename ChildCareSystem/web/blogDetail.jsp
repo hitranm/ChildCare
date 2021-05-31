@@ -1,7 +1,7 @@
 <%-- 
-    Document   : error
-    Created on : May 19, 2021, 9:30:32 PM
-    Author     : Admin
+    Document   : blogDetail
+    Created on : May 28, 2021, 10:09:12 PM
+    Author     : DELL
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Error Page</title>
+        <title>Blog Detail</title>
     </head>
     <body>
-        
+        <h1>Hello World!</h1>
     </body>
 </html>

@@ -5,33 +5,31 @@
  */
 package web.controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.tblCustomer.CustomerDAO;
+
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblCustomer.CustomerError;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblIdentity.IdentityError;
+import web.models.tblStaff.StaffDAO;
+import web.utils.CheckValidHelper;
 import web.utils.RegisterValidation;
-import web.utils.SendEmail;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class AddCustomerServlet extends HttpServlet {
-
-    private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "verify.jsp";
-
+public class AddStaffServlet extends HttpServlet {
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "home.jsp";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,14 +54,15 @@ public class AddCustomerServlet extends HttpServlet {
             String birthday = request.getParameter("birthday");
             String citizenID = request.getParameter("citizenID");
             String roleID = request.getParameter("roleID");
+            String specialtyID = request.getParameter("specialtyID");
+            
             HttpSession session = request.getSession();
-            CustomerDAO dao = new CustomerDAO();
+            StaffDAO staffDAO = new StaffDAO();
             RegisterValidation errors = new RegisterValidation();
             CustomerError error = new CustomerError();
             IdentityError error1 = new IdentityError();
-           
-            boolean check = dao.checkPassword(password, cpassword);
-            boolean check2 = dao.checkEmail(email);
+            boolean check = CheckValidHelper.checkPassword(password, cpassword);
+            boolean check2 = staffDAO.checkEmail(email);
             boolean foundError = false;
             if (phoneNum.trim().length() != 10) {
                 foundError = true;
@@ -89,7 +88,7 @@ public class AddCustomerServlet extends HttpServlet {
                 request.setAttribute("ERROR", error);
                 request.setAttribute("FOUND_ERROR", true);
             }
-            boolean check1 = dao.checkCitizenID(citizenID);
+            boolean check1 = staffDAO.checkCitizenID(citizenID);
             if (check1) {
                 error.setCitizenIDDupError("CCCD đã được sử dụng!!");
                 request.setAttribute("ERROR", error);
@@ -108,35 +107,22 @@ public class AddCustomerServlet extends HttpServlet {
                 request.setAttribute("FOUND_ERROR", true);
             } 
             if(!foundError && check && !check1 && !check2 && !check3) {
-                   SendEmail sm = new SendEmail();  		
-                   String code = sm.getRandom();  
-                   CustomerDTO cus = new CustomerDTO(email,code);
-           boolean test = sm.sendEmail(cus);
-           
-      		//check if the email send successfully
-           if(test){
-               session.setAttribute("authcode", cus);
-               url=SUCCESS;
-           }else{
-               String msg="Vui lòng check lại mail đăng ký có tồn tại hay không";
-      		  request.setAttribute("FAIL_EMAIL", msg);
-      	   } 
-                /*String epassword = dao1.sha256(password);
+                String epassword = dao1.sha256(password);
                 IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
                 boolean flag = dao1.addIdentity(identity);
                 if (flag) {
                     String identityID = dao1.queryID(phoneNum);
-                    CustomerDTO cus = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
                     session.setAttribute("IdentityID", identityID);
-                    boolean flag1 = dao.addCustomer(cus);
+                    boolean flag1 = staffDAO.addStaff(identityID, fullName, email, address, birthday, citizenID, specialtyID);
                     if (flag1) {
-                        session.setAttribute("LOGIN_USER", cus.getFullName());
+                        session.setAttribute("LOGIN_USER", fullName);
+                        session.setAttribute("IDENTITY_ID", identityID);
                         url = SUCCESS;
                     }
-                }*/
+                }
             }
         } catch (Exception e) {
-            log("Error at AddCustomerServlet: " + e.toString());
+            log("Error at AddStaffServlet: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

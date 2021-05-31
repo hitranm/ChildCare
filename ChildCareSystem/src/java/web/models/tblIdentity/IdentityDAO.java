@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.naming.NamingException;
 import web.models.tblCustomer.CustomerDTO;
 import web.utils.DBHelpers;
 
@@ -19,32 +20,38 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class IdentityDAO {
-     public boolean addIdentity(IdentityDTO identity) throws ClassNotFoundException, SQLException{
-        Connection conn=null;
-        PreparedStatement stm=null;
-        try{
-            conn=DBHelpers.makeConnection();
-            if(conn!=null){
-                String sql= "INSERT INTO tblIdentity(PhoneNumber, Password, RoleID) VALUES(?,?,?)";
-                stm=conn.prepareStatement(sql);
+
+    public boolean addIdentity(IdentityDTO identity) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "INSERT INTO tblIdentity(PhoneNumber, Password, RoleID) VALUES(?,?,?)";
+                stm = conn.prepareStatement(sql);
                 stm.setString(1, identity.getPhoneNum());
                 stm.setString(2, identity.getPassword());
                 stm.setString(3, identity.getRoleID());
-                int row= stm.executeUpdate();
-                if(row>0)
+                int row = stm.executeUpdate();
+                if (row > 0) {
                     return true;
+                }
             }
-            
-            
-    }catch(Exception e){
-        e.printStackTrace();
-    }finally{
-            if(stm!=null) stm.close();
-            if(conn!=null) conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }
-     public String sha256(String password) {
+
+    public String sha256(String password) {
         try {
             // Static getInstance method is called with hashing SHA
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -56,7 +63,9 @@ public class IdentityDAO {
                 // Convert message digest into hex value
                 String hex = Integer.toHexString(0xff & b);
                 // Pad with leading zeros
-                if (hex.length() == 1) hexString.append('0');
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
                 hexString.append(hex);
             }
 
@@ -65,88 +74,106 @@ public class IdentityDAO {
             throw new RuntimeException(ex);
         }
     }
-         public IdentityDTO checkLogin(String phoneNum, String password) throws SQLException{
+
+    public IdentityDTO checkLogin(String phoneNum, String password) throws SQLException {
         IdentityDTO identity = null;
-        Connection conn=null;
+        Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        try{
+        try {
             conn = DBHelpers.makeConnection();
-            if(conn!=null){
+            if (conn != null) {
                 String sql = "SELECT IdentityID, RoleID "
                         + " FROM tblIdentity "
-                        +" WHERE PhoneNumber=? AND password=?";
+                        + " WHERE PhoneNumber=? AND password=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, phoneNum);
                 stm.setString(2, password);
-                rs= stm.executeQuery();
-                if(rs.next()){
+                rs = stm.executeQuery();
+                if (rs.next()) {
                     String identityID = rs.getString("IdentityID");
                     String roleID = rs.getString("RoleID");
-                    identity= new IdentityDTO(identityID, roleID);
+                    identity = new IdentityDTO(identityID, roleID);
                 }
             }
-        }catch(Exception e){}
-        finally{
-            if(rs!=null) rs.close();
-            if(stm!=null) stm.close();
-            if(conn!=null) conn.close();            
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return identity;
     }
-          public String queryID(String phoneNum) throws SQLException{
-        String identityID="";
-        Connection conn=null;
+
+    public String queryID(String phoneNum) throws SQLException, NamingException {
+        String identityID = "";
+        Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        try{
+        try {
             conn = DBHelpers.makeConnection();
-            if(conn!=null){
+            if (conn != null) {
                 String sql = "SELECT IdentityID"
                         + " FROM tblIdentity "
-                        +" WHERE PhoneNumber=?";
+                        + " WHERE PhoneNumber=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, phoneNum);
-                rs= stm.executeQuery();
-                if(rs.next()){
+                rs = stm.executeQuery();
+                if (rs.next()) {
                     identityID = rs.getString("IdentityID");
-                    
+
                 }
             }
-        }catch(Exception e){}
-        finally{
-            if(rs!=null) rs.close();
-            if(stm!=null) stm.close();
-            if(conn!=null) conn.close();            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return identityID;
     }
-          public boolean checkPhoneNum(String phoneNum) throws SQLException{
-        boolean check=false;
-        Connection conn= null;
-        PreparedStatement stm= null;
-        ResultSet rs=null;
-        try{
-            conn=DBHelpers.makeConnection();
-            if(conn!=null){
-            String sql="SELECT PhoneNumber "
-                    + " FROM tblIdentity"
-                    +" WHERE PhoneNumber=?";
-           stm=conn.prepareStatement(sql);
-           stm.setString(1, phoneNum);
-           rs=stm.executeQuery();
-           if(rs.next()){
-               check=true;
-           }
-      }  
-      }catch(Exception e) {
-            
-        }finally{
-            if(rs!=null) rs.close();
-            if(stm!=null) stm.close();
-            if(conn!=null) conn.close();
+
+    public boolean checkPhoneNum(String phoneNum) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT PhoneNumber "
+                        + " FROM tblIdentity"
+                        + " WHERE PhoneNumber=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, phoneNum);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
             }
-        return check;
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
           public boolean updatePass(String pass, String phoneNum) throws SQLException {
         Connection conn = null;
@@ -158,16 +185,16 @@ public class IdentityDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, pass);
                 stm.setString(2, phoneNum);
-                
+
                 int row= stm.executeUpdate();
                 if(row>0)
                     return true;
-                
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            
+
             if (stm != null) {
                 stm.close();
             }

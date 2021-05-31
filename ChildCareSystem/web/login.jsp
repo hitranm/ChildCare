@@ -1,11 +1,11 @@
-<%-- 
+<%--
     Document   : register
     Created on : May 18, 2021, 10:55:18 PM
     Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +23,7 @@
         <!--        <h1>ĐĂNG NHẬP</h1>
                 <form action="DispatchServlet" method="POST">
                     <div class="txt_field">
-                        <input type="text" name="phoneNum" required="true">    
+                        <input type="text" name="phoneNum" required="true">
                         <label>SĐT</label>
                     </div>
                     <div class ="txt_field">
@@ -71,7 +71,7 @@
                                         </div>
                                     </c:if>
                                     <div class="d-flex mb-5 align-items-center">
-                                        <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span> 
+                                        <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span>
                                     </div>
                                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button>
                                 </form>

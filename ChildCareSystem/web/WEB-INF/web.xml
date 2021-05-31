@@ -69,40 +69,16 @@
         <url-pattern>/LogOutServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VerifyServlet</servlet-name>
-        <url-pattern>/VerifyServlet</url-pattern>
+        <servlet-name>CreateBlogServlet</servlet-name>
+        <url-pattern>/CreateBlogServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ForgotPassServlet</servlet-name>
-        <url-pattern>/ForgotPassServlet</url-pattern>
+        <servlet-name>ViewBlogServlet</servlet-name>
+        <url-pattern>/ViewBlogServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ResetPassServlet</servlet-name>
-        <url-pattern>/ResetPassServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SetNewPassServlet</servlet-name>
-        <url-pattern>/SetNewPassServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddNewPatientProfileServlet</servlet-name>
-        <url-pattern>/AddNewPatientProfileServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewPatientProfileServlet</servlet-name>
-        <url-pattern>/ViewPatientProfileServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoadPatientProfileByIDServlet</servlet-name>
-        <url-pattern>/LoadPatientProfileByIDServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdatePatientProfileByIDServlet</servlet-name>
-        <url-pattern>/UpdatePatientProfileByIDServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeletePatientProfileByIDServlet</servlet-name>
-        <url-pattern>/DeletePatientProfileByIDServlet</url-pattern>
+        <servlet-name>AddStaffServlet</servlet-name>
+        <url-pattern>/AddStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
