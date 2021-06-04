@@ -33,6 +33,8 @@ public class DispatchServlet extends HttpServlet {
     private static final String ADD_STAFF = "AddStaffServlet";
     private static final String CREATE_BLOG = "CreateBlogServlet";
     private static final String VIEW_BLOG = "ViewBlogServlet";
+    private static final String EDIT_BLOG = "UpdateBlogServlet";
+    private static final String SEARCH_BLOG = "SearchBlogServlet";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,7 +50,7 @@ public class DispatchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
-
+        
         try {
             String button = request.getParameter("btAction");
             if (button == null) {
@@ -77,7 +79,10 @@ public class DispatchServlet extends HttpServlet {
                 url = CREATE_BLOG;
             } else if (button.equalsIgnoreCase("ViewBlog")) {
                 url = VIEW_BLOG;
-            }
+            } else if (button.equalsIgnoreCase("UpdateBlog")){
+                url = EDIT_BLOG;
+            } 
+            
 
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

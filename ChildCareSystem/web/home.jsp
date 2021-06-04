@@ -69,7 +69,7 @@
                                     ></a>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="DispatchServlet?btAction=ViewBlog">Bài viết</a>
+                                <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="ViewPatientProfileServlet">Hồ sơ bệnh nhân</a>
@@ -82,6 +82,9 @@
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Phản hồi</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link" href="LogOutServlet">Đăng xuất</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav">

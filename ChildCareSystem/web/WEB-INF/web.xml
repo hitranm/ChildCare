@@ -52,7 +52,7 @@
         <servlet-name>DeletePatientProfileByIDServlet</servlet-name>
         <servlet-class>web.controller.DeletePatientProfileByIDServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>CreateBlogServlet</servlet-name>
         <servlet-class>web.controller.CreateBlogServlet</servlet-class>
     </servlet>
@@ -64,7 +64,22 @@
         <servlet-name>AddStaffServlet</servlet-name>
         <servlet-class>web.controller.AddStaffServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>ViewBlogDetailServlet</servlet-name>
+        <servlet-class>web.controller.ViewBlogDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBlogServlet</servlet-name>
+        <servlet-class>web.controller.UpdateBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <servlet-class>web.controller.DeleteBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBlogServlet</servlet-name>
+        <servlet-class>web.controller.SearchBlogServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -128,6 +143,22 @@
     <servlet-mapping>
         <servlet-name>AddStaffServlet</servlet-name>
         <url-pattern>/AddStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBlogDetailServlet</servlet-name>
+        <url-pattern>/ViewBlogDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlogServlet</servlet-name>
+        <url-pattern>/UpdateBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <url-pattern>/DeleteBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBlogServlet</servlet-name>
+        <url-pattern>/SearchBlogServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

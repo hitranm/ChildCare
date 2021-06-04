@@ -26,8 +26,10 @@ import web.models.tblBlog.BlogDTO;
  * @author DELL
  */
 public class ViewBlogServlet extends HttpServlet {
+
     private final String VIEW_BLOG_PAGE = "viewBlogList.jsp";
     private final String ERROR_PAGE = "error.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,10 +46,17 @@ public class ViewBlogServlet extends HttpServlet {
         String url = VIEW_BLOG_PAGE;
         try {
             /* TODO output your page here. You may use following sample code. */
-            
             BlogDAO dao = new BlogDAO();
-            dao.viewBlogList();
-            
+            int count = dao.countBlog();
+            int pageSize = 5;
+            int endPage = count / pageSize;
+            if (count % pageSize != 0) {
+                endPage++;
+            }
+            request.setAttribute("PAGE", endPage);
+            String indexString = request.getParameter("index");
+            int index = Integer.parseInt(indexString);
+            dao.viewBlogList(index);
             List<BlogDTO> result = dao.getBlogList();
             request.setAttribute("BLOG_LIST", result);
         } catch (SQLException ex) {
@@ -62,7 +71,7 @@ public class ViewBlogServlet extends HttpServlet {
             out.close();
         }
     }
-            
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

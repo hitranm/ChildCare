@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
            if(identity != null){
                String name= dao1.queryCustomer(phoneNum);
                session.setAttribute("IDENTITY_ID", dao.queryID(phoneNum));
+               session.setAttribute("USER_ID", dao1.queryCustomerID(phoneNum));
                session.setAttribute("LOGIN_USER", name);
                System.out.println(session.getAttribute("LOGIN_USER"));
                url=SUCCESS;
