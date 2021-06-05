@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import web.models.tblBlog.BlogDAO;
+
 import web.utils.DBHelpers;
 
 /**
@@ -75,7 +76,7 @@ public class StaffDAO implements Serializable {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT CitizenID "
-                        + "FROM tblCustomer "
+                        + "FROM tblStaff "
                         + "WHERE CitizenID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, citizenID);
@@ -164,6 +165,77 @@ public class StaffDAO implements Serializable {
         }
         return staffID;
     }
-    
-
+     public StaffDTO queryStaff1(String phoneNum) throws SQLException, NamingException {
+        String fullName = "";
+        String email="";
+        String address="";
+        String birthday="";
+        String citizenID="";
+        String roleID="";
+        String specialtyID="";
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, RoleID, SpecialtyID "
+                        + " FROM tblStaff S, tblIdentity I "
+                        + " WHERE S.IdentityID = I.IdentityID AND PhoneNumber=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, phoneNum);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    fullName = rs.getString("FullName");
+                    email = rs.getString("Email");
+                    address = rs.getString("Address");
+                    birthday = rs.getString("Birthday");
+                    citizenID= rs.getString("CitizenID");
+                    roleID = rs.getString("RoleID");
+                    specialtyID = rs.getString("SpecialtyID");
+                    StaffDTO staff = new StaffDTO(fullName, email, address, birthday, citizenID, roleID, "", specialtyID);
+                    return staff;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+        public boolean update(StaffDTO staff) throws SQLException, NamingException{
+        boolean check=false;
+        Connection conn=null;
+        PreparedStatement stm=null;
+        ResultSet rs=null;
+        try{
+            conn=DBHelpers.makeConnection();
+            if(conn!=null){
+                String sql= "UPDATE tblStaff SET FullName=?, Address=?, Birthday=? "
+                        + " WHERE IdentityID=?";
+                stm=conn.prepareStatement(sql);
+                stm.setString(1, staff.getFullName());
+                stm.setString(2, staff.getAddress());
+                stm.setString(3, staff.getBirthday());
+                stm.setString(4, staff.getIdentityID());
+                
+                check= stm.executeUpdate()>0?true:false;
+            }
+            
+        }
+        finally{
+             if(rs!=null) rs.close();
+            if(stm!=null) stm.close();
+            if(conn!=null) conn.close();
+        }
+        
+       return check;
+}
 }

@@ -124,15 +124,21 @@ public class CustomerDAO {
         return check;
     }
 
-    public String queryCustomer(String phoneNum) throws SQLException, NamingException {
+    public CustomerDTO queryCustomer(String phoneNum) throws SQLException, NamingException {
         String fullName = "";
+        String email="";
+        String address="";
+        String birthday="";
+        String citizenID="";
+        String roleID="";
+        String identityID="";
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT FullName "
+                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, RoleID "
                         + " FROM tblCustomer C, tblIdentity I "
                         + " WHERE C.IdentityID = I.IdentityID AND PhoneNumber=?";
                 stm = conn.prepareStatement(sql);
@@ -140,6 +146,14 @@ public class CustomerDAO {
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     fullName = rs.getString("FullName");
+                    email = rs.getString("Email");
+                    address = rs.getString("Address");
+                    birthday = rs.getString("Birthday");
+                    citizenID= rs.getString("CitizenID");
+                    roleID = rs.getString("RoleID");
+                    identityID = rs.getString("IdentityID");
+                    CustomerDTO cus = new CustomerDTO(fullName, email, address, birthday, citizenID, roleID, "");
+                    return cus;
                 }
             }
         } finally {
@@ -153,7 +167,7 @@ public class CustomerDAO {
                 conn.close();
             }
         }
-        return fullName;
+        return null;
     }
 
     public String queryCustomerID(String phoneNum) throws SQLException, NamingException {
@@ -187,4 +201,32 @@ public class CustomerDAO {
         }
         return CustomerID;
     }
+    public boolean update(CustomerDTO cus) throws SQLException, NamingException{
+        boolean check=false;
+        Connection conn=null;
+        PreparedStatement stm=null;
+        ResultSet rs=null;
+        try{
+            conn=DBHelpers.makeConnection();
+            if(conn!=null){
+                String sql= "UPDATE tblCustomer SET FullName=?, Address=?, Birthday=? "
+                        + " WHERE IdentityID=?";
+                stm=conn.prepareStatement(sql);
+                stm.setString(1, cus.getFullName());
+                stm.setString(2, cus.getAddress());
+                stm.setString(3, cus.getBirthday());
+                stm.setString(4, cus.getIdentityID());
+                
+                check= stm.executeUpdate()>0?true:false;
+            }
+            
+        }
+        finally{
+             if(rs!=null) rs.close();
+            if(stm!=null) stm.close();
+            if(conn!=null) conn.close();
+        }
+        
+       return check;
+}
 }

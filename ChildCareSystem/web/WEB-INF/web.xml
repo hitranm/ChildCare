@@ -52,7 +52,7 @@
         <servlet-name>DeletePatientProfileByIDServlet</servlet-name>
         <servlet-class>web.controller.DeletePatientProfileByIDServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>CreateBlogServlet</servlet-name>
         <servlet-class>web.controller.CreateBlogServlet</servlet-class>
     </servlet>
@@ -64,7 +64,10 @@
         <servlet-name>AddStaffServlet</servlet-name>
         <servlet-class>web.controller.AddStaffServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <servlet-class>web.controller.UpdateProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -128,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>AddStaffServlet</servlet-name>
         <url-pattern>/AddStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <url-pattern>/UpdateProfileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

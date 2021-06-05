@@ -10,14 +10,15 @@ package web.models.tblCustomer;
  * @author Admin
  */
 public class CustomerDTO {
-    private String identityID;
-    private String fullName;
-    private String email;
-    private String address;
-    private String birthday;
-    private String citizenID;
+    private String IdentityID;
+    private String FullName;
+    private String Email;
+    private String Address;
+    private String Birthday;
+    private String CitizenID;
     private String code;
-
+    private String RoleID;
+    
     public CustomerDTO() {
     }
 
@@ -30,68 +31,95 @@ public class CustomerDTO {
     }
 
     public CustomerDTO(String email, String code) {
-        this.email = email;
+        this.Email = email;
         this.code = code;
     }
 
   
 
     public String getFullName() {
-        return fullName;
+        return FullName;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public String getAddress() {
-        return address;
+        return Address;
     }
 
     public String getBirthday() {
-        return birthday;
+        return Birthday;
     }
 
     public String getCitizenID() {
-        return citizenID;
+        return CitizenID;
     }
 
     public void setFullName(String fullName) {
-        this.fullName = fullName;
+        this.FullName = fullName;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.Email = email;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.Address = address;
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = birthday;
+        this.Birthday = birthday;
     }
 
     public void setCitizenID(String citizenID) {
-        this.citizenID = citizenID;
+        this.CitizenID = citizenID;
     }
 
     public CustomerDTO(String identityID ,String fullName, String email, String address, String birthday, String citizenID) {
-        this.identityID= identityID;
-        this.fullName = fullName;
-        this.email = email;
-        this.address = address;
-        this.birthday = birthday;
-        this.citizenID = citizenID;
+        this.IdentityID= identityID;
+        this.FullName = fullName;
+        this.Email = email;
+        this.Address = address;
+        this.Birthday = birthday;
+        this.CitizenID = citizenID;
     }
 
     public String getIdentityID() {
-        return identityID;
+        return IdentityID;
     }
 
     public void setIdentityID(String identityID) {
-        this.identityID = identityID;
+        this.IdentityID = identityID;
     }
+
+    public CustomerDTO(String fullName, String email, String address, String birthday, String citizenID, String roleID, String IdentityID) {
+        this.FullName = fullName;
+        this.Email = email;
+        this.Address = address;
+        this.Birthday = birthday;
+        this.CitizenID = citizenID;
+        this.RoleID= roleID;
+        this.IdentityID= IdentityID;
+    }
+
+    public String getRoleID() {
+        return RoleID;
+    }
+
+    public void setRoleID(String roleID) {
+        this.RoleID = roleID;
+    }
+
+    public CustomerDTO(String IdentityID, String FullName, String Address, String Birthday) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.Address = Address;
+        this.Birthday = Birthday;
+    }
+
+   
 
    
 }

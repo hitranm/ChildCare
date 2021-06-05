@@ -84,7 +84,7 @@ public class IdentityDAO {
             if (conn != null) {
                 String sql = "SELECT IdentityID, RoleID "
                         + " FROM tblIdentity "
-                        + " WHERE PhoneNumber=? AND password=?";
+                        + " WHERE PhoneNumber=? AND Password=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, phoneNum);
                 stm.setString(2, password);
@@ -93,6 +93,7 @@ public class IdentityDAO {
                     String identityID = rs.getString("IdentityID");
                     String roleID = rs.getString("RoleID");
                     identity = new IdentityDTO(identityID, roleID);
+                    return identity;
                 }
             }
         } finally {
@@ -106,7 +107,7 @@ public class IdentityDAO {
                 conn.close();
             }
         }
-        return identity;
+        return null;
     }
 
     public String queryID(String phoneNum) throws SQLException, NamingException {

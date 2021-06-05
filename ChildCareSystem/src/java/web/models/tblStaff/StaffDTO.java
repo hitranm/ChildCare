@@ -17,6 +17,8 @@ public class StaffDTO {
     private String Birthday;
     private String CitizenID;
     private String SpecialtyID;
+    private String RoleID;
+    
 
     public StaffDTO() {
     }
@@ -127,6 +129,32 @@ public class StaffDTO {
      */
     public void setSpecialtyID(String SpecialtyID) {
         this.SpecialtyID = SpecialtyID;
+    }
+
+    public StaffDTO(String FullName, String Email, String Address, String Birthday, String CitizenID, String RoleID, String IdentityID, String SpecialtyID) {
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Address = Address;
+        this.Birthday = Birthday;
+        this.CitizenID = CitizenID;
+        this.RoleID= RoleID;
+        this.IdentityID= IdentityID;
+        this.SpecialtyID=SpecialtyID;
+    }
+
+    public String getRoleID() {
+        return RoleID;
+    }
+
+    public void setRoleID(String roleID) {
+        this.RoleID = roleID;
+    }
+
+    public StaffDTO(String IdentityID, String FullName, String Address, String Birthday) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.Address = Address;
+        this.Birthday = Birthday;
     }
     
 }

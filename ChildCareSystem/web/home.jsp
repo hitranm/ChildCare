@@ -88,7 +88,8 @@
                             <c:choose>
                                 <c:when test="${not empty sessionScope.LOGIN_USER}">
                                     <li>
-                                        <a href="#" class="nav-link">${sessionScope.LOGIN_USER}</a>
+                                        <a href="#" class="nav-link">${sessionScope.LOGIN_USER.fullName}</a>
+                                        <a href="viewProfile.jsp" class="nav-link">View Profile</a>
                                     </li>
                                 </c:when>
                                 <c:otherwise>

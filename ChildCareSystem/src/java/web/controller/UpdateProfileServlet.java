@@ -16,8 +16,6 @@ import web.models.tblAdmin.AdminDAO;
 import web.models.tblAdmin.AdminDTO;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
-import web.models.tblIdentity.IdentityDAO;
-import web.models.tblIdentity.IdentityDTO;
 import web.models.tblManager.ManagerDAO;
 import web.models.tblManager.ManagerDTO;
 import web.models.tblStaff.StaffDAO;
@@ -27,11 +25,9 @@ import web.models.tblStaff.StaffDTO;
  *
  * @author Admin
  */
-public class LoginServlet extends HttpServlet {
-
-    private static final String SUCCESS = "home.jsp";
-    private static final String ERROR = "login.jsp";
-
+public class UpdateProfileServlet extends HttpServlet {
+private static final String ERROR="editProfile.jsp";
+private static final String SUCCESS="viewProfile.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,59 +40,57 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
-        try {
-            String phoneNum = request.getParameter("phoneNum");
-            String password = request.getParameter("password");
-            IdentityDAO dao = new IdentityDAO();
-            String epassword = dao.sha256(password);
-            CustomerDAO dao3 = new CustomerDAO();
+        String url=ERROR;
+        try{
+            String fullName = request.getParameter("fullName");
+            String address = request.getParameter("address");
+            String birthday = request.getParameter("birthday");
+            String email = request.getParameter("email");
+            String citizenID = request.getParameter("citizenID");
+            String roleID = request.getParameter("roleID");
+            String identityID = request.getParameter("identityID");
+            AdminDAO dao0 = new AdminDAO();
             ManagerDAO dao1 = new ManagerDAO();
             StaffDAO dao2 = new StaffDAO();
-            AdminDAO dao0 = new AdminDAO();
-           IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
-           HttpSession session = request.getSession();
-           if(identity != null){
-               if(identity.getRoleID().equals("1")){
-                   ManagerDTO dto= new ManagerDTO();
-                   dto= dao1.queryManager(phoneNum);
-                   session.setAttribute("LOGIN_USER", dto);
-                   session.setAttribute("IDENTITYID", identity.getIdentityID());
-                   url= SUCCESS;
-               }
-               if(identity.getRoleID().equals("2")){
-                   StaffDTO dto= new StaffDTO();
-                   dto = dao2.queryStaff1(phoneNum);
-                   session.setAttribute("LOGIN_USER", dto);
-                   session.setAttribute("IDENTITYID", identity.getIdentityID());
-                   url= SUCCESS;
-               }
-               if(identity.getRoleID().equals("3")){
-               CustomerDTO dto= new CustomerDTO();
-               dto = dao3.queryCustomer(phoneNum);
-               session.setAttribute("LOGIN_USER", dto);
-               session.setAttribute("IDENTITYID", identity.getIdentityID());
-               url=SUCCESS;
-               }
-               if(identity.getRoleID().equals("0")){
-               AdminDTO dto = new AdminDTO();
-               dto = dao0.queryAdmin(phoneNum);
-               session.setAttribute("LOGIN_USER", dto);
-               session.setAttribute("IDENTITYID", identity.getIdentityID());
-               url= SUCCESS;
-               }
-               
-               
-        } else{
-               String msg="Phone number or password is not correct!";
-               request.setAttribute("Message", msg);
-           }
+            CustomerDAO dao3 = new CustomerDAO();
+            HttpSession session = request.getSession();
+            if(roleID.equals("0")) {
+                    AdminDTO dto = new AdminDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+                   boolean check= dao0.update(dto);
+                   if(check){
+                    session.setAttribute("LOGIN_USER", dto);   
+                    url=SUCCESS;   
+                   }
+            }
+            if(roleID.equals("1")){
+                    ManagerDTO dto = new ManagerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+                   boolean check= dao1.update(dto);
+                   if(check){
+                       session.setAttribute("LOGIN_USER", dto); 
+                       url=SUCCESS;
+                }
+            }
+            if(roleID.equals("2")){
+                    StaffDTO dto = new StaffDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+                    boolean check = dao2.update(dto);
+                    if(check){
+                        session.setAttribute("LOGIN_USER", dto); 
+                        url=SUCCESS;
+                }
+            }
+            if(roleID.equals("3")){
+                    CustomerDTO dto = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+                    boolean check = dao3.update(dto);
+                    if(check){
+                        session.setAttribute("LOGIN_USER", dto); 
+                        url=SUCCESS;
+                            
+                }
+            }
+        }catch(Exception e){
+            log("Error at UpdateProfileServlet: "+e.toString());
         }
-        catch(Exception e){
-            e.printStackTrace();
-            log("Error at LoginServlet:" + e.toString());
-        } finally {
+        finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
