@@ -36,6 +36,7 @@
 
     <body>
         <a href="home.jsp">Trở về trang chủ</a>
+        <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <div class="container mt-4 mb-4">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-lg-8">
@@ -47,11 +48,15 @@
                         <c:if test="${not empty err.titleLengthErr}">
                             <font color="red">${err.titleLengthErr}</font>
                         </c:if><br>
+
                         <label for="category">Thể loại:</label>
                         <select name="category" id="category">
-                            <option value="1">Giới thiệu</option>
-                            <option value="2">Hướng dẫn</option>
-                            <option value="3">Sức khỏe</option>
+                            <c:forEach items="${cate.viewBlogCategory()}" var="dto">
+                                <option value="${dto.categoryID}">${dto.categoryName}</option>
+                            </c:forEach>
+
+                            <!--                            <option value="2">Hướng dẫn</option>
+                                                        <option value="3">Sức khỏe</option>-->
                         </select><br/>
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">

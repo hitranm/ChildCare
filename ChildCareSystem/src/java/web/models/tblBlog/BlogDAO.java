@@ -176,7 +176,7 @@ public class BlogDAO implements Serializable {
         return null;
     }
 
-    public boolean updateBlog(String blogID, String title, String body)
+    public boolean updateBlog(String blogID, String title, String body, String categoryID)
             throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -184,7 +184,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
             if (con != null) {
                 String sql = "Update tblBlog "
-                        + "Set Title=?, Description=?, StatusID=? "
+                        + "Set Title=?, Description=?, StatusID=?, CategoryID=? "
                         + "Where BlogID=?";
 
                 stm = con.prepareStatement(sql);
@@ -192,7 +192,8 @@ public class BlogDAO implements Serializable {
                 stm.setString(2, body);
                 //stm.setString(3, cateID);
                 stm.setString(3, "1");
-                stm.setString(4, blogID);
+                stm.setString(4, categoryID);
+                stm.setString(5, blogID);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;

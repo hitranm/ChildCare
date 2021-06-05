@@ -21,11 +21,8 @@ import web.utils.DBHelpers;
  * @author DELL
  */
 public class BlogCategoryDAO implements Serializable {
-    private List<BlogCategoryDTO> blogCategoryList;
-    public List<BlogCategoryDTO> getBlogCategoryList() {
-        return blogCategoryList;
-    }
-    public void viewBlogCategory() throws NamingException, SQLException {
+    
+    public List<BlogCategoryDTO> viewBlogCategory() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -36,15 +33,14 @@ public class BlogCategoryDAO implements Serializable {
                     + "From tblBlogCategory";
             stm = con.prepareStatement(sql);
             rs = stm.executeQuery();
+            List<BlogCategoryDTO> list = new ArrayList<>();
             while (rs.next()) {
                 String cateID = rs.getString("CategoryID");
                 String cateName = rs.getString("CategoryName");
                 BlogCategoryDTO dto = new BlogCategoryDTO(cateID, cateName);
-                if (this.blogCategoryList == null) {
-                    this.blogCategoryList = new ArrayList<>();
-                }
-                this.blogCategoryList.add(dto);
+                list.add(dto);
             }
+            return list;
         } finally {
             if (rs != null) {
                 rs.close();

@@ -48,7 +48,7 @@ public class UpdateBlogServlet extends HttpServlet {
         String blogID = request.getParameter("txtBlogID");
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
-       // String categoryID = request.getParameter("category");
+        String categoryID = request.getParameter("category");
         BlogError err = new BlogError();
         boolean foundErr = false;
         try {
@@ -68,7 +68,7 @@ public class UpdateBlogServlet extends HttpServlet {
 //                blogDAO.viewBlogCategory();
 //                List<BlogCategoryDTO> blogCate = blogDAO.getBlogCategoryList();
 //                request.setAttribute("CATE_LIST", blogCate);
-                boolean result = dao.updateBlog(blogID, title, body);
+                boolean result = dao.updateBlog(blogID, title, body, categoryID);
                 if (result) {
                     url = VIEWBLOG;
                 } else {

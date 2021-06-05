@@ -28,7 +28,7 @@ import web.models.tblStaff.StaffDAO;
  */
 public class CreateBlogServlet extends HttpServlet {
 
-    private final String VIEWBLOG = "ViewBlogServlet";
+    private final String VIEWBLOG = "ViewBlogServlet?index=1";
     private final String ERROR_PAGE = "error.jsp";
 
     /**
