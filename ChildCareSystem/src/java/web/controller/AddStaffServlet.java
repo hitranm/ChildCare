@@ -19,6 +19,7 @@ import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblIdentity.IdentityError;
 import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
 import web.utils.CheckValidHelper;
 import web.utils.RegisterValidation;
 
@@ -69,7 +70,8 @@ public class AddStaffServlet extends HttpServlet {
                 errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
                 request.setAttribute("FOUND_ERROR", true);
             }
-            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
+            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ 
+            if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
                 foundError = true;
                 errors.setPasswordError("Không đúng định dạng!");
                 request.setAttribute("FOUND_ERROR", true);
@@ -111,12 +113,9 @@ public class AddStaffServlet extends HttpServlet {
                 IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
                 boolean flag = dao1.addIdentity(identity);
                 if (flag) {
-                    String identityID = dao1.queryID(phoneNum);
-                    session.setAttribute("IdentityID", identityID);
+                    String identityID = dao1.queryID(phoneNum);                  
                     boolean flag1 = staffDAO.addStaff(identityID, fullName, email, address, birthday, citizenID, specialtyID);
                     if (flag1) {
-                        session.setAttribute("LOGIN_USER", fullName);
-                        session.setAttribute("IDENTITY_ID", identityID);
                         url = SUCCESS;
                     }
                 }

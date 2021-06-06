@@ -67,9 +67,10 @@ public class LoginServlet extends HttpServlet {
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("2")) {
-                    StaffDTO dto = new StaffDTO();
-                    dto = dao2.queryStaff1(phoneNum);
+                    StaffDTO dto = dao2.queryStaffByIdentityId(identity.getIdentityID());
+                    System.out.println(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
+                    System.out.println(session.getAttribute("LOGIN_USER"));
                     session.setAttribute("IDENTITYID", identity.getIdentityID());
                     url = SUCCESS;
                 }

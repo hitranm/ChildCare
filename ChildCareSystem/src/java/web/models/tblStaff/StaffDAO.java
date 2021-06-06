@@ -166,13 +166,58 @@ public class StaffDAO implements Serializable {
         return staffID;
     }
 
-    public StaffDTO queryStaff1(String phoneNum) throws SQLException, NamingException {
+//    public StaffDTO queryStaff1(String phoneNum) throws SQLException, NamingException {
+//        String fullName = "";
+//        String email = "";
+//        String address = "";
+//        String birthday = "";
+//        String citizenID = "";
+//        String roleID = "";
+//        String specialtyID = "";
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            conn = DBHelpers.makeConnection();
+//            if (conn != null) {
+//                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, RoleID, SpecialtyID "
+//                        + " FROM tblStaff S, tblIdentity I "
+//                        + " WHERE S.IdentityID = I.IdentityID AND PhoneNumber=?";
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, phoneNum);
+//                rs = stm.executeQuery();
+//                if (rs.next()) {
+//                    fullName = rs.getString("FullName");
+//                    email = rs.getString("Email");
+//                    address = rs.getString("Address");
+//                    birthday = rs.getString("Birthday");
+//                    citizenID = rs.getString("CitizenID");
+//                    roleID = rs.getString("RoleID");
+//                    specialtyID = rs.getString("SpecialtyID");
+//                    StaffDTO staff = new StaffDTO(fullName, email, address, birthday, citizenID, roleID, "", specialtyID);
+//                    return staff;
+//                }
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return null;
+//    }
+    
+    public StaffDTO queryStaffByIdentityId(String identityId) throws SQLException, NamingException {
         String fullName = "";
         String email = "";
         String address = "";
         String birthday = "";
         String citizenID = "";
-        String roleID = "";
         String specialtyID = "";
         Connection conn = null;
         PreparedStatement stm = null;
@@ -180,11 +225,11 @@ public class StaffDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, RoleID, SpecialtyID "
-                        + " FROM tblStaff S, tblIdentity I "
-                        + " WHERE S.IdentityID = I.IdentityID AND PhoneNumber=?";
+                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, SpecialtyID "
+                        + " FROM tblStaff S "
+                        + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, phoneNum);
+                stm.setString(1, identityId);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     fullName = rs.getString("FullName");
@@ -192,9 +237,8 @@ public class StaffDAO implements Serializable {
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
                     citizenID = rs.getString("CitizenID");
-                    roleID = rs.getString("RoleID");
                     specialtyID = rs.getString("SpecialtyID");
-                    StaffDTO staff = new StaffDTO(fullName, email, address, birthday, citizenID, roleID, "", specialtyID);
+                    StaffDTO staff = new StaffDTO(identityId, fullName, email, address, birthday, citizenID, specialtyID);
                     return staff;
                 }
             }
@@ -211,6 +255,8 @@ public class StaffDAO implements Serializable {
         }
         return null;
     }
+    
+    
 
     public boolean update(StaffDTO staff) throws SQLException, NamingException {
         boolean check = false;
