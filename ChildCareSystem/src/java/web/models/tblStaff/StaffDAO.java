@@ -23,7 +23,7 @@ public class StaffDAO implements Serializable {
 
     public boolean addStaff(String identityID,
             String fullname,
-            String email,
+            String phoneNum,
             String address,
             String birthday,
             String citizenID,
@@ -37,13 +37,13 @@ public class StaffDAO implements Serializable {
             if (con != null) {
                 //2. Create query string
                 String sql = "INSERT INTO "
-                        + "tblStaff (IdentityID, FullName, Email, Address, Birthday, CitizenID, SpecialtyID) "
+                        + "tblStaff (IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID) "
                         + "VALUES (?,?,?,?,?,?,?)";
                 //3. Create statement and assign value
                 stm = con.prepareStatement(sql);
                 stm.setString(1, identityID);
                 stm.setString(2, fullname);
-                stm.setString(3, email);
+                stm.setString(3, phoneNum);
                 stm.setString(4, address);
                 stm.setString(5, birthday);
                 stm.setString(6, citizenID);
@@ -98,23 +98,22 @@ public class StaffDAO implements Serializable {
         }
         return check;
     }
-
-    public boolean checkEmail(String email) throws SQLException, NamingException {
-        boolean check = false;
+    
+    public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT Email "
+                String sql = "SELECT PhoneNumber "
                         + " FROM tblStaff"
-                        + " WHERE Email=?";
+                        + " WHERE PhoneNumber=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, email);
+                stm.setString(1, phoneNum);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    check = true;
+                    return true;
                 }
             }
         } finally {
@@ -128,8 +127,40 @@ public class StaffDAO implements Serializable {
                 conn.close();
             }
         }
-        return check;
+        return false;
     }
+
+//    public boolean checkEmail(String email) throws SQLException, NamingException {
+//        boolean check = false;
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            conn = DBHelpers.makeConnection();
+//            if (conn != null) {
+//                String sql = "SELECT Email "
+//                        + " FROM tblStaff"
+//                        + " WHERE Email=?";
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, email);
+//                rs = stm.executeQuery();
+//                if (rs.next()) {
+//                    check = true;
+//                }
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return check;
+//    }
 
     public String queryStaff(String identityID) throws NamingException, SQLException {
 

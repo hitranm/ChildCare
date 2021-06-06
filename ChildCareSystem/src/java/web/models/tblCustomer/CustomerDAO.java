@@ -120,37 +120,37 @@ public class CustomerDAO {
         return false;
     }
 
-    public boolean checkEmail(String email) throws SQLException, NamingException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBHelpers.makeConnection();
-            if (conn != null) {
-                String sql = "SELECT Email "
-                        + " FROM tblCustomer"
-                        + " WHERE Email=?";
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, email);
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    check = true;
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return check;
-    }
+//    public boolean checkEmail(String email) throws SQLException, NamingException {
+//        boolean check = false;
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            conn = DBHelpers.makeConnection();
+//            if (conn != null) {
+//                String sql = "SELECT Email "
+//                        + " FROM tblCustomer"
+//                        + " WHERE Email=?";
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, email);
+//                rs = stm.executeQuery();
+//                if (rs.next()) {
+//                    check = true;
+//                }
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return check;
+//    }
 
 //    public CustomerDTO queryCustomer(String phoneNum) throws SQLException, NamingException {
 //        String fullName = "";

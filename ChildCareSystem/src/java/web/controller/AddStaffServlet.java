@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.tblCustomer.CustomerDAO;
 
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblCustomer.CustomerError;
@@ -28,9 +29,10 @@ import web.utils.RegisterValidation;
  * @author HOANGKHOI
  */
 public class AddStaffServlet extends HttpServlet {
+
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "home.jsp";
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,86 +47,79 @@ public class AddStaffServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
-//        try {
-//            String fullName = request.getParameter("fullName");
-//            String email = request.getParameter("email");
-//            String address = request.getParameter("address");
-//            String phoneNum = request.getParameter("phoneNum");
-//            String password = request.getParameter("password");
-//            String cpassword = request.getParameter("cpassword");
-//            String birthday = request.getParameter("birthday");
-//            String citizenID = request.getParameter("citizenID");
-//            String roleID = request.getParameter("roleID");
-//            String specialtyID = request.getParameter("specialtyID");
-//            
-//            HttpSession session = request.getSession();
-//            StaffDAO staffDAO = new StaffDAO();
-//            RegisterValidation errors = new RegisterValidation();
-//            CustomerError error = new CustomerError();
-//            IdentityError error1 = new IdentityError();
-//            boolean check = CheckValidHelper.checkPassword(password, cpassword);
-//            boolean check2 = staffDAO.checkEmail(email);
-//            boolean foundError = false;
-//            if (phoneNum.trim().length() != 10) {
-//                foundError = true;
-//                errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
-//                request.setAttribute("FOUND_ERROR", true);
-//            }
-//            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ 
-//            if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
-//                foundError = true;
-//                errors.setPasswordError("Không đúng định dạng!");
-//                request.setAttribute("FOUND_ERROR", true);
-//            }
-//            if (citizenID.trim().length() != 12) {
-//                foundError = true;
-//                errors.setCitizenIDError("Không đúng định dạng!");
-//                request.setAttribute("FOUND_ERROR", true);
-//            }
-//            if (foundError) {
-//                request.setAttribute("SIGNUP_ERROR", errors);
-//            }
-//
-//            if (!check) {
-//                error.setPasswordError("Mật khẩu xác nhận không trùng khớp!!");
-//                request.setAttribute("ERROR", error);
-//                request.setAttribute("FOUND_ERROR", true);
-//            }
-//            boolean check1 = staffDAO.checkCitizenID(citizenID);
-//            if (check1) {
-//                error.setCitizenIDDupError("CCCD đã được sử dụng!!");
-//                request.setAttribute("ERROR", error);
-//                request.setAttribute("FOUND_ERROR", true);
-//            }
-//            if (check2) {
-//                error.setEmailDupError("Email đã được sử dụng!!");
-//                request.setAttribute("ERROR", error);
-//                request.setAttribute("FOUND_ERROR", true);
-//            }
-//            IdentityDAO dao1 = new IdentityDAO();
-//            boolean check3 = dao1.checkPhoneNum(phoneNum);
-//            if (check3) {
-//                error1.setPhoneNumDupError("Số điện thoại đã được sử dụng!!");
-//                request.setAttribute("error", error1);
-//                request.setAttribute("FOUND_ERROR", true);
-//            } 
-//            if(!foundError && check && !check1 && !check2 && !check3) {
-//                String epassword = dao1.sha256(password);
-//                IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
-//                boolean flag = dao1.addIdentity(identity);
-//                if (flag) {
-//                    String identityID = dao1.queryID(phoneNum);                  
-//                    boolean flag1 = staffDAO.addStaff(identityID, fullName, email, address, birthday, citizenID, specialtyID);
-//                    if (flag1) {
-//                        url = SUCCESS;
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {
-//            log("Error at AddStaffServlet: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+        try {
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            String phoneNum = request.getParameter("phoneNum");
+            String password = request.getParameter("password");
+            String cpassword = request.getParameter("cpassword");
+            String birthday = request.getParameter("birthday");
+            String citizenID = request.getParameter("citizenID");
+            String roleID = request.getParameter("roleID");
+            String specialtyID = request.getParameter("specialtyID");
+            HttpSession session = request.getSession();
+            StaffDAO staffDAO = new StaffDAO();
+            IdentityDAO identityDAO = new IdentityDAO();
+            RegisterValidation registerValidation = new RegisterValidation();
+            boolean foundError = false;
+            if (!CheckValidHelper.IsValidPhoneNumberLength(phoneNum)) {
+                foundError = true;
+                registerValidation.setWrongFormatPhoneNumber("Số điện thoại phải gồm 10 chữ số!");
+            }
+
+            if (!CheckValidHelper.IsFormatPassword(password)) {
+                foundError = true;
+                registerValidation.setWrongFormatPassword("Không đúng định dạng!");
+            }
+
+            if (!CheckValidHelper.IsValidCitizenIdLength(citizenID)) {
+                foundError = true;
+                registerValidation.setDuplicatedCitizenId("Không đúng định dạng!");
+            }
+
+            if (!CheckValidHelper.checkConfirmPassword(password, cpassword)) {
+                foundError = true;
+                registerValidation.setConfirmPasswordNotMatch("Mật khẩu xác nhận không trùng khớp!");
+            }
+
+            if (identityDAO.checkDuplicatedEmail(email)) {
+                foundError = true;
+                registerValidation.setDuplicatedEmail("Email này đã được sử dụng!");
+            }
+
+            /* -------- Following errors are depend on each role --------*/
+            if (staffDAO.checkCitizenID(citizenID)) {
+                foundError = true;
+                registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
+            }
+
+            if (staffDAO.checkDuplicatedPhoneNumber(phoneNum)) {
+                foundError = true;
+                registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
+            }
+            /*------------------------------------------------------------*/
+
+            if (foundError) {
+                request.setAttribute("SIGNUP_ERROR", registerValidation);
+                request.setAttribute("FOUND_ERROR", true);
+            } else {
+                String hashedPassword = identityDAO.sha256(password);
+                IdentityDTO identityDTO = new IdentityDTO(email, hashedPassword, roleID);
+                boolean resultAddIdentity = identityDAO.addIdentity(identityDTO);
+                if (resultAddIdentity) {
+                    String identityId = identityDAO.queryIDByEmail(email);
+                    staffDAO.addStaff(identityId, fullName, phoneNum, address, birthday, citizenID, specialtyID);
+                    url = SUCCESS;
+                }
+
+            }
+
+        } catch (Exception e) {
+            log("Error at AddCustomerServlet: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

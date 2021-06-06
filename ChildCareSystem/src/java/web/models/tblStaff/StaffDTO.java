@@ -12,7 +12,7 @@ package web.models.tblStaff;
 public class StaffDTO {
     private String IdentityID;
     private String FullName;
-    private String Email;
+    private String PhoneNumber;
     private String Address;
     private String Birthday;
     private String CitizenID;
@@ -23,16 +23,16 @@ public class StaffDTO {
     public StaffDTO() {
     }
 
-    public StaffDTO(String IdentityID, String FullName, String Email, String Address, String Birthday, String CitizenID, String SpecialtyID) {
+    public StaffDTO(String IdentityID, String FullName, String PhoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
-        this.Email = Email;
+        this.PhoneNumber = PhoneNumber;
         this.Address = Address;
         this.Birthday = Birthday;
         this.CitizenID = CitizenID;
         this.SpecialtyID = SpecialtyID;
     }
-    
+ 
     public StaffDTO(String IdentityID, String FullName, String Address, String Birthday) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
@@ -68,19 +68,15 @@ public class StaffDTO {
         this.FullName = FullName;
     }
 
-    /**
-     * @return the Email
-     */
-    public String getEmail() {
-        return Email;
+    public String getPhoneNumber() {
+        return PhoneNumber;
     }
 
-    /**
-     * @param Email the Email to set
-     */
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setPhoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
     }
+
+   
 
     /**
      * @return the Address
@@ -140,8 +136,10 @@ public class StaffDTO {
 
     @Override
     public String toString() {
-        return "StaffDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", Email=" + Email + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", SpecialtyID=" + SpecialtyID + '}';
+        return "StaffDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNumber=" + PhoneNumber + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", SpecialtyID=" + SpecialtyID + '}';
     }
+
+    
 
     
     
