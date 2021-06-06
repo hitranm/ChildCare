@@ -17,7 +17,15 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class CustomerDAO {
+    private CustomerDTO customer;
+    public CustomerDTO getCustomer() {
+        return this.customer;
+    } 
 
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
+    }
+    
     public boolean addCustomer(CustomerDTO cus) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -124,37 +132,79 @@ public class CustomerDAO {
         return check;
     }
 
-    public CustomerDTO queryCustomer(String phoneNum) throws SQLException, NamingException {
+//    public CustomerDTO queryCustomer(String phoneNum) throws SQLException, NamingException {
+//        String fullName = "";
+//        String email = "";
+//        String address = "";
+//        String birthday = "";
+//        String citizenID = "";
+//        String roleID = "";
+//        String identityID = "";
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//        try {
+//            conn = DBHelpers.makeConnection();
+//            if (conn != null) {
+//                String sql = "SELECT IdentityID, FullName, Email, Address, Birthday, CitizenID, RoleID "
+//                        + " FROM tblCustomer C, tblIdentity I "
+//                        + " WHERE C.IdentityID = I.IdentityID AND I.PhoneNumber=?";
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, phoneNum);
+//                rs = stm.executeQuery();
+//                if (rs.next()) {
+//                    identityID = rs.getString("IdentityID");
+//                    fullName = rs.getString("FullName");
+//                    email = rs.getString("Email");
+//                    address = rs.getString("Address");
+//                    birthday = rs.getString("Birthday");
+//                    citizenID = rs.getString("CitizenID");
+//                    roleID = rs.getString("RoleID");
+//                    CustomerDTO cus = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+//                    return cus;
+//                }
+//            }
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return null;
+//    }
+
+    public CustomerDTO queryCustomerByIdentityId(String identityId) throws SQLException, NamingException {
         String fullName = "";
-        String email="";
-        String address="";
-        String birthday="";
-        String citizenID="";
-        String roleID="";
-        String identityID="";
+        String email = "";
+        String address = "";
+        String birthday = "";
+        String citizenID = "";
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, RoleID "
-                        + " FROM tblCustomer C, tblIdentity I "
-                        + " WHERE C.IdentityID = I.IdentityID AND PhoneNumber=?";
+                String sql = "SELECT IdentityID, FullName, Email, Address, Birthday, CitizenID"
+                        + " FROM tblCustomer"
+                        + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, phoneNum);
+                stm.setString(1, identityId);
                 rs = stm.executeQuery();
-                if (rs.next()) {
+                if (rs.next()) {                 
                     fullName = rs.getString("FullName");
                     email = rs.getString("Email");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
-                    citizenID= rs.getString("CitizenID");
-                    roleID = rs.getString("RoleID");
-                    identityID = rs.getString("IdentityID");
-                    CustomerDTO cus = new CustomerDTO(fullName, email, address, birthday, citizenID, roleID, "");
+                    citizenID = rs.getString("CitizenID");   
+                    CustomerDTO cus = new CustomerDTO(identityId, fullName, email, address, birthday, citizenID);
                     return cus;
-                }
+                } 
             }
         } finally {
             if (rs != null) {
@@ -201,32 +251,37 @@ public class CustomerDAO {
         }
         return CustomerID;
     }
-    public boolean update(CustomerDTO cus) throws SQLException, NamingException{
-        boolean check=false;
-        Connection conn=null;
-        PreparedStatement stm=null;
-        ResultSet rs=null;
-        try{
-            conn=DBHelpers.makeConnection();
-            if(conn!=null){
-                String sql= "UPDATE tblCustomer SET FullName=?, Address=?, Birthday=? "
+
+    public boolean update(CustomerDTO cus) throws SQLException, NamingException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblCustomer SET FullName=?, Address=?, Birthday=? "
                         + " WHERE IdentityID=?";
-                stm=conn.prepareStatement(sql);
+                stm = conn.prepareStatement(sql);
                 stm.setString(1, cus.getFullName());
                 stm.setString(2, cus.getAddress());
                 stm.setString(3, cus.getBirthday());
                 stm.setString(4, cus.getIdentityID());
-                
-                check= stm.executeUpdate()>0?true:false;
+                check = stm.executeUpdate() > 0 ? true : false;
             }
-            
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
-        finally{
-             if(rs!=null) rs.close();
-            if(stm!=null) stm.close();
-            if(conn!=null) conn.close();
-        }
-        
-       return check;
-}
+
+        return check;
+    }
 }

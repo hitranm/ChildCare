@@ -78,15 +78,15 @@ private static final String SUCCESS="viewProfile.jsp";
                         url=SUCCESS;
                 }
             }
-            if(roleID.equals("3")){
-                    CustomerDTO dto = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
-                    boolean check = dao3.update(dto);
-                    if(check){
-                        session.setAttribute("LOGIN_USER", dto); 
-                        url=SUCCESS;
-                            
-                }
-            }
+//            if(roleID.equals("3")){
+//                    CustomerDTO dto = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+//                    boolean check = dao3.update(dto);
+//                    if(check){
+//                        session.setAttribute("LOGIN_USER", dto); 
+//                        url=SUCCESS;
+//                            
+//                }
+//            }
         }catch(Exception e){
             log("Error at UpdateProfileServlet: "+e.toString());
         }

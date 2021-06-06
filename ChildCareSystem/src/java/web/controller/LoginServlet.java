@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,46 +54,44 @@ public class LoginServlet extends HttpServlet {
             ManagerDAO dao1 = new ManagerDAO();
             StaffDAO dao2 = new StaffDAO();
             AdminDAO dao0 = new AdminDAO();
-           IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
-           HttpSession session = request.getSession();
-           if(identity != null){
-               if(identity.getRoleID().equals("1")){
-                   ManagerDTO dto= new ManagerDTO();
-                   dto= dao1.queryManager(phoneNum);
-                   session.setAttribute("LOGIN_USER", dto);
-                   session.setAttribute("IDENTITYID", identity.getIdentityID());
-                   url= SUCCESS;
-               }
-               if(identity.getRoleID().equals("2")){
-                   StaffDTO dto= new StaffDTO();
-                   dto = dao2.queryStaff1(phoneNum);
-                   session.setAttribute("LOGIN_USER", dto);
-                   session.setAttribute("IDENTITYID", identity.getIdentityID());
-                   url= SUCCESS;
-               }
-               if(identity.getRoleID().equals("3")){
-               CustomerDTO dto= new CustomerDTO();
-               dto = dao3.queryCustomer(phoneNum);
-               session.setAttribute("LOGIN_USER", dto);
-               session.setAttribute("IDENTITYID", identity.getIdentityID());
-               url=SUCCESS;
-               }
-               if(identity.getRoleID().equals("0")){
-               AdminDTO dto = new AdminDTO();
-               dto = dao0.queryAdmin(phoneNum);
-               session.setAttribute("LOGIN_USER", dto);
-               session.setAttribute("IDENTITYID", identity.getIdentityID());
-               url= SUCCESS;
-               }
-               
-               
-        } else{
-               String msg="Phone number or password is not correct!";
-               request.setAttribute("Message", msg);
-           }
-        }
-        catch(Exception e){
-            e.printStackTrace();
+            IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
+            
+            HttpSession session = request.getSession();
+            
+            if (identity != null) {
+                if (identity.getRoleID().equals("3")) {
+                    ManagerDTO dto = new ManagerDTO();
+                    dto = dao1.queryManager(phoneNum);
+                    session.setAttribute("LOGIN_USER", dto);
+                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+                    url = SUCCESS;
+                }
+                if (identity.getRoleID().equals("2")) {
+                    StaffDTO dto = new StaffDTO();
+                    dto = dao2.queryStaff1(phoneNum);
+                    session.setAttribute("LOGIN_USER", dto);
+                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+                    url = SUCCESS;
+                }
+                if (identity.getRoleID().equals("1")) {
+                    CustomerDTO dto = dao3.queryCustomerByIdentityId(identity.getIdentityID());                  
+                    session.setAttribute("LOGIN_USER", dto);
+                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+                    url = SUCCESS;
+                }
+                if (identity.getRoleID().equals("4")) {
+                    AdminDTO dto = new AdminDTO();
+                    dto = dao0.queryAdmin(phoneNum);
+                    session.setAttribute("LOGIN_USER", dto);
+                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+
+                    url = SUCCESS;
+                }
+            } else {
+                String msg = "Phone number or password is not correct!";
+                request.setAttribute("Message", msg);
+            }
+        } catch (Exception e) {
             log("Error at LoginServlet:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
