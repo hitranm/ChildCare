@@ -83,16 +83,19 @@
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Phản hồi</a>
                             </li>
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="LogOutServlet">Đăng xuất</a>
-                            </li>
                         </ul>
                         <ul class="navbar-nav">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.LOGIN_USER}">
-                                    <li>                                     
-                                        <a href="#" class="nav-link">${LOGIN_USER.fullName}</a>
-                                        <a href="viewProfile.jsp" class="nav-link">View Profile</a>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            ${sessionScope.LOGIN_USER.fullName}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="viewProfile.jsp">Xem thông tin cá nhân</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                        </div>
                                     </li>
                                 </c:when>
                                 <c:otherwise>

@@ -82,12 +82,9 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_BLOG;
             } else if (button.equalsIgnoreCase("UpdateProfile")) {
                 url=UPDATEPROFILE;
-            }
             } else if (button.equalsIgnoreCase("UpdateBlog")){
                 url = EDIT_BLOG;
             }
-
-
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

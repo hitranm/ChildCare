@@ -18,7 +18,9 @@ import javax.servlet.http.HttpSession;
  * @author Admin
  */
 public class LogOutServlet extends HttpServlet {
-private static final String LOGIN="login.jsp";
+
+    private static final String LOGIN = "login.jsp";
+    private static final String HOME = "home.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,15 +34,15 @@ private static final String LOGIN="login.jsp";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-       String url = LOGIN;
-        try{
+        String url = HOME;
+        try {
             HttpSession session = request.getSession(false);
-            if(session!=null){
+            if (session != null) {
                 session.invalidate(); // huy attributes
             }
-        }catch(Exception e){
-            
-        }finally{
+        } catch (Exception e) {
+
+        } finally {
             response.sendRedirect(url);
         }
     }

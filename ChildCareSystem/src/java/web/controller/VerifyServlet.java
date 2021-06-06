@@ -63,7 +63,7 @@ public class VerifyServlet extends HttpServlet {
                     CustomerDTO cus1 = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
                     boolean flag1 = dao.addCustomer(cus1);
                     if (flag1) {
-                        session.setAttribute("LOGIN_USER", cus1.getFullName()); 
+                        session.setAttribute("LOGIN_USER", cus1); 
                     }
                 }
             } else{
