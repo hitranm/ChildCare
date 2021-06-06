@@ -34,7 +34,9 @@ public class DispatchServlet extends HttpServlet {
     private static final String CREATE_BLOG = "CreateBlogServlet";
     private static final String VIEW_BLOG = "ViewBlogServlet";
     private static final String UPDATEPROFILE="UpdateProfileServlet";
-    
+    private static final String EDIT_BLOG = "UpdateBlogServlet";
+    private static final String SEARCH_BLOG = "SearchBlogServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -81,6 +83,10 @@ public class DispatchServlet extends HttpServlet {
             } else if (button.equalsIgnoreCase("UpdateProfile")) {
                 url=UPDATEPROFILE;
             }
+            } else if (button.equalsIgnoreCase("UpdateBlog")){
+                url = EDIT_BLOG;
+            }
+
 
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

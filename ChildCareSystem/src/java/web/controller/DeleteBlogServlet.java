@@ -8,28 +8,23 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
-import web.models.tblBlog.BlogError;
-import web.models.tblBlogCategory.BlogCategoryDAO;
-import web.models.tblBlogCategory.BlogCategoryDTO;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
  * @author DELL
  */
-public class CreateBlogServlet extends HttpServlet {
+public class DeleteBlogServlet extends HttpServlet {
 
-    private final String VIEWBLOG = "ViewBlogServlet?index=1";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String VIEWBLOG = "ViewBlogServlet";
+    private final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,50 +38,24 @@ public class CreateBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
-        String url = ERROR_PAGE;
-        String title = request.getParameter("txtTitle");
-        String body = request.getParameter("txtBody");
-        String categoryID = request.getParameter("category");
-        //String authorID = "200001";
-        String authorID;
-        BlogError err = new BlogError();
-        boolean foundErr = false;
+        String blogID = request.getParameter("id");
+        String url = ERROR;
         try {
-            if (title.trim().isEmpty()) {
-                foundErr = true;
-                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
+            BlogDAO dao = new BlogDAO();
+            boolean result = dao.deleteBlog(blogID);
+            if (result) {
+                url = VIEWBLOG;
             }
-            if (body.trim().isEmpty()) {
-                foundErr = true;
-                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
-            }
-            if (foundErr) {
-                request.setAttribute("CREATE_ERROR", err);
-            } else {
-                BlogDAO dao = new BlogDAO();
-                if (session != null) {
-                    String identityID = (String) session.getAttribute("IDENTITY_ID");
-                    StaffDAO staffDAO = new StaffDAO();
-                    authorID = staffDAO.queryStaff(identityID);
-                    boolean result = dao.createBlog(title, authorID, body, categoryID);
-                    if (result) {
-                        url = VIEWBLOG;
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            log("CreateNewAccountServlet _ SQL: " + ex.getMessage());
-            url = ERROR_PAGE;
+
         } catch (NamingException ex) {
-            log("CreateNewAccountServlet _ Naming: " + ex.getMessage());
-            url = ERROR_PAGE;
+            Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
             out.close();
+
         }
     }
 

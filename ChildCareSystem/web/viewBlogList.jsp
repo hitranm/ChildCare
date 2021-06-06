@@ -13,21 +13,52 @@
         <title>Blog List</title>
     </head>
     <body>
-        <h1>Danh sách bài viết của bạn</h1>
-
-        <c:set var="result" value="${requestScope.BLOG_LIST}"/>
-        <c:if test="${not empty result}">
-            <c:forEach var="dto" items="${result}">
+        <h1>Danh sách bài viết</h1>
+        <form action="SearchBlogServlet?idx=1" method="POST">
+            Tìm kiếm: <input type="text" name="txtSearchBlog" value="${param.txtSearchBlog}" />
+            <input type="submit" value="Search" name="btAction">
+        </form>
+        <%--        <c:set var="searchValue" value="${param.txtSearchBlog}"/>
+    <c:if test="${not empty searchValue}">
+        <c:set var="searchResult" value="${requestScope.SEARCH_LIST}"/>
+        <c:if test="${not empty searchResult}">
+            <c:forEach var="dto" items="${searchResult}">
                 <div class="blog-preview">
-                    <a href="blogDetail.jsp">
+                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">
                         <h2>${dto.title}</h2>
                     </a>
                 </div>
             </c:forEach>
         </c:if>
-        <c:if test="${empty result}">
-            Bạn chưa có bài viết nào!
+        <c:if test="${empty searchResult}">
+            Không tìm thấy kết quả!
         </c:if>
+    </c:if>--%>
+        <c:if test="${empty searchValue}">
+            <c:set var="list" value="${requestScope.BLOG_LIST}"/>
+            <c:if test="${not empty list}">
+                <c:forEach var="dto" items="${list}">
+                    <div class="blog-preview">
+                        <a href="ViewBlogDetailServlet?id=${dto.blogID}">
+                            <h2>${dto.title}</h2>
+                        </a>
+                    </div>
+                </c:forEach>
+                <div class="paging">
+                    <c:forEach begin="1" end="${PAGE}" var="i">
+                        <a href="ViewBlogServlet?index=${i}">${i}</a>
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${empty list}">
+                Bạn chưa có bài viết nào!
+            </c:if>
+
+        </c:if>
+        <%--<c:if test="${empty result}">--%>
+        <!--Bạn chưa có bài viết nào!-->
+        <%--</c:if>--%>
+        <br>
         <a href="createBlog.jsp">Tạo bài viết</a>
         <a href="home.jsp">Trở về trang chủ</a>    
     </body>

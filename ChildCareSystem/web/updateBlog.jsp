@@ -31,41 +31,51 @@
                 menubar: false
             });
         </script>
-        <title>Blog</title>
+        <title>Update Blog</title>
     </head>
 
     <body>
         <a href="home.jsp">Trở về trang chủ</a>
-        <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <div class="container mt-4 mb-4">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-lg-8">
-                    <h1 class="h2 mb-4">Tạo blog</h1>
+                    <h1 class="h2 mb-4">Chỉnh sửa bài viết</h1>
+                    <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
                     <form action="DispatchServlet" method="POST">
                         <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
+                        <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
+                        <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                         <label><b>Tiêu đề</b></label><br/>
-                        <input type="text" name="txtTitle" value="" />
+                        <input type="text" name="txtTitle" value="${blog.title}" />
                         <c:if test="${not empty err.titleLengthErr}">
                             <font color="red">${err.titleLengthErr}</font>
                         </c:if><br>
-
                         <label for="category">Thể loại:</label>
                         <select name="category" id="category">
                             <c:forEach items="${cate.viewBlogCategory()}" var="dto">
-                                <option value="${dto.categoryID}">${dto.categoryName}</option>
+                                <c:if test="${blog.categotyID eq dto.categoryID}">
+                                    <option value="${dto.categoryID}" selected>${dto.categoryName}</option>
+                                </c:if>
+                                <c:if test="${blog.categotyID != dto.categoryID}">
+                                    <option value="${dto.categoryID}">${dto.categoryName}</option>
+                                </c:if>
                             </c:forEach>
-
-                            <!--                            <option value="2">Hướng dẫn</option>
-                                                        <option value="3">Sức khỏe</option>-->
                         </select><br/>
+                        <%--<c:set var="blogCate" value="${requestScope.CATE_LIST}"/>
+<!--                        <label for="category">Thể loại:</label>
+                        <select name="category" id="category">
+                            <c:forEach var="cateList" items="${blogCate}">
+                                <option value="${cateList.categoryID}">${cateList.categoryName}</option>
+                            </c:forEach>
+                        </select><br/>-->--%>
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">
-                            <textarea id="editor" name="txtBody"></textarea>
+                            <textarea id="editor" name="txtBody" value="${blog.description}"></textarea>
                         </div>
                         <c:if test="${not empty err.descriptionErr}">
                             <font color="red">${err.descriptionErr}</font>
                         </c:if><br>
-                        <input type="submit" value="CreateBlog" name="btAction"/>
+                        <button type="submit" value="UpdateBlog" name="btAction">Cập nhật</button>
                     </form>
                 </div>
             </div>

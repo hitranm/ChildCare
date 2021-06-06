@@ -67,6 +67,20 @@
     <servlet>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <servlet-class>web.controller.UpdateProfileServlet</servlet-class>
+        <servlet-name>ViewBlogDetailServlet</servlet-name>
+        <servlet-class>web.controller.ViewBlogDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBlogServlet</servlet-name>
+        <servlet-class>web.controller.UpdateBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <servlet-class>web.controller.DeleteBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBlogServlet</servlet-name>
+        <servlet-class>web.controller.SearchBlogServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
@@ -135,6 +149,20 @@
     <servlet-mapping>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <url-pattern>/UpdateProfileServlet</url-pattern>
+        <servlet-name>ViewBlogDetailServlet</servlet-name>
+        <url-pattern>/ViewBlogDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlogServlet</servlet-name>
+        <url-pattern>/UpdateBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogServlet</servlet-name>
+        <url-pattern>/DeleteBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBlogServlet</servlet-name>
+        <url-pattern>/SearchBlogServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

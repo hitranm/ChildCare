@@ -55,9 +55,9 @@ public class LoginServlet extends HttpServlet {
             StaffDAO dao2 = new StaffDAO();
             AdminDAO dao0 = new AdminDAO();
             IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
-            
+
             HttpSession session = request.getSession();
-            
+
             if (identity != null) {
                 if (identity.getRoleID().equals("3")) {
                     ManagerDTO dto = new ManagerDTO();
@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("1")) {
-                    CustomerDTO dto = dao3.queryCustomerByIdentityId(identity.getIdentityID());                  
+                    CustomerDTO dto = dao3.queryCustomerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITYID", identity.getIdentityID());
                     url = SUCCESS;

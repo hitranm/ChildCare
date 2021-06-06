@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogError;
 import web.models.tblBlogCategory.BlogCategoryDAO;
@@ -26,9 +25,10 @@ import web.models.tblStaff.StaffDAO;
  *
  * @author DELL
  */
-public class CreateBlogServlet extends HttpServlet {
+public class UpdateBlogServlet extends HttpServlet {
 
-    private final String VIEWBLOG = "ViewBlogServlet?index=1";
+    private final String EDITBLOG_PAGE = "updateBlog.jsp";
+    private final String VIEWBLOG = "blogDetail.jsp";
     private final String ERROR_PAGE = "error.jsp";
 
     /**
@@ -43,15 +43,12 @@ public class CreateBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
-        String url = ERROR_PAGE;
+        String url = EDITBLOG_PAGE;
+        String blogID = request.getParameter("txtBlogID");
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
         String categoryID = request.getParameter("category");
-        //String authorID = "200001";
-        String authorID;
         BlogError err = new BlogError();
         boolean foundErr = false;
         try {
@@ -67,21 +64,23 @@ public class CreateBlogServlet extends HttpServlet {
                 request.setAttribute("CREATE_ERROR", err);
             } else {
                 BlogDAO dao = new BlogDAO();
-                if (session != null) {
-                    String identityID = (String) session.getAttribute("IDENTITY_ID");
-                    StaffDAO staffDAO = new StaffDAO();
-                    authorID = staffDAO.queryStaff(identityID);
-                    boolean result = dao.createBlog(title, authorID, body, categoryID);
-                    if (result) {
-                        url = VIEWBLOG;
-                    }
+//                BlogCategoryDAO blogDAO = new BlogCategoryDAO();
+//                blogDAO.viewBlogCategory();
+//                List<BlogCategoryDTO> blogCate = blogDAO.getBlogCategoryList();
+//                request.setAttribute("CATE_LIST", blogCate);
+                boolean result = dao.updateBlog(blogID, title, body, categoryID);
+                if (result) {
+                    url = VIEWBLOG;
+                } else {
+                    url = ERROR_PAGE;
                 }
             }
+
         } catch (SQLException ex) {
-            log("CreateNewAccountServlet _ SQL: " + ex.getMessage());
+            log("UpdateBlogServlet _ SQL: " + ex.getMessage());
             url = ERROR_PAGE;
         } catch (NamingException ex) {
-            log("CreateNewAccountServlet _ Naming: " + ex.getMessage());
+            log("UpdateBlogServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
