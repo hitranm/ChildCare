@@ -32,11 +32,11 @@ public class CustomerDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblCustomer(IdentityID, FullName, Email, Address, Birthday, CitizenID) VALUES(?,?,?,?,?,?)";
+                String sql = "INSERT INTO tblCustomer(IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID) VALUES(?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cus.getIdentityID());
                 stm.setString(2, cus.getFullName());
-                stm.setString(3, cus.getEmail());
+                stm.setString(3, cus.getPhoneNum());
                 stm.setString(4, cus.getAddress());
                 stm.setString(5, cus.getBirthday());
                 stm.setString(6, cus.getCitizenID());
@@ -88,16 +88,36 @@ public class CustomerDAO {
         }
         return check;
     }
-
-    public boolean checkPassword(String password, String cpassword) {
-        boolean check = true;
-        if (password.equals(cpassword)) {
-            return check;
-        } else {
-            check = false;
-            return check;
-
+    
+    public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT PhoneNumber "
+                        + " FROM tblCustomer"
+                        + " WHERE CitizenID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, phoneNum);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
+        return false;
     }
 
     public boolean checkEmail(String email) throws SQLException, NamingException {

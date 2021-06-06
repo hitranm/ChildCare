@@ -57,8 +57,8 @@
                                 </div>
                                 <form action="DispatchServlet" method="post">
                                     <div class="form-group first">
-                                        <label for="phoneNumber">Số điện thoại</label>
-                                        <input type="text" name="phoneNum" value="" required="true" class="form-control" id="phoneNumber">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" value="" required="true" class="form-control" id="email">
                                     </div>
                                     <div class="form-group last mb-4">
                                         <label for="password">Mật khẩu</label>

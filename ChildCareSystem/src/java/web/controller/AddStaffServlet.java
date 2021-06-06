@@ -45,86 +45,86 @@ public class AddStaffServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
-        try {
-            String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String phoneNum = request.getParameter("phoneNum");
-            String password = request.getParameter("password");
-            String cpassword = request.getParameter("cpassword");
-            String birthday = request.getParameter("birthday");
-            String citizenID = request.getParameter("citizenID");
-            String roleID = request.getParameter("roleID");
-            String specialtyID = request.getParameter("specialtyID");
-            
-            HttpSession session = request.getSession();
-            StaffDAO staffDAO = new StaffDAO();
-            RegisterValidation errors = new RegisterValidation();
-            CustomerError error = new CustomerError();
-            IdentityError error1 = new IdentityError();
-            boolean check = CheckValidHelper.checkPassword(password, cpassword);
-            boolean check2 = staffDAO.checkEmail(email);
-            boolean foundError = false;
-            if (phoneNum.trim().length() != 10) {
-                foundError = true;
-                errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ 
-            if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
-                foundError = true;
-                errors.setPasswordError("Không đúng định dạng!");
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            if (citizenID.trim().length() != 12) {
-                foundError = true;
-                errors.setCitizenIDError("Không đúng định dạng!");
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            if (foundError) {
-                request.setAttribute("SIGNUP_ERROR", errors);
-            }
-
-            if (!check) {
-                error.setPasswordError("Mật khẩu xác nhận không trùng khớp!!");
-                request.setAttribute("ERROR", error);
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            boolean check1 = staffDAO.checkCitizenID(citizenID);
-            if (check1) {
-                error.setCitizenIDDupError("CCCD đã được sử dụng!!");
-                request.setAttribute("ERROR", error);
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            if (check2) {
-                error.setEmailDupError("Email đã được sử dụng!!");
-                request.setAttribute("ERROR", error);
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            IdentityDAO dao1 = new IdentityDAO();
-            boolean check3 = dao1.checkPhoneNum(phoneNum);
-            if (check3) {
-                error1.setPhoneNumDupError("Số điện thoại đã được sử dụng!!");
-                request.setAttribute("error", error1);
-                request.setAttribute("FOUND_ERROR", true);
-            } 
-            if(!foundError && check && !check1 && !check2 && !check3) {
-                String epassword = dao1.sha256(password);
-                IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
-                boolean flag = dao1.addIdentity(identity);
-                if (flag) {
-                    String identityID = dao1.queryID(phoneNum);                  
-                    boolean flag1 = staffDAO.addStaff(identityID, fullName, email, address, birthday, citizenID, specialtyID);
-                    if (flag1) {
-                        url = SUCCESS;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            log("Error at AddStaffServlet: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+//        try {
+//            String fullName = request.getParameter("fullName");
+//            String email = request.getParameter("email");
+//            String address = request.getParameter("address");
+//            String phoneNum = request.getParameter("phoneNum");
+//            String password = request.getParameter("password");
+//            String cpassword = request.getParameter("cpassword");
+//            String birthday = request.getParameter("birthday");
+//            String citizenID = request.getParameter("citizenID");
+//            String roleID = request.getParameter("roleID");
+//            String specialtyID = request.getParameter("specialtyID");
+//            
+//            HttpSession session = request.getSession();
+//            StaffDAO staffDAO = new StaffDAO();
+//            RegisterValidation errors = new RegisterValidation();
+//            CustomerError error = new CustomerError();
+//            IdentityError error1 = new IdentityError();
+//            boolean check = CheckValidHelper.checkPassword(password, cpassword);
+//            boolean check2 = staffDAO.checkEmail(email);
+//            boolean foundError = false;
+//            if (phoneNum.trim().length() != 10) {
+//                foundError = true;
+//                errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
+//                request.setAttribute("FOUND_ERROR", true);
+//            }
+//            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ 
+//            if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
+//                foundError = true;
+//                errors.setPasswordError("Không đúng định dạng!");
+//                request.setAttribute("FOUND_ERROR", true);
+//            }
+//            if (citizenID.trim().length() != 12) {
+//                foundError = true;
+//                errors.setCitizenIDError("Không đúng định dạng!");
+//                request.setAttribute("FOUND_ERROR", true);
+//            }
+//            if (foundError) {
+//                request.setAttribute("SIGNUP_ERROR", errors);
+//            }
+//
+//            if (!check) {
+//                error.setPasswordError("Mật khẩu xác nhận không trùng khớp!!");
+//                request.setAttribute("ERROR", error);
+//                request.setAttribute("FOUND_ERROR", true);
+//            }
+//            boolean check1 = staffDAO.checkCitizenID(citizenID);
+//            if (check1) {
+//                error.setCitizenIDDupError("CCCD đã được sử dụng!!");
+//                request.setAttribute("ERROR", error);
+//                request.setAttribute("FOUND_ERROR", true);
+//            }
+//            if (check2) {
+//                error.setEmailDupError("Email đã được sử dụng!!");
+//                request.setAttribute("ERROR", error);
+//                request.setAttribute("FOUND_ERROR", true);
+//            }
+//            IdentityDAO dao1 = new IdentityDAO();
+//            boolean check3 = dao1.checkPhoneNum(phoneNum);
+//            if (check3) {
+//                error1.setPhoneNumDupError("Số điện thoại đã được sử dụng!!");
+//                request.setAttribute("error", error1);
+//                request.setAttribute("FOUND_ERROR", true);
+//            } 
+//            if(!foundError && check && !check1 && !check2 && !check3) {
+//                String epassword = dao1.sha256(password);
+//                IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
+//                boolean flag = dao1.addIdentity(identity);
+//                if (flag) {
+//                    String identityID = dao1.queryID(phoneNum);                  
+//                    boolean flag1 = staffDAO.addStaff(identityID, fullName, email, address, birthday, citizenID, specialtyID);
+//                    if (flag1) {
+//                        url = SUCCESS;
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            log("Error at AddStaffServlet: " + e.toString());
+//        } finally {
+//            request.getRequestDispatcher(url).forward(request, response);
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

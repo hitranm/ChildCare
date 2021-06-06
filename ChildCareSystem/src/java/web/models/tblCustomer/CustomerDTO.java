@@ -14,24 +14,24 @@ import java.io.Serializable;
 public class CustomerDTO implements Serializable{
     private String IdentityID;
     private String FullName;
-    private String Email;
     private String Address;
     private String Birthday;
     private String CitizenID;
     private String code;
+    private String PhoneNum;
     
     public CustomerDTO() {
     }
     
-    public CustomerDTO(String email, String code) {
-        this.Email = email;
-        this.code = code;
-    }
-    
-    public CustomerDTO(String identityID ,String fullName, String email, String address, String birthday, String citizenID) {
+//    public CustomerDTO(String email, String code) {
+//        this.PhoneNum = PhoneNum;
+//        this.code = code;
+//    }
+//    
+    public CustomerDTO(String identityID ,String fullName, String phoneNum, String address, String birthday, String citizenID) {
         this.IdentityID= identityID;
         this.FullName = fullName;
-        this.Email = email;
+        this.PhoneNum = phoneNum;
         this.Address = address;
         this.Birthday = birthday;
         this.CitizenID = citizenID;
@@ -43,17 +43,12 @@ public class CustomerDTO implements Serializable{
         this.Address = Address;
         this.Birthday = Birthday;
     }
-    
-    //    public CustomerDTO(String identityID ,String fullName, String email, String address, String birthday, String citizenID, String roleID) {
-//        this.FullName = fullName;
-//        this.Email = email;
-//        this.Address = address;
-//        this.Birthday = birthday;
-//        this.CitizenID = citizenID;
-//        this.RoleID= roleID;
-//        this.IdentityID= identityID;
-//    }
 
+    public CustomerDTO(String code, String PhoneNum) {
+        this.code = code;
+        this.PhoneNum = PhoneNum;
+    }
+    
     public String getIdentityID() {
         return IdentityID;
     }
@@ -68,14 +63,6 @@ public class CustomerDTO implements Serializable{
 
     public void setFullName(String FullName) {
         this.FullName = FullName;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
     }
 
     public String getAddress() {
@@ -102,6 +89,14 @@ public class CustomerDTO implements Serializable{
         this.CitizenID = CitizenID;
     }
 
+    public String getPhoneNum() {
+        return PhoneNum;
+    }
+
+    public void setPhoneNum(String PhoneNum) {
+        this.PhoneNum = PhoneNum;
+    }
+    
     public String getCode() {
         return code;
     }
@@ -109,11 +104,11 @@ public class CustomerDTO implements Serializable{
     public void setCode(String code) {
         this.code = code;
     }
-    
-    
-    
+
     @Override
     public String toString() {
-        return "CustomerDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", Email=" + Email + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + '}';
+        return "CustomerDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNum=" + PhoneNum + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", code=" + code + '}';
     }
+    
+    
 }

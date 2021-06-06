@@ -12,12 +12,32 @@ package web.models.tblManager;
 public class ManagerDTO {
     private String IdentityID;
     private String FullName;
-    private String Email;
     private String Address;
     private String Birthday;
     private String CitizenID;
-    private String RoleID;
+    private String PhoneNumber;
+    
+    public ManagerDTO() {
+    }
 
+    public ManagerDTO(String IdentityID, String FullName, String Address, String Birthday, String CitizenID, String PhoneNumber) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.Address = Address;
+        this.Birthday = Birthday;
+        this.CitizenID = CitizenID;
+        this.PhoneNumber = PhoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
+    }
+    
+    
     public String getIdentityID() {
         return IdentityID;
     }
@@ -26,9 +46,7 @@ public class ManagerDTO {
         return FullName;
     }
 
-    public String getEmail() {
-        return Email;
-    }
+    
 
     public String getAddress() {
         return Address;
@@ -50,10 +68,6 @@ public class ManagerDTO {
         this.FullName = FullName;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
     public void setAddress(String Address) {
         this.Address = Address;
     }
@@ -65,36 +79,4 @@ public class ManagerDTO {
     public void setCitizenID(String CitizenID) {
         this.CitizenID = CitizenID;
     }
-
-    public ManagerDTO(String FullName, String Email, String Address, String Birthday, String CitizenID, String RoleID) {
-        this.FullName = FullName;
-        this.Email = Email;
-        this.Address = Address;
-        this.Birthday = Birthday;
-        this.CitizenID = CitizenID;
-        this.RoleID= RoleID;
-    }
-
-    public ManagerDTO() {
-    }
-
-    public String getRoleID() {
-        return RoleID;
-    }
-
-    public void setRoleID(String roleID) {
-        this.RoleID = roleID;
-    }
-
-    public ManagerDTO(String IdentityID, String FullName, String Email, String Address, String Birthday, String CitizenID, String RoleID) {
-        this.IdentityID = IdentityID;
-        this.FullName = FullName;
-        this.Email = Email;
-        this.Address = Address;
-        this.Birthday = Birthday;
-        this.CitizenID = CitizenID;
-        this.RoleID = RoleID;
-    }
-
-   
 }

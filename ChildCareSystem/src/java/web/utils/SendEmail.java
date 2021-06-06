@@ -27,10 +27,10 @@ public class SendEmail {
     }
 
     //send email to the user email
-    public boolean sendEmail(CustomerDTO cus) {
+    public boolean sendEmail(CustomerDTO cus, String email) {
         boolean test = false;
 
-        String toEmail = cus.getEmail();
+        String toEmail = email;
         String fromEmail = "childcaresystemswp@gmail.com";
         String password = "childcare391";
 

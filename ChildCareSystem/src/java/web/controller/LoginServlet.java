@@ -46,28 +46,28 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
-            String phoneNum = request.getParameter("phoneNum");
+            String email = request.getParameter("email");
             String password = request.getParameter("password");
             IdentityDAO dao = new IdentityDAO();
             String epassword = dao.sha256(password);
-            CustomerDAO dao3 = new CustomerDAO();
-            ManagerDAO dao1 = new ManagerDAO();
-            StaffDAO dao2 = new StaffDAO();
+            CustomerDAO customerDAO = new CustomerDAO();
+            ManagerDAO managerDAO = new ManagerDAO();
+            StaffDAO staffDAO = new StaffDAO();
             AdminDAO dao0 = new AdminDAO();
-            IdentityDTO identity = dao.checkLogin(phoneNum, epassword);
+            IdentityDTO identity = dao.checkLogin(email, epassword);
 
             HttpSession session = request.getSession();
 
             if (identity != null) {
                 if (identity.getRoleID().equals("3")) {
                     ManagerDTO dto = new ManagerDTO();
-                    dto = dao1.queryManager(phoneNum);
+                    dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITYID", identity.getIdentityID());
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("2")) {
-                    StaffDTO dto = dao2.queryStaffByIdentityId(identity.getIdentityID());
+                    StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
                     System.out.println(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     System.out.println(session.getAttribute("LOGIN_USER"));
@@ -75,17 +75,9 @@ public class LoginServlet extends HttpServlet {
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("1")) {
-                    CustomerDTO dto = dao3.queryCustomerByIdentityId(identity.getIdentityID());
+                    CustomerDTO dto = customerDAO.queryCustomerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITYID", identity.getIdentityID());
-                    url = SUCCESS;
-                }
-                if (identity.getRoleID().equals("4")) {
-                    AdminDTO dto = new AdminDTO();
-                    dto = dao0.queryAdmin(phoneNum);
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
-
                     url = SUCCESS;
                 }
             } else {

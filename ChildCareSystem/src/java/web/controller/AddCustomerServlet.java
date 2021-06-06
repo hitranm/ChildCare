@@ -5,7 +5,6 @@
  */
 package web.controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,6 +19,7 @@ import web.models.tblCustomer.CustomerError;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblIdentity.IdentityError;
+import web.utils.CheckValidHelper;
 import web.utils.RegisterValidation;
 import web.utils.SendEmail;
 
@@ -29,7 +29,7 @@ import web.utils.SendEmail;
  */
 public class AddCustomerServlet extends HttpServlet {
 
-    private static final String ERROR = "login.jsp";
+    private static final String ERROR = "register.jsp";
     private static final String SUCCESS = "verify.jsp";
 
     /**
@@ -57,84 +57,66 @@ public class AddCustomerServlet extends HttpServlet {
             String citizenID = request.getParameter("citizenID");
             String roleID = request.getParameter("roleID");
             HttpSession session = request.getSession();
-            CustomerDAO dao = new CustomerDAO();
-            RegisterValidation errors = new RegisterValidation();
-            CustomerError error = new CustomerError();
-            IdentityError error1 = new IdentityError();
-           
-            boolean check = dao.checkPassword(password, cpassword);
-            boolean check2 = dao.checkEmail(email);
+            CustomerDAO customerDAO = new CustomerDAO();
+            IdentityDAO identityDAO = new IdentityDAO();
+            RegisterValidation registerValidation = new RegisterValidation();
             boolean foundError = false;
-            if (phoneNum.trim().length() != 10) {
+            if (!CheckValidHelper.IsValidPhoneNumberLength(phoneNum)) {
                 foundError = true;
-                errors.setPhoneNumberError("Số điện thoại phải gồm 10 chữ số!");
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            /*if (!password.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"))*/ if(!password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$")) {
-                foundError = true;
-                errors.setPasswordError("Không đúng định dạng!");
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            if (citizenID.trim().length() != 12) {
-                foundError = true;
-                errors.setCitizenIDError("Không đúng định dạng!");
-                request.setAttribute("FOUND_ERROR", true);
-            }
-            if (foundError) {
-                request.setAttribute("SIGNUP_ERROR", errors);
+                registerValidation.setWrongFormatPhoneNumber("Số điện thoại phải gồm 10 chữ số!");
             }
 
-            if (!check) {
-                error.setPasswordError("Mật khẩu xác nhận không trùng khớp!!");
-                request.setAttribute("ERROR", error);
-                request.setAttribute("FOUND_ERROR", true);
+            if (!CheckValidHelper.IsFormatPassword(password)) {
+                foundError = true;
+                registerValidation.setWrongFormatPassword("Không đúng định dạng!");
             }
-            boolean check1 = dao.checkCitizenID(citizenID);
-            if (check1) {
-                error.setCitizenIDDupError("CCCD đã được sử dụng!!");
-                request.setAttribute("ERROR", error);
-                request.setAttribute("FOUND_ERROR", true);
+            
+            if (!CheckValidHelper.IsValidCitizenIdLength(citizenID)) {
+                foundError = true;
+                registerValidation.setDuplicatedCitizenId("Không đúng định dạng!");
             }
-            if (check2) {
-                error.setEmailDupError("Email đã được sử dụng!!");
-                request.setAttribute("ERROR", error);
-                request.setAttribute("FOUND_ERROR", true);
+            
+            if (!CheckValidHelper.checkConfirmPassword(password, cpassword)) {
+                foundError = true;
+                registerValidation.setConfirmPasswordNotMatch("Mật khẩu xác nhận không trùng khớp!");
             }
-            IdentityDAO dao1 = new IdentityDAO();
-            boolean check3 = dao1.checkPhoneNum(phoneNum);
-            if (check3) {
-                error1.setPhoneNumDupError("Số điện thoại đã được sử dụng!!");
-                request.setAttribute("error", error1);
-                request.setAttribute("FOUND_ERROR", true);
-            } 
-            if(!foundError && check && !check1 && !check2 && !check3) {
-                   SendEmail sm = new SendEmail();  		
-                   String code = sm.getRandom();  
-                   CustomerDTO cus = new CustomerDTO(email,code);
-           boolean test = sm.sendEmail(cus);
-           
-      		//check if the email send successfully
-           if(test){
-               session.setAttribute("authcode", cus);
-               url=SUCCESS;
-           }else{
-               String msg="Vui lòng check lại mail đăng ký có tồn tại hay không";
-      		  request.setAttribute("FAIL_EMAIL", msg);
-      	   } 
-                /*String epassword = dao1.sha256(password);
-                IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
-                boolean flag = dao1.addIdentity(identity);
-                if (flag) {
-                    String identityID = dao1.queryID(phoneNum);
-                    CustomerDTO cus = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
-                    session.setAttribute("IdentityID", identityID);
-                    boolean flag1 = dao.addCustomer(cus);
-                    if (flag1) {
-                        session.setAttribute("LOGIN_USER", cus.getFullName());
-                        url = SUCCESS;
-                    }
-                }*/
+            
+            if(identityDAO.checkDuplicatedEmail(email)) {
+                foundError = true;
+                registerValidation.setDuplicatedEmail("Email này đã được sử dụng!");
             }
+            
+            /* -------- Following errors are depend on each role --------*/
+            if(customerDAO.checkCitizenID(citizenID)) {
+                foundError = true;
+                registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
+            }
+            
+            if (customerDAO.checkDuplicatedPhoneNumber(phoneNum)) {
+                foundError = true;
+                registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
+            }
+            /*------------------------------------------------------------*/
+
+            if (foundError) {
+                request.setAttribute("SIGNUP_ERROR", registerValidation);
+                request.setAttribute("FOUND_ERROR", true);
+            } else {
+                SendEmail sm = new SendEmail();
+                String code = sm.getRandom();
+                CustomerDTO cus = new CustomerDTO(code, phoneNum);
+                boolean test = sm.sendEmail(cus, email);
+
+                //check if the email send successfully
+                if (test) {
+                    session.setAttribute("authcode", cus);
+                    url = SUCCESS;
+                } else {
+                    String msg = "Vui lòng kiểm tra lại mail đăng ký có tồn tại hay không";
+                    request.setAttribute("FAIL_EMAIL", msg);
+                }
+            }     
+                
         } catch (Exception e) {
             log("Error at AddCustomerServlet: " + e.toString());
         } finally {

@@ -54,30 +54,30 @@ private static final String SUCCESS="viewProfile.jsp";
             StaffDAO dao2 = new StaffDAO();
             CustomerDAO dao3 = new CustomerDAO();
             HttpSession session = request.getSession();
-            if(roleID.equals("0")) {
-                    AdminDTO dto = new AdminDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
-                   boolean check= dao0.update(dto);
-                   if(check){
-                    session.setAttribute("LOGIN_USER", dto);   
-                    url=SUCCESS;   
-                   }
-            }
-            if(roleID.equals("1")){
-                    ManagerDTO dto = new ManagerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
-                   boolean check= dao1.update(dto);
-                   if(check){
-                       session.setAttribute("LOGIN_USER", dto); 
-                       url=SUCCESS;
-                }
-            }
-            if(roleID.equals("2")){
-                    StaffDTO dto = new StaffDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
-                    boolean check = dao2.update(dto);
-                    if(check){
-                        session.setAttribute("LOGIN_USER", dto); 
-                        url=SUCCESS;
-                }
-            }
+//            if(roleID.equals("0")) {
+//                    AdminDTO dto = new AdminDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+//                   boolean check= dao0.update(dto);
+//                   if(check){
+//                    session.setAttribute("LOGIN_USER", dto);   
+//                    url=SUCCESS;   
+//                   }
+//            }
+//            if(roleID.equals("1")){
+//                    ManagerDTO dto = new ManagerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+//                   boolean check= dao1.update(dto);
+//                   if(check){
+//                       session.setAttribute("LOGIN_USER", dto); 
+//                       url=SUCCESS;
+//                }
+//            }
+//            if(roleID.equals("2")){
+//                    StaffDTO dto = new StaffDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
+//                    boolean check = dao2.update(dto);
+//                    if(check){
+//                        session.setAttribute("LOGIN_USER", dto); 
+//                        url=SUCCESS;
+//                }
+//            }
 //            if(roleID.equals("3")){
 //                    CustomerDTO dto = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
 //                    boolean check = dao3.update(dto);

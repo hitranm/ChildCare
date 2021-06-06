@@ -44,30 +44,31 @@ public class VerifyServlet extends HttpServlet {
             CustomerDTO cus = (CustomerDTO) session.getAttribute("authcode");
             String code = request.getParameter("authcode");
             if (code.equals(cus.getCode())) {
-                url=SUCCESS;
-            String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String phoneNum = request.getParameter("phoneNum");
-            String password = request.getParameter("password");
-            String birthday = request.getParameter("birthday");
-            String citizenID = request.getParameter("citizenID");
-            String roleID = request.getParameter("roleID");
-            IdentityDAO dao1= new IdentityDAO();
-            CustomerDAO dao= new CustomerDAO();
-            String epassword = dao1.sha256(password);
-                IdentityDTO identity = new IdentityDTO(phoneNum, epassword, roleID);
-                boolean flag = dao1.addIdentity(identity);
-                if (flag) {
-                    String identityID = dao1.queryID(phoneNum);
-                    CustomerDTO cus1 = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID);
-                    boolean flag1 = dao.addCustomer(cus1);
+                url = SUCCESS;
+                String fullName = request.getParameter("fullName");
+                String email = request.getParameter("email");
+                String address = request.getParameter("address");
+                String phoneNum = request.getParameter("phoneNum");
+                String password = request.getParameter("password");
+                String birthday = request.getParameter("birthday");
+                String citizenID = request.getParameter("citizenID");
+                String roleID = request.getParameter("roleID");
+
+                IdentityDAO identityDAO = new IdentityDAO();
+                CustomerDAO customerDAO = new CustomerDAO();
+                String epassword = identityDAO.sha256(password);
+                IdentityDTO identity = new IdentityDTO(email, epassword, roleID);
+                boolean resultAddIdentity = identityDAO.addIdentity(identity);
+                if (resultAddIdentity) {
+                    String identityID = identityDAO.queryIDByEmail(email);
+                    CustomerDTO cus1 = new CustomerDTO(identityID, fullName, phoneNum, address, birthday, citizenID);
+                    boolean flag1 = customerDAO.addCustomer(cus1);
                     if (flag1) {
-                        session.setAttribute("LOGIN_USER", cus1); 
+                        session.setAttribute("LOGIN_USER", cus1);
                     }
                 }
-            } else{
-                String msg="Mã số xác thực không đúng vui lòng kiểm tra lại";
+            } else {
+                String msg = "Mã số xác thực không đúng vui lòng kiểm tra lại";
                 request.setAttribute("WRONG_CODE", msg);
             }
         } catch (Exception e) {

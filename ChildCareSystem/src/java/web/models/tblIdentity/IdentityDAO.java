@@ -27,9 +27,9 @@ public class IdentityDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblIdentity(PhoneNumber, Password, RoleID) VALUES(?,?,?)";
+                String sql = "INSERT INTO tblIdentity(Email, Password, RoleID) VALUES(?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, identity.getPhoneNum());
+                stm.setString(1, identity.getEmail());
                 stm.setString(2, identity.getPassword());
                 stm.setString(3, identity.getRoleID());
                 int row = stm.executeUpdate();
@@ -110,7 +110,7 @@ public class IdentityDAO {
         return null;
     }
 
-    public String queryID(String phoneNum) throws SQLException, NamingException {
+    public String queryIDByEmail(String email) throws SQLException, NamingException {
         String identityID = "";
         Connection conn = null;
         PreparedStatement stm = null;
@@ -120,13 +120,12 @@ public class IdentityDAO {
             if (conn != null) {
                 String sql = "SELECT IdentityID"
                         + " FROM tblIdentity "
-                        + " WHERE PhoneNumber=?";
+                        + " WHERE Email=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, phoneNum);
+                stm.setString(1, email);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     identityID = rs.getString("IdentityID");
-
                 }
             }
         } finally {
@@ -142,7 +141,7 @@ public class IdentityDAO {
         }
         return identityID;
     }
-
+    
     public boolean checkPhoneNum(String phoneNum) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
@@ -175,7 +174,37 @@ public class IdentityDAO {
         return false;
     }
           
-
+    public boolean checkDuplicatedEmail(String email) throws SQLException, NamingException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT Email "
+                        + " FROM tblIdentity"
+                        + " WHERE Email=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
     
 
     public boolean updatePass(String pass, String phoneNum) throws SQLException, NamingException {

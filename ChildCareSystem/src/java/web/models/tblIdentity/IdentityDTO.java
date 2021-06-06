@@ -11,14 +11,38 @@ package web.models.tblIdentity;
  */
 public class IdentityDTO {
     private String identityID;
-    private String phoneNum;
+    private String email;
     private String password;
     private String roleID;
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public IdentityDTO(String identityID, String roleID) {
+        this.identityID = identityID;
+        this.roleID = roleID;
     }
 
+    public IdentityDTO(String email, String password, String roleID) {
+        this.email = email;
+        this.password = password;
+        this.roleID = roleID;
+    }
+    
+    
+
+    public IdentityDTO(String identityID, String email, String password, String roleID) {
+        this.identityID = identityID;
+        this.email = email;
+        this.password = password;
+        this.roleID = roleID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public String getPassword() {
         return password;
     }
@@ -26,22 +50,12 @@ public class IdentityDTO {
     public String getRoleID() {
         return roleID;
     }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
 
     public void setRoleID(String roleID) {
-        this.roleID = roleID;
-    }
-
-    public IdentityDTO(String phoneNum, String password, String roleID) {
-        this.phoneNum = phoneNum;
-        this.password = password;
         this.roleID = roleID;
     }
 
@@ -53,9 +67,6 @@ public class IdentityDTO {
         this.identityID = identityID;
     }
 
-    public IdentityDTO(String identityID, String roleID) {
-        this.identityID = identityID;
-        this.roleID = roleID;
-    }
+    
     
 }

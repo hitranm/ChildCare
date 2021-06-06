@@ -10,36 +10,75 @@ package web.utils;
  * @author Admin
  */
 public class RegisterValidation {
-    private String phoneNumberError;
-    private String passwordError;
-    private String citizenIDError;
+    private String wrongFormatPhoneNumber;
+    private String wrongFormatPassword;
+    private String wrongFormatCitizenId;
+    private String duplicatedPhoneNum;
+    private String duplicatedCitizenId;
+    private String duplicatedEmail;
+    private String confirmPasswordNotMatch;
 
-
-
-    public String getPhoneNumberError() {
-        return phoneNumberError;
+    public String getDuplicatedEmail() {
+        return duplicatedEmail;
     }
 
-    public String getPasswordError() {
-        return passwordError;
+    public void setDuplicatedEmail(String duplicatedEmail) {
+        this.duplicatedEmail = duplicatedEmail;
     }
 
-    public String getCitizenIDError() {
-        return citizenIDError;
+    public String getWrongFormatPhoneNumber() {
+        return wrongFormatPhoneNumber;
     }
 
-
-
-    public void setPhoneNumberError(String phoneNumberError) {
-        this.phoneNumberError = phoneNumberError;
+    public void setWrongFormatPhoneNumber(String wrongFormatPhoneNumber) {
+        this.wrongFormatPhoneNumber = wrongFormatPhoneNumber;
     }
 
-    public void setPasswordError(String passwordError) {
-        this.passwordError = passwordError;
+    public String getWrongFormatPassword() {
+        return wrongFormatPassword;
     }
 
-    public void setCitizenIDError(String citizenIDError) {
-        this.citizenIDError = citizenIDError;
+    public void setWrongFormatPassword(String wrongFormatPassword) {
+        this.wrongFormatPassword = wrongFormatPassword;
     }
+
+    public String getWrongFormatCitizenId() {
+        return wrongFormatCitizenId;
+    }
+
+    public void setWrongFormatCitizenId(String wrongFormatCitizenId) {
+        this.wrongFormatCitizenId = wrongFormatCitizenId;
+    }
+
+    public String getDuplicatedPhoneNum() {
+        return duplicatedPhoneNum;
+    }
+
+    public void setDuplicatedPhoneNum(String duplicatedPhoneNum) {
+        this.duplicatedPhoneNum = duplicatedPhoneNum;
+    }
+
+    public String getDuplicatedCitizenId() {
+        return duplicatedCitizenId;
+    }
+
+    public void setDuplicatedCitizenId(String duplicatedCitizenId) {
+        this.duplicatedCitizenId = duplicatedCitizenId;
+    }
+
+    public String getConfirmPasswordNotMatch() {
+        return confirmPasswordNotMatch;
+    }
+
+    public void setConfirmPasswordNotMatch(String confirmPasswordNotMatch) {
+        this.confirmPasswordNotMatch = confirmPasswordNotMatch;
+    }
+    
+    
+
+
+    
+    
+    
     
 }
