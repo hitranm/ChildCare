@@ -78,7 +78,7 @@
                                 <a class="nav-link" href="#">Liên hệ</a>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="createStaff.jsp">Tạo staff account</a>
+                                <a class="nav-link" href="DispatchServlet?btAction=LoadSpecialty">Tạo staff account</a>
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Phản hồi</a>

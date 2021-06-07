@@ -244,19 +244,19 @@ public class StaffDAO implements Serializable {
 //    }
     
     public StaffDTO queryStaffByIdentityId(String identityId) throws SQLException, NamingException {
-        String fullName = "";
-        String email = "";
-        String address = "";
-        String birthday = "";
-        String citizenID = "";
-        String specialtyID = "";
+        String fullName;
+        String phoneNum;
+        String address;
+        String birthday;
+        String citizenID;
+        String specialtyID;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, SpecialtyID "
+                String sql = "SELECT FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
                         + " FROM tblStaff S "
                         + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
@@ -264,12 +264,12 @@ public class StaffDAO implements Serializable {
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     fullName = rs.getString("FullName");
-                    email = rs.getString("Email");
+                    phoneNum = rs.getString("PhoneNumber");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
                     citizenID = rs.getString("CitizenID");
                     specialtyID = rs.getString("SpecialtyID");
-                    StaffDTO staff = new StaffDTO(identityId, fullName, email, address, birthday, citizenID, specialtyID);
+                    StaffDTO staff = new StaffDTO(identityId, fullName, phoneNum, address, birthday, citizenID, specialtyID);
                     return staff;
                 }
             }

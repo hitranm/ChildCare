@@ -74,7 +74,7 @@ public class IdentityDAO {
         }
     }
 
-    public IdentityDTO checkLogin(String phoneNum, String password) throws SQLException, NamingException {
+    public IdentityDTO checkLogin(String email, String password) throws SQLException, NamingException {
         IdentityDTO identity = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -84,9 +84,9 @@ public class IdentityDAO {
             if (conn != null) {
                 String sql = "SELECT IdentityID, RoleID "
                         + " FROM tblIdentity "
-                        + " WHERE PhoneNumber=? AND Password=?";
+                        + " WHERE Email=? AND Password=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, phoneNum);
+                stm.setString(1, email);
                 stm.setString(2, password);
                 rs = stm.executeQuery();
                 if (rs.next()) {

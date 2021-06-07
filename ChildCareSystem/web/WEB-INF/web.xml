@@ -67,6 +67,8 @@
     <servlet>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <servlet-class>web.controller.UpdateProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ViewBlogDetailServlet</servlet-name>
         <servlet-class>web.controller.ViewBlogDetailServlet</servlet-class>
     </servlet>
@@ -81,6 +83,10 @@
     <servlet>
         <servlet-name>SearchBlogServlet</servlet-name>
         <servlet-class>web.controller.SearchBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadSpecialtyListServlet</servlet-name>
+        <servlet-class>web.controller.LoadSpecialtyListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
@@ -149,6 +155,8 @@
     <servlet-mapping>
         <servlet-name>UpdateProfileServlet</servlet-name>
         <url-pattern>/UpdateProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ViewBlogDetailServlet</servlet-name>
         <url-pattern>/ViewBlogDetailServlet</url-pattern>
     </servlet-mapping>
@@ -163,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>SearchBlogServlet</servlet-name>
         <url-pattern>/SearchBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadSpecialtyListServlet</servlet-name>
+        <url-pattern>/LoadSpecialtyListServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

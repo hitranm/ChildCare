@@ -65,6 +65,7 @@
                         <c:if test="${not empty err.descriptionErr}">
                             <font color="red">${err.descriptionErr}</font>
                         </c:if><br>
+
                         <input type="submit" value="CreateBlog" name="btAction"/>
                     </form>
                 </div>

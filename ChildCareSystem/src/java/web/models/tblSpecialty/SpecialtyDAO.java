@@ -44,7 +44,7 @@ public class SpecialtyDAO implements Serializable {
             //4 Execute query
             rs = stm.executeQuery();
             //5 Process result set
-            while (rs != null) {
+            while (rs.next()) {
                 int specialtyId = rs.getInt("SpecialtyID");
                 String specialtyName = rs.getString("SpecialtyName");
                 SpecialtyDTO dto = new SpecialtyDTO(specialtyId, specialtyName);

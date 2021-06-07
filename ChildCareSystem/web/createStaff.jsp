@@ -101,8 +101,18 @@
                     ${requestScope.SIGNUP_ERROR.duplicatedCitizenId}
                 </div>
             </c:if>
+
+            <c:set var="specialtyList" value="${requestScope.SPECIALTY_LIST}"/>
+            <div class="form-group col-md-4">
+                <label for="specialty">Chuyên khoa</label>
+                <select id="specialty" class="form-control" name="specialtyID">
+                    <c:forEach var="specailtyDTO" items="${specialtyList}">
+                        <option value="${specailtyDTO.specialtyId}">${specailtyDTO.specialtyName}</option>
+                    </c:forEach>                               
+                </select>
+            </div>
             <input type="hidden" name="roleID" value="2">
-            <input type="hidden" name="specialtyID" value="2">
+            
             </div>
             <button type="submit" class="btn btn-primary" name="btAction" value="AddStaff">Đăng ký</button>
         </form>
