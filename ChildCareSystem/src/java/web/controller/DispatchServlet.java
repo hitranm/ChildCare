@@ -53,9 +53,9 @@ public class DispatchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
-
+        String button = request.getParameter("btAction");
         try {
-            String button = request.getParameter("btAction");
+            
             if (button == null) {
                 url = HOME_PAGE;
             } else if (button.equalsIgnoreCase("Login")) {

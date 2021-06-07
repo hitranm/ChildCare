@@ -57,15 +57,13 @@ public class CreateBlogServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        
         HttpSession session = request.getSession(false);
         String url = ERROR_PAGE;
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
         String categoryID = request.getParameter("category");
-        String imageURL = "1";
-       
-        
-        //String authorID = "200001";
+//        String imageURL = uploadFile(request);
         String authorID;
         BlogError err = new BlogError();
         boolean foundErr = false;
@@ -78,15 +76,16 @@ public class CreateBlogServlet extends HttpServlet {
                 foundErr = true;
                 err.setDescriptionErr("Bạn không được để trống Nội dụng!");
             }
+            
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", err);
             } else {
                 BlogDAO dao = new BlogDAO();
                 if (session != null) {
-                    String identityID = (String) session.getAttribute("IDENTITY_ID");
+                    String identityID = (String) session.getAttribute("IDENTITYID");
                     StaffDAO staffDAO = new StaffDAO();
                     authorID = staffDAO.queryStaff(identityID);
-                    boolean result = dao.createBlog(title, authorID, body, categoryID);
+                    boolean result = dao.createBlog("aaa", title, authorID, body, categoryID);
                     if (result) {
                         url = VIEWBLOG;
                     }

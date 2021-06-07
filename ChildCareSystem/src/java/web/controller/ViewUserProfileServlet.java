@@ -43,7 +43,7 @@ public class ViewUserProfileServlet extends HttpServlet {
         
         try {
             HttpSession session = request.getSession();
-            String currentIdentityID = (String)session.getAttribute("IDENTITYID");
+            String currentIdentityID = (String)session.getAttribute("IDENTITY_ID");
             if (currentIdentityID != null) {
                 IdentityDAO identityDAO = new IdentityDAO();
                 IdentityDTO identityDTO = identityDAO.getIdentityDTO(currentIdentityID);

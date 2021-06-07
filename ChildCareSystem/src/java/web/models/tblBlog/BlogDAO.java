@@ -24,7 +24,7 @@ import web.utils.DBHelpers;
  */
 public class BlogDAO implements Serializable {
 
-    public boolean createBlog(String title, String authorID, String description, String categoryID) throws SQLException, NamingException {
+    public boolean createBlog(String thumbnail, String title, String authorID, String description, String categoryID) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -34,7 +34,7 @@ public class BlogDAO implements Serializable {
                         + "tblBlog (Thumbnail, Title, AuthorID, Description, CategoryID, StatusID) "
                         + "Values(?,?,?,?,?,?)";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "test");
+                stm.setString(1, thumbnail);
                 stm.setString(2, title);
                 stm.setString(3, authorID);
                 stm.setString(4, description);

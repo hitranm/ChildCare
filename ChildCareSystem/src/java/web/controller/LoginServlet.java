@@ -63,19 +63,19 @@ public class LoginServlet extends HttpServlet {
                     ManagerDTO dto = new ManagerDTO();
                     dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("2")) {
                     StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);  
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("1")) {
                     CustomerDTO dto = customerDAO.queryCustomerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
+                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     url = SUCCESS;
                 }
             } else {
