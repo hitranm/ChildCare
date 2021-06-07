@@ -88,6 +88,10 @@
         <servlet-name>LoadSpecialtyListServlet</servlet-name>
         <servlet-class>web.controller.LoadSpecialtyListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewUserProfileServlet</servlet-name>
+        <servlet-class>web.controller.ViewUserProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>LoadSpecialtyListServlet</servlet-name>
         <url-pattern>/LoadSpecialtyListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewUserProfileServlet</servlet-name>
+        <url-pattern>/ViewUserProfileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

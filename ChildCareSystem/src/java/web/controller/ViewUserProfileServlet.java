@@ -6,31 +6,26 @@
 package web.controller;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.tblAdmin.AdminDAO;
-import web.models.tblAdmin.AdminDTO;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
-import web.models.tblManager.ManagerDAO;
-import web.models.tblManager.ManagerDTO;
-import web.models.tblStaff.StaffDAO;
-import web.models.tblStaff.StaffDTO;
+import web.viewModels.UserProfile.UserProfileViewModel;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class LoginServlet extends HttpServlet {
-
-    private static final String SUCCESS = "home.jsp";
-    private static final String ERROR = "login.jsp";
-
+public class ViewUserProfileServlet extends HttpServlet {
+    private static final String VIEW_USER_PROFILE_PAGE = "viewProfile.jsp";
+    private static final String HOME_PAGE = "home.jsp";
+    private static final String ERROR_PAGE = "error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,48 +39,51 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = ERROR;
+        String url = VIEW_USER_PROFILE_PAGE;
+        
         try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            IdentityDAO dao = new IdentityDAO();
-            String epassword = dao.sha256(password);
-            CustomerDAO customerDAO = new CustomerDAO();
-            ManagerDAO managerDAO = new ManagerDAO();
-            StaffDAO staffDAO = new StaffDAO();
-            AdminDAO adminDAO = new AdminDAO();
-            IdentityDTO identity = dao.checkLogin(email, epassword);
-
             HttpSession session = request.getSession();
-
-            if (identity != null) {
-                if (identity.getRoleID().equals("3")) {
-                    ManagerDTO dto = new ManagerDTO();
-                    dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
-                    url = SUCCESS;
-                }
-                if (identity.getRoleID().equals("2")) {
-                    StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);  
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
-                    url = SUCCESS;
-                }
-                if (identity.getRoleID().equals("1")) {
-                    CustomerDTO dto = customerDAO.queryCustomerByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITYID", identity.getIdentityID());
-                    url = SUCCESS;
+            String currentIdentityID = (String)session.getAttribute("IDENTITYID");
+            if (currentIdentityID != null) {
+                IdentityDAO identityDAO = new IdentityDAO();
+                IdentityDTO identityDTO = identityDAO.getIdentityDTO(currentIdentityID);
+                int roleId = identityDAO.getRoleIDByIdentityID(currentIdentityID);
+                switch(roleId) {
+                    case 1:
+                        CustomerDAO customerDAO = new CustomerDAO();
+                        CustomerDTO customerDTO = customerDAO.queryCustomerByIdentityId(currentIdentityID);
+                        
+                        UserProfileViewModel userProfileViewModel = new UserProfileViewModel(identityDTO,
+                                                                                            customerDTO.getFullName(),
+                                                                                            customerDTO.getPhoneNum(),
+                                                                                            customerDTO.getAddress(),
+                                                                                            customerDTO.getBirthday(),
+                                                                                            customerDTO.getCitizenID());
+                        session.setAttribute("USER_PROFILE", userProfileViewModel);
+                        break;
+                    case 2:
+                        //Do something
+                        break;
+                    case 3: 
+                        //Do something
+                        break;
+                    case 4:
+                        //Do something
+                        break;
+                    
                 }
             } else {
-                String msg = "Email hoặc mật khẩu không chính xác!";
-                request.setAttribute("Message", msg);
+                url = HOME_PAGE;
             }
+            
+            
         } catch (Exception e) {
-            log("Error at LoginServlet:" + e.toString());
+            log("Error at ViewUserProfileServlet: " + e.getMessage());
+            url = ERROR_PAGE;
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+            
         }
     }
 

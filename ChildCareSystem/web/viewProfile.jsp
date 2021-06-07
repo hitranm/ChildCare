@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,12 +13,13 @@
         <title>Profile Page</title>
     </head>
     <body>
+        <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
         <h1>Your Profile</h1>
-        <div> Full Name: ${sessionScope.LOGIN_USER.fullName}</div>
-        <div> Address: ${sessionScope.LOGIN_USER.address}</div>
-        <div> Birthday: ${sessionScope.LOGIN_USER.birthday}</div>
-        <div> CitizenID: ${sessionScope.LOGIN_USER.citizenID}</div>
-        <div> Email: ${sessionScope.LOGIN_USER.email}</div>
+        <div> Full Name: ${userProfileDTO.fullName}</div>
+        <div> Address: ${userProfileDTO.address}</div>
+        <div> Birthday: ${userProfileDTO.birthday}</div>
+        <div> CitizenID: ${userProfileDTO.citizenId}</div>
+        <div> Email: ${userProfileDTO.identityDTO.email}</div>
         <a href="editProfile.jsp"> Edit Profile </a>
     </body>
 </html>

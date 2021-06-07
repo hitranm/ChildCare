@@ -92,7 +92,7 @@
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="viewProfile.jsp">Xem thông tin cá nhân</a>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>

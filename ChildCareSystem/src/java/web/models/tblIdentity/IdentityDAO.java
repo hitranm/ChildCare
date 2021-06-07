@@ -231,8 +231,85 @@ public class IdentityDAO {
                 conn.close();
             }
         }
-
         return false;
+    }
+    
+    public int getRoleIDByIdentityID(String identityId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1. Connect DB
+            con = DBHelpers.makeConnection();
+            //2. Create query string
+            String sql = "SELECT RoleID "
+                    + "From tblIdentity "
+                    + "Where IdentityID=?";
+            //3. Create statement and assign value
+            stm = con.prepareStatement(sql);
+            stm.setString(1, identityId);
+            //4. Execute query
+            rs = stm.executeQuery();
+            //5. Process result set
+            if(rs.next()) {
+                int roleId = rs.getInt("RoleID");
+                return roleId;
+            }
+            
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            
+            if(stm != null) {
+                stm.close();
+            }
+            
+            if (con != null) {
+                con.close();
+            }
+        }
+        return -1;
+    } 
+    
+    public IdentityDTO getIdentityDTO(String identityId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1. Connect DB
+            con = DBHelpers.makeConnection();
+            //2. Create query string
+            String sql = "SELECT Password, Email, RoleId "
+                    + "From tblIdentity "
+                    + "Where IdentityID=?";
+            //3. Create statement and assign value
+            stm = con.prepareStatement(sql);
+            stm.setString(1, identityId);
+            //4. Execute query
+            rs = stm.executeQuery();
+            //5. Process result set
+            if(rs.next()) {
+                String email = rs.getString("Email");
+                String password = rs.getString("Password");
+                String roleId = rs.getString("RoleID");
+                IdentityDTO identityDTO = new IdentityDTO(identityId, email, password, roleId);
+                return identityDTO;
+            }
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            
+            if(stm != null) {
+                stm.close();
+            }
+            
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 
 }
