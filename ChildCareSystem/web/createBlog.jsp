@@ -41,7 +41,7 @@
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-lg-8">
                     <h1 class="h2 mb-4">Tạo blog</h1>
-                    <form action="DispatchServlet" method="POST">
+                    <form action="DispatchServlet" method="POST" enctype="multipart/form-data">
                         <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
                         <label><b>Tiêu đề</b></label><br/>
                         <input type="text" name="txtTitle" value="" />
@@ -64,7 +64,17 @@
                         </div>
                         <c:if test="${not empty err.descriptionErr}">
                             <font color="red">${err.descriptionErr}</font>
-                        </c:if><br>
+                        </c:if>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" name="fImage">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
 
                         <input type="submit" value="CreateBlog" name="btAction"/>
                     </form>

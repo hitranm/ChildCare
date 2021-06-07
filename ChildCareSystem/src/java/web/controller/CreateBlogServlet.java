@@ -5,17 +5,25 @@
  */
 package web.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import static jdk.nashorn.internal.objects.NativeError.getFileName;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogError;
 import web.models.tblBlogCategory.BlogCategoryDAO;
@@ -26,8 +34,12 @@ import web.models.tblStaff.StaffDAO;
  *
  * @author DELL
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 50)
 public class CreateBlogServlet extends HttpServlet {
 
+    private static final String UPLOAD_DIR = "images";
     private final String VIEWBLOG = "ViewBlogServlet?index=1";
     private final String ERROR_PAGE = "error.jsp";
 
@@ -50,6 +62,9 @@ public class CreateBlogServlet extends HttpServlet {
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
         String categoryID = request.getParameter("category");
+        String imageURL = "1";
+       
+        
         //String authorID = "200001";
         String authorID;
         BlogError err = new BlogError();
@@ -88,6 +103,56 @@ public class CreateBlogServlet extends HttpServlet {
             rd.forward(request, response);
             out.close();
         }
+    }
+    
+    private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
+        String fileName;
+        try {
+            Part filePart = request.getPart("imageURL");
+            fileName = (String) getFileName(filePart);
+            String applicationPath = request.getServletContext().getRealPath("");
+            int end = applicationPath.lastIndexOf("build");
+            String truePath = applicationPath.substring(0, end) + "web";
+            String basePath = truePath + File.separator + UPLOAD_DIR + File.separator;
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            try {
+                File outputFilePath = new File(basePath + fileName);
+                inputStream = filePart.getInputStream();
+                outputStream = new FileOutputStream(outputFilePath);
+                int read = 0;
+                final byte[] bytes = new byte[1024];
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                fileName = "";
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            }
+
+        } catch (Exception e) {
+            fileName = "";
+        }
+        return fileName;
+    }
+    
+    private String getFileName(Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        System.out.println("*****partHeader :" + partHeader);
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
