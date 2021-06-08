@@ -23,7 +23,7 @@ import web.models.tblBlog.BlogDAO;
  */
 public class DeleteBlogServlet extends HttpServlet {
 
-    private final String VIEWBLOG = "ViewBlogServlet";
+    private final String VIEWBLOG = "ViewBlogServlet?index=1";
     private final String ERROR = "error.jsp";
 
     /**
