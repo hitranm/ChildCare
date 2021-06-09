@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import static jdk.nashorn.internal.objects.NativeError.getFileName;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogError;
 import web.models.tblBlogCategory.BlogCategoryDAO;
@@ -34,9 +33,7 @@ import web.models.tblStaff.StaffDAO;
  *
  * @author DELL
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 10MB
-        maxRequestSize = 1024 * 1024 * 50)
+@MultipartConfig
 public class CreateBlogServlet extends HttpServlet {
 
     private static final String UPLOAD_DIR = "images";
@@ -63,9 +60,10 @@ public class CreateBlogServlet extends HttpServlet {
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
         String categoryID = request.getParameter("category");
-//        String imageURL = uploadFile(request);
+        String imageURL = uploadFile(request);
         String authorID;
         BlogError err = new BlogError();
+        System.out.println(imageURL);
         boolean foundErr = false;
         try {
             if (title.trim().isEmpty()) {
@@ -82,7 +80,7 @@ public class CreateBlogServlet extends HttpServlet {
             } else {
                 BlogDAO dao = new BlogDAO();
                 if (session != null) {
-                    String identityID = (String) session.getAttribute("IDENTITYID");
+                    String identityID = (String) session.getAttribute("IDENTITY_ID");
                     StaffDAO staffDAO = new StaffDAO();
                     authorID = staffDAO.queryStaff(identityID);
                     boolean result = dao.createBlog("aaa", title, authorID, body, categoryID);

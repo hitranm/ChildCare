@@ -173,8 +173,8 @@ public class StaffDAO implements Serializable {
             con = DBHelpers.makeConnection();
             if (con != null) {
                 String sql = "Select StaffID "
-                        + "From tblStaff S, tblIdentity I "
-                        + "Where I.IdentityID = ? AND S.IdentityID = I.IdentityID ";
+                        + "From tblStaff "
+                        + "Where IdentityID=?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, identityID);
                 rs = stm.executeQuery();
