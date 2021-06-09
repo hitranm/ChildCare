@@ -18,22 +18,7 @@
             Tìm kiếm: <input type="text" name="txtSearchBlog" value="${param.txtSearchBlog}" />
             <input type="submit" value="Search" name="btAction">
         </form>
-        <%--        <c:set var="searchValue" value="${param.txtSearchBlog}"/>
-    <c:if test="${not empty searchValue}">
-        <c:set var="searchResult" value="${requestScope.SEARCH_LIST}"/>
-        <c:if test="${not empty searchResult}">
-            <c:forEach var="dto" items="${searchResult}">
-                <div class="blog-preview">
-                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">
-                        <h2>${dto.title}</h2>
-                    </a>
-                </div>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty searchResult}">
-            Không tìm thấy kết quả!
-        </c:if>
-    </c:if>--%>
+            
         <c:if test="${empty searchValue}">
             <c:set var="list" value="${requestScope.BLOG_LIST}"/>
             <c:if test="${not empty list}">

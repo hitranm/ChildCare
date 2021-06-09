@@ -6,23 +6,29 @@
 package web.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogError;
 import web.models.tblBlogCategory.BlogCategoryDAO;
@@ -33,10 +39,13 @@ import web.models.tblStaff.StaffDAO;
  *
  * @author DELL
  */
-@MultipartConfig
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 50,
+        maxRequestSize = 1024 * 1024 * 100
+)
 public class CreateBlogServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIR = "images";
     private final String VIEWBLOG = "ViewBlogServlet?index=1";
     private final String ERROR_PAGE = "error.jsp";
 
@@ -54,102 +63,80 @@ public class CreateBlogServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         HttpSession session = request.getSession(false);
         String url = ERROR_PAGE;
-        String title = request.getParameter("txtTitle");
-        String body = request.getParameter("txtBody");
-        String categoryID = request.getParameter("category");
-        String imageURL = uploadFile(request);
+//        String title = request.getParameter("txtTitle");
+//        String body = request.getParameter("txtBody");
+//        String categoryID = request.getParameter("category");
         String authorID;
+        String filename = "";
         BlogError err = new BlogError();
-        System.out.println(imageURL);
+
         boolean foundErr = false;
         try {
-            if (title.trim().isEmpty()) {
-                foundErr = true;
-                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
-            }
-            if (body.trim().isEmpty()) {
-                foundErr = true;
-                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
-            }
-            
+//            if (title.trim().isEmpty()) {
+//                foundErr = true;
+//                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
+//            }
+//            if (body.trim().isEmpty()) {
+//                foundErr = true;
+//                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
+//            }
+
             if (foundErr) {
                 request.setAttribute("CREATE_ERROR", err);
             } else {
-                BlogDAO dao = new BlogDAO();
+                // Create a factory for disk-based file items
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+
+                // Configure a repository (to ensure a secure temp location is used)
+                ServletContext servletContext = this.getServletConfig().getServletContext();
+                File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+                factory.setRepository(repository);
+
+                // Create a new file upload handler
+                ServletFileUpload upload = new ServletFileUpload(factory);
+
+                // Parse the request
+                List<FileItem> items = upload.parseRequest(request);
+
+                // Process the uploaded items
+                Iterator<FileItem> iter = items.iterator();
+                HashMap<String, String> fields = new HashMap<>();
+                while (iter.hasNext()) {
+                    FileItem item = iter.next();              
+                    if (item.isFormField()) {
+                        fields.put(item.getFieldName(), item.getString());
+                    } else {
+                        filename = item.getName();
+                        System.out.println("Filename: " + filename);
+                        Path path = Paths.get(filename);
+                        String storePath = servletContext.getRealPath("/images");
+                        File uploadFile = new File(storePath + "/" + path.getFileName());
+                        item.write(uploadFile);
+                        System.out.println(storePath + "/" + path.getFileName());
+                    }
+                }
+
+                BlogDAO dao = new BlogDAO();             
                 if (session != null) {
                     String identityID = (String) session.getAttribute("IDENTITY_ID");
                     StaffDAO staffDAO = new StaffDAO();
                     authorID = staffDAO.queryStaff(identityID);
-                    boolean result = dao.createBlog("aaa", title, authorID, body, categoryID);
+                    boolean result = dao.createBlog(filename, fields.get("txtTitle"), authorID, fields.get("txtBody"), fields.get("category"));
                     if (result) {
                         url = VIEWBLOG;
                     }
                 }
             }
-        } catch (SQLException ex) {
-            log("CreateNewAccountServlet _ SQL: " + ex.getMessage());
-            url = ERROR_PAGE;
-        } catch (NamingException ex) {
-            log("CreateNewAccountServlet _ Naming: " + ex.getMessage());
-            url = ERROR_PAGE;
+        }  catch (Exception ex) {
+            log("CreateBlogServlet: " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
         }
-    }
-    
-    private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
-        String fileName;
-        try {
-            Part filePart = request.getPart("imageURL");
-            fileName = (String) getFileName(filePart);
-            String applicationPath = request.getServletContext().getRealPath("");
-            int end = applicationPath.lastIndexOf("build");
-            String truePath = applicationPath.substring(0, end) + "web";
-            String basePath = truePath + File.separator + UPLOAD_DIR + File.separator;
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-            try {
-                File outputFilePath = new File(basePath + fileName);
-                inputStream = filePart.getInputStream();
-                outputStream = new FileOutputStream(outputFilePath);
-                int read = 0;
-                final byte[] bytes = new byte[1024];
-                while ((read = inputStream.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                fileName = "";
-            } finally {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            }
-
-        } catch (Exception e) {
-            fileName = "";
-        }
-        return fileName;
-    }
-    
-    private String getFileName(Part part) {
-        final String partHeader = part.getHeader("content-disposition");
-        System.out.println("*****partHeader :" + partHeader);
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-
-        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

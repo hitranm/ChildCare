@@ -54,6 +54,7 @@ public class DispatchServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         String button = request.getParameter("btAction");
+        
         try {
             
             if (button == null) {
