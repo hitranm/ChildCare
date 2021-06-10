@@ -55,7 +55,8 @@ public class AddNewPatientProfileServlet extends HttpServlet {
 //                valid = false;
 //            }
             HttpSession session = request.getSession();
-            String customerID = (String) session.getAttribute("USER_ID");
+            String customerID = (String) session.getAttribute("CUSTOMER_ID");
+            System.out.println(customerID);
             PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
             if (valid) {
                 if (dao.addPatient(patient)) {

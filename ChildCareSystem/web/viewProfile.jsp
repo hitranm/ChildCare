@@ -15,6 +15,7 @@
     <body>
         <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
         <h1>Your Profile</h1>
+        <h1>${CUSTOMER_ID}</h1>
         <form action="DispatchServlet">
         <div> Full Name:<input type="text" name="fullName" value="${userProfileDTO.fullName}" required="true"></div>
         <div> Address: <input type="text" name="address" value="${userProfileDTO.address}" required="true"></div>

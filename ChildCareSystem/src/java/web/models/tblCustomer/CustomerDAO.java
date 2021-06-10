@@ -240,7 +240,7 @@ public class CustomerDAO {
         return null;
     }
 
-    public String queryCustomerID(String phoneNum) throws SQLException, NamingException {
+    public String queryCustomerID(String email) throws SQLException, NamingException {
         String CustomerID = "";
         Connection conn = null;
         PreparedStatement stm = null;
@@ -250,9 +250,9 @@ public class CustomerDAO {
             if (conn != null) {
                 String sql = "SELECT CustomerID "
                         + " FROM tblCustomer C, tblIdentity I "
-                        + " WHERE C.IdentityID = I.IdentityID AND PhoneNumber=?";
+                        + " WHERE C.IdentityID = I.IdentityID AND Email=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, phoneNum);
+                stm.setString(1, email);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     CustomerID = rs.getString("CustomerID");
