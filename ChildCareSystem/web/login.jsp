@@ -71,7 +71,7 @@
                                         </div>
                                     </c:if>
                                     <div class="d-flex mb-5 align-items-center">
-                                        <span class="ml-auto"><a href="#" class="forgot-pass">Quên mật khẩu</a></span>
+                                        <span class="ml-auto"><a href="forgot_pass.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                     </div>
                                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button>
                                 </form>

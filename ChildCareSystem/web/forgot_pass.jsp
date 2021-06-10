@@ -14,7 +14,6 @@
     <body>
         <form action="DispatchServlet" method="POST">
             Nhập email <input type="email" name="email" value="${param.email}" placeholder="Email" required="true"></br>
-            Nhập số điện thoại <input type="text" name="phoneNum" value="${param.phoneNum}" placeholder="Số điện thoại" required="true"></br>
             <button type="submit" name="btAction" value="Forgot"> Tra cứu </button>
         </form>
 

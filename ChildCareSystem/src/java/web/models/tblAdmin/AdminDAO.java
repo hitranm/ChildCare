@@ -17,7 +17,7 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class AdminDAO {
-     public AdminDTO queryAdmin(String phoneNum) throws SQLException, NamingException {
+/*     public AdminDTO queryAdmin(String phoneNum) throws SQLException, NamingException {
         String fullName = "";
         String email="";
         String address="";
@@ -61,7 +61,7 @@ public class AdminDAO {
             }
         }
         return null;
-    }
+    }*/
      public boolean update(AdminDTO admin) throws SQLException, NamingException{
         boolean check=false;
         Connection conn=null;
@@ -120,5 +120,46 @@ public class AdminDAO {
             }
         }
         return check;
+    }
+       public AdminDTO queryAdminByIdentityId(String identityId) throws SQLException, NamingException {
+        String fullName;
+        String phoneNum;
+        String address;
+        String birthday;
+        String citizenID;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT FullName, PhoneNumber, Address, Birthday, CitizenID "
+                        + " FROM tblAdmin A "
+                        + " WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, identityId);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    fullName = rs.getString("FullName");
+                    phoneNum = rs.getString("PhoneNumber");
+                    address = rs.getString("Address");
+                    birthday = rs.getString("Birthday");
+                    citizenID = rs.getString("CitizenID");
+                    AdminDTO admin = new AdminDTO(identityId, fullName, phoneNum, address, birthday, citizenID);
+                    return admin;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
     }
 }

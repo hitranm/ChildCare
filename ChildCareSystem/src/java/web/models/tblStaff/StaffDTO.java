@@ -12,7 +12,7 @@ package web.models.tblStaff;
 public class StaffDTO {
     private String IdentityID;
     private String FullName;
-    private String PhoneNumber;
+    private String phoneNumber;
     private String Address;
     private String Birthday;
     private String CitizenID;
@@ -23,10 +23,10 @@ public class StaffDTO {
     public StaffDTO() {
     }
 
-    public StaffDTO(String IdentityID, String FullName, String PhoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
+    public StaffDTO(String IdentityID, String FullName, String phoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
-        this.PhoneNumber = PhoneNumber;
+        this.phoneNumber = phoneNumber;
         this.Address = Address;
         this.Birthday = Birthday;
         this.CitizenID = CitizenID;
@@ -69,11 +69,11 @@ public class StaffDTO {
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
-    public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
    
@@ -136,7 +136,7 @@ public class StaffDTO {
 
     @Override
     public String toString() {
-        return "StaffDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNumber=" + PhoneNumber + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", SpecialtyID=" + SpecialtyID + '}';
+        return "StaffDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNumber=" + phoneNumber + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", SpecialtyID=" + SpecialtyID + '}';
     }
 
     

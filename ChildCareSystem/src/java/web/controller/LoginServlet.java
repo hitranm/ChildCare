@@ -78,6 +78,13 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     url = SUCCESS;
                 }
+                if (identity.getRoleID().equals("4")) {
+                    AdminDTO dto = adminDAO.queryAdminByIdentityId(identity.getIdentityID());
+                    session.setAttribute("LOGIN_USER", dto);
+                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                    url = SUCCESS;
+                }
+                
             } else {
                 String msg = "Email hoặc mật khẩu không chính xác!";
                 request.setAttribute("Message", msg);

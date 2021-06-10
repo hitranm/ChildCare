@@ -27,7 +27,7 @@ public class SendEmail {
     }
 
     //send email to the user email
-    public boolean sendEmail(CustomerDTO cus, String email) {
+    public boolean sendEmail(String code, String email) {
         boolean test = false;
 
         String toEmail = email;
@@ -65,7 +65,7 @@ public class SendEmail {
             mess.setSubject("User Email Verification");
             
     		//set message text
-            mess.setText("Registered successfully. Please verify your account using this code: " + cus.getCode());
+            mess.setText("Registered successfully. Please verify your account using this code: " + code);
             //send the message
             Transport.send(mess);
             

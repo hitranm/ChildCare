@@ -38,35 +38,32 @@ public class ForgotPassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
-//        try {
-//            String email = request.getParameter("email");
-//            String phoneNum = request.getParameter("phoneNum");
-//            CustomerDAO dao = new CustomerDAO();
-//            IdentityDAO dao1 = new IdentityDAO();
-//            HttpSession session = request.getSession();
-//            boolean check = dao.checkEmail(email);
-//            boolean check1 = dao1.checkPhoneNum(phoneNum);
-//            if (check && check1) {
-//                SendEmail sm = new SendEmail();
-//                String code = sm.getRandom();
-//                CustomerDTO cus = new CustomerDTO(email, code);
-//                boolean test = sm.sendEmail(cus);
-//
-//                //check if the email send successfully
-//                if (test) {
-//                    session.setAttribute("authcode", cus);
-//                    url = SUCCESS;
-//                }
-//            } else {
-//                String msg = "Email hoặc số điện thoại chưa được đăng ký";
-//                request.setAttribute("ERROR_EMAIL", msg);
-//            }
-//
-//        } catch (Exception e) {
-//            log("Error at ForgotPassServlet: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+        try {
+           String email = request.getParameter("email");
+           IdentityDAO dao = new IdentityDAO();
+           HttpSession session = request.getSession();
+           boolean check = dao.checkDuplicatedEmail(email);
+            if (check) {
+                SendEmail sm = new SendEmail();
+                String code = sm.getRandom();
+           //     CustomerDTO cus = new CustomerDTO(email, code);
+                boolean test = sm.sendEmail(code, email);
+
+                //check if the email send successfully
+                if (test) {
+                    session.setAttribute("authcode", code);
+                    url = SUCCESS;
+                }
+            } else {
+                String msg = "Email hoặc số điện thoại chưa được đăng ký";
+                request.setAttribute("ERROR_EMAIL", msg);
+            }
+
+        } catch (Exception e) {
+            log("Error at ForgotPassServlet: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
 
     }
 

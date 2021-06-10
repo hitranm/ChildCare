@@ -17,7 +17,6 @@
         <form action="DispatchServlet" method="POST">
             Nhập mã xác thực email <input type="text" name="authcode" >
             <input type="hidden" name="email" value="${param.email}">
-            <input type="hidden" name="phoneNum" value="${param.phoneNum}">
             <button type="submit" name="btAction" value="VerifyPass">Xác nhận </button>
         </form>
     <c:set var="WRONG_CODE" value="${requestScope.WRONG_CODE}"/>

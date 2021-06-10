@@ -15,26 +15,26 @@ public class ManagerDTO {
     private String Address;
     private String Birthday;
     private String CitizenID;
-    private String PhoneNumber;
+    private String phoneNumber;
     
     public ManagerDTO() {
     }
 
-    public ManagerDTO(String IdentityID, String FullName, String Address, String Birthday, String CitizenID, String PhoneNumber) {
+    public ManagerDTO(String IdentityID, String FullName, String Address, String Birthday, String CitizenID, String phoneNumber) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
         this.Address = Address;
         this.Birthday = Birthday;
         this.CitizenID = CitizenID;
-        this.PhoneNumber = PhoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
-    public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
     

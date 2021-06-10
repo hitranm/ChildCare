@@ -17,7 +17,6 @@
             Mật khẩu mới <input type="password" name="password" placeholder="Mật khẩu" required="true">
             Xác nhận mật khẩu <input type="password" name="cpassword" placeholder="Mật khẩu" required="true">
             <input type="hidden" name="email" value="${param.email}">
-            <input type="hidden" name="phoneNum" value="${param.phoneNum}">
             <button  type="submit" name="btAction" value="ResetPass">Xác nhận </button>
         </form>
     
