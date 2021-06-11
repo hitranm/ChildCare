@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <td>Patient Birthday</td>
-                    <td>: <input type="date" name="txtBirthday" value="${param.txtBithday}">
+                    <td>: <input type="date" name="txtBirthday" value="${param.txtBirthday}">
                         <font color="red">${requestScope.INVALID.birthdayError}</font></td>
                 </tr>
                 <tr>

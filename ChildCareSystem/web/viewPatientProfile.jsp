@@ -28,56 +28,91 @@
             rel="stylesheet"
             />
         <link rel="stylesheet" href="./css/homepage.css" />
+        <link rel="stylesheet" href="./css/patientProfile.css" />
+
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         <main>
-                    <h1>${CUSTOMER_ID}</h1>
-
+            <h1>${CUSTOMER_ID}</h1>
             <c:if test="${requestScope.listPatients!=null}">
                 <c:if test="${not empty requestScope.listPatients}" var="testEmpty">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>PATIENT ID</th>
-                                <th>PATIENT NAME</th>
-                                <th>PATIENT GENDER</th>
-                                <th>PATIENT BIRTHDAY</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${requestScope.listPatients}" var="dto2">
-                            <form action="LoadPatientProfileServlet" method="POST">
-                                <tr>
-                                    <td>${dto2.patientID}</td>
-                                    <td>${dto2.patientName}</td>
-                                    <td>${dto2.gender}</td>
-                                    <td>${dto2.birthday}</td>
-                                    <c:url value="LoadPatientProfileByIDServlet" var="updateLink">
-                                        <c:param name="id" value="${dto2.patientID}"/>
-                                    </c:url>
-                                    <td><a href="${updateLink}">Update</a> </td>
+                    <c:forEach items="${requestScope.listPatients}" var="dto2">
+                        <form action="LoadPatientProfileServlet" method="POST">
+                            <div class="profile-card">
+                                <img class="profile-image" src="https://i.imgur.com/tq1CpHn.png" />
+                                <hr>
+                                <h3 class="profile-name">
+                                    ${dto2.patientName}
+                                </h3>
+                                <p class="profile-description">
+                                <p><strong>Giới tính:</strong> 
+                                    <c:choose>
+                                        <c:when test="${dto2.gender.equals('male')}">
+                                            Nam
+                                        </c:when>
+                                        <c:otherwise>
+                                            Nữ
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                                <p><strong>Ngày sinh:</strong> ${dto2.birthday}</p>
+                                </p>
+                                <hr>
+                                <c:url value="LoadPatientProfileByIDServlet" var="updateLink">
+                                    <c:param name="id" value="${dto2.patientID}"/>
+                                </c:url>
+                                <a class="btn btn-primary" href="${updateLink}" role="button">Update</a>
+                                <c:url value="DeletePatientProfileByIDServlet" var="deleteLink">
+                                    <c:param name="id" value="${dto2.patientID}"/>
+                                </c:url>
+                                <a class="btn btn-secondary" onclick="return confirmation()" href="${deleteLink}" role="button">Delete</a>
+                            </div>
 
-                                    <c:url value="DeletePatientProfileByIDServlet" var="deleteLink">
-                                        <c:param name="id" value="${dto2.patientID}"/>
-                                    </c:url>
-                                    <td><a onclick="return confirmation()" href="${deleteLink}">Delete</a> </td>
+                        </form>
+                    </c:forEach>
 
-                                </tr>
-                            </form>
-                        </c:forEach>
-                        </tbody>
-                    </table>
                 </c:if>
                 <c:if test="${!testEmpty}">
                     <h2>No User Account here. Add one here</h2>
                 </c:if>
             </c:if>
+
+
             <h3> <a href="addNewPatient.jsp">Create new Patient Profile</a> </h3>
 
             <a href="home.jsp">Back to Home.jsp</a>        
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <script>
                 function confirmation() {
                     var r = confirm("Are you sure you want to delete this?");
@@ -85,7 +120,7 @@
                 }
             </script>
         </main>
-         <jsp:include page="footer.jsp"/>       
+        <jsp:include page="footer.jsp"/>       
         <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
         <!-- <script

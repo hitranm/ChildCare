@@ -7,6 +7,9 @@ package web.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +33,10 @@ public class AddNewPatientProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        String checkDate = dateFormat.format(date);
         try {
             String name = request.getParameter("txtName");
             String gender = request.getParameter("txtGender");
@@ -41,7 +48,7 @@ public class AddNewPatientProfileServlet extends HttpServlet {
                 errorObj.setPatientNameError("Patient Name is not supposed to be empty");
                 valid = false;
             }
-            if (gender.trim().isEmpty()) {
+            if (gender == null) {
                 errorObj.setGenderError("Patient Gender is not supposed to be empty");
                 valid = false;
             }
@@ -56,7 +63,6 @@ public class AddNewPatientProfileServlet extends HttpServlet {
 //            }
             HttpSession session = request.getSession();
             String customerID = (String) session.getAttribute("CUSTOMER_ID");
-            System.out.println(customerID);
             PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
             if (valid) {
                 if (dao.addPatient(patient)) {
