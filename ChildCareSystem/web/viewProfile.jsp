@@ -10,9 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>Profile Page</title>
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
+        
         <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
         <h1>Your Profile</h1>
         <h1>${CUSTOMER_ID}</h1>
@@ -28,5 +31,6 @@
         <button type="submit" name="btAction" value="UpdateProfile">Cập nhật</button>
         </form>
         <a href="home.jsp">Back to Homepage</a>
+        <jsp:include page="footer.jsp"/> 
     </body>
 </html>

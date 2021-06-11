@@ -68,12 +68,12 @@ public class AddCustomerServlet extends HttpServlet {
 
             if (!CheckValidHelper.IsFormatPassword(password)) {
                 foundError = true;
-                registerValidation.setWrongFormatPassword("Không đúng định dạng!");
+                registerValidation.setWrongFormatPassword("Mật khẩu không đúng định dạng!");
             }
             
             if (!CheckValidHelper.IsValidCitizenIdLength(citizenID)) {
                 foundError = true;
-                registerValidation.setDuplicatedCitizenId("Không đúng định dạng!");
+                registerValidation.setDuplicatedCitizenId("CCCD không đúng định dạng!");
             }
             
             if (!CheckValidHelper.checkConfirmPassword(password, cpassword)) {
