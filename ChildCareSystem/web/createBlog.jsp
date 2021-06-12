@@ -66,15 +66,6 @@
                             <font color="red">${err.descriptionErr}</font>
                         </c:if>
 
-                        <!--                        <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Upload</span>
-                                                    </div>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="imageURL">
-                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                    </div>
-                                                </div>-->
                         <div class="form-group">
                             <label>Photo</label><br/>
                             <input type="file" class="form-control" name="imageURL" placeholder="Your image">

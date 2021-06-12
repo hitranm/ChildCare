@@ -32,13 +32,19 @@
         <title>Service</title>
     </head>
     <body>
+
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <h1>Tạo mới dịch vụ</h1>
-        <form action="CreateServiceServlet" method="post" enctype="multipart/form-data">
+        <form action="DispatchServlet" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="service-title">Tiêu đề</label>
-                <input type="text" class="form-control" id="service-title" name="txtTitle" value="">
+                <input type="text" class="form-control" id="service-title" name="txtTitle" value="">              
             </div>
+            <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
+                <div class="text-danger">
+                    <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
+                </div>
+            </c:if>
 
             <div class="form-group col-md-4">
                 <label for="service-specialty">Chuyên khoa</label>
@@ -52,16 +58,31 @@
             <div class="form-group">
                 <label for="service-content">Nội dụng</label>
                 <textarea id="service-content" name="txtServiceContent"></textarea>
+                <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}">
+                    <div class="text-danger">
+                        <small>${requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}</small>
+                    </div>
+                </c:if>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="service-price">Nhập giá tiền</label>
                 <input type="text" id="service-price" class="form-control" value="" name="txtPrice"/>
+                <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.priceFormat}">
+                    <div class="text-danger">
+                        <small>${requestScope.CREATE_SERVICE_ERROR.priceFormat}</small>
+                    </div>
+                </c:if>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="service-salePrice">Nhập giá khuyến mãi</label>
                 <input type="text" id="service-salePrice" class="form-control" value="" name="txtSalePrice"/>
+                <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
+                    <div class="text-danger">
+                        <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
+                    </div>
+                </c:if>
             </div>
 
             <div class="form-group">
@@ -69,8 +90,14 @@
                 <input type="file" class="form-control" id="service-image" name="fImage">
             </div>
 
-            <button type="submit">Tạo mới</button>
+            <button type="submit" class="btn btn-primary" name="btAction" value="CreateService">Tạo mới</button>
         </form>
+
+        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR}">
+            <script>
+                $(".invalid-feedback").css("display", "block");
+            </script>
+        </c:if>
 
 
 

@@ -11,8 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Date;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import web.models.tblService.CreateServiceError;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 import web.models.tblStaff.StaffDAO;
@@ -35,7 +37,9 @@ import web.models.tblStaff.StaffDAO;
         maxRequestSize = 1024 * 1024 * 100
 )
 public class CreateServiceServlet extends HttpServlet {
+
     private static final String HOME_PAGE = "home.jsp";
+    private static final String CREATE_SERVICE_PAGE = "createService.jsp";
     private static final String ERROR_PAGE = "error.jsp";
     private static final String UPLOAD_DIR = "images/service";
 
@@ -55,38 +59,66 @@ public class CreateServiceServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         String url = ERROR_PAGE;
-        
+        boolean foundError = false;
+        CreateServiceError createServiceErr = new CreateServiceError();
+
         // Get form parameters
         String serviceName = request.getParameter("txtTitle");
         String specialtyId = request.getParameter("cboSpecialty");
         String description = request.getParameter("txtServiceContent");
-        double price = Double.parseDouble(request.getParameter("txtPrice"));
-        double salePrice = Double.parseDouble(request.getParameter("txtSalePrice"));
-        String thumbnail = uploadFile(request);
-
-        
+        double price = 0;
+        double salePrice = 0;
         try {
-            //Get identity from session
+            price = Double.parseDouble(request.getParameter("txtPrice"));
+        } catch (NumberFormatException ex) {
+            foundError = true;
+            createServiceErr.setPriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
+        }
+        try {
+            salePrice = Double.parseDouble(request.getParameter("txtSalePrice"));
+        } catch (NumberFormatException ex) {
+            foundError = true;
+            createServiceErr.setSalePriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
+        }
+        String thumbnail = uploadFile(request);
+        try {
+            //Validate field
+            if (serviceName.trim().length() == 0 || serviceName.trim().length() > 100) {
+                foundError = true;
+                createServiceErr.setTitleLengthError("Tiêu đề không được để trống và có nhiều nhất 100 kí tự.");
+            }
 
-            String identityId = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String createPersonId = staffDAO.queryStaff(identityId);
-            ServiceDTO serviceDTO = new ServiceDTO(serviceName, 
-                                                specialtyId, 
-                                                thumbnail, 
-                                                description, 
-                                                price, 
-                                                salePrice, 
-                                                "0", 
-                                                createPersonId, 
-                                                LocalDateTime.now().toString());
-            // Process to add new service
-            ServiceDAO serviceDAO = new ServiceDAO();
-            boolean result = serviceDAO.AddNewService(serviceDTO);
-            if (result) {
-                url = HOME_PAGE;
-            } else url = ERROR_PAGE;
-        } catch(Exception ex) {
+            if (description.trim().length() == 0 || description.trim().length() > 300) {
+                createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
+            }
+
+            if (foundError) {
+                url = CREATE_SERVICE_PAGE;
+                request.setAttribute("CREATE_SERVICE_ERROR", createServiceErr);
+            } else {
+                //Get identity from session
+                String identityId = (String) session.getAttribute("IDENTITY_ID");
+                StaffDAO staffDAO = new StaffDAO();
+                String createPersonId = staffDAO.queryStaff(identityId);
+                ServiceDTO serviceDTO = new ServiceDTO(serviceName,
+                        specialtyId,
+                        thumbnail,
+                        description,
+                        price,
+                        salePrice,
+                        "0",
+                        createPersonId,
+                        LocalDateTime.now().toString());
+                // Process to add new service
+                ServiceDAO serviceDAO = new ServiceDAO();
+                boolean result = serviceDAO.AddNewService(serviceDTO);
+                if (result) {
+                    url = HOME_PAGE;
+                } else {
+                    url = ERROR_PAGE;
+                }
+            }
+        } catch (NamingException | SQLException ex) {
             log("Error at CreateServiceServlet: " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -94,11 +126,11 @@ public class CreateServiceServlet extends HttpServlet {
             out.close();
         }
     }
-    
+
     private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
         String fileName;
         try {
-            Part filePart = request.getPart("imageURL");
+            Part filePart = request.getPart("fImage");
             fileName = (String) getFileName(filePart);
             String applicationPath = request.getServletContext().getRealPath("");
             int end = applicationPath.lastIndexOf("build");
@@ -129,7 +161,7 @@ public class CreateServiceServlet extends HttpServlet {
         }
         return fileName;
     }
-    
+
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
         System.out.println("*****partHeader :" + partHeader);
