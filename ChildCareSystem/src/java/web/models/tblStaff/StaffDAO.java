@@ -180,7 +180,6 @@ public class StaffDAO implements Serializable {
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     staffID = rs.getString("StaffID");
-
                 }
             }
         } finally {

@@ -22,13 +22,22 @@ import web.models.tblSpecialty.SpecialtyDTO;
  */
 public class LoadSpecialtyListServlet extends HttpServlet {
     private final String CREATE_STAFF_PAGE = "createStaff.jsp";
+    private final String CREATE_SERVVICE_PAGE = "createService.jsp";
     private final String ERROR_PAGE = "error.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url  = CREATE_STAFF_PAGE;
+        String action = request.getParameter("view");
+        String url  = "";
+//        if (action.equalsIgnoreCase("CreateStaff")) {
+//            url = CREATE_STAFF_PAGE;
+//        } else if (action.equalsIgnoreCase("CreateService")) {
+//            url = CREATE_SERVVICE_PAGE;
+//        }
+         url = CREATE_SERVVICE_PAGE;
+        
         try {
             SpecialtyDAO specialtyDAO = new SpecialtyDAO();
             specialtyDAO.displaySpecialtyList();
