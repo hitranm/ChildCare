@@ -36,7 +36,7 @@ public class CreateBlogServlet extends HttpServlet {
 
     private final String VIEWBLOG = "ViewBlogServlet?index=1";
     private final String ERROR_PAGE = "error.jsp";
-    private static final String UPLOAD_DIR = "images";
+    private static final String UPLOAD_DIR = "images/blog";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

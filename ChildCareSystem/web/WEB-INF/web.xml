@@ -92,6 +92,10 @@
         <servlet-name>ViewUserProfileServlet</servlet-name>
         <servlet-class>web.controller.ViewUserProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateServiceServlet</servlet-name>
+        <servlet-class>web.controller.CreateServiceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -184,9 +188,13 @@
         <servlet-name>ViewUserProfileServlet</servlet-name>
         <url-pattern>/ViewUserProfileServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateServiceServlet</servlet-name>
+        <url-pattern>/CreateServiceServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
     <welcome-file-list>

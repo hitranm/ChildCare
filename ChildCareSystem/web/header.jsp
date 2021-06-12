@@ -60,7 +60,10 @@
                                 <a class="nav-link" href="#">Liên hệ</a>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="DispatchServlet?btAction=LoadSpecialty">Tạo staff account</a>
+                                <a class="nav-link" href="DispatchServlet?btAction=LoadSpecialty&view=CreateStaff">Tạo staff account</a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a class="nav-link" href="createService.jsp">Tạo dịch vụ</a>
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Phản hồi</a>
@@ -75,6 +78,8 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>

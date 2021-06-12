@@ -42,7 +42,7 @@
                 <div class="col-md-12 col-lg-8">
                     <h1 class="h2 mb-4">Tạo blog</h1>
                     
-                    <form action="CreateBlogServlet" method="post" enctype="multipart/form-data">
+                    <form action="DispatchServlet" method="post" enctype="multipart/form-data">
                         <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
                         <label><b>Tiêu đề</b></label><br/>
                         <input type="text" name="txtTitle" value="" />
@@ -56,8 +56,7 @@
                                 <option value="${dto.categoryID}">${dto.categoryName}</option>
                             </c:forEach>
 
-                            <!--                            <option value="2">Hướng dẫn</option>
-                                                        <option value="3">Sức khỏe</option>-->
+                            
                         </select><br/>
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">
@@ -80,7 +79,7 @@
                             <label>Photo</label><br/>
                             <input type="file" class="form-control" name="imageURL" placeholder="Your image">
                         </div>
-                        <input type="submit" value="CreateBlog" name="btAction"/>
+                        <button type="submit" class="btn btn-primary" name="btAction" value="CreateBlog">Tạo mới</button>
                     </form>
                 </div>
             </div>
