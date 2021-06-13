@@ -46,11 +46,10 @@
     <body>
         <jsp:include page="header.jsp" />
 
-        <div class="service-form-wrapper">
-            <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
+        <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
+        <div class="service-form-wrapper">         
             <h1>Tạo mới dịch vụ</h1>
-            <form action="DispatchServlet" method="post" enctype="multipart/form-data" class="col-md-6">
-                
+            <form action="DispatchServlet" method="post" enctype="multipart/form-data" class="col-md-6">      
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-title">Tiêu đề</label>

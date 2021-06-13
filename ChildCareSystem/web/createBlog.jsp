@@ -14,23 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <script>
-            tinymce.init({
-                selector: 'textarea#editor',
-                skin: 'bootstrap',
-                plugins: 'lists, link, image, media',
-                toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
-                menubar: false
-            });
-        </script>
-        <script>
-            tinymce.init({
-                selector: 'textarea#editor',
-                menubar: false
-            });
-        </script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">          
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -47,65 +31,76 @@
             href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
             rel="stylesheet"
             />
-        <link rel="stylesheet" href="./css/createBlog.css" />
+        <link rel="stylesheet" href="css/homepage.css">
+        <link rel="stylesheet" href="./css/blog/createBlog.css" />
+        <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: 'textarea#editor',
+                skin: 'bootstrap',
+                plugins: 'lists, link, image, media',
+                toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+                menubar: false
+            });
+        </script>
+        <script>
+            tinymce.init({
+                selector: 'textarea#editor',
+                menubar: false
+            });
+        </script>
         <title>Blog</title>
     </head>
 
     <body>
         <jsp:include page="header.jsp"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
-        <div class="container mt-4 mb-4">
-            <div class="row justify-content-md-center">
-                <div class="col-md-12 col-lg-8">
-                    <h1 class="h2 mb-4">Tạo blog</h1>
+        <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
+        <div class="blog-wrapper">
+            <h1 class="h2 mb-4">Tạo bài viết mới</h1>
+            <form action="DispatchServlet" method="post" enctype="multipart/form-data" class="col-md-6">
 
-                    <form action="DispatchServlet" method="post" enctype="multipart/form-data">
-                        <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-                        <div class="row justify-content-between mr-1">
-                            <div class="col-9">
-                                <label><h5>Tiêu đề: </h5></label>
-                                <input type="text" name="txtTitle" value="" />
-                                <c:if test="${not empty err.titleLengthErr}">
-                                    <font color="red">${err.titleLengthErr}</font>
-                                </c:if>
-                            </div>
-                            <select class="form-select col-3" aria-label="Default select example" name="category" id="category">
-                                <option selected>-Thể loại- </option>
-                                <c:forEach items="${cate.viewBlogCategory()}" var="dto">
-                                    <option value="${dto.categoryID}">${dto.categoryName}</option>
-                                </c:forEach>
-
-
-                        </select><br/>
-                        <label>Nội dung bài viết</label>
-                        <div class="form-group" name="txtBody">
-                            <textarea id="editor" name="txtBody"></textarea>
-                        </div>
-                        <c:if test="${not empty err.descriptionErr}">
-                            <font color="red">${err.descriptionErr}</font>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="title">Tiêu đề</label>
+                        <input class="form-control" type="text" name="txtTitle" value="" id="title"/>
+                        <c:if test="${not empty err.titleLengthErr}">
+                            <font color="red">${err.titleLengthErr}</font>
                         </c:if>
-
-                        <div class="form-group">
-                            <label>Photo</label><br/>
-                            <input type="file" class="form-control" name="imageURL" placeholder="Your image">
-                        </div>
-                        <button type="submit" class="btn btn-primary" name="btAction" value="CreateBlog">Tạo mới</button>
-                        <!--                        <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Upload</span>
-                                                    </div>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="imageURL">
-                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                                    </div>
-                                                </div>-->
-                        <a class="btn btn-secondary float-right ml-2" onclick="return cancelConfirm()" href="ViewBlogServlet?index=1">Hủy</a>
-                        <button class="btn btn-primary float-right" type="submit" value="CreateBlog" name="btAction">Tạo bài viết</button>
-
-                    </form>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="category">Thể loại</label>
+                        <select class="form-control" aria-label="Default select example" name="category" id="category">
+                            <c:forEach items="${cate.viewBlogCategory()}" var="dto">
+                                <option value="${dto.categoryID}">${dto.categoryName}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="content">Nội dung bài viết</label>
+                    <textarea id="editor" name="txtBody" id="content"></textarea>
+                    <c:if test="${not empty err.descriptionErr}">
+                        <font color="red">${err.descriptionErr}</font>
+                    </c:if>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Ảnh nền</label>
+                    <input type="file" class="form-control" name="imageURL" id="image">
+                </div>
+        
+                <div class="text-center">                
+                    <button class="btn btn-primary col-6 col-md-3" type="submit" value="CreateBlog" name="btAction">Tạo bài viết</button>
+                    <a class="btn btn-secondary col-6 col-md-3" onclick="return cancelConfirm()" href="ViewBlogServlet?index=1">Hủy</a>
+                </div>
+
+            </form>
         </div>
+
+
+
         <jsp:include page="footer.jsp"/>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
