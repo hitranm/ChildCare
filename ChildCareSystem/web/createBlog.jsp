@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : createBlog
     Created on : May 26, 2021, 9:50:33 AM
     Author     : DELL
@@ -31,32 +31,51 @@
                 menubar: false
             });
         </script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+            />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+            crossorigin="anonymous"
+            />
+        <link
+            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+            rel="stylesheet"
+            />
+        <link rel="stylesheet" href="./css/createBlog.css" />
         <title>Blog</title>
     </head>
 
     <body>
-        <a href="home.jsp">Trở về trang chủ</a>
+        <jsp:include page="header.jsp"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <div class="container mt-4 mb-4">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-lg-8">
                     <h1 class="h2 mb-4">Tạo blog</h1>
-                    
+
                     <form action="DispatchServlet" method="post" enctype="multipart/form-data">
                         <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-                        <label><b>Tiêu đề</b></label><br/>
-                        <input type="text" name="txtTitle" value="" />
-                        <c:if test="${not empty err.titleLengthErr}">
-                            <font color="red">${err.titleLengthErr}</font>
-                        </c:if><br>
+                        <div class="row justify-content-between mr-1">
+                            <div class="col-9">
+                                <label><h5>Tiêu đề: </h5></label>
+                                <input type="text" name="txtTitle" value="" />
+                                <c:if test="${not empty err.titleLengthErr}">
+                                    <font color="red">${err.titleLengthErr}</font>
+                                </c:if>
+                            </div>
+                            <select class="form-select col-3" aria-label="Default select example" name="category" id="category">
+                                <option selected>-Thể loại- </option>
+                                <c:forEach items="${cate.viewBlogCategory()}" var="dto">
+                                    <option value="${dto.categoryID}">${dto.categoryName}</option>
+                                </c:forEach>
 
-                        <label for="category">Thể loại:</label>
-                        <select name="category" id="category">
-                            <c:forEach items="${cate.viewBlogCategory()}" var="dto">
-                                <option value="${dto.categoryID}">${dto.categoryName}</option>
-                            </c:forEach>
 
-                            
                         </select><br/>
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">
@@ -71,15 +90,28 @@
                             <input type="file" class="form-control" name="imageURL" placeholder="Your image">
                         </div>
                         <button type="submit" class="btn btn-primary" name="btAction" value="CreateBlog">Tạo mới</button>
+                        <!--                        <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="imageURL">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                    </div>
+                                                </div>-->
+                        <a class="btn btn-secondary float-right ml-2" onclick="return cancelConfirm()" href="ViewBlogServlet?index=1">Hủy</a>
+                        <button class="btn btn-primary float-right" type="submit" value="CreateBlog" name="btAction">Tạo bài viết</button>
+
                     </form>
                 </div>
             </div>
         </div>
-
+        <jsp:include page="footer.jsp"/>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>

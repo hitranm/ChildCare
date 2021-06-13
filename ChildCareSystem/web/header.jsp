@@ -46,7 +46,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="#"
+                                <a class="nav-link" href="home.jsp"
                                    >Trang chủ<span class="sr-only"></span
                                     ></a>
                             </li>
