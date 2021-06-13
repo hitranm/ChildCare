@@ -10,7 +10,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">          
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+            crossorigin="anonymous"
+            />
+        <link
+            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+            rel="stylesheet"
+            />
+        <link rel="stylesheet" href="css/homepage.css">
+        <link rel="stylesheet" href="css/service/createService.css">
 
         <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
@@ -32,75 +44,76 @@
         <title>Service</title>
     </head>
     <body>
+        <jsp:include page="header.jsp" />
 
-        <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
-        <h1>Tạo mới dịch vụ</h1>
-        <form action="DispatchServlet" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="service-title">Tiêu đề</label>
-                <input type="text" class="form-control" id="service-title" name="txtTitle" value="">              
-            </div>
-            <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
-                <div class="text-danger">
-                    <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
+        <div class="service-form-wrapper">
+            <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
+            <h1>Tạo mới dịch vụ</h1>
+            <form action="DispatchServlet" method="post" enctype="multipart/form-data" class="col-md-6">
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="service-title">Tiêu đề</label>
+                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="">              
+                    </div>
+                    <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
+                        <div class="text-danger">
+                            <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
+                        </div>
+                    </c:if>
+                    <div class="form-group col-md-6">
+                        <label for="service-specialty">Chuyên khoa</label>
+                        <select id="service-specialty" class="form-control" name="cboSpecialty">
+                            <c:forEach items="${specialty.viewSpecialtyList()}" var="dto">
+                                <option value="${dto.specialtyId}">${dto.specialtyName}</option>
+                            </c:forEach>                
+                        </select>
+                    </div>
                 </div>
-            </c:if>
 
-            <div class="form-group col-md-4">
-                <label for="service-specialty">Chuyên khoa</label>
-                <select id="service-specialty" class="form-control" name="cboSpecialty">
-                    <c:forEach items="${specialty.viewSpecialtyList()}" var="dto">
-                        <option value="${dto.specialtyId}">${dto.specialtyName}</option>
-                    </c:forEach>                
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="service-content">Nội dụng</label>
+                    <textarea id="service-content" name="txtServiceContent"></textarea>
+                    <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}">
+                        <div class="text-danger">
+                            <small>${requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}</small>
+                        </div>
+                    </c:if>
+                </div>
 
-            <div class="form-group">
-                <label for="service-content">Nội dụng</label>
-                <textarea id="service-content" name="txtServiceContent"></textarea>
-                <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}">
-                    <div class="text-danger">
-                        <small>${requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}</small>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="service-price">Nhập giá tiền</label>
+                        <input type="text" id="service-price" class="form-control" value="" name="txtPrice"/>
+                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.priceFormat}">
+                            <div class="text-danger">
+                                <small>${requestScope.CREATE_SERVICE_ERROR.priceFormat}</small>
+                            </div>
+                        </c:if>
                     </div>
-                </c:if>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label for="service-price">Nhập giá tiền</label>
-                <input type="text" id="service-price" class="form-control" value="" name="txtPrice"/>
-                <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.priceFormat}">
-                    <div class="text-danger">
-                        <small>${requestScope.CREATE_SERVICE_ERROR.priceFormat}</small>
+                    <div class="form-group col-md-6">
+                        <label for="service-salePrice">Nhập giá khuyến mãi</label>
+                        <input type="text" id="service-salePrice" class="form-control" value="" name="txtSalePrice"/>
+                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
+                            <div class="text-danger">
+                                <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
+                            </div>
+                        </c:if>
                     </div>
-                </c:if>
-            </div>
+                </div>
 
-            <div class="form-group col-md-4">
-                <label for="service-salePrice">Nhập giá khuyến mãi</label>
-                <input type="text" id="service-salePrice" class="form-control" value="" name="txtSalePrice"/>
-                <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
-                    <div class="text-danger">
-                        <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
-                    </div>
-                </c:if>
-            </div>
+                <div class="form-group">
+                    <label for="service-image">Ảnh nền</label>
+                    <input type="file" class="form-control" id="service-image" name="fImage">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary col-6 col-md-4" name="btAction" value="CreateService">Tạo mới</button>
+                </div>
+                
+            </form>
+        </div>
 
-            <div class="form-group">
-                <label for="service-image">Ảnh nền</label>
-                <input type="file" class="form-control" id="service-image" name="fImage">
-            </div>
-
-            <button type="submit" class="btn btn-primary" name="btAction" value="CreateService">Tạo mới</button>
-        </form>
-
-        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR}">
-            <script>
-                $(".invalid-feedback").css("display", "block");
-            </script>
-        </c:if>
-
-
-
+        <jsp:include page="footer.jsp"/>
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
