@@ -40,7 +40,11 @@ public class AddNewPatientProfileServlet extends HttpServlet {
         try {
             String name = request.getParameter("txtName");
             String gender = request.getParameter("txtGender");
-            String birthday = request.getParameter("txtBirthday");
+            String txtYear = request.getParameter("txtYear");
+            String txtMonth = request.getParameter("txtMonth");
+            String txtDay = request.getParameter("txtDay");
+
+            String birthday = txtYear + "-" + txtMonth + "-" + txtDay;
 
             boolean valid = true;
             PatientError errorObj = new PatientError();

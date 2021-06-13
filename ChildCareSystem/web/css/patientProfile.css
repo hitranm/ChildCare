@@ -1,59 +1,6 @@
 main {
     margin: 0 auto;
-    padding: 10%;
+    padding: 5px;
     font-family: 'Quattrocento Sans', sans-serif;
 }
-.profile-card, form {
-    margin: 16px 16px;
-    display: inline-block;
-    width: 256px;
-    height: auto;
-    border-radius: 4px;
-    background: #eee;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.profile-card .profile-image {
-    width: 160px;
-    height: 160px;
-    box-sizing: border-box;
-    padding: 4px;
-    position: relative;
-    top: -40px;
-    left: 44px;
-    background: #eee;
-    border-radius: 100%;
-    box-shadow: 0 -2px 6px -3px rgba(0,0,0,0.1);
-    cursor: pointer;
-}
-.profile-card .profile-image-none {
-    color: #8cbab7;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    font-size: 160px;
-    position: relative;
-    top: -40px;
-    left: 44px;
-    background: #eee;
-    border-radius: 100%;
-    box-shadow: 0 -2px 6px -3px rgba(0,0,0,0.1);
-    cursor: pointer;
-}
-.profile-card .profile-name {
-    width: 256px;
-    box-sizing: border-box;
-    padding: 0 16px;
-    text-align: center;
-    color: #2b3f60;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    position: relative;
-    top: -64px;
-}
-.profile-card .profile-description {
-    width: 256px;
-    box-sizing: border-box;
-    padding: 0 24px;
-    color: #748aa4;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    position: relative;
-    top: -72px;
-    margin-bottom: -48px;
-}
+
