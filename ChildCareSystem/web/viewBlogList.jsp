@@ -27,7 +27,7 @@
             href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
             rel="stylesheet"
             />
-        <link rel="stylesheet" href="./css/viewblog.css" />
+        <link rel="stylesheet" href="./css/blog/viewblog.css" />
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -84,7 +84,7 @@
                         </c:if>
 
                     </div>
-                    <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
+<!--                    <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
                         <div class="right-post-section">
                             <h4>Bài viết mới nhất</h4>
                             <div class="right-post-card">
@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div>-->
                     <%--<c:if test="${empty result}">--%>
                     <!--Bạn chưa có bài viết nào!-->
                     <%--</c:if>--%>

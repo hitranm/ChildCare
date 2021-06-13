@@ -69,7 +69,7 @@
                                 <a class="nav-link" href="#">Phản hồi</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav pr-5">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.LOGIN_USER}">
                                     <li class="nav-item dropdown">
