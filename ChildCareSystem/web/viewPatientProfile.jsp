@@ -119,11 +119,7 @@
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
                                     <div class="col-sm-6">
-<<<<<<< Updated upstream
-                                        <input type="text" class="form-control" name="txtName" value="" required>
-=======
                                         <input type="text" class="form-control" name="txtName"  required>
->>>>>>> Stashed changes
                                     </div>
 
                                 </div>
