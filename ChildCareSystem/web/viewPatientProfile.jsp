@@ -118,9 +118,8 @@
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" name="txtName" value="${param.txtName}" required>
+                                        <input type="text" class="form-control" name="txtName" value="" required>
                                     </div>
-
 
                                 </div>
 
@@ -138,12 +137,6 @@
                                                 <input class="form-check-input" type="radio" name="txtGender" id="gridRadios2" value="1">
                                                 <label class="form-check-label" for="gridRadios2">
                                                     Nữ
-                                                </label>
-                                            </div>
-                                            <div class="form-check disabled">
-                                                <input class="form-check-input" type="radio" name="txtGender" id="gridRadios3" value="2" disabled>
-                                                <label class="form-check-label" for="gridRadios3">
-                                                    Third disabled radio
                                                 </label>
                                             </div>
                                         </div>
@@ -212,7 +205,7 @@
                                                             <c:url value="DeletePatientProfileByIDServlet" var="deleteLink">
                                                                 <c:param name="id" value="${dto2.patientID}"/>
                                                             </c:url>
-                                                            <a class="btn btn-secondary" onclick="return confirmation()" href="${deleteLink}" role="button">Xóa hồ sơ</a>
+                                                            <a class="btn btn-danger" onclick="return confirmation()" href="${deleteLink}" role="button">Xóa hồ sơ</a>
                                                         </div>
                                                     </div>
 
