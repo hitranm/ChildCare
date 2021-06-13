@@ -71,18 +71,21 @@ public class AddNewPatientProfileServlet extends HttpServlet {
             if (valid) {
                 if (dao.addPatient(patient)) {
                     url = SUCCESS;
+                    response.sendRedirect(url);
                 } else {
                     request.setAttribute("ERROR", "Insert failed, please go back and try again");
+                    request.getRequestDispatcher(url).forward(request, response);
+
                 }
             } else {
                 url = INVALID;
                 request.setAttribute("INVALID", errorObj);
+                request.getRequestDispatcher(url).forward(request, response);
+
             }
         } catch (ClassNotFoundException | SQLException e) {
             log("ERROR at AddNewPatientServlet: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

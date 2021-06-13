@@ -19,7 +19,7 @@ import web.models.tblPatient.PatientDAO;
  */
 public class DeletePatientProfileByIDServlet extends HttpServlet {
 
-     private static final String SUCCESS = "ViewPatientProfileServlet";
+    private static final String SUCCESS = "ViewPatientProfileServlet";
     private static final String ERROR = "error.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -31,13 +31,16 @@ public class DeletePatientProfileByIDServlet extends HttpServlet {
             PatientDAO dao = new PatientDAO();
             if (dao.delete(id)) {
                 url = SUCCESS;
+                response.sendRedirect(url);
             } else {
                 request.setAttribute("ERROR", "Delete Fail, Cannot find the Patient ID: " + id + ", because it is not existed or has been deleted");
+                request.getRequestDispatcher(url).forward(request, response);
+
             }
         } catch (Exception e) {
             log("ERROR at DeletePatientProfileByIDServlet: " + e.getMessage());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
+
         }
     }
 

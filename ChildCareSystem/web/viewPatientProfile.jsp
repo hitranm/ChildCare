@@ -105,6 +105,7 @@
                 <div class="col-md-12 col-lg-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm Hồ Sơ Bệnh Nhân</a>
+                        <br>
                         <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hồ sơ bệnh nhân</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
                         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
@@ -118,7 +119,11 @@
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
                                     <div class="col-sm-6">
+<<<<<<< Updated upstream
                                         <input type="text" class="form-control" name="txtName" value="" required>
+=======
+                                        <input type="text" class="form-control" name="txtName"  required>
+>>>>>>> Stashed changes
                                     </div>
 
                                 </div>
@@ -177,7 +182,7 @@
                                 <c:if test="${requestScope.listPatients!=null}">
                                     <c:if test="${not empty requestScope.listPatients}" var="testEmpty">
                                         <c:forEach items="${requestScope.listPatients}" var="dto2">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6" style="margin-bottom: 3%">
                                                 <form class="col" action="LoadPatientProfileServlet" method="POST">
                                                     <div class="card">
                                                         <div class="card-body">
