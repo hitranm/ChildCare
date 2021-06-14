@@ -16,30 +16,59 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <style>
+            .wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 4rem 0 6rem 0;
+            }
 
-        <h1>Phiếu đăng ký</h1>
-        <form action="DispatchServlet" method="POST">
-            <div class="form-group">
-                <label for="fullNanme">Họ và tên</label>
-                <input type="text" class="form-control" id="fullName" value="${param.fullName}" placeholder="Họ và tên" name="fullName" required="true">
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
+            .wrapper form {
+                width: 100%;
+            }
+
+            .wrapper h1 {
+                margin-bottom: 20px;
+            }
+        </style>
+
+
+        <div class="wrapper px-5">
+            <h1>Phiếu đăng ký</h1>
+            <form action="DispatchServlet" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fullNanme">Họ và tên</label>
+                        <input type="text" class="form-control" id="fullName" value="${param.fullName}" name="fullName" required="true">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="citizenID">Căn cước công dân</label>
+                        <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" value="${param.citizenID}" required="true">
+                        <small id="citizenIDHelp" class="form-text text-muted">Gồm 12 số</small>
+                    </div>
+                    <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedCitizenId}">
+                        <div class="alert alert-danger" role="alert">
+                            ${requestScope.SIGNUP_ERROR.duplicatedCitizenId}
+                        </div>
+                    </c:if>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="${param.email}" placeholder="Email" required="true">
+                        <input type="email" class="form-control" id="email" name="email" value="${param.email}" required="true">
                     </div>
                     <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedEmail}">
                         <div class="alert alert-danger" role="alert">
                             ${requestScope.SIGNUP_ERROR.duplicatedEmail}
                         </div>
                     </c:if>
-                </div>
 
-                <div class="col">
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="phoneNumber">Số điện thoại</label>
-                        <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" placeholder="Số điện thoại" required="true">
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" required="true">
                     </div>
                     <c:if test="${not empty requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}">
                         <div class="alert alert-danger" role="alert">
@@ -53,59 +82,55 @@
                     </c:if>
                 </div>
 
-            </div>
-            <div class="form-group">
-                <label for="address">Địa chỉ</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" value="${param.address}">
-            </div>
-
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" placeholder="Mật khẩu" required="true">
-                        <small id="passwordHelp" class="form-text text-muted">Mật khẩu phải dài ít nhất 6 kí tự và không có kí tự đặc biệt</small>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" name="address" value="${param.address}">
                     </div>
-                    <c:if test="${not empty requestScope.SIGNUP_ERROR.wrongFormatPassword}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.SIGNUP_ERROR.wrongFormatPassword}
-                        </div>
-                    </c:if>
-                </div>
 
-                <div class="col">
-                    <div class="form-group">
-                        <label for="cpassword">Xác nhận mật khẩu</label>
-                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Mật khẩu" required="true">
+                    <div class="form-group col-md-6">
+                        <label for="birthday">Ngày sinh</label>
+                        <input type="date" class="form-control" name="birthday" value="${param.birthday}" id="birthday">
                     </div>
-                    <c:if test="${not empty requestScope.SIGNUP_ERROR.confirmPasswordNotMatch}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.SIGNUP_ERROR.confirmPasswordNotMatch}
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password" required="true">
+                            <small id="passwordHelp" class="form-text text-muted">Mật khẩu phải dài ít nhất 6 kí tự và không có kí tự đặc biệt</small>
                         </div>
-                    </c:if>
-                </div>
-            </div>
+                        <c:if test="${not empty requestScope.SIGNUP_ERROR.wrongFormatPassword}">
+                            <div class="alert alert-danger" role="alert">
+                                ${requestScope.SIGNUP_ERROR.wrongFormatPassword}
+                            </div>
+                        </c:if>
+                    </div>
 
-            <div class="form-group">
-                <label for="birthday">Ngày sinh</label>
-                <input type="date" class="form-control" name="birthday" value="${param.birthday}" id="birthday">
-            </div>
-
-            <div class="form-group">
-                <label for="citizenID">CCCD</label>
-                <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" placeholder="CCCD" value="${param.citizenID}" required="true">
-                <small id="citizenIDHelp" class="form-text text-muted">Gồm 12 số</small>
-            </div>
-            <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedCitizenId}">
-                <div class="alert alert-danger" role="alert">
-                    ${requestScope.SIGNUP_ERROR.duplicatedCitizenId}
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="cpassword">Xác nhận mật khẩu</label>
+                            <input type="password" class="form-control" id="cpassword" name="cpassword" required="true">
+                        </div>
+                        <c:if test="${not empty requestScope.SIGNUP_ERROR.confirmPasswordNotMatch}">
+                            <div class="alert alert-danger" role="alert">
+                                ${requestScope.SIGNUP_ERROR.confirmPasswordNotMatch}
+                            </div>
+                        </c:if>
+                    </div>
                 </div>
-            </c:if>
-            <input type="hidden" name="roleID" value="1">
-            </div>
-            <button type="submit" class="btn btn-primary" name="btAction" value="Register">Đăng ký</button>
-        </form>
+
+                <input type="hidden" name="roleID" value="1">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary col-md-4" name="btAction" value="Register">Đăng ký</button>
+                </div>
+            </form>
+        </div>
+
         <jsp:include page="footer.jsp"/> 
+
+
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

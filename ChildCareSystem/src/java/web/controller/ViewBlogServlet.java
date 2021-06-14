@@ -59,6 +59,7 @@ public class ViewBlogServlet extends HttpServlet {
             dao.viewBlogList(index);
             List<BlogDTO> result = dao.getBlogList();
             request.setAttribute("BLOG_LIST", result);
+            
         } catch (SQLException ex) {
             log("ViewBlogServlet _ SQL: " + ex.getMessage());
             url = ERROR_PAGE;
