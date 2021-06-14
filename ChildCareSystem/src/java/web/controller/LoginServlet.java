@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 if (identity.getRoleID().equals("2")) {
                     StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);  
+                    session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     url = SUCCESS;
                 }
@@ -76,8 +76,16 @@ public class LoginServlet extends HttpServlet {
                     CustomerDTO dto = customerDAO.queryCustomerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                    session.setAttribute("CUSTOMER_ID", customerDAO.queryCustomerID(email));
                     url = SUCCESS;
                 }
+                if (identity.getRoleID().equals("4")) {
+                    AdminDTO dto = adminDAO.queryAdminByIdentityId(identity.getIdentityID());
+                    session.setAttribute("LOGIN_USER", dto);
+                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                    url = SUCCESS;
+                }
+
             } else {
                 String msg = "Email hoặc mật khẩu không chính xác!";
                 request.setAttribute("Message", msg);

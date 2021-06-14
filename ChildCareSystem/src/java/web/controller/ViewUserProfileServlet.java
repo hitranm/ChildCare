@@ -12,10 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.tblAdmin.AdminDAO;
+import web.models.tblAdmin.AdminDTO;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
+import web.models.tblManager.ManagerDAO;
+import web.models.tblManager.ManagerDTO;
+import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
 import web.viewModels.UserProfile.UserProfileViewModel;
 
 /**
@@ -53,22 +59,42 @@ public class ViewUserProfileServlet extends HttpServlet {
                         CustomerDAO customerDAO = new CustomerDAO();
                         CustomerDTO customerDTO = customerDAO.queryCustomerByIdentityId(currentIdentityID);
                         
-                        UserProfileViewModel userProfileViewModel = new UserProfileViewModel(identityDTO,
+                        UserProfileViewModel userProfileViewModelCus = new UserProfileViewModel(identityDTO,
                                                                                             customerDTO.getFullName(),
-                                                                                            customerDTO.getPhoneNum(),
+                                                                                            customerDTO.getPhoneNumber(),
                                                                                             customerDTO.getAddress(),
                                                                                             customerDTO.getBirthday(),
                                                                                             customerDTO.getCitizenID());
-                        session.setAttribute("USER_PROFILE", userProfileViewModel);
+                        session.setAttribute("USER_PROFILE", userProfileViewModelCus);
                         break;
                     case 2:
-                        //Do something
+                        StaffDAO staffDAO = new StaffDAO();
+                        StaffDTO staffDTO = staffDAO.queryStaffByIdentityId(currentIdentityID);
+                        
+                        UserProfileViewModel userProfileViewModelStaff = new UserProfileViewModel (identityDTO, staffDTO.getFullName(), staffDTO.getPhoneNumber(), staffDTO.getAddress(), staffDTO.getBirthday(), staffDTO.getCitizenID(), staffDTO.getSpecialtyID());
+                        session.setAttribute("USER_PROFILE", userProfileViewModelStaff);
                         break;
                     case 3: 
-                        //Do something
+                        ManagerDAO managerDAO = new ManagerDAO();
+                        ManagerDTO managerDTO = managerDAO.queryManagerByIdentityId(currentIdentityID);
+                        UserProfileViewModel userProfileViewModelManager = new UserProfileViewModel(identityDTO,
+                                                                                            managerDTO.getFullName(),
+                                                                                            managerDTO.getPhoneNumber(),
+                                                                                            managerDTO.getAddress(),
+                                                                                            managerDTO.getBirthday(),
+                                                                                            managerDTO.getCitizenID());
+                        session.setAttribute("USER_PROFILE", userProfileViewModelManager);
                         break;
                     case 4:
-                        //Do something
+                        AdminDAO adminDAO = new AdminDAO();
+                        AdminDTO adminDTO = adminDAO.queryAdminByIdentityId(currentIdentityID);
+                        UserProfileViewModel userProfileViewModelAdmin = new UserProfileViewModel(identityDTO,
+                                                                                            adminDTO.getFullName(),
+                                                                                            adminDTO.getPhoneNumber(),
+                                                                                            adminDTO.getAddress(),
+                                                                                            adminDTO.getBirthday(),
+                                                                                            adminDTO.getCitizenID());
+                        session.setAttribute("USER_PROFILE", userProfileViewModelAdmin);
                         break;
                     
                 }

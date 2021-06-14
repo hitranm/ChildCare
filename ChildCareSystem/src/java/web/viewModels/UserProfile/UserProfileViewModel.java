@@ -5,7 +5,6 @@
  */
 package web.viewModels.UserProfile;
 
-import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDTO;
 
 /**
@@ -15,32 +14,32 @@ import web.models.tblIdentity.IdentityDTO;
 public class UserProfileViewModel {
     private IdentityDTO identityDTO;
     private String fullName;
-    private String phoneNum;
+    private String phoneNumber;
     private String address;
     private String birthday;
-    private String citizenId;
-    private int specialtyId;
+    private String citizenID;
+    private String specialtyID;
 
     public UserProfileViewModel() {
     }
 
-    public UserProfileViewModel(IdentityDTO identityDTO, String fullName, String phoneNum, String address, String birthday, String citizenId) {
+    public UserProfileViewModel(IdentityDTO identityDTO, String fullName, String phoneNumber, String address, String birthday, String citizenID) {
         this.identityDTO = identityDTO;
         this.fullName = fullName;
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.birthday = birthday;
-        this.citizenId = citizenId;
+        this.citizenID = citizenID;
     }
 
-    public UserProfileViewModel(IdentityDTO identityDTO, String fullName, String phoneNum, String address, String birthday, String citizenId, int specialtyId) {
+    public UserProfileViewModel(IdentityDTO identityDTO, String fullName, String phoneNumber, String address, String birthday, String citizenID, String specialtyID) {
         this.identityDTO = identityDTO;
         this.fullName = fullName;
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.birthday = birthday;
-        this.citizenId = citizenId;
-        this.specialtyId = specialtyId;
+        this.citizenID = citizenID;
+        this.specialtyID = specialtyID;
     }
 
     public IdentityDTO getIdentityDTO() {
@@ -59,12 +58,12 @@ public class UserProfileViewModel {
         this.fullName = fullName;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNum;
     }
 
     public String getAddress() {
@@ -83,25 +82,25 @@ public class UserProfileViewModel {
         this.birthday = birthday;
     }
 
-    public String getCitizenId() {
-        return citizenId;
+    public String getCitizenID() {
+        return citizenID;
     }
 
-    public void setCitizenId(String citizenId) {
-        this.citizenId = citizenId;
+    public void setCitizenID(String citizenID) {
+        this.citizenID = citizenID;
     }
 
-    public int getSpecialtyId() {
-        return specialtyId;
+    public String getSpecialtyID() {
+        return specialtyID;
     }
 
-    public void setSpecialtyId(int specialtyId) {
-        this.specialtyId = specialtyId;
+    public void setSpecialtyID(String specialtyID) {
+        this.specialtyID = specialtyID;
     }
 
     @Override
     public String toString() {
-        return "UserProfileViewModel{" + "identityDTO=" + identityDTO + ", fullName=" + fullName + ", phoneNum=" + phoneNum + ", address=" + address + ", birthday=" + birthday + ", citizenId=" + citizenId + ", specialtyId=" + specialtyId + '}';
+        return "UserProfileViewModel{" + "identityDTO=" + identityDTO + ", fullName=" + fullName + ", phoneNum=" + phoneNumber + ", address=" + address + ", birthday=" + birthday + ", citizenId=" + citizenID + ", specialtyId=" + specialtyID + '}';
     }
     
 }

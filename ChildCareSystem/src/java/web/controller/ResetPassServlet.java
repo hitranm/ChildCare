@@ -36,12 +36,12 @@ private static final String SUCCESS="newpassword.jsp";
         String url=ERROR;
         try{
             HttpSession session = request.getSession();
-            CustomerDTO cus = (CustomerDTO) session.getAttribute("authcode");
+            String verifyCode = (String) session.getAttribute("authcode");
             String code = request.getParameter("authcode");
-            if (code.equals(cus.getCode())) {
+            if (code.equals(verifyCode)) {
                 url=SUCCESS;
             } else{
-                 String msg="Mã số xác thực không đúng vui lòng kiểm tra lại";
+                 String msg= "Mã số xác thực không đúng vui lòng kiểm tra lại";
                 request.setAttribute("WRONG_CODE", msg);
             }
         }catch(Exception e){

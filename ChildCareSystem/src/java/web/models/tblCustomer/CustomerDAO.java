@@ -36,7 +36,7 @@ public class CustomerDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, cus.getIdentityID());
                 stm.setString(2, cus.getFullName());
-                stm.setString(3, cus.getPhoneNum());
+                stm.setString(3, cus.getPhoneNumber());
                 stm.setString(4, cus.getAddress());
                 stm.setString(5, cus.getBirthday());
                 stm.setString(6, cus.getCitizenID());
@@ -122,7 +122,7 @@ public class CustomerDAO {
 
 //    public boolean checkEmail(String email) throws SQLException, NamingException {
 //        boolean check = false;
-//        Connection conn = null;
+//       Connection conn = null;
 //        PreparedStatement stm = null;
 //        ResultSet rs = null;
 //        try {
@@ -240,7 +240,7 @@ public class CustomerDAO {
         return null;
     }
 
-    public String queryCustomerID(String phoneNum) throws SQLException, NamingException {
+    public String queryCustomerID(String email) throws SQLException, NamingException {
         String CustomerID = "";
         Connection conn = null;
         PreparedStatement stm = null;
@@ -250,9 +250,9 @@ public class CustomerDAO {
             if (conn != null) {
                 String sql = "SELECT CustomerID "
                         + " FROM tblCustomer C, tblIdentity I "
-                        + " WHERE C.IdentityID = I.IdentityID AND PhoneNumber=?";
+                        + " WHERE C.IdentityID = I.IdentityID AND Email=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, phoneNum);
+                stm.setString(1, email);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     CustomerID = rs.getString("CustomerID");

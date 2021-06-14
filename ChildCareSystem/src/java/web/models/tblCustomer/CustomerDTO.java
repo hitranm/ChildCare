@@ -18,7 +18,7 @@ public class CustomerDTO implements Serializable{
     private String Birthday;
     private String CitizenID;
     private String code;
-    private String PhoneNum;
+    private String phoneNumber;
     
     public CustomerDTO() {
     }
@@ -28,10 +28,10 @@ public class CustomerDTO implements Serializable{
 //        this.code = code;
 //    }
 //    
-    public CustomerDTO(String identityID ,String fullName, String phoneNum, String address, String birthday, String citizenID) {
+    public CustomerDTO(String identityID ,String fullName, String phoneNumber, String address, String birthday, String citizenID) {
         this.IdentityID= identityID;
         this.FullName = fullName;
-        this.PhoneNum = phoneNum;
+        this.phoneNumber = phoneNumber;
         this.Address = address;
         this.Birthday = birthday;
         this.CitizenID = citizenID;
@@ -44,9 +44,9 @@ public class CustomerDTO implements Serializable{
         this.Birthday = Birthday;
     }
 
-    public CustomerDTO(String code, String PhoneNum) {
+    public CustomerDTO(String code, String phoneNumber) {
         this.code = code;
-        this.PhoneNum = PhoneNum;
+        this.phoneNumber = phoneNumber;
     }
     
     public String getIdentityID() {
@@ -89,12 +89,12 @@ public class CustomerDTO implements Serializable{
         this.CitizenID = CitizenID;
     }
 
-    public String getPhoneNum() {
-        return PhoneNum;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNum(String PhoneNum) {
-        this.PhoneNum = PhoneNum;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
     public String getCode() {
@@ -107,7 +107,7 @@ public class CustomerDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "CustomerDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNum=" + PhoneNum + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", code=" + code + '}';
+        return "CustomerDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNum=" + phoneNumber + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", code=" + code + '}';
     }
     
     

@@ -7,6 +7,9 @@ package web.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +33,18 @@ public class AddNewPatientProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        String checkDate = dateFormat.format(date);
         try {
             String name = request.getParameter("txtName");
             String gender = request.getParameter("txtGender");
-            String birthday = request.getParameter("txtBirthday");
+            String txtYear = request.getParameter("txtYear");
+            String txtMonth = request.getParameter("txtMonth");
+            String txtDay = request.getParameter("txtDay");
+
+            String birthday = txtYear + "-" + txtMonth + "-" + txtDay;
 
             boolean valid = true;
             PatientError errorObj = new PatientError();
@@ -41,7 +52,7 @@ public class AddNewPatientProfileServlet extends HttpServlet {
                 errorObj.setPatientNameError("Patient Name is not supposed to be empty");
                 valid = false;
             }
-            if (gender.trim().isEmpty()) {
+            if (gender == null) {
                 errorObj.setGenderError("Patient Gender is not supposed to be empty");
                 valid = false;
             }
@@ -55,23 +66,26 @@ public class AddNewPatientProfileServlet extends HttpServlet {
 //                valid = false;
 //            }
             HttpSession session = request.getSession();
-            String customerID = (String) session.getAttribute("USER_ID");
+            String customerID = (String) session.getAttribute("CUSTOMER_ID");
             PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
             if (valid) {
                 if (dao.addPatient(patient)) {
                     url = SUCCESS;
+                    response.sendRedirect(url);
                 } else {
                     request.setAttribute("ERROR", "Insert failed, please go back and try again");
+                    request.getRequestDispatcher(url).forward(request, response);
+
                 }
             } else {
                 url = INVALID;
                 request.setAttribute("INVALID", errorObj);
+                request.getRequestDispatcher(url).forward(request, response);
+
             }
         } catch (ClassNotFoundException | SQLException e) {
             log("ERROR at AddNewPatientServlet: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

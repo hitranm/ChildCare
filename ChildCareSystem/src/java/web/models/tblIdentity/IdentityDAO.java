@@ -207,16 +207,16 @@ public class IdentityDAO {
     }
     
 
-    public boolean updatePass(String pass, String phoneNum) throws SQLException, NamingException {
+    public boolean updatePass(String pass, String email) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "UPDATE tblIdentity SET Password=? WHERE PhoneNumber=?";
+                String sql = "UPDATE tblIdentity SET Password=? WHERE Email=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, pass);
-                stm.setString(2, phoneNum);
+                stm.setString(2, email);
 
                 int row = stm.executeUpdate();
                 if (row > 0) {

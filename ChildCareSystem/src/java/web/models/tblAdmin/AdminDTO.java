@@ -14,11 +14,10 @@ import java.util.logging.Logger;
 public class AdminDTO {
     private String IdentityID;
     private String FullName;
-    private String Email;
     private String Address;
     private String Birthday;
     private String CitizenID;
-    private String RoleID;
+    private String phoneNumber;
 
     public String getIdentityID() {
         return IdentityID;
@@ -28,9 +27,7 @@ public class AdminDTO {
         return FullName;
     }
 
-    public String getEmail() {
-        return Email;
-    }
+
 
     public String getAddress() {
         return Address;
@@ -52,9 +49,6 @@ public class AdminDTO {
         this.FullName = FullName;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
 
     public void setAddress(String Address) {
         this.Address = Address;
@@ -68,35 +62,23 @@ public class AdminDTO {
         this.CitizenID = CitizenID;
     }
 
-    public AdminDTO(String FullName, String Email, String Address, String Birthday, String CitizenID, String RoleID) {
-        this.FullName = FullName;
-        this.Email = Email;
-        this.Address = Address;
-        this.Birthday = Birthday;
-        this.CitizenID = CitizenID;
-        this.RoleID= RoleID;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public AdminDTO() {
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public AdminDTO(String IdentityID, String FullName, String Email, String Address, String Birthday, String CitizenID, String RoleID) {
+    public AdminDTO(String IdentityID, String FullName, String Address, String Birthday, String CitizenID, String phoneNumber) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
-        this.Email = Email;
         this.Address = Address;
         this.Birthday = Birthday;
         this.CitizenID = CitizenID;
-        this.RoleID = RoleID;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getRoleID() {
-        return RoleID;
-    }
-
-    public void setRoleID(String RoleID) {
-        this.RoleID = RoleID;
-    }
 
     
     

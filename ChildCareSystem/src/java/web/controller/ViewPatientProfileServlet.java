@@ -36,7 +36,7 @@ public class ViewPatientProfileServlet extends HttpServlet {
         try {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession session = req.getSession();
-            String customerID = (String) session.getAttribute("USER_ID");
+            String customerID = (String) session.getAttribute("CUSTOMER_ID");
             PatientDAO dao1 = new PatientDAO();
             List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
             request.setAttribute("listPatients", listPatients);

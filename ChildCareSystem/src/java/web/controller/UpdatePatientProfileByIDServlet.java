@@ -44,7 +44,7 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
                 errorObj.setPatientNameError("Patient Name is not supposed to be empty");
                 valid = false;
             }
-            if (gender.trim().isEmpty()) {
+            if (gender == null) {
                 errorObj.setGenderError("Patient Gender is not supposed to be empty");
                 valid = false;
             }
@@ -59,7 +59,7 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
 //            }
             HttpSession session = request.getSession();
             String customerID = (String) session.getAttribute("USER_ID");
-            PatientDTO patient = new PatientDTO(id,name, gender, birthday, customerID);
+            PatientDTO patient = new PatientDTO(id, name, gender, birthday, customerID);
             if (valid) {
                 if (dao.update(patient)) {
                     url = SUCCESS;

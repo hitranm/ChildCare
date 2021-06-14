@@ -36,12 +36,12 @@ private static final String SUCCESS="login.jsp";
         try{
             String password= request.getParameter("password");
             String cpassword= request.getParameter("cpassword");
-            String phoneNum= request.getParameter("phoneNum");
+            String email= request.getParameter("email");
             if(password.equals(cpassword)){
                 
             IdentityDAO dao= new IdentityDAO();
              String epass = dao.sha256(password);
-             boolean check = dao.updatePass(epass, phoneNum);
+             boolean check = dao.updatePass(epass, email);
              if(check){
                  url=SUCCESS;
              }
