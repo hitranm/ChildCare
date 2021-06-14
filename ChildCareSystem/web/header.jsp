@@ -70,7 +70,7 @@
                             <c:choose>
                                 <c:when test="${not empty sessionScope.LOGIN_USER}">
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -96,5 +96,8 @@
                 </nav>
             </div>
         </header>
+        
+        
+        
     </body>
 </html>
