@@ -29,6 +29,7 @@
             rel="stylesheet"
             />
         <link rel="stylesheet" href="./css/homepage.css" />
+        <link rel="stylesheet" href="css/footer.css"/>
 
     </head>
     <body>

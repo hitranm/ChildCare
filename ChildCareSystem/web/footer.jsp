@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="css/footer.css">
     </head>
     <body>
         <footer id="footer">
@@ -59,13 +60,6 @@
                                 <li>
                                     <i class="bx bx-chevron-right"></i>
                                     <a href="#">Product Management</a>
-                                </li>
-                                <li>
-                                    <i class="bx bx-chevron-right"></i> <a href="#">Marketing</a>
-                                </li>
-                                <li>
-                                    <i class="bx bx-chevron-right"></i>
-                                    <a href="#">Graphic Design</a>
                                 </li>
                             </ul>
                         </div>
