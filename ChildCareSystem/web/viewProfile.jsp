@@ -31,12 +31,13 @@
             <div> Birthday: <input type="text" name="birthday" value="${userProfileDTO.birthday}" required="true"></div>
             <div> CitizenID: <input type="text" name="citizenID" value="${userProfileDTO.citizenID}" readonly></div>
             <div> Phone Number: <input type="text" name="phoneNum" value="${userProfileDTO.phoneNumber}" readonly></div>
+            <div> Email: <input type="text" name="email" value="${userProfileDTO.identityDTO.email}" readonly></div>
                 <c:if test="${userProfileDTO.specialtyID != null}">
                 <div> SpecialtyID: <input type="text" name="specialtyID" value="${userProfileDTO.specialtyID}" readonly></div>
                 </c:if>
             <button type="submit" name="btAction" value="UpdateProfile">Cập nhật</button>
         </form>
-        <a href="home.jsp">Back to Homepage</a>
+        
 
 
         <jsp:include page="footer.jsp"/> 

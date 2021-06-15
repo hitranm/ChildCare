@@ -48,6 +48,13 @@ public class CustomerDTO implements Serializable{
         this.code = code;
         this.phoneNumber = phoneNumber;
     }
+
+    public CustomerDTO(String IdentityID, String FullName, String phoneNumber) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.phoneNumber = phoneNumber;
+    }
+    
     
     public String getIdentityID() {
         return IdentityID;

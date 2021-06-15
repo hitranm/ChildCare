@@ -10,8 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import web.models.tblBlog.BlogDAO;
+
 
 import web.utils.DBHelpers;
 
@@ -320,5 +323,41 @@ public class StaffDAO implements Serializable {
         }
 
         return check;
+    }
+    public List<StaffDTO> getAllStaffProfile() throws SQLException {
+        List<StaffDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * "
+                        + " FROM tblStaff" ;
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String identityID = rs.getString("IdentityID");
+                    String fullName = rs.getString("FullName");
+                    String phoneNumber = rs.getString("PhoneNumber");
+                    StaffDTO staff = new StaffDTO(identityID, fullName, phoneNumber);
+                    result.add(staff);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 }

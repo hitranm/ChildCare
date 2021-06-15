@@ -40,6 +40,12 @@ public class StaffDTO {
         this.Birthday = Birthday;
     }
 
+    public StaffDTO(String IdentityID, String FullName, String phoneNumber) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.phoneNumber = phoneNumber;
+    }
+
     /**
      * @return the IdentityID
      */

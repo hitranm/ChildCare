@@ -63,6 +63,9 @@
                                 <a class="nav-link" href="createStaff.jsp">Tạo staff account</a>
                             </li>
                             <li class="nav-item px-3">
+                                <a class="nav-link" href="viewAllAccounts.jsp">Xem all accounts</a>
+                            </li>
+                            <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Phản hồi</a>
                             </li>
                         </ul>
@@ -77,6 +80,8 @@
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>

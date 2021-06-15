@@ -11,16 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import web.models.tblIdentity.IdentityDAO;
 
 /**
  *
  * @author Admin
  */
-public class SetNewPassServlet extends HttpServlet {
-private static final String ERROR="newpassword.jsp";
-private static final String SUCCESS="login.jsp";
+public class ViewAccountsServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,44 +30,20 @@ private static final String SUCCESS="login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try{
-            String password= request.getParameter("password");
-            String cpassword= request.getParameter("cpassword");
-            String email= request.getParameter("email");
-           HttpSession session = request.getSession();
-           IdentityDAO dao= new IdentityDAO();
-           String identityID_changePassword =(String) session.getAttribute("IDENTITY_ID");
-            if(password.equals(cpassword)){
-              if(!email.isEmpty()){
-            
-            String identityID = dao.queryIDByEmail(email);
-             String epass = dao.sha256(password);
-             boolean check = dao.updatePass(epass, identityID);
-             if(check){
-                 url=SUCCESS;
-             }
-            }
-            
-              else {
-                String epass= dao.sha256(password);
-                boolean check = dao.updatePass(epass, identityID_changePassword);
-             if(check){
-                 url=SUCCESS;
-             }
-            }
-            }
-             else{
-                 String msg="Mật khẩu và mật khẩu xác nhận không trùng khớp!";
-                request.setAttribute("ERROR_PASS", msg);
-             }
-        }catch(Exception e){
-            log("Error at SetNewPassServlet: "+e.toString());
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewAccountsServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewAccountsServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        finally{
-            request.getRequestDispatcher(url).forward(request, response);
     }
-    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
