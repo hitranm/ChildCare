@@ -62,7 +62,7 @@
                     </div>
         
                         <div class="blog-thumb">
-                            <img src="${blog.thumbnail}"/>
+                            <img src="./images/blog/${blog.thumbnail}"/>
                         </div>
                         <div class="blog-body">
                             ${blog.description}
