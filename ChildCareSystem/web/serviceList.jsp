@@ -55,7 +55,7 @@
                                     <div class="style">
                                         <div class="service-thumbnail">
                                             <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
-                                                <img src="${dto.thumbnail}" />
+                                                <img src="./images/service/${dto.thumbnail}"/>
                                             </a>
                                         </div>
                                         <div class="service-name">
