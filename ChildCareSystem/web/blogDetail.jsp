@@ -28,7 +28,7 @@
             href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
             rel="stylesheet"
             />
-        <link rel="stylesheet" href="./css/blogdetail.css" />
+        <link rel="stylesheet" href="./css/blog/blogdetail.css" />
         <title>Blog | ${blog.title}</title>
     </head>
     <body>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
+<!--                <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
                     <div class="right-post-section">
                         <h4>Bài viết mới nhất</h4>
                         <div class="right-post-card">
@@ -96,10 +96,21 @@
                         </div>
                     </div>
 
-                </div>
+                </div>-->
             </div>
         </div>
         <jsp:include page="footer.jsp"/>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            $("#navbarDropdown").click(function () {
+                $('.dropdown-toggle').dropdown();
+            })
+        </script>
         <script src="./js/main.js"></script>
     </body>
 </html>
