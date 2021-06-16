@@ -32,7 +32,7 @@ public class AddStaffServlet extends HttpServlet {
 
     private static final String ERROR = "createStaff.jsp";
     private static final String SUCCESS = "home.jsp";
-    private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -104,7 +104,7 @@ public class AddStaffServlet extends HttpServlet {
             if (foundError) {
                 request.setAttribute("SIGNUP_ERROR", registerValidation);
                 request.setAttribute("FOUND_ERROR", true);
-                url = LOAD_SPECIALTY;
+                url = ERROR;
                 
             } else {
                 String hashedPassword = identityDAO.sha256(password);
@@ -115,7 +115,6 @@ public class AddStaffServlet extends HttpServlet {
                     staffDAO.addStaff(identityId, fullName, phoneNum, address, birthday, citizenID, specialtyID);
                     url = SUCCESS;
                 }
-
             }
 
         } catch (Exception e) {
