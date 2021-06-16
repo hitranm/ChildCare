@@ -39,6 +39,9 @@ public class ViewPatientProfileServlet extends HttpServlet {
             String customerID = (String) session.getAttribute("CUSTOMER_ID");
             PatientDAO dao1 = new PatientDAO();
             List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
+            if (listPatients.size() == 6) {
+                request.setAttribute("reachMaxPatient", "Số hồ số bệnh nhân đã đạt tối đa mà hệ thống cho phép.");
+            }
             request.setAttribute("listPatients", listPatients);
         } catch (Exception e) {
             log("ERROR at ViewPatientProfileServlet: " + e.getMessage());

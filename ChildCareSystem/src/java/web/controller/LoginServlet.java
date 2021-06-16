@@ -6,6 +6,7 @@
 package web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblAdmin.AdminDAO;
 import web.models.tblAdmin.AdminDTO;
+import web.models.tblBlog.BlogDAO;
+import web.models.tblBlog.BlogDTO;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblManager.ManagerDAO;
 import web.models.tblManager.ManagerDTO;
+import web.models.tblService.ServiceDAO;
+import web.models.tblService.ServiceDTO;
+
 import web.models.tblStaff.StaffDAO;
 import web.models.tblStaff.StaffDTO;
 
@@ -56,7 +62,16 @@ public class LoginServlet extends HttpServlet {
             AdminDAO adminDAO = new AdminDAO();
             IdentityDTO identity = dao.checkLogin(email, epassword);
 
+            BlogDAO blogDAO = new BlogDAO();
+            List<BlogDTO> listBlog = blogDAO.getTop6BlogList();
+
+            ServiceDAO serviceDAO = new ServiceDAO();
+            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
+            
             HttpSession session = request.getSession();
+
+            session.setAttribute("BLOG_LIST_TOP6", listBlog);
+            session.setAttribute("SERVICE_LIST_TOP3", listService);
 
             if (identity != null) {
                 if (identity.getRoleID().equals("3")) {

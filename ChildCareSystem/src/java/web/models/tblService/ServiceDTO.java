@@ -26,6 +26,13 @@ public class ServiceDTO implements Serializable{
     public ServiceDTO() {
     }
 
+    public ServiceDTO(String serviceName, String thumbnail, String createdDate) {
+        this.serviceName = serviceName;
+        this.thumbnail = thumbnail;
+        this.createdDate = createdDate;
+    }
+    
+    
     public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate, String updatedDate) {
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;

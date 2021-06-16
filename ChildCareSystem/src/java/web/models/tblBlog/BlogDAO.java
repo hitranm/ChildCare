@@ -404,4 +404,44 @@ public class BlogDAO implements Serializable {
             }
         }
     }
+
+    public List<BlogDTO> getTop6BlogList() throws SQLException {
+        List<BlogDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT TOP(6)* FROM tblBlog ORDER BY CreatedDate DESC ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String blogID = rs.getString("BlogID");
+                    String thumbnail = rs.getString("Thumbnail");
+                    String title = rs.getString("Title");
+                    String authorID = rs.getString("AuthorID");
+                    String description = rs.getString("Description");
+                    String categoryID = rs.getString("CategoryID");
+                    String statusID = rs.getString("StatusID");
+                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
+                    result.add(dto);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
 }

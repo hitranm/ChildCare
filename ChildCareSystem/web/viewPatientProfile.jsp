@@ -40,7 +40,7 @@
                 var cur = date.getFullYear();
 
                 seYear.append('<option value="">-- Năm --</option>');
-                for (i = cur; i >= 1900; i--) {
+                for (i = cur; i >= cur - 18; i--) {
                     seYear.append('<option value="' + i + '">' + i + '</option>');
                 }
                 ;
@@ -104,75 +104,104 @@
             <div class="row">
                 <div class="col-md-12 col-lg-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm Hồ Sơ Bệnh Nhân</a>
+                        <c:if test="${not empty requestScope.reachMaxPatient}">
+                            <button type="button" class="nav-link btn-outline-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;text-align: left;cursor:pointer">
+                                Thêm hồ sơ bệnh nhân
+                            </button>
+                        </c:if>
+                        <c:if test="${empty requestScope.reachMaxPatient}">
+                            <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm Hồ Sơ Bệnh Nhân</a>
+
+                        </c:if>
                         <br>
                         <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hồ sơ bệnh nhân</a>
-                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-9">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade" id="v-pills-addPatient" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <h2>Thông tin hồ sơ bệnh nhân</h2>
-                            <form action="DispatchServlet" method="POST" name="f1">
-                                <div class="form-group row">
-                                    <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" name="txtName"  required>
+                        <c:if test="${not empty requestScope.reachMaxPatient}">
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Thông báo của hệ thống</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h2>${requestScope.reachMaxPatient}</h2>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        </div>
                                     </div>
-
                                 </div>
-
-                                <fieldset class="form-group">
-                                    <div class="row">
-                                        <legend class="col-form-label col-sm-2 pt-0">Giới tính:</legend>
+                            </div>
+                        </c:if>
+                        <c:if test="${empty requestScope.reachMaxPatient}">
+                            <div class="tab-pane fade" id="v-pills-addPatient" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                <h2>Thông tin đăng ký hồ sơ bệnh nhân</h2>
+                                <form action="DispatchServlet" method="POST" name="f1">
+                                    <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
                                         <div class="col-sm-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="txtGender" id="gridRadios1" value="0" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    Nam
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="txtGender" id="gridRadios2" value="1">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Nữ
-                                                </label>
-                                            </div>
+                                            <input type="text" class="form-control" name="txtName"  required>
                                         </div>
+
                                     </div>
-                                </fieldset>
-                                <div class="form-group row">
-                                    <label for="inputBirthday" class="col-sm-2 col-form-label">Ngày sinh: </label>
-                                    <div class="col-sm-6">
-                                        <!--<input type="date" class="form-control" name="txtBirthday" id="txtBirthday" value="${param.txtBirthday}" max="2022-01-01" required>-->
+                                    <fieldset class="form-group">
                                         <div class="row">
-                                            <div class="col">
-                                                <select name="txtYear" id="year" class="form-control" size="1" required></select>
-                                            </div>
-                                            <div class="col">
-                                                <select name="txtMonth" id="month" class="form-control" size="1" required></select>
-                                            </div>
-                                            <div class="col">
-                                                <select name="txtDay" id="day" class="form-control" size="1" required>
-                                                    <option value=" " selected="selected">-- Ngày --</option>
-                                                </select>
+                                            <legend class="col-form-label col-sm-2 pt-0">Giới tính:</legend>
+                                            <div class="col-sm-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="txtGender" id="gridRadios1" value="0" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        Nam
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="txtGender" id="gridRadios2" value="1">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        Nữ
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
+                                    </fieldset>
+                                    <div class="form-group row">
+                                        <label for="inputBirthday" class="col-sm-2 col-form-label">Ngày sinh: </label>
+                                        <div class="col-sm-6">
+                                            <!--<input type="date" class="form-control" name="txtBirthday" id="txtBirthday" value="${param.txtBirthday}" max="2022-01-01" required>-->
+                                            <div class="row">
+                                                <div class="col">
+                                                    <select name="txtYear" id="year" class="form-control" size="1" required></select>
+                                                </div>
+                                                <div class="col">
+                                                    <select name="txtMonth" id="month" class="form-control" size="1" required></select>
+                                                </div>
+                                                <div class="col">
+                                                    <select name="txtDay" id="day" class="form-control" size="1" required>
+                                                        <option value=" " selected="selected">-- Ngày --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10 offset-md-2">
+                                            <button type="submit" class="btn btn-primary" name="btAction" value="AddNewPatientProfile">Đăng ký</button>
+                                            <button type="reset" class="btn btn-secondary" >Đặt lại</button>
 
-
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10 offset-md-2">
-                                        <button type="submit" class="btn btn-primary" name="btAction" value="AddNewPatientProfile">Đăng ký</button>
-                                        <button type="reset" class="btn btn-secondary" >Đặt lại</button>
-
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>                            
+
+                        </c:if>
                         <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <div class="row">
                                 <c:if test="${requestScope.listPatients!=null}">
@@ -209,10 +238,9 @@
                                                             <a class="btn btn-danger" onclick="return confirmation()" href="${deleteLink}" role="button">Xóa hồ sơ</a>
                                                         </div>
                                                     </div>
-
-
                                                 </form>
                                             </div>
+
                                         </c:forEach>
 
                                     </c:if>
@@ -222,8 +250,6 @@
                                 </c:if>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
 
                     </div>
                 </div>

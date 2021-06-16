@@ -152,95 +152,29 @@
                             <h2>Bài viết nổi bật</h2>
                         </div>
                         <div class="blog_wrapper">
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/blog1.jpg" />
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>
-                                            Kỷ niệm Ngày Quốc tế Điều dưỡng tại Bệnh viện Nhi Đồng
-                                            Thành Phố
-                                        </h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
+                            <c:if test="${sessionScope.BLOG_LIST_TOP6!=null}">
+                                <c:if test="${not empty sessionScope.BLOG_LIST_TOP6}" var="testEmpty">
+                                    <c:forEach items="${sessionScope.BLOG_LIST_TOP6}" var="dto">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
+                                            <article>
+                                                <div class="blog_thumbnail">
+                                                    <img src="./images/blog/${dto.thumbnail}" />
+                                                </div>
+                                                <div class="blog_content px-2">
+                                                    <h2>
+                                                        ${dto.title}
+                                                    </h2>
+                                                    <div class="blog_date">24 Tháng Năm, 2021</div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${!testEmpty}">
+                                    <h2>Hiện chưa có bài viết nào.</h2>
+                                </c:if>
+                            </c:if>
 
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/blog2.png"/>
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>
-                                            Kỷ niệm Ngày Quốc tế Điều dưỡng tại Bệnh viện Nhi Đồng
-                                            Thành Phố
-                                        </h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/blog1.jpg"/>
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>
-                                            Kỷ niệm Ngày Quốc tế Điều dưỡng tại Bệnh viện Nhi Đồng
-                                            Thành Phố
-                                        </h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/blog4.png"/>
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>
-                                            Kỷ niệm Ngày Quốc tế Điều dưỡng tại Bệnh viện Nhi Đồng
-                                            Thành Phố
-                                        </h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/blog3.jpg" />
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>
-                                            Kỷ niệm Ngày Quốc tế Điều dưỡng tại Bệnh viện Nhi Đồng
-                                            Thành Phố
-                                        </h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/blog3.jpg" />
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>
-                                            Kỷ niệm Ngày Quốc tế Điều dưỡng tại Bệnh viện Nhi Đồng
-                                            Thành Phố
-                                        </h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
                         </div>
                         <a href="#" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
@@ -271,41 +205,30 @@
                             <h2>Dịch vụ</h2>
                         </div>
                         <div class="blog_wrapper">
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/service1.jpg" />
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>Tiêm chủng</h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
+                            <c:if test="${sessionScope.SERVICE_LIST_TOP3!=null}">
+                                <c:if test="${not empty sessionScope.SERVICE_LIST_TOP3}" var="testEmpty">
+                                    <c:forEach items="${sessionScope.SERVICE_LIST_TOP3}" var="dto">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
+                                            <article>
+                                                <div class="blog_thumbnail">
+                                                    <img src="./images/blog/${dto.thumbnail}" />
+                                                </div>
+                                                <div class="blog_content px-2">
+                                                    <h2>
+                                                        ${dto.serviceName}
+                                                    </h2>
+                                                    <div class="blog_date">${dto.createdDate}</div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${!testEmpty}">
+                                    <h2>Hiện chưa có bài viết nào.</h2>
+                                </c:if>
+                            </c:if>
 
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/service2.jpg" />
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>Khám mắt</h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
-                                <article>
-                                    <div class="blog_thumbnail">
-                                        <img src="./images/service3.jpg" />
-                                    </div>
-                                    <div class="blog_content px-2">
-                                        <h2>Hô hấp</h2>
-                                        <div class="blog_date">24 Tháng Năm, 2021</div>
-                                    </div>
-                                </article>
-                            </div>
+                           
                         </div>
                         <a href="#" class="section_moredetail pr-4">Xem thêm</a>
                     </div>

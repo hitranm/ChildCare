@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import web.models.tblPatient.PatientDAO;
 import web.models.tblPatient.PatientDTO;
 import web.models.tblPatient.PatientError;
+import web.utils.DateValidator;
+import web.utils.DateValidatorUsingDateFormat;
 
 /**
  *
@@ -36,20 +38,17 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
             String id = request.getParameter("txtID");
             String name = request.getParameter("txtName");
             String gender = request.getParameter("txtGender");
-            String birthday = request.getParameter("txtBirthday");
+            String txtYear = request.getParameter("txtYear");
+            String txtMonth = request.getParameter("txtMonth");
+            String txtDay = request.getParameter("txtDay");
 
+            String birthday = txtYear + "-" + txtMonth + "-" + txtDay;
             boolean valid = true;
             PatientError errorObj = new PatientError();
-            if (name.trim().isEmpty()) {
-                errorObj.setPatientNameError("Patient Name is not supposed to be empty");
-                valid = false;
-            }
-            if (gender == null) {
-                errorObj.setGenderError("Patient Gender is not supposed to be empty");
-                valid = false;
-            }
-            if (birthday.trim().isEmpty()) {
-                errorObj.setBirthdayError("Patient Birthday is not supposed to be empty");
+            DateValidator validator = new DateValidatorUsingDateFormat("dd/MM/yyyy");
+
+            if (!validator.isValid(birthday)) {
+                errorObj.setBirthdayError("Sai thông tin về ngày tháng năm sinh. Vui lòng kiểm tra lại");
                 valid = false;
             }
             PatientDAO dao = new PatientDAO();
@@ -58,15 +57,18 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
 //                valid = false;
 //            }
             HttpSession session = request.getSession();
-            String customerID = (String) session.getAttribute("USER_ID");
+            String customerID = (String) session.getAttribute("CUSTOMER_ID");
             PatientDTO patient = new PatientDTO(id, name, gender, birthday, customerID);
             if (valid) {
                 if (dao.update(patient)) {
                     url = SUCCESS;
                     idURL = "";
+                    response.sendRedirect(url);
 
                 } else {
                     request.setAttribute("ERROR", "Update failed, cannot find the User ID: " + id + ", please go back and try again");
+                    request.getRequestDispatcher(url).forward(request, response);
+
                 }
             } else {
                 url = INVALID + "?id=" + id;
@@ -76,8 +78,6 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
         } catch (Exception e) {
             log("ERROR at UpdateUserController: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url + idURL).forward(request, response);
         }
     }
 

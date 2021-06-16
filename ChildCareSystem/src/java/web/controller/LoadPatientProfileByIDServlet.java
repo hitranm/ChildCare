@@ -42,12 +42,14 @@ public class LoadPatientProfileByIDServlet extends HttpServlet {
             String id = request.getParameter("id");
             PatientDAO dao1 = new PatientDAO();
             PatientDTO patient = dao1.getPatientByID(id);
-//            String birthday = patient.getBirthday();
-//            System.out.println(patient.getBirthday());
-//            Date date1 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
-//            System.out.println(date1);
-
             request.setAttribute("patient", patient);
+            String[] slits = patient.getBirthday().split("-");
+            String year=slits[0];
+            String month=slits[1];
+            String day=slits[2];
+            request.setAttribute("patientDay", day);
+            request.setAttribute("patientMonth", month);
+            request.setAttribute("patientYear", year);
 
         } catch (SQLException e) {
             log("ERROR at LoadPatientProfileByIDServlet: " + e.getMessage());
