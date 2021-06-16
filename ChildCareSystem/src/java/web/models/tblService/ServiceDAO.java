@@ -8,7 +8,10 @@ package web.models.tblService;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import web.utils.DBHelpers;
 
@@ -56,5 +59,41 @@ public class ServiceDAO implements Serializable {
             }
         }
         return false;     
+    }
+    public List<ServiceDTO> getTop3ServiceList() throws SQLException {
+        List<ServiceDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT TOP(3) ServiceName,Thumbnail,CreatedDate"
+                        + " FROM tblService ORDER BY CreatedDate DESC ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String serviceName = rs.getString("ServiceName");
+                    String thumbnail = rs.getString("Thumbnail");
+                    String createdDate = rs.getString("CreatedDate");
+                    ServiceDTO dto = new ServiceDTO(serviceName, thumbnail, createdDate);
+                    result.add(dto);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 }

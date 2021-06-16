@@ -53,7 +53,7 @@
                                     <div class="blog-preview d-flex">
                                         <div class="blog-thumbnail">
                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">
-                                                <img src="${dto.thumbnail}" />
+                                                <img src="images/blog/${dto.thumbnail}" class="img-thumbnail"/>
                                             </a>
                                         </div>
                                         <div>
