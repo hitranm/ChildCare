@@ -314,8 +314,8 @@ public class CustomerDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, FullName, PhoneNumber, RoleName "
-                        + " FROM tblCustomer C ";
+                String sql = "SELECT IdentityID, FullName, PhoneNumber "
+                        + " FROM tblCustomer  ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();

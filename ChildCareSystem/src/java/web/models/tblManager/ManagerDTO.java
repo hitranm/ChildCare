@@ -29,6 +29,12 @@ public class ManagerDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public ManagerDTO(String IdentityID, String FullName, String phoneNumber) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

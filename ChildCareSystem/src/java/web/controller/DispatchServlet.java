@@ -45,6 +45,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
     private static final String VIEW_USER_PROFILE = "ViewUserProfileServlet";
     private static final String CREATE_SERVICE = "CreateServiceServlet";
+    private static final String VIEW_ACCOUNT="ViewAccountsServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -100,6 +101,8 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_USER_PROFILE;
             } else if (button.equalsIgnoreCase("CreateService")) {
                 url = CREATE_SERVICE;
+            } else if (button.equalsIgnoreCase("ViewAccount")) {
+                url = VIEW_ACCOUNT;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

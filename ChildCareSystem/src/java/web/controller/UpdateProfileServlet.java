@@ -61,7 +61,8 @@ private static final String SUCCESS="viewProfile.jsp";
                     AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                    boolean check= dao0.update(dto);
                    if(check){
-                    session.setAttribute("USER_PROFILE", dto);   
+                    session.setAttribute("USER_PROFILE", dto);  
+                    session.setAttribute("LOGIN_USER", dto);
                     url=SUCCESS;   
                    }
             }
@@ -70,6 +71,7 @@ private static final String SUCCESS="viewProfile.jsp";
                    boolean check= dao1.update(dto);
                    if(check){
                        session.setAttribute("USER_PROFILE", dto); 
+                       session.setAttribute("LOGIN_USER", dto);
                        url=SUCCESS;
                 }
             }
@@ -78,6 +80,7 @@ private static final String SUCCESS="viewProfile.jsp";
                     boolean check = dao2.update(dto);
                     if(check){
                         session.setAttribute("USER_PROFILE", dto); 
+                        session.setAttribute("LOGIN_USER", dto);
                         url=SUCCESS;
                 }
             }
@@ -85,7 +88,8 @@ private static final String SUCCESS="viewProfile.jsp";
                     CustomerDTO dto = new CustomerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                     boolean check = dao3.update(dto);
                     if(check){
-                        session.setAttribute("USER_PROFILE", dto); 
+                        session.setAttribute("USER_PROFILE", dto);
+                        session.setAttribute("LOGIN_USER", dto);
                         url=SUCCESS;
                             
                 }

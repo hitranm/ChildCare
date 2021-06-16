@@ -332,8 +332,8 @@ public class StaffDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT * "
-                        + " FROM tblStaff" ;
+                String sql = "SELECT IdentityID, FullName, PhoneNumber "
+                        + " FROM tblStaff " ;
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();

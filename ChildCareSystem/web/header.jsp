@@ -63,7 +63,7 @@
                                 <a class="nav-link" href="createStaff.jsp">Tạo staff account</a>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="viewAllAccounts.jsp">Xem all accounts</a>
+                                <a class="nav-link" href="DispatchServlet?btAction=ViewAccount">Xem all accounts</a>
                             </li>
                             <li class="nav-item px-3">
                                 <a class="nav-link" href="#">Phản hồi</a>

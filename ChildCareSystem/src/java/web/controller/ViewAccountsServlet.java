@@ -7,17 +7,26 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblCustomer.CustomerDAO;
+import web.models.tblCustomer.CustomerDTO;
+import web.models.tblManager.ManagerDAO;
+import web.models.tblManager.ManagerDTO;
+import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
+
 
 /**
  *
  * @author Admin
  */
 public class ViewAccountsServlet extends HttpServlet {
-
+private static final String VIEW_ACCOUNT="viewAllAccounts.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,17 +39,23 @@ public class ViewAccountsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewAccountsServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewAccountsServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String url=VIEW_ACCOUNT;
+        try {
+            
+            
+            CustomerDAO customerDAO = new CustomerDAO();
+            StaffDAO staffDAO = new StaffDAO();
+            ManagerDAO managerDAO = new ManagerDAO();
+            List<CustomerDTO> listCustomer = customerDAO.getAllCustomerProfile();
+            request.setAttribute("ListCustomer", listCustomer);
+            List<StaffDTO> listStaff = staffDAO.getAllStaffProfile();
+            request.setAttribute("ListStaff", listStaff);
+            List<ManagerDTO> listManager = managerDAO.getAllManagerProfile();
+            request.setAttribute("ListManager", listManager);
+        } catch (Exception e) {
+            log("ERROR at ViewPatientProfileServlet: " + e.getMessage());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
