@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class DispatchServlet extends HttpServlet {
 
-    private static final String HOME_PAGE = "home.jsp";
+    private static final String HOME_PAGE = "StartupServlet";
     private static final String ADD = "AddCustomerServlet";
     private static final String LOGIN = "LoginServlet";
     private static final String LOGOUT = "LogOutServlet";

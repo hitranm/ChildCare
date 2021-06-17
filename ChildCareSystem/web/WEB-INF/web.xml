@@ -100,6 +100,10 @@
         <servlet-name>ViewAccountsServlet</servlet-name>
         <servlet-class>web.controller.ViewAccountsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StartupServlet</servlet-name>
+        <servlet-class>web.controller.StartupServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>ViewAccountsServlet</servlet-name>
         <url-pattern>/ViewAccountsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StartupServlet</servlet-name>
+        <url-pattern>/StartupServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
