@@ -17,10 +17,12 @@ import web.models.tblAdmin.AdminDTO;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
+import web.models.tblIdentity.IdentityDTO;
 import web.models.tblManager.ManagerDAO;
 import web.models.tblManager.ManagerDTO;
 import web.models.tblStaff.StaffDAO;
 import web.models.tblStaff.StaffDTO;
+import web.viewModels.UserProfile.UserProfileViewModel;
 
 /**
  *
@@ -61,7 +63,10 @@ private static final String SUCCESS="viewProfile.jsp";
                     AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                    boolean check= dao0.update(dto);
                    if(check){
-                    session.setAttribute("USER_PROFILE", dto);  
+                    
+                    IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+                    UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
+                    session.setAttribute("USER_PROFILE", userProfile); 
                     session.setAttribute("LOGIN_USER", dto);
                     url=SUCCESS;   
                    }
@@ -70,7 +75,10 @@ private static final String SUCCESS="viewProfile.jsp";
                     ManagerDTO dto = new ManagerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                    boolean check= dao1.update(dto);
                    if(check){
-                       session.setAttribute("USER_PROFILE", dto); 
+                      // session.setAttribute("USER_PROFILE", dto); 
+                      IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+                    UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
+                    session.setAttribute("USER_PROFILE", userProfile); 
                        session.setAttribute("LOGIN_USER", dto);
                        url=SUCCESS;
                 }
@@ -79,7 +87,10 @@ private static final String SUCCESS="viewProfile.jsp";
                     StaffDTO dto = new StaffDTO(identityID, fullName, phoneNumber, address, birthday, citizenID, specialtyID);
                     boolean check = dao2.update(dto);
                     if(check){
-                        session.setAttribute("USER_PROFILE", dto); 
+                       // session.setAttribute("USER_PROFILE", dto); 
+                       IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+                    UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
+                    session.setAttribute("USER_PROFILE", userProfile); 
                         session.setAttribute("LOGIN_USER", dto);
                         url=SUCCESS;
                 }
@@ -88,8 +99,11 @@ private static final String SUCCESS="viewProfile.jsp";
                     CustomerDTO dto = new CustomerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                     boolean check = dao3.update(dto);
                     if(check){
-                        session.setAttribute("USER_PROFILE", dto);
-                        session.setAttribute("LOGIN_USER", dto);
+                       // session.setAttribute("USER_PROFILE", dto);
+                       IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+                    UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
+                    session.setAttribute("USER_PROFILE", userProfile); 
+                       session.setAttribute("LOGIN_USER", dto);
                         url=SUCCESS;
                             
                 }

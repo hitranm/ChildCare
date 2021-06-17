@@ -1,4 +1,10 @@
 <%-- 
+    Document   : viewDetails
+    Created on : Jun 17, 2021, 11:53:02 PM
+    Author     : Admin
+--%>
+
+<%-- 
     Document   : viewProfile
     Created on : Jun 3, 2021, 9:57:49 PM
     Author     : Admin
@@ -25,7 +31,8 @@
         <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
         <h1>Your Profile</h1>
         
-        <form action="DispatchServlet" method="POST">
+        <form action="DispatchServlet">
+            <div> IdentityID: <input type="text" name="identityID" value="${userProfileDTO.identityDTO.identityID}" readonly></div>
             <div> Full Name:<input type="text" name="fullName" value="${userProfileDTO.fullName}" required="true"></div>
             <div> Address: <input type="text" name="address" value="${userProfileDTO.address}" required="true"></div>
             <div> Birthday: <input type="date" name="birthday" value="${userProfileDTO.birthday}" required="true"></div>
@@ -35,8 +42,7 @@
                 <c:if test="${userProfileDTO.specialtyID != null}">
                 <div> SpecialtyID: <input type="text" name="specialtyID" value="${userProfileDTO.specialtyID}" readonly></div>
                 </c:if>
-                <input type="hidden" name="identityID" value="${userProfileDTO.identityDTO.identityID}"> 
-            <button type="submit" name="btAction" value="UpdateProfile">Cập nhật</button>
+            <button type="submit" name="btAction" value="UpdateProfile">Lmao</button>
         </form>
         
 
@@ -58,3 +64,4 @@
 
     </body>
 </html>
+
