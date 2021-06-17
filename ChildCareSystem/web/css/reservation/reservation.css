@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 17, 2021, 8:59:04 PM
+    Author     : HOANGKHOI
+*/
+
+.reservation-wrapper, .reservation-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reservation-top {
+    border-bottom: 1px solid #6c757d;
+}
+
+.patientProfile {
+    border-right: 1px solid #6c757d;
+    padding: 2rem;
+}
+
+

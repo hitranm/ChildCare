@@ -7,17 +7,29 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import web.models.tblCustomer.CustomerDAO;
+import web.models.tblCustomer.CustomerDTO;
+import web.models.tblIdentity.IdentityDAO;
+import web.models.tblIdentity.IdentityDTO;
+import web.models.tblPatient.PatientDAO;
+import web.models.tblPatient.PatientDTO;
+import web.viewModels.Reservation.ReservationViewModel;
 
 /**
  *
  * @author HOANGKHOI
  */
 public class ChooseReservationServlet extends HttpServlet {
-
+    private static final String CHOOSE_SERVICE_PAGE = "chooseServiceReserve.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,18 +41,31 @@ public class ChooseReservationServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ChooseReservationServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ChooseReservationServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        String url = CHOOSE_SERVICE_PAGE;
+        try {
+            IdentityDAO identityDAO = new IdentityDAO();
+            CustomerDAO customerDAO = new CustomerDAO();
+            PatientDAO patientDAO = new PatientDAO();
+            
+            String identityId = (String) session.getAttribute("IDENTITY_ID");
+            if (identityId != null) {
+                // Get customerId if any
+                String customerId = customerDAO.getCustomerIdByIdentity(identityId);
+                if (!customerId.equals("")) {
+                    IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityId);
+                    CustomerDTO customerDTO = customerDAO.queryCustomerByIdentityId(identityId);
+                    List<PatientDTO> listPatient = patientDAO.getAllPatientProfile(customerId);
+                    ReservationViewModel reservationViewModel = new ReservationViewModel(customerDTO, listPatient, identityDTO);
+                    request.setAttribute("VIEW_MODEL", reservationViewModel);
+                }
+            }
+        } catch (SQLException | NamingException ex) {     
+            log("Error at ChooseReservationServlet: " + ex.getMessage());
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

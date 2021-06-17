@@ -273,6 +273,38 @@ public class CustomerDAO {
         }
         return CustomerID;
     }
+    
+    public String getCustomerIdByIdentity(String identityId) throws SQLException, NamingException {
+        String CustomerID = "";
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT CustomerID "
+                        + " FROM tblCustomer "
+                        + " WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, identityId);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    CustomerID = rs.getString("CustomerID");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return CustomerID;
+    }
 
     public boolean update(CustomerDTO cus) throws SQLException, NamingException {
         boolean check = false;
@@ -315,7 +347,7 @@ public class CustomerDAO {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT IdentityID, FullName, PhoneNumber "
-                        + " FROM tblCustomer  ";
+                        + " FROM tblCustomer ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();

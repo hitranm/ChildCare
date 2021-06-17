@@ -97,7 +97,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="chooseServiceReserve.jsp">Đặt dịch vụ</a>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt dịch vụ</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
