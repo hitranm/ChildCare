@@ -52,7 +52,7 @@ public class PatientDAO {
         return false;
     }
 
-    public List<PatientDTO> getAllPatientProfile(String id) throws SQLException {
+    public List<PatientDTO> getAllPatientProfile(String id) throws SQLException, NamingException {
         List<PatientDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -83,8 +83,6 @@ public class PatientDAO {
                     result.add(patient);
                 }
             }
-        } catch (Exception e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -127,7 +125,6 @@ public class PatientDAO {
                     result = new PatientDTO(id, patientName, gender, birthday, customerID);
                 }
             }
-        } catch (SQLException | NamingException e) {
         } finally {
             if (rs != null) {
                 rs.close();
@@ -142,7 +139,7 @@ public class PatientDAO {
         return result;
     }
 
-    public boolean update(PatientDTO patient) throws ClassNotFoundException, SQLException {
+    public boolean update(PatientDTO patient) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -160,8 +157,6 @@ public class PatientDAO {
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -173,7 +168,7 @@ public class PatientDAO {
         return false;
     }
 
-    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+    public boolean delete(String id) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -188,8 +183,6 @@ public class PatientDAO {
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
