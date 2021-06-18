@@ -201,11 +201,20 @@
                                                     <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
+                                                            
+
+
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
+                                                    <td>
+                                                        <c:url var="delete" value="DispatchServlet">
+                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
                                                             
 
                                                         </c:url>
-                                                        <a href="${viewdetails}">See details</a>
+                                                        <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -222,14 +231,23 @@
                                                         <td>${dto.fullName}</td>
                                                         <td>${dto.phoneNumber}</td>
                                                         <td class="alert alert-warning">Staff</td>
-                                                         <td>
-                                                        <c:url var="viewdetails" value="DispatchServlet">
-                                                            <c:param name="btAction" value="ViewDetails"></c:param>
+                                                        <td>
+                                                            <c:url var="viewdetails" value="DispatchServlet">
+                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                               
+
+
+                                                            </c:url>
+                                                            <a href="${viewdetails}">See details</a>
+                                                        </td>
+                                                        <td>
+                                                        <c:url var="delete" value="DispatchServlet">
+                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
                                                             
 
                                                         </c:url>
-                                                        <a href="${viewdetails}">See details</a>
+                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                     </td>
                                                     </tr>
                                                 </c:forEach>  
@@ -245,14 +263,23 @@
                                                             <td>${dto.fullName}</td>
                                                             <td>${dto.phoneNumber}</td>
                                                             <td class="alert alert-danger">Manager</td>
-                                                             <td>
-                                                        <c:url var="viewdetails" value="DispatchServlet">
-                                                            <c:param name="btAction" value="ViewDetails"></c:param>
+                                                            <td>
+                                                                <c:url var="viewdetails" value="DispatchServlet">
+                                                                    <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                    
+
+
+                                                                </c:url>
+                                                                <a href="${viewdetails}">See details</a>
+                                                            </td>
+                                                            <td>
+                                                        <c:url var="delete" value="DispatchServlet">
+                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
                                                             
 
                                                         </c:url>
-                                                        <a href="${viewdetails}">See details</a>
+                                                       <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                     </td>
                                                         </tr>
                                                     </c:forEach>
@@ -292,14 +319,23 @@
                                                     <td>${dto.fullName}</td>
                                                     <td>${dto.phoneNumber}</td>
                                                     <td class="alert alert-success">Customer</td>
-                                                     <td>
+                                                    <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
+                                                            
+
+
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
+                                                    <td>
+                                                        <c:url var="delete" value="DispatchServlet">
+                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
                                                             
 
                                                         </c:url>
-                                                        <a href="${viewdetails}">See details</a>
+                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -340,14 +376,23 @@
                                                     <td>${dto.fullName}</td>
                                                     <td>${dto.phoneNumber}</td>
                                                     <td class="alert alert-warning">Staff</td>
-                                                     <td>
+                                                    <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
+                                                           
+
+
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
+                                                    <td>
+                                                        <c:url var="delete" value="DispatchServlet">
+                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
                                                             
 
                                                         </c:url>
-                                                        <a href="${viewdetails}">See details</a>
+                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -385,14 +430,23 @@
                                                     <td>${dto.fullName}</td>
                                                     <td>${dto.phoneNumber}</td>
                                                     <td class="alert alert-danger">Manager</td>
-                                                     <td>
+                                                    <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
+                                                           
+
+
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
+                                                    <td>
+                                                        <c:url var="delete" value="DispatchServlet">
+                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
                                                             
 
                                                         </c:url>
-                                                        <a href="${viewdetails}">See details</a>
+                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -451,6 +505,12 @@
                                            loader.className += " hidden"; // class "loader hidden"
                                        })
         </script>
+        <script>
+                function confirmation() {
+                    var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+                    return r;
+                }
+            </script>
         <script>
             $(".mydatatable").DataTable();
         </script>

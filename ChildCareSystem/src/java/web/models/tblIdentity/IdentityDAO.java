@@ -311,6 +311,32 @@ public class IdentityDAO {
         }
         return null;
     }
+public boolean delete(String id) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM tblIdentity WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
 }
 

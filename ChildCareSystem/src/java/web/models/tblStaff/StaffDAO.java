@@ -299,13 +299,15 @@ public class StaffDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "UPDATE tblStaff SET FullName=?, Address=?, Birthday=? "
+                String sql = "UPDATE tblStaff SET FullName=?, Address=?, Birthday=?, SpecialtyID=?"
                         + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, staff.getFullName());
                 stm.setString(2, staff.getAddress());
                 stm.setString(3, staff.getBirthday());
-                stm.setString(4, staff.getIdentityID());
+                stm.setString(4, staff.getSpecialtyID());
+                stm.setString(5, staff.getIdentityID());
+                
 
                 check = stm.executeUpdate() > 0 ? true : false;
             }
@@ -359,5 +361,32 @@ public class StaffDAO implements Serializable {
             }
         }
         return result;
+    }
+    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM tblStaff WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 }

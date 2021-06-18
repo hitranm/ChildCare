@@ -39,14 +39,16 @@ public class DispatchServlet extends HttpServlet {
     private static final String ADD_STAFF = "AddStaffServlet";
     private static final String CREATE_BLOG = "CreateBlogServlet";
     private static final String VIEW_BLOG = "ViewBlogServlet";
-    private static final String UPDATEPROFILE="UpdateProfileServlet";
+    private static final String UPDATEPROFILE = "UpdateProfileServlet";
     private static final String EDIT_BLOG = "UpdateBlogServlet";
     private static final String SEARCH_BLOG = "SearchBlogServlet";
     private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
     private static final String VIEW_USER_PROFILE = "ViewUserProfileServlet";
     private static final String CREATE_SERVICE = "CreateServiceServlet";
-    private static final String VIEW_ACCOUNT="ViewAccountsServlet";
-    private static final String VIEW_DETAILS="ViewAccountDetailsServlet";
+    private static final String VIEW_ACCOUNT = "ViewAccountsServlet";
+    private static final String VIEW_DETAILS = "ViewAccountDetailsServlet";
+    private static final String UPDATE_DETAILS = "UpdateAccountDetailsServlet";
+    private static final String DELETE_ACCOUNT = "DeleteAccountServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,9 +65,9 @@ public class DispatchServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         String button = request.getParameter("btAction");
-        
+
         try {
-            
+
             if (button == null) {
                 url = HOME_PAGE;
             } else if (button.equalsIgnoreCase("Login")) {
@@ -93,8 +95,8 @@ public class DispatchServlet extends HttpServlet {
             } else if (button.equalsIgnoreCase("ViewBlog")) {
                 url = VIEW_BLOG;
             } else if (button.equalsIgnoreCase("UpdateProfile")) {
-                url=UPDATEPROFILE;
-            } else if (button.equalsIgnoreCase("UpdateBlog")){
+                url = UPDATEPROFILE;
+            } else if (button.equalsIgnoreCase("UpdateBlog")) {
                 url = EDIT_BLOG;
             } else if (button.equalsIgnoreCase("LoadSpecialty")) {
                 url = LOAD_SPECIALTY;
@@ -106,6 +108,10 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_ACCOUNT;
             } else if (button.equalsIgnoreCase("ViewDetails")) {
                 url = VIEW_DETAILS;
+            } else if (button.equalsIgnoreCase("UpdateDetails")) {
+                url = UPDATE_DETAILS;
+            } else if (button.equalsIgnoreCase("DeleteAccount")) {
+                url = DELETE_ACCOUNT;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

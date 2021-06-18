@@ -108,6 +108,14 @@
         <servlet-name>ViewAccountDetailsServlet</servlet-name>
         <servlet-class>web.controller.ViewAccountDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountDetailsServlet</servlet-name>
+        <servlet-class>web.controller.UpdateAccountDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteAccountServlet</servlet-name>
+        <servlet-class>web.controller.DeleteAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -215,6 +223,14 @@
     <servlet-mapping>
         <servlet-name>ViewAccountDetailsServlet</servlet-name>
         <url-pattern>/ViewAccountDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountDetailsServlet</servlet-name>
+        <url-pattern>/UpdateAccountDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAccountServlet</servlet-name>
+        <url-pattern>/DeleteAccountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

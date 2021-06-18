@@ -20,6 +20,7 @@
         <title>Profile Page</title>
     </head>
     <body>
+        <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <jsp:include page="header.jsp"/>
 
         <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
@@ -33,12 +34,27 @@
             <div> Phone Number: <input type="text" name="phoneNum" value="${userProfileDTO.phoneNumber}" readonly></div>
             <div> Email: <input type="text" name="email" value="${userProfileDTO.identityDTO.email}" readonly></div>
                 <c:if test="${userProfileDTO.specialtyID != null}">
-                <div> SpecialtyID: <input type="text" name="specialtyID" value="${userProfileDTO.specialtyID}" readonly></div>
+                <div>   Chuyên khoa <select name="specialtyID" required="true">
+                                <option>-Chuyên khoa-</option>
+                                <c:forEach items="${specialty.viewSpecialtyList()}" var="dto">
+                                    <c:if test="${userProfileDTO.specialtyID eq dto.specialtyId}">
+                                        <option value="${dto.specialtyId}" selected>${dto.specialtyName}</option>
+                                    </c:if>
+                                    <c:if test="${userProfileDTO.specialtyID != dto.specialtyId}">
+                                        <option value="${dto.specialtyId}">${dto.specialtyName}</option>
+                                    </c:if>
+                                </c:forEach>
+                    </select>
+                </div>
                 </c:if>
                 <input type="hidden" name="identityID" value="${userProfileDTO.identityDTO.identityID}"> 
             <button type="submit" name="btAction" value="UpdateProfile">Cập nhật</button>
         </form>
-        
+                <c:if test="${requestScope.SUCCESS !=null}">
+                    <div class="alert alert-success"role="alert">
+                            ${requestScope.SUCCESS}
+                        </div>
+                </c:if>
 
 
         <jsp:include page="footer.jsp"/> 

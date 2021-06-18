@@ -28,9 +28,9 @@ import web.viewModels.UserProfile.UserProfileViewModel;
  *
  * @author Admin
  */
-public class UpdateProfileServlet extends HttpServlet {
+public class UpdateAccountDetailsServlet extends HttpServlet {
 private static final String ERROR="error.jsp";
-private static final String SUCCESS="viewProfile.jsp";
+private static final String SUCCESS="viewDetails.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,7 +57,7 @@ private static final String SUCCESS="viewProfile.jsp";
             StaffDAO dao2 = new StaffDAO();
             CustomerDAO dao3 = new CustomerDAO();
             HttpSession session = request.getSession();
-            String identityID = (String)session.getAttribute("IDENTITY_ID");
+            String identityID = request.getParameter("identityID");
             int roleID = identityDAO.getRoleIDByIdentityID(identityID);
             if(roleID == 4) {
                     AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
@@ -117,7 +117,7 @@ private static final String SUCCESS="viewProfile.jsp";
                 }
             }
         }catch(Exception e){
-            log("Error at UpdateProfileServlet: "+e.toString());
+            log("Error at UpdateAccountDetailsServlet: "+e.toString());
         }
         finally{
             request.getRequestDispatcher(url).forward(request, response);
