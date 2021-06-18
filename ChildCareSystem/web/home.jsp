@@ -35,6 +35,7 @@
     <body>
         <jsp:include page="header.jsp"/>
         <main>
+            <h2>${sessionScope.ROLE}</h2>
             <div class="main_wrapper px-5 py-5">
                 <div class="main_left col-12 col-lg-9">
                     <!--Carousel-->
@@ -155,7 +156,7 @@
                             <c:if test="${sessionScope.BLOG_LIST_TOP6!=null}">
                                 <c:if test="${not empty sessionScope.BLOG_LIST_TOP6}" var="testEmpty">
                                     <c:forEach items="${sessionScope.BLOG_LIST_TOP6}" var="dto">
-                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewBlogDetailServlet?id=${dto.blogID}'">
                                             <article>
                                                 <div class="blog_thumbnail">
                                                     <img src="./images/blog/${dto.thumbnail}" />
@@ -168,6 +169,7 @@
                                                 </div>
                                             </article>
                                         </div>
+
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${!testEmpty}">
@@ -228,7 +230,7 @@
                                 </c:if>
                             </c:if>
 
-                           
+
                         </div>
                         <a href="#" class="section_moredetail pr-4">Xem thêm</a>
                     </div>

@@ -167,7 +167,7 @@
                                         </div>
                                         <div class="col">
                                             <select name="txtDay" id="day" class="form-control" size="1" required">
-                                                <option value="${patientDay}" selected>${patientDay}</option>
+                                                <option value="${patientDay}" selected hidden>${patientDay}</option>
                                             </select>
                                         </div>
 

@@ -34,7 +34,7 @@ import web.models.tblStaff.StaffDTO;
  */
 public class LoginServlet extends HttpServlet {
 
-    private static final String SUCCESS = "home.jsp";
+    private static final String SUCCESS = "StartupServlet";
     private static final String ERROR = "login.jsp";
 
     /**
@@ -62,16 +62,16 @@ public class LoginServlet extends HttpServlet {
             AdminDAO adminDAO = new AdminDAO();
             IdentityDTO identity = dao.checkLogin(email, epassword);
 
-            BlogDAO blogDAO = new BlogDAO();
-            List<BlogDTO> listBlog = blogDAO.getTop6BlogList();
+//            BlogDAO blogDAO = new BlogDAO();
+//            List<BlogDTO> listBlog = blogDAO.getTop6BlogList();
+//
+//            ServiceDAO serviceDAO = new ServiceDAO();
+//            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
 
-            ServiceDAO serviceDAO = new ServiceDAO();
-            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
-            
             HttpSession session = request.getSession();
 
-            session.setAttribute("BLOG_LIST_TOP6", listBlog);
-            session.setAttribute("SERVICE_LIST_TOP3", listService);
+//            session.setAttribute("BLOG_LIST_TOP6", listBlog);
+//            session.setAttribute("SERVICE_LIST_TOP3", listService);
 
             if (identity != null) {
                 if (identity.getRoleID().equals("3")) {
@@ -79,12 +79,14 @@ public class LoginServlet extends HttpServlet {
                     dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                    session.setAttribute("ROLE", "manager");
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("2")) {
                     StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                    session.setAttribute("ROLE", "staff");
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("1")) {
@@ -92,12 +94,14 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     session.setAttribute("CUSTOMER_ID", customerDAO.queryCustomerID(email));
+                    session.setAttribute("ROLE", "customer");
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("4")) {
                     AdminDTO dto = adminDAO.queryAdminByIdentityId(identity.getIdentityID());
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                    session.setAttribute("ROLE", "admin");
                     url = SUCCESS;
                 }
 

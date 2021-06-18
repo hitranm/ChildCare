@@ -53,6 +53,11 @@
                         <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <div class="mb-4">
+                                    <c:if test="${requestScope.DID_LOGIN!=null}">
+                                        <div class="alert alert-danger" role="alert">
+                                            ${requestScope.DID_LOGIN}
+                                        </div>
+                                    </c:if>
                                     <h3>Đăng nhập</h3>
                                 </div>
                                 <form action="DispatchServlet" method="post">
@@ -73,7 +78,7 @@
                                     <div class="d-flex mb-5 align-items-center">
                                         <span class="ml-auto"><a href="forgot_pass.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                     </div>
-                                   <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button>
+                                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button>
                                 </form>
                             </div>
                         </div>

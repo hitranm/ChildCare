@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class LogOutServlet extends HttpServlet {
 
     private static final String LOGIN = "login.jsp";
-    private static final String HOME = "home.jsp";
+    private static final String HOME = "StartupServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
