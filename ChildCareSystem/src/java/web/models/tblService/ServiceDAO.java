@@ -114,7 +114,7 @@ public class ServiceDAO implements Serializable {
                 String serviceName = rs.getString("ServiceName");
                 String specialtyId = rs.getString("SpecialtyID");
                 double price = Double.parseDouble(rs.getString("Price"));
-                String statusId = rs.getString("Status");
+                String statusId = rs.getString("StatusID");
                 ServiceDTO dto = new ServiceDTO(serivceId, serviceName, specialtyId, price, statusId);
                 list.add(dto);
             }
