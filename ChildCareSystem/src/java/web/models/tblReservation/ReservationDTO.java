@@ -49,6 +49,19 @@ public class ReservationDTO implements Serializable{
         this.patienGender = patienGender;
         this.serviceId = serviceId;
     }
+
+    public ReservationDTO(String customerName, String customerEmail, String phoneNumber, String patientName, String patientBirthday, boolean patienGender, String serviceId, String intervalTimeId) {
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.phoneNumber = phoneNumber;
+        this.patientName = patientName;
+        this.patientBirthday = patientBirthday;
+        this.patienGender = patienGender;
+        this.serviceId = serviceId;
+        this.intervalTimeId = intervalTimeId;
+    }
+    
+    
     
     
 

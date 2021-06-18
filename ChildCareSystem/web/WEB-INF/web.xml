@@ -104,6 +104,10 @@
         <servlet-name>ChooseReservationServlet</servlet-name>
         <servlet-class>web.controller.ChooseReservationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutReservationServlet</servlet-name>
+        <servlet-class>web.controller.CheckoutReservationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>ChooseReservationServlet</servlet-name>
         <url-pattern>/ChooseReservationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutReservationServlet</servlet-name>
+        <url-pattern>/CheckoutReservationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

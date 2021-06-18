@@ -22,7 +22,7 @@
         </style>
         <jsp:include page="header.jsp"/>
         <main>
-            <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="page"/>
+            <jsp:useBean id="service" class="web.models.tblService.ServiceDAO" scope="page"/>
             <jsp:useBean id="listTime" class="web.models.tblOpenTime.OpenTimeDAO"/>
             <c:set var="customerDTO" value="${requestScope.VIEW_MODEL.customerDTO}"/>
             <c:set var="patientList" value="${requestScope.VIEW_MODEL.listPatient}"/>
@@ -84,14 +84,14 @@
                             <div class="form-group col-8">
                                 <label for="service-specialty">Chuyên khoa</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
-                                    <c:forEach items="${specialty.viewSpecialtyList()}" var="dto">
-                                        <option value="${dto.specialtyId}">${dto.specialtyName}</option>
+                                    <c:forEach items="${service.viewServiceList()}" var="dto">
+                                        <option value="${dto.serviceId}">${dto.serviceName}</option>
                                     </c:forEach>                
                                 </select>
                             </div>
                             <div class="form-group col-3">
-                                <label for="service-specialty">Chọn thời gian</label>
-                                <select id="service-specialty" class="form-control" name="cboSpecialty">
+                                <label for="reservation-time">Chọn thời gian</label>
+                                <select id="reservation-time" class="form-control" name="cboTime">
                                     <c:forEach items="${listTime.viewTimeList()}" var="timeDTO">
                                         <option value="${timeDTO.openTimeId}">${timeDTO.openTime}</option>
                                     </c:forEach>                
@@ -104,6 +104,7 @@
 
                 <div class="reservation-bottom py-4 col-12">
                     <h3>Thông tin khách hàng</h3>
+                    <div hidden id="customerId">${customerDTO.customerID}</div>
                     <form class="col-md-6">
                         <div class="form-group col-12">
                             <label for="customerName">Tên</label>

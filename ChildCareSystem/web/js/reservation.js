@@ -13,15 +13,34 @@ function submitReservation() {
     console.log("Submit form");
     var patientList = $('.list-group-item').toArray();
     let chosenPatientId;
-    
+    var specialtyId = $("#service-specialty option:selected").val();
+    var timeId = $("#reservation-time option:selected").val();
+    var customerId = $("#customerId").text();
+
     patientList.forEach(patient => {
         if (patient.ariaSelected) {
             chosenPatientId = patient.id;
         }
     });
-    if (chosenPatientId == undefined) {
-        console.log(chosenPatientId);
+    if (chosenPatientId == undefined) {  
         $("#patientError").attr("hidden", false);
+        return;
+    } else {
+        console.log(customerId);
     }
-
+    
+//    $.ajax(
+//            {
+//                type: 'POST',
+//                data: {txtPatientId: chosenPatientId,
+//                        txtSpecialtyId: specialtyId,
+//                        txtCustomerId: customerId,
+//                        txtTimeId: timeId,
+//                        
+//        },
+//                url: 'CheckoutReservationServlet',
+//                success: function (data, textStatus, jqXHR) {
+//                }
+//            }
+//    );
 }

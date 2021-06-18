@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
+import web.models.tblSpecialty.SpecialtyDTO;
 import web.utils.DBHelpers;
 
 /**
@@ -60,7 +61,8 @@ public class ServiceDAO implements Serializable {
         }
         return false;     
     }
-    public List<ServiceDTO> getTop3ServiceList() throws SQLException {
+    
+    public List<ServiceDTO> getTop3ServiceList() throws SQLException, NamingException {
         List<ServiceDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -81,8 +83,6 @@ public class ServiceDAO implements Serializable {
                     result.add(dto);
                 }
             }
-        } catch (Exception e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -96,4 +96,41 @@ public class ServiceDAO implements Serializable {
         }
         return result;
     }
+    
+    public List<ServiceDTO> viewServiceList() throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            //if (con != null) {
+            String sql = "Select ServiceID, ServiceName, SpecialtyID, Price, StatusID "
+                    + "From tblService";
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            List<ServiceDTO> list = new ArrayList<>();
+            while (rs.next()) {
+                String serivceId = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyId = rs.getString("SpecialtyID");
+                double price = Double.parseDouble(rs.getString("Price"));
+                String statusId = rs.getString("Status");
+                ServiceDTO dto = new ServiceDTO(serivceId, serviceName, specialtyId, price, statusId);
+                list.add(dto);
+            }
+            return list;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    
 }
