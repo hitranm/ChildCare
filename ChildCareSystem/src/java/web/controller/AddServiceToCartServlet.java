@@ -68,41 +68,50 @@ public class AddServiceToCartServlet extends HttpServlet {
             CartObject cart = (CartObject) session.getAttribute("CART");
             List<CartViewModel> listCartViewModel = (List<CartViewModel>) session.getAttribute("CART_VIEW_MODEL");
             if (cart == null) {
-                cart = new CartObject();   
+                cart = new CartObject();
             }
             if (listCartViewModel == null) {
                 listCartViewModel = new ArrayList<>();
             }
 
-            //3. Customer select service
-            String time = openTimeDAO.getTimeString(timeIntervalId);
-            String datetime = date + " " + time;
-            CartItem reservation = new CartItem(customerId, patientId, serviceId, timeIntervalId, datetime);
-            
-            //4. Add to cart
-            boolean result = cart.addServiceToCart(reservation);
-            if (result == true) {
-                //Setup viewmodel
-                CustomerDAO customerDAO = new CustomerDAO();
-                CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(customerId);
-                
-                PatientDAO patientDAO = new PatientDAO();
-                PatientDTO patientDTO = patientDAO.getPatientByID(String.valueOf(patientId));
-                
-                ServiceDAO serviceDAO = new ServiceDAO();
-                ServiceDTO serviceDTO = serviceDAO.getServiceInfo(serviceId);
-                
-                SpecialtyDAO specialtyDAO = new SpecialtyDAO();
-                int specialtyId = Integer.parseInt(serviceDTO.getSpecialtyId());
-                SpecialtyDTO specialtyDTO = specialtyDAO.getSpecialtyById(specialtyId);
-                
-                CartViewModel cartViewModel = new CartViewModel(customerDTO, patientDTO, serviceDTO, specialtyDTO, reservation);
-                listCartViewModel.add(cartViewModel);
-                session.setAttribute("CART", cart);
-                session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
-                url = SUCCESS;           
-                response.sendRedirect(url);
-            } else request.getRequestDispatcher(url).forward(request, response);
+            if (cart.getCountItem() == 3) {  // Check max cart item
+                request.setAttribute("MAX_RESERVATION_ERROR", "Bạn chỉ được đặt tối đa 3 dịch vụ trong 1 lần thanh toán.");
+                url = "DispatchServlet?btAction=ChooseServiceReserve&status=max";
+                request.getRequestDispatcher(url).forward(request, response);
+            } else {
+                //3. Customer select service
+                String time = openTimeDAO.getTimeString(timeIntervalId);
+                String datetime = date + " " + time;
+                CartItem reservation = new CartItem(customerId, patientId, serviceId, timeIntervalId, datetime);
+                //4. Add to cart
+                boolean result = cart.addServiceToCart(reservation);
+                if (result == true) {
+                    //Setup viewmodel
+                    CustomerDAO customerDAO = new CustomerDAO();
+                    CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(customerId);
+
+                    PatientDAO patientDAO = new PatientDAO();
+                    PatientDTO patientDTO = patientDAO.getPatientByID(String.valueOf(patientId));
+
+                    ServiceDAO serviceDAO = new ServiceDAO();
+                    ServiceDTO serviceDTO = serviceDAO.getServiceInfo(serviceId);
+
+                    SpecialtyDAO specialtyDAO = new SpecialtyDAO();
+                    int specialtyId = Integer.parseInt(serviceDTO.getSpecialtyId());
+                    SpecialtyDTO specialtyDTO = specialtyDAO.getSpecialtyById(specialtyId);
+
+                    CartViewModel cartViewModel = new CartViewModel(customerDTO, patientDTO, serviceDTO, specialtyDTO, reservation);
+                    listCartViewModel.add(cartViewModel);
+                    session.setAttribute("CART", cart);
+                    session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
+                    url = SUCCESS;
+                    response.sendRedirect(url);
+                } else {
+                    request.setAttribute("DUPLICATE_PATIENT", "Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.");
+                    url = "DispatchServlet?btAction=ChooseServiceReserve&status=duplicated";
+                    response.sendRedirect(url);
+                }
+            }
         } catch (Exception ex) {
             log("Error at AddServiceToCartServlet: " + ex.getMessage());
         }

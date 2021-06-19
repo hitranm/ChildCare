@@ -5,7 +5,7 @@
  */
 const nextYear = new Date().getFullYear() + 1;
 const nextMonth = new Date().getMonth() + 1;
-console.log(nextMonth);
+
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
     min: new Date(),
     max: new Date(nextYear, 10)

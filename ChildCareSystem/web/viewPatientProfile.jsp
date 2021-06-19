@@ -98,13 +98,6 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <c:if test="${not empty param.action}">
-            <script>
-                $("#v-pills-addPatient-tab").trigger('click');
-                console.log("Clicked");
-            </script>
-        </c:if>
-        
         
         <main style="padding: 5%">
             <h1>DANH SÁCH HỒ SƠ BỆNH NHÂN</h1>

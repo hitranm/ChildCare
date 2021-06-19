@@ -29,7 +29,9 @@ import web.viewModels.Reservation.ReservationViewModel;
  * @author HOANGKHOI
  */
 public class ChooseReservationServlet extends HttpServlet {
+
     private static final String CHOOSE_SERVICE_PAGE = "chooseServiceReserve.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,11 +46,12 @@ public class ChooseReservationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String url = CHOOSE_SERVICE_PAGE;
+        String status = request.getParameter("status");
         try {
             IdentityDAO identityDAO = new IdentityDAO();
             CustomerDAO customerDAO = new CustomerDAO();
             PatientDAO patientDAO = new PatientDAO();
-            
+
             String identityId = (String) session.getAttribute("IDENTITY_ID");
             if (identityId != null) {
                 // Get customerId if any
@@ -59,9 +62,17 @@ public class ChooseReservationServlet extends HttpServlet {
                     List<PatientDTO> listPatient = patientDAO.getAllPatientProfile(customerId);
                     ReservationViewModel reservationViewModel = new ReservationViewModel(customerDTO, listPatient, identityDTO);
                     request.setAttribute("VIEW_MODEL", reservationViewModel);
+                    if (status != null) {
+                        if (status.equals("duplicated")) {
+                            request.setAttribute("DUPLICATE_PATIENT", "Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.");
+                        } else if (status.equals("max")) {
+                            request.setAttribute("MAX_RESERVATION", "Bạn chỉ được đặt dịch vụ tối đa 3 đơn cho một lần thanh toán.");
+                        }
+                    }
+
                 }
             }
-        } catch (SQLException | NamingException ex) {     
+        } catch (SQLException | NamingException ex) {
             log("Error at ChooseReservationServlet: " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

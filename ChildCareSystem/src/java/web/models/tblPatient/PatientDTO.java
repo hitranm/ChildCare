@@ -5,11 +5,13 @@
  */
 package web.models.tblPatient;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nguye
  */
-public class PatientDTO {
+public class PatientDTO implements Serializable{
 
     private String patientID;
     private String patientName;

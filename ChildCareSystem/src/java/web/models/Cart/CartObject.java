@@ -39,6 +39,13 @@ public class CartObject implements Serializable {
         this.cartItems.add(reservation);
         return true;
     }
+    
+    public int getCountItem() {
+        if(this.cartItems == null) {
+            this.cartItems = new ArrayList<>();
+        }
+        return this.cartItems.size();
+    }
 
     public boolean removeServiceFromCart(int patientId) {
         boolean status = false;
