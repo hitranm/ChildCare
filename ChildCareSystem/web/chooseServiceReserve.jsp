@@ -82,7 +82,7 @@
                     <div class="col-8 px-4">
                         <div class="row">
                             <div class="form-group col-8">
-                                <label for="service-specialty">Chuyên khoa</label>
+                                <label for="service-specialty">Dịch vụ</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
                                     <c:forEach items="${service.viewServiceList()}" var="dto">
                                         <option value="${dto.serviceId}">${dto.serviceName}</option>
@@ -105,7 +105,13 @@
                 <div class="reservation-bottom py-4 col-12">
                     <h3>Thông tin khách hàng</h3>
                     <div hidden id="customerId">${customerDTO.customerID}</div>
-                    <form class="col-md-6">
+                    <form class="col-md-6" action="AddServiceToCartServlet" method="post" id="reservationForm">
+                        <input hidden name="txtCustomerId" value="${customerDTO.customerID}"/>
+                        <input id="txtPatientId" hidden name="txtPatientId" value=""/>
+                        <input id="txtServiceId" hidden name="txtServiceId" value=""/>
+                        <input id="txtTimeId" hidden name="txtTimeId" value=""/>
+                        <input id="txtDate" hidden name="txtDate" value=""/>
+                        
                         <div class="form-group col-12">
                             <label for="customerName">Tên</label>
                             <input type="text" class="form-control" id="customerName" name="customerName" value="${customerDTO.fullName}" disabled>

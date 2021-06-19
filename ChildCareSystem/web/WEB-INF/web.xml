@@ -108,6 +108,10 @@
         <servlet-name>CheckoutReservationServlet</servlet-name>
         <servlet-class>web.controller.CheckoutReservationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddServiceToCartServlet</servlet-name>
+        <servlet-class>web.controller.AddServiceToCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>CheckoutReservationServlet</servlet-name>
         <url-pattern>/CheckoutReservationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddServiceToCartServlet</servlet-name>
+        <url-pattern>/AddServiceToCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

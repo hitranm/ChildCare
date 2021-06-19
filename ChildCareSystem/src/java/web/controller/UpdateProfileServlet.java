@@ -27,8 +27,10 @@ import web.models.tblStaff.StaffDTO;
  * @author Admin
  */
 public class UpdateProfileServlet extends HttpServlet {
-private static final String ERROR="error.jsp";
-private static final String SUCCESS="viewProfile.jsp";
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "viewProfile.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,63 +43,62 @@ private static final String SUCCESS="viewProfile.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try{
+        String url = ERROR;
+        try {
             String fullName = request.getParameter("fullName");
             String address = request.getParameter("address");
             String birthday = request.getParameter("birthday");
             String phoneNumber = request.getParameter("phoneNum");
             String citizenID = request.getParameter("citizenID");
-           String specialtyID = request.getParameter("specialtyID");
+            String specialtyID = request.getParameter("specialtyID");
             IdentityDAO identityDAO = new IdentityDAO();
             AdminDAO dao0 = new AdminDAO();
             ManagerDAO dao1 = new ManagerDAO();
             StaffDAO dao2 = new StaffDAO();
             CustomerDAO dao3 = new CustomerDAO();
             HttpSession session = request.getSession();
-            String identityID = (String)session.getAttribute("IDENTITY_ID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
             int roleID = identityDAO.getRoleIDByIdentityID(identityID);
-            if(roleID == 4) {
-                    AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
-                   boolean check= dao0.update(dto);
-                   if(check){
-                    session.setAttribute("USER_PROFILE", dto);  
+            if (roleID == 4) {
+                AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
+                boolean check = dao0.update(dto);
+                if (check) {
+                    session.setAttribute("USER_PROFILE", dto);
                     session.setAttribute("LOGIN_USER", dto);
-                    url=SUCCESS;   
-                   }
-            }
-            if(roleID == 3){
-                    ManagerDTO dto = new ManagerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
-                   boolean check= dao1.update(dto);
-                   if(check){
-                       session.setAttribute("USER_PROFILE", dto); 
-                       session.setAttribute("LOGIN_USER", dto);
-                       url=SUCCESS;
+                    url = SUCCESS;
                 }
             }
-            if(roleID == 2){
-                    StaffDTO dto = new StaffDTO(identityID, fullName, phoneNumber, address, birthday, citizenID, specialtyID);
-                    boolean check = dao2.update(dto);
-                    if(check){
-                        session.setAttribute("USER_PROFILE", dto); 
-                        session.setAttribute("LOGIN_USER", dto);
-                        url=SUCCESS;
+            if (roleID == 3) {
+                ManagerDTO dto = new ManagerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
+                boolean check = dao1.update(dto);
+                if (check) {
+                    session.setAttribute("USER_PROFILE", dto);
+                    session.setAttribute("LOGIN_USER", dto);
+                    url = SUCCESS;
                 }
             }
-            if(roleID == 1){
-                    CustomerDTO dto = new CustomerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
-                    boolean check = dao3.update(dto);
-                    if(check){
-                        session.setAttribute("USER_PROFILE", dto);
-                        session.setAttribute("LOGIN_USER", dto);
-                        url=SUCCESS;
-                            
+            if (roleID == 2) {
+                StaffDTO dto = new StaffDTO(identityID, fullName, phoneNumber, address, birthday, citizenID, specialtyID);
+                boolean check = dao2.update(dto);
+                if (check) {
+                    session.setAttribute("USER_PROFILE", dto);
+                    session.setAttribute("LOGIN_USER", dto);
+                    url = SUCCESS;
                 }
             }
-        }catch(Exception e){
-            log("Error at UpdateProfileServlet: "+e.toString());
-        }
-        finally{
+            if (roleID == 1) {
+                CustomerDTO dto = new CustomerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
+                boolean check = dao3.update(dto);
+                if (check) {
+                    session.setAttribute("USER_PROFILE", dto);
+                    session.setAttribute("LOGIN_USER", dto);
+                    url = SUCCESS;
+
+                }
+            }
+        } catch (Exception e) {
+            log("Error at UpdateProfileServlet: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

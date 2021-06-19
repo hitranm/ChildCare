@@ -100,4 +100,37 @@ public class SpecialtyDAO implements Serializable {
             }
         }
     }
+    
+    public SpecialtyDTO getSpecialtyById(int specialtyId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+
+            String sql = "Select SpecialtyID, SpecialtyName "
+                    + "From tblSpecialty "
+                    + "Where SpecialtyID=?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, specialtyId);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                int specialID = rs.getInt("SpecialtyID");
+                String specialName = rs.getString("SpecialtyName");
+                SpecialtyDTO dto = new SpecialtyDTO(specialID, specialName);             
+                return dto;
+            } else return null;
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

@@ -19,8 +19,10 @@ import web.models.tblIdentity.IdentityDAO;
  * @author Admin
  */
 public class SetNewPassServlet extends HttpServlet {
-private static final String ERROR="newpassword.jsp";
-private static final String SUCCESS="login.jsp";
+
+    private static final String ERROR = "newpassword.jsp";
+    private static final String SUCCESS = "login.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,44 +35,41 @@ private static final String SUCCESS="login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try{
-            String password= request.getParameter("password");
-            String cpassword= request.getParameter("cpassword");
-            String email= request.getParameter("email");
-           HttpSession session = request.getSession();
-           IdentityDAO dao= new IdentityDAO();
-           String identityID_changePassword =(String) session.getAttribute("IDENTITY_ID");
-            if(password.equals(cpassword)){
-              if(!email.isEmpty()){
-            
-            String identityID = dao.queryIDByEmail(email);
-             String epass = dao.sha256(password);
-             boolean check = dao.updatePass(epass, identityID);
-             if(check){
-                 url=SUCCESS;
-             }
-            }
-            
-              else {
-                String epass= dao.sha256(password);
-                boolean check = dao.updatePass(epass, identityID_changePassword);
-             if(check){
-                 url=SUCCESS;
-             }
-            }
-            }
-             else{
-                 String msg="Mật khẩu và mật khẩu xác nhận không trùng khớp!";
+        String url = ERROR;
+        try {
+            String password = request.getParameter("password");
+            String cpassword = request.getParameter("cpassword");
+            String email = request.getParameter("email");
+            HttpSession session = request.getSession();
+            IdentityDAO dao = new IdentityDAO();
+            String identityID_changePassword = (String) session.getAttribute("IDENTITY_ID");
+            if (password.equals(cpassword)) {
+                if (!email.isEmpty()) {
+
+                    String identityID = dao.queryIDByEmail(email);
+                    String epass = dao.sha256(password);
+                    boolean check = dao.updatePass(epass, identityID);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    String epass = dao.sha256(password);
+                    boolean check = dao.updatePass(epass, identityID_changePassword);
+                    if (check) {
+                        url = SUCCESS;
+                    }
+                }
+            } else {
+                String msg = "Mật khẩu và mật khẩu xác nhận không trùng khớp!";
                 request.setAttribute("ERROR_PASS", msg);
-             }
-        }catch(Exception e){
-            log("Error at SetNewPassServlet: "+e.toString());
-        }
-        finally{
+            }
+        } catch (Exception e) {
+            log("Error at SetNewPassServlet: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
+        }
     }
-    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

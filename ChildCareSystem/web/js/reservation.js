@@ -10,37 +10,46 @@ const myCalender = new CalendarPicker('#myCalendarWrapper', {
 });
 
 function submitReservation() {
-    console.log("Submit form");
     var patientList = $('.list-group-item').toArray();
     let chosenPatientId;
-    var specialtyId = $("#service-specialty option:selected").val();
+    var serviceId = $("#service-specialty option:selected").val();
     var timeId = $("#reservation-time option:selected").val();
     var customerId = $("#customerId").text();
+    var date = myCalender.value.toLocaleDateString();
+    
 
     patientList.forEach(patient => {
         if (patient.ariaSelected) {
             chosenPatientId = patient.id;
         }
     });
-    if (chosenPatientId == undefined) {  
+    if (chosenPatientId == undefined) {
         $("#patientError").attr("hidden", false);
         return;
     } else {
-        console.log(customerId);
+        $("#txtServiceId").val(serviceId);
+        $("#txtPatientId").val(chosenPatientId);
+        $("#txtTimeId").val(timeId);
+        $("#txtDate").val(date);
+        $("#reservationForm").submit();
     }
-    
+
+    // send form to servlet
 //    $.ajax(
 //            {
 //                type: 'POST',
 //                data: {txtPatientId: chosenPatientId,
-//                        txtSpecialtyId: specialtyId,
-//                        txtCustomerId: customerId,
-//                        txtTimeId: timeId,
-//                        
-//        },
-//                url: 'CheckoutReservationServlet',
-//                success: function (data, textStatus, jqXHR) {
+//                    txtServiceId: serviceId,
+//                    txtCustomerId: customerId,
+//                    txtTimeId: timeId,
+//                    txtDate: date
+//                },
+//                url: 'AddServiceToCartServlet',
+//                success: function (url) {
+//                    console.log(url);
+//                    window.location.replace("http://localhost:8080/ChildCareSystem/" + url);
 //                }
 //            }
 //    );
+
 }

@@ -132,5 +132,41 @@ public class ServiceDAO implements Serializable {
         }
     }
     
+    public ServiceDTO getServiceInfo(int serviceId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            String sql = "Select ServiceID, ServiceName, SpecialtyID, Price, StatusID "
+                    + "From tblService "
+                    + "Where ServiceID=?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, serviceId);
+            rs = stm.executeQuery();
+            
+            if (rs.next()) {
+                String serivceId = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyId = rs.getString("SpecialtyID");
+                double price = Double.parseDouble(rs.getString("Price"));
+                String statusId = rs.getString("StatusID");
+                ServiceDTO dto = new ServiceDTO(serivceId, serviceName, specialtyId, price, statusId);
+                return dto;
+            } else return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        
+    }
+    
     
 }

@@ -60,4 +60,36 @@ public class OpenTimeDAO implements Serializable{
             }
         }
     }
+    
+    public String getTimeString(int openTimeId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String openTime = "";
+        try {
+            con = DBHelpers.makeConnection();
+            String sql = "Select OpenTime "
+                    + "From tblOpenTime "
+                    + "Where OpenTimeID=?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, openTimeId);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                openTime = rs.getTime("OpenTime").toString();
+                return openTime;
+            }
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return openTime;
+    }
 }
