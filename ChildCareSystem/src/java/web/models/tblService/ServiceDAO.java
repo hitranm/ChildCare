@@ -111,7 +111,7 @@ public class ServiceDAO implements Serializable {
             String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
                     + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
                     + "from tblService) as x "
-                    + "where r between ?*9-8 and ?*9";
+                    + "where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
             stm.setInt(1, index);
             stm.setInt(2, index);

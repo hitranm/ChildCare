@@ -16,12 +16,29 @@ body {
     float: left;
     padding-right: 1rem;
 }
+.blog-thumb img {
+    width: 100%;
+    height: auto;
+}
 
 .blog-date {
     font-style: italic;
     color: #777777;
 }
-
+.blog-cate {
+    background: #F6F6F7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-direction: column;
+    margin: 0px;
+}
+.blog-cate a {
+    color: #444444;
+}
+.blog-cate a:hover {
+    color: #444444;
+    text-decoration: none;
+}
 .main-right {
     flex-direction: column;
 }

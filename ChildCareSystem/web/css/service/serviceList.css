@@ -20,10 +20,30 @@ body {
     padding-top: 10px;
     border-radius: 12px;
 }
+.service-preview {
+    display: inline;
+    background-color: #fff;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
 .service-name a {
     color: #444444;
 }
+.service-thumbnail {
+    margin: 10px;
+    display: inline-block;
+}
 
+.service-thumbnail img {
+    width: 250px;
+    height: 150px;
+    border-radius: 4px;
+}
+.service-name {
+    padding-top: 15px;
+}
 .service-name a:hover {
     color: #1977cc;
     text-decoration: none;

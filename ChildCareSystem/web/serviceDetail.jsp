@@ -66,6 +66,10 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group col-lg-9 col-12 mb-5">
+                <textarea class="form-control" placeholder="Đánh giá dịch vụ" rows="2"></textarea>
+                <button class="btn btn-primary float-right mt-1">Đăng</button>
+            </div>
         </div>
         <jsp:include page="footer.jsp"/>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

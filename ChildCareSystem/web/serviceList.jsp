@@ -34,39 +34,33 @@
 
         <main>
             <div class="container">
-                <!--                <div class="body-top d-flex">
-                                    <div class="search col-9">
-                                        <form action="SearchBlogServlet?idx=1" method="POST">
-                                            <b>Tìm kiếm dịch vụ:</b> <input type="text" name="txtSearchBlog" value="${param.txtSearchBlog}" />
-                                            <input type="submit" value="Search" name="btAction">
-                                        </form>
-                                    </div>
-                                    <div class="create-blog col-3">
-                                        <a class="btn btn-primary" href="createBlog.jsp">Tạo bài viết</a>
-                                    </div>
-                                </div>-->
+                <h1 class="text-center mb-2">DỊCH VỤ</h1> 
+                <div class="search">
+                    <form action="SearchBlogServlet?idx=1" method="POST">
+                        <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchBlog" value="${param.txtSearchBlog}" />
+                        <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form> 
+                </div>
                 <div class="main-wrapper">
-                    <h1 class="text-center mb-5">DỊCH VỤ</h1>                     
                     <c:set var="list" value="${requestScope.SERVICE_LIST}"/>
                     <c:if test="${not empty list}">
-                        <div class="row text-center">
-                            <c:forEach var="dto" items="${list}">
-                                <div class="service-preview mb-3 col-lg-4">
-                                    <div class="style">
-                                        <div class="service-thumbnail">
-                                            <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
-                                                <img src="${dto.thumbnail}" />
-                                            </a>
-                                        </div>
-                                        <div class="service-name">
-                                            <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
-                                                <h4>${dto.serviceName}</h4>
-                                            </a>
-                                        </div>
-                                    </div>
+                        <!--<div class="row text-center mt-2">-->
+                        <c:forEach var="dto" items="${list}">
+                            <div class="service-preview d-flex">
+                                <div class="service-thumbnail">
+                                    <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
+                                        <img src="${dto.thumbnail}" />
+                                    </a>
                                 </div>
-                            </c:forEach>
-                        </div>
+                                <div class="service-name">
+                                    <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
+                                        <h4>${dto.serviceName}</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </c:forEach>
                         <div class="paging text-center mb-3">
                             <c:forEach begin="1" end="${PAGE}" var="i">
                                 <a href="ViewServiceListServlet?index=${i}">${i}</a>

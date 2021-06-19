@@ -44,7 +44,7 @@ public class ViewServiceListServlet extends HttpServlet {
         try {
             ServiceDAO dao = new ServiceDAO();
             int count = dao.countService();
-            int pageSize = 9;
+            int pageSize = 5;
             int endPage = count / pageSize;
             if (count % pageSize != 0) {
                 endPage++;

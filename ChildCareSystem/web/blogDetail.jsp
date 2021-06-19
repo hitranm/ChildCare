@@ -51,52 +51,53 @@
                 <div class="body-left col-lg-9 col-12">
                     <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                     <div class="blog-date text-right">
-                        Ngày 10 tháng Sáu năm 2021
+                        ${blog.createdDate}
                     </div>
-                    <div class="blog-cate mb-3">
+                    <div class="blog-cate mb-5" style="position: absolute; margin-bottom: 2em;">
                         <c:forEach items="${cate.viewBlogCategory()}" var="dto">
                             <c:if test="${blog.categotyID eq dto.categoryID}">
-                                Thể loại: ${dto.categoryName}
+                                <a class="btn btn-link btn-sm" href="#">#${dto.categoryName}</a>
                             </c:if>
                         </c:forEach>
-                    </div>
-        
-                        <div class="blog-thumb">
-                            <img src="${blog.thumbnail}"/>
+                    </div> <br><br>
+                    <div class="">
+                        <div class="blog-thumb mb-3">
+                            <img src="./images/blog/${blog.thumbnail}"/>
                         </div>
                         <div class="blog-body">
                             ${blog.description}
                         </div>
+                    </div>
                     <div class="blog-author text-right mb-5">
                         <i>Tác giả: </i>
                     </div>
                 </div>
 
-<!--                <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
-                    <div class="right-post-section">
-                        <h4>Bài viết mới nhất</h4>
-                        <div class="right-post-card">
-                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                            <div class="right-post-content">
-                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                            </div>
-                            <div class="right-post-date">
-                                24 Tháng Năm, 2021
-                            </div>
-                        </div>
-
-                        <div class="right-post-card">
-                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                            <div class="right-post-content">
-                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                            </div>
-                            <div class="right-post-date">
-                                24 Tháng Năm, 2021
-                            </div>
-                        </div>
-                    </div>
-
-                </div>-->
+                <!--                <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
+                                    <div class="right-post-section">
+                                        <h4>Bài viết mới nhất</h4>
+                                        <div class="right-post-card">
+                                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
+                                            <div class="right-post-content">
+                                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
+                                            </div>
+                                            <div class="right-post-date">
+                                                24 Tháng Năm, 2021
+                                            </div>
+                                        </div>
+                
+                                        <div class="right-post-card">
+                                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
+                                            <div class="right-post-content">
+                                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
+                                            </div>
+                                            <div class="right-post-date">
+                                                24 Tháng Năm, 2021
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>-->
             </div>
         </div>
         <jsp:include page="footer.jsp"/>
@@ -107,9 +108,9 @@
             crossorigin="anonymous"
         ></script>
         <script>
-            $("#navbarDropdown").click(function () {
-                $('.dropdown-toggle').dropdown();
-            })
+                            $("#navbarDropdown").click(function () {
+                                $('.dropdown-toggle').dropdown();
+                            })
         </script>
         <script src="./js/main.js"></script>
     </body>
