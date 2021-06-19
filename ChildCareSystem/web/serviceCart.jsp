@@ -75,7 +75,10 @@
                                                             <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-outline-danger">Xóa</button>
+                                                            <c:url var="urlRemove" value="RemoveServiceFromCartServlet">
+                                                                <c:param name="txtPatientId" value="${reservation.patientDTO.patientID}"/>
+                                                            </c:url>
+                                                            <a href="${urlRemove}" role="button" class="btn btn-outline-danger">Xóa</a>
                                                         </td>
                                                     </tr>
                                                 </tbody>

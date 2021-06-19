@@ -112,6 +112,10 @@
         <servlet-name>AddServiceToCartServlet</servlet-name>
         <servlet-class>web.controller.AddServiceToCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveServiceFromCartServlet</servlet-name>
+        <servlet-class>web.controller.RemoveServiceFromCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>AddServiceToCartServlet</servlet-name>
         <url-pattern>/AddServiceToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveServiceFromCartServlet</servlet-name>
+        <url-pattern>/RemoveServiceFromCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -47,11 +47,14 @@ public class CartObject implements Serializable {
             this.cartItems = new ArrayList<>();
         }
 
+        CartItem deleteItem = null;
         for (CartItem item : this.cartItems) {
             if (item.getPatientId() == patientId) {
-                cartItems.remove(item);
-                status = true;
+                deleteItem = item;
             }
+        }      
+        if(deleteItem != null) {
+            status = this.cartItems.remove(deleteItem);
         }
         // If the cart is empty, delete it
         if (this.cartItems.isEmpty()) {
