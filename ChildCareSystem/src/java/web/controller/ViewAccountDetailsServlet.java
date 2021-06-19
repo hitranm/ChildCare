@@ -63,14 +63,14 @@ private static final String ERROR="error.jsp";
                                                                                             customerDTO.getAddress(),
                                                                                             customerDTO.getBirthday(),
                                                                                             customerDTO.getCitizenID());
-                        session.setAttribute("USER_PROFILE", userProfileViewModelCus);
+                        session.setAttribute("USER_PROFILE1", userProfileViewModelCus);
                         break;
                     case 2:
                         StaffDAO staffDAO = new StaffDAO();
                         StaffDTO staffDTO = staffDAO.queryStaffByIdentityId(currentIdentityID);
                         
                         UserProfileViewModel userProfileViewModelStaff = new UserProfileViewModel (identityDTO, staffDTO.getFullName(), staffDTO.getPhoneNumber(), staffDTO.getAddress(), staffDTO.getBirthday(), staffDTO.getCitizenID(), staffDTO.getSpecialtyID());
-                        session.setAttribute("USER_PROFILE", userProfileViewModelStaff);
+                        session.setAttribute("USER_PROFILE1", userProfileViewModelStaff);
                         break;
                     case 3: 
                         ManagerDAO managerDAO = new ManagerDAO();
@@ -81,7 +81,7 @@ private static final String ERROR="error.jsp";
                                                                                             managerDTO.getAddress(),
                                                                                             managerDTO.getBirthday(),
                                                                                             managerDTO.getCitizenID());
-                        session.setAttribute("USER_PROFILE", userProfileViewModelManager);
+                        session.setAttribute("USER_PROFILE1", userProfileViewModelManager);
                         break;
                     case 4:
                         AdminDAO adminDAO = new AdminDAO();
@@ -92,7 +92,7 @@ private static final String ERROR="error.jsp";
                                                                                             adminDTO.getAddress(),
                                                                                             adminDTO.getBirthday(),
                                                                                             adminDTO.getCitizenID());
-                        session.setAttribute("USER_PROFILE", userProfileViewModelAdmin);
+                        session.setAttribute("USER_PROFILE1", userProfileViewModelAdmin);
                         break;
                     
                 }

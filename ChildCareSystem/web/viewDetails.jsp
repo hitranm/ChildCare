@@ -43,20 +43,65 @@
         <jsp:include page="header.jsp"/>
         <main> 
             <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
-            <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
+            <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE1}"/>
+<style>
+            .wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 4rem 0 6rem 0;
+               
+            }
 
-            <h1>Profile</h1>
+            .wrapper form {
+                width: 30%;
+               
+            }
+
+            .wrapper h1 {
+                margin-bottom: 20px;
+            }
+        </style>
+        <div class="wrapper px-5">
+            <h1>Thông tin tài khoản</h1>
 
             <form action="DispatchServlet" method="POST">
-                <div> IdentityID: <input type="text" name="identityID" value="${userProfileDTO.identityDTO.identityID}" readonly></div>
-                <div> Full Name:<input type="text" name="fullName" value="${userProfileDTO.fullName}" required="true"></div>
-                <div> Address: <input type="text" name="address" value="${userProfileDTO.address}" required="true"></div>
-                <div> Birthday: <input type="date" name="birthday" value="${userProfileDTO.birthday}" required="true"></div>
-                <div> CitizenID: <input type="text" name="citizenID" value="${userProfileDTO.citizenID}" readonly></div>
-                <div> Phone Number: <input type="text" name="phoneNum" value="${userProfileDTO.phoneNumber}" readonly></div>
-                <div> Email: <input type="text" name="email" value="${userProfileDTO.identityDTO.email}" readonly></div>
+                <div class="form-row">
+                <label for="fullNanme">IdentityID</label>
+                <input type="text" name="identityID" class="form-control" value="${userProfileDTO.identityDTO.identityID}" readonly>
+                </div>
+                <div class="form-row">
+                     <label for="fullNanme">Họ và tên</label>
+                <input type="text" name="fullName" class="form-control" value="${userProfileDTO.fullName}" required="true">
+                </div>
+                <div class="form-row">
+                    <label for="fullNanme">Địa chỉ</label>
+                <input type="text" name="address" class="form-control" value="${userProfileDTO.address}" required="true">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fullNanme">Ngày sinh</label>
+                <input type="date" name="birthday" class="form-control" value="${userProfileDTO.birthday}" required="true">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fullNanme">CCCD</label>
+                <input type="text" name="citizenID" class="form-control" value="${userProfileDTO.citizenID}" readonly>
+                    </div>
+                </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fullNanme">Số điện thoại</label> 
+                <input type="text" name="phoneNum" class="form-control" value="${userProfileDTO.phoneNumber}" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fullNanme">Email</label> 
+                <input type="text" name="email" class="form-control" value="${userProfileDTO.identityDTO.email}" readonly>
+                    </div>
+                    </div>
                     <c:if test="${userProfileDTO.specialtyID != null}">
-                    <div>   Chuyên khoa <select name="specialtyID" required="true">
+                        <div class="form-row">  
+                   <label for="fullNanme">Chuyên khoa</label>
+                    <select name="specialtyID" class="form-control" required="true">
                             <option>-Chuyên khoa-</option>
                             <c:forEach items="${specialty.viewSpecialtyList()}" var="dto">
                                 <c:if test="${userProfileDTO.specialtyID eq dto.specialtyId}">
@@ -69,10 +114,12 @@
                     </select>
                         </div>
                 </c:if>
-                
-                <button type="submit" name="btAction" value="UpdateDetails"> Cập nhật</button>
+                    </br>
+                <div class="text-center">
+                <button type="submit" name="btAction" class="btn btn-primary col-md-4" value="UpdateDetails"> Cập nhật</button>
+                </div>
             </form>
-
+        
 
             <c:if test="${requestScope.SUCCESS !=null}">
                 <div class="alert alert-success"role="alert">
@@ -80,7 +127,7 @@
                 </div>
             </c:if>
         </main>
-
+</div>
         <jsp:include page="footer.jsp"/>        
         <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 

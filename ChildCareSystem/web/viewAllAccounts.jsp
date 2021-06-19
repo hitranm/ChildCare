@@ -201,7 +201,7 @@
                                                     <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
-                                                            
+                                                            <c:param name="id" value="${dto.identityID}"></c:param>
 
 
                                                         </c:url>
@@ -234,7 +234,7 @@
                                                         <td>
                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                 <c:param name="btAction" value="ViewDetails"></c:param>
-                                                               
+                                                               <c:param name="id" value="${dto.identityID}"></c:param>
 
 
                                                             </c:url>
@@ -266,7 +266,7 @@
                                                             <td>
                                                                 <c:url var="viewdetails" value="DispatchServlet">
                                                                     <c:param name="btAction" value="ViewDetails"></c:param>
-                                                                    
+                                                                    <c:param name="id" value="${dto.identityID}"></c:param>
 
 
                                                                 </c:url>
@@ -322,7 +322,7 @@
                                                     <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
-                                                            
+                                                            <c:param name="id" value="${dto.identityID}"></c:param>
 
 
                                                         </c:url>
@@ -379,7 +379,7 @@
                                                     <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
-                                                           
+                                                           <c:param name="id" value="${dto.identityID}"></c:param>
 
 
                                                         </c:url>
@@ -433,7 +433,7 @@
                                                     <td>
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
-                                                           
+                                                           <c:param name="id" value="${dto.identityID}"></c:param>
 
 
                                                         </c:url>
