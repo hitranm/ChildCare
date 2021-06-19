@@ -46,13 +46,21 @@
                 <div class="main-wrapper">
                     <c:set var="list" value="${requestScope.SERVICE_LIST}"/>
                     <c:if test="${not empty list}">
-                        <!--<div class="row text-center mt-2">-->
-                        <c:forEach var="dto" items="${list}">
-                            <div class="service-preview d-flex">
-                                <div class="service-thumbnail">
-                                    <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
-                                        <img src="${dto.thumbnail}" />
-                                    </a>
+                        <div class="row text-center">
+                            <c:forEach var="dto" items="${list}">
+                                <div class="service-preview mb-3 col-lg-4">
+                                    <div class="style">
+                                        <div class="service-thumbnail">
+                                            <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
+                                                <img src="./images/service/${dto.thumbnail}"/>
+                                            </a>
+                                        </div>
+                                        <div class="service-name">
+                                            <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
+                                                <h4>${dto.serviceName}</h4>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="service-name">
                                     <a href="ViewServiceDetailServlet?id=${dto.serviceID}">
