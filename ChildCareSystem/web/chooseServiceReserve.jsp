@@ -15,11 +15,19 @@
         <link rel="stylesheet" href="css/reservation/reservation.css" >    
     </head>
     <body>
+
         <style>
             main {
                 min-height: 70vh;
             }
         </style>
+        <script>
+            $(document).ready(function () {
+                $("#customerName").prop("disabled", false);
+                $("#customerEmail").prop("disabled", false);
+                $("#phoneNum").prop("disabled", false);
+            });
+        </script>
         <jsp:include page="header.jsp"/>
         <main>
             <jsp:useBean id="service" class="web.models.tblService.ServiceDAO" scope="page"/>
@@ -69,15 +77,13 @@
                                 <h3>Chưa có hồ sơ bệnh nhân</h3>
                             </c:when>
                             <c:otherwise>
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#customerName").prop("disabled", false);
-                                        $("#customerEmail").prop("disabled", false);
-                                        $("#phoneNum").prop("disabled", false);
-                                    });
-                                </script>
+
                             </c:otherwise>
                         </c:choose>
+                        <c:url var="addUrl" value="ViewPatientProfileServlet"> 
+                            <c:param name="action" value="add"/>
+                        </c:url>
+                        <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>  
                     </div>
                     <div class="col-8 px-4">
                         <div class="row">
@@ -111,7 +117,7 @@
                         <input id="txtServiceId" hidden name="txtServiceId" value=""/>
                         <input id="txtTimeId" hidden name="txtTimeId" value=""/>
                         <input id="txtDate" hidden name="txtDate" value=""/>
-                        
+
                         <div class="form-group col-12">
                             <label for="customerName">Tên</label>
                             <input type="text" class="form-control" id="customerName" name="customerName" value="${customerDTO.fullName}" disabled>
@@ -125,9 +131,8 @@
                             <input type="text" class="form-control" id="phoneNum" name="phoneNum" value="${customerDTO.phoneNumber}" disabled>
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="submitReservation()" class="btn btn-primary col-md-3">Tiếp tục</button>
+                            <button type="button" onclick="submitReservation()" class="btn btn-primary col-md-4">Tiếp tục</button>
                         </div>
-
                     </form>
                 </div>
 
@@ -135,10 +140,11 @@
         </main>
 
 
-<!--        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>-->
+        <!--        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>-->
         <script src="js/CalendarPicker.js"></script>
         <script src="js/reservation.js"></script>
+
 
         <jsp:include page="footer.jsp"/>
     </body>

@@ -98,6 +98,14 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <c:if test="${not empty param.action}">
+            <script>
+                $("#v-pills-addPatient-tab").trigger('click');
+                console.log("Clicked");
+            </script>
+        </c:if>
+        
+        
         <main style="padding: 5%">
             <h1>DANH SÁCH HỒ SƠ BỆNH NHÂN</h1>
             <br>
@@ -111,7 +119,6 @@
                         </c:if>
                         <c:if test="${empty requestScope.reachMaxPatient}">
                             <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm Hồ Sơ Bệnh Nhân</a>
-
                         </c:if>
                         <br>
                         <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hồ sơ bệnh nhân</a>
@@ -270,8 +277,7 @@
           integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
           crossorigin="anonymous"
         ></script> -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+        
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
