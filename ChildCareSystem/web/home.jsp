@@ -213,7 +213,7 @@
                                         <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
                                             <article>
                                                 <div class="blog_thumbnail">
-                                                    <img src="./images/blog/${dto.thumbnail}" />
+                                                    <img src="./images/service/${dto.thumbnail}" />
                                                 </div>
                                                 <div class="blog_content px-2">
                                                     <h2>
