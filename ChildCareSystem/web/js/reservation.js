@@ -5,10 +5,13 @@
  */
 const nextYear = new Date().getFullYear() + 1;
 const nextMonth = new Date().getMonth() + 1;
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
 
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
     min: new Date(),
-    max: new Date(nextYear, 10)
+    max: new Date(nextYear, 1)
 });
 
 function submitReservation() {
@@ -16,8 +19,10 @@ function submitReservation() {
     let chosenPatientId;
     var serviceId = $("#service-specialty option:selected").val();
     var timeId = $("#reservation-time option:selected").val();
-    var customerId = $("#customerId").text();
     var date = myCalender.value.toLocaleDateString();
+    
+    //Date validation
+    
     
 
     patientList.forEach(patient => {

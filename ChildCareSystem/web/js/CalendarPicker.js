@@ -57,29 +57,29 @@ function CalendarPicker(element, options) {
 
     // Hard-coded list of all days.
     this.listOfAllDaysAsText = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
+        'Thứ 2',
+        'Thứ 3',
+        'Thứ 4',
+        'Thứ 5',
+        'Thứ 6',
+        'Thứ 7',
+        'Chủ nhật'
     ];
 
     // Hard-coded list of all months.
     this.listOfAllMonthsAsText = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
+        'Tháng 1',
+        'Tháng 2',
+        'Tháng 3',
+        'Tháng 4',
+        'Tháng 5',
+        'Tháng 6',
+        'Tháng 7',
+        'Tháng 8',
+        'Tháng 9',
+        'Tháng 10',
+        'Tháng 11',
+        'Tháng 12'
     ];
 
     // Creating the calendar
