@@ -116,6 +116,10 @@
         <servlet-name>RemoveServiceFromCartServlet</servlet-name>
         <servlet-class>web.controller.RemoveServiceFromCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadUpdateReservationServlet</servlet-name>
+        <servlet-class>web.controller.LoadUpdateReservationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>RemoveServiceFromCartServlet</servlet-name>
         <url-pattern>/RemoveServiceFromCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadUpdateReservationServlet</servlet-name>
+        <url-pattern>/LoadUpdateReservationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

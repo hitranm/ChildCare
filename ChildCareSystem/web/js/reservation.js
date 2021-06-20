@@ -6,7 +6,7 @@
 const nextYear = new Date().getFullYear() + 1;
 const nextMonth = new Date().getMonth() + 1;
 const today = new Date();
-const tomorrow = new Date(today);
+const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
@@ -40,23 +40,4 @@ function submitReservation() {
         $("#txtDate").val(date);
         $("#reservationForm").submit();
     }
-
-    // send form to servlet
-//    $.ajax(
-//            {
-//                type: 'POST',
-//                data: {txtPatientId: chosenPatientId,
-//                    txtServiceId: serviceId,
-//                    txtCustomerId: customerId,
-//                    txtTimeId: timeId,
-//                    txtDate: date
-//                },
-//                url: 'AddServiceToCartServlet',
-//                success: function (url) {
-//                    console.log(url);
-//                    window.location.replace("http://localhost:8080/ChildCareSystem/" + url);
-//                }
-//            }
-//    );
-
 }

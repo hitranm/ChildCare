@@ -72,7 +72,10 @@
                                                         <td>${reservation.cartItem.checkInTime}</td>
                                                         <td>${reservation.serviceDTO.price}</td>
                                                         <td>
-                                                            <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
+                                                            <c:url var="urlUpdate" value="LoadUpdateReservationServlet">
+                                                                <c:param name="txtPatientId" value="${reservation.patientDTO.patientID}"/>
+                                                            </c:url>
+                                                            <a href="${urlUpdate}" role="button" class="btn btn-outline-primary">Chỉnh sửa</a>
                                                         </td>
                                                         <td>
                                                             <c:url var="urlRemove" value="RemoveServiceFromCartServlet">
