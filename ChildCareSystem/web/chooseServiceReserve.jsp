@@ -12,33 +12,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Choose service</title>
         <link rel="stylesheet" href="css/CalendarPicker.style.css">
-        <link rel="stylesheet" href="css/reservation/reservation.css" >    
-    </head>
-    <body>
-
+        <link rel="stylesheet" href="css/lobibox.css">
+        <link rel="stylesheet" href="css/reservation/reservation.css" >  
+        
         <style>
             main {
                 min-height: 70vh;
             }
         </style>
-
+    </head>
+    <body>
         <jsp:include page="header.jsp"/>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Đã có lỗi xảy ra</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="modalBody">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        <script src="js/lobibox.js"></script>
+        <script src="js/notifications.js"></script>
+        
         <script>
             $(document).ready(function () {
                 $("#customerName").prop("disabled", false);
@@ -48,14 +35,32 @@
         </script>
         <c:if test="${not empty requestScope.DUPLICATE_PATIENT}">
             <script>
-                $("#modalBody").text("${requestScope.DUPLICATE_PATIENT}");
-                $("#exampleModal").modal('show');
+                Lobibox.alert('error', {
+                    msg: "Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.",
+                    icons: {
+                        fontAwesome: {
+                            error: 'fa fa-times-circle'
+                        }
+                    },
+                    icon: true,
+                    iconSource: 'fontAwesome',
+                    width: 600,
+                    title: "Đã có lỗi xảy ra"
+                });
             </script>
         </c:if>
         <c:if test="${not empty requestScope.MAX_RESERVATION}">
             <script>
-                $("#modalBody").text("${requestScope.MAX_RESERVATION}");
-                $("#exampleModal").modal('show');
+                Lobibox.alert('error', {
+                    msg: "Bạn chỉ có thể đặt tối đa 3 đơn trong 1 lần thanh toán.",
+                    icons: {
+                        fontAwesome: {
+                            error: 'fa fa-times-circle'
+                        }
+                    },
+                    icon: true,
+                    iconSource: 'fontAwesome'
+                });
             </script>
         </c:if>
         <main>
@@ -169,8 +174,7 @@
         </main>
 
 
-        <!--                <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>-->
+
         <script src="js/CalendarPicker.js"></script>
         <script src="js/reservation.js"></script>
         <jsp:include page="footer.jsp"/>

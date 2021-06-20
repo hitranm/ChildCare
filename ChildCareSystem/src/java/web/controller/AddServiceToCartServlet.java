@@ -35,7 +35,7 @@ import web.viewModels.Cart.CartViewModel;
  * @author HOANGKHOI
  */
 public class AddServiceToCartServlet extends HttpServlet {
-
+    
     private static final String SUCCESS = "serviceCart.jsp";
     private static final String ERROR = "chooseServiceReserve.jsp";
 
@@ -73,11 +73,11 @@ public class AddServiceToCartServlet extends HttpServlet {
             if (listCartViewModel == null) {
                 listCartViewModel = new ArrayList<>();
             }
-
+            
             if (cart.getCountItem() == 3) {  // Check max cart item
-                request.setAttribute("MAX_RESERVATION_ERROR", "Bạn chỉ được đặt tối đa 3 dịch vụ trong 1 lần thanh toán.");
-                url = "DispatchServlet?btAction=ChooseServiceReserve&status=max";
-                request.getRequestDispatcher(url).forward(request, response);
+                url = "DispatchServlet?btAction=ChooseServiceReserve";
+                session.setAttribute("STATUS", "MAX");
+                response.sendRedirect(url);
             } else {
                 //3. Customer select service
                 String time = openTimeDAO.getTimeString(timeIntervalId);
@@ -89,26 +89,27 @@ public class AddServiceToCartServlet extends HttpServlet {
                     //Setup viewmodel
                     CustomerDAO customerDAO = new CustomerDAO();
                     CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(customerId);
-
+                    
                     PatientDAO patientDAO = new PatientDAO();
                     PatientDTO patientDTO = patientDAO.getPatientByID(String.valueOf(patientId));
-
+                    
                     ServiceDAO serviceDAO = new ServiceDAO();
                     ServiceDTO serviceDTO = serviceDAO.getServiceInfo(serviceId);
-
+                    
                     SpecialtyDAO specialtyDAO = new SpecialtyDAO();
                     int specialtyId = Integer.parseInt(serviceDTO.getSpecialtyId());
                     SpecialtyDTO specialtyDTO = specialtyDAO.getSpecialtyById(specialtyId);
-
+                    
                     CartViewModel cartViewModel = new CartViewModel(customerDTO, patientDTO, serviceDTO, specialtyDTO, reservation);
                     listCartViewModel.add(cartViewModel);
                     session.setAttribute("CART", cart);
                     session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
                     url = SUCCESS;
+                    session.removeAttribute("DUPLICATE_PATIENT");
                     response.sendRedirect(url);
                 } else {
-                    request.setAttribute("DUPLICATE_PATIENT", "Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.");
-                    url = "DispatchServlet?btAction=ChooseServiceReserve&status=duplicated";
+                    url = "DispatchServlet?btAction=ChooseServiceReserve";
+                    session.setAttribute("STATUS", "DUPLICATED");                    
                     response.sendRedirect(url);
                 }
             }

@@ -5,11 +5,13 @@
  */
 package web.models.tblIdentity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Admin
  */
-public class IdentityDTO {
+public class IdentityDTO implements Serializable{
     private String identityID;
     private String email;
     private String password;
