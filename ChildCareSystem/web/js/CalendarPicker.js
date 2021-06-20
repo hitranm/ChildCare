@@ -1,13 +1,16 @@
 // Polyfill for Element.prototype.closest (for IE 9+)
-if (!Element.prototype.matches) { Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector; }
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
 if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-      var el = this;
-      do {
-        if (Element.prototype.matches.call(el, s)) return el;
-        el = el.parentElement || el.parentNode;
-      } while (el !== null && el.nodeType === 1);
-      return null;
+    Element.prototype.closest = function (s) {
+        var el = this;
+        do {
+            if (Element.prototype.matches.call(el, s))
+                return el;
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
     };
 }
 
@@ -30,6 +33,7 @@ function CalendarPicker(element, options) {
 
     // The calendars value should always be the current date.
     this.value = this.date;
+
 
     // Ranges for the calendar (optional).
     this.min = options.min;
@@ -108,7 +112,8 @@ function CalendarPicker(element, options) {
  * @author Juan Mendes - 30th October 2012.
  */
 CalendarPicker.prototype._getDaysInMonth = function (month, year) {
-    if ((!month && month !== 0) || (!year && year !== 0)) return;
+    if ((!month && month !== 0) || (!year && year !== 0))
+        return;
 
     var date = new Date(year, month, 1);
     var days = [];
@@ -125,7 +130,8 @@ CalendarPicker.prototype._getDaysInMonth = function (month, year) {
  * @description Sets the clock of a date to 00:00:00 to be consistent.
  */
 CalendarPicker.prototype._formatDateToInit = function (date) {
-    if (!date) return;
+    if (!date)
+        return;
     date.setHours(0, 0, 0);
 }
 
@@ -169,7 +175,8 @@ CalendarPicker.prototype._insertCalendarIntoWrapper = function () {
     this.calendarGrid.addEventListener('click', handleSelectedElement, false);
 
     this.calendarGrid.addEventListener('keydown', (keyEvent) => {
-        if (keyEvent.key !== 'Enter') return;
+        if (keyEvent.key !== 'Enter')
+            return;
 
         handleSelectedElement(keyEvent);
     }, false);
@@ -265,7 +272,8 @@ CalendarPicker.prototype._insertDaysIntoGrid = function () {
         var Date = date.toString().split(' ')[2];
 
         var dateIsTheCurrentValue = this.value.toString() === date.toString();
-        if (dateIsTheCurrentValue) this.activeDateElement = dateElement;
+        if (dateIsTheCurrentValue)
+            this.activeDateElement = dateElement;
 
         var dateIsBetweenAllowedRange = (this.min || this.max) && (date.toString() !== this.today.toString() && (date < this.min || date > this.max))
         if (dateIsBetweenAllowedRange) {
@@ -309,7 +317,8 @@ CalendarPicker.prototype._updateCalendar = function () {
  * @description A "listener" that lets the user do something everytime the value changes.
  */
 CalendarPicker.prototype.onValueChange = function (callback) {
-    if (this.callback) return this.callback(this.value);
+    if (this.callback)
+        return this.callback(this.value);
     this.callback = callback;
 }
 

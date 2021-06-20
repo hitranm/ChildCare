@@ -13,9 +13,10 @@
         <title>Update</title>
         <link rel="stylesheet" href="css/CalendarPicker.style.css">
         <link rel="stylesheet" href="css/reservation/reservation.css" >  
+
+
     </head>
     <body>
-        <h1>Hello World!</h1>
         <jsp:include page="header.jsp"/>
         <main>
             <jsp:useBean id="service" class="web.models.tblService.ServiceDAO" scope="page"/>
@@ -91,14 +92,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div hidden id="checkInTime">${updateItemDTO.checkInTime}</div>
                         <div id="myCalendarWrapper" class="py-3"></div>
                     </div>
                 </div>
 
                 <div class="reservation-bottom py-4 col-12">
                     <h3>Thông tin khách hàng</h3>
-                    <div hidden id="customerId">${customerDTO.customerID}</div>
-                    <form class="col-md-6" action="AddServiceToCartServlet" method="post" id="reservationForm">
+                    <form class="col-md-6" action="UpdateReservationServlet" method="post" id="reservationForm">
                         <input hidden name="txtCustomerId" value="${customerDTO.customerID}"/>
                         <input id="txtPatientId" hidden name="txtPatientId" value="${updateItemDTO.patientId}"/>
                         <input id="txtServiceId" hidden name="txtServiceId" value=""/>
@@ -118,15 +119,29 @@
                             <input type="text" class="form-control" id="phoneNum" name="phoneNum" value="${customerDTO.phoneNumber}" disabled>
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="submitReservation()" class="btn btn-primary col-md-4">Cập nhật</button>
+                            <button type="button" onclick="submitUpdate()" class="btn btn-primary col-md-4">Cập nhật</button>
                         </div>
                     </form>
                 </div>
             </div>
         </main>
 
+
+        <script>
+            function submitUpdate() {
+                var serviceId = $("#service-specialty option:selected").val();
+                var timeId = $("#reservation-time option:selected").val();
+                var date = myCalender.value.toLocaleDateString();
+                $("#txtServiceId").val(serviceId);
+                $("#txtTimeId").val(timeId);
+                $("#txtDate").val(date);
+                $("#reservationForm").submit();
+            }
+        </script>
         <script src="js/CalendarPicker.js"></script>
         <script src="js/reservation.js"></script>
+
         <jsp:include page="footer.jsp"/>
+
     </body>
 </html>

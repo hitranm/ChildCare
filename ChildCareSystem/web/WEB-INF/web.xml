@@ -120,6 +120,10 @@
         <servlet-name>LoadUpdateReservationServlet</servlet-name>
         <servlet-class>web.controller.LoadUpdateReservationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateReservationServlet</servlet-name>
+        <servlet-class>web.controller.UpdateReservationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>LoadUpdateReservationServlet</servlet-name>
         <url-pattern>/LoadUpdateReservationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateReservationServlet</servlet-name>
+        <url-pattern>/UpdateReservationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

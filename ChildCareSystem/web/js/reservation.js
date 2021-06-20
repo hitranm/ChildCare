@@ -11,8 +11,15 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
     min: new Date(),
-    max: new Date(nextYear, 1)
+    max: new Date(nextYear, 1),
+    
 });
+
+// Get former checkin time
+    function renderCheckInTime() {
+        var date = $("#checkInTime").text();
+        console.log(date);
+    }
 
 function submitReservation() {
     var patientList = $('.list-group-item').toArray();
@@ -22,9 +29,6 @@ function submitReservation() {
     var date = myCalender.value.toLocaleDateString();
     
     //Date validation
-    
-    
-
     patientList.forEach(patient => {
         if (patient.ariaSelected) {
             chosenPatientId = patient.id;
@@ -40,4 +44,19 @@ function submitReservation() {
         $("#txtDate").val(date);
         $("#reservationForm").submit();
     }
+    
+    function submitUpdate() {
+        var serviceId = $("#service-specialty option:selected").val();
+        var timeId = $("#reservation-time option:selected").val();
+        var date = myCalender.value.toLocaleDateString();
+         $("#txtServiceId").val(serviceId);
+        $("#txtTimeId").val(timeId);
+        $("#txtDate").val(date);
+        $("#reservationForm").submit();
+    }
+    
+    //---------------------------------------------
+    renderCheckInTime();
+    
+    
 }
