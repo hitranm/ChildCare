@@ -29,8 +29,12 @@ body {
 }
 
 .blog-preview {
-    border-bottom: 1px #55a3f7;
     display: inline;
+    background-color: #fff;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
 }
 
 .blog-preview a {
@@ -61,7 +65,17 @@ body {
 .preview-title {
     padding-top: 15px;
 }
+.cate {
+    background: #F6F6F7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-direction: column;
+    margin: 0px;
+}
 
+.cate a:hover {
+    color: #444444;
+}
 
 /*-----body centre--------*/
 

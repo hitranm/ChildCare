@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author HOANGKHOI
  */
 public class ServiceDTO implements Serializable{
+    private String serviceID;
     private String serviceName;
     private String specialtyId;
     private String thumbnail;
@@ -31,8 +32,21 @@ public class ServiceDTO implements Serializable{
         this.thumbnail = thumbnail;
         this.createdDate = createdDate;
     }
-    
-    
+
+
+    public ServiceDTO(String serviceID, String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.specialtyId = specialtyId;
+        this.thumbnail = thumbnail;
+        this.description = description;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.statusId = statusId;
+        this.createPersonId = createPersonId;
+        this.createdDate = createdDate;
+    }
+
     public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate, String updatedDate) {
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
@@ -46,7 +60,7 @@ public class ServiceDTO implements Serializable{
         this.updatedDate = updatedDate;
     }
 
-    
+
     public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate) {
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
@@ -58,8 +72,14 @@ public class ServiceDTO implements Serializable{
         this.createPersonId = createPersonId;
         this.createdDate = createdDate;
     }
-    
-    
+
+    public String getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
+    }
 
     public String getServiceName() {
         return serviceName;
@@ -140,6 +160,6 @@ public class ServiceDTO implements Serializable{
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
-    
+
+
 }

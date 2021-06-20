@@ -62,26 +62,30 @@
                         <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
                         <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
                         <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
-                        <div class="row justify-content-between mr-1">
-                            <div class="col-9">
-                                <label><h5>Tiêu đề: </h5></label>
-                                <input type="text" name="txtTitle" value="${blog.title}" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="title">Tiêu đề:</label>
+                                <input class="form-control" type="text" name="txtTitle" value="${blog.title}" />
                                 <c:if test="${not empty err.titleLengthErr}">
                                     <font color="red">${err.titleLengthErr}</font>
                                 </c:if>
                             </div>
-                            <select class="form-select col-3" aria-label="Default select example" name="category" id="category">
-                                <option>-Thể loại-</option>
-                                <c:forEach items="${cate.viewBlogCategory()}" var="dto">
-                                    <c:if test="${blog.categotyID eq dto.categoryID}">
-                                        <option value="${dto.categoryID}" selected>${dto.categoryName}</option>
-                                    </c:if>
-                                    <c:if test="${blog.categotyID != dto.categoryID}">
-                                        <option value="${dto.categoryID}">${dto.categoryName}</option>
-                                    </c:if>
-                                </c:forEach>
-                            </select><br/>
+                            <div class="form-group col-md-6">
+                                <label for="category">Thể loại:</label>
+                                <select class="form-control" name="category" id="category">
+
+                                    <c:forEach items="${cate.viewBlogCategory()}" var="dto">
+                                        <c:if test="${blog.categotyID eq dto.categoryID}">
+                                            <option value="${dto.categoryID}" selected>${dto.categoryName}</option>
+                                        </c:if>
+                                        <c:if test="${blog.categotyID != dto.categoryID}">
+                                            <option value="${dto.categoryID}">${dto.categoryName}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
+                        <br/>
 
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">

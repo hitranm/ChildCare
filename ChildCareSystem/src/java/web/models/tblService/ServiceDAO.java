@@ -20,18 +20,19 @@ import web.utils.DBHelpers;
  * @author HOANGKHOI
  */
 public class ServiceDAO implements Serializable {
+
     public boolean AddNewService(ServiceDTO serviceDTO) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
-        
+
         try {
             //1. Connect Db;
-            con =  DBHelpers.makeConnection();
+            con = DBHelpers.makeConnection();
             //2. Create query string
             String query = "INSERT INTO "
                     + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            
+
             //3 Create statement and assign value
             stm = con.prepareStatement(query);
             stm.setString(1, serviceDTO.getServiceName());
@@ -43,22 +44,271 @@ public class ServiceDAO implements Serializable {
             stm.setString(7, serviceDTO.getStatusId());
             stm.setString(8, serviceDTO.getCreatedDate());
             stm.setString(9, serviceDTO.getCreatePersonId());
-            
+
             //4 Execute query
             int row = stm.executeUpdate();
             if (row > 0) {
                 return true;
-            }            
+            }
         } finally {
             if (stm != null) {
                 stm.close();
             }
-            
+
             if (con != null) {
                 con.close();
             }
         }
-        return false;     
+        return false;
+    }
+
+    public int countService() throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1. connect db
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                //2. create sql string
+                String sql = "Select count(*) "
+                        + "From tblService";
+                //3. create statement and assign value to parameters
+                stm = con.prepareStatement(sql);
+                //4. execute query
+                rs = stm.executeQuery();
+                //5. Process result
+                while (rs.next()) {
+                    return rs.getInt(1);
+                } //end while traversing result
+            } //end if con iss opened
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    private List<ServiceDTO> serviceList;
+
+    public List<ServiceDTO> getServiceList() {
+        return serviceList;
+    }
+
+    public void viewServiceList(int index) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            //if (con != null) {
+            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+                    + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
+                    + "from tblService) as x "
+                    + "where r between ?*5-4 and ?*5";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, index);
+            stm.setInt(2, index);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                String serviceID = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyID = rs.getString("SpecialtyID");
+                String thumbnail = rs.getString("Thumbnail");
+                String description = rs.getString("Description");
+                Double price = rs.getDouble("Price");
+                Double sale = rs.getDouble("SalePrice");
+                String authorID = rs.getString("CreatedPersonID");
+                String date = rs.getString("CreatedDate");
+                String statusID = rs.getString("StatusID");
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                if (this.serviceList == null) {
+                    this.serviceList = new ArrayList<>();
+                }
+                this.serviceList.add(dto);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public ServiceDTO getServiceDetail(String serviceID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+                        + "From tblService Where ServiceID = ?";
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, serviceID);
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    String serviceName = rs.getString("ServiceName");
+                    String specialtyID = rs.getString("SpecialtyID");
+                    String thumbnail = rs.getString("Thumbnail");
+                    String description = rs.getString("Description");
+                    Double price = rs.getDouble("Price");
+                    Double sale = rs.getDouble("SalePrice");
+                    String authorID = rs.getString("CreatedPersonID");
+                    String date = rs.getString("CreatedDate");
+                    String statusID = rs.getString("StatusID");
+                    ServiceDTO dto = new ServiceDTO(serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                    return dto;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public int countSearch(String searchValue) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1. connect db
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                //2. create sql string
+                String sql = "Select count(*) "
+                        + "From tblService "
+                        + "Where ServiceName Like ?";
+                //3. create statement and assign value to parameters
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + searchValue + "%");
+                //4. execute query
+                rs = stm.executeQuery();
+                //5. Process result
+                while (rs.next()) {
+                    return rs.getInt(1);
+                } //end while traversing result
+            } //end if con iss opened
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+
+    public void searchService(String searchValue, int index) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+                    + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * \n"
+                    + "from tblService where ServiceName like ?) as x where r between ?*5-4 and ?*5";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, "%" + searchValue + "%");
+            stm.setInt(2, index);
+            stm.setInt(3, index);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                String serviceID = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyID = rs.getString("SpecialtyID");
+                String thumbnail = rs.getString("Thumbnail");
+                String description = rs.getString("Description");
+                Double price = rs.getDouble("Price");
+                Double sale = rs.getDouble("SalePrice");
+                String authorID = rs.getString("CreatedPersonID");
+                String date = rs.getString("CreatedDate");
+                String statusID = rs.getString("StatusID");
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                if (this.serviceList == null) {
+                    this.serviceList = new ArrayList<>();
+                }
+                this.serviceList.add(dto);
+
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+    }
+    public void viewServiceList() throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            //if (con != null) {
+            String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+                    + "From tblService";
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+               String serviceID = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyID = rs.getString("SpecialtyID");
+                String thumbnail = rs.getString("Thumbnail");
+                String description = rs.getString("Description");
+                Double price = rs.getDouble("Price");
+                Double sale = rs.getDouble("SalePrice");
+                String authorID = rs.getString("CreatedPersonID");
+                String date = rs.getString("CreatedDate");
+                String statusID = rs.getString("StatusID");
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                if (this.serviceList == null) {
+                    this.serviceList = new ArrayList<>();
+                }
+                this.serviceList.add(dto);
+
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
     public List<ServiceDTO> getTop3ServiceList() throws SQLException {
         List<ServiceDTO> result = null;

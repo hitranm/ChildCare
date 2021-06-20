@@ -8,23 +8,25 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import web.models.tblBlog.BlogDAO;
-import web.models.tblBlog.BlogDTO;
+import web.models.tblService.ServiceDAO;
+import web.models.tblService.ServiceDTO;
 
 /**
  *
  * @author DELL
  */
-public class ViewBlogDetailServlet extends HttpServlet {
-    private final String VIEWBLOGDETAIL_PAGE = "blogDetail.jsp";
+public class ViewServiceListServlet extends HttpServlet {
+
+    private final String VIEW_SERVICE_PAGE = "serviceList.jsp";
     private final String ERROR_PAGE = "error.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,18 +40,26 @@ public class ViewBlogDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String blogID = request.getParameter("id");
-        HttpSession session = request.getSession();
-        String url = VIEWBLOGDETAIL_PAGE;
+        String url = VIEW_SERVICE_PAGE;
         try {
-            BlogDAO dao = new BlogDAO();
-            BlogDTO blog = dao.getBlogDetail(blogID);
-            session.setAttribute("BLOG_DETAIL", blog);
+            ServiceDAO dao = new ServiceDAO();
+            int count = dao.countService();
+            int pageSize = 5;
+            int endPage = count / pageSize;
+            if (count % pageSize != 0) {
+                endPage++;
+            }
+            request.setAttribute("PAGE", endPage);
+            String indexString = request.getParameter("index");
+            int index = Integer.parseInt(indexString);
+            dao.viewServiceList(index);
+            List<ServiceDTO> result = dao.getServiceList();
+            request.setAttribute("SERVICE_LIST", result);
         } catch (NamingException ex) {
-            log("ViewBlogDetailServlet _ Naming: " + ex.getMessage());
+            log("ViewServiceListServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
         } catch (SQLException ex) {
-            log("ViewBlogDetailServlet _ SQL: " + ex.getMessage());
+            log("ViewServiceListServlet _ SQL: " + ex.getMessage());
             url = ERROR_PAGE;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

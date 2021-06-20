@@ -8,6 +8,8 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,16 +17,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.tblBlog.BlogDAO;
-import web.models.tblBlog.BlogDTO;
+import web.models.tblService.ServiceDAO;
+import web.models.tblService.ServiceDTO;
 
 /**
  *
  * @author DELL
  */
-public class ViewBlogDetailServlet extends HttpServlet {
-    private final String VIEWBLOGDETAIL_PAGE = "blogDetail.jsp";
+public class ViewServiceDetailServlet extends HttpServlet {
+
+    private final String SERVICE_DETAIL_PAGE = "serviceDetail.jsp";
     private final String ERROR_PAGE = "error.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,18 +42,18 @@ public class ViewBlogDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String blogID = request.getParameter("id");
+        String serviceID = request.getParameter("id");
         HttpSession session = request.getSession();
-        String url = VIEWBLOGDETAIL_PAGE;
+        String url = SERVICE_DETAIL_PAGE;
         try {
-            BlogDAO dao = new BlogDAO();
-            BlogDTO blog = dao.getBlogDetail(blogID);
-            session.setAttribute("BLOG_DETAIL", blog);
+            ServiceDAO dao = new ServiceDAO();
+            ServiceDTO service = dao.getServiceDetail(serviceID);
+            session.setAttribute("SERVICE_DETAIL", service);
         } catch (NamingException ex) {
-            log("ViewBlogDetailServlet _ Naming: " + ex.getMessage());
+            log("ViewServiceDetailServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
         } catch (SQLException ex) {
-            log("ViewBlogDetailServlet _ SQL: " + ex.getMessage());
+            log("ViewServiceDetailServlet _ SQL: " + ex.getMessage());
             url = ERROR_PAGE;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);

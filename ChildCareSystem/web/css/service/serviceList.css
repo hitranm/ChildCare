@@ -1,63 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 16, 2021, 4:18:06 PM
+    Author     : DELL
+*/
 .top_title {
     font-size: 2rem;
 }
+
 body {
     background-color: rgba(var(--b3f, 250, 250, 250), 1);
 }
-.container {
-    margin-top: 20px;
+.style {
+    background-color: #fff;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 12px;
 }
-
-.blog-title {
-    text-align: center;
+.service-preview {
+    display: inline;
+    background-color: #fff;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
 }
-
-.blog-thumb {
-    float: left;
-    padding-right: 1rem;
-}
-.blog-thumb img {
-    width: 100%;
-    height: auto;
-}
-
-.blog-date {
-    font-style: italic;
-    color: #777777;
-}
-.blog-cate {
-    background: #F6F6F7;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    flex-direction: column;
-    margin: 0px;
-}
-.blog-cate a {
+.service-name a {
     color: #444444;
 }
-.blog-cate a:hover {
-    color: #444444;
+.service-thumbnail {
+    margin: 10px;
+    display: inline-block;
+}
+
+.service-thumbnail img {
+    width: 250px;
+    height: 150px;
+    border-radius: 4px;
+}
+.service-name {
+    padding-top: 15px;
+}
+.service-name a:hover {
+    color: #1977cc;
     text-decoration: none;
 }
-.main-right {
-    flex-direction: column;
+/*----------paging----------*/
+
+.paging {
+    padding-top: 20px;
 }
 
-.right-post-section {
-    background-color: #fff;
-    border: 1px solid #000;
-    padding: 1rem;
+.paging a {
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 7px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 16px;
 }
 
-.right-post-section h4 {
-    text-align: center;
+.paging a:hover {
+    background-color: #55a3f7;
 }
-
-.right-post-card {
-    margin: 1rem 0;
-}
-
-
 /*-------Footer --------*/
 
 #footer {

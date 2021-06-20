@@ -54,6 +54,9 @@
                                 <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
                             </li>
                             <li class="nav-item px-3">
+                                <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                            </li>
+                            <li class="nav-item px-3">
                                 <a class="nav-link" href="ViewPatientProfileServlet">Hồ sơ bệnh nhân</a>
                             </li>
                             <li class="nav-item px-3">
