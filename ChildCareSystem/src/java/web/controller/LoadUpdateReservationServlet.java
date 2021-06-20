@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
@@ -15,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.Cart.CartItem;
+import web.models.Cart.CartObject;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
@@ -45,26 +46,40 @@ public class LoadUpdateReservationServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String patientId = request.getParameter("txtPatientId");
         String url = SUCCESS;
-        HttpSession session = request.getSession();
+
         try {
             if (patientId != null) {
-                request.setAttribute("PATIENT_ID", patientId);
-                IdentityDAO identityDAO = new IdentityDAO();
-                CustomerDAO customerDAO = new CustomerDAO();
-                PatientDAO patientDAO = new PatientDAO();
-
+                //1. Go to cart place
+                HttpSession session = request.getSession();
                 String identityId = (String) session.getAttribute("IDENTITY_ID");
-                if (identityId != null) {
-                    // Get customerId if any
-                    String customerId = customerDAO.getCustomerIdByIdentity(identityId);
-                    if (!customerId.equals("")) {
-                        IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityId);
-                        CustomerDTO customerDTO = customerDAO.queryCustomerByIdentityId(identityId);
-                        List<PatientDTO> listPatient = patientDAO.getAllPatientProfile(customerId);
-                        ReservationViewModel reservationViewModel = new ReservationViewModel(customerDTO, listPatient, identityDTO);
-                        request.setAttribute("VIEW_MODEL", reservationViewModel);
+                if (identityId != null) { // Authenticated
+                    CartObject cart = (CartObject) session.getAttribute("CART");
+                    if (cart != null) { // Nếu có cart
+                        CartItem targetReservation = cart.getCartItem(Integer.parseInt(patientId));
+                        if (targetReservation != null) {  // Có tồn tại đơn này
+                            request.setAttribute("UPDATE_RESERVATION", targetReservation);
+                            IdentityDAO identityDAO = new IdentityDAO();
+                            CustomerDAO customerDAO = new CustomerDAO();
+                            PatientDAO patientDAO = new PatientDAO();
+                            // Get customerId if any
+                            String customerId = customerDAO.getCustomerIdByIdentity(identityId);
+                            if (!customerId.equals("")) {
+                                IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityId);
+                                CustomerDTO customerDTO = customerDAO.queryCustomerByIdentityId(identityId);
+                                List<PatientDTO> listPatient = patientDAO.getAllPatientProfile(customerId);
+                                ReservationViewModel reservationViewModel = new ReservationViewModel(customerDTO, listPatient, identityDTO);
+                                request.setAttribute("VIEW_MODEL", reservationViewModel);
+                            }
+                        } else { // Ko có đơn
+                            request.setAttribute("NOT_EXIST", "Đơn đặt hàng này không tồn tại.");
+                        }
+                    } else { // Ko có cart
+                        request.setAttribute("EMPTY_CART", "Không có dịch vụ nào đang chờ được thanh toán.");
                     }
-                }
+                } else {
+                    response.sendRedirect("login.jsp");
+                }  // End authenticated
+
             }
         } catch (SQLException | NamingException ex) {
             log("Error at LoadUpdateReservationServlet: " + ex.getMessage());
