@@ -115,12 +115,16 @@
     <servlet>
         <servlet-name>DeleteAccountServlet</servlet-name>
         <servlet-class>web.controller.DeleteAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ViewServiceListServlet</servlet-name>
         <servlet-class>web.controller.ViewServiceListServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewServiceDetailServlet</servlet-name>
         <servlet-class>web.controller.ViewServiceDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ChooseReservationServlet</servlet-name>
         <servlet-class>web.controller.ChooseReservationServlet</servlet-class>
     </servlet>
@@ -263,12 +267,16 @@
     <servlet-mapping>
         <servlet-name>DeleteAccountServlet</servlet-name>
         <url-pattern>/DeleteAccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ViewServiceListServlet</servlet-name>
         <url-pattern>/ViewServiceListServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewServiceDetailServlet</servlet-name>
         <url-pattern>/ViewServiceDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ChooseReservationServlet</servlet-name>
         <url-pattern>/ChooseReservationServlet</url-pattern>
     </servlet-mapping>

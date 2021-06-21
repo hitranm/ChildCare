@@ -5,6 +5,7 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -108,7 +109,7 @@
                 <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
                 <jsp:forward page="login.jsp"/>
             </c:if>
-            
+
             <c:if test="${sessionScope.ROLE eq 'customer'}">
                 <h1>DANH SÁCH HỒ SƠ BỆNH NHÂN</h1>
                 <br>
