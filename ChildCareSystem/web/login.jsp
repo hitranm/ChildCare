@@ -20,29 +20,6 @@
 
     </head>
     <body>
-        <!--        <h1>ĐĂNG NHẬP</h1>
-                <form action="DispatchServlet" method="POST">
-                    <div class="txt_field">
-                        <input type="text" name="phoneNum" required="true">
-                        <label>SĐT</label>
-                    </div>
-                    <div class ="txt_field">
-                        <input type="password" name="password" required="true">
-                        <span></span>
-                        <label>Mật khẩu</label>
-        <c:set var="login_error" value="${requestScope.Message}"/>
-        <c:if test="${Message!=null}">
-            <div class="alert alert-danger" role="alert">
-            ${requestScope.Message}
-        </div>
-        </c:if>
-
-    </div>
-    <a href="forgot_pass.jsp"> Quên mật khẩu </a>
-    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button></br>
-</form>
-<a href="./register.jsp">Đăng ký</a>-->
-
         <div class="content">
             <div class="container">
                 <div class="row">
@@ -60,7 +37,7 @@
                                     </c:if>
                                     <h3>Đăng nhập</h3>
                                 </div>
-                                <form action="DispatchServlet" method="post">
+                                <form action="LoginServlet" method="post" id="registerForm">
                                     <div class="form-group first">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" value="" required="true" class="form-control" id="email">
@@ -78,7 +55,8 @@
                                     <div class="d-flex mb-5 align-items-center">
                                         <span class="ml-auto"><a href="forgot_pass.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" name="btAction" value="Login">Đăng nhập</button>
+                                    <!--                                    <input name="btAction" value="Login" hidden/>-->
+                                    <button type="submit" name="btAction" value="Login" class="btn btn-primary">Đăng nhập</button>
                                 </form>
                             </div>
                         </div>
@@ -92,19 +70,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
-            $(function () {
-                'use strict';
+                                    $(function () {
+                                        'use strict';
 
-                $('.form-control').on('input', function () {
-                    var $field = $(this).closest('.form-group');
-                    if (this.value) {
-                        $field.addClass('field--not-empty');
-                    } else {
-                        $field.removeClass('field--not-empty');
-                    }
-                });
+                                        $('.form-control').on('input', function () {
+                                            var $field = $(this).closest('.form-group');
+                                            if (this.value) {
+                                                $field.addClass('field--not-empty');
+                                            } else {
+                                                $field.removeClass('field--not-empty');
+                                            }
+                                        });
 
-            });
+                                    });
+        </script>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
         </script>
     </body>
 </html>
