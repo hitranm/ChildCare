@@ -37,14 +37,14 @@
                                     </c:if>
                                     <h3>Đăng nhập</h3>
                                 </div>
-                                <form action="LoginServlet" method="post" id="registerForm">
+                                <form action="DispatchServlet" method="post" id="registerForm" onsubmit="submitForm(); return false;">
                                     <div class="form-group first">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" value="" required="true" class="form-control" id="email">
+                                        <input type="email" name="email" value="" class="form-control" id="email">
                                     </div>
                                     <div class="form-group last mb-4">
                                         <label for="password">Mật khẩu</label>
-                                        <input type="password" class="form-control" name="password" value="" required="true" id="password">
+                                        <input type="password" class="form-control" name="password" value="" id="password">
                                     </div>
                                     <c:set var="login_error" value="${requestScope.Message}"/>
                                     <c:if test="${Message!=null}">
@@ -70,24 +70,28 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
-                                    $(function () {
-                                        'use strict';
+            $(function () {
+                'use strict';
 
-                                        $('.form-control').on('input', function () {
-                                            var $field = $(this).closest('.form-group');
-                                            if (this.value) {
-                                                $field.addClass('field--not-empty');
-                                            } else {
-                                                $field.removeClass('field--not-empty');
-                                            }
-                                        });
+                $('.form-control').on('input', function () {
+                    var $field = $(this).closest('.form-group');
+                    if (this.value) {
+                        $field.addClass('field--not-empty');
+                    } else {
+                        $field.removeClass('field--not-empty');
+                    }
+                });
 
-                                    });
-        </script>
-        <script>
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
+            });
+
+            function submitForm() {
+                $("#registerForm").submit();
             }
         </script>
+        <!--        <script>
+                    if (window.history.replaceState) {
+                        window.history.replaceState(null, null, window.location.href);
+                    }
+                </script>-->
     </body>
 </html>
