@@ -462,48 +462,31 @@
 
             </div>
         </main>
-        <!--
-             <footer>
-              <div class="footer__title col-lg-3 ">
-                <h3>F-Code Workshop</h3>
-                <img src="../img/rsz_logo_2000x2000 (1).png">
-              </div>
-              <div class="footer__description col-lg-6 ">
-                <p>Knowledge shared is knowledge squared</p>
-                
-              </div>
-              <div class="footer__contact col-lg-3 ">
-                <h3>Contact</h3>
-                <div class="contact__icons">
-                  <a href="https://www.facebook.com/fcodefpt" target="_blank"><img src="../img/facebook.svg"></a>
-                  <a href="mailto: fcode.fptuhcm@gmail.com"><img src="../img/gmail.svg"></a>
-                </div>
-              </div>
-              <div class="footer__copyright">© F-Code Club 2020</div>
-            </footer>
-        -->
+
         <!--JQuery-->
-        <!--        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
         <!--Custom JS-->
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
+        <script>
+                 $(".mydatatable").DataTable();
+        </script>
 
 
         <script>
-                                                            window.addEventListener('load', function () {
-                                                                const loader = document.querySelector(".loader");
-                                                                loader.className += " hidden"; // class "loader hidden"
-                                                            })
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            })
         </script>
         <script>
             function confirmation() {
@@ -511,9 +494,7 @@
                 return r;
             }
         </script>
-        <script>
-            $(".mydatatable").DataTable();
-        </script>
+
     </body>
 
 </html>

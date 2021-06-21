@@ -152,6 +152,10 @@
         <servlet-name>VerifyCheckoutServlet</servlet-name>
         <servlet-class>web.controller.VerifyCheckoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddManagerServlet</servlet-name>
+        <servlet-class>web.controller.AddManagerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -303,6 +307,10 @@
     <servlet-mapping>
         <servlet-name>VerifyCheckoutServlet</servlet-name>
         <url-pattern>/VerifyCheckoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddManagerServlet</servlet-name>
+        <url-pattern>/AddManagerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -234,4 +234,64 @@ public class ManagerDAO {
         }
         return false;
     }
+      public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT PhoneNumber "
+                        + " FROM tblManager"
+                        + " WHERE PhoneNumber=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, phoneNum);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+       public boolean addManager(ManagerDTO man) throws ClassNotFoundException, SQLException, NamingException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "INSERT INTO tblManager(IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID) VALUES(?,?,?,?,?,?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, man.getIdentityID());
+                stm.setString(2, man.getFullName());
+                stm.setString(3, man.getPhoneNumber());
+                stm.setString(4, man.getAddress());
+                stm.setString(5, man.getBirthday());
+                stm.setString(6, man.getCitizenID());
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
 }

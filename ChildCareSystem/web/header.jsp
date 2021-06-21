@@ -82,6 +82,9 @@
                                 <a class="nav-link" href="createStaff.jsp">Tạo staff account</a>
                             </li>
                             <li class="nav-item px-3">
+                                <a class="nav-link" href="addManager.jsp">Tạo manager account</a>
+                            </li>
+                            <li class="nav-item px-3">
                                 <a class="nav-link" href="DispatchServlet?btAction=ViewAccount">Xem all accounts</a>
                             </li>
                             <li class="nav-item px-3">

@@ -24,11 +24,18 @@ public class StaffDTO {
     public StaffDTO() {
     }
     
-    public StaffDTO(String identityId, String staffId, String specialtyId) {
-        this.IdentityID = identityId;
-        this.StaffID = staffId;
-        this.SpecialtyID = specialtyId;
+  //  public StaffDTO(String identityId, String staffId, String specialtyId) {
+    //    this.IdentityID = identityId;
+      //  this.StaffID = staffId;
+       // this.SpecialtyID = specialtyId;
+    //}
+
+    public StaffDTO(String IdentityID, String FullName, String phoneNumber) {
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.phoneNumber = phoneNumber;
     }
+    
 
     public StaffDTO(String IdentityID, String FullName, String phoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
         this.IdentityID = IdentityID;

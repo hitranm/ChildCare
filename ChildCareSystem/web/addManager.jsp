@@ -1,7 +1,7 @@
 <%-- 
-    Document   : register
-    Created on : May 30, 2021, 3:45:08 AM
-    Author     : HOANGKHOI
+    Document   : addManager
+    Created on : Jun 21, 2021, 9:41:30 PM
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,8 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trang đăng kí</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Tạo acc manager</title>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -121,9 +121,9 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="roleID" value="1">
+                <input type="hidden" name="roleID" value="3">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary col-md-4" name="btAction" value="Register">Đăng ký</button>
+                    <button type="submit" class="btn btn-primary col-md-4" name="btAction" value="RegisterManager">Đăng ký</button>
                 </div>
             </form>
         </div>
@@ -149,6 +149,6 @@
             crossorigin="anonymous"
         ></script>
         <!--Custom JS-->
-        <script src="./js/main.js"></script>    
+        <script src="./js/main.js"></script> 
     </body>
 </html>
