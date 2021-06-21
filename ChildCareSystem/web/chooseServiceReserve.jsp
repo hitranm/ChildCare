@@ -121,7 +121,7 @@
                             <div class="form-group col-8">
                                 <label for="service-specialty">Dịch vụ</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
-                                    <c:forEach items="${service.viewServiceList()}" var="dto">
+                                    <c:forEach items="${service.listService}" var="dto">
                                         <option value="${dto.serviceId}">${dto.serviceName}</option>
                                     </c:forEach>                
                                 </select>

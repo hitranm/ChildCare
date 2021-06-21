@@ -270,6 +270,7 @@ public class ServiceDAO implements Serializable {
 
         }
     }
+    
     public void viewServiceList() throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -347,7 +348,7 @@ public class ServiceDAO implements Serializable {
         return result;
     }
     
-    public List<ServiceDTO> viewServiceList() throws NamingException, SQLException {
+    public List<ServiceDTO> getListService() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;

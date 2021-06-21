@@ -47,6 +47,8 @@ public class StartupServlet extends HttpServlet {
             session.setAttribute("BLOG_LIST_TOP6", listBlog);
             session.setAttribute("SERVICE_LIST_TOP3", listService);
             url =HOME_PAGE;
+        } catch (Exception ex) {
+            log("Error at StartupServelt: " + ex.getMessage());
         } finally{
 //            request.getRequestDispatcher(url).forward(request, response);
             response.sendRedirect(url);

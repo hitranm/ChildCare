@@ -94,7 +94,7 @@
                 });
             });
         </script>
-        <<script>
+        <script>
             function redirect() {
                 windows.location.replace("login.jsp")
             }
@@ -107,8 +107,8 @@
             <c:if test="${empty sessionScope.ROLE}">
                 <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
                 <jsp:forward page="login.jsp"/>
-
             </c:if>
+            
             <c:if test="${sessionScope.ROLE eq 'customer'}">
                 <h1>DANH SÁCH HỒ SƠ BỆNH NHÂN</h1>
                 <br>
