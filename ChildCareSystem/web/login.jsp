@@ -37,7 +37,7 @@
                                     </c:if>
                                     <h3>Đăng nhập</h3>
                                 </div>
-                                <form action="DispatchServlet" method="post" id="registerForm" onsubmit="submitForm(); return false;">
+                                <form action="LoginServlet" method="post" id="registerForm" onsubmit="submitForm(); return false;">
                                     <div class="form-group first">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" value="" class="form-control" id="email">
@@ -88,10 +88,10 @@
                 $("#registerForm").submit();
             }
         </script>
-        <!--        <script>
+                <script>
                     if (window.history.replaceState) {
                         window.history.replaceState(null, null, window.location.href);
                     }
-                </script>-->
+                </script>
     </body>
 </html>
