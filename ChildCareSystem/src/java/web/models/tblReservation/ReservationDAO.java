@@ -60,6 +60,39 @@ public class ReservationDAO implements Serializable {
         }
         return false;
     }
+    
+    public boolean checkExistedReervation(int patientId, int serviceId, String checkInTime) throws SQLException, NamingException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT ReservationID "
+                        + " FROM tblReservation "
+                        + "Where PatientID=? AND ServiceID=? AND CheckInTime=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, patientId);
+                stm.setInt(2, serviceId);
+                stm.setString(3, checkInTime);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
 
     public void AddReservation() throws SQLException, NamingException {
         Connection con = null;

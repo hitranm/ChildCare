@@ -53,20 +53,30 @@ public class VerifyCheckoutServlet extends HttpServlet {
         ServiceDAO serviceDAO = new ServiceDAO();
         StaffDAO staffDAO = new StaffDAO();
         ReservationDAO reservationDAO = new ReservationDAO();
-
+        boolean status = false;
         String url = LOGIN_PAGE;
         try {
             String idenityId = (String) session.getAttribute("IDENTITY_ID");
             String customerId = customerDAO.getCustomerIdByIdentity(idenityId);
+
             if (customerId != null) {
                 CartObject cart = (CartObject) session.getAttribute("CART");
                 if (cart != null) {
                     for (CartItem reservation : cart.getCartItems()) {
+                        status = false;
                         int serviecId = reservation.getServiceId();
                         String serviceName = serviceDAO.getServiceNameById(serviecId);
                         String checkInTime = reservation.getCheckInTime();
                         ServiceDTO serviceDTO = serviceDAO.getServiceInfo(serviecId);
                         int specialtyId = Integer.parseInt(serviceDTO.getSpecialtyId());
+                        boolean isExistedReservation
+                                = reservationDAO.checkExistedReervation(reservation.getPatientId(), reservation.getServiceId(), reservation.getCheckInTime());
+                        if (isExistedReservation) {
+                            request.setAttribute("RESERVATION_EXIST", "Bạn đã đặt dịch vụ " + serviceName + " vào thời điểm " + checkInTime + " cho bệnh nhân " + reservation.getServiceId());
+                            url = SERVICE_CART;
+                            request.getRequestDispatcher(url).forward(request, response);
+                            break;
+                        }
                         // Lấy ra list staff thuộc specialty
                         List<StaffDTO> listStaff = staffDAO.getStaffListBySpecialtyId(specialtyId);
 
@@ -86,6 +96,7 @@ public class VerifyCheckoutServlet extends HttpServlet {
                                     // Add to waiting list
                                     reservationDAO.getWaitingList().add(reservationDTO);
                                     foundStaff = true;
+                                    status = true;
                                     break;
                                 }
                             }
@@ -95,14 +106,17 @@ public class VerifyCheckoutServlet extends HttpServlet {
                                 url = SERVICE_CART;
                                 request.getRequestDispatcher(url).forward(request, response);
                             }
-
                         }
                     }
-                    //Execute batch
-                    reservationDAO.AddReservation();
-                    url = SUCCESS;
-                    session.removeAttribute("CART");
-                    session.removeAttribute("CART_VIEW_MODEL");
+
+                    if (status == true) {
+                        //Execute batch
+                        reservationDAO.AddReservation();
+                        url = SUCCESS;
+                        session.removeAttribute("CART");
+                        session.removeAttribute("CART_VIEW_MODEL");
+                        response.sendRedirect(url);
+                    }
 
                 } else { // if empty cart
                     url = EMPTY_CART;
@@ -114,7 +128,7 @@ public class VerifyCheckoutServlet extends HttpServlet {
         } catch (IOException | SQLException | NamingException ex) {
             log("Error at VerifyCheckoutServlet: " + ex.getMessage());
         } finally {
-            response.sendRedirect(url);
+
         }
     }
 
