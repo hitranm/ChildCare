@@ -91,9 +91,12 @@
                                 </div>
                             </c:forEach>
                         </div>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-success col-4">Thanh toán</button>
-                        </div>
+                        <form action="DispatchServlet" method="post">
+                            <div class="text-center">
+                                <button type="submit" name="btAction" value="VerifyCheckout" class="btn btn-success col-4">Thanh toán</button>
+                            </div>
+                        </form>
+                        
                     </div>
                 </c:when>
                 <c:otherwise>

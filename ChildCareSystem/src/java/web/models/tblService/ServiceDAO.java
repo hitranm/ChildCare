@@ -165,7 +165,36 @@ public class ServiceDAO implements Serializable {
                 con.close();
             }
         }
-        
+    }
+    
+    public String getServiceNameById(int serviceId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            String sql = "Select ServiceName "
+                    + "From tblService "
+                    + "Where ServiceID=?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, serviceId);
+            rs = stm.executeQuery();
+            
+            if (rs.next()) {
+                String serviceName = rs.getString("ServiceName");
+                return serviceName;
+            } else return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
     
     

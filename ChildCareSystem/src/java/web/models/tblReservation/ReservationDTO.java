@@ -56,7 +56,15 @@ public class ReservationDTO implements Serializable{
         this.serviceId = serviceId;
         this.timeIntervalId = timeIntervalId;
     }
-    
+
+    public ReservationDTO(int customerId, int patientId, int serviceId, int staffAssignId, int timeIntervalId, String checkInDate) {
+        this.customerId = customerId;
+        this.patientId = patientId;
+        this.serviceId = serviceId;
+        this.staffAssignId = staffAssignId;
+        this.timeIntervalId = timeIntervalId;
+        this.checkInDate = checkInDate;
+    }
     
     public int getReservationId() {
         return reservationId;

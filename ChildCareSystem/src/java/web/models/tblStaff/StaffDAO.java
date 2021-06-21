@@ -198,52 +198,6 @@ public class StaffDAO implements Serializable {
         }
         return staffID;
     }
-
-//    public StaffDTO queryStaff1(String phoneNum) throws SQLException, NamingException {
-//        String fullName = "";
-//        String email = "";
-//        String address = "";
-//        String birthday = "";
-//        String citizenID = "";
-//        String roleID = "";
-//        String specialtyID = "";
-//        Connection conn = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = DBHelpers.makeConnection();
-//            if (conn != null) {
-//                String sql = "SELECT FullName, Email, Address, Birthday, CitizenID, RoleID, SpecialtyID "
-//                        + " FROM tblStaff S, tblIdentity I "
-//                        + " WHERE S.IdentityID = I.IdentityID AND PhoneNumber=?";
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, phoneNum);
-//                rs = stm.executeQuery();
-//                if (rs.next()) {
-//                    fullName = rs.getString("FullName");
-//                    email = rs.getString("Email");
-//                    address = rs.getString("Address");
-//                    birthday = rs.getString("Birthday");
-//                    citizenID = rs.getString("CitizenID");
-//                    roleID = rs.getString("RoleID");
-//                    specialtyID = rs.getString("SpecialtyID");
-//                    StaffDTO staff = new StaffDTO(fullName, email, address, birthday, citizenID, roleID, "", specialtyID);
-//                    return staff;
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return null;
-//    }
     
     public StaffDTO queryStaffByIdentityId(String identityId) throws SQLException, NamingException {
         String fullName;
@@ -324,7 +278,8 @@ public class StaffDAO implements Serializable {
 
         return check;
     }
-    public List<StaffDTO> getAllStaffProfile() throws SQLException {
+    
+    public List<StaffDTO> getAllStaffProfile() throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -345,8 +300,43 @@ public class StaffDAO implements Serializable {
                     result.add(staff);
                 }
             }
-        } catch (Exception e) {
-
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+    
+    public List<StaffDTO> getStaffListBySpecialtyId(int specialtyID) throws SQLException, NamingException {
+        List<StaffDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT IdentityID, StaffID, SpecialtyID "
+                        + " FROM tblStaff "
+                        + "Where SpecialtyID=?" ;
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, specialtyID);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String identityID = rs.getString("IdentityID");
+                    String staffId = rs.getString("StaffID");
+                    String specialtyId = rs.getString("SpecialtyID");
+                    StaffDTO staff = new StaffDTO(identityID, staffId, specialtyId);
+                    result.add(staff);
+                }
+            }
         } finally {
             if (rs != null) {
                 rs.close();
