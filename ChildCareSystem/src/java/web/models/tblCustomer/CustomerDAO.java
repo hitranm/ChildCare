@@ -122,85 +122,8 @@ public class CustomerDAO {
         return false;
     }
 
-//    public boolean checkEmail(String email) throws SQLException, NamingException {
-//        boolean check = false;
-//       Connection conn = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = DBHelpers.makeConnection();
-//            if (conn != null) {
-//                String sql = "SELECT Email "
-//                        + " FROM tblCustomer"
-//                        + " WHERE Email=?";
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, email);
-//                rs = stm.executeQuery();
-//                if (rs.next()) {
-//                    check = true;
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return check;
-//    }
-
-//    public CustomerDTO queryCustomer(String phoneNum) throws SQLException, NamingException {
-//        String fullName = "";
-//        String email = "";
-//        String address = "";
-//        String birthday = "";
-//        String citizenID = "";
-//        String roleID = "";
-//        String identityID = "";
-//        Connection conn = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = DBHelpers.makeConnection();
-//            if (conn != null) {
-//                String sql = "SELECT IdentityID, FullName, Email, Address, Birthday, CitizenID, RoleID "
-//                        + " FROM tblCustomer C, tblIdentity I "
-//                        + " WHERE C.IdentityID = I.IdentityID AND I.PhoneNumber=?";
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, phoneNum);
-//                rs = stm.executeQuery();
-//                if (rs.next()) {
-//                    identityID = rs.getString("IdentityID");
-//                    fullName = rs.getString("FullName");
-//                    email = rs.getString("Email");
-//                    address = rs.getString("Address");
-//                    birthday = rs.getString("Birthday");
-//                    citizenID = rs.getString("CitizenID");
-//                    roleID = rs.getString("RoleID");
-//                    CustomerDTO cus = new CustomerDTO(identityID, fullName, email, address, birthday, citizenID, roleID);
-//                    return cus;
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return null;
-//    }
-
     public CustomerDTO queryCustomerByIdentityId(String identityId) throws SQLException, NamingException {
+        String customerID;
         String fullName;
         String phoneNum;
         String address;
@@ -212,19 +135,66 @@ public class CustomerDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID"
+                String sql = "SELECT CustomerID, IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID"
                         + " FROM tblCustomer"
                         + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, identityId);
                 rs = stm.executeQuery();
                 if (rs.next()) {                 
+                    customerID = rs.getString("CustomerID");
                     fullName = rs.getString("FullName");
                     phoneNum = rs.getString("PhoneNumber");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
                     citizenID = rs.getString("CitizenID");   
-                    CustomerDTO cus = new CustomerDTO(identityId, fullName, phoneNum, address, birthday, citizenID);
+                    CustomerDTO cus = new CustomerDTO(customerID, identityId, fullName, phoneNum, address, birthday, citizenID);
+                    return cus;
+                } 
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    
+    public CustomerDTO queryCustomerByCustomerId(int customerId) throws SQLException, NamingException {
+        String identityId;
+        String fullName;
+        String phoneNum;
+        String address;
+        String birthday;
+        String citizenID;
+        String stringId;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT CustomerID, IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID"
+                        + " FROM tblCustomer"
+                        + " WHERE CustomerID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, customerId);
+                rs = stm.executeQuery();
+                if (rs.next()) {                 
+                    identityId = rs.getString("IdentityID");
+                    fullName = rs.getString("FullName");
+                    phoneNum = rs.getString("PhoneNumber");
+                    address = rs.getString("Address");
+                    birthday = rs.getString("Birthday");
+                    citizenID = rs.getString("CitizenID");   
+                    stringId = rs.getString("CustomerID");
+                    CustomerDTO cus = new CustomerDTO(stringId, identityId, fullName, phoneNum, address, birthday, citizenID);
                     return cus;
                 } 
             }
@@ -255,6 +225,38 @@ public class CustomerDAO {
                         + " WHERE C.IdentityID = I.IdentityID AND Email=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    CustomerID = rs.getString("CustomerID");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return CustomerID;
+    }
+    
+    public String getCustomerIdByIdentity(String identityId) throws SQLException, NamingException {
+        String CustomerID = "";
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT CustomerID "
+                        + " FROM tblCustomer "
+                        + " WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, identityId);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     CustomerID = rs.getString("CustomerID");
@@ -315,7 +317,7 @@ public class CustomerDAO {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT IdentityID, FullName, PhoneNumber "
-                        + " FROM tblCustomer  ";
+                        + " FROM tblCustomer ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();

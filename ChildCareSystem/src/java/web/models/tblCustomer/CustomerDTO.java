@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author Admin
  */
 public class CustomerDTO implements Serializable{
+    private String CustomerID;
     private String IdentityID;
     private String FullName;
     private String Address;
@@ -22,6 +23,16 @@ public class CustomerDTO implements Serializable{
     
     public CustomerDTO() {
     }
+
+    public CustomerDTO(String CustomerID, String IdentityID, String FullName, String Address, String Birthday, String CitizenID, String phoneNumber) {
+        this.CustomerID = CustomerID;
+        this.IdentityID = IdentityID;
+        this.FullName = FullName;
+        this.Address = Address;
+        this.Birthday = Birthday;
+        this.CitizenID = CitizenID;
+        this.phoneNumber = phoneNumber;
+    }
     
 //    public CustomerDTO(String email, String code) {
 //        this.PhoneNum = PhoneNum;
@@ -29,7 +40,7 @@ public class CustomerDTO implements Serializable{
 //    }
 //    
     public CustomerDTO(String identityID ,String fullName, String phoneNumber, String address, String birthday, String citizenID) {
-        this.IdentityID= identityID;
+        this.IdentityID = identityID;
         this.FullName = fullName;
         this.phoneNumber = phoneNumber;
         this.Address = address;
@@ -54,7 +65,14 @@ public class CustomerDTO implements Serializable{
         this.FullName = FullName;
         this.phoneNumber = phoneNumber;
     }
-    
+
+    public String getCustomerID() {
+        return CustomerID;
+    }
+
+    public void setCustomerID(String CustomerID) {
+        this.CustomerID = CustomerID;
+    }
     
     public String getIdentityID() {
         return IdentityID;
@@ -112,10 +130,6 @@ public class CustomerDTO implements Serializable{
         this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return "CustomerDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNum=" + phoneNumber + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", code=" + code + '}';
-    }
     
     
 }

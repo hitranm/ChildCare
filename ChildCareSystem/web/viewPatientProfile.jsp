@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : viewPatientProfile
     Created on : May 30, 2021, 10:58:55 AM
     Author     : nguye
@@ -102,6 +102,7 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+
         <main style="padding: 5%">
             <c:if test="${empty sessionScope.ROLE}">
                 <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
@@ -209,7 +210,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>                            
+                                </div>
 
                             </c:if>
                             <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -224,7 +225,7 @@
                                                                 <h5 class="card-title"><strong>${dto2.patientName}</strong></h5>
                                                                 <hr>
                                                                 <p class="card-text">
-                                                                    <strong>Giới tính:</strong> 
+                                                                    <strong>Giới tính:</strong>
                                                                     <c:choose>
                                                                         <c:when test="${dto2.gender.equals('male')}">
                                                                             Nam
@@ -273,7 +274,7 @@
                 </script>
             </c:if>
         </main>
-        <jsp:include page="footer.jsp"/>       
+        <jsp:include page="footer.jsp"/>
         <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
         <!-- <script
@@ -281,8 +282,7 @@
           integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
           crossorigin="anonymous"
         ></script> -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

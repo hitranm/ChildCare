@@ -49,6 +49,8 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_DETAILS = "ViewAccountDetailsServlet";
     private static final String UPDATE_DETAILS = "UpdateAccountDetailsServlet";
     private static final String DELETE_ACCOUNT = "DeleteAccountServlet";
+    private static final String CHOOSE_SERVICE_RESERVE = "ChooseReservationServlet";
+    private static final String VERIFY_CHECKOUT = "VerifyCheckoutServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -112,6 +114,10 @@ public class DispatchServlet extends HttpServlet {
                 url = UPDATE_DETAILS;
             } else if (button.equalsIgnoreCase("DeleteAccount")) {
                 url = DELETE_ACCOUNT;
+            } else if (button.equalsIgnoreCase("ChooseServiceReserve")) {
+                url = CHOOSE_SERVICE_RESERVE;
+            } else if (button.equalsIgnoreCase("VerifyCheckout")) {
+                url = VERIFY_CHECKOUT;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

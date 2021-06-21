@@ -11,17 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import web.models.tblIdentity.IdentityDAO;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class SetNewPassServlet extends HttpServlet {
-
-    private static final String ERROR = "newpassword.jsp";
-    private static final String SUCCESS = "login.jsp";
+public class CheckoutReservationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,38 +30,12 @@ public class SetNewPassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String patientId = request.getParameter("patientId");
+        System.out.println("");
         try {
-            String password = request.getParameter("password");
-            String cpassword = request.getParameter("cpassword");
-            String email = request.getParameter("email");
-            HttpSession session = request.getSession();
-            IdentityDAO dao = new IdentityDAO();
-            String identityID_changePassword = (String) session.getAttribute("IDENTITY_ID");
-            if (password.equals(cpassword)) {
-                if (!email.isEmpty()) {
-
-                    String identityID = dao.queryIDByEmail(email);
-                    String epass = dao.sha256(password);
-                    boolean check = dao.updatePass(epass, identityID);
-                    if (check) {
-                        url = SUCCESS;
-                    }
-                } else {
-                    String epass = dao.sha256(password);
-                    boolean check = dao.updatePass(epass, identityID_changePassword);
-                    if (check) {
-                        url = SUCCESS;
-                    }
-                }
-            } else {
-                String msg = "Mật khẩu và mật khẩu xác nhận không trùng khớp!";
-                request.setAttribute("ERROR_PASS", msg);
-            }
-        } catch (Exception e) {
-            log("Error at SetNewPassServlet: " + e.toString());
+            
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            
         }
     }
 

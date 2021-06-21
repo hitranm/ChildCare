@@ -7,21 +7,22 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.tblIdentity.IdentityDAO;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import web.models.Cart.CartItem;
+import web.models.Cart.CartObject;
+import web.viewModels.Cart.CartViewModel;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class SetNewPassServlet extends HttpServlet {
-
-    private static final String ERROR = "newpassword.jsp";
-    private static final String SUCCESS = "login.jsp";
+public class RemoveServiceFromCartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,38 +36,40 @@ public class SetNewPassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = "serviceCart.jsp";
+        boolean result = false;
+        int patientId = Integer.parseInt(request.getParameter("txtPatientId"));
         try {
-            String password = request.getParameter("password");
-            String cpassword = request.getParameter("cpassword");
-            String email = request.getParameter("email");
+            //1. Customer go to cart place
             HttpSession session = request.getSession();
-            IdentityDAO dao = new IdentityDAO();
-            String identityID_changePassword = (String) session.getAttribute("IDENTITY_ID");
-            if (password.equals(cpassword)) {
-                if (!email.isEmpty()) {
-
-                    String identityID = dao.queryIDByEmail(email);
-                    String epass = dao.sha256(password);
-                    boolean check = dao.updatePass(epass, identityID);
-                    if (check) {
-                        url = SUCCESS;
+            if (session != null) {
+                //2. Customer take cart
+                CartObject cart = (CartObject) session.getAttribute("CART");
+                List<CartViewModel> listCartViewModel = (List<CartViewModel>) session.getAttribute("CART_VIEW_MODEL");
+                if (cart != null) {
+                    //3. Customer get item
+                    List<CartItem> items = cart.getCartItems();
+                    if (items != null) {
+                        
+                        result = cart.removeServiceFromCart(patientId);    
                     }
-                } else {
-                    String epass = dao.sha256(password);
-                    boolean check = dao.updatePass(epass, identityID_changePassword);
-                    if (check) {
-                        url = SUCCESS;
+                    if (result) {
+                        session.setAttribute("CART", cart);
+                        //Remove trong Cart View Model
+                        CartViewModel deleteViewModel = null;
+                        for(CartViewModel viewModel : listCartViewModel) {
+                            if(Integer.parseInt(viewModel.getPatientDTO().getPatientID()) == patientId) {
+                                deleteViewModel = viewModel;
+                            }
+                        }
+                        listCartViewModel.remove(deleteViewModel);
+                        session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
+                        response.sendRedirect(url);
                     }
                 }
-            } else {
-                String msg = "Mật khẩu và mật khẩu xác nhận không trùng khớp!";
-                request.setAttribute("ERROR_PASS", msg);
             }
-        } catch (Exception e) {
-            log("Error at SetNewPassServlet: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        } catch (IOException | NumberFormatException ex) {
+            log("Error at RemoveServiceFromCartServlet " + ex.getMessage());
         }
     }
 

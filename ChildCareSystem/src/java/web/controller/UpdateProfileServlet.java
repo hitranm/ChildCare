@@ -29,8 +29,10 @@ import web.viewModels.UserProfile.UserProfileViewModel;
  * @author Admin
  */
 public class UpdateProfileServlet extends HttpServlet {
-private static final String ERROR="error.jsp";
-private static final String SUCCESS="viewProfile.jsp";
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "viewProfile.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,44 +45,44 @@ private static final String SUCCESS="viewProfile.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try{
+        String url = ERROR;
+        try {
             String fullName = request.getParameter("fullName");
             String address = request.getParameter("address");
             String birthday = request.getParameter("birthday");
             String phoneNumber = request.getParameter("phoneNum");
             String citizenID = request.getParameter("citizenID");
-           String specialtyID = request.getParameter("specialtyID");
+            String specialtyID = request.getParameter("specialtyID");
             IdentityDAO identityDAO = new IdentityDAO();
             AdminDAO dao0 = new AdminDAO();
             ManagerDAO dao1 = new ManagerDAO();
             StaffDAO dao2 = new StaffDAO();
             CustomerDAO dao3 = new CustomerDAO();
             HttpSession session = request.getSession();
-            String identityID = (String)session.getAttribute("IDENTITY_ID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
             int roleID = identityDAO.getRoleIDByIdentityID(identityID);
             if(roleID == 4) {
                     AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                    boolean check= dao0.update(dto);
                    if(check){
-                    
+
                     IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
-                    session.setAttribute("USER_PROFILE", userProfile); 
+                    session.setAttribute("USER_PROFILE", userProfile);
                     session.setAttribute("LOGIN_USER", dto);
                     String msg="Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
-                    url=SUCCESS;   
+                    url=SUCCESS;
                    }
             }
             if(roleID == 3){
                     ManagerDTO dto = new ManagerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
                    boolean check= dao1.update(dto);
                    if(check){
-                      // session.setAttribute("USER_PROFILE", dto); 
+                      // session.setAttribute("USER_PROFILE", dto);
                       IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
-                    session.setAttribute("USER_PROFILE", userProfile); 
+                    session.setAttribute("USER_PROFILE", userProfile);
                        session.setAttribute("LOGIN_USER", dto);
                        String msg="Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
@@ -91,10 +93,10 @@ private static final String SUCCESS="viewProfile.jsp";
                     StaffDTO dto = new StaffDTO(identityID, fullName, phoneNumber, address, birthday, citizenID, specialtyID);
                     boolean check = dao2.update(dto);
                     if(check){
-                       // session.setAttribute("USER_PROFILE", dto); 
+                       // session.setAttribute("USER_PROFILE", dto);
                        IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID(), dto.getSpecialtyID());
-                    session.setAttribute("USER_PROFILE", userProfile); 
+                    session.setAttribute("USER_PROFILE", userProfile);
                         session.setAttribute("LOGIN_USER", dto);
                         String msg="Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
@@ -108,18 +110,17 @@ private static final String SUCCESS="viewProfile.jsp";
                        // session.setAttribute("USER_PROFILE", dto);
                        IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
-                    session.setAttribute("USER_PROFILE", userProfile); 
+                    session.setAttribute("USER_PROFILE", userProfile);
                        session.setAttribute("LOGIN_USER", dto);
                        String msg="Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
                         url=SUCCESS;
-                            
+
                 }
             }
-        }catch(Exception e){
-            log("Error at UpdateProfileServlet: "+e.toString());
-        }
-        finally{
+        } catch (Exception e) {
+            log("Error at UpdateProfileServlet: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

@@ -11,6 +11,7 @@ package web.models.tblStaff;
  */
 public class StaffDTO {
     private String IdentityID;
+    private String StaffID;
     private String FullName;
     private String phoneNumber;
     private String Address;
@@ -21,6 +22,12 @@ public class StaffDTO {
     
 
     public StaffDTO() {
+    }
+    
+    public StaffDTO(String identityId, String staffId, String specialtyId) {
+        this.IdentityID = identityId;
+        this.StaffID = staffId;
+        this.SpecialtyID = specialtyId;
     }
 
     public StaffDTO(String IdentityID, String FullName, String phoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
@@ -40,36 +47,18 @@ public class StaffDTO {
         this.Birthday = Birthday;
     }
 
-    public StaffDTO(String IdentityID, String FullName, String phoneNumber) {
-        this.IdentityID = IdentityID;
-        this.FullName = FullName;
-        this.phoneNumber = phoneNumber;
-    }
-
-    /**
-     * @return the IdentityID
-     */
     public String getIdentityID() {
         return IdentityID;
     }
 
-    /**
-     * @param IdentityID the IdentityID to set
-     */
     public void setIdentityID(String IdentityID) {
         this.IdentityID = IdentityID;
     }
 
-    /**
-     * @return the FullName
-     */
     public String getFullName() {
         return FullName;
     }
-
-    /**
-     * @param FullName the FullName to set
-     */
+    
     public void setFullName(String FullName) {
         this.FullName = FullName;
     }
@@ -82,68 +71,47 @@ public class StaffDTO {
         this.phoneNumber = phoneNumber;
     }
 
-   
-
-    /**
-     * @return the Address
-     */
     public String getAddress() {
         return Address;
     }
 
-    /**
-     * @param Address the Address to set
-     */
     public void setAddress(String Address) {
         this.Address = Address;
     }
 
-    /**
-     * @return the Birthday
-     */
     public String getBirthday() {
         return Birthday;
     }
 
-    /**
-     * @param Birthday the Birthday to set
-     */
     public void setBirthday(String Birthday) {
         this.Birthday = Birthday;
     }
 
-    /**
-     * @return the CitizenID
-     */
     public String getCitizenID() {
         return CitizenID;
     }
 
-    /**
-     * @param CitizenID the CitizenID to set
-     */
     public void setCitizenID(String CitizenID) {
         this.CitizenID = CitizenID;
     }
 
-    /**
-     * @return the SpecialtyID
-     */
     public String getSpecialtyID() {
         return SpecialtyID;
     }
-
-    /**
-     * @param SpecialtyID the SpecialtyID to set
-     */
+    
     public void setSpecialtyID(String SpecialtyID) {
         this.SpecialtyID = SpecialtyID;
     }
 
-    @Override
-    public String toString() {
-        return "StaffDTO{" + "IdentityID=" + IdentityID + ", FullName=" + FullName + ", PhoneNumber=" + phoneNumber + ", Address=" + Address + ", Birthday=" + Birthday + ", CitizenID=" + CitizenID + ", SpecialtyID=" + SpecialtyID + '}';
+    public String getStaffID() {
+        return StaffID;
     }
+
+    public void setStaffID(String StaffID) {
+        this.StaffID = StaffID;
+    }
+
+    
 
     
 

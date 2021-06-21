@@ -11,8 +11,9 @@ import java.io.Serializable;
  *
  * @author HOANGKHOI
  */
-public class ServiceDTO implements Serializable{
-    private String serviceID;
+public class ServiceDTO implements Serializable {
+
+    private String serviceId;
     private String serviceName;
     private String specialtyId;
     private String thumbnail;
@@ -27,10 +28,18 @@ public class ServiceDTO implements Serializable{
     public ServiceDTO() {
     }
 
-    public ServiceDTO(String serviceName, String thumbnail, String createdDate) {
+    public ServiceDTO(String serviceId, String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate, String updatedDate) {
+        this.serviceId = serviceId;
         this.serviceName = serviceName;
+        this.specialtyId = specialtyId;
         this.thumbnail = thumbnail;
+        this.description = description;
+        this.price = price;
+        this.salePrice = salePrice;
+        this.statusId = statusId;
+        this.createPersonId = createPersonId;
         this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
 
 
@@ -73,12 +82,28 @@ public class ServiceDTO implements Serializable{
         this.createdDate = createdDate;
     }
 
-    public String getServiceID() {
-        return serviceID;
+    public ServiceDTO(String serviceName, String thumbnail, String createdDate) {
+        this.serviceName = serviceName;
+        this.thumbnail = thumbnail;
+        this.createdDate = createdDate;
     }
 
-    public void setServiceID(String serviceID) {
-        this.serviceID = serviceID;
+    public ServiceDTO(String serviceId, String serviceName, String specialtyId, double price, String statusId) {
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.specialtyId = specialtyId;
+        this.price = price;
+        this.statusId = statusId;
+    }
+
+
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getServiceName() {
