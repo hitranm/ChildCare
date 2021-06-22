@@ -52,6 +52,7 @@
                     <div class="body-left col-lg-9 col-12">
                         <c:if test="${empty searchValue}">
                             <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
+                            <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
                             <c:set var="list" value="${requestScope.BLOG_LIST}"/>
                             <c:if test="${not empty list}">
                                 <c:forEach var="dto" items="${list}">
@@ -72,7 +73,8 @@
                                             </div>
 
                                             <div class="author">
-                                                Tác giả: 
+                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                Tác giả: ${staff.getStaffName(staffID)}
                                             </div>
                                             <div class="cate" style="position: absolute;right: 0; margin-right: 2em;" >
                                                 <c:forEach items="${cate.viewBlogCategory()}" var="category">

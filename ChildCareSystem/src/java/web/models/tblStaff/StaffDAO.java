@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import web.models.tblBlog.BlogDAO;
 
 
 import web.utils.DBHelpers;
@@ -378,5 +377,36 @@ public class StaffDAO implements Serializable {
             }
         }
         return false;
+    }
+    public String getStaffName(String staffID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con!=null) {
+                String sql = "SELECT FullName "
+                        + " FROM tblStaff "
+                        + "Where StaffID=?" ;
+                stm = con.prepareStatement(sql);
+                stm.setString(1, staffID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String staffName = rs.getString("FullName");
+                    return staffName;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 }

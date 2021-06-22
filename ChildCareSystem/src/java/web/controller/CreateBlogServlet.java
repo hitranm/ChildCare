@@ -91,8 +91,8 @@ public class CreateBlogServlet extends HttpServlet {
         }  catch (Exception ex) {
             log("CreateBlogServlet: " + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            
+            response.sendRedirect(url);
             out.close();
         }
     }

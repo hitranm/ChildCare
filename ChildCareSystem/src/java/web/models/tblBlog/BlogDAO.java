@@ -7,6 +7,7 @@ package web.models.tblBlog;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class BlogDAO implements Serializable {
                 stm.setString(3, authorID);
                 stm.setString(4, description);
                 stm.setString(5, categoryID);
-                stm.setString(6, "1");
+                stm.setString(6, "0");
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -153,8 +154,8 @@ public class BlogDAO implements Serializable {
                     String authorID = rs.getString("AuthorID");
                     String description = rs.getString("Description");
                     String categoryID = rs.getString("CategoryID");
-                    String createdDate = rs.getString("CreatedDate");
-                    String updatedDate = rs.getString("UpdatedDate");
+                    Date createdDate = rs.getDate("CreatedDate");
+                    Date updatedDate = rs.getDate("UpdatedDate");
                     String statusID = rs.getString("StatusID");
                     BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, createdDate, updatedDate, statusID);
 //                    if (this.blogList == null) {
@@ -193,7 +194,7 @@ public class BlogDAO implements Serializable {
                 stm.setString(1, title);
                 stm.setString(2, body);
                 //stm.setString(3, cateID);
-                stm.setString(3, "1");
+                stm.setString(3, "0");
                 stm.setString(4, categoryID);
                 stm.setString(5, blogID);
                 int row = stm.executeUpdate();
@@ -343,8 +344,8 @@ public class BlogDAO implements Serializable {
                 String authorID = rs.getString("AuthorID");
                 String description = rs.getString("Description");
                 String categoryID = rs.getString("CategoryID");
-                String createdDate = rs.getString("CreatedDate");
-                String updatedDate = rs.getString("UpdatedDate");
+                Date createdDate = rs.getDate("CreatedDate");
+                Date updatedDate = rs.getDate("UpdatedDate");
                 String statusID = rs.getString("StatusID");
                 BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, createdDate, updatedDate, statusID);
                 if (this.blogList == null) {
@@ -375,7 +376,7 @@ public class BlogDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //if (con != null) {
             String sql = "select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, CreatedDate, UpdatedDate, StatusID "
-                    + "from (select ROW_NUMBER() over (order by BlogID asc) as r, * \n"
+                    + "from (select ROW_NUMBER() over (order by CreatedDate DESC) as r, * \n"
                     + "from tblBlog) as x \n"
                     + "where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
@@ -389,8 +390,8 @@ public class BlogDAO implements Serializable {
                 String authorID = rs.getString("AuthorID");
                 String description = rs.getString("Description");
                 String categoryID = rs.getString("CategoryID");
-                String createdDate = rs.getString("CreatedDate");
-                String updatedDate = rs.getString("UpdatedDate");
+                Date createdDate = rs.getDate("CreatedDate");
+                Date updatedDate = rs.getDate("UpdatedDate");
                 String statusID = rs.getString("StatusID");
                 BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, createdDate, updatedDate, statusID);
                 if (this.blogList == null) {

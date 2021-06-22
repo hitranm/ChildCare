@@ -11,6 +11,7 @@
     <head>
         <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
+        <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link
             rel="stylesheet"
@@ -69,7 +70,8 @@
                         </div>
                     </div>
                     <div class="blog-author text-right mb-5">
-                        <i>Tác giả: </i>
+                        <c:set var="staffID" value="${blog.authorID}"/>
+                        <i>Tác giả: ${staff.getStaffName(staffID)}</i>
                     </div>
                 </div>
 

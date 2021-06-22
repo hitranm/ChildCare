@@ -6,6 +6,7 @@
 package web.models.tblBlog;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  *
@@ -18,14 +19,14 @@ public class BlogDTO implements Serializable{
     private String AuthorID;
     private String Description;
     private String CategotyID;
-    private String createdDate;
-    private String updateDate;
+    private Date createdDate;
+    private Date updateDate;
     private String StatusID;
 
     public BlogDTO() {
     }
 
-    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String createdDate, String updateDate, String StatusID) {
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, Date createdDate, Date updateDate, String StatusID) {
         this.BlogID = BlogID;
         this.Thumbnail = Thumbnail;
         this.title = title;
@@ -36,6 +37,8 @@ public class BlogDTO implements Serializable{
         this.updateDate = updateDate;
         this.StatusID = StatusID;
     }
+
+    
 
     public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID) {
         this.BlogID = BlogID;
@@ -130,19 +133,19 @@ public class BlogDTO implements Serializable{
         this.CategotyID = CategotyID;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public String getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
