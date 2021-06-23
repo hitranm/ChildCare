@@ -25,14 +25,6 @@
         <jsp:include page="header.jsp"/>
         <script src="js/lobibox.js"></script>
         <script src="js/notifications.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $("#customerName").prop("disabled", false);
-                $("#customerEmail").prop("disabled", false);
-                $("#phoneNum").prop("disabled", false);
-            });
-        </script>
         <c:if test="${not empty requestScope.DUPLICATE_PATIENT}">
             <script>
                 Lobibox.alert('error', {
@@ -71,7 +63,7 @@
             <c:set var="identityDTO" value="${requestScope.VIEW_MODEL.identityDTO}"/>
 
             <div class="reservation-wrapper px-5 py-5">
-                <h2>Đặt chỗ khám bệnh</h2>
+                <h2 class="mb-4">Đặt chỗ khám bệnh</h2>
                 <div class="form-row col-12 reservation-top pb-4">
                     <div class="col-4">
                         <h4>Hồ sơ bệnh nhân</h4>

@@ -14,35 +14,33 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/login.css">
-
-
         <title>Login Page</title>
-
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
         <div class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6">
                         <img src="./images/background1.png" alt="Image" class="img-fluid">
                     </div>
-                    <div class="col-md-6 contents">
+                    <div class="col-12 col-md-6 contents">
                         <div class="row justify-content-center">
-                            <div class="col-md-8">
+                            <div class=" col-8 col-md-12">
                                 <div class="mb-4">
                                     <c:if test="${requestScope.DID_LOGIN!=null}">
                                         <div class="alert alert-danger" role="alert">
                                             ${requestScope.DID_LOGIN}
                                         </div>
                                     </c:if>
-                                    <h3>Đăng nhập</h3>
+                                    <h3 class="text-center">Đăng nhập</h3>
                                 </div>
                                 <form action="LoginServlet" method="post" id="registerForm" onsubmit="submitForm(); return false;">
-                                    <div class="form-group first">
+                                    <div class="form-group col-12 first">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" value="" class="form-control" id="email">
                                     </div>
-                                    <div class="form-group last mb-4">
+                                    <div class="form-group col-12 last mb-4">
                                         <label for="password">Mật khẩu</label>
                                         <input type="password" class="form-control" name="password" value="" id="password">
                                     </div>
@@ -52,11 +50,13 @@
                                             ${requestScope.Message}
                                         </div>
                                     </c:if>
-                                    <div class="d-flex mb-5 align-items-center">
+                                    <div class="d-flex mb-4 align-items-center">
+                                        <a href="register.jsp" style="font-size: 14px">Đăng ký tài khoản</a>
                                         <span class="ml-auto"><a href="forgot_pass.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                     </div>
-                                    <!--                                    <input name="btAction" value="Login" hidden/>-->
-                                    <button type="submit" name="btAction" value="Login" class="btn btn-primary">Đăng nhập</button>
+                                    <div class="text-center"> 
+                                        <button type="submit" name="btAction" value="Login" class="btn btn-primary">Đăng nhập</button>
+                                    </div>                              
                                 </form>
                             </div>
                         </div>
@@ -64,7 +64,8 @@
                 </div>
             </div>
         </div>
-
+                                    
+                                    <jsp:include page="footer.jsp"/>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -21,7 +21,6 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 4rem 0 6rem 0;
             }
 
             .wrapper form {
@@ -34,7 +33,7 @@
         </style>
 
 
-        <div class="wrapper px-5">
+        <div class="wrapper container my-5 px-4">
             <h1>Phiếu đăng ký</h1>
             <form action="DispatchServlet" method="POST">
                 <div class="form-row">
