@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import web.models.Cart.CartItem;
 import web.models.Cart.CartObject;
 import web.models.tblCustomer.CustomerDAO;
+import web.models.tblPatient.PatientDAO;
+import web.models.tblPatient.PatientDTO;
 import web.models.tblReservation.ReservationDAO;
 import web.models.tblReservation.ReservationDTO;
 import web.models.tblService.ServiceDAO;
@@ -72,7 +74,9 @@ public class VerifyCheckoutServlet extends HttpServlet {
                         boolean isExistedReservation
                                 = reservationDAO.checkExistedReervation(reservation.getPatientId(), reservation.getServiceId(), reservation.getCheckInTime());
                         if (isExistedReservation) {
-                            request.setAttribute("RESERVATION_EXIST", "Bạn đã đặt dịch vụ " + serviceName + " vào thời điểm " + checkInTime + " cho bệnh nhân " + reservation.getServiceId());
+                            PatientDAO patientDAO = new PatientDAO();
+                            String patientName = patientDAO.getPatienNametByID(reservation.getPatientId());
+                            request.setAttribute("RESERVATION_EXIST", "Bạn đã đặt dịch vụ " + serviceName + " vào thời điểm " + checkInTime + " cho bệnh nhân " + patientName);
                             url = SERVICE_CART;
                             request.getRequestDispatcher(url).forward(request, response);
                             break;

@@ -138,6 +138,38 @@ public class PatientDAO {
         }
         return result;
     }
+    
+    public String getPatienNametByID(int id) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String patientName = "";
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT PatientName"
+                        + " FROM tblPatient "
+                        + " WHERE PatientID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    patientName = rs.getString("PatientName");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return patientName;
+    }
 
     public boolean update(PatientDTO patient) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;

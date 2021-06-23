@@ -92,8 +92,18 @@
                                 </div>
                             </c:forEach>
                             <div class="totalPrice col-8">Tổng cộng: <span>${sessionScope.TOTAL_PRICE} VNĐ</span></div>
-                        </div>
-                        
+                            <c:if test="${not empty requestScope.RESERVATION_EXIST}">
+                                <div class="alert alert-danger my-3" role="alert">
+                                    ${requestScope.RESERVATION_EXIST}
+                                </div>
+                            </c:if>
+                            <c:if test="${not empty requestScope.SERVICE_BUSY}">
+                                <div class="alert alert-danger my-3" role="alert">
+                                    ${requestScope.SERVICE_BUSY}
+                                </div>
+                            </c:if>
+                        </div>                      
+                                               
                         <form action="DispatchServlet" method="post">
                             <div class="text-center">
                                 <button type="submit" name="btAction" value="VerifyCheckout" class="btn btn-success col-4">Thanh toán</button>

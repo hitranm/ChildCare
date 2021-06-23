@@ -324,9 +324,9 @@ public class StaffDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, StaffID, SpecialtyID "
+                String sql = "SELECT StaffID, IdentityID, FullName, Address, Birthday, CitizenID, PhoneNumber, SpecialtyID "
                         + " FROM tblStaff "
-                        + "Where SpecialtyID=?" ;
+                        + "Where SpecialtyID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, specialtyID);
                 rs = stm.executeQuery();
@@ -335,7 +335,12 @@ public class StaffDAO implements Serializable {
                     String identityID = rs.getString("IdentityID");
                     String staffId = rs.getString("StaffID");
                     String specialtyId = rs.getString("SpecialtyID");
-                    StaffDTO staff = new StaffDTO(identityID, staffId, specialtyId);
+                    String fullName = rs.getString("FullName");
+                    String address = rs.getString("Address");
+                    String birthday = rs.getString("Birthday");
+                    String citizenId = rs.getString("CitizenID");
+                    String phoneNumber = rs.getString("PhoneNumber");
+                    StaffDTO staff = new StaffDTO(identityID, staffId, fullName, phoneNumber, address, birthday, citizenId, specialtyId);
                     result.add(staff);
                 }
             }
