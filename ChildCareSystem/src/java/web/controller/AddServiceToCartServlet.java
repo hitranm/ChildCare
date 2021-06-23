@@ -8,6 +8,7 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -86,6 +87,9 @@ public class AddServiceToCartServlet extends HttpServlet {
                 //4. Add to cart
                 boolean result = cart.addServiceToCart(reservation);
                 double totalPrice = cart.getTotalPrice();
+                DecimalFormat df = new DecimalFormat("#.000");
+                String total = df.format(totalPrice);
+                
                 if (result == true) {
                     //Setup viewmodel
                     CustomerDAO customerDAO = new CustomerDAO();
@@ -105,7 +109,7 @@ public class AddServiceToCartServlet extends HttpServlet {
                     listCartViewModel.add(cartViewModel);
                     session.setAttribute("CART", cart);
                     session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
-                    session.setAttribute(("TOTAL_PRICE"), totalPrice);
+                    session.setAttribute(("TOTAL_PRICE"), total);
                     url = SUCCESS;
                     session.removeAttribute("DUPLICATE_PATIENT");
                     response.sendRedirect(url);

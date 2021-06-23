@@ -71,7 +71,7 @@
                                                         <td>${reservation.specialtyDTO.specialtyName}</td>
                                                         <td>${reservation.serviceDTO.serviceName}</td>
                                                         <td>${reservation.cartItem.checkInTime}</td>
-                                                        <td>${reservation.serviceDTO.price}</td>
+                                                        <td>${reservation.serviceDTO.price}00</td>
                                                         <td>
                                                             <c:url var="urlUpdate" value="LoadUpdateReservationServlet">
                                                                 <c:param name="txtPatientId" value="${reservation.patientDTO.patientID}"/>
@@ -91,8 +91,9 @@
                                     </div>
                                 </div>
                             </c:forEach>
+                            <div class="totalPrice col-8">Tổng cộng: <span>${sessionScope.TOTAL_PRICE} VNĐ</span></div>
                         </div>
-                        <div>Tổng cộng: ${sessionScope.TOTAL_PRICE}</div>
+                        
                         <form action="DispatchServlet" method="post">
                             <div class="text-center">
                                 <button type="submit" name="btAction" value="VerifyCheckout" class="btn btn-success col-4">Thanh toán</button>

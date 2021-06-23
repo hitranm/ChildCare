@@ -47,3 +47,15 @@ th, td {
     padding: 1rem 0;
 }
 
+.totalPrice {
+    text-align: center;
+    font-size: 18px;
+}
+
+.totalPrice span {
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+
+
