@@ -85,6 +85,7 @@ public class AddServiceToCartServlet extends HttpServlet {
                 CartItem reservation = new CartItem(customerId, patientId, serviceId, timeIntervalId, datetime);
                 //4. Add to cart
                 boolean result = cart.addServiceToCart(reservation);
+                double totalPrice = cart.getTotalPrice();
                 if (result == true) {
                     //Setup viewmodel
                     CustomerDAO customerDAO = new CustomerDAO();
@@ -104,6 +105,7 @@ public class AddServiceToCartServlet extends HttpServlet {
                     listCartViewModel.add(cartViewModel);
                     session.setAttribute("CART", cart);
                     session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
+                    session.setAttribute(("TOTAL_PRICE"), totalPrice);
                     url = SUCCESS;
                     session.removeAttribute("DUPLICATE_PATIENT");
                     response.sendRedirect(url);

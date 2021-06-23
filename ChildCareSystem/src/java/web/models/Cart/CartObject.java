@@ -6,8 +6,11 @@
 package web.models.Cart;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.NamingException;
+import web.models.tblService.ServiceDAO;
 
 /**
  *
@@ -45,6 +48,19 @@ public class CartObject implements Serializable {
             this.cartItems = new ArrayList<>();
         }
         return this.cartItems.size();
+    }
+    
+    public double getTotalPrice() throws SQLException, NamingException {
+        double total = 0;
+        ServiceDAO serviceDAO = new ServiceDAO();
+        if(this.cartItems == null) {
+            this.cartItems = new ArrayList<>();
+        }
+        
+        for(CartItem item : this.cartItems) {
+            total += serviceDAO.getServicePriceById(item.getServiceId());
+        }
+        return total;
     }
 
     public boolean removeServiceFromCart(int patientId) {

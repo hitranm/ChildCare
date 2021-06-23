@@ -23,6 +23,7 @@
 
         <jsp:include page="header.jsp"/>
         <main>
+            <jsp:useBean id="totalPrice" class="web.models.Cart.CartObject" scope="session"/>
             <c:choose>
                 <c:when test="${not empty sessionScope.CART_VIEW_MODEL}">         
                     <div class="wrapper my-5">
@@ -91,6 +92,7 @@
                                 </div>
                             </c:forEach>
                         </div>
+                        <div>Tổng cộng: ${sessionScope.TOTAL_PRICE}</div>
                         <form action="DispatchServlet" method="post">
                             <div class="text-center">
                                 <button type="submit" name="btAction" value="VerifyCheckout" class="btn btn-success col-4">Thanh toán</button>

@@ -123,32 +123,35 @@ public class CustomerDAO {
     }
 
     public CustomerDTO queryCustomerByIdentityId(String identityId) throws SQLException, NamingException {
- String identityID;
+        String identityID;
         String fullName;
         String phoneNum;
         String address;
         String birthday;
         String citizenID;
+        String customerID;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID"
+                String sql = "SELECT CustomerID, IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID"
                         + " FROM tblCustomer"
                         + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, identityId);
                 rs = stm.executeQuery();
                 if (rs.next()) {                 
+                    customerID = rs.getString("CustomerID");
                     identityID = rs.getString("IdentityID");
                     fullName = rs.getString("FullName");
                     phoneNum = rs.getString("PhoneNumber");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
                     citizenID = rs.getString("CitizenID");   
-                    CustomerDTO cus = new CustomerDTO(identityID, fullName, phoneNum, address, birthday, citizenID);
+                    
+                    CustomerDTO cus = new CustomerDTO(customerID, identityID, fullName, address, birthday, citizenID, phoneNum);
                     return cus;
                 } 
             }

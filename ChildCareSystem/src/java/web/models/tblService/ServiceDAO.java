@@ -448,5 +448,35 @@ public class ServiceDAO implements Serializable {
         }
     }
     
+    public double getServicePriceById(int serviceId) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            String sql = "Select Price "
+                    + "From tblService "
+                    + "Where ServiceID=?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, serviceId);
+            rs = stm.executeQuery();
+            
+            if (rs.next()) {
+                double price = rs.getFloat("Price");
+                return price;
+            } else return 0;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
     
 }

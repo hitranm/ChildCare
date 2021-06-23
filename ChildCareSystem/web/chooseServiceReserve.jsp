@@ -141,7 +141,6 @@
 
                 <div class="reservation-bottom py-4 col-12">
                     <h3>Thông tin khách hàng</h3>
-                    <div hidden id="customerId">${customerDTO.customerID}</div>
                     <form class="col-md-6" action="AddServiceToCartServlet" method="post" id="reservationForm">
                         <input hidden name="txtCustomerId" value="${customerDTO.customerID}"/>
                         <input id="txtPatientId" hidden name="txtPatientId" value=""/>
