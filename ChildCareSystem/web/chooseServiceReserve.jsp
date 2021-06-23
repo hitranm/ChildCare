@@ -65,7 +65,7 @@
             <div class="reservation-wrapper px-5 py-5">
                 <h2 class="mb-4">Đặt chỗ khám bệnh</h2>
                 <div class="form-row col-12 reservation-top pb-4">
-                    <div class="col-4">
+                    <div class="col-4 left-section">
                         <h4>Hồ sơ bệnh nhân</h4>
                         <c:choose>
                             <c:when test="${not empty patientList}">
@@ -91,25 +91,35 @@
                                                     <strong>Ngày sinh:</strong> ${patientDTO.birthday}
                                                 </p>
                                             </div>
-                                        </a>
+                                        </a>                                           
                                     </c:forEach>
+                                    <c:url var="addUrl" value="ViewPatientProfileServlet"> 
+                                        <c:param name="action" value="add"/>
+                                    </c:url>
+                                    <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>
                                     <div class="alert alert-danger my-3" id="patientError" role="alert" hidden>
                                         Chưa chọn hồ sơ bệnh nhân
                                     </div>
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <h3>Chưa có hồ sơ bệnh nhân</h3>
+                                <div class="mb-5">
+                                    <h5 style="margin-top: 40%">Chưa có hồ sơ bệnh nhân</h5>
+                                    <small>(Bạn cần hồ sơ bệnh nhân để đặt dịch vụ)</small>
+                                </div>
+
+                                <c:url var="addUrl" value="ViewPatientProfileServlet"> 
+                                    <c:param name="action" value="add"/>
+                                </c:url>
+                                <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>
                             </c:otherwise>
                         </c:choose>
-                        <c:url var="addUrl" value="ViewPatientProfileServlet"> 
-                            <c:param name="action" value="add"/>
-                        </c:url>
-                        <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>  
+
+
                     </div>
-                    
+
                     <div class="col-8 px-4">
-                        <div class="row">
+                        <div class="row mb-5">
                             <div class="form-group col-8">
                                 <label for="service-specialty">Dịch vụ</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
@@ -127,7 +137,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="myCalendarWrapper" class="py-3"></div>
+                        <div id="myCalendarWrapper" class="py-3 mt-5"></div>
                     </div>
                 </div>
 

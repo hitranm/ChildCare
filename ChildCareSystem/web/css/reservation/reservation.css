@@ -20,14 +20,16 @@ and open the template in the editor.
 
 .patientProfile {
     min-height: 100vh;
-    border-right: 1px solid #6c757d;
+    
     padding: 2rem;
 }
 
-
+.left-section {
+    border-right: 1px solid #6c757d;
+}
 
 .addPatientLink {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 
