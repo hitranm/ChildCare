@@ -42,7 +42,7 @@ public class VerifyServlet extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             //CustomerDTO cus = (CustomerDTO) session.getAttribute("authcode");
-            String verifyCode = (String)session.getAttribute("authcode");
+            String verifyCode = (String) session.getAttribute("authcode");
             String code = request.getParameter("authcode");
             if (code.equals(verifyCode)) {
                 url = SUCCESS;
@@ -67,6 +67,8 @@ public class VerifyServlet extends HttpServlet {
                     if (flag1) {
                         session.setAttribute("LOGIN_USER", cus1);
                         session.setAttribute("IDENTITY_ID", identityID);
+                        session.setAttribute("CUSTOMER_ID", customerDAO.queryCustomerID(email));
+                        session.setAttribute("ROLE", "customer");
                     }
                 }
             } else {
