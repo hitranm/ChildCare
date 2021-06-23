@@ -14,10 +14,10 @@
         <title>Child Care System</title>   
         <link rel="stylesheet" href="./css/homepage.css" />
     </head>
-    
+
     <body>
         <jsp:include page="header.jsp"/>
-        
+
         <main>
             <h2>${sessionScope.ROLE}</h2>
             <div class="main_wrapper px-5 py-5">
@@ -153,14 +153,12 @@
                                                 </div>
                                             </article>
                                         </div>
-
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${!testEmpty}">
                                     <h2>Hiện chưa có bài viết nào.</h2>
                                 </c:if>
-                            </c:if>
-
+                            </c:if> 
                         </div>
                         <a href="#" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
@@ -252,14 +250,14 @@
         <jsp:include page="footer.jsp"/>
         <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
-        
+
         <!--Custom JS-->
         <script src="./js/main.js"></script>
         <script>
-            window.addEventListener('load', (event) => {
-                window.localStorage.clear();
-                window.localStorage.setItem("identityId", "${sessionScope.IDENTITY_ID}");
-            });
+                                            window.addEventListener('load', (event) => {
+                                                window.localStorage.clear();
+                                                window.localStorage.setItem("identityId", "${sessionScope.IDENTITY_ID}");
+                                            });
         </script>
     </body>
 </html>

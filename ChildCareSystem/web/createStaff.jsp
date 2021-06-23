@@ -17,13 +17,27 @@
             />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/homepage.css">
-        <link rel="stylesheet" href="css/staff/createStaff.css">
+        <style>
+            .wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .wrapper form {
+                width: 100%;
+            }
+
+            .wrapper h1 {
+                margin-bottom: 20px;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
 
-        <div class="wrapper">
+        <div class="wrapper container my-5 px-4">
             <h1>Tạo tài khoản nhân viên</h1>
             <form action="DispatchServlet" method="POST">
                 <div class="form-row">

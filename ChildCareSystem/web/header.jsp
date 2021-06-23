@@ -76,9 +76,6 @@
                                 <a class="nav-link" href="ViewPatientProfileServlet">Hồ sơ bệnh nhân</a>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link" href="#">Liên hệ</a>
-                            </li>
-                            <li class="nav-item px-3">
                                 <a class="nav-link" href="createStaff.jsp">Tạo staff account</a>
                             </li>
                             <li class="nav-item px-3">
