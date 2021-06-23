@@ -67,6 +67,7 @@ public class VerifyServlet extends HttpServlet {
                     if (flag1) {
                         session.setAttribute("LOGIN_USER", cus1);
                         session.setAttribute("IDENTITY_ID", identityID);
+                        session.setAttribute("ROLE", "customer");
                     }
                 }
             } else {
