@@ -37,19 +37,21 @@ public class StartupServlet extends HttpServlet {
         String url = ERROR;
         try {
             BlogDAO blogDAO = new BlogDAO();
-            List<BlogDTO> listBlog = blogDAO.getTop6BlogList();
+            int numberOfBlogView = 6;
+            List<BlogDTO> listBlog = blogDAO.getTopXBlogList(numberOfBlogView);
 
             ServiceDAO serviceDAO = new ServiceDAO();
-            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
-            
+            int numberOfServiceView = 3;
+            List<ServiceDTO> listService = serviceDAO.getTopXServiceList(numberOfServiceView);
+
             HttpSession session = request.getSession();
 
             session.setAttribute("BLOG_LIST_TOP6", listBlog);
             session.setAttribute("SERVICE_LIST_TOP3", listService);
-            url =HOME_PAGE;
+            url = HOME_PAGE;
         } catch (Exception ex) {
             log("Error at StartupServelt: " + ex.getMessage());
-        } finally{
+        } finally {
 //            request.getRequestDispatcher(url).forward(request, response);
             response.sendRedirect(url);
         }
