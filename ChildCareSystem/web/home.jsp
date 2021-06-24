@@ -137,9 +137,9 @@
                             <h2>Bài viết nổi bật</h2>
                         </div>
                         <div class="blog_wrapper">
-                            <c:if test="${sessionScope.BLOG_LIST_TOP6 != null}">
-                                <c:if test="${not empty sessionScope.BLOG_LIST_TOP6}" var="testEmpty">
-                                    <c:forEach items="${sessionScope.BLOG_LIST_TOP6}" var="dto">
+                            <c:if test="${sessionScope.BLOG_LIST_VIEW != null}">
+                                <c:if test="${not empty sessionScope.BLOG_LIST_VIEW}" var="testEmpty">
+                                    <c:forEach items="${sessionScope.BLOG_LIST_VIEW}" var="dto">
                                         <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewBlogDetailServlet?id=${dto.blogID}'">
                                             <article>
                                                 <div class="blog_thumbnail">
@@ -189,9 +189,9 @@
                             <h2>Dịch vụ</h2>
                         </div>
                         <div class="blog_wrapper">
-                            <c:if test="${sessionScope.SERVICE_LIST_TOP3!=null}">
-                                <c:if test="${not empty sessionScope.SERVICE_LIST_TOP3}" var="testEmpty">
-                                    <c:forEach items="${sessionScope.SERVICE_LIST_TOP3}" var="dto">
+                            <c:if test="${sessionScope.SERVICE_LIST_VIEW!=null}">
+                                <c:if test="${not empty sessionScope.SERVICE_LIST_VIEW}" var="testEmpty">
+                                    <c:forEach items="${sessionScope.SERVICE_LIST_VIEW}" var="dto">
                                         <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
                                             <article>
                                                 <div class="blog_thumbnail">

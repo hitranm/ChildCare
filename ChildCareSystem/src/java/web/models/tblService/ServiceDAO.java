@@ -313,7 +313,7 @@ public class ServiceDAO implements Serializable {
         }
     }
     
-    public List<ServiceDTO> getTopXServiceList(int top) throws SQLException, NamingException {
+    public List<ServiceDTO> getTop3ServiceList() throws SQLException, NamingException {
         List<ServiceDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -321,10 +321,9 @@ public class ServiceDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT TOP(?) ServiceName,Thumbnail,CreatedDate"
+                String sql = "SELECT TOP(3) ServiceName,Thumbnail,CreatedDate"
                         + " FROM tblService ORDER BY CreatedDate DESC ";
                 stm = conn.prepareStatement(sql);
-                stm.setInt(1, top);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
                 while (rs.next()) {

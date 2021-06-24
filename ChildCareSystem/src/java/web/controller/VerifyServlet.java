@@ -24,7 +24,7 @@ import web.models.tblIdentity.IdentityDTO;
 public class VerifyServlet extends HttpServlet {
 
     private static final String ERROR = "verify.jsp";
-    private static final String SUCCESS = "home.jsp";
+    private static final String SUCCESS = "StartupServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
