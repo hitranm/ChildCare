@@ -42,7 +42,7 @@
                                 class="d-inline-block align-top"
                                 alt=""
                                 />
-                            Child Care System
+                            Trung tâm chăm sóc trẻ em CCS
                         </a>
                     </nav>
                 </div>

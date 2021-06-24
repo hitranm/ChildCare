@@ -28,9 +28,9 @@
                 <c:when test="${not empty sessionScope.CART_VIEW_MODEL}">         
                     <div class="wrapper my-5">
                         <h2 class="text-center my-5">Vui lòng kiểm tra lại thông tin trước khi thanh toán</h2>
-                        <div class="service-card-wrapper my-5">
+                        <div class="service-card-wrapper my-5 col-12">
                             <c:forEach var="reservation" items="${sessionScope.CART_VIEW_MODEL}">
-                                <div class="card col-8 my-3">
+                                <div class="card col-12 col-md-8 my-3">
                                     <div class="card-header">
                                         Thông tin khám
                                     </div>
