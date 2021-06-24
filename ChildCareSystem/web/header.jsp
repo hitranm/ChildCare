@@ -105,6 +105,8 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt dịch vụ</a>
                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewReservationForManager">Coi đơn đặt khám</a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>

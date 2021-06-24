@@ -129,4 +129,114 @@ public class ReservationDAO implements Serializable {
         }
 
     }
+    public List<ReservationDTO> getAllReservation() throws SQLException, NamingException {
+        List<ReservationDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                        + " FROM tblReservation " ;
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    int reservationID = rs.getInt("ReservationID");
+                    int customerID = rs.getInt("CustomerID");
+                    int staffAssignedID = rs.getInt("StaffAssignedID");
+                    String checkInTime = rs.getString("CheckInTime");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    result.add(res);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+     public List<ReservationDTO> getAllReservationByIntervalTimeID(int x, int y) throws SQLException, NamingException {
+        List<ReservationDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                        + " FROM tblReservation "
+                        +" WHERE IntervalTimeID BETWEEN ? AND ?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, x);
+                stm.setInt(2, y);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    int reservationID = rs.getInt("ReservationID");
+                    int customerID = rs.getInt("CustomerID");
+                    int staffAssignedID = rs.getInt("StaffAssignedID");
+                    String checkInTime = rs.getString("CheckInTime");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    result.add(res);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+       public ReservationDTO queryResById(String id) throws SQLException, NamingException {
+
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT CustomerID, PatientID, ServiceID, StaffAssignedID, CheckInTime "
+                        + " FROM tblReservation "
+                        + " WHERE ReservationID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int customerID = rs.getInt("CustomerID");
+                    int patientID = rs.getInt("PatientID");
+                    int serviceID = rs.getInt("ServiceID");
+                    int staffAssignID = rs.getInt("StaffAssignedID");
+                    String checkInDate = rs.getString("CheckInTime");
+                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, "");
+                    return res;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 }

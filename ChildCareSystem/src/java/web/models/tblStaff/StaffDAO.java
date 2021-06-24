@@ -379,4 +379,39 @@ public class StaffDAO implements Serializable {
         }
         return false;
     }
+      public StaffDTO queryStaffById(int id) throws SQLException, NamingException {
+       
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT FullName, SpecialtyID "
+                        + " FROM tblStaff S "
+                        + " WHERE StaffID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String fullName = rs.getString("FullName");
+                    
+                    String specialtyID = rs.getString("SpecialtyID");
+                    StaffDTO staff = new StaffDTO(fullName, specialtyID);
+                    return staff;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 }
