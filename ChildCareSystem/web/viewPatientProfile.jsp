@@ -111,8 +111,6 @@
             </c:if>
 
             <c:if test="${sessionScope.ROLE eq 'customer'}">
-                <h1>DANH SÁCH HỒ SƠ BỆNH NHÂN</h1>
-                <br>
                 <div class="row">
                     <div class="col-md-12 col-lg-3">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -122,11 +120,12 @@
                                 </button>
                             </c:if>
                             <c:if test="${empty requestScope.reachMaxPatient}">
-                                <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm Hồ Sơ Bệnh Nhân</a>
+                                <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm hồ sơ bệnh nhân</a>
 
                             </c:if>
                             <br>
                             <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hồ sơ bệnh nhân</a>
+                            <a class="nav-link" id="v-pills-history-tab" data-toggle="pill" href="#v-pills-history" role="tab" aria-controls="v-pills-history" aria-selected="false">Lịch sử đặt lịch khám</a>
 
                         </div>
                     </div>
@@ -154,7 +153,7 @@
                             </c:if>
                             <c:if test="${empty requestScope.reachMaxPatient}">
                                 <div class="tab-pane fade" id="v-pills-addPatient" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                    <h2>Thông tin đăng ký hồ sơ bệnh nhân</h2>
+                                    <h2 style="text-align: center; color: #c97244">THÔNG TIN ĐĂNG KÝ HỒ SƠ BỆNH NHÂN</h2>
                                     <form action="DispatchServlet" method="POST" name="f1">
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
@@ -215,6 +214,7 @@
 
                             </c:if>
                             <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                <h2 style="text-align: center; color: #1977cc">DANH SÁCH HỒ SƠ BỆNH NHÂN</h2>
                                 <div class="row">
                                     <c:if test="${requestScope.listPatients!=null}">
                                         <c:if test="${not empty requestScope.listPatients}" var="testEmpty">
@@ -263,6 +263,53 @@
                                 </div>
                             </div>
 
+                            <div class="tab-pane fade" id="v-pills-history" role="tabpanel" aria-labelledby="v-pills-history-tab">
+                                <h2 style="text-align: center; color: #ffbd3f">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
+
+                                <div class="row">
+                                    <c:if test="${requestScope.historyList!=null}">
+                                        <c:if test="${not empty requestScope.historyList}" var="testEmpty">
+                                            <c:forEach items="${requestScope.historyList}" var="history">
+                                                <div class="col-md-6" style="margin-bottom: 3%">
+                                                    <form class="col" action="LoadPatientProfileServlet" method="POST">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><strong>${history.patientName}</strong></h5>
+                                                                <hr> 
+                                                                <p class="card-text">
+                                                                    <strong>Dịch vụ đã chọn:</strong> ${history.serviceName}
+                                                                </p>
+                                                                <p class="card-text">
+                                                                    <strong>Ngày hẹn khám:</strong> ${history.checkInTime}
+                                                                </p>
+                                                                <hr>
+                                                                <c:url value="#" var="updateLink">
+                                                                    <c:param name="id" value="${history.reservationID}"/>
+                                                                </c:url>
+                                                                <a class="btn btn-primary" href="${updateLink}" role="button">Chính sửa lịch khám</a>
+                                                                <c:url value="#" var="deleteLink">
+                                                                    <c:param name="id" value="${history.reservationID}"/>
+                                                                </c:url>
+                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${deleteLink}" role="button">Hủy lịch khám</a>
+
+                                                                <p class="card-text" style="text-align: right; font-size: smaller">
+                                                                    ${history.createdDate}
+                                                                </p>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </c:forEach>
+
+                                        </c:if>
+                                        <c:if test="${!testEmpty}">
+                                            <h2>Hiện Chưa Có Lịch Khám Nào</h2>
+                                        </c:if>
+                                    </c:if>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
