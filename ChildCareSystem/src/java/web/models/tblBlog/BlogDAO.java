@@ -451,4 +451,33 @@ public class BlogDAO implements Serializable {
         }
         return result;
     }
+    public boolean setStatus(String blogID, String statusID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "Update tblBlog "
+                        + "Set StatusID=? "
+                        + "Where BlogID=?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, statusID);
+                stm.setString(2, blogID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+        return false;
+    }
 }

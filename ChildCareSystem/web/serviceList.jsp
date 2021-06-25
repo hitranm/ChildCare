@@ -35,7 +35,7 @@
         <main>
             <div class="container">
                 <h1 class="text-center mb-2">DỊCH VỤ</h1> 
-                <div class="search">
+                <div class="search p-2">
                     <form action="SearchBlogServlet?idx=1" method="POST">
                         <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchBlog" value="${param.txtSearchBlog}" />
                         <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
@@ -46,26 +46,22 @@
                 <div class="main-wrapper">
                     <c:set var="list" value="${requestScope.SERVICE_LIST}"/>
                     <c:if test="${not empty list}">
-                        <div class="row text-center">
-                            <c:forEach var="dto" items="${list}">
-                                <div class="service-preview mb-3 col-lg-4">
-                                    <div class="style">
-                                        <div class="service-thumbnail">
-                                            <a href="ViewServiceDetailServlet?id=${dto.serviceId}">
-                                                <img src="./images/service/${dto.thumbnail}"/>
-                                            </a>
-                                        </div>
-                                        <div class="service-name">
-                                            <a href="ViewServiceDetailServlet?id=${dto.serviceId}">
-                                                <h4>${dto.serviceName}</h4>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="service-name">
+                        <c:forEach var="dto" items="${list}">
+                            <div class="service-preview d-flex">
+                                <div class="service-thumbnail">
                                     <a href="ViewServiceDetailServlet?id=${dto.serviceId}">
-                                        <h4>${dto.serviceName}</h4>
+                                        <img src="./images/service/${dto.thumbnail}"/>
                                     </a>
+                                </div>
+                                <div>
+                                    <div class="service-name">
+                                        <a href="ViewServiceDetailServlet?id=${dto.serviceId}">
+                                            <h4>${dto.serviceName}</h4>
+                                        </a>
+                                    </div>
+                                    <div class="service-descript text-secondary">
+                                        ${dto.description}
+                                    </div>
                                 </div>
                             </div>
                         </c:forEach>
@@ -82,7 +78,6 @@
             </div>
         </main>
         <jsp:include page="footer.jsp"/>
-        
         <script src="./js/main.js"></script>
     </body>
 </html>

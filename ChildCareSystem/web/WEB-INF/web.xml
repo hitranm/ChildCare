@@ -156,6 +156,38 @@
         <servlet-name>AddManagerServlet</servlet-name>
         <servlet-class>web.controller.AddManagerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateBlogStatusServlet</servlet-name>
+        <servlet-class>web.controller.UpdateBlogStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateSpecialtyServlet</servlet-name>
+        <servlet-class>web.controller.CreateSpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSpecialtyServlet</servlet-name>
+        <servlet-class>web.controller.DeleteSpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSpecialtyServlet</servlet-name>
+        <servlet-class>web.controller.UpdateSpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+        <servlet-class>web.controller.CreateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCategoryServlet</servlet-name>
+        <servlet-class>web.controller.ViewCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <servlet-class>web.controller.UpdateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>web.controller.DeleteCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -311,6 +343,38 @@
     <servlet-mapping>
         <servlet-name>AddManagerServlet</servlet-name>
         <url-pattern>/AddManagerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlogStatusServlet</servlet-name>
+        <url-pattern>/UpdateBlogStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSpecialtyServlet</servlet-name>
+        <url-pattern>/CreateSpecialtyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSpecialtyServlet</servlet-name>
+        <url-pattern>/DeleteSpecialtyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSpecialtyServlet</servlet-name>
+        <url-pattern>/UpdateSpecialtyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+        <url-pattern>/CreateCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCategoryServlet</servlet-name>
+        <url-pattern>/ViewCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <url-pattern>/UpdateCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/DeleteCategoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

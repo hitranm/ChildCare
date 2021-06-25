@@ -101,9 +101,15 @@
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="viewSpeciaty.jsp">Danh sách chuyên khoa</a>
+                                            <a class="dropdown-item" href="createSpecialty.jsp">Tạo chuyên khoa</a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt dịch vụ</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="ViewCategoryServlet">Danh sách chủ đề bài viết</a>
+                                            <a class="dropdown-item" href="createCategory.jsp">Thêm chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>

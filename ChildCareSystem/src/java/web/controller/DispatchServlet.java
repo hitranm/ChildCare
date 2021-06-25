@@ -52,6 +52,10 @@ public class DispatchServlet extends HttpServlet {
     private static final String CHOOSE_SERVICE_RESERVE = "ChooseReservationServlet";
     private static final String VERIFY_CHECKOUT = "VerifyCheckoutServlet";
     private static final String ADD_MANAGER = "AddManagerServlet";
+    private static final String CREATE_SPECIALTY = "CreateSpecialtyServlet";
+    private static final String UPDATE_SPECIALTY = "UpdateSpecialtyServlet";
+    private static final String CREATE_CATEGORY = "CreateCategoryServlet";
+    private static final String UPDATE_CATEGORY = "UpdateCategoryServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -121,6 +125,14 @@ public class DispatchServlet extends HttpServlet {
                 url = VERIFY_CHECKOUT;
             } else if (button.equalsIgnoreCase("RegisterManager")) {
                 url = ADD_MANAGER;
+            } else if (button.equalsIgnoreCase("CreateSpecialty")) {
+                url = CREATE_SPECIALTY;
+            } else if (button.equalsIgnoreCase("UpdateSpecialty")) {
+                url = UPDATE_SPECIALTY;
+            } else if (button.equalsIgnoreCase("CreateCate")) {
+                url = CREATE_CATEGORY;
+            } else if (button.equalsIgnoreCase("UpdateCate")) {
+                url = UPDATE_CATEGORY;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
