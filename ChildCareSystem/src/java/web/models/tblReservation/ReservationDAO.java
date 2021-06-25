@@ -239,4 +239,80 @@ public class ReservationDAO implements Serializable {
         }
         return null;
     }
+       public List<ReservationDTO> getReservationByStaffID(String id) throws SQLException, NamingException {
+        List<ReservationDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                        + " FROM tblReservation "
+                        + " WHERE StaffAssignedID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, id);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    int reservationID = rs.getInt("ReservationID");
+                    int customerID = rs.getInt("CustomerID");
+                    int staffAssignedID = rs.getInt("StaffAssignedID");
+                    String checkInTime = rs.getString("CheckInTime");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    result.add(res);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+       public List<ReservationDTO> getReservationByIntervalTimeIDForStaff(int x, int y, String id) throws SQLException, NamingException {
+        List<ReservationDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                        + " FROM tblReservation "
+                        +" WHERE IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, x);
+                stm.setInt(2, y);
+                stm.setString(3, id);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    int reservationID = rs.getInt("ReservationID");
+                    int customerID = rs.getInt("CustomerID");
+                    int staffAssignedID = rs.getInt("StaffAssignedID");
+                    String checkInTime = rs.getString("CheckInTime");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    result.add(res);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
 }

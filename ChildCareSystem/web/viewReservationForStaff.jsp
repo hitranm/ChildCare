@@ -115,7 +115,7 @@
 
                                             <td>
                                             <c:url var="viewdetails" value="DispatchServlet">
-                                                <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                <c:param name="btAction" value="ViewReservationDetailsStaff"></c:param>
                                                 <c:param name="resid" value="${dto.reservationId}"></c:param>
 
 
@@ -166,7 +166,7 @@
 
                                             <td>
                                             <c:url var="viewdetails" value="DispatchServlet">
-                                                <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                <c:param name="btAction" value="ViewReservationDetailsStaff"></c:param>
                                                 <c:param name="resid" value="${dto.reservationId}"></c:param>
 
 
@@ -217,7 +217,7 @@
 
                                             <td>
                                             <c:url var="viewdetails" value="DispatchServlet">
-                                                <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                <c:param name="btAction" value="ViewReservationDetailsStaff"></c:param>
                                                 <c:param name="resid" value="${dto.reservationId}"></c:param>
 
 
