@@ -184,6 +184,10 @@
         <servlet-name>CreateFeedbackServlet</servlet-name>
         <servlet-class>web.controller.CreateFeedbackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateFeedbackServlet</servlet-name>
+        <servlet-class>web.controller.UpdateFeedbackServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -367,6 +371,10 @@
     <servlet-mapping>
         <servlet-name>CreateFeedbackServlet</servlet-name>
         <url-pattern>/CreateFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFeedbackServlet</servlet-name>
+        <url-pattern>/UpdateFeedbackServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

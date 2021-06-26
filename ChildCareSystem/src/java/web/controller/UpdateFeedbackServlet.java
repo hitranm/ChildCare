@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import web.models.tblFeedback.FeedbackDAO;
-import web.models.tblFeedback.FeedbackDTO;
 
 /**
  *
  * @author HOANGKHOI
  */
-public class CreateFeedbackServlet extends HttpServlet {
+public class UpdateFeedbackServlet extends HttpServlet {
     private static final String SUCCESS = "ViewPatientProfileServlet";
     private static final String ERROR = "feedback.jsp";
     /**
@@ -34,30 +33,24 @@ public class CreateFeedbackServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String strReservationId = request.getParameter("txtrReservationId");
-        String strCustomerId = request.getParameter("txtCustomerId");
-        String strServiceId = request.getParameter("txtServiceId");
+        String url = ERROR;
+
         String strStar = request.getParameter("txtStar");
         String strComment = request.getParameter("txtComment");
+        String strFeedbackId = request.getParameter("txtFeedbackId");
         FeedbackDAO feedbackDAO = new FeedbackDAO();
-        String url = ERROR;
         try {
-            int reservationId = Integer.parseInt(strReservationId);
-            int customerId = Integer.parseInt(strCustomerId);
-            int serviceId = Integer.parseInt(strServiceId);
-            int star = Integer.parseInt(strStar);
-            FeedbackDTO feedbackDTO = new FeedbackDTO(serviceId, customerId, reservationId, strComment, star);
-            boolean result = feedbackDAO.addFeedback(feedbackDTO);
-            if (result) {
+            int feedbackId = Integer.parseInt(strFeedbackId);
+            int rate = Integer.parseInt(strStar);
+            boolean result = feedbackDAO.updateFeedback(feedbackId, strComment, rate);
+            if(result) {
                 url = SUCCESS;
             }
-            
-        } catch (Exception ex) {
-            log("Error at CreateFeedbackServlet: " + ex.getMessage());
-            url = ERROR;
+        } catch (Exception ex) { 
+            log("Error at UpdateFeedbackServlet: " + ex.getMessage());
         }
         finally {
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

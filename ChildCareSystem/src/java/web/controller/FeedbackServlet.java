@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FeedbackServlet extends HttpServlet {
     private static final String CREATE_FEEDBACK = "CreateFeedbackServlet";
+    private static  final String UPDATE_FEEDBACK = "UpdateFeedbackServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,6 +39,8 @@ public class FeedbackServlet extends HttpServlet {
                
            } else if (action.equalsIgnoreCase("Create")) {
                url = CREATE_FEEDBACK;
+           } else if(action.equalsIgnoreCase("update")) {
+               url = UPDATE_FEEDBACK;
            }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

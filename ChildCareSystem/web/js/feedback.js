@@ -39,6 +39,26 @@ $("#submitButton").click(function () {
         $("#feedbackForm").submit();
     } else
         return;
+});
 
+$("#updateButton").click(function () {
+    var status = true;
+    if (count === undefined) {
+        $("#rate-error").attr("hidden", false);
+        status = false;
+    }
 
+    if ($("#comment").val() === "") {
+        $("#comment-error").attr("hidden", false);
+        status = false;
+    }
+
+    if (status == true) {
+        $("#txtStar").val(count);
+        $("#action").val("update");
+        var comment = $("#comment").val();
+        $("#txtComment").val(comment);
+        $("#feedbackForm").submit();
+    } else
+        return;
 });

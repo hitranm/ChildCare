@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
+import web.models.tblFeedback.FeedbackDAO;
+import web.models.tblFeedback.FeedbackDTO;
 import web.models.tblPatient.PatientDAO;
 import web.models.tblPatient.PatientDTO;
 import web.models.tblReservation.ReservationDAO;
@@ -46,19 +48,22 @@ public class LoadFeedbackServlet extends HttpServlet {
         PatientDAO patientDAO = new PatientDAO();
         ServiceDAO serviceDAO = new ServiceDAO();
         CustomerDAO customerDAO = new CustomerDAO();
+        FeedbackDAO feedbackDAO = new FeedbackDAO();
         String url = FEEDBACK_PAGE;
                 
         try {
             //Get reservation
             ReservationDTO reservationDTO = reservationDAO.queryResById(reservationId);
-            // Get service, patient and customer
-            int serviceId = reservationDTO.getServiceId();       
+            // Get service, patient and customer      
             ServiceDTO serviceDTO = serviceDAO.getServiceInfo(reservationDTO.getServiceId());
             PatientDTO patientDTO = patientDAO.getPatByID(reservationDTO.getPatientId());
             CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(reservationDTO.getCustomerId());
             FeedbackViewModel viewModel = new FeedbackViewModel(patientDTO, serviceDTO, reservationDTO, customerDTO);
+            FeedbackDTO previousFeedback = feedbackDAO.getFeedbackByReservationId(reservationDTO.getReservationId());
+            if(previousFeedback != null) {
+                request.setAttribute("PREVIOUS_FEEDBACK", previousFeedback);
+            }
             request.setAttribute("FEEDBACK_VIEW_MODEL", viewModel);
-            
             
         } catch (SQLException | NamingException ex) {
             log("Error at LoadFeedbackServlet: " + ex.getMessage());

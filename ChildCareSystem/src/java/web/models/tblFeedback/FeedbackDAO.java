@@ -8,6 +8,7 @@ package web.models.tblFeedback;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import web.utils.DBHelpers;
@@ -16,7 +17,8 @@ import web.utils.DBHelpers;
  *
  * @author HOANGKHOI
  */
-public class FeedbackDAO implements Serializable{
+public class FeedbackDAO implements Serializable {
+
     public boolean addFeedback(FeedbackDTO feedback) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -25,7 +27,7 @@ public class FeedbackDAO implements Serializable{
             if (conn != null) {
                 String sql = "INSERT INTO tblFeedback(ServiceID, ReservationID, CustomerID, Comment, Rate) VALUES(?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                
+
                 stm.setInt(1, feedback.getServiceId());
                 stm.setInt(2, feedback.getReservationId());
                 stm.setInt(3, feedback.getCustomerId());
@@ -46,7 +48,7 @@ public class FeedbackDAO implements Serializable{
         }
         return false;
     }
-    
+
     public boolean deleteFeedback(int id) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -71,7 +73,7 @@ public class FeedbackDAO implements Serializable{
         }
         return false;
     }
-    
+
     public boolean updateFeedback(int feedbackId, String comment, int rate) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -98,5 +100,42 @@ public class FeedbackDAO implements Serializable{
             }
         }
         return false;
+    }
+
+    public FeedbackDTO getFeedbackByReservationId(int id) throws SQLException, NamingException {
+        FeedbackDTO result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * "
+                        + " FROM tblFeedback "
+                        + " WHERE ReservationID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String comment = rs.getString("Comment");
+                    int rate = rs.getInt("Rate");
+                    int serviceId = rs.getInt("ServiceID");
+                    int customerId = rs.getInt("CustomerID");
+                    int feedbackId = rs.getInt("FeedbackID");
+                    result = new FeedbackDTO(feedbackId, serviceId, customerId, id, comment, rate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 }

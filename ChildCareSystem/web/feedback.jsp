@@ -77,6 +77,21 @@
                                 ></textarea>
                             <small class="text-danger" hidden id="comment-error">Bạn chưa nhập đánh giá</small>
                         </div>
+                        <!-- If there is previous feedback -->
+                        <c:if test="${not empty requestScope.PREVIOUS_FEEDBACK}">
+                            <script>
+                                console.log("There are feedback");
+                                document.getElementById("comment").innerHTML = "${requestScope.PREVIOUS_FEEDBACK.comment}";
+                                let star = ${requestScope.PREVIOUS_FEEDBACK.rate};
+                                for (var i = 0; i < 5; i++) {
+                                    if (i < star) {
+                                        document.getElementById(i + 1 + "one").style.color = "#fed330";
+                                    } else {
+                                        document.getElementById(i + 1 + "one").style.color = "black";
+                                    }
+                                }
+                            </script>
+                        </c:if>
 
                         <form action="FeedbackServlet" class="my-4" id="feedbackForm">
                             <input hidden name="txtrReservationId" value="${reservationDTO.reservationId}"/>
@@ -86,8 +101,18 @@
                             <input hidden name="txtComment" value="" id="txtComment"/>
                             <input hidden name="action" value="" id="action"/>
                             <div class="text-center">
-                                <button type="button" name="action" value="SendFeedback" class="btn btn-primary" id="submitButton">Gửi phản hồi</button>
-                                <button type="button" name="action" value="DeleteFeedback" class="btn btn-danger">Xóa phản hồi</button>
+                                <c:choose>
+                                    <c:when test="${not empty requestScope.PREVIOUS_FEEDBACK}">
+                                        <input hidden name="txtFeedbackId" value="${requestScope.PREVIOUS_FEEDBACK.feedbackId}"/>
+                                        <button type="button" name="action" value="UpdateFeedback" class="btn btn-primary" id="updateButton">Cập nhật phản hồi</button>
+                                        <button type="button" name="action" value="DeleteFeedback" class="btn btn-danger">Xóa phản hồi</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button type="button" name="action" value="SendFeedback" class="btn btn-primary" id="submitButton">Gửi phản hồi</button>
+                                    </c:otherwise>
+                                </c:choose>
+                                
+                                
                             </div>
                         </form>
                     </div>
@@ -98,7 +123,6 @@
                 </c:otherwise>
             </c:choose>
         </main>
-
 
         <jsp:include page="footer.jsp"/>
         <script src="js/feedback.js"></script>
