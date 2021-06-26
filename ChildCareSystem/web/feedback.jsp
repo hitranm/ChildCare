@@ -105,7 +105,7 @@
                                     <c:when test="${not empty requestScope.PREVIOUS_FEEDBACK}">
                                         <input hidden name="txtFeedbackId" value="${requestScope.PREVIOUS_FEEDBACK.feedbackId}"/>
                                         <button type="button" name="action" value="UpdateFeedback" class="btn btn-primary" id="updateButton">Cập nhật phản hồi</button>
-                                        <button type="button" name="action" value="DeleteFeedback" class="btn btn-danger">Xóa phản hồi</button>
+                                        <button type="button" name="action" value="DeleteFeedback" class="btn btn-danger" id="deleteButton">Xóa phản hồi</button>
                                     </c:when>
                                     <c:otherwise>
                                         <button type="button" name="action" value="SendFeedback" class="btn btn-primary" id="submitButton">Gửi phản hồi</button>

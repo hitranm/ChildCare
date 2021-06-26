@@ -62,3 +62,9 @@ $("#updateButton").click(function () {
     } else
         return;
 });
+
+$("#deleteButton").click(function () {
+    $("#action").val("delete");
+    $("#feedbackForm").submit();
+
+});

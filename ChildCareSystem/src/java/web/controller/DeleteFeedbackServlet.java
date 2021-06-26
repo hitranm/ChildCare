@@ -11,15 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import web.models.tblFeedback.FeedbackDAO;
 
 /**
  *
  * @author HOANGKHOI
  */
-public class FeedbackServlet extends HttpServlet {
-    private static final String CREATE_FEEDBACK = "CreateFeedbackServlet";
-    private static  final String UPDATE_FEEDBACK = "UpdateFeedbackServlet";
-    private static final String DELETE_FEEDBACK = "DeleteFeedbackServlet";
+public class DeleteFeedbackServlet extends HttpServlet {
+
+    private static final String SUCCESS = "ViewPatientProfileServlet";
+    private static final String ERROR = "feedback.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,19 +34,17 @@ public class FeedbackServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String action = request.getParameter("action");
-        String url = CREATE_FEEDBACK;
+        String strFeedbackId = request.getParameter("txtFeedbackId");
+        FeedbackDAO feedbackDAO = new FeedbackDAO();
+        String url = ERROR;
         try {
-           if(action == null) {
-               
-           } else if (action.equalsIgnoreCase("Create")) {
-               url = CREATE_FEEDBACK;
-           } else if(action.equalsIgnoreCase("update")) {
-               url = UPDATE_FEEDBACK;
-           } else if(action.equalsIgnoreCase("delete")) {
-               url = DELETE_FEEDBACK;
-           }
+            int feedbackId = Integer.parseInt(strFeedbackId);
+            boolean result = feedbackDAO.deleteFeedback(feedbackId);
+            if(result) {
+                url = SUCCESS;
+            }
+        } catch (Exception ex) {
+            log("Error at DeleteFeedbackServlet: " + ex.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

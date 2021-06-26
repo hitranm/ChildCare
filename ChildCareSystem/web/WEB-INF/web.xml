@@ -188,6 +188,10 @@
         <servlet-name>UpdateFeedbackServlet</servlet-name>
         <servlet-class>web.controller.UpdateFeedbackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedbackServlet</servlet-name>
+        <servlet-class>web.controller.DeleteFeedbackServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -375,6 +379,10 @@
     <servlet-mapping>
         <servlet-name>UpdateFeedbackServlet</servlet-name>
         <url-pattern>/UpdateFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedbackServlet</servlet-name>
+        <url-pattern>/DeleteFeedbackServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
