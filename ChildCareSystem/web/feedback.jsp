@@ -66,7 +66,8 @@
                                 id="5one"
                                 style="font-size: 25px; cursor: pointer"
                                 class="fa fa-star"
-                                ></span>
+                                ></span><br>
+                            <small class="text-danger" hidden id="rate-error">Bạn chưa chọn số điểm đánh giá</small>
                             <textarea
                                 class="form-control mt-3"
                                 rows="5"
@@ -74,6 +75,7 @@
                                 placeholder="Nhập đánh giá của bạn"
                                 maxlength="200"
                                 ></textarea>
+                            <small class="text-danger" hidden id="comment-error">Bạn chưa nhập đánh giá</small>
                         </div>
 
                         <form action="FeedbackServlet" class="my-4" id="feedbackForm">

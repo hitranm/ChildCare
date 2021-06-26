@@ -7,22 +7,38 @@
 
 var count;
 function starmark(item) {
-  count = item.id[0];
-  sessionStorage.starRating = count;
-  var subid = item.id.substring(1);
-  for (var i = 0; i < 5; i++) {
-    if (i < count) {
-      document.getElementById(i + 1 + subid).style.color = "#fed330";
-    } else {
-      document.getElementById(i + 1 + subid).style.color = "black";
+    count = item.id[0];
+    sessionStorage.starRating = count;
+    var subid = item.id.substring(1);
+    for (var i = 0; i < 5; i++) {
+        if (i < count) {
+            document.getElementById(i + 1 + subid).style.color = "#fed330";
+        } else {
+            document.getElementById(i + 1 + subid).style.color = "black";
+        }
     }
-  }
 }
 
-$( "#submitButton" ).click(function() {
-    $("#txtStar").val(count);
-    $("#action").val("Create");
-    var comment = $("#comment").val();
-    $("#txtComment").val(comment);
-    $("#feedbackForm").submit();
+$("#submitButton").click(function () {
+    var status = true;
+    if (count === undefined) {
+        $("#rate-error").attr("hidden", false);
+        status = false;
+    }
+
+    if ($("#comment").val() === "") {
+        $("#comment-error").attr("hidden", false);
+        status = false;
+    }
+
+    if (status == true) {
+        $("#txtStar").val(count);
+        $("#action").val("Create");
+        var comment = $("#comment").val();
+        $("#txtComment").val(comment);
+        $("#feedbackForm").submit();
+    } else
+        return;
+
+
 });
