@@ -23,3 +23,14 @@ function cancelConfirm() {
     var r = confirm("Các thay đổi sẽ không được lưu. Bạn có chắc chắn muốn hủy bài viết?");
     return r;
 }
+
+function feedback(time, id) {
+    var reservationDate = new Date(time);
+    var today = new Date();
+    var timeInterval = today - reservationDate;
+    if(timeInterval > 0) {
+        location.replace(`LoadFeedbackServlet?id=${id}`);
+    } else {
+        $(`#${id}`).attr("hidden", false);
+    }
+}

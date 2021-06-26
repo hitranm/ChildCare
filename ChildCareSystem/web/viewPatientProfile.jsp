@@ -11,25 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Patient Profile Page</title>
-
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
-
-        <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="./css/patientProfile.css"/>
 
         <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -286,16 +267,16 @@
                                                                 <c:url value="LoadFeedbackServlet" var="feedbackLink">
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>
-                                                                <a class="btn btn-primary" href="${feedbackLink}" role="button">Góp ý dịch vụ</a>
+                                                                <a class="btn btn-primary" href="#" role="button" onclick="feedback('${history.checkInTime}', '${history.reservationID}')">Góp ý dịch vụ</a>
+                                                                
                                                                 <c:url value="#" var="deleteLink">
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>
-                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${deleteLink}" role="button">Hủy lịch khám</a>
-
+                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${deleteLink}" role="button">Hủy lịch khám</a>                                                              
                                                                 <p class="card-text" style="text-align: right; font-size: smaller">
                                                                     ${history.createdDate}
                                                                 </p>
-
+                                                                <small class="text-danger" hidden id="${history.reservationID}">Bạn chưa thể góp ý về dịch vụ bây giờ.</small>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -323,7 +304,6 @@
             </c:if>
         </main>
         <jsp:include page="footer.jsp"/>
-        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
         <!-- <script
           src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
