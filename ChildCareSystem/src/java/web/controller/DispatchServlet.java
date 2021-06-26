@@ -54,8 +54,9 @@ public class DispatchServlet extends HttpServlet {
     private static final String ADD_MANAGER = "AddManagerServlet";
     private static final String VIEW_RESERVATION_MANAGER = "ViewReservationManagerServlet";
     private static final String VIEW_RESERVATION_DETAILS = "ViewReservationDetailServlet";
- private static final String VIEW_RESERVATION_STAFF = "ViewReservationStaffServlet";
- private static final String VIEW_RESERVATION_DETAILS_STAFF = "ViewReservationDetailStaffServlet";
+    private static final String VIEW_RESERVATION_STAFF = "ViewReservationStaffServlet";
+    private static final String VIEW_RESERVATION_DETAILS_STAFF = "ViewReservationDetailStaffServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

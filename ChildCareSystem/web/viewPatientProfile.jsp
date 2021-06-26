@@ -283,10 +283,10 @@
                                                                     <strong>Ngày hẹn khám:</strong> ${history.checkInTime}
                                                                 </p>
                                                                 <hr>
-                                                                <c:url value="#" var="updateLink">
+                                                                <c:url value="LoadFeedbackServlet" var="feedbackLink">
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>
-                                                                <a class="btn btn-primary" href="${updateLink}" role="button">Chính sửa lịch khám</a>
+                                                                <a class="btn btn-primary" href="${feedbackLink}" role="button">Góp ý dịch vụ</a>
                                                                 <c:url value="#" var="deleteLink">
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>

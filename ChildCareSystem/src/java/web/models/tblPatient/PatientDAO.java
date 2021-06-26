@@ -21,7 +21,7 @@ import web.utils.DBHelpers;
  */
 public class PatientDAO {
 
-    public boolean addPatient(PatientDTO patient) throws ClassNotFoundException, SQLException {
+    public boolean addPatient(PatientDTO patient) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -38,9 +38,6 @@ public class PatientDAO {
                     return true;
                 }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -225,7 +222,8 @@ public class PatientDAO {
         }
         return false;
     }
-    public PatientDTO getPatByID(int id) throws Exception {
+    
+    public PatientDTO getPatByID(int id) throws NamingException, SQLException {
         PatientDTO result = null;
         Connection conn = null;
         PreparedStatement stm = null;

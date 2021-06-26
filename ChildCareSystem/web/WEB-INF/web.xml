@@ -172,6 +172,18 @@
         <servlet-name>ViewReservationDetailStaffServlet</servlet-name>
         <servlet-class>web.controller.ViewReservationDetailStaffServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadFeedbackServlet</servlet-name>
+        <servlet-class>web.controller.LoadFeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <servlet-class>web.controller.FeedbackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateFeedbackServlet</servlet-name>
+        <servlet-class>web.controller.CreateFeedbackServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -343,6 +355,18 @@
     <servlet-mapping>
         <servlet-name>ViewReservationDetailStaffServlet</servlet-name>
         <url-pattern>/ViewReservationDetailStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadFeedbackServlet</servlet-name>
+        <url-pattern>/LoadFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackServlet</servlet-name>
+        <url-pattern>/FeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateFeedbackServlet</servlet-name>
+        <url-pattern>/CreateFeedbackServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -60,7 +60,7 @@ public class ReservationDAO implements Serializable {
         }
         return false;
     }
-    
+
     public boolean checkExistedReervation(int patientId, int serviceId, String checkInTime) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -116,7 +116,7 @@ public class ReservationDAO implements Serializable {
                     stm.setString(6, reservation.getCheckInDate());
                     stm.addBatch();
                 }
-                stm.executeBatch();                
+                stm.executeBatch();
             }
 
         } finally {
@@ -129,6 +129,7 @@ public class ReservationDAO implements Serializable {
         }
 
     }
+
     public List<ReservationDTO> getAllReservation() throws SQLException, NamingException {
         List<ReservationDTO> result = null;
         Connection conn = null;
@@ -138,7 +139,7 @@ public class ReservationDAO implements Serializable {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
-                        + " FROM tblReservation " ;
+                        + " FROM tblReservation ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
@@ -164,7 +165,8 @@ public class ReservationDAO implements Serializable {
         }
         return result;
     }
-     public List<ReservationDTO> getAllReservationByIntervalTimeID(int x, int y) throws SQLException, NamingException {
+
+    public List<ReservationDTO> getAllReservationByIntervalTimeID(int x, int y) throws SQLException, NamingException {
         List<ReservationDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -174,7 +176,7 @@ public class ReservationDAO implements Serializable {
             if (conn != null) {
                 String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
                         + " FROM tblReservation "
-                        +" WHERE IntervalTimeID BETWEEN ? AND ?";
+                        + " WHERE IntervalTimeID BETWEEN ? AND ?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, x);
                 stm.setInt(2, y);
@@ -202,7 +204,8 @@ public class ReservationDAO implements Serializable {
         }
         return result;
     }
-       public ReservationDTO queryResById(String id) throws SQLException, NamingException {
+
+    public ReservationDTO queryResById(String id) throws SQLException, NamingException {
 
         Connection conn = null;
         PreparedStatement stm = null;
@@ -210,7 +213,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT CustomerID, PatientID, ServiceID, StaffAssignedID, CheckInTime "
+                String sql = "SELECT ReservationID, CustomerID, PatientID, ServiceID, StaffAssignedID, CheckInTime "
                         + " FROM tblReservation "
                         + " WHERE ReservationID=?";
                 stm = conn.prepareStatement(sql);
@@ -222,7 +225,8 @@ public class ReservationDAO implements Serializable {
                     int serviceID = rs.getInt("ServiceID");
                     int staffAssignID = rs.getInt("StaffAssignedID");
                     String checkInDate = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, "");
+                    int reservationId = rs.getInt("ReservationID");
+                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, reservationId);
                     return res;
                 }
             }
@@ -239,7 +243,8 @@ public class ReservationDAO implements Serializable {
         }
         return null;
     }
-       public List<ReservationDTO> getReservationByStaffID(String id) throws SQLException, NamingException {
+
+    public List<ReservationDTO> getReservationByStaffID(String id) throws SQLException, NamingException {
         List<ReservationDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -276,7 +281,8 @@ public class ReservationDAO implements Serializable {
         }
         return result;
     }
-       public List<ReservationDTO> getReservationByIntervalTimeIDForStaff(int x, int y, String id) throws SQLException, NamingException {
+
+    public List<ReservationDTO> getReservationByIntervalTimeIDForStaff(int x, int y, String id) throws SQLException, NamingException {
         List<ReservationDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -286,7 +292,7 @@ public class ReservationDAO implements Serializable {
             if (conn != null) {
                 String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
                         + " FROM tblReservation "
-                        +" WHERE IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
+                        + " WHERE IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, x);
                 stm.setInt(2, y);

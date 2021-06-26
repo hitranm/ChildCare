@@ -5,6 +5,7 @@
  */
 package web.models.tblCustomer;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import web.utils.DBHelpers;
  *
  * @author Admin
  */
-public class CustomerDAO {
+public class CustomerDAO implements Serializable {
     private CustomerDTO customer;
     public CustomerDTO getCustomer() {
         return this.customer;

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.YearMonth;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +84,7 @@ public class AddNewPatientProfileServlet extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
 
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (NamingException | SQLException e) {
             log("ERROR at AddNewPatientServlet: " + e.getMessage());
             e.printStackTrace();
         }
