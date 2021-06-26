@@ -156,6 +156,22 @@
         <servlet-name>AddManagerServlet</servlet-name>
         <servlet-class>web.controller.AddManagerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewReservationManagerServlet</servlet-name>
+        <servlet-class>web.controller.ViewReservationManagerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReservationDetailServlet</servlet-name>
+        <servlet-class>web.controller.ViewReservationDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReservationStaffServlet</servlet-name>
+        <servlet-class>web.controller.ViewReservationStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReservationDetailStaffServlet</servlet-name>
+        <servlet-class>web.controller.ViewReservationDetailStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -311,6 +327,22 @@
     <servlet-mapping>
         <servlet-name>AddManagerServlet</servlet-name>
         <url-pattern>/AddManagerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReservationManagerServlet</servlet-name>
+        <url-pattern>/ViewReservationManagerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReservationDetailServlet</servlet-name>
+        <url-pattern>/ViewReservationDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReservationStaffServlet</servlet-name>
+        <url-pattern>/ViewReservationStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReservationDetailStaffServlet</servlet-name>
+        <url-pattern>/ViewReservationDetailStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -52,7 +52,10 @@ public class DispatchServlet extends HttpServlet {
     private static final String CHOOSE_SERVICE_RESERVE = "ChooseReservationServlet";
     private static final String VERIFY_CHECKOUT = "VerifyCheckoutServlet";
     private static final String ADD_MANAGER = "AddManagerServlet";
-
+    private static final String VIEW_RESERVATION_MANAGER = "ViewReservationManagerServlet";
+    private static final String VIEW_RESERVATION_DETAILS = "ViewReservationDetailServlet";
+ private static final String VIEW_RESERVATION_STAFF = "ViewReservationStaffServlet";
+ private static final String VIEW_RESERVATION_DETAILS_STAFF = "ViewReservationDetailStaffServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -121,6 +124,14 @@ public class DispatchServlet extends HttpServlet {
                 url = VERIFY_CHECKOUT;
             } else if (button.equalsIgnoreCase("RegisterManager")) {
                 url = ADD_MANAGER;
+            } else if (button.equalsIgnoreCase("ViewReservationForManager")) {
+                url = VIEW_RESERVATION_MANAGER;
+            } else if (button.equalsIgnoreCase("ViewReservationDetails")) {
+                url = VIEW_RESERVATION_DETAILS;
+            } else if (button.equalsIgnoreCase("ViewReservationForStaff")) {
+                url = VIEW_RESERVATION_STAFF;
+            } else if (button.equalsIgnoreCase("ViewReservationDetailsStaff")) {
+                url = VIEW_RESERVATION_DETAILS_STAFF;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

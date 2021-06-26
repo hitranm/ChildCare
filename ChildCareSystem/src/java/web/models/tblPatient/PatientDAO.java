@@ -225,4 +225,45 @@ public class PatientDAO {
         }
         return false;
     }
+    public PatientDTO getPatByID(int id) throws Exception {
+        PatientDTO result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * "
+                        + " FROM tblPatient "
+                        + " WHERE PatientID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String patientName = rs.getString("PatientName");
+                    String genderID = rs.getString("Gender");
+                    String gender;
+                    if (genderID.equalsIgnoreCase("1")) {
+                        gender = "female";
+                    } else {
+                        gender = "male";
+                    }
+                    String birthday = rs.getString("Birthday");
+                    String customerID = rs.getString("CustomerID");
+                    result = new PatientDTO(patientName, gender, birthday, customerID);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
 }

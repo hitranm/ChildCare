@@ -182,6 +182,8 @@
                                             <th>Full Name</th>
                                             <th>Phone Number</th>
                                             <th> Role</th>
+                                            <th>View details</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
 
@@ -283,11 +285,12 @@
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
-                                                </tbody>
-                                            </table>
+                                                </c:if>
+                                            </c:if>
                                         </c:if>
-                                    </c:if>
-                                </c:if>
+                                    </tbody>
+                                </table>
+
                             </div>
 
                             <!--WaitingList-->
@@ -303,6 +306,8 @@
                                             <th>Full Name</th>
                                             <th>Phone Number</th>
                                             <th>Role</th>
+                                            <th>View details</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBodyWaiting">
@@ -340,10 +345,10 @@
                                                 </tr>
                                             </c:forEach>
 
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </c:if>
+                                        </c:if>
+                                    </tbody>
+                                </table>
+
                             </div>
 
                             <!--RejectedList-->
@@ -359,6 +364,9 @@
                                             <th>Full Name</th>
                                             <th>Phone Number</th>
                                             <th>Role</th>
+                                            <th>View details</th>
+                                            <th></th>
+                                            
                                         </tr>
                                     </thead>
 
@@ -396,10 +404,10 @@
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-                                            </tr>
+                                            </c:if>
                                         </tbody>
                                     </table>
-                                </c:if>
+                                
                             </div>
 
                             <!--All-->
@@ -413,6 +421,9 @@
                                             <th>Full Name</th>
                                             <th>Phone Number</th>
                                             <th>Role</th>
+                                            <th>View details</th>
+                                            <th></th>
+                                            
                                         </tr>
                                     </thead>
 
@@ -450,11 +461,11 @@
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-                                            </tr>
+                                             </c:if>
                                         </tbody>
                                         <tfoot></tfoot>
                                     </table>
-                                </c:if>
+                               
                             </div>
                         </div>
                     </div>
@@ -478,7 +489,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                 $(".mydatatable").DataTable();
+                                                            $(".mydatatable").DataTable();
         </script>
 
 

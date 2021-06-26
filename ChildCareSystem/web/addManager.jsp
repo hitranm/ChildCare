@@ -35,7 +35,7 @@
 
 
         <div class="wrapper px-5">
-            <h1>Phiếu đăng ký</h1>
+            <h1>Tạo account manager</h1>
             <form action="DispatchServlet" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">

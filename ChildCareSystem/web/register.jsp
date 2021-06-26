@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : register
     Created on : May 30, 2021, 3:45:08 AM
     Author     : HOANGKHOI
@@ -58,17 +58,17 @@
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="${param.email}" required="true">
-                    </div>
+
                     <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedEmail}">
                         <div class="alert alert-danger" role="alert">
                             ${requestScope.SIGNUP_ERROR.duplicatedEmail}
                         </div>
                     </c:if>
-
+</div>
                     <div class="form-group col-md-6">
                         <label for="phoneNumber">Số điện thoại</label>
                         <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" required="true">
-                    </div>
+
                     <c:if test="${not empty requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}">
                         <div class="alert alert-danger" role="alert">
                             ${requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}
@@ -80,7 +80,7 @@
                         </div>
                     </c:if>
                 </div>
-
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="address">Địa chỉ</label>
@@ -127,7 +127,7 @@
             </form>
         </div>
 
-        <jsp:include page="footer.jsp"/> 
+        <jsp:include page="footer.jsp"/>
 
 
 
@@ -148,6 +148,6 @@
             crossorigin="anonymous"
         ></script>
         <!--Custom JS-->
-        <script src="./js/main.js"></script>    
+        <script src="./js/main.js"></script>
     </body>
 </html>
