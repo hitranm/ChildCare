@@ -94,7 +94,7 @@
                                         </a>                                           
                                     </c:forEach>
                                     <c:url var="addUrl" value="ViewPatientProfileServlet"> 
-                                        <c:param name="action" value="add"/>
+                                        <c:param name="tab" value="add"/>
                                     </c:url>
                                     <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>
                                     <div class="alert alert-danger my-3" id="patientError" role="alert" hidden>
@@ -109,7 +109,7 @@
                                 </div>
 
                                 <c:url var="addUrl" value="ViewPatientProfileServlet"> 
-                                    <c:param name="action" value="add"/>
+                                    <c:param name="tab" value="add"/>
                                 </c:url>
                                 <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>
                             </c:otherwise>

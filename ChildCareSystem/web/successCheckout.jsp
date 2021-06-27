@@ -5,13 +5,36 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Success</title>
+        <style>
+            main {
+                min-height: 50vh;
+            }
+        </style>
     </head>
     <body>
-        <h1>Dịch vụ đã được đặt thành công</h1>
+        <jsp:include page="header.jsp"/>
+        <main>
+            <div class="px-5 align-middle mt-5">
+                <div class="alert alert-success text-center" role="alert">
+                    <h3>Đặt dịch vụ thành công</h3>
+                </div>
+                <div class="text-center">
+                    <a class="btn btn-primary" href="home.jsp" role="button">Quay về trang chủ</a>
+                    <a class="btn btn-success" href="ViewPatientProfileServlet?tab=order" role="button">Xem lịch sử đặt</a>
+                </div>
+                
+            </div>
+
+        </main>
+
+
+
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>

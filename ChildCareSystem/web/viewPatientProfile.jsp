@@ -101,13 +101,25 @@
                                 </button>
                             </c:if>
                             <c:if test="${empty requestScope.reachMaxPatient}">
-                                <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="pill" href="#v-pills-addPatient" role="tab" aria-controls="v-pills-home" aria-selected="true">Thêm hồ sơ bệnh nhân</a>
-
+                                <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="tab" href="#v-pills-addPatient" role="tab" aria-selected="true">Thêm hồ sơ bệnh nhân</a>
                             </c:if>
                             <br>
-                            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hồ sơ bệnh nhân</a>
-                            <a class="nav-link" id="v-pills-history-tab" data-toggle="pill" href="#v-pills-history" role="tab" aria-controls="v-pills-history" aria-selected="false">Lịch sử đặt lịch khám</a>
-
+                            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="tab" href="#v-pills-profile" role="tab" aria-selected="false">Hồ sơ bệnh nhân</a>
+                            <a class="nav-link" id="v-pills-history-tab" data-toggle="tab" href="#v-pills-history" role="tab" aria-selected="false">Lịch sử đặt lịch khám</a>
+                            <c:if test="${param.tab eq 'order'}">
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#v-pills-history-tab").tab("show");
+                                    });
+                                </script>
+                            </c:if>
+                            <c:if test="${param.tab eq 'add'}">
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#v-pills-addPatient-tab").tab("show");
+                                    });
+                                </script>
+                            </c:if>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-9">
@@ -132,8 +144,10 @@
                                     </div>
                                 </div>
                             </c:if>
+
+                            <!-- Create patient profile -->
                             <c:if test="${empty requestScope.reachMaxPatient}">
-                                <div class="tab-pane fade" id="v-pills-addPatient" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                <div class="tab-pane fade" id="v-pills-addPatient">
                                     <h2 style="text-align: center; color: #c97244">THÔNG TIN ĐĂNG KÝ HỒ SƠ BỆNH NHÂN</h2>
                                     <form action="DispatchServlet" method="POST" name="f1">
                                         <div class="form-group row">
@@ -180,8 +194,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-10 offset-md-2">
@@ -192,9 +204,11 @@
                                         </div>
                                     </form>
                                 </div>
-
                             </c:if>
-                            <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                            <!--------------------------------------------------------------------------------------------------------------------------->
+
+                            <!-- PATIENT PROFILE LIST -->
+                            <div class="tab-pane fade active show" id="v-pills-profile">
                                 <h2 style="text-align: center; color: #1977cc">DANH SÁCH HỒ SƠ BỆNH NHÂN</h2>
                                 <div class="row">
                                     <c:if test="${requestScope.listPatients!=null}">
@@ -233,20 +247,19 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
                                             </c:forEach>
-
                                         </c:if>
+
                                         <c:if test="${!testEmpty}">
                                             <h2>Hiện Chưa Có Hồ Sơ Bệnh Nhân Nào. Vui Lòng Thêm Hồ Sơ Bệnh Nhân</h2>
                                         </c:if>
                                     </c:if>
                                 </div>
                             </div>
+                            <!-------------------------------------------------------------------------------->
 
-                            <div class="tab-pane fade" id="v-pills-history" role="tabpanel" aria-labelledby="v-pills-history-tab">
+                            <div class="tab-pane fade" id="v-pills-history">
                                 <h2 style="text-align: center; color: #ffbd3f">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
-
                                 <div class="row">
                                     <c:if test="${requestScope.historyList!=null}">
                                         <c:if test="${not empty requestScope.historyList}" var="testEmpty">
@@ -268,7 +281,7 @@
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>
                                                                 <a class="btn btn-primary" href="#" role="button" onclick="feedback('${history.checkInTime}', '${history.reservationID}')">Góp ý dịch vụ</a>
-                                                                
+
                                                                 <c:url value="#" var="deleteLink">
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>
@@ -281,9 +294,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
                                             </c:forEach>
-
                                         </c:if>
                                         <c:if test="${!testEmpty}">
                                             <h2>Hiện Chưa Có Lịch Khám Nào</h2>
@@ -291,6 +302,7 @@
                                     </c:if>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
