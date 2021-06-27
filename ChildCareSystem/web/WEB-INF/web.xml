@@ -192,6 +192,14 @@
         <servlet-name>DeleteFeedbackServlet</servlet-name>
         <servlet-class>web.controller.DeleteFeedbackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MedicalExaminationServlet</servlet-name>
+        <servlet-class>web.controller.MedicalExaminationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateExaminationServlet</servlet-name>
+        <servlet-class>web.controller.CreateExaminationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -383,6 +391,14 @@
     <servlet-mapping>
         <servlet-name>DeleteFeedbackServlet</servlet-name>
         <url-pattern>/DeleteFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MedicalExaminationServlet</servlet-name>
+        <url-pattern>/MedicalExaminationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateExaminationServlet</servlet-name>
+        <url-pattern>/CreateExaminationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

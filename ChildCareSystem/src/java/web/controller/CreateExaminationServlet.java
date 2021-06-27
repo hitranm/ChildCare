@@ -6,31 +6,28 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
-import web.models.tblPatient.PatientDAO;
-import web.models.tblPatient.PatientDTO;
-import web.models.tblReservation.ReservationDAO;
-import web.models.tblReservation.ReservationDTO;
-import web.models.tblService.ServiceDAO;
-import web.models.tblService.ServiceDTO;
-import web.models.tblSpecialty.SpecialtyDAO;
-import web.models.tblSpecialty.SpecialtyDTO;
-import web.models.tblStaff.StaffDAO;
-import web.models.tblStaff.StaffDTO;
-import web.viewModels.ReservationDetails.ReservationDetailViewModel;
+import web.models.tblMedicalExamination.MedicalExaminationDAO;
+import web.models.tblMedicalExamination.MedicalExaminationDTO;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class ViewReservationDetailServlet extends HttpServlet {
-private static final String VIEW_RESERVATION_DETAIL="viewReservationDetails.jsp";
+public class CreateExaminationServlet extends HttpServlet {
+
+    private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
+    private static final String ERROR = "";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,32 +40,33 @@ private static final String VIEW_RESERVATION_DETAIL="viewReservationDetails.jsp"
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String url= VIEW_RESERVATION_DETAIL;
-       try{
-           String id = request.getParameter("resid");
-           ReservationDAO resDAO = new ReservationDAO();
-           
-           ReservationDTO reservationDTO = resDAO.queryResById(id);
-           CustomerDAO customerDAO = new CustomerDAO();
-           CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(reservationDTO.getCustomerId());
-           PatientDAO patDAO = new PatientDAO();
-           PatientDTO patientDTO = patDAO.getPatByID(reservationDTO.getPatientId());
-           ServiceDAO serDAO = new ServiceDAO();
-           ServiceDTO serviceDTO = serDAO.getServiceInfo(reservationDTO.getServiceId());
-           StaffDAO staffDAO = new StaffDAO();
-           StaffDTO staffDTO = staffDAO.queryStaffById(reservationDTO.getStaffAssignId());
-           SpecialtyDAO speDAO = new SpecialtyDAO();
-           SpecialtyDTO speDTO = speDAO.getSpecialtyName(staffDTO.getSpecialtyID());
-           String specialtyName = speDTO.getSpecialtyName();
-           ReservationDetailViewModel resViewModel = new ReservationDetailViewModel(customerDTO ,patientDTO, serviceDTO, staffDTO, specialtyName, reservationDTO);
-           request.setAttribute("RES_DETAIL", resViewModel);
-           
-       }catch(Exception e){
-           log("Error at ViewReservationDetailServlet: "+ e.toString());
-       }
-       finally{
-           request.getRequestDispatcher(url).forward(request, response);
-       }
+        request.setCharacterEncoding("UTF-8");
+        String strReservationId = request.getParameter("txtReservationId");
+        String strServiceId = request.getParameter("txtServiceId");
+        String prescription = request.getParameter("txtPrescription");
+        MedicalExaminationDAO medicalExamDAO = new MedicalExaminationDAO();
+        String url = VIEW_RESERVATION;
+
+        try {
+            int reservationId = Integer.parseInt(strReservationId);
+            int serviceId = Integer.parseInt(strServiceId);
+            LocalDate createdDate = LocalDate.now();
+            java.sql.Date sqlDate = java.sql.Date.valueOf(createdDate);
+            
+            url = url + reservationId;
+            if (!prescription.equals("")) {
+                MedicalExaminationDTO examination
+                        = new MedicalExaminationDTO(reservationId, serviceId, prescription, sqlDate, sqlDate);
+                boolean result = medicalExamDAO.addExamination(examination);
+                if (result == false) {
+                    url = ERROR;
+                }
+            }
+        } catch (NumberFormatException | SQLException | NamingException ex) {
+            log("Error at CreateExaminationServlet " + ex.getMessage());
+        } finally {
+            response.sendRedirect(url);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -60,7 +60,7 @@ private static final String VIEW_RESERVATION_DETAIL="viewReservationDetailsStaff
            SpecialtyDAO speDAO = new SpecialtyDAO();
            SpecialtyDTO speDTO = speDAO.getSpecialtyName(staffDTO.getSpecialtyID());
            String specialtyName = speDTO.getSpecialtyName();
-           ReservationDetailViewModel resViewModel = new ReservationDetailViewModel(customerDTO ,patientDTO, serviceDTO, staffDTO, specialtyName);
+           ReservationDetailViewModel resViewModel = new ReservationDetailViewModel(customerDTO ,patientDTO, serviceDTO, staffDTO, specialtyName, reservationDTO);
            request.setAttribute("RES_DETAIL", resViewModel);
            
        }catch(Exception e){

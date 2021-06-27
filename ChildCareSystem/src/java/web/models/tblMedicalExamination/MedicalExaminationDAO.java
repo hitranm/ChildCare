@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package web.tblMedicalExamination;
+package web.models.tblMedicalExamination;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -25,7 +25,7 @@ public class MedicalExaminationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tbl MedicalExamination(ReservationID, ServiceID, Prescription, CreatedDate, UpdatedDate) VALUES(?,?,?,?,?)";
+                String sql = "INSERT INTO tblMedicalExamination(ReservationID, ServiceID, Prescription, CreatedDate, UpdatedDate) VALUES(?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
 
                 stm.setInt(1, examination.getReservationId());
@@ -103,7 +103,7 @@ public class MedicalExaminationDAO implements Serializable {
         return false;
     }
     
-    public MedicalExaminationDTO getFeedbackByReservationId(int id) throws SQLException, NamingException {
+    public MedicalExaminationDTO getExaminationByReservationId(int id) throws SQLException, NamingException {
         MedicalExaminationDTO result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -122,9 +122,9 @@ public class MedicalExaminationDAO implements Serializable {
                     String prescription = rs.getString("Prescription");
                     int examinationId = rs.getInt("ExaminationID");
                     int serviceId = rs.getInt("ServiceID");
-                    Date createdDate = rs.getDate("CreatedDate");
-                    Date updatedDate = rs.getDate("UpdatedDate");
-                    result = new MedicalExaminationDTO(examinationId, id, serviceId, prescription, updatedDate, createdDate);
+                    String createdDate = rs.getString("CreatedDate");
+                    String updatedDate = rs.getString("UpdatedDate");
+                    
                 }
             }
         } finally {

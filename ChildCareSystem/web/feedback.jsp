@@ -93,7 +93,7 @@
                             </script>
                         </c:if>
 
-                        <form action="FeedbackServlet" class="my-4" id="feedbackForm">
+                            <form action="FeedbackServlet" class="my-4" id="feedbackForm" method="post">
                             <input hidden name="txtrReservationId" value="${reservationDTO.reservationId}"/>
                             <input hidden name="txtCustomerId" value="${customerDTO.customerID}"/>
                             <input hidden name="txtServiceId" value="${serviceDTO.serviceId}"/>

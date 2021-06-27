@@ -11,26 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
-import web.models.tblPatient.PatientDAO;
-import web.models.tblPatient.PatientDTO;
-import web.models.tblReservation.ReservationDAO;
-import web.models.tblReservation.ReservationDTO;
-import web.models.tblService.ServiceDAO;
-import web.models.tblService.ServiceDTO;
-import web.models.tblSpecialty.SpecialtyDAO;
-import web.models.tblSpecialty.SpecialtyDTO;
-import web.models.tblStaff.StaffDAO;
-import web.models.tblStaff.StaffDTO;
-import web.viewModels.ReservationDetails.ReservationDetailViewModel;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class ViewReservationDetailServlet extends HttpServlet {
-private static final String VIEW_RESERVATION_DETAIL="viewReservationDetails.jsp";
+public class MedicalExaminationServlet extends HttpServlet {
+    private static final String CREATE_EXAMINATION = "CreateExaminationServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,32 +30,18 @@ private static final String VIEW_RESERVATION_DETAIL="viewReservationDetails.jsp"
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String url= VIEW_RESERVATION_DETAIL;
-       try{
-           String id = request.getParameter("resid");
-           ReservationDAO resDAO = new ReservationDAO();
-           
-           ReservationDTO reservationDTO = resDAO.queryResById(id);
-           CustomerDAO customerDAO = new CustomerDAO();
-           CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(reservationDTO.getCustomerId());
-           PatientDAO patDAO = new PatientDAO();
-           PatientDTO patientDTO = patDAO.getPatByID(reservationDTO.getPatientId());
-           ServiceDAO serDAO = new ServiceDAO();
-           ServiceDTO serviceDTO = serDAO.getServiceInfo(reservationDTO.getServiceId());
-           StaffDAO staffDAO = new StaffDAO();
-           StaffDTO staffDTO = staffDAO.queryStaffById(reservationDTO.getStaffAssignId());
-           SpecialtyDAO speDAO = new SpecialtyDAO();
-           SpecialtyDTO speDTO = speDAO.getSpecialtyName(staffDTO.getSpecialtyID());
-           String specialtyName = speDTO.getSpecialtyName();
-           ReservationDetailViewModel resViewModel = new ReservationDetailViewModel(customerDTO ,patientDTO, serviceDTO, staffDTO, specialtyName, reservationDTO);
-           request.setAttribute("RES_DETAIL", resViewModel);
-           
-       }catch(Exception e){
-           log("Error at ViewReservationDetailServlet: "+ e.toString());
-       }
-       finally{
-           request.getRequestDispatcher(url).forward(request, response);
-       }
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        String url = CREATE_EXAMINATION;
+         try {
+           if(action == null) {
+               
+           } else if (action.equalsIgnoreCase("Add")) {
+               url = CREATE_EXAMINATION;
+           }
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
