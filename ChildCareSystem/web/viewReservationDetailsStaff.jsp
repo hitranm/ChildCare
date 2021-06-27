@@ -86,12 +86,27 @@
                             rows="5"
                             id="prescription"
                             maxlength="200"
-                            name="txtPrescription"
+                            name="txtPrescription"                
                             ></textarea>
+                        <c:choose>
+                            <c:when test="${not empty requestScope.PRE_EXAM}">
+                                <script>
+                                    document.getElementById("prescription").innerHTML = "${requestScope.PRE_EXAM.prescription}";
+                                </script>
+                                <div class="text-center">
+                                    <input hidden name="txtExaminationId" value="${requestScope.PRE_EXAM.examinationId}"/>
+                                    <button type="submit" name="action" value="Update" class="btn btn-primary col-4">Lưu</button>
+                                    <button type="submit" name="action" value="Delete" class="btn btn-danger col-4">Xóa</button>
+                                </div>
+                            </c:when>
+                                
+                            <c:otherwise>
+                                <div class="text-center">
+                                    <button type="submit" name="action" value="Add" class="btn btn-success col-4">Lưu</button>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
 
-                        <div class="text-center">
-                            <button type="submit" name="action" value="Add" class="btn btn-success col-4">Lưu</button>
-                        </div>
                     </form>
                 </div>
             </div>

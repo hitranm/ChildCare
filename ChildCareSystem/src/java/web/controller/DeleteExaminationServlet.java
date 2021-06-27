@@ -13,29 +13,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
 import web.models.tblMedicalExamination.MedicalExaminationDAO;
-import web.models.tblMedicalExamination.MedicalExaminationDTO;
-import web.models.tblPatient.PatientDAO;
-import web.models.tblPatient.PatientDTO;
-import web.models.tblReservation.ReservationDAO;
-import web.models.tblReservation.ReservationDTO;
-import web.models.tblService.ServiceDAO;
-import web.models.tblService.ServiceDTO;
-import web.models.tblSpecialty.SpecialtyDAO;
-import web.models.tblSpecialty.SpecialtyDTO;
-import web.models.tblStaff.StaffDAO;
-import web.models.tblStaff.StaffDTO;
-import web.viewModels.ReservationDetails.ReservationDetailViewModel;
 
 /**
  *
- * @author Admin
+ * @author HOANGKHOI
  */
-public class ViewReservationDetailStaffServlet extends HttpServlet {
-
-    private static final String VIEW_RESERVATION_DETAIL = "viewReservationDetailsStaff.jsp";
+public class DeleteExaminationServlet extends HttpServlet {
+    
+    private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
+    private static final String ERROR = "";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,37 +36,24 @@ public class ViewReservationDetailStaffServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String id = request.getParameter("resid");
-        String url = VIEW_RESERVATION_DETAIL;
-        ReservationDAO resDAO = new ReservationDAO();
-        CustomerDAO customerDAO = new CustomerDAO();
-        PatientDAO patDAO = new PatientDAO();
-        ServiceDAO serDAO = new ServiceDAO();
-        StaffDAO staffDAO = new StaffDAO();
-        SpecialtyDAO speDAO = new SpecialtyDAO();
+        String strExaminationId = request.getParameter("txtExaminationId");
+        String strReservationId = request.getParameter("txtReservationId");
         MedicalExaminationDAO medicalExamDAO = new MedicalExaminationDAO();
-
+        String url = VIEW_RESERVATION;
         try {
-            ReservationDTO reservationDTO = resDAO.queryResById(id);
-            CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(reservationDTO.getCustomerId());
-            PatientDTO patientDTO = patDAO.getPatByID(reservationDTO.getPatientId());
-            ServiceDTO serviceDTO = serDAO.getServiceInfo(reservationDTO.getServiceId());
-            StaffDTO staffDTO = staffDAO.queryStaffById(reservationDTO.getStaffAssignId());
-            SpecialtyDTO speDTO = speDAO.getSpecialtyName(staffDTO.getSpecialtyID());
-            String specialtyName = speDTO.getSpecialtyName();
-            ReservationDetailViewModel resViewModel = new ReservationDetailViewModel(customerDTO, patientDTO, serviceDTO, staffDTO, specialtyName, reservationDTO);
-            request.setAttribute("RES_DETAIL", resViewModel);
-            //---------
-            MedicalExaminationDTO previousExam = medicalExamDAO.getExaminationByReservationId(Integer.parseInt(id));
-            if(previousExam != null) {
-                request.setAttribute("PRE_EXAM", previousExam);
+            int reservationId = Integer.parseInt(strReservationId);
+            url = url + reservationId;
+            int examinationId = Integer.parseInt(strExaminationId);
+            
+            boolean result = medicalExamDAO.deleteExamination(examinationId); 
+            if(result == false) {
+                url = ERROR;
             }
-
-        } catch (SQLException | NamingException e) {
-            log("Error at ViewReservationDetailServlet: " + e.toString());
+            
+        } catch (NumberFormatException | SQLException | NamingException ex) {
+            log("Error at DeleteExaminationServlet: " + ex.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

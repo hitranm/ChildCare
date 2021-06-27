@@ -24,7 +24,6 @@ import web.models.tblMedicalExamination.MedicalExaminationDTO;
  * @author HOANGKHOI
  */
 public class CreateExaminationServlet extends HttpServlet {
-
     private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
     private static final String ERROR = "";
 

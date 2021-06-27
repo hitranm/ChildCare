@@ -17,7 +17,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author HOANGKHOI
  */
 public class MedicalExaminationServlet extends HttpServlet {
+
     private static final String CREATE_EXAMINATION = "CreateExaminationServlet";
+    private static final String UPDATE_EXAMINATION = "UpdateExaminationServlet";
+    private static final String DELETE_EXAMINATION = "DeleteExaminationServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,12 +37,14 @@ public class MedicalExaminationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         String url = CREATE_EXAMINATION;
-         try {
-           if(action == null) {
-               
-           } else if (action.equalsIgnoreCase("Add")) {
-               url = CREATE_EXAMINATION;
-           }
+        try {
+            if (action.equalsIgnoreCase("Add")) {
+                url = CREATE_EXAMINATION;
+            } else if (action.equalsIgnoreCase("Update")) {
+                url = UPDATE_EXAMINATION;
+            } else if (action.equalsIgnoreCase("Delete")) {
+                url = DELETE_EXAMINATION;
+            }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

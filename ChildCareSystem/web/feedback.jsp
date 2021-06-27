@@ -80,7 +80,6 @@
                         <!-- If there is previous feedback -->
                         <c:if test="${not empty requestScope.PREVIOUS_FEEDBACK}">
                             <script>
-                                console.log("There are feedback");
                                 document.getElementById("comment").innerHTML = "${requestScope.PREVIOUS_FEEDBACK.comment}";
                                 let star = ${requestScope.PREVIOUS_FEEDBACK.rate};
                                 for (var i = 0; i < 5; i++) {

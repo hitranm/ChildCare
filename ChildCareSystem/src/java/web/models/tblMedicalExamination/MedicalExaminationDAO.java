@@ -122,9 +122,9 @@ public class MedicalExaminationDAO implements Serializable {
                     String prescription = rs.getString("Prescription");
                     int examinationId = rs.getInt("ExaminationID");
                     int serviceId = rs.getInt("ServiceID");
-                    String createdDate = rs.getString("CreatedDate");
-                    String updatedDate = rs.getString("UpdatedDate");
-                    
+                    Date createdDate = rs.getDate("CreatedDate");
+                    Date updatedDate = rs.getDate("UpdatedDate");
+                    result = new MedicalExaminationDTO(examinationId, id, serviceId, prescription, updatedDate, createdDate);
                 }
             }
         } finally {
