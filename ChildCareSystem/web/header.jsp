@@ -28,6 +28,12 @@
             href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
             rel="stylesheet"
             />
+        
+        <style>
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -36,9 +42,9 @@
                     <nav class="navbar navbar-light bg-light">
                         <a class="navbar-brand top_title" href="#">
                             <img
-                                src="/docs/4.0/assets/brand/bootstrap-solid.svg"
-                                width="30"
-                                height="30"
+                                src="./images/logo.png"
+                                width="60"
+                                height="60"
                                 class="d-inline-block align-top"
                                 alt=""
                                 />

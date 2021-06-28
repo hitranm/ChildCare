@@ -216,4 +216,15 @@ h6 {
     margin: 1rem 0;
 }
 
+.right-active-section {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.active-title {
+  padding: 5px;
+  border-bottom: solid 1px #fff;
+}
 
