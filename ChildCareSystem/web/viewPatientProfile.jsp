@@ -289,7 +289,7 @@
                                                                 <p class="card-text" style="text-align: right; font-size: smaller">
                                                                     ${history.createdDate}
                                                                 </p>
-                                                                <small class="text-danger" hidden id="${history.reservationID}">Bạn chưa thể góp ý về dịch vụ bây giờ.</small>
+                                                                <small class="text-danger" hidden id="${history.reservationID}">(* Đánh giá sẽ được mở sau khi khám bệnh)</small>
                                                             </div>
                                                         </div>
                                                     </form>

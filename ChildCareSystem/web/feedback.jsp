@@ -31,7 +31,6 @@
                             <div>Thời gian: <span>${reservationDTO.checkInDate}</span></div>
                         </div>
                         <div class="rating-section mt-5 col-12">
-                            <div class="rating-title mb-4">Đánh giá của bạn <span>(* Đánh giá sẽ được mở sau 24h kể từ khi khám bệnh)</span></div>
                             <span
                                 onmouseover="starmark(this)"
                                 onclick="starmark(this)"
@@ -92,7 +91,7 @@
                             </script>
                         </c:if>
 
-                            <form action="FeedbackServlet" class="my-4" id="feedbackForm" method="post">
+                        <form action="FeedbackServlet" class="my-4" id="feedbackForm" method="post">
                             <input hidden name="txtrReservationId" value="${reservationDTO.reservationId}"/>
                             <input hidden name="txtCustomerId" value="${customerDTO.customerID}"/>
                             <input hidden name="txtServiceId" value="${serviceDTO.serviceId}"/>
@@ -110,8 +109,8 @@
                                         <button type="button" name="action" value="SendFeedback" class="btn btn-primary" id="submitButton">Gửi phản hồi</button>
                                     </c:otherwise>
                                 </c:choose>
-                                
-                                
+
+
                             </div>
                         </form>
                     </div>

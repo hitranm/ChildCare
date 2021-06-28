@@ -241,7 +241,7 @@
                         </div>
                     </div>
                   
-                    <a class="kbyt my-3" href="https://kbyt.khambenh.gov.vn/#tokhai_yte/model" target="_blank">
+                    <a class="kbyt mb-4" href="https://kbyt.khambenh.gov.vn/#tokhai_yte/model" target="_blank">
                         <img src="images/kbyt.png" style="width: 100%"/>
                     </a>
                     
@@ -262,7 +262,7 @@
                             ></iframe>
                     </div>
                     <div class="ring-wrapper">                      
-                        <div class="ring mb-5">
+                        <div class="ring my-5">
                             <div class="ring-phoneNum mr-4"> 0909998888</div>
                             <div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show">
                                 <div class="coccoc-alo-ph-circle"></div>
