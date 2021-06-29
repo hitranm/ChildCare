@@ -13,11 +13,11 @@
         <title>Update</title>
         <link rel="stylesheet" href="css/CalendarPicker.style.css">
         <link rel="stylesheet" href="css/reservation/reservation.css" >  
-
-
     </head>
+    
     <body>
         <jsp:include page="header.jsp"/>
+        
         <main>
             <jsp:useBean id="service" class="web.models.tblService.ServiceDAO" scope="page"/>
             <jsp:useBean id="listTime" class="web.models.tblOpenTime.OpenTimeDAO"/>
@@ -64,7 +64,7 @@
                             <div class="form-group col-8">
                                 <label for="service-specialty">Dịch vụ</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
-                                    <c:forEach items="${service.viewServiceList()}" var="dto">
+                                    <c:forEach items="${service.listService}" var="dto">
                                         <c:choose>
                                             <c:when test="${dto.serviceId == updateItemDTO.serviceId}">
                                                 <option value="${dto.serviceId}" selected="">${dto.serviceName}</option>
@@ -139,7 +139,7 @@
             }
         </script>
         <script src="js/CalendarPicker.js"></script>
-        <script src="js/reservation.js"></script>
+        <script src="js/updateReservation.js"></script>
 
         <jsp:include page="footer.jsp"/>
 

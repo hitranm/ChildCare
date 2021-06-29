@@ -22,6 +22,7 @@ if (!Element.prototype.closest) {
 function CalendarPicker(element, options) {
     // Core variables.
     this.date = new Date();
+
     this._formatDateToInit(this.date);
 
     this.day = this.date.getDay()
@@ -31,15 +32,24 @@ function CalendarPicker(element, options) {
     // Storing the todays date for practical reasons.
     this.today = this.date;
 
-    // The calendars value should always be the current date.
-    this.value = this.date;
-
-
     // Ranges for the calendar (optional).
     this.min = options.min;
     this.max = options.max;
     this._formatDateToInit(this.min);
     this._formatDateToInit(this.max);
+    
+    // The calendars value should always be the current date.
+    if (options.selectedDate != null) {
+        this.selectedDate = options.selectedDate;
+        this._formatDateToInit(this.selectedDate);
+        this.value = this.selectedDate;
+    } else {
+        this.value = this.min;
+    }
+
+    this.today = this.min;
+
+
 
     // Element to insert calendar in.
     this.userElement = document.querySelector(element);

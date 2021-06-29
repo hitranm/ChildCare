@@ -114,8 +114,6 @@
                                 <a href="${addUrl}" class="text-center my-3 addPatientLink">Thêm mới hồ sơ</a>
                             </c:otherwise>
                         </c:choose>
-
-
                     </div>
 
                     <div class="col-8 px-4">
@@ -137,7 +135,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="myCalendarWrapper" class="py-3 mt-5"></div>
+                        <div id="myCalendarWrapper" class="py-3 mt-5 jsCalendar blue"></div>
                     </div>
                 </div>
 
@@ -170,7 +168,6 @@
 
             </div>
         </main>
-
 
 
         <script src="js/CalendarPicker.js"></script>
