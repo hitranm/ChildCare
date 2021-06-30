@@ -40,7 +40,7 @@
             <div class="header_wrapper px-5 py-2">
                 <div class="header_top">
                     <nav class="navbar navbar-light bg-light">
-                        <a class="navbar-brand top_title" href="#">
+                        <a class="navbar-brand top_title" href="home.jsp">
                             <img
                                 src="./images/logo.png"
                                 width="60"

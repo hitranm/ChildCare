@@ -219,29 +219,6 @@
 
                 <div class="main-right d-none d-lg-flex col-lg-3">
                   
-                    <div class="right-post-section mb-5" hidden>
-                        <h4>Bài viết mới nhất</h4>
-                        <div class="right-post-card">
-                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                            <div class="right-post-content">
-                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                            </div>
-                            <div class="right-post-date">
-                                24 Tháng Năm, 2021
-                            </div>
-                        </div>
-
-                        <div class="right-post-card">
-                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                            <div class="right-post-content">
-                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                            </div>
-                            <div class="right-post-date">
-                                24 Tháng Năm, 2021
-                            </div>
-                        </div>
-                    </div>
-
                     <a class="kbyt mb-4" href="https://kbyt.khambenh.gov.vn/#tokhai_yte/model" target="_blank">
                         <img src="images/kbyt.png" style="width: 100%"/>
                     </a>
@@ -262,13 +239,13 @@
 
                     <a class="right-bpd-section my-3" style="background: #1997d4;" href="https://phapdien.moj.gov.vn/Pages/home.aspx" target="_blank">
                         <div class="bpd-title">
-                            KÊNH THÔNG TIN SỞ Y TẾ
+                            THÔNG TIN SỞ Y TẾ
                         </div>
                     </a>
 
                     <div class="right-map-section my-3">
                         <iframe
-                            style="border: 0; width: 100%;"
+                            style="border: 0; width: 100%; height: 250px;"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4854095316514!2d105.52487561540214!3d21.01325499368218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b465a4e65fb%3A0xaae6040cfabe8fe!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1623417301225!5m2!1svi!2s"          
                             allowfullscreen="true"
                             loading="lazy"
