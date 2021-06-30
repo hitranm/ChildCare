@@ -58,7 +58,7 @@ public class PatientDAO {
             if (conn != null) {
                 String sql = "SELECT * "
                         + " FROM tblPatient"
-                        + " WHERE CustomerID=?";
+                        + " WHERE CustomerID=? and StatusID=1";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -75,7 +75,8 @@ public class PatientDAO {
                     }
                     String birthday = rs.getString("Birthday");
                     String customerID = rs.getString("CustomerID");
-                    PatientDTO patient = new PatientDTO(patientID, name, gender, birthday, customerID);
+                    int StatusID = rs.getInt("StatusID");
+                    PatientDTO patient = new PatientDTO(patientID, name, gender, birthday, customerID, StatusID);
                     result.add(patient);
                 }
             }
@@ -134,7 +135,7 @@ public class PatientDAO {
         }
         return result;
     }
-    
+
     public String getPatienNametByID(int id) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -202,9 +203,11 @@ public class PatientDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "DELETE FROM tblPatient WHERE PatientID=?";
+                String sql = "UPDATE tblPatient SET StatusID=? WHERE PatientID=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, id);
+                stm.setInt(1, 2);
+                stm.setString(2, id);
+
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -221,7 +224,7 @@ public class PatientDAO {
         }
         return false;
     }
-    
+
     public PatientDTO getPatByID(int id) throws NamingException, SQLException {
         PatientDTO result = null;
         Connection conn = null;

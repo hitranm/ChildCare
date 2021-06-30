@@ -321,7 +321,7 @@ public class ServiceDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT TOP(?) ServiceName,Thumbnail,CreatedDate"
+                String sql = "SELECT TOP(?) ServiceID, ServiceName,Thumbnail,CreatedDate"
                         + " FROM tblService ORDER BY CreatedDate DESC ";
                 stm = conn.prepareStatement(sql);
                             int numberOfBlogView = 6;
@@ -329,10 +329,11 @@ public class ServiceDAO implements Serializable {
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
                 while (rs.next()) {
+                    String serviceID = rs.getString("ServiceID");
                     String serviceName = rs.getString("ServiceName");
                     String thumbnail = rs.getString("Thumbnail");
                     String createdDate = rs.getString("CreatedDate");
-                    ServiceDTO dto = new ServiceDTO(serviceName, thumbnail, createdDate);
+                    ServiceDTO dto = new ServiceDTO(serviceID,serviceName, thumbnail, createdDate);
                     result.add(dto);
                 }
             }

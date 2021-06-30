@@ -429,8 +429,9 @@ public class BlogDAO implements Serializable {
                     String authorID = rs.getString("AuthorID");
                     String description = rs.getString("Description");
                     String categoryID = rs.getString("CategoryID");
+                    String createdDate =rs.getString("CreatedDate");
                     String statusID = rs.getString("StatusID");
-                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
+                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, createdDate, statusID);
                     result.add(dto);
                 }
             }

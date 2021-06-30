@@ -140,17 +140,17 @@
                         <div class="blog_wrapper">
                             <c:if test="${sessionScope.BLOG_LIST_VIEW != null}">
                                 <c:if test="${not empty sessionScope.BLOG_LIST_VIEW}" var="testEmpty">
-                                    <c:forEach items="${sessionScope.BLOG_LIST_VIEW}" var="dto">
-                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewBlogDetailServlet?id=${dto.blogID}'">
+                                    <c:forEach items="${sessionScope.BLOG_LIST_VIEW}" var="dtoBlog">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewBlogDetailServlet?id=${dtoBlog.blogID}'">
                                             <article>
                                                 <div class="blog_thumbnail">
-                                                    <img src="./images/blog/${dto.thumbnail}" />
+                                                    <img src="./images/blog/${dtoBlog.thumbnail}" />
                                                 </div>
                                                 <div class="blog_content px-2">
                                                     <h2>
-                                                        ${dto.title}
+                                                        ${dtoBlog.title}
                                                     </h2>
-                                                    <div class="blog_date">24 Tháng Năm, 2021</div>
+                                                    <div class="blog_date">${dtoBlog.createdDate}</div>
                                                 </div>
                                             </article>
                                         </div>
@@ -189,17 +189,17 @@
                         <div class="blog_wrapper">
                             <c:if test="${sessionScope.SERVICE_LIST_VIEW!=null}">
                                 <c:if test="${not empty sessionScope.SERVICE_LIST_VIEW}" var="testEmpty">
-                                    <c:forEach items="${sessionScope.SERVICE_LIST_VIEW}" var="dto">
-                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
+                                    <c:forEach items="${sessionScope.SERVICE_LIST_VIEW}" var="dtoService">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewServiceDetailServlet?id=${dtoService.serviceId}'">
                                             <article>
                                                 <div class="blog_thumbnail">
-                                                    <img src="./images/service/${dto.thumbnail}" />
+                                                    <img src="./images/service/${dtoService.thumbnail}" />
                                                 </div>
                                                 <div class="blog_content px-2">
                                                     <h2>
-                                                        ${dto.serviceName}
+                                                        ${dtoService.serviceName}
                                                     </h2>
-                                                    <div class="blog_date">${dto.createdDate}</div>
+                                                    <div class="blog_date">${dtoService.createdDate}</div>
                                                 </div>
                                             </article>
                                         </div>
