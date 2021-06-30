@@ -218,7 +218,7 @@
                 </div>
 
                 <div class="main-right d-none d-lg-flex col-lg-3">
-                  
+
                     <a class="kbyt mb-4" href="https://kbyt.khambenh.gov.vn/#tokhai_yte/model" target="_blank">
                         <img src="images/kbyt.png" style="width: 100%"/>
                     </a>

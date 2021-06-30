@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import web.models.tblBlog.BlogDTO;
  *
  * @author DELL
  */
+
 public class ViewBlogServlet extends HttpServlet {
 
     private final String VIEW_BLOG_PAGE = "viewBlogList.jsp";

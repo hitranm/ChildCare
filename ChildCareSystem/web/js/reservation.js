@@ -12,7 +12,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
-    min: today,
+    min: tomorrow,
     max: new Date(nextYear, 1),
 });
 

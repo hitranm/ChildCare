@@ -168,7 +168,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="login.jsp">Đăng nhập</a>
+                                        <a class="nav-link" href="login">Đăng nhập</a>
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="register.jsp">Đăng ký</a>
