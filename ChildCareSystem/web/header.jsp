@@ -162,6 +162,8 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>
                                     </li>
@@ -173,6 +175,7 @@
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="register.jsp">Đăng ký</a>
                                     </li>
+                                    
                                 </c:otherwise>
                             </c:choose>
                         </ul>
