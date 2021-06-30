@@ -282,10 +282,11 @@
                                                                 </c:url>
                                                                 <a class="btn btn-primary" href="#" role="button" onclick="feedback('${history.checkInTime}', '${history.reservationID}')">Góp ý dịch vụ</a>
 
-                                                                <c:url value="#" var="deleteLink">
-                                                                    <c:param name="id" value="${history.reservationID}"/>
+                                                                <c:url value="DispatchServlet" var="infoLink">
+                                                                    <c:param name="resid" value="${history.reservationID}"/>
+                                                                    <c:param name="btAction" value="ViewReservationDetails"/>                                                                 
                                                                 </c:url>
-                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${deleteLink}" role="button">Hủy lịch khám</a>                                                              
+                                                                <a class="btn btn-success" href="${infoLink}" role="button">Xem chi tiết</a>                                                              
                                                                 <p class="card-text" style="text-align: right; font-size: smaller">
                                                                     ${history.createdDate}
                                                                 </p>
@@ -317,22 +318,6 @@
         </main>
         <jsp:include page="footer.jsp"/>
 
-        <!-- <script
-          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-          crossorigin="anonymous"
-        ></script> -->
-
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
-        ></script>
         <!--Custom JS-->
         <script src="./js/main.js"></script>
     </body>

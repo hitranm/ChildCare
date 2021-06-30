@@ -15,14 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Child Care System</title>
-        <link rel="stylesheet" href="css/footer.css"/>
         <style>
             .wrapper {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 padding: 3rem 0 6rem 0;
-
             }
 
         </style>

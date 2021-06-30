@@ -52,18 +52,18 @@
                         </div>
 
                         <div class="col-lg-3 col-md-6 footer-links">
-                            <h4>Our Services</h4>
+                            <h4>Về dịch vụ</h4>
                             <ul>
                                 <li>
-                                    <i class="bx bx-chevron-right"></i> <a href="#">Web Design</a>
+                                    <i class="bx bx-chevron-right"></i> <a href="#">Cơ sở vật chất</a>
                                 </li>
                                 <li>
                                     <i class="bx bx-chevron-right"></i>
-                                    <a href="#">Web Development</a>
+                                    <a href="#">Đánh giá</a>
                                 </li>
                                 <li>
                                     <i class="bx bx-chevron-right"></i>
-                                    <a href="#">Product Management</a>
+                                    <a href="#">Liên hệ</a>
                                 </li>
                             </ul>
                         </div>

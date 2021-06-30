@@ -34,7 +34,7 @@ h6 {
 
 .section-title {
     text-align: center;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .section-title h2 {
@@ -216,7 +216,7 @@ h6 {
     margin: 1rem 0;
 }
 
-.right-active-section {
+.right-active-section, .right-bpd-section {
   color: #fff;
   font-weight: 600;
   font-size: 1.1rem;
@@ -226,5 +226,15 @@ h6 {
 .active-title {
   padding: 5px;
   border-bottom: solid 1px #fff;
+}
+
+.bpd-title {
+    font-size: 1.3rem;
+    padding: 15px;
+}
+
+.right-bpd-section:hover {
+    text-decoration: none;
+    color: #fff;
 }
 

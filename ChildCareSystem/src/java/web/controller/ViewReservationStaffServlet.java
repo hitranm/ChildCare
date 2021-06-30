@@ -7,7 +7,9 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +50,7 @@ private static final String VIEW_RESERVATION="viewReservationForStaff.jsp";
             request.setAttribute("ListMorning", listReservationMorning);
             List<ReservationDTO> listReservationNoon = reservationDAO.getReservationByIntervalTimeIDForStaff(5, 7, staffID);
             request.setAttribute("ListNoon", listReservationNoon);
-        } catch (Exception e) {
+        } catch (SQLException | NamingException e) {
             log("ERROR at ViewReservationStaffServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

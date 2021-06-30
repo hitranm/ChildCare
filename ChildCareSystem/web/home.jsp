@@ -13,14 +13,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Child Care System</title>   
         <link rel="stylesheet" href="./css/homepage.css" />
-        <link rel="stylesheet" href="css/home/phonering.css">
+        <link rel="stylesheet" href="css/home/phonering.css"/>
+        <link rel="stylesheet" href="css/sidebar.css"/>
     </head>
 
     <body>
         <jsp:include page="header.jsp"/>
 
         <main>
-            <h2>${sessionScope.ROLE}</h2>
             <div class="main_wrapper px-5 py-5">
                 <div class="main_left col-12 col-lg-9">
                     <!--Carousel-->
@@ -133,7 +133,7 @@
                     <!--End carousel-->
 
                     <!--Post section-->
-                    <div class="section">
+                    <div class="section my-5">
                         <div class="section-title">
                             <h2>Bài viết nổi bật</h2>
                         </div>
@@ -182,7 +182,7 @@
                     <!-- End Cta Section -->
 
                     <!--Service section-->
-                    <div class="section">
+                    <div class="section my-5">
                         <div class="section-title">
                             <h2>Dịch vụ</h2>
                         </div>
@@ -218,6 +218,7 @@
                 </div>
 
                 <div class="main-right d-none d-lg-flex col-lg-3">
+                  
                     <div class="right-post-section mb-5" hidden>
                         <h4>Bài viết mới nhất</h4>
                         <div class="right-post-card">
@@ -240,18 +241,30 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <a class="kbyt mb-4" href="https://kbyt.khambenh.gov.vn/#tokhai_yte/model" target="_blank">
                         <img src="images/kbyt.png" style="width: 100%"/>
                     </a>
-                    
+
                     <div class="right-active-section my-3" style="background: #ef668b;">
                         <div class="active-title">
-                            Thời gian hoạt động
+                            THỜI GIAN HOẠT ĐỘNG
                             <div style="font-size: 14px;">Tất cả các ngày trong tuần</div>
                         </div>
                         <div style="padding: 5px;">Khám chữa bệnh 24/24</div>
                     </div>
+
+                    <a class="right-bpd-section my-3" style="background: #f1b243;" href="https://phapdien.moj.gov.vn/Pages/home.aspx" target="_blank">
+                        <div class="bpd-title">
+                            BỘ PHÁP ĐIỀN
+                        </div>
+                    </a>
+
+                    <a class="right-bpd-section my-3" style="background: #1997d4;" href="https://phapdien.moj.gov.vn/Pages/home.aspx" target="_blank">
+                        <div class="bpd-title">
+                            KÊNH THÔNG TIN SỞ Y TẾ
+                        </div>
+                    </a>
 
                     <div class="right-map-section my-3">
                         <iframe
@@ -261,6 +274,7 @@
                             loading="lazy"
                             ></iframe>
                     </div>
+
                     <div class="ring-wrapper">                      
                         <div class="ring my-5">
                             <div class="ring-phoneNum mr-4"> 0909998888</div>
@@ -281,12 +295,15 @@
 
 
         <!--Custom JS-->
-        <script src="./js/main.js"></script>
         <script>
-                                            window.addEventListener('load', (event) => {
-                                                window.localStorage.clear();
-                                                window.localStorage.setItem("identityId", "${sessionScope.IDENTITY_ID}");
-                                            });
+            $(function () {
+                // Sidebar toggle behavior
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                });
+            });
         </script>
+        <script src="./js/main.js"></script>
+
     </body>
 </html>

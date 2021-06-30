@@ -14,7 +14,6 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
     min: today,
     max: new Date(nextYear, 1),
-    selectedDate: tomorrow
 });
 
 //-----------------------------------------------------------------
@@ -45,15 +44,6 @@ function submitReservation() {
         $("#reservationForm").submit();
     }
 
-//    function submitUpdate() {
-//        var serviceId = $("#service-specialty option:selected").val();
-//        var timeId = $("#reservation-time option:selected").val();
-//        var date = myCalender.value.toLocaleDateString();
-//        $("#txtServiceId").val(serviceId);
-//        $("#txtTimeId").val(timeId);
-//        $("#txtDate").val(date);
-//        $("#reservationForm").submit();
-//    }
 
     //---------------------------------------------
 
