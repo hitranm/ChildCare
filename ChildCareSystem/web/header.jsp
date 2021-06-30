@@ -162,7 +162,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                                            <a class="dropdown-item" href="dashboard.jsp">Dashboard</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>

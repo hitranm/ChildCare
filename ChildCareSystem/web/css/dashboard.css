@@ -40,8 +40,9 @@ and open the template in the editor.
 }
 .sidebar-brand span{
     display: inline-block;
-    padding-right: 1rem;
+    padding-right: .5rem;
 }
+
 .sidebar-menu{
     margin-top: 1rem;
 }
@@ -81,8 +82,8 @@ and open the template in the editor.
 {
    padding-left: 0rem;
 }
-#nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
-#nav-toggle:checked + .sidebar li a span:last-child,
+#nav-toggle:checked + .sidebar .sidebar-brand h3 span:last-child,
+#nav-toggle:checked + .sidebar li a span:last-child
 {
     display: none;
 }
@@ -126,7 +127,7 @@ header label span{
     border: 1px solid #ccc;
     border-radius: 30px;
     height: 50px;
-    display: flex;
+    display: none;
     align-items: center;
     overflow-x: hidden;
 }
@@ -142,7 +143,7 @@ header label span{
     font-size: 1.5rem;
 }
 .user-wrapper{
-    display: flex;
+    display: none;
     align-items: center;
 }
 .user-wrapper img{
