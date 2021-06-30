@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import web.models.tblCustomer.CustomerDTO;
 import web.utils.DBHelpers;
 
 /**

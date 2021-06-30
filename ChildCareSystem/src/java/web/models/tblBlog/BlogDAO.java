@@ -98,7 +98,6 @@ public class BlogDAO implements Serializable {
 //            }
 //        }
 //    }
-
     public int countBlog() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -285,7 +284,6 @@ public class BlogDAO implements Serializable {
 //            }
 //        }
 //    }
-
     public int countSearch(String searchValue) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -411,7 +409,7 @@ public class BlogDAO implements Serializable {
         }
     }
 
-    public List<BlogDTO> getTop6BlogList() throws SQLException {
+    public List<BlogDTO> getTopXBlogList(int top) throws SQLException {
         List<BlogDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -419,8 +417,9 @@ public class BlogDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT TOP(6)* FROM tblBlog ORDER BY CreatedDate DESC ";
+                String sql = "SELECT TOP(?)* FROM tblBlog ORDER BY CreatedDate DESC ";
                 stm = conn.prepareStatement(sql);
+                stm.setInt(1, top);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
                 while (rs.next()) {
@@ -435,7 +434,7 @@ public class BlogDAO implements Serializable {
                     result.add(dto);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException | NamingException e) {
 
         } finally {
             if (rs != null) {

@@ -7,8 +7,10 @@ package web.models.tblSystemSetting;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
+import web.models.tblPatient.PatientDTO;
 import web.utils.DBHelpers;
 
 /**
@@ -42,4 +44,46 @@ public class SystemSettingDAO {
         }
         return false;
     }
+      public SystemSettingDTO getSettingByName(String name) throws Exception {
+        SystemSettingDTO result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * "
+                        + " FROM tblSystemSetting "
+                        + " WHERE SettingName=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, name);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String patientName = rs.getString("PatientName");
+                    String genderID = rs.getString("Gender");
+                    String gender;
+                    if (genderID.equalsIgnoreCase("1")) {
+                        gender = "female";
+                    } else {
+                        gender = "male";
+                    }
+                    String birthday = rs.getString("Birthday");
+                    String customerID = rs.getString("CustomerID");
+                    result = new PatientDTO(id, patientName, gender, birthday, customerID);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+    
 }

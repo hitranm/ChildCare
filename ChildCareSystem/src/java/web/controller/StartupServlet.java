@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,19 +38,23 @@ public class StartupServlet extends HttpServlet {
         String url = ERROR;
         try {
             BlogDAO blogDAO = new BlogDAO();
-            List<BlogDTO> listBlog = blogDAO.getTop6BlogList();
+            int numberOfBlogView = 2;
+            List<BlogDTO> listBlog = blogDAO.getTopXBlogList(numberOfBlogView);
 
             ServiceDAO serviceDAO = new ServiceDAO();
-            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
-            
-            HttpSession session = request.getSession();
+            int numberOfServiceView = 3;
 
+            List<ServiceDTO> listService = serviceDAO.getTopXServiceList(numberOfServiceView);
+
+            HttpSession session = request.getSession();
+            session.removeAttribute("BLOG_LIST_VIEW");
+            session.removeAttribute("SERVICE_LIST_VIEW");
             session.setAttribute("BLOG_LIST_VIEW", listBlog);
             session.setAttribute("SERVICE_LIST_VIEW", listService);
-            url =HOME_PAGE;
-        } catch (Exception ex) {
+            url = HOME_PAGE;
+        } catch (SQLException | NamingException ex) {
             log("Error at StartupServelt: " + ex.getMessage());
-        } finally{
+        } finally {
 //            request.getRequestDispatcher(url).forward(request, response);
             response.sendRedirect(url);
         }
