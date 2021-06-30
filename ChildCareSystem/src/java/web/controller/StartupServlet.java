@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,6 +20,8 @@ import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
+import web.models.tblSystemSetting.SystemSettingDAO;
+import web.models.tblSystemSetting.SystemSettingDTO;
 
 /**
  *
@@ -32,18 +33,18 @@ public class StartupServlet extends HttpServlet {
     private static final String HOME_PAGE = "home.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
+            SystemSettingDAO systemDAO = new SystemSettingDAO();
             BlogDAO blogDAO = new BlogDAO();
-            int numberOfBlogView = 2;
+            int numberOfBlogView =Integer.parseInt(systemDAO.getSettingByName("Max Blog Post On Homepage").getSettingValue());
             List<BlogDTO> listBlog = blogDAO.getTopXBlogList(numberOfBlogView);
 
             ServiceDAO serviceDAO = new ServiceDAO();
-            int numberOfServiceView = 3;
-
+            int numberOfServiceView =Integer.parseInt(systemDAO.getSettingByName("Max Service Post On Homepage").getSettingValue());
             List<ServiceDTO> listService = serviceDAO.getTopXServiceList(numberOfServiceView);
 
             HttpSession session = request.getSession();
@@ -76,6 +77,8 @@ public class StartupServlet extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,6 +96,8 @@ public class StartupServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

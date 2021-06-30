@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
-import web.models.tblPatient.PatientDTO;
 import web.utils.DBHelpers;
 
 /**
@@ -59,17 +58,13 @@ public class SystemSettingDAO {
                 stm.setString(1, name);
                 rs = stm.executeQuery();
                 if (rs.next()) {
-                    String patientName = rs.getString("PatientName");
-                    String genderID = rs.getString("Gender");
-                    String gender;
-                    if (genderID.equalsIgnoreCase("1")) {
-                        gender = "female";
-                    } else {
-                        gender = "male";
-                    }
-                    String birthday = rs.getString("Birthday");
-                    String customerID = rs.getString("CustomerID");
-                    result = new PatientDTO(id, patientName, gender, birthday, customerID);
+                    int settingID = rs.getInt("SettingID");
+                    String settingName = rs.getString("SettingName");
+                    String settingValue = rs.getString("SettingValue");
+                    int adminID = rs.getInt("AdminID");
+                    String createdDate = rs.getString("CreatedDate");
+                    String updatedDate = rs.getString("UpdatedDate");
+                    result = new SystemSettingDTO(settingID, settingName, settingValue, adminID, createdDate, updatedDate);
                 }
             }
         } finally {

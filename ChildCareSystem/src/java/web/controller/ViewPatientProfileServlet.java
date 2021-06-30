@@ -16,6 +16,7 @@ import web.models.ReservationHistory.ReservationHistoryDAO;
 import web.models.ReservationHistory.ReservationHistoryDTO;
 import web.models.tblPatient.PatientDAO;
 import web.models.tblPatient.PatientDTO;
+import web.models.tblSystemSetting.SystemSettingDAO;
 
 /**
  *
@@ -43,7 +44,10 @@ public class ViewPatientProfileServlet extends HttpServlet {
             List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
             ReservationHistoryDAO history = new ReservationHistoryDAO();
             List<ReservationHistoryDTO> historyList = history.getAllPatientReservation(customerID);
-            if (listPatients.size() == 6) {
+            SystemSettingDAO systemDAO = new SystemSettingDAO();
+            int maxPatientProfileAllowed = Integer.parseInt(systemDAO.getSettingByName("Max Patient Profile").getSettingValue());
+
+            if (listPatients.size() >= maxPatientProfileAllowed) {
                 request.setAttribute("reachMaxPatient", "Số hồ số bệnh nhân đã đạt tối đa mà hệ thống cho phép.");
             }
             request.setAttribute("listPatients", listPatients);
