@@ -26,7 +26,7 @@ import web.models.tblStaff.StaffDTO;
  * @author Admin
  */
 public class ViewAccountsServlet extends HttpServlet {
-private static final String VIEW_ACCOUNT="viewAllAccounts.jsp";
+private static final String VIEW_ACCOUNT="dashboard.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

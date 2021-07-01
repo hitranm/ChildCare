@@ -55,7 +55,7 @@
                             <span>Blog</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-receipt"></span>
+                        <a href="DispatchServlet?btAction=ViewReservationForManager"><span class="las la-receipt"></span>
                             <span>Reservation</span></a>
                     </li>
                     <li>
@@ -141,7 +141,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Accounts List</h3>
-                                <button>See all <span class="las la-arrow-right"></span></button>
+                                
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">

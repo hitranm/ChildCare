@@ -20,7 +20,7 @@ import web.models.tblReservation.ReservationDTO;
  * @author Admin
  */
 public class ViewReservationManagerServlet extends HttpServlet {
-private static final String VIEW_RESERVATION="viewReservationForManager.jsp";
+private static final String VIEW_RESERVATION="reservationdashboard.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
