@@ -24,13 +24,13 @@
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200">
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar">
             <div class ="sidebar-brand">
                 <h3><span class="lab la-accusoft"> 
                     </span>
-                    <span class="lmao">
+                    <span class="lmao" style="font-size: 1.5rem">
                         Child Care System
                     </span></h3>
 
