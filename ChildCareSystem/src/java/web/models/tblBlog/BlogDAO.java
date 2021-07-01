@@ -102,6 +102,7 @@ public class BlogDAO implements Serializable {
             }
         }
     }
+
     public int countPublicBlog() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -135,6 +136,7 @@ public class BlogDAO implements Serializable {
         }
         return 0;
     }
+
     public int countBlog() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -322,7 +324,6 @@ public class BlogDAO implements Serializable {
 //            }
 //        }
 //    }
-
     public int countSearch(String searchValue) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -486,6 +487,7 @@ public class BlogDAO implements Serializable {
         }
         return result;
     }
+
     public boolean setStatus(String blogID, String statusID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -515,6 +517,7 @@ public class BlogDAO implements Serializable {
         }
         return false;
     }
+
     public void queryBlogListbyStatus(int index, String statusID) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -558,6 +561,7 @@ public class BlogDAO implements Serializable {
             }
         }
     }
+
     public void queryBlogbyAuthor(String authorID) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -597,32 +601,74 @@ public class BlogDAO implements Serializable {
             }
         }
     }
-    
+
     public void updateSlider(int blogId, String onSlider) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
-        
+
         try {
             con = DBHelpers.makeConnection();
             String sql = "Update tblBlog "
                     + "Set OnSlider = ? "
                     + "Where BlogID = ?";
             stm = con.prepareStatement(sql);
-            if(onSlider != null) {
+            if (onSlider != null) {
                 stm.setBoolean(1, true);
-            } else stm.setBoolean(1, false);
-            
+            } else {
+                stm.setBoolean(1, false);
+            }
+
             stm.setInt(2, blogId);
             stm.executeUpdate();
-            
+
         } finally {
-            if(stm != null) {
+            if (stm != null) {
                 stm.close();
             }
-            
-            if(con != null) {
+
+            if (con != null) {
                 con.close();
             }
         }
+    }
+
+    public List<BlogDTO> getSliderList() throws NamingException, SQLException {
+        List<BlogDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM tblBlog "
+                        + "Where OnSlider = 1";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String blogID = rs.getString("BlogID");
+                    String thumbnail = rs.getString("Thumbnail");
+                    String title = rs.getString("Title");
+                    String authorID = rs.getString("AuthorID");
+                    String description = rs.getString("Description");
+                    String categoryID = rs.getString("CategoryID");
+                    String statusID = rs.getString("StatusID");
+                    boolean onSlider = rs.getBoolean("OnSlider");
+                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID, onSlider);
+                    result.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 }

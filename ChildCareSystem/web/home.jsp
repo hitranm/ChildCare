@@ -14,10 +14,24 @@
         <title>Child Care System</title>   
         <link rel="stylesheet" href="./css/homepage.css" />
     </head>
-    
+
     <body>
         <jsp:include page="header.jsp"/>
-        
+        <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
+
+        <style>
+            .carousel-item img {
+                height: 55vh;
+            }
+            
+            .carousel-description {
+                -webkit-line-clamp: 3;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+            }
+        </style>
+
         <main>
             <h2>${sessionScope.ROLE}</h2>
             <div class="main_wrapper px-5 py-5">
@@ -30,79 +44,51 @@
                         interval="3000"
                         >
                         <ol class="carousel-indicators">
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="0"
-                                class="active"
-                                ></li>
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="1"
-                                ></li>
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="2"
-                                ></li>
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="varStatus">
+                                <li
+                                    data-target="#carouselExampleIndicators"
+                                    data-slide-to="${varStatus.index}"
+                                    <c:if test="${varStatus.count == 1}">
+                                        class="active"  
+                                    </c:if>
+                                    ></li>
+                                </c:forEach>
                         </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/tan-tam-nang-dong.jpg"
-                                    alt="First slide"
-                                    />
 
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
+                        <div class="carousel-inner">
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                                <div 
+                                    <c:choose>
+                                        <c:when test="${stat.count == 1}">
+                                            class="carousel-item active"
+                                        </c:when>
+                                        <c:otherwise>
+                                            class="carousel-item"
+                                        </c:otherwise>
+                                    </c:choose>
+                                    >
+
+                                    <img
+                                        class="d-block w-100 img-fluid"
+                                        src="./images/blog/${post.thumbnail}"
+                                        alt="slide"
+                                        />
+                                    <div class="carousel_caption-overlay d-none d-lg-flex">
+                                        <h5>
+                                            ${post.title}
+                                        </h5>
+                                        <div class="carousel-description mb-3">
+                                            ${post.description}
+                                        </div>
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $(".carousel-description").find('span').removeAttr("style");
+                                        });
+                                    </script>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/tan-tam.jpg"
-                                    alt="Second slide"
-                                    />
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/nang-dong.jpg"
-                                    alt="Second slide"
-                                    />
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach> 
                         </div>
                         <a
                             class="carousel-control-prev"
@@ -153,7 +139,6 @@
                                                 </div>
                                             </article>
                                         </div>
-
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${!testEmpty}">
@@ -252,14 +237,14 @@
         <jsp:include page="footer.jsp"/>
         <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
-        
+
         <!--Custom JS-->
         <script src="./js/main.js"></script>
         <script>
-            window.addEventListener('load', (event) => {
-                window.localStorage.clear();
-                window.localStorage.setItem("identityId", "${sessionScope.IDENTITY_ID}");
-            });
+                                            window.addEventListener('load', (event) => {
+                                                window.localStorage.clear();
+                                                window.localStorage.setItem("identityId", "${sessionScope.IDENTITY_ID}");
+                                            });
         </script>
     </body>
 </html>
