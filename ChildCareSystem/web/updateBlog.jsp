@@ -53,19 +53,19 @@
 
     <body>
         <jsp:include page="header.jsp"/>
+        <c:set var="err" value="${requestScope.BLOG_ERROR}"/>
+        <c:set var="blog" value="${requestScope.BLOG}"/>
         <div class="container mt-4 mb-4">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-lg-8">
                     <h1 class="h2 mb-4 text-center">Chỉnh sửa bài viết</h1>
                     <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
-                    <form action="DispatchServlet" method="POST">
-                        <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-                        <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
+                    <form action="DispatchServlet" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="title">Tiêu đề:</label>
-                                <input class="form-control" type="text" name="txtTitle" value="${blog.title}" />
+                                <input class="form-control" type="text" name="txtTitle" value="${blog.title}">
                                 <c:if test="${not empty err.titleLengthErr}">
                                     <font color="red">${err.titleLengthErr}</font>
                                 </c:if>
@@ -73,7 +73,6 @@
                             <div class="form-group col-md-6">
                                 <label for="category">Thể loại:</label>
                                 <select class="form-control" name="category" id="category">
-
                                     <c:forEach items="${cate.viewBlogCategory()}" var="dto">
                                         <c:if test="${blog.categotyID eq dto.categoryID}">
                                             <option value="${dto.categoryID}" selected>${dto.categoryName}</option>
@@ -89,11 +88,15 @@
 
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">
-                            <textarea id="editor" name="txtBody" value="${blog.description}"></textarea>
+                            <textarea id="editor" name="txtBody">${blog.description}</textarea>
                         </div>
                         <c:if test="${not empty err.descriptionErr}">
                             <font color="red">${err.descriptionErr}</font>
                         </c:if><br>
+                        <div class="form-group">
+                            <label for="service-image">Ảnh nền</label>
+                            <input type="file" class="form-control" id="service-image" name="imageURL">
+                        </div>
                         <a class="btn btn-secondary float-right ml-2" onclick="return cancelConfirm()" href="ViewBlogDetailServlet?id=${blog.blogID}">Hủy</a>
                         <button class="btn btn-primary float-right" type="submit" value="UpdateBlog" name="btAction">Cập nhật</button>
                     </form>

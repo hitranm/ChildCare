@@ -12,22 +12,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
+import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
 
 /**
  *
  * @author DELL
  */
-public class SearchBlogServlet extends HttpServlet {
-
-    private final String SEARCH_PAGE = "searchBlog.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+public class ViewAllBlogListServlet extends HttpServlet {
+    private final String VIEW_BLOG = "viewAllBlog.jsp";
+    private final String ERROR = "error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,35 +40,21 @@ public class SearchBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        String searchValue = request.getParameter("txtSearchBlog");
-        String url = SEARCH_PAGE;
+        String url = VIEW_BLOG;
         try {
-            if (searchValue.trim().length() > 0) {
-                BlogDAO dao = new BlogDAO();
-                int count = dao.countSearch(searchValue);
-                int pageSize = 5;
-                int endPage = count / pageSize;
-                if (count % pageSize != 0) {
-                    endPage++;
-                }
-                request.setAttribute("END_PAGE", endPage);
-                String indexString = request.getParameter("idx");
-                int index = Integer.parseInt(indexString);
-                dao.searchBlog(searchValue, index);
-                List<BlogDTO> list = dao.getBlogList();
-                request.setAttribute("SEARCH_LIST", list);
-            }
-        } catch (NamingException ex) {
-            log("SearchBlogServlet _ Naming: " + ex.getMessage());
-            url = ERROR_PAGE;
-        } catch (SQLException ex) {
-            log("SearchBlogServlet _ SQL: " + ex.getMessage());
-            url = ERROR_PAGE;
+            StaffDAO staffDAO = new StaffDAO();
+            List<StaffDTO> staff = staffDAO.getAllStaffProfile();
+            request.setAttribute("STAFF", staff);
+            BlogDAO dao = new BlogDAO();
+            dao.viewBlogList();
+            List<BlogDTO> blog = dao.getBlogList();
+            request.setAttribute("BLOG_LIST", blog);
+        } catch (SQLException | NamingException ex) {
+            log("ViewAllBlogListServletError" + ex.getMessage());
+            url = ERROR;
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
     }

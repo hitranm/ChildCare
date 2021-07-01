@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-3 text-center">
                     <div>
-                        <a class="btn btn-primary" href="UpdateBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a><br>
+                        <a class="btn btn-primary" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a><br>
                     </div>
                     <div>
                         <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br>
@@ -64,17 +64,6 @@
                                         <button class="btn btn-outline-primary" type="submit" value="1" name="status">Hiện bài đăng</button>
                                     </c:when>
                                 </c:choose>
-                                <!--                            <label for="status">Trạng thái</label>
-                                                            <select class="form-control" aria-label="Default select example" name="status" id="status">
-                                <c:forEach items="${status.viewBlogCategory()}" var="dto">
-                                    <c:if test="${dto.statusID eq blog.statusID}">
-                                        <option value="${dto.statusID}" selected>${dto.statusName}</option>
-                                    </c:if>
-                                    <c:if test="${dto.statusID != blog.statusID}">
-                                        <option value="${dto.statusID}">${dto.statusName}</option>
-                                    </c:if>
-                                </c:forEach>
-                            </select>-->
                             </form>
                         </div>
                     </c:if>
@@ -84,7 +73,7 @@
                 <div class="body-left col-lg-9 col-12">
                     <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                     <div class="blog-date text-right">
-                        ${blog.createdDate}
+                        ${blog.updateDate}
                     </div>
                     <div class="blog-cate mb-5" style="position: absolute; margin-bottom: 2em;">
                         <c:forEach items="${cate.viewBlogCategory()}" var="dto">

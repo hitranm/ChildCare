@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,11 +22,10 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import web.models.tblBlog.BlogDAO;
-import web.models.tblBlog.BlogError;
-import web.models.tblStaff.StaffDAO;
+import web.models.tblService.CreateServiceError;
+import web.models.tblService.ServiceDAO;
+import web.models.tblService.ServiceDTO;
 
 /**
  *
@@ -34,12 +36,12 @@ import web.models.tblStaff.StaffDAO;
         maxFileSize = 1024 * 1024 * 50,
         maxRequestSize = 1024 * 1024 * 100
 )
-public class CreateBlogServlet extends HttpServlet {
+public class UpdateServiceServlet extends HttpServlet {
 
-    private final String CREATE_BLOG = "createBlog.jsp";
-    private final String VIEWBLOG = "ViewBlogServlet?index=1";
-    private final String ERROR_PAGE = "error.jsp";
-    private static final String UPLOAD_DIR = "images/blog";
+    private final String VIEW_SERVICE = "ViewServiceDetailServlet";
+    private final String ERROR = "error.jsp";
+    private final String UPDATE_SERVICE = "LoadServiceServlet";
+    private static final String UPLOAD_DIR = "images/service";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,62 +54,71 @@ public class CreateBlogServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
-        String url = ERROR_PAGE;
-        String title = request.getParameter("txtTitle");
-        String body = request.getParameter("txtBody");
-        String categoryID = request.getParameter("category");
-        String authorID;
-        boolean foundErr = false;
-        BlogError err = new BlogError();
-        String imageURL = uploadFile(request);
+        boolean foundError = false;
+        CreateServiceError createServiceErr = new CreateServiceError();
+        String serviceID = request.getParameter("txtServiceID");
+        String serviceName = request.getParameter("txtTitle");
+        String specialtyId = request.getParameter("cboSpecialty");
+        String description = request.getParameter("txtServiceContent");
+        String thumbnail = uploadFile(request);
+        double price = 0;
+        double salePrice = 0;
+        String url = ERROR;
         try {
-            if (title.trim().length() == 0) {
-                foundErr = true;
-                err.setTitleLengthErr("Vui lòng điền nội dung cho tiêu đề");
+            price = Double.parseDouble(request.getParameter("txtPrice"));
+        } catch (NumberFormatException ex) {
+            foundError = true;
+            createServiceErr.setPriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
+        }
+        try {
+            salePrice = Double.parseDouble(request.getParameter("txtSalePrice"));
+        } catch (NumberFormatException ex) {
+            foundError = true;
+            createServiceErr.setSalePriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
+        }
+        try {
+            if (serviceName.trim().length() == 0 || serviceName.trim().length() > 100) {
+                foundError = true;
+                createServiceErr.setTitleLengthError("Tiêu đề không được để trống và có nhiều nhất 100 kí tự.");
             }
-            if (body.trim().length() == 0) {
-                foundErr = true;
-                err.setDescriptionErr("Vui lòng điền nội dung cho bài viết");
+
+            if (description.trim().length() == 0 || description.trim().length() > 300) {
+                foundError = true;
+                createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
             }
-            if (imageURL.trim().isEmpty()) {
-                foundErr = true;
-                err.setImgErr("Vui lòng tải ảnh lên");
-            }
-            if (foundErr) {
-                url = CREATE_BLOG;
-                request.setAttribute("CREATE_BLOG", err);
+
+            if (foundError) {
+                request.setAttribute("CREATE_SERVICE_ERROR", createServiceErr);
+                url = UPDATE_SERVICE + "?id=" + serviceID;
             } else {
-                BlogDAO dao = new BlogDAO();
-                if (session != null) {
-                    String identityID = (String) session.getAttribute("IDENTITY_ID");
-                    StaffDAO staffDAO = new StaffDAO();
-                    authorID = staffDAO.queryStaff(identityID);
-                    boolean result = dao.createBlog(imageURL, title, authorID, body, categoryID);
-                    if (result) {
-                        url = VIEWBLOG;
-                    } else {
-                        url = ERROR_PAGE;
-                    }
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, 
+                        specialtyId, thumbnail, description, price, salePrice, 
+                        "0", LocalDateTime.now().toString());
+                ServiceDAO dao = new ServiceDAO();
+                boolean result = dao.updateService(dto);
+                if (result) {
+                    url = VIEW_SERVICE + "?id=" + serviceID;
+                }
+                else {
+                    url = ERROR;
                 }
             }
-        } catch (NamingException | SQLException ex) {
-            log("CreateBlogServlet: " + ex.getMessage());
+        } catch (NamingException ex) {
+            log("UpdateServiceServlet_ Naming: " + ex.getMessage());
+        } catch (SQLException ex) {
+            log("UpdateServiceServlet_SQL: " + ex.getMessage());
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
         }
     }
-
-    private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
-        String fileName = "";
+private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
+        String fileName;
         try {
-            Part filePart = request.getPart("imageURL");
+            Part filePart = request.getPart("fImage");
             fileName = (String) getFileName(filePart);
             String applicationPath = request.getServletContext().getRealPath("");
             int end = applicationPath.lastIndexOf("build");
@@ -141,6 +152,7 @@ public class CreateBlogServlet extends HttpServlet {
 
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
+
         for (String content : part.getHeader("content-disposition").split(";")) {
             if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
@@ -148,7 +160,6 @@ public class CreateBlogServlet extends HttpServlet {
         }
         return null;
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

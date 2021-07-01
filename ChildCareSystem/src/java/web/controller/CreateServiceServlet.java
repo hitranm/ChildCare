@@ -89,9 +89,13 @@ public class CreateServiceServlet extends HttpServlet {
             }
 
             if (description.trim().length() == 0 || description.trim().length() > 300) {
+                foundError = true;
                 createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
             }
-
+            if (thumbnail.trim().isEmpty()) {
+                foundError = true;
+                createServiceErr.setImageError("Vui lòng tải ảnh lên");
+            }
             if (foundError) {
                 url = CREATE_SERVICE_PAGE;
                 request.setAttribute("CREATE_SERVICE_ERROR", createServiceErr);

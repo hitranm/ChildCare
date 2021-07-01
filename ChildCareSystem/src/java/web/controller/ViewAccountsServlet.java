@@ -41,8 +41,6 @@ private static final String VIEW_ACCOUNT="viewAllAccounts.jsp";
         response.setContentType("text/html;charset=UTF-8");
         String url=VIEW_ACCOUNT;
         try {
-            
-            
             CustomerDAO customerDAO = new CustomerDAO();
             StaffDAO staffDAO = new StaffDAO();
             ManagerDAO managerDAO = new ManagerDAO();

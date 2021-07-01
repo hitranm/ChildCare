@@ -45,6 +45,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
     private static final String VIEW_USER_PROFILE = "ViewUserProfileServlet";
     private static final String CREATE_SERVICE = "CreateServiceServlet";
+    private static final String UPDATE_SERVICE = "UpdateServiceServlet";
     private static final String VIEW_ACCOUNT = "ViewAccountsServlet";
     private static final String VIEW_DETAILS = "ViewAccountDetailsServlet";
     private static final String UPDATE_DETAILS = "UpdateAccountDetailsServlet";
@@ -133,6 +134,8 @@ public class DispatchServlet extends HttpServlet {
                 url = CREATE_CATEGORY;
             } else if (button.equalsIgnoreCase("UpdateCate")) {
                 url = UPDATE_CATEGORY;
+            } else if (button.equalsIgnoreCase("UpdateService")) {
+                url = UPDATE_SERVICE;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

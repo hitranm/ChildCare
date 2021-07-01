@@ -104,6 +104,10 @@
                                             <a class="dropdown-item" href="viewSpeciaty.jsp">Danh sách chuyên khoa</a>
                                             <a class="dropdown-item" href="createSpecialty.jsp">Tạo chuyên khoa</a>
                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>
+                                            <a class="dropdown-item" href="ViewAllBlogListServlet">Tất cả bài viết</a>
+                                            <a class="dropdown-item" href="ViewBlogByAuthorServlet">Bài viết của bạn</a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt dịch vụ</a>
