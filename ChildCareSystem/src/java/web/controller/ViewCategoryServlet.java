@@ -46,7 +46,6 @@ public class ViewCategoryServlet extends HttpServlet {
         try {
             BlogCategoryDAO dao = new BlogCategoryDAO();
             List<BlogCategoryDTO> cate = dao.viewBlogCategory();
-            cate = dao.viewBlogCategory();
             request.setAttribute("CATEGORY", cate);
         } catch (NamingException ex) {
             url = ERROR;

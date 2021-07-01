@@ -17,17 +17,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import web.models.tblBlog.BlogDAO;
-import web.models.tblBlog.BlogDTO;
+import web.models.tblService.ServiceDAO;
+import web.models.tblService.ServiceDTO;
 
 /**
  *
  * @author DELL
  */
-public class SearchBlogServlet extends HttpServlet {
+public class SearchServiceServlet extends HttpServlet {
 
-    private final String SEARCH_PAGE = "searchBlog.jsp";
+    private final String SEARCH_PAGE = "searchService.jsp";
     private final String ERROR_PAGE = "error.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,13 +41,13 @@ public class SearchBlogServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        String searchValue = request.getParameter("txtSearchBlog");
+        request.setCharacterEncoding("UTF-8");
+        String searchValue = request.getParameter("txtSearchService");
         String url = SEARCH_PAGE;
         try {
             if (searchValue.trim().length() > 0) {
-                BlogDAO dao = new BlogDAO();
+                ServiceDAO dao = new ServiceDAO();
                 int count = dao.countSearch(searchValue);
                 int pageSize = 5;
                 int endPage = count / pageSize;
@@ -56,15 +57,16 @@ public class SearchBlogServlet extends HttpServlet {
                 request.setAttribute("END_PAGE", endPage);
                 String indexString = request.getParameter("idx");
                 int index = Integer.parseInt(indexString);
-                dao.searchBlog(searchValue, index);
-                List<BlogDTO> list = dao.getBlogList();
+                dao.searchService(searchValue, index);
+                List<ServiceDTO> list = dao.getServiceList();
                 request.setAttribute("SEARCH_LIST", list);
+                request.setAttribute("SEARCH_VAR", searchValue);
             }
-        } catch (NamingException ex) {
-            log("SearchBlogServlet _ Naming: " + ex.getMessage());
-            url = ERROR_PAGE;
         } catch (SQLException ex) {
-            log("SearchBlogServlet _ SQL: " + ex.getMessage());
+            log("SearchServiceServlet _ SQL: " + ex.getMessage());
+            url = ERROR_PAGE;
+        } catch (NamingException ex) {
+            log("SearchServiceServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -72,6 +74,7 @@ public class SearchBlogServlet extends HttpServlet {
             out.close();
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

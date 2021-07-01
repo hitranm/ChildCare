@@ -14,15 +14,26 @@ import java.io.Serializable;
 public class BlogError implements Serializable {
     private String titleLengthErr;
     private String descriptionErr;
+    private String imgErr;
 
     public BlogError() {
     }
 
-    public BlogError(String titleLengthErr, String descriptionErr) {
+    public BlogError(String titleLengthErr, String descriptionErr, String imgErr) {
         this.titleLengthErr = titleLengthErr;
         this.descriptionErr = descriptionErr;
+        this.imgErr = imgErr;
     }
 
+    public String getImgErr() {
+        return imgErr;
+    }
+
+    public void setImgErr(String imgErr) {
+        this.imgErr = imgErr;
+    }
+
+    
     public String getTitleLengthErr() {
         return titleLengthErr;
     }

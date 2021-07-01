@@ -42,15 +42,13 @@
                         </button>
                     </form>
                 </div>
-                <div class="create-blog col-3">
-                    <a class="btn btn-primary" href="createBlog.jsp">Tạo bài viết</a>
-                </div>
             </div>
             <div class="main-wrapper">
-                <div class="body-left col-lg-9 col-12">
+                <div class="body-left col-12">
                     <c:set var="searchValue" value="${param.txtSearchBlog}"/>
                     <c:if test="${not empty searchValue}">
                         <c:set var="searchResult" value="${requestScope.SEARCH_LIST}"/>
+                        <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
                         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
                         <c:if test="${not empty searchResult}">
                             <c:forEach var="dto" items="${searchResult}">
@@ -69,23 +67,37 @@
                                         <div class="date">
                                             ${dto.createdDate}
                                         </div>
-                                        <div class="author">
-                                            Tác giả: 
+                                        <div class="sub-body">
+                                            ${dto.description}
                                         </div>
-                                        <div class="cate" style="position: absolute;right: 0; margin-right: 2em;">
-                                            <c:forEach items="${cate.viewBlogCategory()}" var="category">
-                                                <c:if test="${category.categoryID eq dto.categotyID}">
-                                                    <a class="btn btn-link btn-sm" href="#">#${category.categoryName}</a>
-                                                </c:if>
-                                            </c:forEach>
+                                        <div class="d-flex">
+                                            <div class="author">
+                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                Tác giả: ${staff.getStaffName(staffID)}
+                                            </div>
+                                            <div class="cate" style="position: absolute;right: 0; margin-right: 2em;">
+                                                <c:forEach items="${cate.viewBlogCategory()}" var="category">
+                                                    <c:if test="${category.categoryID eq dto.categotyID}">
+                                                        <a class="btn btn-link btn-sm" href="#">#${category.categoryName}</a>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </c:forEach>
-                            <div class="paging mb-2" align="center">
-                                <c:forEach begin="1" end="${END_PAGE}" var="i">
-                                    <a href="SearchBlogServlet?idx=${i}&txtSearchBlog=${SEARCH_VAR}">${i}</a>
-                                </c:forEach>
+                            <div class="d-flex justify-content-center" style="width: 100%">
+                                <div class="paging mb-2" align="center">
+                                    <c:set var="index" value="${param.idx}"/>
+                                    <c:forEach begin="1" end="${END_PAGE}" var="i">
+                                        <c:if test="${i eq index}">
+                                            <a class="number active" href="SearchBlogServlet?idx=${i}&txtSearchBlog=${searchValue}">${i}</a>
+                                        </c:if>
+                                        <c:if test="${i != index}">
+                                            <a class="number" href="SearchBlogServlet?idx=${i}&txtSearchBlog=${searchValue}">${i}</a>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
                             </div>
                         </c:if>
                         <c:if test="${empty searchResult}">
@@ -93,37 +105,9 @@
                         </c:if>
                     </c:if>
                     <c:if test="${empty searchValue}">
-                        <jsp:forward page = "ViewBlogServlet?index=1"/>
+                        <jsp:forward page ="ViewBlogServlet?index=1"/>
                     </c:if>
                 </div>
-                <!--                <div class="main-right d-none d-lg-flex col-lg-3">
-                                    <div class="right-post-section">
-                                        <h4>Bài viết mới nhất</h4>
-                                        <div class="right-post-card">
-                                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                                            <div class="right-post-content">
-                                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                                            </div>
-                                            <div class="right-post-date">
-                                                24 Tháng Năm, 2021`
-                                            </div>
-                                        </div>
-                
-                                        <div class="right-post-card">
-                                            <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                                            <div class="right-post-content">
-                                                Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                                            </div>
-                                            <div class="right-post-date">
-                                                24 Tháng Năm, 2021
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                </div>-->
-                <%--<c:if test="${empty result}">--%>
-                <!--Bạn chưa có bài viết nào!-->
-                <%--</c:if>--%>
 
             </div> 
         </div>

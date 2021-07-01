@@ -188,6 +188,38 @@
         <servlet-name>DeleteCategoryServlet</servlet-name>
         <servlet-class>web.controller.DeleteCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadServiceServlet</servlet-name>
+        <servlet-class>web.controller.LoadServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceServlet</servlet-name>
+        <servlet-class>web.controller.UpdateServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteServiceServlet</servlet-name>
+        <servlet-class>web.controller.DeleteServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServiceServlet</servlet-name>
+        <servlet-class>web.controller.SearchServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadBlogServlet</servlet-name>
+        <servlet-class>web.controller.LoadBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllBlogListServlet</servlet-name>
+        <servlet-class>web.controller.ViewAllBlogListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBlogByAuthorServlet</servlet-name>
+        <servlet-class>web.controller.ViewBlogByAuthorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceStatusServlet</servlet-name>
+        <servlet-class>web.controller.UpdateServiceStatusServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -376,6 +408,38 @@
         <servlet-name>DeleteCategoryServlet</servlet-name>
         <url-pattern>/DeleteCategoryServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadServiceServlet</servlet-name>
+        <url-pattern>/LoadServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceServlet</servlet-name>
+        <url-pattern>/UpdateServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteServiceServlet</servlet-name>
+        <url-pattern>/DeleteServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServiceServlet</servlet-name>
+        <url-pattern>/SearchServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadBlogServlet</servlet-name>
+        <url-pattern>/LoadBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllBlogListServlet</servlet-name>
+        <url-pattern>/ViewAllBlogListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBlogByAuthorServlet</servlet-name>
+        <url-pattern>/ViewBlogByAuthorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceStatusServlet</servlet-name>
+        <url-pattern>/UpdateServiceStatusServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -390,4 +454,9 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <dependency>
+        <groupId>com.github.h-thurow</groupId>
+        <artifactId>tomcat8jndi</artifactId>
+        <version>1.0.0</version>
+    </dependency>
 </web-app>

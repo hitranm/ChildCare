@@ -36,8 +36,8 @@
             <div class="container">
                 <h1 class="text-center mb-2">DỊCH VỤ</h1> 
                 <div class="search p-2">
-                    <form action="SearchBlogServlet?idx=1" method="POST">
-                        <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchBlog" value="${param.txtSearchBlog}" />
+                    <form action="SearchServiceServlet?idx=1" method="POST">
+                        <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchService" value="${param.txtSearchService}" />
                         <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
                             <i class="fas fa-search"></i>
                         </button>
@@ -65,14 +65,22 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="paging text-center mb-3">
-                            <c:forEach begin="1" end="${PAGE}" var="i">
-                                <a href="ViewServiceListServlet?index=${i}">${i}</a>
-                            </c:forEach>
+                        <div class="d-flex justify-content-center" style="width: 100%">
+                            <c:set var="index" value="${param.index}"/>
+                            <div class="paging text-center mb-3">
+                                <c:forEach begin="1" end="${PAGE}" var="i">
+                                    <c:if test="${i eq index}">
+                                        <a class="number active" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                    </c:if>
+                                    <c:if test="${i != index}">
+                                        <a class="number" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
                         </div>
                     </c:if>
                     <c:if test="${empty list}">
-                        Chưa có dich vu nào!
+                        Chưa có dịch vụ nào!
                     </c:if>
                 </div>
             </div>

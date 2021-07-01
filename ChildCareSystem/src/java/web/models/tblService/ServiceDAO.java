@@ -73,7 +73,7 @@ public class ServiceDAO implements Serializable {
             if (con != null) {
                 //2. create sql string
                 String sql = "Select count(*) "
-                        + "From tblService";
+                        + "From tblService WHERE StatusID=1";
                 //3. create statement and assign value to parameters
                 stm = con.prepareStatement(sql);
                 //4. execute query
@@ -146,7 +146,50 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
-
+    public void viewServicebyStatus(int index, String statusID) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            //if (con != null) {
+            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+                    + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
+                    + "from tblService WHERE StatusID=?) as x "
+                    + "where r between ?*5-4 and ?*5";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, statusID);
+            stm.setInt(2, index);
+            stm.setInt(3, index);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                String serviceID = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyID = rs.getString("SpecialtyID");
+                String thumbnail = rs.getString("Thumbnail");
+                String description = rs.getString("Description");
+                Double price = rs.getDouble("Price");
+                Double sale = rs.getDouble("SalePrice");
+                String authorID = rs.getString("CreatedPersonID");
+                String date = rs.getString("CreatedDate");
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                if (this.serviceList == null) {
+                    this.serviceList = new ArrayList<>();
+                }
+                this.serviceList.add(dto);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
     public ServiceDTO getServiceDetail(String serviceID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -171,7 +214,7 @@ public class ServiceDAO implements Serializable {
                     String authorID = rs.getString("CreatedPersonID");
                     String date = rs.getString("CreatedDate");
                     String statusID = rs.getString("StatusID");
-                    ServiceDTO dto = new ServiceDTO(serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                    ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
                     return dto;
                 }
             }
@@ -447,6 +490,98 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
-    
-    
+    public boolean updateService(ServiceDTO serviceDTO) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. Connect Db;
+            con = DBHelpers.makeConnection();
+            //2. Create query string
+            String query = "UPDATE tblService "
+                    + "SET ServiceName=?, SpecialtyID=?, Thumbnail=?, "
+                    + "Description=?, Price=?, SalePrice=?, StatusID=?, UpdatedDate=? "
+                    + "WHERE ServiceID=?";
+
+            //3 Create statement and assign value
+            stm = con.prepareStatement(query);
+            stm.setString(1, serviceDTO.getServiceName());
+            stm.setString(2, serviceDTO.getSpecialtyId());
+            stm.setString(3, serviceDTO.getThumbnail());
+            stm.setString(4, serviceDTO.getDescription());
+            stm.setDouble(5, serviceDTO.getPrice());
+            stm.setDouble(6, serviceDTO.getSalePrice());
+            stm.setString(7, serviceDTO.getStatusId());
+            stm.setString(8, serviceDTO.getUpdatedDate());
+            stm.setString(9, serviceDTO.getServiceId());
+
+            //4 Execute query
+            int row = stm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    public boolean deleteService(String serviceID) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM tblService WHERE ServiceID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, serviceID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    public boolean setStatus(String serviceID, String statusID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "Update tblService "
+                        + "Set StatusID=? "
+                        + "Where ServiceID=?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, statusID);
+                stm.setString(2, serviceID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }

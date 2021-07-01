@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:set var="service" value="${sessionScope.SERVICE_DETAIL}"/>
+        <c:set var="service" value="${requestScope.SERVICE_DETAIL}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link
             rel="stylesheet"
@@ -35,11 +35,35 @@
         <div class="container">
             <div class="body-top row">
                 <div class="service-name text-center col-9 mb-2">
-                    <h1>${service.serviceName}</h1>
+                    <h1>${service.serviceName}
+                        ${service.statusId}
+                    </h1>
                 </div>
                 <div class="col-3 text-center">
                     <a class="btn btn-primary mt-2" href="#" name="btAction">Đặt dịch vụ</a><br>
+                    <a class="btn btn-primary mt-2" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
+                    <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
                 </div>
+                <c:set var="role" value="${sessionScope.ROLEID}"/>
+                <c:if test="${role eq 3}">
+                    <div class="status mt-4">
+                        <form action="UpdateServiceStatusServlet" method="POST">
+                            <input type="hidden" name="txtServiceID" value="${service.serviceId}" />
+                            <c:choose>
+                                <c:when test="${service.statusId eq 0}">
+                                    <button class="btn btn-outline-primary" type="submit" value="1" name="status">Duyệt bài</button>
+                                    <button class="btn btn-outline-primary" type="submit" value="2" name="status">Từ chối</button>
+                                </c:when>
+                                <c:when test="${service.statusId eq 1}">
+                                    <button class="btn btn-outline-primary" type="submit" value="0" name="status">Ẩn dịch vụ</button>
+                                </c:when>
+                                <c:when test="${service.statusId eq 2}">
+                                    <button class="btn btn-outline-primary" type="submit" value="1" name="status">Hiện bài đăng</button>
+                                </c:when>
+                            </c:choose>
+                        </form>
+                    </div>
+                </c:if>
             </div>
             <div class="row">
                 <div class="body-left col-lg-9 col-12">
