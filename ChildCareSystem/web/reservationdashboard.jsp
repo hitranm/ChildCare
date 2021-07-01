@@ -38,28 +38,28 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="" ><span class="las la-igloo"></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-users"></span>
+                        <a href=""class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-users"></span>
                             <span>Account </span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-clipboard-list"></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-clipboard-list"></span>
                             <span>Service </span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-shopping-bag
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-shopping-bag
                                          "></span>
                             <span>Blog</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="active"><span class="las la-receipt"></span>
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-receipt"></span>
                             <span>Reservation</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-user-circle"></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-user-circle"></span>
                             <span>Feedback</span></a>
                     </li>
                 </ul>

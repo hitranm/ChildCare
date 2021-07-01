@@ -24,9 +24,9 @@
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
     </head>
-    <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200">
+    <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
         <input type="checkbox" id="nav-toggle">
-        <div class="sidebar">
+        <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
                 <h3><span class="lab la-accusoft"> 
                     </span>
@@ -38,28 +38,27 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="" class="active"><span class="las la-igloo"></span>
+                        <a href="" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-users"></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
                             <span>Account </span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-clipboard-list"></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-clipboard-list"></span>
                             <span>Service </span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-shopping-bag
-                                         "></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-shopping-bag"></span>
                             <span>Blog</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager"><span class="las la-receipt"></span>
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-receipt"></span>
                             <span>Reservation</span></a>
                     </li>
                     <li>
-                        <a href=""><span class="las la-user-circle"></span>
+                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
                             <span>Feedback</span></a>
                     </li>
                 </ul>
