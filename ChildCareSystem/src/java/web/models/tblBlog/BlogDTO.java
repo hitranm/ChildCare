@@ -22,8 +22,22 @@ public class BlogDTO implements Serializable{
     private Date createdDate;
     private Date updateDate;
     private String StatusID;
+    private boolean onSlider;
 
     public BlogDTO() {
+    }
+
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, Date createdDate, Date updateDate, String StatusID, boolean onSlider) {
+        this.BlogID = BlogID;
+        this.Thumbnail = Thumbnail;
+        this.title = title;
+        this.AuthorID = AuthorID;
+        this.Description = Description;
+        this.CategotyID = CategotyID;
+        this.createdDate = createdDate;
+        this.updateDate = updateDate;
+        this.StatusID = StatusID;
+        this.onSlider = onSlider;
     }
 
     public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, Date createdDate, Date updateDate, String StatusID) {
@@ -40,7 +54,7 @@ public class BlogDTO implements Serializable{
 
     
 
-    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID) {
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID, boolean onSlider) {
         this.BlogID = BlogID;
         this.Thumbnail = Thumbnail;
         this.title = title;
@@ -48,6 +62,7 @@ public class BlogDTO implements Serializable{
         this.Description = Description;
         this.CategotyID = CategotyID;
         this.StatusID = StatusID;
+        this.onSlider = onSlider;
     }
     /**
      * @return the BlogID
@@ -149,18 +164,22 @@ public class BlogDTO implements Serializable{
         this.updateDate = updateDate;
     }
 
-    /**
-     * @return the StatusID
-     */
     public String getStatusID() {
         return StatusID;
     }
 
-    /**
-     * @param StatusID the StatusID to set
-     */
     public void setStatusID(String StatusID) {
         this.StatusID = StatusID;
     }
+
+    public boolean isOnSlider() {
+        return onSlider;
+    }
+
+    public void setOnSlider(boolean onSlider) {
+        this.onSlider = onSlider;
+    }
+    
+    
     
 }

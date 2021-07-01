@@ -220,6 +220,10 @@
         <servlet-name>UpdateServiceStatusServlet</servlet-name>
         <servlet-class>web.controller.UpdateServiceStatusServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateSliderServlet</servlet-name>
+        <servlet-class>web.controller.UpdateSliderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -439,6 +443,10 @@
     <servlet-mapping>
         <servlet-name>UpdateServiceStatusServlet</servlet-name>
         <url-pattern>/UpdateServiceStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSliderServlet</servlet-name>
+        <url-pattern>/UpdateSliderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

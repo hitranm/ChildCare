@@ -11,12 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tất cả bài viết</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="./viewAllAccounts.css">
-        <link rel="stylesheet" type="text/css"
-              href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
-        <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -35,16 +30,23 @@
                                 <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill" href="#all" 
                                    role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
                                    onclick="toggleButton(this)">Tất cả</a>
-                                <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#public"
+                                <a class="nav-link" id="v-pills-public-tab" data-toggle="pill" href="#public"
                                    role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                    onclick="toggleButton(this)">Chấp nhận</a>
-                                <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#pending"
+                                <a class="nav-link" id="v-pills-pending-tab" data-toggle="pill" href="#pending"
                                    role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                    onclick="toggleButton(this)">Đang chờ</a>
-                                <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#deny"
+                                <a class="nav-link" id="v-pills-deny-tab" data-toggle="pill" href="#deny"
                                    role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                    onclick="toggleButton(this)">Từ chối</a>
                             </div>
+                            <c:if test="${param.status eq 'accepted'}">
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#v-pills-public-tab").tab("show");
+                                    });
+                                </script>
+                            </c:if>
                         </div>
                     </div>
                     <div class="col-sm-12 table__wrapper bg-white">
@@ -61,6 +63,8 @@
                                                 <th>Tiêu đề</th>
                                                 <th>Tác giả</th>
                                                 <th>Trạng thái</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
@@ -84,7 +88,6 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td class="alert alert-success">Chấp nhận</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>
@@ -107,7 +110,6 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td class="alert alert-warning">Đang chờ</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>
@@ -130,7 +132,6 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td class="alert alert-danger">Từ chối</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>
@@ -155,10 +156,11 @@
                                                 <th>Tiêu đề</th>
                                                 <th>Tác giả</th>
                                                 <th>Trạng thái</th>
-
+                                                <th>Slider</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
-
                                         <tbody id="tableBodyAccepted">
                                             <c:set var="count" value="0"/>
                                             <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
@@ -178,20 +180,34 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td class="alert alert-success">Chấp nhận</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
+                                                        <td>
+                                                            <form action="DispatchServlet" method="post">
+                                                                <c:choose>
+                                                                    <c:when test="${dto.onSlider}">
+                                                                        <input type="checkbox" name="chkSlider" value="ON" checked />
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <input type="checkbox" name="chkSlider" value="ON" />
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <input name="txtBlogId" value="${dto.blogID}" hidden />
+                                                                <button type="submit" class="btn btn-primary" name="btAction" value="UpdateSlider">Cập nhật</button>
+                                                            </form>
+                                                        </td>
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>
-                                                        <td>
+                                                        <td>    
                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
                                                         </td>
                                                     </tr>
+
                                                 </c:if>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+                                </div>             
 
-                                </div>                    
                                 <!--Pending-->
                                 <div class="tab-pane fade show bg-white" id="pending" role="tabpanel"
                                      aria-labelledby="v-pills-changePassword-tab">
@@ -203,6 +219,8 @@
                                                 <th>Tiêu đề</th>
                                                 <th>Tác giả</th>
                                                 <th>Trạng thái</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
@@ -225,7 +243,6 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td class="alert alert-warning">Đang chờ</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>
@@ -237,8 +254,8 @@
                                             </c:forEach>
                                         </tbody>
                                     </table>
-
                                 </div>
+
                                 <!--deny-->
                                 <div class="tab-pane fade show bg-white" id="deny" role="tabpanel"
                                      aria-labelledby="v-pills-changePassword-tab">
@@ -251,6 +268,8 @@
                                                 <th>Tiêu đề</th>
                                                 <th>Tác giả</th>
                                                 <th>Trạng thái</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
@@ -273,7 +292,6 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td class="alert alert-danger">Từ chối</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>
@@ -293,13 +311,23 @@
                 </div>
             </div>
         </main>
+
+
+        <jsp:include page="footer.jsp"/>
         <script>
             function confirmation() {
                 var r = confirm("Bạn có chắc muốn xóa bài viết này?");
                 return r;
             }
+
+
         </script>
 
-        <jsp:include page="footer.jsp"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+        <script>
+            $(".mydatatable").DataTable();
+        </script>
     </body>
 </html>
