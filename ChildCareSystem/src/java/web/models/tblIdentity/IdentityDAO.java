@@ -338,5 +338,127 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
         }
         return false;
     }
+ public int countAllAccount() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(IdentityID) as Total"
+                        + " FROM tblIdentity ";
+                stm = conn.prepareStatement(sql);
+                
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+  public int countCustomerAccount() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(IdentityID) as Total"
+                        + " FROM tblIdentity "
+                        + " WHERE RoleID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, 1);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+   public int countStaffAccount() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(IdentityID) as Total"
+                        + " FROM tblIdentity "
+                        + " WHERE RoleID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, 2);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+    public int countNewAccountMonthly() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(IdentityID) as Total"
+                        + " FROM tblIdentity "
+                        + " WHERE MONTH(CreatedDate) = Month(GETDATE())";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
 }
 

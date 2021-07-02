@@ -13,10 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.tblBlog.BlogDAO;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblCustomer.CustomerDTO;
+import web.models.tblFeedback.FeedbackDAO;
+import web.models.tblIdentity.IdentityDAO;
 import web.models.tblManager.ManagerDAO;
 import web.models.tblManager.ManagerDTO;
+import web.models.tblService.ServiceDAO;
 import web.models.tblStaff.StaffDAO;
 import web.models.tblStaff.StaffDTO;
 
@@ -41,8 +45,10 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
         response.setContentType("text/html;charset=UTF-8");
         String url=VIEW_ACCOUNT;
         try {
-            
-            
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            ServiceDAO dao = new ServiceDAO();
+            BlogDAO blogDAO = new BlogDAO();
+            IdentityDAO identityDAO = new IdentityDAO();
             CustomerDAO customerDAO = new CustomerDAO();
             StaffDAO staffDAO = new StaffDAO();
             ManagerDAO managerDAO = new ManagerDAO();
@@ -52,8 +58,35 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
             request.setAttribute("ListStaff", listStaff);
             List<ManagerDTO> listManager = managerDAO.getAllManagerProfile();
             request.setAttribute("ListManager", listManager);
+            int sum = identityDAO.countAllAccount();
+            request.setAttribute("TOTAL_ACCOUNT", sum);
+            int customers = identityDAO.countCustomerAccount();
+            request.setAttribute("CUSTOMER_ACCOUNT", customers);
+            int staffs = identityDAO.countStaffAccount();
+            request.setAttribute("STAFF_ACCOUNT", staffs);
+            int newaccs = identityDAO.countNewAccountMonthly();
+            request.setAttribute("MONTHLY_ACCOUNT", newaccs);
+            int allService = dao.countAllService();
+            request.setAttribute("ALL_SERVICE", allService);
+            int activeService = dao.countServiceActive();
+            request.setAttribute("ACTIVE_SERVICE", activeService);
+            int denyService = dao.countServiceDeny();
+            request.setAttribute("DENY_SERVICE", denyService);
+            String service = dao.countMostUseService();
+            request.setAttribute("POPULAR_SERVICE", service);
+            int allBlog = blogDAO.countAllBlog();
+            request.setAttribute("ALL_BLOG", allBlog);
+            int activeBlog = blogDAO.countBlogActive();
+            request.setAttribute("ACTIVE_BLOG", activeBlog);
+            int pendingBlog = blogDAO.countBlogPending();
+            request.setAttribute("PENDING_BLOG", pendingBlog);
+            int allfb = feedbackDAO.countAllFeedback();
+            request.setAttribute("ALL_FB", allfb);
+            float result = feedbackDAO.calcAvgStar();
+            request.setAttribute("AVG_STAR", result);
+            
         } catch (Exception e) {
-            log("ERROR at ViewPatientProfileServlet: " + e.getMessage());
+            log("ERROR at ViewAccountsServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -28,17 +28,14 @@
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
-                <h3><span class="lab la-accusoft"> 
-                    </span>
-                    <span class="lmao" style="font-size: 1.5rem">
-                        Child Care System
-                    </span></h3>
-
+                <a  href="StartupServlet" class="link-primary" style="color: white">
+                <h3><span class="lab la-accusoft"></span><span class="lmao" style="font-size: 1.5rem">Child Care System</span></h3>
+</a>
             </div>
             <div class ="sidebar-menu">
                 <ul>
                                        <li>
-                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
+                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-tv"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
@@ -94,7 +91,7 @@
                 <div class="cards">
                     <div class="card-single">
                         <div>
-                            <h1>30</h1>
+                            <h1>${requestScope.ALL_BLOG}</h1>
                             <span>Bài đăng</span>
                         </div>
                         <div>
@@ -103,7 +100,7 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>20</h1>
+                            <h1>${requestScope.ACTIVE_BLOG}</h1>
                             <span>Đang hiển thị</span>
                         </div>
                         <div>
@@ -112,7 +109,7 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>10</h1>
+                            <h1>${requestScope.PENDING_BLOG}</h1>
                             <span>Đang chờ duyệt</span>
                         </div>
                         <div>
