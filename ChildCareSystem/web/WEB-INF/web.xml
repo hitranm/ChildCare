@@ -212,6 +212,14 @@
         <servlet-name>DeleteExaminationServlet</servlet-name>
         <servlet-class>web.controller.DeleteExaminationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateSystemSettingServlet</servlet-name>
+        <servlet-class>web.controller.UpdateSystemSettingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSystemSettingServlet</servlet-name>
+        <servlet-class>web.controller.ViewSystemSettingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -419,6 +427,14 @@
     <servlet-mapping>
         <servlet-name>DeleteExaminationServlet</servlet-name>
         <url-pattern>/DeleteExaminationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSystemSettingServlet</servlet-name>
+        <url-pattern>/UpdateSystemSettingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSystemSettingServlet</servlet-name>
+        <url-pattern>/ViewSystemSettingServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
