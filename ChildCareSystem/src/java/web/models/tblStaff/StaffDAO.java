@@ -359,7 +359,7 @@ public class StaffDAO implements Serializable {
         return result;
     }
 
-    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+    public boolean delete(String id) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -373,9 +373,6 @@ public class StaffDAO implements Serializable {
                     return true;
                 }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -410,8 +407,19 @@ public class StaffDAO implements Serializable {
                 }
             }
         } finally {
-
+            if(rs != null) {
+                rs.close();
+            }
+            
+            if(stm != null) {
+                stm.close();
+            }
+            
+            if(conn != null) {
+                conn.close();
+            }
         }
+        return null;
     }
 
     public String getStaffName(String staffID) throws NamingException, SQLException {

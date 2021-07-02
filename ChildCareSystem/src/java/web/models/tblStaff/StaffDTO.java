@@ -35,17 +35,6 @@ public class StaffDTO {
         this.SpecialtyID = SpecialtyID;
     }
 
-    public StaffDTO(String IdentityID, String StaffID, String FullName, String phoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
-        this.IdentityID = IdentityID;
-        this.StaffID = StaffID;
-        this.FullName = FullName;
-        this.phoneNumber = phoneNumber;
-        this.Address = Address;
-        this.Birthday = Birthday;
-        this.CitizenID = CitizenID;
-        this.SpecialtyID = SpecialtyID;
-    }
-    
     public StaffDTO(String IdentityID, String FullName, String phoneNumber) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;

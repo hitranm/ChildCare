@@ -309,52 +309,6 @@ public class BlogDAO implements Serializable {
         return false;
     }
 
-//    public void searchBlog(String searchValue) throws NamingException, SQLException {
-//        Connection con = null;
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        try {
-//            //1. connect db
-//            con = DBHelpers.makeConnection();
-//            if (con != null) {
-//                //2. create sql string
-//                String sql = "Select BlogID, Thumbnail, Title, "
-//                        + "AuthorID, Description, CategoryID, StatusID "
-//                        + "From tblBlog "
-//                        + "Where Title Like ?";
-//                //3. create statement and assign value to parameters
-//                stm = con.prepareStatement(sql);
-//                stm.setString(1, "%" + searchValue + "%");
-//                //4. execute query
-//                rs = stm.executeQuery();
-//                //5. Process result
-//                while (rs.next()) {
-//                    String blogID = rs.getString("BlogID");
-//                    String thumbnail = rs.getString("Thumbnail");
-//                    String title = rs.getString("Title");
-//                    String authorID = rs.getString("AuthorID");
-//                    String description = rs.getString("Description");
-//                    String categoryID = rs.getString("CategoryID");
-//                    String statusID = rs.getString("StatusID");
-//                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
-//                    if (this.blogList == null) {
-//                        this.blogList = new ArrayList<>();
-//                    }
-//                    this.blogList.add(dto);
-//                } //end while traversing result
-//            } //end if con iss opened
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (stm != null) {
-//                stm.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//    }
     public int countSearch(String searchValue) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -500,9 +454,8 @@ public class BlogDAO implements Serializable {
                     String authorID = rs.getString("AuthorID");
                     String description = rs.getString("Description");
                     String categoryID = rs.getString("CategoryID");
-                    String createdDate =rs.getString("CreatedDate");
                     String statusID = rs.getString("StatusID");
-                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, createdDate, statusID);
+                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
                     result.add(dto);
                 }
             }
