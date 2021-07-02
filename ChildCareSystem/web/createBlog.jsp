@@ -63,7 +63,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="title">Tiêu đề</label>
-                        <input class="form-control" type="text" name="txtTitle" value="" id="title"/>
+                        <input class="form-control" type="text" name="txtTitle" value="${param.txtTitle}" id="title"/>
                         <c:if test="${not empty err.titleLengthErr}">
                             <small class="text-danger">${err.titleLengthErr}</small>
                         </c:if>
@@ -80,7 +80,7 @@
 
                 <div class="form-group">
                     <label for="content">Nội dung bài viết</label>
-                    <textarea class="form-control" id="blog-content" name="txtBody"></textarea>
+                    <textarea class="form-control" id="blog-content" name="txtBody">${param.txtBody}</textarea>
                     <c:if test="${not empty err.descriptionErr}">
                         <small class="text-danger">${err.descriptionErr}</small>
                     </c:if>

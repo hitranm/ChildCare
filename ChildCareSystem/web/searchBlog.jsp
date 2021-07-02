@@ -78,7 +78,11 @@
                                             <div class="cate" style="position: absolute;right: 0; margin-right: 2em;">
                                                 <c:forEach items="${cate.viewBlogCategory()}" var="category">
                                                     <c:if test="${category.categoryID eq dto.categotyID}">
-                                                        <a class="btn btn-link btn-sm" href="#">#${category.categoryName}</a>
+                                                        <c:url var="viewbycate" value = "ViewBlogByCateServlet">
+                                                            <c:param name="txtCateID" value="${dto.categotyID}"/>
+                                                            <c:param name="index" value="1"/>
+                                                        </c:url>    
+                                                        <a class="btn btn-link btn-sm" href="${viewbycate}">#${category.categoryName}</a>
                                                     </c:if>
                                                 </c:forEach>
                                             </div>

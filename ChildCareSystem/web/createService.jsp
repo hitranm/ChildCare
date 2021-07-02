@@ -52,7 +52,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-title">Tiêu đề</label>
-                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="">              
+                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="${param.txtTitle}">              
                         <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
                             <div class="text-danger">
                                 <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
@@ -72,7 +72,7 @@
 
                 <div class="form-group">
                     <label for="service-content">Nội dụng</label>
-                    <textarea id="service-content" name="txtServiceContent"></textarea>
+                    <textarea id="service-content" name="txtServiceContent">${param.txtServiceContent}</textarea>
                     <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}">
                         <div class="text-danger">
                             <small>${requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}</small>
@@ -83,7 +83,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-price">Nhập giá tiền</label>
-                        <input type="text" id="service-price" class="form-control" value="" name="txtPrice"/>
+                        <input type="text" id="service-price" class="form-control" value="${param.txtPrice}" name="txtPrice"/>
                         <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.priceFormat}">
                             <div class="text-danger">
                                 <small>${requestScope.CREATE_SERVICE_ERROR.priceFormat}</small>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="service-salePrice">Nhập giá khuyến mãi</label>
-                        <input type="text" id="service-salePrice" class="form-control" value="" name="txtSalePrice"/>
+                        <input type="text" id="service-salePrice" class="form-control" value="${param.txtSalePrice}" name="txtSalePrice"/>
                         <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
                             <div class="text-danger">
                                 <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
