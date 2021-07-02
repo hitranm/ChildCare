@@ -154,9 +154,7 @@
                                                     <th>Setting Value</th>
                                                     <th>Created Date</th>
                                                     <th>Updated Date</th>
-                                                    
                                                     <th></th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
