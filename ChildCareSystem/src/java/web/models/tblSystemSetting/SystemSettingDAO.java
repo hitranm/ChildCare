@@ -47,7 +47,7 @@ public class SystemSettingDAO {
         return false;
     }
 
-    public boolean updateSystemSetting(SystemSettingDTO config) throws SQLException, NamingException {
+    public boolean updateSystemSetting(String value, String id) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -55,8 +55,8 @@ public class SystemSettingDAO {
             if (conn != null) {
                 String sql = "UPDATE tblSystemSetting SET SettingValue=?  WHERE SettingId=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, config.getSettingValue());
-                stm.setInt(2, config.getSettingID());
+                stm.setString(1, value);
+                stm.setString(2, id);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;

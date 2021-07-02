@@ -37,7 +37,7 @@
             </div>
             <div class ="sidebar-menu">
                 <ul>
-                   <li>
+                    <li>
                         <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
@@ -62,7 +62,7 @@
                             <span>Feedback</span></a>
                     </li>
                     <li>
-                        <a href="systemSettingsDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-cogs"></span>
+                        <a href="ViewSystemSettingServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-cogs"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -91,129 +91,144 @@
 
             </header>
             <main>
-                <div class="cards">
-                    <div class="card-single">
-                        <div>
-                            <h1>100</h1>
-                            <span>Tài khoản</span>
+                <div class="row">
+                    <c:if test="${requestScope.UPDATE_SETTING!=null}">
+                        <div class="col-sm">
                         </div>
-                        <div>
-                            <span class="las la-users"></span>
+                        <div class="alert alert-success col-sm" role="alert" style="font-size: large">
+                            ${requestScope.UPDATE_SETTING}
                         </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>20</h1>
-                            <span>Dịch vụ</span>
+                        <div class="col-sm">
                         </div>
-                        <div>
-                            <span class="las la-clipboard-list"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>30</h1>
-                            <span>Blog</span>
-                        </div>
-                        <div>
-                            <span class="las la-shopping-bag"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>40</h1>
-                            <span>Đơn hẹn khám</span>
-                        </div>
-                        <div>
-                            <span class="las la-google-wallet"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>20</h1>
-                            <span>Phản hồi</span>
-                        </div>
-                        <div>
-                            <span class="las la-users"></span>
-                        </div>
-                    </div>
-
+                    </c:if>
                 </div>
+                <!--                <div class="cards">
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>100</h1>
+                                            <span>Tài khoản</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-users"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>20</h1>
+                                            <span>Dịch vụ</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-clipboard-list"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>30</h1>
+                                            <span>Blog</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-shopping-bag"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>40</h1>
+                                            <span>Đơn hẹn khám</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-google-wallet"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>20</h1>
+                                            <span>Phản hồi</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-users"></span>
+                                        </div>
+                                    </div>
+                
+                                </div>-->
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-
-                                <c:if test="${requestScope.settingList!=null}">
-                                    <c:if test="${not empty requestScope.settingList}" var="testEmpty">
-                                        <table class="table table-striped table-bordered mydatatable dataTable no-footer">
-                                            <thead>
-                                                <tr>
-                                                    <th>Setting ID</th>
-                                                    <th>Setting Name</th>
-                                                    <th>Setting Value</th>
-                                                    <th>Created Date</th>
-                                                    <th>Updated Date</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${requestScope.settingList}" var="dto">
-                                                    <tr>
-                                                        <td>${dto.settingID}</td>
-                                                        <td>${dto.settingName}</td>
-                                                        <td>${dto.settingValue}</td>
-                                                        <td>${dto.createdDate}</td>
-                                                        <td>${dto.updatedDate}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </c:if>
-                                    <c:if test="${!testEmpty}">
+                                <div class="row">
+                                    <c:if test="${requestScope.settingList!=null}">
+                                        <c:if test="${not empty requestScope.settingList}" var="testEmpty">
+                                            <c:forEach items="${requestScope.settingList}" var="dto">
+                                                <div class="col-md-6" style="margin-bottom: 3%">
+                                                    <form class="col" action="UpdateSystemSettingServlet" method="POST">
+                                                        <div class="card" style="text-align: center">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><strong>${dto.settingName}</strong></h5>
+                                                                <h5 class="card-title"><input type="text" name="txtID" value="${dto.settingID}" hidden></h5>
+                                                                <hr>
+                                                                <p class="card-text col-md-12" style="width: 50%;margin-left: 24%">
+                                                                    <strong>Giá trị cài đặt</strong><input placeholder="Nhập giá trị" required type="number" name="txtValue" value="${dto.settingValue}" min="1" max="15" step="1"/>
+                                                                </p>
+                                                                <hr>
+                                                                <c:url value="UpdateSystemSettingServlet" var="updateLink">
+                                                                    <c:param name="id" value="${dto.settingID}"/>
+                                                                </c:url>
+                                                                <button type="submit" class="btn btn-primary" href="${updateLink}">Cập nhật</button>
+                                                                <button type="reset" class="btn btn-primary" href="ViewSystemSettingServlet">Đặt lại</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${!testEmpty}">
                                             <h2>No Product here. Create new one below here</h2>
 
+                                        </c:if>
                                     </c:if>
-                                </c:if>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
-                </main>
-            </div>
-            <!--JQuery-->
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+                </div>
+            </main>
+        </div>
 
-            <!--Custom JS-->
-            <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-            <script>
-                $(".mydatatable").DataTable();
-            </script>
+        <!--JQuery-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script src="./js/bootstrap-input-spinner.js"></script>
+        <script>
+            $("input[type='number']").inputSpinner()
+        </script>
+        <!--Custom JS-->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(".mydatatable").DataTable();
+        </script>
 
 
-            <script>
-                window.addEventListener('load', function () {
-                    const loader = document.querySelector(".loader");
-                    loader.className += " hidden"; // class "loader hidden"
-                });
-            </script>
-            <script>
-                function confirmation() {
-                    var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
-                    return r;
-                }
-            </script>
-        </body>
-    </html>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
+        <script>
+            function confirmation() {
+                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+                return r;
+            }
+        </script>
+    </body>
+</html>
 
 

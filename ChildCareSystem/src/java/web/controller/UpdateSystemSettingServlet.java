@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import web.models.tblSystemSetting.SystemSettingDAO;
 
 /**
  *
@@ -18,12 +19,44 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UpdateSystemSettingServlet extends HttpServlet {
 
-    
+    private static final String SUCCESS = "ViewSystemSettingServlet";
+    private static final String ERROR = "error.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           
+        String url = ERROR;
+
+        try {
+            String id = request.getParameter("txtID");
+            String value = request.getParameter("txtValue");
+            boolean valid = true;
+            String regex = "[0-9]{1,2}";
+            if (!value.matches(regex)) {
+                valid = false;
+            }
+            SystemSettingDAO dao = new SystemSettingDAO();
+            if (valid) {
+                if (dao.updateSystemSetting(value, id)) {
+                    url = SUCCESS;
+                    request.setAttribute("UPDATE_SETTING", "Đã cập nhật thành công");
+                    request.getRequestDispatcher(url).forward(request, response);
+
+                } else {
+                    request.setAttribute("ERROR", "Update failed, cannot find the Setting ID: " + id + ", please go back and try again");
+                    request.setAttribute("UPDATE_SETTING", "Cập nhật thất bại, vui lòng thử lại");
+                    request.getRequestDispatcher(url).forward(request, response);
+
+                }
+            } else {
+                url = SUCCESS;
+                request.setAttribute("UPDATE_SETTING", "Vui lòng nhập giá trị từ 1 tới 15 ");
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+
+        } catch (Exception e) {
+            log("ERROR at UpdateSystemSettingServlet: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
