@@ -53,7 +53,7 @@ public class DeleteBlogServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
             out.close();
 
         }

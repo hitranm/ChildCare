@@ -219,6 +219,80 @@
     <servlet>
         <servlet-name>ViewSystemSettingServlet</servlet-name>
         <servlet-class>web.controller.ViewSystemSettingServlet</servlet-class>
+        <servlet-name>UpdateBlogStatusServlet</servlet-name>
+        <servlet-class>web.controller.UpdateBlogStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateSpecialtyServlet</servlet-name>
+        <servlet-class>web.controller.CreateSpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSpecialtyServlet</servlet-name>
+        <servlet-class>web.controller.DeleteSpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSpecialtyServlet</servlet-name>
+        <servlet-class>web.controller.UpdateSpecialtyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+        <servlet-class>web.controller.CreateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCategoryServlet</servlet-name>
+        <servlet-class>web.controller.ViewCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <servlet-class>web.controller.UpdateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>web.controller.DeleteCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadServiceServlet</servlet-name>
+        <servlet-class>web.controller.LoadServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceServlet</servlet-name>
+        <servlet-class>web.controller.UpdateServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteServiceServlet</servlet-name>
+        <servlet-class>web.controller.DeleteServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServiceServlet</servlet-name>
+        <servlet-class>web.controller.SearchServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadBlogServlet</servlet-name>
+        <servlet-class>web.controller.LoadBlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllBlogListServlet</servlet-name>
+        <servlet-class>web.controller.ViewAllBlogListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBlogByAuthorServlet</servlet-name>
+        <servlet-class>web.controller.ViewBlogByAuthorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceStatusServlet</servlet-name>
+        <servlet-class>web.controller.UpdateServiceStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllServiceListServlet</servlet-name>
+        <servlet-class>web.controller.ViewAllServiceListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewServiceByStaffServlet</servlet-name>
+        <servlet-class>web.controller.ViewServiceByStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBlogByCateServlet</servlet-name>
+        <servlet-class>web.controller.ViewBlogByCateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
@@ -435,6 +509,80 @@
     <servlet-mapping>
         <servlet-name>ViewSystemSettingServlet</servlet-name>
         <url-pattern>/ViewSystemSettingServlet</url-pattern>
+        <servlet-name>UpdateBlogStatusServlet</servlet-name>
+        <url-pattern>/UpdateBlogStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSpecialtyServlet</servlet-name>
+        <url-pattern>/CreateSpecialtyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSpecialtyServlet</servlet-name>
+        <url-pattern>/DeleteSpecialtyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSpecialtyServlet</servlet-name>
+        <url-pattern>/UpdateSpecialtyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+        <url-pattern>/CreateCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCategoryServlet</servlet-name>
+        <url-pattern>/ViewCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <url-pattern>/UpdateCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/DeleteCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadServiceServlet</servlet-name>
+        <url-pattern>/LoadServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceServlet</servlet-name>
+        <url-pattern>/UpdateServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteServiceServlet</servlet-name>
+        <url-pattern>/DeleteServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServiceServlet</servlet-name>
+        <url-pattern>/SearchServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadBlogServlet</servlet-name>
+        <url-pattern>/LoadBlogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllBlogListServlet</servlet-name>
+        <url-pattern>/ViewAllBlogListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBlogByAuthorServlet</servlet-name>
+        <url-pattern>/ViewBlogByAuthorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceStatusServlet</servlet-name>
+        <url-pattern>/UpdateServiceStatusServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllServiceListServlet</servlet-name>
+        <url-pattern>/ViewAllServiceListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewServiceByStaffServlet</servlet-name>
+        <url-pattern>/ViewServiceByStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBlogByCateServlet</servlet-name>
+        <url-pattern>/ViewBlogByCateServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -450,4 +598,9 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <dependency>
+        <groupId>com.github.h-thurow</groupId>
+        <artifactId>tomcat8jndi</artifactId>
+        <version>1.0.0</version>
+    </dependency>
 </web-app>

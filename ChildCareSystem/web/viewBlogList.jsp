@@ -44,14 +44,13 @@
                             </button>
                         </form>
                     </div>
-                    <div class="create-blog col-3">
-                        <a class="btn btn-primary" href="createBlog.jsp">Tạo bài viết</a>
-                    </div>
                 </div>
                 <div class="main-wrapper">
-                    <div class="body-left col-lg-9 col-12">
+                    <div class="body-left col-12">
+                        <c:set var="searchValue" value="${param.txtSearchBlog}"/>
                         <c:if test="${empty searchValue}">
                             <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
+                            <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
                             <c:set var="list" value="${requestScope.BLOG_LIST}"/>
                             <c:if test="${not empty list}">
                                 <c:forEach var="dto" items="${list}">
@@ -68,83 +67,92 @@
                                                 </a>
                                             </div>
                                             <div class="date">
-                                                ${dto.createdDate}
+                                                ${dto.updateDate}
                                             </div>
-
-                                            <div class="author">
-                                                Tác giả: 
+                                            <div class="sub-body">
+                                                ${dto.description}
                                             </div>
-                                            <div class="cate" style="position: absolute;right: 0; margin-right: 2em;" >
-                                                <c:forEach items="${cate.viewBlogCategory()}" var="category">
-                                                    <c:if test="${category.categoryID eq dto.categotyID}">
-                                                        <a class="btn btn-link btn-sm" href="#">#${category.categoryName}</a>
-                                                    </c:if>
-                                                </c:forEach>
+                                            <div class="d-flex">
+                                                <div class="author">
+                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                    Tác giả: ${staff.getStaffName(staffID)}
+                                                </div>
+                                                <div class="cate" style="position: absolute;right: 0; margin-right: 2em;" >
+                                                    <c:forEach items="${cate.viewBlogCategory()}" var="category">
+                                                        <c:if test="${category.categoryID eq dto.categotyID}">
+                                                            <c:url var="viewbycate" value = "ViewBlogByCateServlet">
+                                                                <c:param name="txtCateID" value="${dto.categotyID}"/>
+                                                                <c:param name="index" value="1"/>
+                                                            </c:url>    
+                                                            <a class="btn btn-link btn-sm" href="${viewbycate}">#${category.categoryName}</a>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </div>
                                             </div>
-
                                         </div>
 
                                     </div>
                                 </c:forEach>
-                                <div class="paging mb-2" align="center">
-                                    <c:forEach begin="1" end="${PAGE}" var="i">
-                                        <a href="ViewBlogServlet?index=${i}">${i}</a>
-                                    </c:forEach>
-                                </div>
+                                <nav aria-label="Paging">
+                                    <c:set var="page" value="${requestScope.PAGE}"/>
+                                    <ul class="pagination justify-content-center">
+                                        <c:set var="index" value="${param.index}"/>
+                                        <c:if test="${index-1 != 0}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="ViewBlogServlet?index=${index-1}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+
+                                        <c:if test="${index-1 eq 0}">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:forEach begin="1" end="${PAGE}" var="i">                                            
+                                            <c:if test="${i eq index}">
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${i != index}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                                </li>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${index eq page}">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${index != page}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="ViewBlogServlet?index=${index+1}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </nav>
                             </c:if>
                             <c:if test="${empty list}">
                                 Bạn chưa có bài viết nào!
                             </c:if>
-
                         </c:if>
-
                     </div>
-                    <!--                    <div class="main-right d-none d-lg-flex col-lg-3 mt-3">
-                                            <div class="right-post-section">
-                                                <h4>Bài viết mới nhất</h4>
-                                                <div class="right-post-card">
-                                                    <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                                                    <div class="right-post-content">
-                                                        Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                                                    </div>
-                                                    <div class="right-post-date">
-                                                        24 Tháng Năm, 2021
-                                                    </div>
-                                                </div>
-                    
-                                                <div class="right-post-card">
-                                                    <h5>LOREM, IPSUM DOLOR SIT AMET</h5>
-                                                    <div class="right-post-content">
-                                                        Enim accusantium commodi deleniti excepturi voluptates quas voluptatibus expedita laboriosam ipsam tempore saepe beatae non velit, labore pariatur, ipsum autem consequatur! Consequatur.
-                                                    </div>
-                                                    <div class="right-post-date">
-                                                        24 Tháng Năm, 2021
-                                                    </div>
-                                                </div>
-                                            </div>
-                    
-                                        </div>-->
-                    <%--<c:if test="${empty result}">--%>
-                    <!--Bạn chưa có bài viết nào!-->
-                    <%--</c:if>--%>
-
                 </div>
             </div>
         </main>
         <jsp:include page="footer.jsp"/>
-
-
-
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
-        ></script>
-        <script>
-            $("#navbarDropdown").click(function () {
-                $('.dropdown-toggle').dropdown();
-            })
-        </script>
     </body>
 </html>

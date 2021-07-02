@@ -43,12 +43,11 @@ public class ViewServiceDetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String serviceID = request.getParameter("id");
-        HttpSession session = request.getSession();
         String url = SERVICE_DETAIL_PAGE;
         try {
             ServiceDAO dao = new ServiceDAO();
             ServiceDTO service = dao.getServiceDetail(serviceID);
-            session.setAttribute("SERVICE_DETAIL", service);
+            request.setAttribute("SERVICE_DETAIL", service);
         } catch (NamingException ex) {
             log("ViewServiceDetailServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;

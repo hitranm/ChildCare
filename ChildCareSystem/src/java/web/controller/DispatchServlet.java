@@ -45,6 +45,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
     private static final String VIEW_USER_PROFILE = "ViewUserProfileServlet";
     private static final String CREATE_SERVICE = "CreateServiceServlet";
+    private static final String UPDATE_SERVICE = "UpdateServiceServlet";
     private static final String VIEW_ACCOUNT = "ViewAccountsServlet";
     private static final String VIEW_DETAILS = "ViewAccountDetailsServlet";
     private static final String UPDATE_DETAILS = "UpdateAccountDetailsServlet";
@@ -56,6 +57,10 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_RESERVATION_DETAILS = "ViewReservationDetailServlet";
     private static final String VIEW_RESERVATION_STAFF = "ViewReservationStaffServlet";
     private static final String VIEW_RESERVATION_DETAILS_STAFF = "ViewReservationDetailStaffServlet";
+    private static final String CREATE_SPECIALTY = "CreateSpecialtyServlet";
+    private static final String UPDATE_SPECIALTY = "UpdateSpecialtyServlet";
+    private static final String CREATE_CATEGORY = "CreateCategoryServlet";
+    private static final String UPDATE_CATEGORY = "UpdateCategoryServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -133,6 +138,16 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_RESERVATION_STAFF;
             } else if (button.equalsIgnoreCase("ViewReservationDetailsStaff")) {
                 url = VIEW_RESERVATION_DETAILS_STAFF;
+            } else if (button.equalsIgnoreCase("CreateSpecialty")) {
+                url = CREATE_SPECIALTY;
+            } else if (button.equalsIgnoreCase("UpdateSpecialty")) {
+                url = UPDATE_SPECIALTY;
+            } else if (button.equalsIgnoreCase("CreateCate")) {
+                url = CREATE_CATEGORY;
+            } else if (button.equalsIgnoreCase("UpdateCate")) {
+                url = UPDATE_CATEGORY;
+            } else if (button.equalsIgnoreCase("UpdateService")) {
+                url = UPDATE_SERVICE;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

@@ -38,7 +38,7 @@ public class SpecialtyDAO implements Serializable {
             //2. Create query string
             String sql = "SELECT SpecialtyID, SpecialtyName "
                     + "FROM tblSpecialty";
-            
+
             //3 Create statement
             stm = con.prepareStatement(sql);
             //4 Execute query
@@ -53,22 +53,22 @@ public class SpecialtyDAO implements Serializable {
                 }
                 this.listSpecialty.add(dto);
             }
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (stm != null) {
                 stm.close();
             }
-            
+
             if (con != null) {
                 con.close();
             }
         }
     }
-    
+
     public List<SpecialtyDTO> viewSpecialtyList() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -100,7 +100,7 @@ public class SpecialtyDAO implements Serializable {
             }
         }
     }
-    
+
     public SpecialtyDTO getSpecialtyById(int specialtyId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -117,9 +117,11 @@ public class SpecialtyDAO implements Serializable {
             if (rs.next()) {
                 int specialID = rs.getInt("SpecialtyID");
                 String specialName = rs.getString("SpecialtyName");
-                SpecialtyDTO dto = new SpecialtyDTO(specialID, specialName);             
+                SpecialtyDTO dto = new SpecialtyDTO(specialID, specialName);
                 return dto;
-            } else return null;
+            } else {
+                return null;
+            }
 
         } finally {
             if (rs != null) {
@@ -149,7 +151,7 @@ public class SpecialtyDAO implements Serializable {
             if (rs.next()) {
                 int specialID = rs.getInt("SpecialtyID");
                 String specialName = rs.getString("SpecialtyName");
-                SpecialtyDTO dto = new SpecialtyDTO(specialID, specialName);             
+                SpecialtyDTO dto = new SpecialtyDTO(specialID, specialName);
                 return dto;
             } else return null;
 
@@ -157,6 +159,23 @@ public class SpecialtyDAO implements Serializable {
             if (rs != null) {
                 rs.close();
             }
+
+    public boolean addSpecialty(String specialtyName) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "INSERT INTO tblSpecialty "
+                        + "(SpecialtyName) values(?)";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, specialtyName);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
             if (stm != null) {
                 stm.close();
             }
@@ -164,5 +183,60 @@ public class SpecialtyDAO implements Serializable {
                 con.close();
             }
         }
+        return false;
+    }
+
+    public boolean deleteSpecialty(String specialtyID) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM tblSpecialty WHERE SpecialtyID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, specialtyID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateSpecialty(String specialtyID, String specialtyName) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "UPDATE tblSpecialty SET SpecialtyName=? "
+                        + " WHERE SpecialtyID=?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, specialtyName);
+                stm.setString(2, specialtyID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 }

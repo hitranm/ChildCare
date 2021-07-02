@@ -52,7 +52,7 @@ public class ViewServiceListServlet extends HttpServlet {
             request.setAttribute("PAGE", endPage);
             String indexString = request.getParameter("index");
             int index = Integer.parseInt(indexString);
-            dao.viewServiceList(index);
+            dao.viewServicebyStatus(index,"1");
             List<ServiceDTO> result = dao.getServiceList();
             request.setAttribute("SERVICE_LIST", result);
         } catch (NamingException ex) {

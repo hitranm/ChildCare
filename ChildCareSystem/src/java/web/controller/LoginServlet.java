@@ -80,6 +80,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     session.setAttribute("ROLE", "manager");
+                    session.setAttribute("ROLEID", identity.getRoleID());
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("2")) {

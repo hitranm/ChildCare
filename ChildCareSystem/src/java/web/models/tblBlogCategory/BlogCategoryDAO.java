@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import web.models.tblBlog.BlogDTO;
 import web.utils.DBHelpers;
 
 /**
@@ -53,5 +52,82 @@ public class BlogCategoryDAO implements Serializable {
             }
         }
     }
-    
+    public boolean addCategory(String cateName) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "INSERT INTO tblBlogCategory "
+                        + "(CategoryName) values(?)";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, cateName);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    public boolean deleteCategory(String cateID) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "DELETE FROM tblBlogCategory WHERE CategoryID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, cateID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateSpecialty(String cateID, String cateName) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "UPDATE tblBlogCategory SET CategoryName=? "
+                        + " WHERE CategoryID=?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, cateName);
+                stm.setString(2, cateID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }

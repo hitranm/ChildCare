@@ -45,7 +45,6 @@
     </head>
     <body>
         <jsp:include page="header.jsp" />
-
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <div class="service-form-wrapper">         
             <h1>Tạo mới dịch vụ</h1>
@@ -53,13 +52,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-title">Tiêu đề</label>
-                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="">              
+                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="${param.txtTitle}">              
+                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
+                            <div class="text-danger">
+                                <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
+                            </div>
+                        </c:if>
                     </div>
-                    <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
-                        <div class="text-danger">
-                            <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
-                        </div>
-                    </c:if>
+
                     <div class="form-group col-md-6">
                         <label for="service-specialty">Chuyên khoa</label>
                         <select id="service-specialty" class="form-control" name="cboSpecialty">
@@ -72,7 +72,7 @@
 
                 <div class="form-group">
                     <label for="service-content">Nội dụng</label>
-                    <textarea id="service-content" name="txtServiceContent"></textarea>
+                    <textarea id="service-content" name="txtServiceContent">${param.txtServiceContent}</textarea>
                     <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}">
                         <div class="text-danger">
                             <small>${requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}</small>
@@ -83,7 +83,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-price">Nhập giá tiền</label>
-                        <input type="text" id="service-price" class="form-control" value="" name="txtPrice"/>
+                        <input type="text" id="service-price" class="form-control" value="${param.txtPrice}" name="txtPrice"/>
                         <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.priceFormat}">
                             <div class="text-danger">
                                 <small>${requestScope.CREATE_SERVICE_ERROR.priceFormat}</small>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="service-salePrice">Nhập giá khuyến mãi</label>
-                        <input type="text" id="service-salePrice" class="form-control" value="" name="txtSalePrice"/>
+                        <input type="text" id="service-salePrice" class="form-control" value="${param.txtSalePrice}" name="txtSalePrice"/>
                         <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
                             <div class="text-danger">
                                 <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
@@ -104,16 +104,21 @@
                 <div class="form-group">
                     <label for="service-image">Ảnh nền</label>
                     <input type="file" class="form-control" id="service-image" name="fImage">
+                    <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.imageError}">
+                        <div class="text-danger">
+                            <small>${requestScope.CREATE_SERVICE_ERROR.imageError}</small>
+                        </div>
+                    </c:if>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary col-6 col-md-4" name="btAction" value="CreateService">Tạo mới</button>
                 </div>
-                
+
             </form>
         </div>
 
         <jsp:include page="footer.jsp"/>
 
-        
+
     </body>
 </html>

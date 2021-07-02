@@ -25,9 +25,10 @@ import web.models.tblBlog.BlogDTO;
  * @author DELL
  */
 public class SearchBlogServlet extends HttpServlet {
-
+    
     private final String SEARCH_PAGE = "searchBlog.jsp";
     private final String ERROR_PAGE = "error.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,13 +54,12 @@ public class SearchBlogServlet extends HttpServlet {
                 if (count % pageSize != 0) {
                     endPage++;
                 }
-                request.setAttribute("END_PAGE", endPage);
+                request.setAttribute("PAGE", endPage);
                 String indexString = request.getParameter("idx");
                 int index = Integer.parseInt(indexString);
                 dao.searchBlog(searchValue, index);
                 List<BlogDTO> list = dao.getBlogList();
                 request.setAttribute("SEARCH_LIST", list);
-                request.setAttribute("SEARCH_VAR", searchValue);
             }
         } catch (NamingException ex) {
             log("SearchBlogServlet _ Naming: " + ex.getMessage());
