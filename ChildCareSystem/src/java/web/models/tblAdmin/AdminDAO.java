@@ -145,7 +145,7 @@ public class AdminDAO {
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
                     citizenID = rs.getString("CitizenID");
-                    AdminDTO admin = new AdminDTO(identityId, fullName, phoneNum, address, birthday, citizenID);
+                    AdminDTO admin = new AdminDTO(fullName, address, birthday, citizenID, phoneNum);
                     return admin;
                 }
             }

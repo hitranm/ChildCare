@@ -220,6 +220,10 @@
         <servlet-name>ViewSystemSettingServlet</servlet-name>
         <servlet-class>web.controller.ViewSystemSettingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MainDashBoardServlet</servlet-name>
+        <servlet-class>web.controller.MainDashBoardServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -435,6 +439,10 @@
     <servlet-mapping>
         <servlet-name>ViewSystemSettingServlet</servlet-name>
         <url-pattern>/ViewSystemSettingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MainDashBoardServlet</servlet-name>
+        <url-pattern>/MainDashBoardServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

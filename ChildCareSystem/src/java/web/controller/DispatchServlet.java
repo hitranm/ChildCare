@@ -56,6 +56,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_RESERVATION_DETAILS = "ViewReservationDetailServlet";
     private static final String VIEW_RESERVATION_STAFF = "ViewReservationStaffServlet";
     private static final String VIEW_RESERVATION_DETAILS_STAFF = "ViewReservationDetailStaffServlet";
+    private static final String VIEW_MAIN_DASHBOARD = "MainDashBoardServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -133,6 +134,8 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_RESERVATION_STAFF;
             } else if (button.equalsIgnoreCase("ViewReservationDetailsStaff")) {
                 url = VIEW_RESERVATION_DETAILS_STAFF;
+            } else if (button.equalsIgnoreCase("ViewMainDashboard")) {
+                url = VIEW_MAIN_DASHBOARD;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

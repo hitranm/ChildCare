@@ -7,20 +7,24 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import web.models.tblBlog.BlogDAO;
+import web.models.tblFeedback.FeedbackDAO;
+import web.models.tblIdentity.IdentityDAO;
 import web.models.tblReservation.ReservationDAO;
-import web.models.tblReservation.ReservationDTO;
+import web.models.tblService.ServiceDAO;
 
 /**
  *
  * @author Admin
  */
-public class ViewReservationManagerServlet extends HttpServlet {
-private static final String VIEW_RESERVATION="reservationdashboard.jsp";
+public class MainDashBoardServlet extends HttpServlet {
+
+    private static final String VIEW_DASHBOARD = "dashboard.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,24 +37,25 @@ private static final String VIEW_RESERVATION="reservationdashboard.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=VIEW_RESERVATION;
+        String url = VIEW_DASHBOARD;
         try {
+            IdentityDAO identityDAO = new IdentityDAO();
+            ServiceDAO serviceDAO = new ServiceDAO();
+            BlogDAO blogDAO = new BlogDAO();
             ReservationDAO reservationDAO = new ReservationDAO();
-            
-            List<ReservationDTO> listReservation = reservationDAO.getAllReservation();
-            request.setAttribute("ListReservation", listReservation);
-            List<ReservationDTO> listReservationMorning = reservationDAO.getAllReservationByIntervalTimeID(1, 4);
-            request.setAttribute("ListMorning", listReservationMorning);
-            List<ReservationDTO> listReservationNoon = reservationDAO.getAllReservationByIntervalTimeID(5, 7);
-            request.setAttribute("ListNoon", listReservationNoon);
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            int sum = identityDAO.countAllAccount();
+            request.setAttribute("TOTAL_ACCOUNT", sum);
+            int allService = serviceDAO.countAllService();
+            request.setAttribute("ALL_SERVICE", allService);
+            int allBlog = blogDAO.countAllBlog();
+            request.setAttribute("ALL_BLOG", allBlog);
+            int allfb = feedbackDAO.countAllFeedback();
+            request.setAttribute("ALL_FB", allfb);
             int allRes = reservationDAO.countAllRes();
             request.setAttribute("ALL_RES", allRes);
-            int monthlyRes = reservationDAO.countMonthlyRes();
-            request.setAttribute("MONTHLY_RES", monthlyRes);
-            int weeklyRes = reservationDAO.countWeeklyRes();
-            request.setAttribute("WEEKLY_RES", weeklyRes);
         } catch (Exception e) {
-            log("ERROR at ViewReservationManagerServlet: " + e.getMessage());
+            log("ERROR at MainDashBoardServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

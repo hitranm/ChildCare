@@ -35,7 +35,7 @@
             <div class ="sidebar-menu">
                 <ul>
                    <li>
-                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
+                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-tv"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
@@ -91,7 +91,7 @@
                 <div class="cards">
                     <div class="card-single">
                         <div>
-                            <h1>100</h1>
+                            <h1>${requestScope.TOTAL_ACCOUNT}</h1>
                             <span>Tài khoản</span>
                         </div>
                         <div>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>80</h1>
+                            <h1>${requestScope.CUSTOMER_ACCOUNT}</h1>
                             <span>Khách hàng</span>
                         </div>
                         <div>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>20</h1>
+                            <h1>${requestScope.STAFF_ACCOUNT}</h1>
                             <span>Nhân viên</span>
                         </div>
                         <div>
@@ -118,8 +118,8 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>10</h1>
-                            <span>Tài khoản mới</span>
+                            <h1>${requestScope.MONTHLY_ACCOUNT}</h1>
+                            <span>Tài khoản mới trong tháng</span>
                         </div>
                         <div>
                             <span class="fas fa-user-plus"></span>
