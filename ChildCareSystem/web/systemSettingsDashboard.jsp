@@ -149,12 +149,12 @@
                                         <table border="1">
                                             <thead>
                                                 <tr>
-                                                    <th>PRODUCT ID</th>
-                                                    <th>PRODUCT NAME</th>
-                                                    <th>PRODUCT BRAND</th>
-                                                    <th>PRODUCT DESCRIPTION</th>
-                                                    <th>PRODUCT STATUS</th>
-                                                    <th>PRICE</th>
+                                                    <th>Setting ID</th>
+                                                    <th>Setting Name</th>
+                                                    <th>Setting Value</th>
+                                                    <th>Created Date</th>
+                                                    <th>Updated Date</th>
+                                                    
                                                     <th></th>
 
                                                 </tr>
