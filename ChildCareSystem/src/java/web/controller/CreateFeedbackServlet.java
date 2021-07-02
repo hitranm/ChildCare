@@ -7,6 +7,8 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import web.models.tblFeedback.FeedbackDTO;
  * @author HOANGKHOI
  */
 public class CreateFeedbackServlet extends HttpServlet {
-    private static final String SUCCESS = "ViewPatientProfileServlet";
+    private static final String SUCCESS = "ViewPatientProfileServlet?tab=order";
     private static final String ERROR = "feedback.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,7 +54,7 @@ public class CreateFeedbackServlet extends HttpServlet {
                 url = SUCCESS;
             }
             
-        } catch (Exception ex) {
+        } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at CreateFeedbackServlet: " + ex.getMessage());
             url = ERROR;
         }

@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 import web.utils.DBHelpers;
 
@@ -123,6 +125,47 @@ public class FeedbackDAO implements Serializable {
                     int customerId = rs.getInt("CustomerID");
                     int feedbackId = rs.getInt("FeedbackID");
                     result = new FeedbackDTO(feedbackId, serviceId, customerId, id, comment, rate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+    
+    public List<FeedbackDTO> getFeedbackByServiceId(int id, int top) throws SQLException, NamingException {
+        List<FeedbackDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT TOP(?)* "
+                        + " FROM tblFeedback "
+                        + " WHERE ServiceID=? "
+                        + "ORDER BY Rate DESC";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, top);
+                stm.setInt(2, id);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String comment = rs.getString("Comment");
+                    int rate = rs.getInt("Rate");
+                    int reservationId = rs.getInt("ReservationID");
+                    int customerId = rs.getInt("CustomerID");
+                    int feedbackId = rs.getInt("FeedbackID");
+                    FeedbackDTO dto = new FeedbackDTO(feedbackId, id, customerId, reservationId, comment, rate);
+                    result.add(dto);
                 }
             }
         } finally {

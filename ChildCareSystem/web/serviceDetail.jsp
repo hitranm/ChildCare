@@ -11,24 +11,14 @@
     <head>
         <c:set var="service" value="${requestScope.SERVICE_DETAIL}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="./css/service/serviceDetail.css"/>
         <title>Dịch vụ | ${service.serviceName}</title>
+        <style>
+            svg {
+                color: #fed330;
+            }
+        </style>
+        
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -83,41 +73,41 @@
                 <div class="col-lg-9 col-12">
                     <div class="headings d-flex justify-content-between align-items-center mb-3 ">
                         <h5>Phản hồi về dịch vụ</h5>
+                    </div>
 
-                    </div>
-                    <div class="card p-3 mt-2 bg-light">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user d-flex flex-row align-items-center"> 
-                                <span>
-                                    <small class="font-weight-bold">Dịch vụ tốt</small>
-                                </span> 
-                            </div> 
-                            <small>1 tuần trước</small>
-                        </div>
-                    </div>
-                    <div class="card p-3 mt-2 bg-light">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user d-flex flex-row align-items-center"> 
-                                <span>
-                                    <small class="font-weight-bold">Bác sĩ tận tâm</small>
-                                </span> 
-                            </div> 
-                            <small>1 tuần trước</small>
-                        </div>
-                    </div>
-                    <div class="card p-3 mt-2 bg-light">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user d-flex flex-row align-items-center"> 
-                                <span>
-                                    <small class="font-weight-bold">Cơ sở vật chất hiện đại, đội ngũ y tế giỏi</small>
-                                </span> 
-                            </div> 
-                            <small>1 tuần trước</small>
-                        </div>
-                    </div>
+                    <c:choose>
+                        <c:when test="${not empty requestScope.FEEDBACK_LIST}">
+                            <c:forEach items="${requestScope.FEEDBACK_LIST}" var="feedbackDTO">
+                                <div class="card p-3 mt-2 bg-light">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="user d-flex flex-row align-items-center"> 
+                                            <span>
+                                                <small class="font-weight-bold">${feedbackDTO.comment}</small>
+                                            </span> 
+                                        </div> 
+                                        <div>
+                                            ${feedbackDTO.rate}
+                                            <svg
+                                                width="1.1em"
+                                                height="1.1em"
+                                                viewBox="0 0 16 16"
+                                                class="bi bi-star-fill"
+                                                fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg"                      
+                                                >
+                                            <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                                                />
+                                            </svg>                                         
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
                 </div>
             </div>
-
         </div>
         <jsp:include page="footer.jsp"/>
         <script src="./js/main.js"></script>

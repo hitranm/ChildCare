@@ -8,6 +8,7 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.tblFeedback.FeedbackDAO;
+import web.models.tblFeedback.FeedbackDTO;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 
@@ -46,6 +49,12 @@ public class ViewServiceDetailServlet extends HttpServlet {
         String url = SERVICE_DETAIL_PAGE;
         try {
             ServiceDAO dao = new ServiceDAO();
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            
+            List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackByServiceId(Integer.parseInt(serviceID), 3);
+            if(!feedbackList.isEmpty()) {
+                request.setAttribute("FEEDBACK_LIST",feedbackList);
+            }
             ServiceDTO service = dao.getServiceDetail(serviceID);
             request.setAttribute("SERVICE_DETAIL", service);
         } catch (NamingException ex) {
