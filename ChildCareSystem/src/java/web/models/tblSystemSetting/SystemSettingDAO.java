@@ -47,6 +47,31 @@ public class SystemSettingDAO {
         return false;
     }
 
+    public boolean updateSystemSetting(SystemSettingDTO config) throws SQLException, NamingException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblSystemSetting SET SettingValue=?  WHERE SettingId=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, config.getSettingValue());
+                stm.setInt(2, config.getSettingID());
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
     public SystemSettingDTO getSettingByName(String name) throws Exception {
         SystemSettingDTO result = null;
         Connection conn = null;

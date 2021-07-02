@@ -146,7 +146,7 @@
 
                                 <c:if test="${requestScope.settingList!=null}">
                                     <c:if test="${not empty requestScope.settingList}" var="testEmpty">
-                                        <table border="1">
+                                        <table class="table table-striped table-bordered mydatatable dataTable no-footer">
                                             <thead>
                                                 <tr>
                                                     <th>Setting ID</th>
