@@ -31,8 +31,8 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //2. Create query string
             String query = "INSERT INTO "
-                    + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //3 Create statement and assign value
             stm = con.prepareStatement(query);
@@ -44,7 +44,8 @@ public class ServiceDAO implements Serializable {
             stm.setDouble(6, serviceDTO.getSalePrice());
             stm.setString(7, serviceDTO.getStatusId());
             stm.setString(8, serviceDTO.getCreatedDate());
-            stm.setString(9, serviceDTO.getCreatePersonId());
+            stm.setString(9, serviceDTO.getUpdatedDate());
+            stm.setString(10, serviceDTO.getCreatePersonId());
 
             //4 Execute query
             int row = stm.executeUpdate();
@@ -146,6 +147,7 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
+
     public void viewServicebyStatus(int index, String statusID) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -190,6 +192,7 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
+
     public ServiceDTO getServiceDetail(String serviceID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -313,7 +316,7 @@ public class ServiceDAO implements Serializable {
 
         }
     }
-    
+
     public void viewServiceList() throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -321,12 +324,13 @@ public class ServiceDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             //if (con != null) {
-            String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
-                    + "From tblService";
+            String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, "
+                    + "Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
+                    + "From tblService ORDER BY UpdatedDate DESC";
             stm = con.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-               String serviceID = rs.getString("ServiceID");
+                String serviceID = rs.getString("ServiceID");
                 String serviceName = rs.getString("ServiceName");
                 String specialtyID = rs.getString("SpecialtyID");
                 String thumbnail = rs.getString("Thumbnail");
@@ -335,8 +339,9 @@ public class ServiceDAO implements Serializable {
                 Double sale = rs.getDouble("SalePrice");
                 String authorID = rs.getString("CreatedPersonID");
                 String date = rs.getString("CreatedDate");
+                String updatedDate = rs.getString("UpdatedDate");
                 String statusID = rs.getString("StatusID");
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date, updatedDate);
                 if (this.serviceList == null) {
                     this.serviceList = new ArrayList<>();
                 }
@@ -355,7 +360,7 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
-    
+
     public List<ServiceDTO> getTop3ServiceList() throws SQLException, NamingException {
         List<ServiceDTO> result = null;
         Connection conn = null;
@@ -390,7 +395,7 @@ public class ServiceDAO implements Serializable {
         }
         return result;
     }
-    
+
     public List<ServiceDTO> getListService() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -425,7 +430,7 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
-    
+
     public ServiceDTO getServiceInfo(int serviceId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -438,7 +443,7 @@ public class ServiceDAO implements Serializable {
             stm = con.prepareStatement(sql);
             stm.setInt(1, serviceId);
             rs = stm.executeQuery();
-            
+
             if (rs.next()) {
                 String serivceId = rs.getString("ServiceID");
                 String serviceName = rs.getString("ServiceName");
@@ -447,7 +452,9 @@ public class ServiceDAO implements Serializable {
                 String statusId = rs.getString("StatusID");
                 ServiceDTO dto = new ServiceDTO(serivceId, serviceName, specialtyId, price, statusId);
                 return dto;
-            } else return null;
+            } else {
+                return null;
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -460,7 +467,7 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
-    
+
     public String getServiceNameById(int serviceId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -473,11 +480,13 @@ public class ServiceDAO implements Serializable {
             stm = con.prepareStatement(sql);
             stm.setInt(1, serviceId);
             rs = stm.executeQuery();
-            
+
             if (rs.next()) {
                 String serviceName = rs.getString("ServiceName");
                 return serviceName;
-            } else return null;
+            } else {
+                return null;
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -490,6 +499,7 @@ public class ServiceDAO implements Serializable {
             }
         }
     }
+
     public boolean updateService(ServiceDTO serviceDTO) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -531,6 +541,7 @@ public class ServiceDAO implements Serializable {
         }
         return false;
     }
+
     public boolean deleteService(String serviceID) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -556,6 +567,7 @@ public class ServiceDAO implements Serializable {
         }
         return false;
     }
+
     public boolean setStatus(String serviceID, String statusID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -583,5 +595,48 @@ public class ServiceDAO implements Serializable {
             }
         }
         return false;
+    }
+
+    public void getServicebyStaff(String staffID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            //if (con != null) {
+            String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, "
+                    + "Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
+                    + "From tblService ORDER BY UpdatedDate DESC";
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                String serviceID = rs.getString("ServiceID");
+                String serviceName = rs.getString("ServiceName");
+                String specialtyID = rs.getString("SpecialtyID");
+                String thumbnail = rs.getString("Thumbnail");
+                String description = rs.getString("Description");
+                Double price = rs.getDouble("Price");
+                Double sale = rs.getDouble("SalePrice");
+                String authorID = rs.getString("CreatedPersonID");
+                String date = rs.getString("CreatedDate");
+                String updatedDate = rs.getString("UpdatedDate");
+                String statusID = rs.getString("StatusID");
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date, updatedDate);
+                if (this.serviceList == null) {
+                    this.serviceList = new ArrayList<>();
+                }
+                this.serviceList.add(dto);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 }

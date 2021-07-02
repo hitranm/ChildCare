@@ -37,7 +37,7 @@ import web.models.tblStaff.StaffDAO;
 public class CreateBlogServlet extends HttpServlet {
 
     private final String CREATE_BLOG = "createBlog.jsp";
-    private final String VIEWBLOG = "ViewBlogServlet?index=1";
+    private final String VIEWBLOG = "ViewBlogByAuthorServlet";
     private final String ERROR_PAGE = "error.jsp";
     private static final String UPLOAD_DIR = "images/blog";
 

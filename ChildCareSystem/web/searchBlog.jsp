@@ -86,19 +86,57 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                            <div class="d-flex justify-content-center" style="width: 100%">
-                                <div class="paging mb-2" align="center">
+                            <nav aria-label="Paging">
+                                <c:set var="page" value="${requestScope.PAGE}"/>
+                                <ul class="pagination justify-content-center">
                                     <c:set var="index" value="${param.idx}"/>
-                                    <c:forEach begin="1" end="${END_PAGE}" var="i">
+                                    <c:if test="${index-1 != 0}">
+                                        <li class="page-item">
+                                            <a class="page-link" href="ViewBlogServlet?index=${index-1}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+
+                                    <c:if test="${index-1 eq 0}">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <c:forEach begin="1" end="${PAGE}" var="i">                                            
                                         <c:if test="${i eq index}">
-                                            <a class="number active" href="SearchBlogServlet?idx=${i}&txtSearchBlog=${searchValue}">${i}</a>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                            </li>
                                         </c:if>
                                         <c:if test="${i != index}">
-                                            <a class="number" href="SearchBlogServlet?idx=${i}&txtSearchBlog=${searchValue}">${i}</a>
+                                            <li class="page-item">
+                                                <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                            </li>
                                         </c:if>
                                     </c:forEach>
-                                </div>
-                            </div>
+                                    <c:if test="${index eq page}">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${index != page}">
+                                        <li class="page-item">
+                                            <a class="page-link" href="ViewBlogServlet?index=${index+1}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </nav>
                         </c:if>
                         <c:if test="${empty searchResult}">
                             Không tìm thấy kết quả!

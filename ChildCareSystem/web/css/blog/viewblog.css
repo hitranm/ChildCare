@@ -18,7 +18,13 @@ body {
 .search {
     font-size: 18px;
 }
-
+.boxtag {
+    box-shadow: 0 0px 4px #ccc;
+    display: inline-block;
+    border-radius: 10px;
+    display: table;
+    padding: 10px;
+}
 .create-blog {
     text-align: center;
 }

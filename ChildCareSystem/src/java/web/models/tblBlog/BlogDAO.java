@@ -14,10 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
-import web.controller.ViewBlogServlet;
 import web.utils.DBHelpers;
 
 /**
@@ -101,6 +98,7 @@ public class BlogDAO implements Serializable {
             }
         }
     }
+
     public int countPublicBlog() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -134,6 +132,42 @@ public class BlogDAO implements Serializable {
         }
         return 0;
     }
+
+    public int countPublicBlogbyCate(String cateID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            //1. connect db
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                //2. create sql string
+                String sql = "Select count(*) "
+                        + "From tblBlog Where StatusID=1 AND CategoryID=?";
+                //3. create statement and assign value to parameters
+                stm = con.prepareStatement(sql);
+                stm.setString(1, cateID);
+                //4. execute query
+                rs = stm.executeQuery();
+                //5. Process result
+                while (rs.next()) {
+                    return rs.getInt(1);
+                } //end while traversing result
+            } //end if con iss opened
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+
     public int countBlog() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -321,7 +355,6 @@ public class BlogDAO implements Serializable {
 //            }
 //        }
 //    }
-
     public int countSearch(String searchValue) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -486,6 +519,7 @@ public class BlogDAO implements Serializable {
         }
         return result;
     }
+
     public boolean setStatus(String blogID, String statusID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -515,6 +549,7 @@ public class BlogDAO implements Serializable {
         }
         return false;
     }
+
     public void queryBlogListbyStatus(int index, String statusID) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -558,6 +593,7 @@ public class BlogDAO implements Serializable {
             }
         }
     }
+
     public void queryBlogbyAuthor(String authorID) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -567,7 +603,8 @@ public class BlogDAO implements Serializable {
             //if (con != null) {
             String sql = "Select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, StatusID "
                     + "From tblBlog "
-                    + "Where AuthorID=?";
+                    + "Where AuthorID=? "
+                    + "ORDER BY UpdatedDate DESC";
             stm = con.prepareStatement(sql);
             stm.setString(1, authorID);
             rs = stm.executeQuery();
@@ -579,6 +616,51 @@ public class BlogDAO implements Serializable {
                 String categoryID = rs.getString("CategoryID");
                 String statusID = rs.getString("StatusID");
                 BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
+                if (this.blogList == null) {
+                    this.blogList = new ArrayList<>();
+                }
+                this.blogList.add(dto);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void queryBlogbyCate(String cateID, int index) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            //if (con != null) {
+            String sql = "select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, CreatedDate, UpdatedDate, StatusID "
+                    + "from (select ROW_NUMBER() over (order by UpdatedDate DESC) as r, * \n"
+                    + "from tblBlog where CategoryID=? AND StatusID=?) as x \n"
+                    + "where r between ?*5-4 and ?*5";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, cateID);
+            stm.setString(2, "1");
+            stm.setInt(3, index);
+            stm.setInt(4, index);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                String blogID = rs.getString("BlogID");
+                String thumbnail = rs.getString("Thumbnail");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String authorID = rs.getString("AuthorID");
+                Date createdDate = rs.getDate("CreatedDate");
+                Date updatedDate = rs.getDate("UpdatedDate");
+                String statusID = rs.getString("StatusID");
+                BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, cateID, createdDate, updatedDate, statusID);
                 if (this.blogList == null) {
                     this.blogList = new ArrayList<>();
                 }

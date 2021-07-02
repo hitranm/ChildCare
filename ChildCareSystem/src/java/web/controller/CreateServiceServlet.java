@@ -38,7 +38,7 @@ import web.models.tblStaff.StaffDAO;
 )
 public class CreateServiceServlet extends HttpServlet {
 
-    private static final String HOME_PAGE = "home.jsp";
+    private static final String VIEW_SERVICE = "ViewServiceByStaffServlet";
     private static final String CREATE_SERVICE_PAGE = "createService.jsp";
     private static final String ERROR_PAGE = "error.jsp";
     private static final String UPLOAD_DIR = "images/service";
@@ -104,20 +104,14 @@ public class CreateServiceServlet extends HttpServlet {
                 String identityId = (String) session.getAttribute("IDENTITY_ID");
                 StaffDAO staffDAO = new StaffDAO();
                 String createPersonId = staffDAO.queryStaff(identityId);
-                ServiceDTO serviceDTO = new ServiceDTO(serviceName,
-                        specialtyId,
-                        thumbnail,
-                        description,
-                        price,
-                        salePrice,
-                        "0",
-                        createPersonId,
-                        LocalDateTime.now().toString());
+                ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
+                        thumbnail, description, price, salePrice, "0", 
+                        createPersonId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
                 // Process to add new service
                 ServiceDAO serviceDAO = new ServiceDAO();
                 boolean result = serviceDAO.AddNewService(serviceDTO);
                 if (result) {
-                    url = HOME_PAGE;
+                    url = VIEW_SERVICE;
                 } else {
                     url = ERROR_PAGE;
                 }

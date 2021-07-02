@@ -17,17 +17,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
+import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
 
 /**
  *
  * @author DELL
  */
-public class SearchServiceServlet extends HttpServlet {
+public class ViewServiceByStaffServlet extends HttpServlet {
 
-    private final String SEARCH_PAGE = "searchService.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String VIEW_SERVICE = "viewServicebyStaff.jsp";
+    private final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,39 +44,29 @@ public class SearchServiceServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
         PrintWriter out = response.getWriter();
-        request.setCharacterEncoding("UTF-8");
-        String searchValue = request.getParameter("txtSearchService");
-        String url = SEARCH_PAGE;
+        String url = VIEW_SERVICE;
         try {
-            if (searchValue.trim().length() > 0) {
-                ServiceDAO dao = new ServiceDAO();
-                int count = dao.countSearch(searchValue);
-                int pageSize = 5;
-                int endPage = count / pageSize;
-                if (count % pageSize != 0) {
-                    endPage++;
-                }
-                request.setAttribute("PAGE", endPage);
-                String indexString = request.getParameter("index");
-                int index = Integer.parseInt(indexString);
-                dao.searchService(searchValue, index);
-                List<ServiceDTO> list = dao.getServiceList();
-                request.setAttribute("SEARCH_LIST", list);
+            if (session != null) {
+                String identityID = (String) session.getAttribute("IDENTITY_ID");
+                StaffDAO staffDAO = new StaffDAO();
+                StaffDTO staff = staffDAO.queryStaffByIdentityId(identityID);
+                ServiceDAO serviceDAO = new ServiceDAO();
+                String staffID = staff.getStaffID();
+                serviceDAO.getServicebyStaff(staffID);
+                List<ServiceDTO> service = serviceDAO.getServiceList();
+                request.setAttribute("SERVICE_LIST", service);
             }
-        } catch (SQLException ex) {
-            log("SearchServiceServlet _ SQL: " + ex.getMessage());
-            url = ERROR_PAGE;
-        } catch (NamingException ex) {
-            log("SearchServiceServlet _ Naming: " + ex.getMessage());
-            url = ERROR_PAGE;
+        } catch (NamingException | SQLException ex) {
+            log("ViewServiceByStaffServlet: " + ex.getMessage());
+            url = ERROR;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

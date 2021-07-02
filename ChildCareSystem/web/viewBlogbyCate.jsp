@@ -1,16 +1,16 @@
 <%-- 
-    Document   : viewBlogList
-    Created on : May 27, 2021, 1:31:39 AM
+    Document   : viewBlogbyCate
+    Created on : Jul 2, 2021, 11:17:46 AM
     Author     : DELL
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Blog List</title>
+        <title>Bài viết</title>
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -32,6 +32,8 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <c:set var="list" value="${requestScope.BLOG_LIST}"/>
+        <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <main>
             <div class="container">
                 <h1 class="text-center mb-2">BÀI VIẾT</h1> 
@@ -44,14 +46,22 @@
                             </button>
                         </form>
                     </div>
+                    <div class="row col-3">
+                        <div class="boxtag">
+                            <c:forEach items="${cate.viewBlogCategory()}" var="category">
+                                <c:if test="${category.categoryID eq param.txtCateID}">
+                                    Chủ đề: ${category.categoryName}
+                                    <a href="ViewBlogServlet?index=1" class="fas fa-times-circle"></a>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                    </div>        
                 </div>
                 <div class="main-wrapper">
                     <div class="body-left col-12">
                         <c:set var="searchValue" value="${param.txtSearchBlog}"/>
                         <c:if test="${empty searchValue}">
-                            <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
                             <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
-                            <c:set var="list" value="${requestScope.BLOG_LIST}"/>
                             <c:if test="${not empty list}">
                                 <c:forEach var="dto" items="${list}">
                                     <div class="blog-preview d-flex">
@@ -80,11 +90,7 @@
                                                 <div class="cate" style="position: absolute;right: 0; margin-right: 2em;" >
                                                     <c:forEach items="${cate.viewBlogCategory()}" var="category">
                                                         <c:if test="${category.categoryID eq dto.categotyID}">
-                                                            <c:url var="viewbycate" value = "ViewBlogByCateServlet">
-                                                                <c:param name="txtCateID" value="${dto.categotyID}"/>
-                                                                <c:param name="index" value="1"/>
-                                                            </c:url>    
-                                                            <a class="btn btn-link btn-sm" href="${viewbycate}">#${category.categoryName}</a>
+                                                            <a class="btn btn-link btn-sm" href="#">#${category.categoryName}</a>
                                                         </c:if>
                                                     </c:forEach>
                                                 </div>
@@ -94,12 +100,15 @@
                                     </div>
                                 </c:forEach>
                                 <nav aria-label="Paging">
+                                    <c:url var="viewbycate" value = "ViewBlogByCateServlet">
+                                        <c:param name="txtCateID" value="${param.txtCateID}"/>
+                                    </c:url>    
                                     <c:set var="page" value="${requestScope.PAGE}"/>
                                     <ul class="pagination justify-content-center">
                                         <c:set var="index" value="${param.index}"/>
                                         <c:if test="${index-1 != 0}">
                                             <li class="page-item">
-                                                <a class="page-link" href="ViewBlogServlet?index=${index-1}" aria-label="Previous">
+                                                <a class="page-link" href="${viewbycate}&index=${index-1}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <span class="sr-only">Previous</span>
                                                 </a>
@@ -117,12 +126,12 @@
                                         <c:forEach begin="1" end="${PAGE}" var="i">                                            
                                             <c:if test="${i eq index}">
                                                 <li class="page-item active">
-                                                    <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                                    <a class="page-link" href="${viewbycate}&index=${i}">${i}</a>
                                                 </li>
                                             </c:if>
                                             <c:if test="${i != index}">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                                    <a class="page-link" href="${viewbycate}&index=${i}">${i}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
@@ -136,7 +145,7 @@
                                         </c:if>
                                         <c:if test="${index != page}">
                                             <li class="page-item">
-                                                <a class="page-link" href="ViewBlogServlet?index=${index+1}" aria-label="Next">
+                                                <a class="page-link" href="${viewbycate}&index=${index+1}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <span class="sr-only">Next</span>
                                                 </a>

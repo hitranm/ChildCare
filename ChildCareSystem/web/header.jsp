@@ -109,6 +109,8 @@
                                             <a class="dropdown-item" href="ViewBlogByAuthorServlet">Bài viết của bạn</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <a class="dropdown-item" href="ViewAllServiceListServlet">Tất cả dịch vụ</a>
+                                            <a class="dropdown-item" href="ViewServiceByStaffServlet">Dịch vụ của bạn</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt dịch vụ</a>
                                             <div class="dropdown-divider"></div>

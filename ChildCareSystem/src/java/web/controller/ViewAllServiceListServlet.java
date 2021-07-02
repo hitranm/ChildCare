@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +21,10 @@ import web.models.tblService.ServiceDTO;
  *
  * @author DELL
  */
-public class SearchServiceServlet extends HttpServlet {
+public class ViewAllServiceListServlet extends HttpServlet {
 
-    private final String SEARCH_PAGE = "searchService.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String VIEW_SERVICE = "allServiceList.jsp";
+    private final String ERROR = "error.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,38 +39,21 @@ public class SearchServiceServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        request.setCharacterEncoding("UTF-8");
-        String searchValue = request.getParameter("txtSearchService");
-        String url = SEARCH_PAGE;
+        String url = VIEW_SERVICE;
         try {
-            if (searchValue.trim().length() > 0) {
-                ServiceDAO dao = new ServiceDAO();
-                int count = dao.countSearch(searchValue);
-                int pageSize = 5;
-                int endPage = count / pageSize;
-                if (count % pageSize != 0) {
-                    endPage++;
-                }
-                request.setAttribute("PAGE", endPage);
-                String indexString = request.getParameter("index");
-                int index = Integer.parseInt(indexString);
-                dao.searchService(searchValue, index);
-                List<ServiceDTO> list = dao.getServiceList();
-                request.setAttribute("SEARCH_LIST", list);
-            }
-        } catch (SQLException ex) {
-            log("SearchServiceServlet _ SQL: " + ex.getMessage());
-            url = ERROR_PAGE;
-        } catch (NamingException ex) {
-            log("SearchServiceServlet _ Naming: " + ex.getMessage());
-            url = ERROR_PAGE;
+            ServiceDAO dao = new ServiceDAO();
+            dao.viewServiceList();
+            List<ServiceDTO> service = dao.getServiceList();
+            request.setAttribute("SERVICE_LIST", service);
+
+        } catch (SQLException | NamingException ex) {
+            log("ViewAllServiceListServletError" + ex.getMessage());
+            url = ERROR;
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

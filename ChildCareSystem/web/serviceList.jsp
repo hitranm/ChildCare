@@ -35,13 +35,15 @@
         <main>
             <div class="container">
                 <h1 class="text-center mb-2">DỊCH VỤ</h1> 
-                <div class="search p-2">
-                    <form action="SearchServiceServlet?idx=1" method="POST">
-                        <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchService" value="${param.txtSearchService}" />
-                        <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form> 
+                <div class="body-top d-flex">
+                    <div class="search col-9">
+                        <form action="SearchServiceServlet?index=1" method="POST">
+                            <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchService" value="${param.txtSearchService}" />
+                            <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form> 
+                    </div>
                 </div>
                 <div class="main-wrapper">
                     <c:set var="list" value="${requestScope.SERVICE_LIST}"/>
@@ -65,19 +67,57 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="d-flex justify-content-center" style="width: 100%">
-                            <c:set var="index" value="${param.index}"/>
-                            <div class="paging text-center mb-3">
-                                <c:forEach begin="1" end="${PAGE}" var="i">
+                        <nav aria-label="Paging">
+                            <c:set var="page" value="${requestScope.PAGE}"/>
+                            <ul class="pagination justify-content-center">
+                                <c:set var="index" value="${param.index}"/>
+                                <c:if test="${index-1 != 0}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="ViewServiceListServlet?index=${index-1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                                <c:if test="${index-1 eq 0}">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="1" end="${PAGE}" var="i">                                            
                                     <c:if test="${i eq index}">
-                                        <a class="number active" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                        </li>
                                     </c:if>
                                     <c:if test="${i != index}">
-                                        <a class="number" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                        <li class="page-item">
+                                            <a class="page-link" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                        </li>
                                     </c:if>
                                 </c:forEach>
-                            </div>
-                        </div>
+                                <c:if test="${index eq page}">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${index != page}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="ViewServiceListServlet?index=${index+1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </nav>
                     </c:if>
                     <c:if test="${empty list}">
                         Chưa có dịch vụ nào!

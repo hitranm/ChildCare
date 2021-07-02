@@ -93,11 +93,16 @@ public class UpdateServiceServlet extends HttpServlet {
                 request.setAttribute("CREATE_SERVICE_ERROR", createServiceErr);
                 url = UPDATE_SERVICE + "?id=" + serviceID;
             } else {
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, 
+                ServiceDAO dao = new ServiceDAO();
+                ServiceDTO dto = dao.getServiceDetail(serviceID);
+                if (thumbnail.trim().isEmpty()) {
+                    thumbnail = dto.getThumbnail();
+                }
+                ServiceDTO service = new ServiceDTO(serviceID, serviceName, 
                         specialtyId, thumbnail, description, price, salePrice, 
                         "0", LocalDateTime.now().toString());
-                ServiceDAO dao = new ServiceDAO();
-                boolean result = dao.updateService(dto);
+                
+                boolean result = dao.updateService(service);
                 if (result) {
                     url = VIEW_SERVICE + "?id=" + serviceID;
                 }
