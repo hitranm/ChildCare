@@ -42,27 +42,27 @@
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
+                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-users"></span>
                             <span>Account </span></a>
                     </li>
                     <li>
-                        <a href="serviceDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-clipboard-list"></span>
+                        <a href="serviceDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-first-aid"></span>
                             <span>Service </span></a>
                     </li>
                     <li>
-                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-shopping-bag"></span>
+                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-file-alt"></span>
                             <span>Blog</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-receipt"></span>
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-notes-medical"></span>
                             <span>Reservation</span></a>
                     </li>
                     <li>
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="far fa-comments"></span>
                             <span>Feedback</span></a>
                     </li>
                     <li>
-                        <a href="systemSettingsDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                        <a href="systemSettingsDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-cogs"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -98,7 +98,7 @@
                             <span>Dịch vụ</span>
                         </div>
                         <div>
-                            <span class="las la-users"></span>
+                            <span class="fas fa-first-aid"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -107,7 +107,7 @@
                             <span>Đang hoạt động</span>
                         </div>
                         <div>
-                            <span class="las la-clipboard-list"></span>
+                            <span class="fas fa-eye"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -116,7 +116,7 @@
                             <span>Tạm ngưng</span>
                         </div>
                         <div>
-                            <span class="las la-shopping-bag"></span>
+                            <span class="fas fa-eye-slash"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -125,7 +125,7 @@
                             <span>Dịch vụ đặt nhiều nhất</span>
                         </div>
                         <div>
-                            <span class="las la-google-wallet"></span>
+                            <span class="fas fa-star"></span>
                         </div>
                     </div>
                     

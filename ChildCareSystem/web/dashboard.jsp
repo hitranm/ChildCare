@@ -37,32 +37,32 @@
             </div>
             <div class ="sidebar-menu">
                 <ul>
-                    <li>
-                        <a href="dashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
+                   <li>
+                        <a href="dashboard.jsp"  class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewAccount" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
+                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-users"></span>
                             <span>Account </span></a>
                     </li>
                     <li>
-                        <a href="serviceDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-clipboard-list"></span>
+                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-first-aid"></span>
                             <span>Service </span></a>
                     </li>
                     <li>
-                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-shopping-bag"></span>
+                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-file-alt"></span>
                             <span>Blog</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-receipt"></span>
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-notes-medical"></span>
                             <span>Reservation</span></a>
                     </li>
                     <li>
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="far fa-comments"></span>
                             <span>Feedback</span></a>
                     </li>
                     <li>
-                        <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                        <a href="systemSettingsDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-cogs"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -98,7 +98,7 @@
                             <span>Tài khoản</span>
                         </div>
                         <div>
-                            <span class="las la-users"></span>
+                            <span class="fas fa-users"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -107,7 +107,7 @@
                             <span>Dịch vụ</span>
                         </div>
                         <div>
-                            <span class="las la-clipboard-list"></span>
+                            <span class="fas fa-first-aid"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -116,7 +116,7 @@
                             <span>Blog</span>
                         </div>
                         <div>
-                            <span class="las la-shopping-bag"></span>
+                            <span class="fas fa-file-alt"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -125,7 +125,7 @@
                             <span>Đơn hẹn khám</span>
                         </div>
                         <div>
-                            <span class="las la-google-wallet"></span>
+                            <span class="fas fa-notes-medical"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -134,7 +134,7 @@
                             <span>Phản hồi</span>
                         </div>
                         <div>
-                            <span class="las la-users"></span>
+                            <span class="fas fa-comments"></span>
                         </div>
                     </div>
 
