@@ -11,30 +11,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dịch vụ</title>
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="./css/service/serviceList.css" />
     </head>
     <body>
         <jsp:include page="header.jsp"/>
 
         <main>
-            <div class="container">
-                <h1 class="text-center mb-2">DỊCH VỤ</h1> 
+            <div class="container py-5 mb-5">
+                <h2 class="text-center mb-2">DỊCH VỤ</h2> 
                 <div class="body-top d-flex">
                     <div class="search col-9">
                         <form action="SearchServiceServlet?index=1" method="POST">
