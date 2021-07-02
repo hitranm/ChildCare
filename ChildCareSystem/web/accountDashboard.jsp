@@ -38,11 +38,11 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="dashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
+                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewAccount" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
+                        <a href="DispatchServlet?btAction=ViewAccount" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
                             <span>Account </span></a>
                     </li>
                     <li>
@@ -103,8 +103,8 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>20</h1>
-                            <span>Dịch vụ</span>
+                            <h1>80</h1>
+                            <span>Khách hàng</span>
                         </div>
                         <div>
                             <span class="las la-clipboard-list"></span>
@@ -112,8 +112,8 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>30</h1>
-                            <span>Blog</span>
+                            <h1>20</h1>
+                            <span>Nhân viên</span>
                         </div>
                         <div>
                             <span class="las la-shopping-bag"></span>
@@ -121,28 +121,20 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>40</h1>
-                            <span>Đơn hẹn khám</span>
+                            <h1>10</h1>
+                            <span>Tài khoản mới</span>
                         </div>
                         <div>
                             <span class="las la-google-wallet"></span>
                         </div>
                     </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>20</h1>
-                            <span>Phản hồi</span>
-                        </div>
-                        <div>
-                            <span class="las la-users"></span>
-                        </div>
-                    </div>
+
 
                 </div>
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
-                    <%--        <div class="card-header">
+                            <div class="card-header">
                                 <h3>Accounts List</h3>
                                 
                             </div>
@@ -479,7 +471,7 @@
                                     </div>
                                 </div>
                             </div>
---%>
+
                         </div>
 
                     </div>
@@ -519,4 +511,3 @@
         </script>
     </body>
 </html>
-

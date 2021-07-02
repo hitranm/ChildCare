@@ -38,7 +38,7 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="dashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
+                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
@@ -62,7 +62,7 @@
                             <span>Feedback</span></a>
                     </li>
                     <li>
-                        <a href="systemSettingsDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                        <a href="systemSettingsDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -519,4 +519,5 @@
         </script>
     </body>
 </html>
+
 

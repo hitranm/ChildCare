@@ -37,30 +37,33 @@
             </div>
             <div class ="sidebar-menu">
                 <ul>
-                    <li>
-                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-igloo"></span>
+                                        <li>
+                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href=""class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-users"></span>
+                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
                             <span>Account </span></a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-clipboard-list"></span>
+                        <a href="serviceDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-clipboard-list"></span>
                             <span>Service </span></a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-shopping-bag
-                                         "></span>
+                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-shopping-bag"></span>
                             <span>Blog</span></a>
                     </li>
                     <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-receipt"></span>
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-receipt"></span>
                             <span>Reservation</span></a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;"><span class="las la-user-circle"></span>
+                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
                             <span>Feedback</span></a>
+                    </li>
+                    <li>
+                        <a href="systemSettingsDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                            <span>System Settings</span></a>
                     </li>
                 </ul>
             </div>
@@ -91,8 +94,8 @@
                 <div class="cards">
                     <div class="card-single">
                         <div>
-                            <h1>54</h1>
-                            <span>Customers</span>
+                            <h1>100</h1>
+                            <span>Đơn đặt khám</span>
                         </div>
                         <div>
                             <span class="las la-users"></span>
@@ -100,8 +103,8 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>79</h1>
-                            <span>Projects</span>
+                            <h1>10</h1>
+                            <span>Đơn trong tuần</span>
                         </div>
                         <div>
                             <span class="las la-clipboard-list"></span>
@@ -109,32 +112,14 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>124</h1>
-                            <span>Orders</span>
+                            <h1>20</h1>
+                            <span>Đơn trong tháng</span>
                         </div>
                         <div>
                             <span class="las la-shopping-bag"></span>
                         </div>
                     </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>$6K</h1>
-                            <span>Income</span>
-                        </div>
-                        <div>
-                            <span class="las la-google-wallet"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>54</h1>
-                            <span>Customers</span>
-                        </div>
-                        <div>
-                            <span class="las la-users"></span>
-                        </div>
-                    </div>
-
+                    
                 </div>
                 <div class="recent-grid">
                     <div class="projects">
