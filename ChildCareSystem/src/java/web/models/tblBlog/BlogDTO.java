@@ -38,14 +38,13 @@ public class BlogDTO implements Serializable{
         this.StatusID = StatusID;
     }
 
-    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String createdDate, String StatusID) {
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID) {
         this.BlogID = BlogID;
         this.Thumbnail = Thumbnail;
         this.title = title;
         this.AuthorID = AuthorID;
         this.Description = Description;
         this.CategotyID = CategotyID;
-        this.createdDate = createdDate;
         this.StatusID = StatusID;
     }
     /**

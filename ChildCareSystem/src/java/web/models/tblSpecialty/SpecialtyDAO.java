@@ -159,6 +159,8 @@ public class SpecialtyDAO implements Serializable {
             if (rs != null) {
                 rs.close();
             }
+        }
+    }
 
     public boolean addSpecialty(String specialtyName) throws SQLException, NamingException {
         Connection con = null;

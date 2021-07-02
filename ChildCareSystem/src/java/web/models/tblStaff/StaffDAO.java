@@ -386,7 +386,8 @@ public class StaffDAO implements Serializable {
         }
         return false;
     }
-      public StaffDTO queryStaffById(int id) throws SQLException, NamingException {
+
+    public StaffDTO queryStaffById(int id) throws SQLException, NamingException {
 
         Connection conn = null;
         PreparedStatement stm = null;
@@ -406,6 +407,12 @@ public class StaffDAO implements Serializable {
                     String specialtyID = rs.getString("SpecialtyID");
                     StaffDTO staff = new StaffDTO(fullName, specialtyID);
                     return staff;
+                }
+            }
+        } finally {
+
+        }
+    }
 
     public String getStaffName(String staffID) throws NamingException, SQLException {
         Connection con = null;
@@ -432,8 +439,7 @@ public class StaffDAO implements Serializable {
             if (stm != null) {
                 stm.close();
             }
-            if (conn != null) {
-                conn.close();
+
             if (con != null) {
                 con.close();
             }
