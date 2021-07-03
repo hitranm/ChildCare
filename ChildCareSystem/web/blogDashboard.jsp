@@ -49,7 +49,7 @@
                             <span>Tài khoản </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -77,7 +77,7 @@
                     <label for="nav-toggle">
                         <span class="las la-bars"></span>
                     </label>
-                    Dashboard
+                    Thống kê
                 </h2>
             </header>
             <main>
@@ -131,7 +131,7 @@
                                                    onclick="toggleButton(this)">Tất cả</a>
                                                 <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#public"
                                                    role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                   onclick="toggleButton(this)">Chấp nhận</a>
+                                                   onclick="toggleButton(this)">Chấp thuận</a>
                                                 <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#pending"
                                                    role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                    onclick="toggleButton(this)">Đang chờ</a>
@@ -144,6 +144,7 @@
                                     <div class="col-sm-12 table__wrapper bg-white">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <c:if test="${not empty requestScope.BLOG_LIST}">
+                                                
                                                 <!--All-->
                                                 <div class="tab-pane fade show active bg-white" id="all" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
@@ -168,7 +169,6 @@
                                                                         <td>
                                                                             ${count}
                                                                         </td>
-
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
@@ -178,8 +178,7 @@
                                                                                 </c:if>
                                                                             </c:forEach>
                                                                         </td>
-                                                                        <td class="alert alert-success">Chấp nhận</td>
-                                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
+                                                                        <td class="alert alert-success">Chấp thuận</td>
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -202,7 +201,6 @@
                                                                             </c:forEach>
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
-                                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -225,7 +223,6 @@
                                                                             </c:forEach>
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
-                                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -273,8 +270,7 @@
                                                                                 </c:if>
                                                                             </c:forEach>
                                                                         </td>
-                                                                        <td class="alert alert-success">Chấp nhận</td>
-                                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
+                                                                        <td class="alert alert-success">Chấp thuận</td>
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -323,7 +319,6 @@
                                                                             </c:forEach>
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
-                                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -373,7 +368,6 @@
                                                                             </c:forEach>
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
-                                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -411,7 +405,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                                                                $(".mydatatable").DataTable();
+                                                                                $(".mydatatable").DataTable();
         </script>
 
 

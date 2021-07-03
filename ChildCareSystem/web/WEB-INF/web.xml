@@ -606,7 +606,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            60
+            500
         </session-timeout>
     </session-config>
     <welcome-file-list>

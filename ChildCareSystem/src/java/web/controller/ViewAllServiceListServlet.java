@@ -23,7 +23,7 @@ import web.models.tblService.ServiceDTO;
  */
 public class ViewAllServiceListServlet extends HttpServlet {
 
-    private final String VIEW_SERVICE = "allServiceList.jsp";
+    private final String VIEW_SERVICE = "serviceDashboard.jsp";
     private final String ERROR = "error.jsp";
 
     /**
@@ -45,6 +45,15 @@ public class ViewAllServiceListServlet extends HttpServlet {
             dao.viewServiceList();
             List<ServiceDTO> service = dao.getServiceList();
             request.setAttribute("SERVICE_LIST", service);
+            
+            int activeServiceCount = dao.countServiceActive();
+            request.setAttribute("ACTIVE_SERVICE", activeServiceCount);
+            
+            int allServiceCount = dao.countAllService();
+            request.setAttribute("ALL_SERVICE", allServiceCount);
+            String topServiceCount = dao.countMostUseService();
+            request.setAttribute("POPULAR_SERVICE", topServiceCount);
+            
 
         } catch (SQLException | NamingException ex) {
             log("ViewAllServiceListServletError" + ex.getMessage());
