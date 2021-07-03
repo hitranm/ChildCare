@@ -7,6 +7,8 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +56,7 @@ public class MainDashBoardServlet extends HttpServlet {
             request.setAttribute("ALL_FB", allfb);
             int allRes = reservationDAO.countAllRes();
             request.setAttribute("ALL_RES", allRes);
-        } catch (Exception e) {
+        } catch (SQLException | NamingException e) {
             log("ERROR at MainDashBoardServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

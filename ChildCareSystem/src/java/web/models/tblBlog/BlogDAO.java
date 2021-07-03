@@ -754,4 +754,44 @@ public class BlogDAO implements Serializable {
         }
         return sum;
     }
+    
+    public List<BlogDTO> getSliderList() throws NamingException, SQLException {
+        List<BlogDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * FROM tblBlog "
+                        + "Where OnSlider = 1";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String blogID = rs.getString("BlogID");
+                    String thumbnail = rs.getString("Thumbnail");
+                    String title = rs.getString("Title");
+                    String authorID = rs.getString("AuthorID");
+                    String description = rs.getString("Description");
+                    String categoryID = rs.getString("CategoryID");
+                    String statusID = rs.getString("StatusID");
+                    boolean onSlider = rs.getBoolean("OnSlider");
+                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID, onSlider);
+                    result.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
 }
