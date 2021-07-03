@@ -435,7 +435,7 @@ public class BlogDAO implements Serializable {
         }
     }
 
-    public List<BlogDTO> getTopXBlogList(int top) throws SQLException {
+    public List<BlogDTO> getTopXBlogList(int top) throws SQLException, NamingException {
         List<BlogDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -461,8 +461,6 @@ public class BlogDAO implements Serializable {
                     result.add(dto);
                 }
             }
-        } catch (SQLException | NamingException e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -631,6 +629,8 @@ public class BlogDAO implements Serializable {
             if (stm != null) {
                 stm.close();
             }
+        }
+    }
     public void updateSlider(int blogId, String onSlider) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
