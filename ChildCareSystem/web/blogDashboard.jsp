@@ -23,43 +23,49 @@
 
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+        <style>
+            #side-bar-icon {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        </style>
     </head>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
                 <a  href="StartupServlet" class="link-primary" style="color: white">
-                <h3><span class="lab la-accusoft"></span><span class="lmao" style="font-size: 1.5rem">Child Care System</span></h3>
-</a>
+                    <h3><span class="lab la-accusoft"></span><span class="lmao" style="font-size: 1.5rem">Child Care System</span></h3>
+                </a>
             </div>
-            <div class ="sidebar-menu">
+             <div class ="sidebar-menu">
                 <ul>
-                                       <li>
-                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-tv"></span>
-                            <span>Dashboard</span></a>
+                    <li style="padding-left:0.25rem">
+                        <a href="dashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <span >Dashboard</span></a>
                     </li>
-                    <li>
-                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-users"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                             <span>Account </span></a>
                     </li>
-                    <li>
-                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-first-aid"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Service </span></a>
                     </li>
-                    <li>
-                        <a href="blogDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-file-alt"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="blogDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Blog</span></a>
                     </li>
-                    <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-notes-medical"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                             <span>Reservation</span></a>
                     </li>
-                    <li>
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="far fa-comments"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Feedback</span></a>
                     </li>
-                    <li>
-                        <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="fas fa-cogs"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -78,7 +84,7 @@
                     <input type="search"/>
                 </div>
                 <div class="user-wrapper">
-                    
+
                     <div>
                         <h4>John Doe</h4>
                         <small>Super administrator
@@ -116,7 +122,7 @@
                             <span class="fas fa-spinner"></span>
                         </div>
                     </div>
-                    
+
 
 
                 </div>
@@ -125,13 +131,13 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Accounts List</h3>
-                                
+
                             </div>
                             <div class="card-body">
-                                
-                                
-                                
-                                
+
+
+
+
                             </div>
 
                         </div>
@@ -155,7 +161,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                                                                                $(".mydatatable").DataTable();
+            $(".mydatatable").DataTable();
         </script>
 
 

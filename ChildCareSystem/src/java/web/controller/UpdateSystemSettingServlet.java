@@ -31,8 +31,13 @@ public class UpdateSystemSettingServlet extends HttpServlet {
             String id = request.getParameter("txtID");
             String value = request.getParameter("txtValue");
             boolean valid = true;
-            String regex = "[0-9]{1,2}";
-            if (!value.matches(regex)) {
+            String regex = "^[0-9]{1,2}$";
+            if (value.matches(regex)) {
+                int valueCheck = Integer.parseInt(value);
+                if (valueCheck <= 1 || valueCheck >= 15) {
+                    valid = false;
+                }
+            } else {
                 valid = false;
             }
             SystemSettingDAO dao = new SystemSettingDAO();
@@ -50,7 +55,7 @@ public class UpdateSystemSettingServlet extends HttpServlet {
                 }
             } else {
                 url = SUCCESS;
-                request.setAttribute("UPDATE_SETTING", "Vui lòng nhập giá trị từ 1 tới 15 ");
+                request.setAttribute("UPDATE_SETTING", "Vui lòng nhập giá trị từ 2 tới 12 ");
                 request.getRequestDispatcher(url).forward(request, response);
             }
 
