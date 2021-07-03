@@ -54,7 +54,6 @@ public class SystemSettingDAO {
         PreparedStatement stm = null;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        System.out.println(formatter.format(date));
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
