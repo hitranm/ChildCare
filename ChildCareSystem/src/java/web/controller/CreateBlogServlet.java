@@ -81,6 +81,8 @@ public class CreateBlogServlet extends HttpServlet {
             if (foundErr) {
                 url = CREATE_BLOG;
                 request.setAttribute("CREATE_BLOG", err);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
                 BlogDAO dao = new BlogDAO();
                 if (session != null) {
@@ -94,12 +96,11 @@ public class CreateBlogServlet extends HttpServlet {
                         url = ERROR_PAGE;
                     }
                 }
+                response.sendRedirect(url);
             }
         } catch (NamingException | SQLException ex) {
             log("CreateBlogServlet: " + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
             out.close();
         }
     }

@@ -34,7 +34,7 @@ import web.models.tblBlog.BlogError;
         maxRequestSize = 1024 * 1024 * 100
 )
 public class UpdateBlogServlet extends HttpServlet {
-
+    
     private final String EDITBLOG_PAGE = "LoadBlogServlet";
     private final String VIEWBLOG = "ViewBlogDetailServlet";
     private final String ERROR_PAGE = "error.jsp";
@@ -70,10 +70,12 @@ public class UpdateBlogServlet extends HttpServlet {
                 foundErr = true;
                 err.setDescriptionErr("Vui lòng nhập nội dung cho bài viết");
             }
-
+            
             if (foundErr) {
                 url = EDITBLOG_PAGE + "?id=" + blogID;
                 request.setAttribute("BLOG_ERROR", err);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
                 BlogDAO dao = new BlogDAO();
                 BlogDTO dto = dao.getBlogDetail(blogID);
@@ -90,6 +92,7 @@ public class UpdateBlogServlet extends HttpServlet {
                 } else {
                     url = ERROR_PAGE;
                 }
+                response.sendRedirect(url);
             }
         } catch (SQLException ex) {
             log("UpdateBlogServlet _ SQL: " + ex.getMessage());
@@ -98,12 +101,10 @@ public class UpdateBlogServlet extends HttpServlet {
             log("UpdateBlogServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
             out.close();
         }
     }
-
+    
     private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
         String fileName;
         try {
@@ -132,13 +133,13 @@ public class UpdateBlogServlet extends HttpServlet {
                     outputStream.close();
                 }
             }
-
+            
         } catch (Exception e) {
             fileName = "";
         }
         return fileName;
     }
-
+    
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : part.getHeader("content-disposition").split(";")) {

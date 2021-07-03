@@ -246,7 +246,7 @@ public class ServiceDAO implements Serializable {
                 //2. create sql string
                 String sql = "Select count(*) "
                         + "From tblService "
-                        + "Where ServiceName Like ?";
+                        + "Where ServiceName Like ? AND StatusID=1";
                 //3. create statement and assign value to parameters
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");
@@ -279,7 +279,7 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
                     + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * \n"
-                    + "from tblService where ServiceName like ?) as x where r between ?*5-4 and ?*5";
+                    + "from tblService where ServiceName like ? AND StatusID=1) as x where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
             stm.setString(1, "%" + searchValue + "%");
             stm.setInt(2, index);
@@ -606,8 +606,9 @@ public class ServiceDAO implements Serializable {
             //if (con != null) {
             String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, "
                     + "Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
-                    + "From tblService ORDER BY UpdatedDate DESC";
+                    + "From tblService WHERE CreatedPersonID=? ORDER BY UpdatedDate DESC";
             stm = con.prepareStatement(sql);
+            stm.setString(1, staffID);
             rs = stm.executeQuery();
             while (rs.next()) {
                 String serviceID = rs.getString("ServiceID");

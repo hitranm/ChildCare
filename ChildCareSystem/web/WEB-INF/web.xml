@@ -478,9 +478,4 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-    <dependency>
-        <groupId>com.github.h-thurow</groupId>
-        <artifactId>tomcat8jndi</artifactId>
-        <version>1.0.0</version>
-    </dependency>
 </web-app>
