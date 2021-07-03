@@ -37,7 +37,7 @@ import web.models.tblStaff.StaffDAO;
         maxRequestSize = 1024 * 1024 * 100
 )
 public class CreateServiceServlet extends HttpServlet {
-
+    
     private static final String VIEW_SERVICE = "ViewServiceByStaffServlet";
     private static final String CREATE_SERVICE_PAGE = "createService.jsp";
     private static final String ERROR_PAGE = "error.jsp";
@@ -87,7 +87,7 @@ public class CreateServiceServlet extends HttpServlet {
                 foundError = true;
                 createServiceErr.setTitleLengthError("Tiêu đề không được để trống và có nhiều nhất 100 kí tự.");
             }
-
+            
             if (description.trim().length() == 0 || description.trim().length() > 300) {
                 foundError = true;
                 createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
@@ -99,13 +99,15 @@ public class CreateServiceServlet extends HttpServlet {
             if (foundError) {
                 url = CREATE_SERVICE_PAGE;
                 request.setAttribute("CREATE_SERVICE_ERROR", createServiceErr);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
                 //Get identity from session
                 String identityId = (String) session.getAttribute("IDENTITY_ID");
                 StaffDAO staffDAO = new StaffDAO();
                 String createPersonId = staffDAO.queryStaff(identityId);
                 ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
-                        thumbnail, description, price, salePrice, "0", 
+                        thumbnail, description, price, salePrice, "0",
                         createPersonId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
                 // Process to add new service
                 ServiceDAO serviceDAO = new ServiceDAO();
@@ -115,16 +117,15 @@ public class CreateServiceServlet extends HttpServlet {
                 } else {
                     url = ERROR_PAGE;
                 }
+                response.sendRedirect(url);
             }
         } catch (NamingException | SQLException ex) {
             log("Error at CreateServiceServlet: " + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
             out.close();
         }
     }
-
+    
     private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
         String fileName;
         try {
@@ -153,16 +154,16 @@ public class CreateServiceServlet extends HttpServlet {
                     outputStream.close();
                 }
             }
-
+            
         } catch (Exception e) {
             fileName = "";
         }
         return fileName;
     }
-
+    
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
-
+        
         for (String content : part.getHeader("content-disposition").split(";")) {
             if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");

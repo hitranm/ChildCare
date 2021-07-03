@@ -41,13 +41,15 @@
                     <h1>${blog.title}</h1>
                 </div>
                 <div class="col-3 text-center">
-                    <div>
-                        <a class="btn btn-primary" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a><br>
-                    </div>
-                    <div>
-                        <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br>
-                    </div>
                     <c:set var="role" value="${sessionScope.ROLEID}"/>
+                    <c:if test="${role eq 2}">
+                        <div>
+                            <a class="btn btn-primary" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a><br>
+                        </div>
+                        <div>
+                            <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br>
+                        </div>
+                    </c:if>
                     <c:if test="${role eq 3}">
                         <div class="blog-status mt-4">
                             <form action="UpdateBlogStatusServlet" method="POST">

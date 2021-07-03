@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 //            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
 
             HttpSession session = request.getSession();
-
+            session.setAttribute("ROLEID", identity.getRoleID());
 //            session.setAttribute("BLOG_LIST_TOP6", listBlog);
 //            session.setAttribute("SERVICE_LIST_TOP3", listService);
 
