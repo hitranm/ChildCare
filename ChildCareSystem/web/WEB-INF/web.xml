@@ -298,7 +298,9 @@
     </servlet>
     <servlet>
         <servlet-name>MainDashBoardServlet</servlet-name>
-        <servlet-class>web.controller.MainDashBoardServlet</servlet-class>
+        <servlet-class>web.controller.MainDashBoardServlet</servlet-class>      
+    </servlet>
+    <servlet>
         <servlet-name>UpdateSliderServlet</servlet-name>
         <servlet-class>web.controller.UpdateSliderServlet</servlet-class>
     </servlet>
@@ -597,6 +599,8 @@
     <servlet-mapping>
         <servlet-name>MainDashBoardServlet</servlet-name>
         <url-pattern>/MainDashBoardServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UpdateSliderServlet</servlet-name>
         <url-pattern>/UpdateSliderServlet</url-pattern>
     </servlet-mapping>
