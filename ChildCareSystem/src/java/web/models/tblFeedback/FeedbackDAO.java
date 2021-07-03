@@ -182,6 +182,45 @@ public class FeedbackDAO implements Serializable {
         return result;
     }
 
+    public List<FeedbackDTO> getFeedbackList() throws SQLException, NamingException {
+        List<FeedbackDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * "
+                        + " FROM tblFeedback";        
+                stm = conn.prepareStatement(sql);
+                
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String comment = rs.getString("Comment");
+                    int rate = rs.getInt("Rate");
+                    int reservationId = rs.getInt("ReservationID");
+                    int customerId = rs.getInt("CustomerID");
+                    int feedbackId = rs.getInt("FeedbackID");
+                    int serviceId = rs.getInt("ServiceID");
+                    FeedbackDTO dto = new FeedbackDTO(feedbackId, serviceId, customerId, reservationId, comment, rate);
+                    result.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+    
     public float calcAvgStar() throws SQLException, NamingException {
         float sum = 0;
         float rate = 0;

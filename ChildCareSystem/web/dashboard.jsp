@@ -61,7 +61,7 @@
                             <span>Đơn đặt khám</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
+                        <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Phản hồi</span></a>
                     </li>
                     <li style="padding-left:0.25rem">

@@ -61,7 +61,7 @@
                             <span>Đơn đặt khám</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
+                        <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Phản hồi</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -126,7 +126,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Danh sách dịch vụ</h3>
-
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">
@@ -147,10 +146,10 @@
                                                     <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#publicList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                        onclick="toggleButton(this)">Đang hoạt động</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#staffList"
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#waitingList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                        onclick="toggleButton(this)">Đang chờ</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#managerList"
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#rejectList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                        onclick="toggleButton(this)">Tạm ngưng</a>
                                                 </div>
@@ -214,7 +213,7 @@
                                                 </div>
 
                                                 <!--Public list-->
-                                                <div class="tab-pane fade show active bg-white" id="publicList" role="tabpanel"
+                                                <div class="tab-pane fade bg-white" id="publicList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
@@ -235,7 +234,7 @@
                                                                     <c:if test="${dto.statusId eq 1}">
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <tr>
-                                                                            <td>${countVar.count}</td>
+                                                                            <td>${count}</td>
                                                                             <td>${dto.serviceId}</td>
                                                                             <td>${dto.serviceName}</td>
                                                                             <td>${dto.price}00</td>
@@ -263,7 +262,7 @@
 
 
                                                 <!-- Waiting list -->
-                                                <div class="tab-pane fade show active bg-white" id="publicList" role="tabpanel"
+                                                <div class="tab-pane fade bg-white" id="waitingList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
@@ -284,7 +283,7 @@
                                                                     <c:if test="${dto.statusId eq 0}">
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <tr>
-                                                                            <td>${countVar.count}</td>
+                                                                            <td>${count}</td>
                                                                             <td>${dto.serviceId}</td>
                                                                             <td>${dto.serviceName}</td>
                                                                             <td>${dto.price}00</td>
@@ -311,7 +310,7 @@
                                                 </div>
 
                                                 <!--RejectedList-->
-                                                <div class="tab-pane fade show active bg-white" id="publicList" role="tabpanel"
+                                                <div class="tab-pane fade bg-white" id="rejectList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
@@ -332,7 +331,7 @@
                                                                     <c:if test="${dto.statusId eq 2}">
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <tr>
-                                                                            <td>${countVar.count}</td>
+                                                                            <td>${count}</td>
                                                                             <td>${dto.serviceId}</td>
                                                                             <td>${dto.serviceName}</td>
                                                                             <td>${dto.price}00</td>
@@ -356,14 +355,11 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                     </div>

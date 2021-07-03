@@ -298,11 +298,15 @@
     </servlet>
     <servlet>
         <servlet-name>MainDashBoardServlet</servlet-name>
-        <servlet-class>web.controller.MainDashBoardServlet</servlet-class>      
+        <servlet-class>web.controller.MainDashBoardServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateSliderServlet</servlet-name>
         <servlet-class>web.controller.UpdateSliderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllFeedbackServlet</servlet-name>
+        <servlet-class>web.controller.ViewAllFeedbackServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
@@ -603,6 +607,10 @@
     <servlet-mapping>
         <servlet-name>UpdateSliderServlet</servlet-name>
         <url-pattern>/UpdateSliderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllFeedbackServlet</servlet-name>
+        <url-pattern>/ViewAllFeedbackServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
