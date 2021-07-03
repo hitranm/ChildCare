@@ -41,32 +41,32 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li style="padding-left:0.25rem">
-                        <a href="dashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
-                            <span >Dashboard</span></a>
+                        <a href="DispatchServlet?btAction=ViewMainDashboard" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <span >Tổng quát</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
-                            <span>Account </span></a>
+                            <span>Tài khoản </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <span>Service </span></a>
+                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                            <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Blog</span></a>
+                        <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
-                            <span>Reservation</span></a>
+                            <span>Đơn đặt khám</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
-                            <span>Feedback</span></a>
+                        <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
+                            <span>Phản hồi</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="ViewSystemSettingServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
-                            <span>System Settings</span></a>
+                            <span>Cấu hình hệ thống</span></a>
                     </li>
                 </ul>
             </div>
@@ -105,54 +105,7 @@
                         </div>
                     </c:if>
                 </div>
-                <!--                <div class="cards">
-                                    <div class="card-single">
-                                        <div>
-                                            <h1>100</h1>
-                                            <span>Tài khoản</span>
-                                        </div>
-                                        <div>
-                                            <span class="las la-users"></span>
-                                        </div>
-                                    </div>
-                                    <div class="card-single">
-                                        <div>
-                                            <h1>20</h1>
-                                            <span>Dịch vụ</span>
-                                        </div>
-                                        <div>
-                                            <span class="las la-clipboard-list"></span>
-                                        </div>
-                                    </div>
-                                    <div class="card-single">
-                                        <div>
-                                            <h1>30</h1>
-                                            <span>Blog</span>
-                                        </div>
-                                        <div>
-                                            <span class="las la-shopping-bag"></span>
-                                        </div>
-                                    </div>
-                                    <div class="card-single">
-                                        <div>
-                                            <h1>40</h1>
-                                            <span>Đơn hẹn khám</span>
-                                        </div>
-                                        <div>
-                                            <span class="las la-google-wallet"></span>
-                                        </div>
-                                    </div>
-                                    <div class="card-single">
-                                        <div>
-                                            <h1>20</h1>
-                                            <span>Phản hồi</span>
-                                        </div>
-                                        <div>
-                                            <span class="las la-users"></span>
-                                        </div>
-                                    </div>
                 
-                                </div>-->
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
@@ -189,7 +142,6 @@
                                         </c:if>
                                         <c:if test="${!testEmpty}">
                                             <h2>No Product here. Create new one below here</h2>
-
                                         </c:if>
                                     </c:if>
                                 </div>

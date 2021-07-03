@@ -41,7 +41,7 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li style="padding-left:0.25rem">
-                        <a href="dashboard.jsp"  class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                        <a href="DispatchServlet?btAction=ViewMainDashboard"  class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                             <span >Tổng quát</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
