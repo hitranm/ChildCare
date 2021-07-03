@@ -74,12 +74,7 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
             request.setAttribute("DENY_SERVICE", denyService);
             String service = dao.countMostUseService();
             request.setAttribute("POPULAR_SERVICE", service);
-            int allBlog = blogDAO.countAllBlog();
-            request.setAttribute("ALL_BLOG", allBlog);
-            int activeBlog = blogDAO.countBlogActive();
-            request.setAttribute("ACTIVE_BLOG", activeBlog);
-            int pendingBlog = blogDAO.countBlogPending();
-            request.setAttribute("PENDING_BLOG", pendingBlog);
+            
             int allfb = feedbackDAO.countAllFeedback();
             request.setAttribute("ALL_FB", allfb);
             float result = feedbackDAO.calcAvgStar();
