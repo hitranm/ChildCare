@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.naming.NamingException;
 import web.utils.DBHelpers;
@@ -50,13 +52,17 @@ public class SystemSettingDAO {
     public boolean updateSystemSetting(String value, String id) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        System.out.println(formatter.format(date));
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "UPDATE tblSystemSetting SET SettingValue=?  WHERE SettingId=?";
+                String sql = "UPDATE tblSystemSetting SET SettingValue=?, UpdatedDate=?  WHERE SettingId=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, value);
-                stm.setString(2, id);
+                stm.setString(2, formatter.format(date));
+                stm.setString(3, id);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -72,6 +78,7 @@ public class SystemSettingDAO {
         }
         return false;
     }
+
     public SystemSettingDTO getSettingByName(String name) throws Exception {
         SystemSettingDTO result = null;
         Connection conn = null;

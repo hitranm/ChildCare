@@ -23,7 +23,7 @@
 
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
-         <style>
+        <style>
             #side-bar-icon {
                 padding-left: 1rem;
                 padding-right: 1rem;
@@ -177,6 +177,10 @@
                                                                 </c:url>
                                                                 <button type="submit" class="btn btn-primary" href="${updateLink}">Cập nhật</button>
                                                                 <button type="reset" class="btn btn-primary" href="ViewSystemSettingServlet">Đặt lại</button>
+                                                                <hr>
+                                                                <p class="card-text" style="text-align: right; font-size: small">
+                                                                    <strong>Cập nhật lần cuối: </strong> ${dto.updatedDate}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </form>
