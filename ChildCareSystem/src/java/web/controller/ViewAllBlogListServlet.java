@@ -26,7 +26,7 @@ import web.models.tblStaff.StaffDTO;
  * @author DELL
  */
 public class ViewAllBlogListServlet extends HttpServlet {
-    private final String VIEW_BLOG = "viewAllBlog.jsp";
+    private final String VIEW_BLOG = "blogDashboard.jsp";
     private final String ERROR = "error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,6 +50,12 @@ public class ViewAllBlogListServlet extends HttpServlet {
             dao.viewBlogList();
             List<BlogDTO> blog = dao.getBlogList();
             request.setAttribute("BLOG_LIST", blog);
+            int allBlog = dao.countAllBlog();
+            request.setAttribute("ALL_BLOG", allBlog);
+            int activeBlog = dao.countBlogActive();
+            request.setAttribute("ACTIVE_BLOG", activeBlog);
+            int pendingBlog = dao.countBlogPending();
+            request.setAttribute("PENDING_BLOG", pendingBlog);
         } catch (SQLException | NamingException ex) {
             log("ViewAllBlogListServletError" + ex.getMessage());
             url = ERROR;

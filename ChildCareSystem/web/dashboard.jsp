@@ -53,7 +53,7 @@
                             <span>Service </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                        <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Blog</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
