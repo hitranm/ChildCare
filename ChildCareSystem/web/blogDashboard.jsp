@@ -42,31 +42,31 @@
                 <ul>
                     <li style="padding-left:0.25rem">
                         <a href="dashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
-                            <span >Dashboard</span></a>
+                            <span >Tổng quát</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
-                            <span>Account </span></a>
+                            <span>Tài khoản </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <span>Service </span></a>
+                            <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="blogDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Blog</span></a>
+                        <a href="ViewAllBlogListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
-                            <span>Reservation</span></a>
+                            <span>Đơn đặt khám</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
-                            <span>Feedback</span></a>
+                            <span>Phản hồi</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
-                            <span>System Settings</span></a>
+                            <span>Cấu hình hệ thống</span></a>
                     </li>
                 </ul>
             </div>
@@ -79,19 +79,6 @@
                     </label>
                     Dashboard
                 </h2>
-                <div class="search-wrapper">
-                    <span class="las la-search"></span>
-                    <input type="search"/>
-                </div>
-                <div class="user-wrapper">
-
-                    <div>
-                        <h4>John Doe</h4>
-                        <small>Super administrator
-                        </small>
-                    </div>
-                </div>
-
             </header>
             <main>
                 <div class="cards">
@@ -122,20 +109,16 @@
                             <span class="fas fa-spinner"></span>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Blogs List</h3>
-
+                                <h3>Danh sách bài viết</h3>
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__wrapper">
-                                    <div class="status-dropdown">
+                                    <div class="status-dropdown px-3 mb-4">
                                         <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Trạng thái
@@ -172,9 +155,10 @@
                                                                 <th>Tiêu đề</th>
                                                                 <th>Tác giả</th>
                                                                 <th>Trạng thái</th>
+                                                                <th></th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
-
                                                         <tbody id="tableBodyAccepted">
                                                             <c:set var="count" value="0"/>
                                                             <c:forEach items="${requestScope.BLOG_LIST}" var="dto">
@@ -266,7 +250,8 @@
                                                                 <th>Tiêu đề</th>
                                                                 <th>Tác giả</th>
                                                                 <th>Trạng thái</th>
-
+                                                                <th></th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
 
@@ -314,6 +299,8 @@
                                                                 <th>Tiêu đề</th>
                                                                 <th>Tác giả</th>
                                                                 <th>Trạng thái</th>
+                                                                <th></th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
 
@@ -362,6 +349,8 @@
                                                                 <th>Tiêu đề</th>
                                                                 <th>Tác giả</th>
                                                                 <th>Trạng thái</th>
+                                                                <th></th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
 
@@ -396,19 +385,13 @@
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
                                             </c:if>
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </main>

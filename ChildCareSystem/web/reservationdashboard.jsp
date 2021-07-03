@@ -159,7 +159,7 @@
                                                                 <th>ID khách hàng</th>
                                                                 <th>ID nhân viên</th>
                                                                 <th>Thời gian khám</th>
-                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
 
@@ -206,7 +206,7 @@
                                                                 <th>ID khách hàng</th>
                                                                 <th>ID nhân viên</th>
                                                                 <th>Thời gian khám</th>
-                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="tableBodyWaiting">
@@ -245,7 +245,7 @@
                                                                 <th>ID khách hàng</th>
                                                                 <th>ID nhân viên</th>
                                                                 <th>Thời gian khám</th>
-                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
 
@@ -260,31 +260,19 @@
                                                                         <td>${dto.customerId}</td>
                                                                         <td>${dto.staffAssignId}</td>
                                                                         <td>${dto.checkInDate}</td>
-
                                                                         <td>
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewReservationDetails"></c:param>
                                                                                 <c:param name="resid" value="${dto.reservationId}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
-
                                                                     </tr>
                                                                 </c:forEach>
                                                             </c:if>
                                                         </tbody>
-                                                    </table>
-
-                                                </div>
-
-                                                <!--All-->
-
-                                                </tbody>
                                                 <tfoot></tfoot>
                                                 </table>
-
                                             </div>
                                         </div>
                                     </div>
