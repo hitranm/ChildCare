@@ -219,6 +219,8 @@
     <servlet>
         <servlet-name>ViewSystemSettingServlet</servlet-name>
         <servlet-class>web.controller.ViewSystemSettingServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateBlogStatusServlet</servlet-name>
         <servlet-class>web.controller.UpdateBlogStatusServlet</servlet-class>
     </servlet>
@@ -513,6 +515,8 @@
     <servlet-mapping>
         <servlet-name>ViewSystemSettingServlet</servlet-name>
         <url-pattern>/ViewSystemSettingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UpdateBlogStatusServlet</servlet-name>
         <url-pattern>/UpdateBlogStatusServlet</url-pattern>
     </servlet-mapping>
@@ -606,9 +610,9 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-    <dependency>
+<!--    <dependency>
         <groupId>com.github.h-thurow</groupId>
         <artifactId>tomcat8jndi</artifactId>
         <version>1.0.0</version>
-    </dependency>
+    </dependency>-->
 </web-app>
