@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Child Care System</title>   
+        <title>Child Care System</title>
         <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="css/home/phonering.css"/>
         <link rel="stylesheet" href="css/sidebar.css"/>
@@ -19,6 +19,20 @@
 
     <body>
         <jsp:include page="header.jsp"/>
+        <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
+
+        <style>
+            .carousel-item img {
+                height: 55vh;
+            }
+
+            .carousel-description {
+                -webkit-line-clamp: 3;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+            }
+        </style>
 
         <main>
             <div class="main_wrapper px-5 py-5">
@@ -31,79 +45,51 @@
                         interval="3000"
                         >
                         <ol class="carousel-indicators">
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="0"
-                                class="active"
-                                ></li>
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="1"
-                                ></li>
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="2"
-                                ></li>
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="varStatus">
+                                <li
+                                    data-target="#carouselExampleIndicators"
+                                    data-slide-to="${varStatus.index}"
+                                    <c:if test="${varStatus.count == 1}">
+                                        class="active"
+                                    </c:if>
+                                    ></li>
+                                </c:forEach>
                         </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/tan-tam-nang-dong.jpg"
-                                    alt="First slide"
-                                    />
 
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
+                        <div class="carousel-inner">
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                                <div
+                                    <c:choose>
+                                        <c:when test="${stat.count == 1}">
+                                            class="carousel-item active"
+                                        </c:when>
+                                        <c:otherwise>
+                                            class="carousel-item"
+                                        </c:otherwise>
+                                    </c:choose>
+                                    >
+
+                                    <img
+                                        class="d-block w-100 img-fluid"
+                                        src="./images/blog/${post.thumbnail}"
+                                        alt="slide"
+                                        />
+                                    <div class="carousel_caption-overlay d-none d-lg-flex">
+                                        <h5>
+                                            ${post.title}
+                                        </h5>
+                                        <div class="carousel-description mb-3">
+                                            ${post.description}
+                                        </div>
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $(".carousel-description").find('span').removeAttr("style");
+                                        });
+                                    </script>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/tan-tam.jpg"
-                                    alt="Second slide"
-                                    />
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/nang-dong.jpg"
-                                    alt="Second slide"
-                                    />
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                         <a
                             class="carousel-control-prev"
@@ -159,7 +145,7 @@
                                 <c:if test="${!testEmpty}">
                                     <h2>Hiện chưa có bài viết nào.</h2>
                                 </c:if>
-                            </c:if> 
+                            </c:if>
                         </div>
                         <a href="#" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
@@ -218,7 +204,7 @@
                 </div>
 
                 <div class="main-right d-none d-lg-flex col-lg-3">
-                  
+
                     <a class="kbyt mb-4" href="https://kbyt.khambenh.gov.vn/#tokhai_yte/model" target="_blank">
                         <img src="images/kbyt.png" style="width: 100%"/>
                     </a>
@@ -246,13 +232,13 @@
                     <div class="right-map-section my-3">
                         <iframe
                             style="border: 0; width: 100%; height: 250px;"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4854095316514!2d105.52487561540214!3d21.01325499368218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b465a4e65fb%3A0xaae6040cfabe8fe!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1623417301225!5m2!1svi!2s"          
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4854095316514!2d105.52487561540214!3d21.01325499368218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b465a4e65fb%3A0xaae6040cfabe8fe!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1623417301225!5m2!1svi!2s"
                             allowfullscreen="true"
                             loading="lazy"
                             ></iframe>
                     </div>
 
-                    <div class="ring-wrapper">                      
+                    <div class="ring-wrapper">
                         <div class="ring my-5">
                             <div class="ring-phoneNum mr-4"> 0909998888</div>
                             <div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show">

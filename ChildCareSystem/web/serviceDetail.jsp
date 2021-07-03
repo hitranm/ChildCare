@@ -27,11 +27,15 @@
                 <div class="service-name text-center col-9 mb-2">
                     <h1>${service.serviceName}</h1>
                 </div>
+                <c:set var="role" value="${sessionScope.ROLEID}"/>
                 <div class="funct-button col-3 text-center">
-                    <a class="btn btn-primary mt-2" href="#" name="btAction">Đặt dịch vụ</a><br>
-                    <a class="btn btn-primary mt-2" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
-                    <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
-                    <c:set var="role" value="${sessionScope.ROLEID}"/>
+                    <c:if test="${role eq 1}">
+                        <a class="btn btn-primary mt-2" href="#" name="btAction">Đặt dịch vụ</a><br>
+                    </c:if>
+                    <c:if test="${role eq 2}">
+                        <a class="btn btn-primary mt-2" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
+                        <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                    </c:if>
                     <c:if test="${role eq 3}">
                         <div class="status mt-4">
                             <form action="UpdateServiceStatusServlet" method="POST">

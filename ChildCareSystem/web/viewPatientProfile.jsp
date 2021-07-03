@@ -269,7 +269,7 @@
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <h5 class="card-title"><strong>${history.patientName}</strong></h5>
-                                                                <hr> 
+                                                                <hr>
                                                                 <p class="card-text">
                                                                     <strong>Dịch vụ đã chọn:</strong> ${history.serviceName}
                                                                 </p>
@@ -284,9 +284,9 @@
 
                                                                 <c:url value="DispatchServlet" var="infoLink">
                                                                     <c:param name="resid" value="${history.reservationID}"/>
-                                                                    <c:param name="btAction" value="ViewReservationDetails"/>                                                                 
+                                                                    <c:param name="btAction" value="ViewReservationDetails"/>
                                                                 </c:url>
-                                                                <a class="btn btn-success" href="${infoLink}" role="button">Xem chi tiết</a>                                                              
+                                                                <a class="btn btn-success" href="${infoLink}" role="button">Xem chi tiết</a>
                                                                 <p class="card-text" style="text-align: right; font-size: smaller">
                                                                     ${history.createdDate}
                                                                 </p>

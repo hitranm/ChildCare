@@ -299,6 +299,8 @@
     <servlet>
         <servlet-name>MainDashBoardServlet</servlet-name>
         <servlet-class>web.controller.MainDashBoardServlet</servlet-class>
+        <servlet-name>UpdateSliderServlet</servlet-name>
+        <servlet-class>web.controller.UpdateSliderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
@@ -595,6 +597,8 @@
     <servlet-mapping>
         <servlet-name>MainDashBoardServlet</servlet-name>
         <url-pattern>/MainDashBoardServlet</url-pattern>
+        <servlet-name>UpdateSliderServlet</servlet-name>
+        <url-pattern>/UpdateSliderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -610,9 +614,4 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
-<!--    <dependency>
-        <groupId>com.github.h-thurow</groupId>
-        <artifactId>tomcat8jndi</artifactId>
-        <version>1.0.0</version>
-    </dependency>-->
 </web-app>

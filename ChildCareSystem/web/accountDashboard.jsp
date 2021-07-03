@@ -42,31 +42,31 @@
                 <ul>
                     <li style="padding-left:0.25rem">
                         <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
-                            <span >Dashboard</span></a>
+                            <span >Tổng quát</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewAccount" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
-                            <span>Account </span></a>
+                            <span>Tài khoản </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <span>Service </span></a>
+                            <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Blog</span></a>
+                            <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
-                            <span>Reservation</span></a>
+                            <span>Đơn đặt hàng</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
-                            <span>Feedback</span></a>
+                            <span>Phản hồi</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
-                            <span>System Settings</span></a>
+                            <span>Cấu hình hệ thống</span></a>
                     </li>
                 </ul>
             </div>
@@ -79,19 +79,6 @@
                     </label>
                     Dashboard
                 </h2>
-                <div class="search-wrapper">
-                    <span class="las la-search"></span>
-                    <input type="search"/>
-                </div>
-                <div class="user-wrapper">
-
-                    <div>
-                        <h4>John Doe</h4>
-                        <small>Super administrator
-                        </small>
-                    </div>
-                </div>
-
             </header>
             <main>
                 <div class="cards">
@@ -138,17 +125,17 @@
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Accounts List</h3>
+                                <h3>Danh sách tài khoản</h3>
 
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">
                                     <div class="userPosts__wrapper">
                                         <h2 class="userPosts__title"></h2>
-                                        <div class="dropdownButton__wrapper">
+                                        <div class="dropdownButton__wrapper px-3 mb-4">
                                             <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Role
+                                                Vài trò
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -156,16 +143,16 @@
                                                      aria-orientation="vertical">
                                                     <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
                                                        href="#allList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
-                                                       onclick="toggleButton(this)">All</a>
+                                                       onclick="toggleButton(this)">Tất cả</a>
                                                     <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#customerList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Customer</a>
+                                                       onclick="toggleButton(this)">Khách hàng</a>
                                                     <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#staffList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Staff</a>
+                                                       onclick="toggleButton(this)">Nhân viên</a>
                                                     <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#managerList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Manager</a>
+                                                       onclick="toggleButton(this)">Quản lí</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,12 +166,12 @@
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>IdentityID</th>
-                                                                <th>Full Name</th>
-                                                                <th>Phone Number</th>
-                                                                <th> Role</th>
-                                                                <th>View details</th>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -209,7 +196,7 @@
 
 
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <c:url var="delete" value="DispatchServlet">
@@ -242,7 +229,7 @@
 
 
                                                                                 </c:url>
-                                                                                <a href="${viewdetails}">See details</a>
+                                                                                <a href="${viewdetails}">Chi tiết</a>
                                                                             </td>
                                                                             <td>
                                                                                 <c:url var="delete" value="DispatchServlet">
@@ -274,7 +261,7 @@
 
 
                                                                                     </c:url>
-                                                                                    <a href="${viewdetails}">See details</a>
+                                                                                    <a href="${viewdetails}">Chi tiết</a>
                                                                                 </td>
                                                                                 <td>
                                                                                     <c:url var="delete" value="DispatchServlet">
@@ -308,7 +295,7 @@
                                                                 <th>Full Name</th>
                                                                 <th>Phone Number</th>
                                                                 <th>Role</th>
-                                                                <th>View details</th>
+                                                                <th>Chi tiết</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -333,7 +320,7 @@
 
 
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <c:url var="delete" value="DispatchServlet">
@@ -366,7 +353,7 @@
                                                                 <th>Full Name</th>
                                                                 <th>Phone Number</th>
                                                                 <th>Role</th>
-                                                                <th>View details</th>
+                                                                <th>Chi tiết</th>
                                                                 <th></th>
 
                                                             </tr>
@@ -393,7 +380,7 @@
 
 
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <c:url var="delete" value="DispatchServlet">
@@ -423,7 +410,7 @@
                                                                 <th>Full Name</th>
                                                                 <th>Phone Number</th>
                                                                 <th>Role</th>
-                                                                <th>View details</th>
+                                                                <th>Chi tiết</th>
                                                                 <th></th>
 
                                                             </tr>
@@ -450,7 +437,7 @@
 
 
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <c:url var="delete" value="DispatchServlet">

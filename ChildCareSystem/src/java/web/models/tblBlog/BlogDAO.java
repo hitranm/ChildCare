@@ -68,7 +68,7 @@ public class BlogDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             //if (con != null) {
-            String sql = "Select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, StatusID "
+            String sql = "Select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, StatusID, OnSlider "
                     + "From tblBlog ORDER BY UpdatedDate DESC";
             stm = con.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -80,7 +80,8 @@ public class BlogDAO implements Serializable {
                 String description = rs.getString("Description");
                 String categoryID = rs.getString("CategoryID");
                 String statusID = rs.getString("StatusID");
-                BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
+                boolean onSlider = rs.getBoolean("OnSlider");
+                BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID, onSlider);
                 if (this.blogList == null) {
                     this.blogList = new ArrayList<>();
                 }
@@ -434,7 +435,7 @@ public class BlogDAO implements Serializable {
         }
     }
 
-    public List<BlogDTO> getTopXBlogList(int top) throws SQLException {
+    public List<BlogDTO> getTopXBlogList(int top) throws SQLException, NamingException {
         List<BlogDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -455,12 +456,11 @@ public class BlogDAO implements Serializable {
                     String description = rs.getString("Description");
                     String categoryID = rs.getString("CategoryID");
                     String statusID = rs.getString("StatusID");
-                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
+                    boolean onSlider = rs.getBoolean("OnSlider");
+                    BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID, onSlider);
                     result.add(dto);
                 }
             }
-        } catch (SQLException | NamingException e) {
-
         } finally {
             if (rs != null) {
                 rs.close();
@@ -556,7 +556,7 @@ public class BlogDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             //if (con != null) {
-            String sql = "Select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, StatusID "
+            String sql = "Select BlogID, Thumbnail, Title, AuthorID, Description, CategoryID, StatusID, OnSlider "
                     + "From tblBlog "
                     + "Where AuthorID=? "
                     + "ORDER BY UpdatedDate DESC";
@@ -570,7 +570,8 @@ public class BlogDAO implements Serializable {
                 String description = rs.getString("Description");
                 String categoryID = rs.getString("CategoryID");
                 String statusID = rs.getString("StatusID");
-                BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID);
+                boolean onSlider = rs.getBoolean("OnSlider");
+                BlogDTO dto = new BlogDTO(blogID, thumbnail, title, authorID, description, categoryID, statusID, onSlider);
                 if (this.blogList == null) {
                     this.blogList = new ArrayList<>();
                 }
@@ -628,12 +629,38 @@ public class BlogDAO implements Serializable {
             if (stm != null) {
                 stm.close();
             }
+        }
+    }
+    public void updateSlider(int blogId, String onSlider) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBHelpers.makeConnection();
+            String sql = "Update tblBlog "
+                    + "Set OnSlider = ? "
+                    + "Where BlogID = ?";
+            stm = con.prepareStatement(sql);
+            if (onSlider != null) {
+                stm.setBoolean(1, true);
+            } else {
+                stm.setBoolean(1, false);
+            }
+
+            stm.setInt(2, blogId);
+            stm.executeUpdate();
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+
             if (con != null) {
                 con.close();
             }
         }
     }
-    
+
     public int countAllBlog() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
@@ -663,7 +690,7 @@ public class BlogDAO implements Serializable {
         }
         return sum;
     }
-    
+
     public int countBlogActive() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
@@ -695,7 +722,7 @@ public class BlogDAO implements Serializable {
         }
         return sum;
     }
-    
+
     public int countBlogPending() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
