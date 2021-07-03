@@ -11,57 +11,53 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import web.models.tblSystemSetting.SystemSettingDAO;
+import web.models.tblBlog.BlogDAO;
+import web.models.tblFeedback.FeedbackDAO;
+import web.models.tblIdentity.IdentityDAO;
+import web.models.tblReservation.ReservationDAO;
+import web.models.tblService.ServiceDAO;
 
 /**
  *
- * @author nguye
+ * @author Admin
  */
-public class UpdateSystemSettingServlet extends HttpServlet {
+public class MainDashBoardServlet extends HttpServlet {
 
-    private static final String SUCCESS = "ViewSystemSettingServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String VIEW_DASHBOARD = "dashboard.jsp";
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-
+        String url = VIEW_DASHBOARD;
         try {
-            String id = request.getParameter("txtID");
-            String value = request.getParameter("txtValue");
-            boolean valid = true;
-            String regex = "^[0-9]{1,2}$";
-            if (value.matches(regex)) {
-                int valueCheck = Integer.parseInt(value);
-                if (valueCheck <= 1 || valueCheck >= 15) {
-                    valid = false;
-                }
-            } else {
-                valid = false;
-            }
-            SystemSettingDAO dao = new SystemSettingDAO();
-            if (valid) {
-                if (dao.updateSystemSetting(value, id)) {
-                    url = SUCCESS;
-                    request.setAttribute("UPDATE_SETTING", "Đã cập nhật thành công");
-                    request.getRequestDispatcher(url).forward(request, response);
-
-                } else {
-                    request.setAttribute("ERROR", "Update failed, cannot find the Setting ID: " + id + ", please go back and try again");
-                    request.setAttribute("UPDATE_SETTING", "Cập nhật thất bại, vui lòng thử lại");
-                    request.getRequestDispatcher(url).forward(request, response);
-
-                }
-            } else {
-                url = SUCCESS;
-                request.setAttribute("UPDATE_SETTING", "Vui lòng nhập giá trị từ 2 tới 12 ");
-                request.getRequestDispatcher(url).forward(request, response);
-            }
-
+            IdentityDAO identityDAO = new IdentityDAO();
+            ServiceDAO serviceDAO = new ServiceDAO();
+            BlogDAO blogDAO = new BlogDAO();
+            ReservationDAO reservationDAO = new ReservationDAO();
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            int sum = identityDAO.countAllAccount();
+            request.setAttribute("TOTAL_ACCOUNT", sum);
+            int allService = serviceDAO.countAllService();
+            request.setAttribute("ALL_SERVICE", allService);
+            int allBlog = blogDAO.countAllBlog();
+            request.setAttribute("ALL_BLOG", allBlog);
+            int allfb = feedbackDAO.countAllFeedback();
+            request.setAttribute("ALL_FB", allfb);
+            int allRes = reservationDAO.countAllRes();
+            request.setAttribute("ALL_RES", allRes);
         } catch (Exception e) {
-            log("ERROR at UpdateSystemSettingServlet: " + e.getMessage());
-            e.printStackTrace();
+            log("ERROR at MainDashBoardServlet: " + e.getMessage());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -125,6 +125,8 @@
                                             <a class="dropdown-item" href="#">Hồ sơ bệnh nhân</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewReservationForManager">Đơn đặt khám bệnh</a>
+                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Dashboard</a>
                                         </div>
                                     </li>
                                 </c:when>
@@ -178,8 +180,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="dashboard.jsp">Dashboard</a>
-                                            <div class="dropdown-divider"></div>
+                                            
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>
                                     </li>

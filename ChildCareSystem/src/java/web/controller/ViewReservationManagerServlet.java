@@ -43,6 +43,12 @@ private static final String VIEW_RESERVATION="reservationdashboard.jsp";
             request.setAttribute("ListMorning", listReservationMorning);
             List<ReservationDTO> listReservationNoon = reservationDAO.getAllReservationByIntervalTimeID(5, 7);
             request.setAttribute("ListNoon", listReservationNoon);
+            int allRes = reservationDAO.countAllRes();
+            request.setAttribute("ALL_RES", allRes);
+            int monthlyRes = reservationDAO.countMonthlyRes();
+            request.setAttribute("MONTHLY_RES", monthlyRes);
+            int weeklyRes = reservationDAO.countWeeklyRes();
+            request.setAttribute("WEEKLY_RES", weeklyRes);
         } catch (Exception e) {
             log("ERROR at ViewReservationManagerServlet: " + e.getMessage());
         } finally {

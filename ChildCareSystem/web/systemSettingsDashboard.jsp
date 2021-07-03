@@ -23,46 +23,49 @@
 
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+        <style>
+            #side-bar-icon {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        </style>
     </head>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
-                <h3><span class="lab la-accusoft"> 
-                    </span>
-                    <span class="lmao" style="font-size: 1.5rem">
-                        Child Care System
-                    </span></h3>
-
+                <a  href="StartupServlet" class="link-primary" style="color: white">
+                    <h3><span class="lab la-accusoft"></span><span class="lmao" style="font-size: 1.5rem">Child Care System</span></h3>
+                </a>
             </div>
             <div class ="sidebar-menu">
                 <ul>
-                    <li>
-                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
-                            <span>Dashboard</span></a>
+                    <li style="padding-left:0.25rem">
+                        <a href="dashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <span >Dashboard</span></a>
                     </li>
-                    <li>
-                        <a href="DispatchServlet?btAction=ViewAccount" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                             <span>Account </span></a>
                     </li>
-                    <li>
-                        <a href="serviceDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-clipboard-list"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Service </span></a>
                     </li>
-                    <li>
-                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-shopping-bag"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Blog</span></a>
                     </li>
-                    <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-receipt"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                             <span>Reservation</span></a>
                     </li>
-                    <li>
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Feedback</span></a>
                     </li>
-                    <li>
-                        <a href="systemSettingsDashboard.jsp" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="ViewSystemSettingServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -91,129 +94,148 @@
 
             </header>
             <main>
-                <div class="cards">
-                    <div class="card-single">
-                        <div>
-                            <h1>100</h1>
-                            <span>Tài khoản</span>
+                <div class="row">
+                    <c:if test="${requestScope.UPDATE_SETTING!=null}">
+                        <div class="col-sm">
                         </div>
-                        <div>
-                            <span class="las la-users"></span>
+                        <div class="alert alert-success col-sm" role="alert" style="font-size: large">
+                            ${requestScope.UPDATE_SETTING}
                         </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>20</h1>
-                            <span>Dịch vụ</span>
+                        <div class="col-sm">
                         </div>
-                        <div>
-                            <span class="las la-clipboard-list"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>30</h1>
-                            <span>Blog</span>
-                        </div>
-                        <div>
-                            <span class="las la-shopping-bag"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>40</h1>
-                            <span>Đơn hẹn khám</span>
-                        </div>
-                        <div>
-                            <span class="las la-google-wallet"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>20</h1>
-                            <span>Phản hồi</span>
-                        </div>
-                        <div>
-                            <span class="las la-users"></span>
-                        </div>
-                    </div>
-
+                    </c:if>
                 </div>
+                <!--                <div class="cards">
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>100</h1>
+                                            <span>Tài khoản</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-users"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>20</h1>
+                                            <span>Dịch vụ</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-clipboard-list"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>30</h1>
+                                            <span>Blog</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-shopping-bag"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>40</h1>
+                                            <span>Đơn hẹn khám</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-google-wallet"></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-single">
+                                        <div>
+                                            <h1>20</h1>
+                                            <span>Phản hồi</span>
+                                        </div>
+                                        <div>
+                                            <span class="las la-users"></span>
+                                        </div>
+                                    </div>
+                
+                                </div>-->
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-
-                                <c:if test="${requestScope.settingList!=null}">
-                                    <c:if test="${not empty requestScope.settingList}" var="testEmpty">
-                                        <table class="table table-striped table-bordered mydatatable dataTable no-footer">
-                                            <thead>
-                                                <tr>
-                                                    <th>Setting ID</th>
-                                                    <th>Setting Name</th>
-                                                    <th>Setting Value</th>
-                                                    <th>Created Date</th>
-                                                    <th>Updated Date</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${requestScope.settingList}" var="dto">
-                                                    <tr>
-                                                        <td>${dto.settingID}</td>
-                                                        <td>${dto.settingName}</td>
-                                                        <td>${dto.settingValue}</td>
-                                                        <td>${dto.createdDate}</td>
-                                                        <td>${dto.updatedDate}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </c:if>
-                                    <c:if test="${!testEmpty}">
+                                <div class="row">
+                                    <c:if test="${requestScope.settingList!=null}">
+                                        <c:if test="${not empty requestScope.settingList}" var="testEmpty">
+                                            <c:forEach items="${requestScope.settingList}" var="dto">
+                                                <div class="col-md-6" style="margin-bottom: 3%">
+                                                    <form class="col" action="UpdateSystemSettingServlet" method="POST">
+                                                        <div class="card" style="text-align: center">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><strong>${dto.settingName}</strong></h5>
+                                                                <h5 class="card-title"><input type="text" name="txtID" value="${dto.settingID}" hidden></h5>
+                                                                <hr>
+                                                                <p class="card-text col-md-12" style="width: 50%;margin-left: 24%">
+                                                                    <strong>Giá trị cài đặt</strong><input placeholder="Nhập giá trị" required type="number" name="txtValue" value="${dto.settingValue}" min="0" max="15" step="1"/>
+                                                                </p>
+                                                                <hr>
+                                                                <c:url value="UpdateSystemSettingServlet" var="updateLink">
+                                                                    <c:param name="id" value="${dto.settingID}"/>
+                                                                </c:url>
+                                                                <button type="submit" class="btn btn-primary" href="${updateLink}">Cập nhật</button>
+                                                                <button type="reset" class="btn btn-primary" href="ViewSystemSettingServlet">Đặt lại</button>
+                                                                <hr>
+                                                                <p class="card-text" style="text-align: right; font-size: small">
+                                                                    <strong>Cập nhật lần cuối: </strong> ${dto.updatedDate}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${!testEmpty}">
                                             <h2>No Product here. Create new one below here</h2>
 
+                                        </c:if>
                                     </c:if>
-                                </c:if>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
-                </main>
-            </div>
-            <!--JQuery-->
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+                </div>
+            </main>
+        </div>
 
-            <!--Custom JS-->
-            <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-            <script>
-                $(".mydatatable").DataTable();
-            </script>
+        <!--JQuery-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script src="./js/bootstrap-input-spinner.js"></script>
+        <script>
+            $("input[type='number']").inputSpinner()
+        </script>
+        <!--Custom JS-->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(".mydatatable").DataTable();
+        </script>
 
 
-            <script>
-                window.addEventListener('load', function () {
-                    const loader = document.querySelector(".loader");
-                    loader.className += " hidden"; // class "loader hidden"
-                });
-            </script>
-            <script>
-                function confirmation() {
-                    var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
-                    return r;
-                }
-            </script>
-        </body>
-    </html>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
+        <script>
+            function confirmation() {
+                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+                return r;
+            }
+        </script>
+    </body>
+</html>
 
 

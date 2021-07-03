@@ -23,46 +23,49 @@
 
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+        <style>
+            #side-bar-icon {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        </style>
     </head>
     <body>
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar">
             <div class ="sidebar-brand">
-                <h3><span class="lab la-accusoft"> 
-                    </span>
-                    <span class="lmao">
-                        Child Care System
-                    </span></h3>
-
+                <a  href="StartupServlet" class="link-primary" style="color: white">
+                    <h3><span class="lab la-accusoft"></span><span class="lmao" style="font-size: 1.5rem">Child Care System</span></h3>
+                </a>
             </div>
             <div class ="sidebar-menu">
                 <ul>
-                                        <li>
-                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-igloo"></span>
-                            <span>Dashboard</span></a>
+                    <li style="padding-left:0.25rem">
+                        <a href="dashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <span >Dashboard</span></a>
                     </li>
-                    <li>
-                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-users"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                             <span>Account </span></a>
                     </li>
-                    <li>
-                        <a href="serviceDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-clipboard-list"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Service </span></a>
                     </li>
-                    <li>
-                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-shopping-bag"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Blog</span></a>
                     </li>
-                    <li>
-                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-receipt"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                             <span>Reservation</span></a>
                     </li>
-                    <li>
-                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Feedback</span></a>
                     </li>
-                    <li>
-                        <a href="systemSettingsDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span class="las la-user-circle"></span>
+                    <li style="padding-left:0.25rem">
+                        <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                             <span>System Settings</span></a>
                     </li>
                 </ul>
@@ -94,44 +97,44 @@
                 <div class="cards">
                     <div class="card-single">
                         <div>
-                            <h1>100</h1>
+                            <h1>${requestScope.ALL_RES}</h1>
                             <span>Đơn đặt khám</span>
                         </div>
                         <div>
-                            <span class="las la-users"></span>
+                            <span class="fas fa-notes-medical"></span>
                         </div>
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>10</h1>
+                            <h1>${requestScope.WEEKLY_RES}</h1>
                             <span>Đơn trong tuần</span>
                         </div>
                         <div>
-                            <span class="las la-clipboard-list"></span>
+                            <span class="fas fa-calendar-week"></span>
                         </div>
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1>20</h1>
+                            <h1>${requestScope.MONTHLY_RES}</h1>
                             <span>Đơn trong tháng</span>
                         </div>
                         <div>
-                            <span class="las la-shopping-bag"></span>
+                            <span class="far fa-calendar-alt"></span>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
                                 <h3>Reservations List</h3>
-                                
+
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">
                                     <div class="userPosts__wrapper">
-                                        
+
                                         <div class="dropdownButton__wrapper">
                                             <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

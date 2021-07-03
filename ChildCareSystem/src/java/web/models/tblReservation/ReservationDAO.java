@@ -321,4 +321,97 @@ public class ReservationDAO implements Serializable {
         }
         return result;
     }
+
+    public int countAllRes() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ReservationID) as Total"
+                        + " FROM tblReservation ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+
+    public int countMonthlyRes() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ReservationID) as Total"
+                        + " FROM tblReservation "
+                        + " WHERE MONTH(CreatedDate) = Month(GETDATE())";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+
+    public int countWeeklyRes() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ReservationID) as Total"
+                        + " FROM tblReservation "
+                        + " WHERE CreatedDate >= dateadd(day, 1-datepart(dw, getdate()), CONVERT(date,getdate())) "
+                        + " AND CreatedDate <  dateadd(day, 8-datepart(dw, getdate()), CONVERT(date,getdate()))";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
 }

@@ -140,7 +140,7 @@ public class FeedbackDAO implements Serializable {
         }
         return result;
     }
-    
+
     public List<FeedbackDTO> getFeedbackByServiceId(int id, int top) throws SQLException, NamingException {
         List<FeedbackDTO> result = null;
         Connection conn = null;

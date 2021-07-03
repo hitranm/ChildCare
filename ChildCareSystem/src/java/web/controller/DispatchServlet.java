@@ -61,6 +61,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String UPDATE_SPECIALTY = "UpdateSpecialtyServlet";
     private static final String CREATE_CATEGORY = "CreateCategoryServlet";
     private static final String UPDATE_CATEGORY = "UpdateCategoryServlet";
+    private static final String VIEW_MAIN_DASHBOARD = "MainDashBoardServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -148,6 +149,8 @@ public class DispatchServlet extends HttpServlet {
                 url = UPDATE_CATEGORY;
             } else if (button.equalsIgnoreCase("UpdateService")) {
                 url = UPDATE_SERVICE;
+            } else if (button.equalsIgnoreCase("ViewMainDashboard")) {
+                url = VIEW_MAIN_DASHBOARD;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

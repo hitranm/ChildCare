@@ -674,4 +674,126 @@ public class ServiceDAO implements Serializable {
     }
 
 
+    public int countAllService() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ServiceID) as Total"
+                        + " FROM tblService ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+    public int countServiceActive() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ServiceID) as Total"
+                        + " FROM tblService "
+                        + " WHERE StatusID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, 1);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+     public int countServiceDeny() throws SQLException, NamingException {
+        int sum=0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ServiceID) as Total"
+                        + " FROM tblService "
+                        + " WHERE StatusID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, 2);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+     public String countMostUseService() throws SQLException, NamingException {
+        String service="";
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT TOP(1) ServiceName, COUNT(R.ServiceID) as Total"
+                        + " FROM tblReservation R, tblService S "
+                        + " WHERE R.ServiceID= S.ServiceID"
+                        + " GROUP BY S.ServiceName ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    service = rs.getString("ServiceName");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return service;
+    }
 }

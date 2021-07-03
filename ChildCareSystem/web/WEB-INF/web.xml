@@ -294,6 +294,10 @@
         <servlet-name>ViewBlogByCateServlet</servlet-name>
         <servlet-class>web.controller.ViewBlogByCateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MainDashBoardServlet</servlet-name>
+        <servlet-class>web.controller.MainDashBoardServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -583,6 +587,10 @@
     <servlet-mapping>
         <servlet-name>ViewBlogByCateServlet</servlet-name>
         <url-pattern>/ViewBlogByCateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MainDashBoardServlet</servlet-name>
+        <url-pattern>/MainDashBoardServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
