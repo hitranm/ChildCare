@@ -181,4 +181,71 @@ public class FeedbackDAO implements Serializable {
         }
         return result;
     }
+
+    public float calcAvgStar() throws SQLException, NamingException {
+        float sum = 0;
+        float rate = 0;
+        float result = 0;
+
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT SUM(Rate) as AvgRate, COUNT(FeedbackID) as Total"
+                        + " FROM tblFeedback ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getFloat("Total");
+                    rate = rs.getFloat("AvgRate");
+                    result = rate / sum;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return result;
+    }
+
+    public int countAllFeedback() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(FeedbackID) as Total"
+                        + " FROM tblFeedback ";
+                stm = conn.prepareStatement(sql);
+
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
 }

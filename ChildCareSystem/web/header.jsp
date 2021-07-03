@@ -137,10 +137,11 @@
                                             Hệ thống
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="nav-link" href="#">Cấu hình hệ thống</a>
+                                            <a class="dropdown-item" href="#">Cấu hình hệ thống</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="nav-link" href="addManager.jsp">Tạo tài khoản cho quản lí</a>
+                                            <a class="dropdown-item" href="addManager.jsp">Tạo tài khoản cho quản lí</a>
                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Dashboard</a>
                                         </div>
                                     </li>
                                 </c:when>
