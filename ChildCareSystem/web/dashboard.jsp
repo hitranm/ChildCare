@@ -77,20 +77,8 @@
                     <label for="nav-toggle">
                         <span class="las la-bars"></span>
                     </label>
-                    Dashboard
+                    Thống kê
                 </h2>
-                <div class="search-wrapper">
-                    <span class="las la-search"></span>
-                    <input type="search"/>
-                </div>
-                <div class="user-wrapper">
-
-                    <div>
-                        <h4>John Doe</h4>
-                        <small>Super administrator
-                        </small>
-                    </div>
-                </div>
             </header>
             <main>
                 <div class="cards">
@@ -115,7 +103,7 @@
                     <div class="card-single">
                         <div>
                             <h1>${requestScope.ALL_BLOG}</h1>
-                            <span>Blog</span>
+                            <span>Bài viết</span>
                         </div>
                         <div>
                             <span class="fas fa-file-alt"></span>
@@ -139,7 +127,6 @@
                             <span class="fas fa-comments"></span>
                         </div>
                     </div>
-
                 </div>
                 <div class="recent-grid">
                     <div class="projects">

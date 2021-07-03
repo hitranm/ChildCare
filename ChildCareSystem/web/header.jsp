@@ -126,7 +126,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewReservationForManager">Đơn đặt khám bệnh</a>
                                              <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Dashboard</a>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
                                         </div>
                                     </li>
                                 </c:when>

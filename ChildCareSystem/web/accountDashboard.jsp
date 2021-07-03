@@ -23,7 +23,7 @@
 
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
-         <style>
+        <style>
             #side-bar-icon {
                 padding-left: 1rem;
                 padding-right: 1rem;
@@ -38,7 +38,7 @@
                     <h3><span class="lab la-accusoft"></span><span class="lmao" style="font-size: 1.5rem">Child Care System</span></h3>
                 </a>
             </div>
-             <div class ="sidebar-menu">
+            <div class ="sidebar-menu">
                 <ul>
                     <li style="padding-left:0.25rem">
                         <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
@@ -77,7 +77,7 @@
                     <label for="nav-toggle">
                         <span class="las la-bars"></span>
                     </label>
-                    Dashboard
+                    Thống kê
                 </h2>
             </header>
             <main>
@@ -135,7 +135,7 @@
                                         <div class="dropdownButton__wrapper px-3 mb-4">
                                             <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Vài trò
+                                                Vai trò
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -175,16 +175,13 @@
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
-
                                                         <tbody id="tableBodyAccepted">
                                                             <c:if test="${requestScope.ListCustomer!=null}">
                                                                 <c:set var="count" value="0"/>
                                                                 <c:forEach items="${requestScope.ListCustomer}" var="dto" >
-
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
-
                                                                         <td>${dto.identityID}</td>
                                                                         <td>${dto.fullName}</td>
                                                                         <td>${dto.phoneNumber}</td>
@@ -193,8 +190,6 @@
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewDetails"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
@@ -202,8 +197,6 @@
                                                                             <c:url var="delete" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
                                                                         </td>
@@ -211,8 +204,37 @@
                                                                 </c:forEach>
 
                                                                 <c:if test="${requestScope.ListStaff!=null}">
-
                                                                     <c:forEach items="${requestScope.ListStaff}" var="dto" >
+                                                                        <c:set var="count" value="${count+1}"/>
+                                                                    <td>${count}</td>
+
+                                                                    <td>${dto.identityID}</td>
+                                                                    <td>${dto.fullName}</td>
+                                                                    <td>${dto.phoneNumber}</td>
+                                                                    <td class="alert alert-warning">Staff</td>
+                                                                    <td>
+                                                                        <c:url var="viewdetails" value="DispatchServlet">
+                                                                            <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                        </c:url>
+                                                                        <a href="${viewdetails}">Chi tiết</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <c:url var="delete" value="DispatchServlet">
+                                                                            <c:param name="btAction" value="DeleteAccount"></c:param>
+                                                                            <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                        </c:url>
+                                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
+                                                                    </td>
+                                                                    </tr>
+                                                                </c:forEach>  
+                                                                <c:if test="${requestScope.ListManager!=null}">
+
+                                                                    <c:forEach items="${requestScope.ListManager}" var="dto" >
 
                                                                         <tr>
                                                                             <c:set var="count" value="${count+1}"/>
@@ -221,7 +243,7 @@
                                                                             <td>${dto.identityID}</td>
                                                                             <td>${dto.fullName}</td>
                                                                             <td>${dto.phoneNumber}</td>
-                                                                            <td class="alert alert-warning">Staff</td>
+                                                                            <td class="alert alert-danger">Manager</td>
                                                                             <td>
                                                                                 <c:url var="viewdetails" value="DispatchServlet">
                                                                                     <c:param name="btAction" value="ViewDetails"></c:param>
@@ -241,61 +263,26 @@
                                                                                 <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                                             </td>
                                                                         </tr>
-                                                                    </c:forEach>  
-                                                                    <c:if test="${requestScope.ListManager!=null}">
-
-                                                                        <c:forEach items="${requestScope.ListManager}" var="dto" >
-
-                                                                            <tr>
-                                                                                <c:set var="count" value="${count+1}"/>
-                                                                                <td>${count}</td>
-
-                                                                                <td>${dto.identityID}</td>
-                                                                                <td>${dto.fullName}</td>
-                                                                                <td>${dto.phoneNumber}</td>
-                                                                                <td class="alert alert-danger">Manager</td>
-                                                                                <td>
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewDetails"></c:param>
-                                                                                        <c:param name="id" value="${dto.identityID}"></c:param>
-
-
-                                                                                    </c:url>
-                                                                                    <a href="${viewdetails}">Chi tiết</a>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <c:url var="delete" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="DeleteAccount"></c:param>
-                                                                                        <c:param name="id" value="${dto.identityID}"></c:param>
-
-
-                                                                                    </c:url>
-                                                                                    <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </c:if>
+                                                                    </c:forEach>
                                                                 </c:if>
                                                             </c:if>
+                                                        </c:if>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
 
-                                                <!--WaitingList-->
+                                                <!--Customer list-->
                                                 <div class="tab-pane fade bg-white" id="customerList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
-
-
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>IdentityID</th>
-                                                                <th>Full Name</th>
-                                                                <th>Phone Number</th>
-                                                                <th>Role</th>
-                                                                <th>Chi tiết</th>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -304,21 +291,16 @@
                                                                 <c:if test="${requestScope.ListCustomer!=null}">
                                                                     <c:set var="count" value="0"/>
                                                                     <c:forEach items="${requestScope.ListCustomer}" var="dto" >
-
-                                                                    <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
-
                                                                         <td>${dto.identityID}</td>
                                                                         <td>${dto.fullName}</td>
                                                                         <td>${dto.phoneNumber}</td>
-                                                                        <td class="alert alert-success">Customer</td>
+                                                                        <td class="alert alert-success">Khách hàng</td>
                                                                         <td>
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewDetails"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
@@ -326,59 +308,47 @@
                                                                             <c:url var="delete" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
-
                                                             </c:if>
                                                         </tbody>
                                                     </table>
 
                                                 </div>
 
-                                                <!--RejectedList-->
+                                                <!--staff list-->
                                                 <div class="tab-pane fade bg-white" id="staffList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
-
-
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>IdentityID</th>
-                                                                <th>Full Name</th>
-                                                                <th>Phone Number</th>
-                                                                <th>Role</th>
-                                                                <th>Chi tiết</th>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
                                                                 <th></th>
-
                                                             </tr>
                                                         </thead>
-
                                                         <tbody id="tableBodyRejected">
-                                                            <tr>
                                                                 <c:if test="${requestScope.ListStaff!=null}">
                                                                     <c:set var="count" value="0"/>
                                                                     <c:forEach items="${requestScope.ListStaff}" var="dto" >
-
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
-
                                                                         <td>${dto.identityID}</td>
                                                                         <td>${dto.fullName}</td>
                                                                         <td>${dto.phoneNumber}</td>
-                                                                        <td class="alert alert-warning">Staff</td>
+                                                                        <td class="alert alert-warning">Nhân viên</td>
                                                                         <td>
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewDetails"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
@@ -386,8 +356,6 @@
                                                                             <c:url var="delete" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                                         </td>
@@ -396,32 +364,28 @@
                                                             </c:if>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
 
-                                                <!--All-->
+                                                <!--Manager list-->
                                                 <div class="tab-pane fade bg-white" id="managerList" role="tabpanel"
                                                      >
                                                     <table class="table table-striped table-bordered mydatatable" id="tableAll">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>IdentityID</th>
-                                                                <th>Full Name</th>
-                                                                <th>Phone Number</th>
-                                                                <th>Role</th>
-                                                                <th>Chi tiết</th>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
                                                                 <th></th>
-
                                                             </tr>
                                                         </thead>
 
                                                         <tbody id="tableBodyAll">
-                                                            <tr>
-                                                                <c:if test="${requestScope.ListManager!=null}">
-                                                                    <c:set var="count" value="0"/>
-                                                                    <c:forEach items="${requestScope.ListManager}" var="dto" >
-
+                                                            <c:if test="${requestScope.ListManager!=null}">
+                                                                <c:set var="count" value="0"/>
+                                                                <c:forEach items="${requestScope.ListManager}" var="dto" >
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -429,7 +393,7 @@
                                                                         <td>${dto.identityID}</td>
                                                                         <td>${dto.fullName}</td>
                                                                         <td>${dto.phoneNumber}</td>
-                                                                        <td class="alert alert-danger">Manager</td>
+                                                                        <td class="alert alert-danger">Quản lí</td>
                                                                         <td>
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewDetails"></c:param>
@@ -443,8 +407,6 @@
                                                                             <c:url var="delete" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                                             </c:url>
                                                                             <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                                         </td>
@@ -454,16 +416,13 @@
                                                         </tbody>
                                                         <tfoot></tfoot>
                                                     </table>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </main>

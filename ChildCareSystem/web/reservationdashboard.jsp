@@ -41,32 +41,32 @@
             <div class ="sidebar-menu">
                 <ul>
                     <li style="padding-left:0.25rem">
-                        <a href="dashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
-                            <span >Dashboard</span></a>
+                        <a href="dashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <span >Tổng quát</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
-                            <span>Account </span></a>
+                        <a href="DispatchServlet?btAction=ViewAccount" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
+                            <span>Tài khoản </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="serviceDashboard.jsp"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <span>Service </span></a>
+                            <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="blogDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Blog</span></a>
+                            <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
-                            <span>Reservation</span></a>
+                            <span>Đơn đặt hàng</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="feedbackDashboard.jsp" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
-                            <span>Feedback</span></a>
+                            <span>Phản hồi</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
-                            <span>System Settings</span></a>
+                            <span>Cấu hình hệ thống</span></a>
                     </li>
                 </ul>
             </div>
@@ -77,21 +77,8 @@
                     <label for="nav-toggle">
                         <span class="las la-bars"></span>
                     </label>
-                    Dashboard
+                    Thống kê
                 </h2>
-                <div class="search-wrapper">
-                    <span class="las la-search"></span>
-                    <input type="search"/>
-                </div>
-                <div class="user-wrapper">
-
-                    <div>
-                        <h4>John Doe</h4>
-                        <small>Super administrator
-                        </small>
-                    </div>
-                </div>
-
             </header>
             <main>
                 <div class="cards">
@@ -128,17 +115,17 @@
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Reservations List</h3>
+                                <h3>Danh sách đặt khám</h3>
 
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">
                                     <div class="userPosts__wrapper">
 
-                                        <div class="dropdownButton__wrapper">
+                                        <div class="dropdownButton__wrapper px-3 mb-4">
                                             <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                DayTime
+                                                Thời gian
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -146,13 +133,13 @@
                                                      aria-orientation="vertical">
                                                     <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
                                                        href="#allList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
-                                                       onclick="toggleButton(this)">All</a>
+                                                       onclick="toggleButton(this)">Tất cả</a>
                                                     <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#customerList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Morning</a>
+                                                       onclick="toggleButton(this)">Sáng</a>
                                                     <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#staffList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Noon</a>
+                                                       onclick="toggleButton(this)">Chiều</a>
 
                                                 </div>
                                             </div>
@@ -167,13 +154,12 @@
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>ReservationID</th>
-                                                                <th>CustomerID</th>
-                                                                <th>StaffAssignedID</th>
-                                                                <th>CheckInTime</th>
-                                                                <th>View details</th>
-
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>ID khách hàng</th>
+                                                                <th>ID nhân viên</th>
+                                                                <th>Thời gian khám</th>
+                                                                <th>Xem chi tiết</th>
                                                             </tr>
                                                         </thead>
 
@@ -195,12 +181,9 @@
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewReservationDetails"></c:param>
                                                                                 <c:param name="resid" value="${dto.reservationId}"></c:param>
-
-
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
-
                                                                     </tr>
                                                                 </c:forEach>
 
@@ -215,25 +198,21 @@
                                                 <!--WaitingList-->
                                                 <div class="tab-pane fade bg-white" id="customerList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
-
-
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>ReservationID</th>
-                                                                <th>CustomerID</th>
-                                                                <th>StaffAssignedID</th>
-                                                                <th> CheckInTime</th>
-                                                                <th>View details</th>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>ID khách hàng</th>
+                                                                <th>ID nhân viên</th>
+                                                                <th>Thời gian khám</th>
+                                                                <th>Xem chi tiết</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="tableBodyWaiting">
-                                                            <tr>
                                                                 <c:if test="${requestScope.ListMorning!=null}">
                                                                     <c:set var="count" value="0"/>
                                                                     <c:forEach items="${requestScope.ListMorning}" var="dto" >
-
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -241,50 +220,39 @@
                                                                         <td>${dto.customerId}</td>
                                                                         <td>${dto.staffAssignId}</td>
                                                                         <td>${dto.checkInDate}</td>
-
                                                                         <td>
                                                                             <c:url var="viewdetails" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="ViewReservationDetails"></c:param>
                                                                                 <c:param name="resid" value="${dto.reservationId}"></c:param>
-
-
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
-
                                                                     </tr>
                                                                 </c:forEach>
-
                                                             </c:if>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
 
-                                                <!--RejectedList-->
+                                                <!--Noon list-->
                                                 <div class="tab-pane fade bg-white" id="staffList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
-
-
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>ReservationID</th>
-                                                                <th>CustomerID</th>
-                                                                <th>StaffAssignedID</th>
-                                                                <th> CheckInTime</th>
-                                                                <th>View details</th>
-
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>ID khách hàng</th>
+                                                                <th>ID nhân viên</th>
+                                                                <th>Thời gian khám</th>
+                                                                <th>Xem chi tiết</th>
                                                             </tr>
                                                         </thead>
 
                                                         <tbody id="tableBodyRejected">
-                                                            <tr>
                                                                 <c:if test="${requestScope.ListNoon!=null}">
                                                                     <c:set var="count" value="0"/>
                                                                     <c:forEach items="${requestScope.ListNoon}" var="dto" >
-
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -300,7 +268,7 @@
 
 
                                                                             </c:url>
-                                                                            <a href="${viewdetails}">See details</a>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
 
                                                                     </tr>
@@ -321,18 +289,13 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
+
         <!--JQuery-->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -352,12 +315,6 @@
         </script>
 
 
-        <script>
-            window.addEventListener('load', function () {
-                const loader = document.querySelector(".loader");
-                loader.className += " hidden"; // class "loader hidden"
-            })
-        </script>
         <script>
             function confirmation() {
                 var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
