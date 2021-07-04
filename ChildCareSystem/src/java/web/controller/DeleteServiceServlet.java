@@ -15,7 +15,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblService.ServiceDAO;
+import web.models.tblService.ServiceDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -24,7 +27,9 @@ import web.models.tblService.ServiceDAO;
 public class DeleteServiceServlet extends HttpServlet {
 
     private final String VIEW_SERVICE = "ViewServiceListServlet?index=1";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,13 +44,29 @@ public class DeleteServiceServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String serviceID = request.getParameter("id");
         String url = ERROR;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
+            StaffDAO staffDAO = new StaffDAO();
+            String staffID = staffDAO.queryStaff(identityID);
             ServiceDAO dao = new ServiceDAO();
-            boolean result = dao.deleteService(serviceID);
-            if (result) {
-                url = VIEW_SERVICE;
+            ServiceDTO dto = dao.getServiceDetail(serviceID);
+            String authorID = dto.getCreatePersonId();
+            if (role == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if (!staffID.equals(authorID) || !"3".equals(role)) {
+                url = DENY;
+            } else {
+                boolean result = dao.deleteService(serviceID);
+                if (result) {
+                    url = VIEW_SERVICE;
+                } else {
+                    url = ERROR;
+                }
             }
         } catch (NamingException ex) {
             log("DeleteServiceServlet _ Naming: " + ex.getMessage());

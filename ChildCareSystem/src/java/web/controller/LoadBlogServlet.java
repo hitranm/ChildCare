@@ -16,8 +16,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -26,7 +28,9 @@ import web.models.tblBlog.BlogDTO;
 public class LoadBlogServlet extends HttpServlet {
 
     private final String UPDATE_BLOG = "updateBlog.jsp";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,12 +45,27 @@ public class LoadBlogServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String blogID = request.getParameter("id");
-        String url = UPDATE_BLOG;
+        String url = ERROR;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
+            StaffDAO staffDAO = new StaffDAO();
+            String staffID = staffDAO.queryStaff(identityID);
             BlogDAO dao = new BlogDAO();
             BlogDTO blog = dao.getBlogDetail(blogID);
-            request.setAttribute("BLOG", blog);
+            String authorID = blog.getAuthorID();
+            if (role == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if (!staffID.equals(authorID)) {
+                url = DENY;
+            } else {
+                request.setAttribute("BLOG", blog);
+                url = UPDATE_BLOG;
+            }
+
         } catch (NamingException ex) {
             log("LoadBlogServlet _ Naming: " + ex.getMessage());
             url = ERROR;

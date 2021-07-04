@@ -22,6 +22,7 @@ import web.models.tblFeedback.FeedbackDAO;
 import web.models.tblFeedback.FeedbackDTO;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -30,7 +31,9 @@ import web.models.tblService.ServiceDTO;
 public class ViewServiceDetailServlet extends HttpServlet {
 
     private final String SERVICE_DETAIL_PAGE = "serviceDetail.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,18 +48,33 @@ public class ViewServiceDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String serviceID = request.getParameter("id");
         String url = SERVICE_DETAIL_PAGE;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
+            StaffDAO staffDAO = new StaffDAO();
+            String staffID = staffDAO.queryStaff(identityID);
             ServiceDAO dao = new ServiceDAO();
-            FeedbackDAO feedbackDAO = new FeedbackDAO();
-            
-            List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackByServiceId(Integer.parseInt(serviceID), 3);
-            if(!feedbackList.isEmpty()) {
-                request.setAttribute("FEEDBACK_LIST",feedbackList);
-            }
             ServiceDTO service = dao.getServiceDetail(serviceID);
-            request.setAttribute("SERVICE_DETAIL", service);
+            String authorID = service.getCreatePersonId();
+            String statusID = service.getStatusId();
+            if (role == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if ("1".equals(statusID) || "3".equals(role) || staffID.equals(authorID)) {
+                FeedbackDAO feedbackDAO = new FeedbackDAO();
+                List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackByServiceId(Integer.parseInt(serviceID), 3);
+                if (!feedbackList.isEmpty()) {
+                    request.setAttribute("FEEDBACK_LIST", feedbackList);
+                }
+                request.setAttribute("SERVICE_DETAIL", service);
+                request.setAttribute("STAFFID", staffID);
+                url = SERVICE_DETAIL_PAGE;
+            } else {
+                url = DENY;
+            }
         } catch (NamingException ex) {
             log("ViewServiceDetailServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;

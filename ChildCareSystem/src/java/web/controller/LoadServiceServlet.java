@@ -17,18 +17,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 import web.models.tblSpecialty.SpecialtyDAO;
 import web.models.tblSpecialty.SpecialtyDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
  * @author DELL
  */
 public class LoadServiceServlet extends HttpServlet {
+
     private final String UPDATE_SERVICE = "updateService.jsp";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,15 +48,29 @@ public class LoadServiceServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String serviceID = request.getParameter("id");
-        String url = UPDATE_SERVICE;
+        String url = ERROR;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
+            StaffDAO staffDAO = new StaffDAO();
+            String staffID = staffDAO.queryStaff(identityID);
             ServiceDAO serviceDao = new ServiceDAO();
             ServiceDTO service = serviceDao.getServiceDetail(serviceID);
-            request.setAttribute("SERVICE", service);
-            SpecialtyDAO specDao = new SpecialtyDAO();
-            List<SpecialtyDTO> specialty = specDao.viewSpecialtyList();
-            request.setAttribute("SPECIALTY", specialty);
+            String authorID = service.getCreatePersonId();
+            if (role == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if (!staffID.equals(authorID)) {
+                url = DENY;
+            } else {
+                request.setAttribute("SERVICE", service);
+                SpecialtyDAO specDao = new SpecialtyDAO();
+                List<SpecialtyDTO> specialty = specDao.viewSpecialtyList();
+                request.setAttribute("SPECIALTY", specialty);
+                url = UPDATE_SERVICE;
+            }
         } catch (NamingException ex) {
             log("LoadServiceServlet _ Naming: " + ex.getMessage());
             url = ERROR;

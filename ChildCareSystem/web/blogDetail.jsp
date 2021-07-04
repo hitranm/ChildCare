@@ -72,7 +72,8 @@
                     </div>
                     <div class="text-center mb-5">
                         <c:set var="role" value="${sessionScope.ROLEID}"/>
-                        <c:if test="${role eq 2}">
+                        <c:set var="staff" value="${requestScope.STAFFID}"/>
+                        <c:if test="${role eq 2 and staffID eq staff}">
                             <a class="btn btn-primary col-4" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
                             <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a>
                         </c:if>
