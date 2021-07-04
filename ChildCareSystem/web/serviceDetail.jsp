@@ -24,40 +24,14 @@
     <body>
         <jsp:include page="header.jsp"/>
         <div class="container">
-            <div class="body-top row mt-5">
-                <div class="service-name text-center col-9 mb-2">
+            <div class="body-top mt-3">
+                <div class="service-name text-center mb-4">
                     <h2>${service.serviceName}</h2>
                 </div>
                 <c:set var="role" value="${sessionScope.ROLEID}"/>
-                <div class="funct-button col-3 text-center">
-
-                    <c:if test="${role eq 2}">
-                        <a class="btn btn-primary mt-2" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
-                        <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
-                    </c:if>
-                    <c:if test="${role eq 3}">
-                        <div class="status mt-4">
-                            <form action="UpdateServiceStatusServlet" method="POST">
-                                <input type="hidden" name="txtServiceID" value="${service.serviceId}" />
-                                <c:choose>
-                                    <c:when test="${service.statusId eq 0}">
-                                        <button class="btn btn-outline-primary" type="submit" value="1" name="status">Duyệt bài</button>
-                                        <button class="btn btn-outline-primary" type="submit" value="2" name="status">Từ chối</button>
-                                    </c:when>
-                                    <c:when test="${service.statusId eq 1}">
-                                        <button class="btn btn-outline-primary" type="submit" value="0" name="status">Ẩn dịch vụ</button>
-                                    </c:when>
-                                    <c:when test="${service.statusId eq 2}">
-                                        <button class="btn btn-outline-primary" type="submit" value="1" name="status">Hiện bài đăng</button>
-                                    </c:when>
-                                </c:choose>
-                            </form>
-                        </div>
-                    </c:if>
-                </div>
             </div>
             <div class="row mb-5">
-                <div class="body-left col-lg-9 col-12">
+                <div class="body-left col-12">
                     <div>
                         <div class="service-thumb mb-3">
                             <img src="./images/service/${service.thumbnail}"/>
@@ -69,16 +43,42 @@
                         <div class="price text-center float-right">
                             ${service.price}00đ
                         </div>
+                    </div>
+                    <div class="funct-button text-center mt-5">
                         <c:if test="${role eq 1}">
                             <c:url var="reservationLink" value="DispatchServlet">
                                 <c:param name="btAction" value="ChooseServiceReserve"/>
                                 <c:param name="serviceId" value="${service.serviceId}"/>
                             </c:url>
-                            <div class="text-center mt-5"> 
-                                <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
+                            <!--                                <div class="text-center mt-5"> -->
+                            <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
+                            <!--                                </div>-->
+                        </c:if>
+                        <c:if test="${role eq 2}">
+                            <a class="btn btn-primary mt-2 col-4" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
+                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                        </c:if>
+                        <c:if test="${role eq 3}">
+                            <div class="status mt-4">
+                                <form action="UpdateServiceStatusServlet" method="POST">
+                                    <input type="hidden" name="txtServiceID" value="${service.serviceId}" />
+                                    <c:choose>
+                                        <c:when test="${service.statusId eq 0}">
+                                            <button class="btn btn-outline-primary col-4" type="submit" value="1" name="status">Duyệt dịch vụ</button>
+                                            <button class="btn btn-outline-danger col-4" type="submit" value="2" name="status">Từ chối</button>
+                                        </c:when>
+                                        <c:when test="${service.statusId eq 1}">
+                                            <button class="btn btn-outline-secondary col-4" type="submit" value="0" name="status">Ẩn dịch vụ</button>
+                                        </c:when>
+                                        <c:when test="${service.statusId eq 2}">
+                                            <button class="btn btn-outline-primary col-4" type="submit" value="1" name="status">Hiện bài đăng</button>
+                                        </c:when>
+                                    </c:choose>
+                                </form>
                             </div>
                         </c:if>
                     </div>
+
 
                 </div>
 
@@ -86,7 +86,7 @@
 
             <!-- Feedback Section -->
             <div class="row d-flex mb-4">
-                <div class="col-lg-9 col-12">
+                <div class="col-12">
                     <div class="headings d-flex justify-content-between align-items-center mb-3 ">
                         <h5>Phản hồi về dịch vụ</h5>
                     </div>

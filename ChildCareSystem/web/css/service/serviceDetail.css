@@ -11,11 +11,6 @@ and open the template in the editor.
 .top_title {
     font-size: 2rem;
 }
-.funct-button {
-    position: fixed;
-    z-index: 99999;
-    right: 15px;
-}
 .price {
     font-size: 20px;
 }
@@ -25,7 +20,7 @@ body {
 }
 
 .service-thumb img {
-    width: 825px;
+    width: 1110px;
     height: auto;
     border-radius: 15px;
 }
