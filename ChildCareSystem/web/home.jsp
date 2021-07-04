@@ -147,7 +147,7 @@
                                 </c:if>
                             </c:if>
                         </div>
-                        <a href="#" class="section_moredetail pr-4">Xem thêm</a>
+                        <a href="ViewBlogServlet?index=1" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
                     <!--End post section-->
 
@@ -198,7 +198,7 @@
 
 
                         </div>
-                        <a href="#" class="section_moredetail pr-4">Xem thêm</a>
+                        <a href="ViewServiceListServlet?index=1" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
                     <!--End service section-->
                 </div>

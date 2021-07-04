@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Trang chủ</title>
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -66,28 +66,18 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="DispatchServlet"
-                                   >Trang chủ<span class="sr-only"></span
-                                    ></a>
-                            </li>
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
-                            </li>
+                        <c:choose>
 
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
-                            </li>
-
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="#">Phản hồi</a>
-                            </li>
-
-
-                            <!-- Authorize menu -->
-                            <c:choose>
-                                <c:when test="${sessionScope.ROLE eq 'customer'}">
+                            <c:when test="${sessionScope.ROLE eq 'customer'}">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet"
+                                           >Trang chủ<span class="sr-only"></span
+                                            ></a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Dịch vụ
@@ -98,105 +88,196 @@
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt chỗ khám bệnh</a>
                                         </div>
                                     </li>
-                                    <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewPatientProfileServlet">Hồ sơ bệnh nhân</a>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Hồ sơ bệnh nhân
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="ViewPatientProfileServlet">Xem hồ sơ bệnh nhân của bạn</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="ViewPatientProfileServlet?tab=add">Tạo hồ sơ bệnh nhân</a>
+                                        </div>
                                     </li>
-                                </c:when>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewPatientProfileServlet?tab=order">Phản hồi</a>
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav pr-5">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            ${sessionScope.LOGIN_USER.fullName}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="ViewPatientProfileServlet?tab=order">Xem lịch sử đặt khám</a>  
+                                            <div class="dropdown-divider"></div> 
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>                                              
+                                            <div class="dropdown-divider"></div>                                                   
+                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </c:when>
 
-                                <c:when test="${sessionScope.ROLE eq 'staff'}">
+                            <c:when test="${sessionScope.ROLE eq 'staff'}">
+                                <ul class="navbar-nav mr-auto">
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="DispatchServlet?btAction=ViewReservationForStaff">Xem lịch khám bệnh</a>
+                                        <a class="nav-link" href="DispatchServlet"
+                                           >Trang chủ<span class="sr-only"></span
+                                            ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="#">Hồ sơ bệnh nhân</a>
+                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
                                     </li>
-                                </c:when>
-
-                                <c:when test="${sessionScope.ROLE eq 'manager'}">
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Quản lí
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewAccount">Xem tất cả tài khoản</a>
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewReservationForStaff">Xem lịch khám bệnh</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createStaff.jsp">Tạo tài khoản nhân viên</a>
+                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>   
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Hồ sơ bệnh nhân</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewReservationForManager">Đơn đặt khám bệnh</a>
-                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
+                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
                                         </div>
-                                    </li>
-                                </c:when>
-
-                                <c:when test="${sessionScope.ROLE eq 'admin'}">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Hệ thống
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Cấu hình hệ thống</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="addManager.jsp">Tạo tài khoản cho quản lí</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Dashboard</a>
-                                        </div>
-                                    </li>
-                                </c:when>
-
-
-                            </c:choose>
-                            <!-- ------------------------------- -->
-
-
-
-                        </ul>
-                        <ul class="navbar-nav pr-5">
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.LOGIN_USER}">
+                                    </li>                                 
+                                </ul>
+                                <ul class="navbar-nav pr-5">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <div class="dropdown-divider"></div>                                                   
+                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="viewSpeciaty.jsp">Danh sách chuyên khoa</a>
-                                            <a class="dropdown-item" href="createSpecialty.jsp">Tạo chuyên khoa</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>
-                                            <a class="dropdown-item" href="ViewAllBlogListServlet">Tất cả bài viết</a>
-                                            <a class="dropdown-item" href="ViewBlogByAuthorServlet">Bài viết của bạn</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
-                                            <a class="dropdown-item" href="ViewAllServiceListServlet">Tất cả dịch vụ</a>
-                                            <a class="dropdown-item" href="ViewServiceByStaffServlet">Dịch vụ của bạn</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt dịch vụ</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewCategoryServlet">Danh sách chủ đề bài viết</a>
-                                            <a class="dropdown-item" href="createCategory.jsp">Thêm chủ đề bài viết</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
-                                            <div class="dropdown-divider"></div>
-                                            
                                             <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
                                         </div>
                                     </li>
-                                </c:when>
-                                <c:otherwise>
+                                </ul>
+                            </c:when>
+
+                            <c:when test="${sessionScope.ROLE eq 'manager'}">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet"
+                                           >Trang chủ<span class="sr-only"></span
+                                            ></a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Thêm mới
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                           
+                                            <a class="dropdown-item" href="createSpecialty.jsp">Thêm chuyên khoa</a>
+                                            <div class="dropdown-divider"></div>                                          
+                                            <a class="dropdown-item" href="createCategory.jsp">Thêm chủ đề bài viết</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>  
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="createStaff.jsp">Tạo tài khoản nhân viên</a>       
+                                        </div>
+                                    </li>  
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Quản lí
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="viewSpeciaty.jsp">Danh sách chuyên khoa</a>
+                                            <div class="dropdown-divider"></div>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="ViewCategoryServlet">Danh sách chủ đề bài viết</a>
+                                            <div class="dropdown-divider"></div>                                          
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
+                                        </div>
+                                    </li>   
+                                </ul>
+                                <ul class="navbar-nav pr-5">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            ${sessionScope.LOGIN_USER.fullName}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <div class="dropdown-divider"></div>                                                   
+                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </c:when>
+
+                            <c:when test="${sessionScope.ROLE eq 'admin'}">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet"
+                                           >Trang chủ<span class="sr-only"></span
+                                            ></a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                    </li>                                    
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet?btAction=ViewMainDashboard">Quản lí</a>
+                                    </li>                                      
+                                </ul>
+                                <ul class="navbar-nav pr-5">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            ${sessionScope.LOGIN_USER.fullName}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <div class="dropdown-divider"></div>                                                   
+                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </c:when>
+
+                            <c:otherwise>
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet"
+                                           >Trang chủ<span class="sr-only"></span
+                                            ></a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav pr-5">
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="login.jsp">Đăng nhập</a>
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="register.jsp">Đăng ký</a>
                                     </li>
-
-                                </c:otherwise>
-                            </c:choose>
-                        </ul>
+                                </ul>
+                            </c:otherwise>
+                        </c:choose>                       
                     </div>
                 </nav>
             </div>
