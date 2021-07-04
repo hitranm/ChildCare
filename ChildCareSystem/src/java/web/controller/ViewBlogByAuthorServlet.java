@@ -44,8 +44,8 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
+
         String authorID;
         String url = VIEW_BLOG;
         BlogDAO blogDAO = new BlogDAO();
@@ -77,7 +77,7 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            out.close();
+            
         }
     }
 
