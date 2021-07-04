@@ -1,9 +1,3 @@
-<%-- 
-    Document   : dashboard
-    Created on : Jul 1, 2021, 1:15:32 AM
-    Author     : Admin
---%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page autoFlush="true" buffer="1094kb"%>
@@ -31,8 +25,7 @@
         </style>
     </head>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
-        <jsp:include page="dashboard_header.jsp"/>
-<!--        <input type="checkbox" id="nav-toggle">
+        <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
                 <a  href="StartupServlet" class="link-primary" style="color: white">
@@ -71,105 +64,7 @@
                     </li>
                 </ul>
             </div>
-        </div>-->
-        <div class="main-content">
-            <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label>
-                    Thống kê
-                </h2>
-            </header>
-            <main>
-                <div class="cards">
-                    <div class="card-single">
-                        <div>
-                            <h1>${requestScope.TOTAL_ACCOUNT}</h1>
-                            <span>Tài khoản</span>
-                        </div>
-                        <div>
-                            <span class="fas fa-users"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>${requestScope.ALL_SERVICE}</h1>
-                            <span>Dịch vụ</span>
-                        </div>
-                        <div>
-                            <span class="fas fa-first-aid"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>${requestScope.ALL_BLOG}</h1>
-                            <span>Bài viết</span>
-                        </div>
-                        <div>
-                            <span class="fas fa-file-alt"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>${requestScope.ALL_RES}</h1>
-                            <span>Đơn hẹn khám</span>
-                        </div>
-                        <div>
-                            <span class="fas fa-notes-medical"></span>
-                        </div>
-                    </div>
-                    <div class="card-single">
-                        <div>
-                            <h1>${requestScope.ALL_FB}</h1>
-                            <span>Phản hồi</span>
-                        </div>
-                        <div>
-                            <span class="fas fa-comments"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="recent-grid">
-                    <div class="projects">
-                        <div class="card">
-                            
-                        </div>
-
-                    </div>
-                </div>
-            </main>
         </div>
-        <!--JQuery-->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-        <!--Custom JS-->
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script>
-            $(".mydatatable").DataTable();
-        </script>
-
-
-        <script>
-            window.addEventListener('load', function () {
-                const loader = document.querySelector(".loader");
-                loader.className += " hidden"; // class "loader hidden"
-            })
-        </script>
-        <script>
-            function confirmation() {
-                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
-                return r;
-            }
-        </script>
     </body>
 </html>
 
