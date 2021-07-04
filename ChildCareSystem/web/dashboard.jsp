@@ -31,8 +31,7 @@
         </style>
     </head>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
-        <jsp:include page="dashboard_header.jsp"/>
-<!--        <input type="checkbox" id="nav-toggle">
+        <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
                 <a  href="StartupServlet" class="link-primary" style="color: white">
@@ -71,7 +70,7 @@
                     </li>
                 </ul>
             </div>
-        </div>-->
+        </div>
         <div class="main-content">
             <header>
                 <h2>
