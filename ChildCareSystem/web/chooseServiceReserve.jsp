@@ -143,7 +143,15 @@
                                 <label for="service-specialty">Dịch vụ</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
                                     <c:forEach items="${service.listService}" var="dto">
-                                        <option value="${dto.serviceId}">${dto.serviceName}</option>
+                                        <c:choose>
+                                            <c:when test="${param.serviceId eq dto.serviceId}">
+                                                <option selected value="${dto.serviceId}">${dto.serviceName}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${dto.serviceId}">${dto.serviceName}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        
                                     </c:forEach>                
                                 </select>
                             </div>

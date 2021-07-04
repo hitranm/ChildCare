@@ -17,21 +17,20 @@
             svg {
                 color: #fed330;
             }
+
         </style>
-        
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         <div class="container">
-            <div class="body-top row">
+            <div class="body-top row mt-5">
                 <div class="service-name text-center col-9 mb-2">
-                    <h1>${service.serviceName}</h1>
+                    <h2>${service.serviceName}</h2>
                 </div>
                 <c:set var="role" value="${sessionScope.ROLEID}"/>
                 <div class="funct-button col-3 text-center">
-                    <c:if test="${role eq 1}">
-                        <a class="btn btn-primary mt-2" href="#" name="btAction">Đặt dịch vụ</a><br>
-                    </c:if>
+
                     <c:if test="${role eq 2}">
                         <a class="btn btn-primary mt-2" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
                         <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
@@ -57,7 +56,7 @@
                     </c:if>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="body-left col-lg-9 col-12">
                     <div>
                         <div class="service-thumb mb-3">
@@ -67,18 +66,30 @@
                         <div class="service-des">
                             ${service.description}
                         </div>
-                        <div class="price text-center d-flex float-right">
+                        <div class="price text-center float-right">
                             ${service.price}00đ
                         </div>
+                        <c:if test="${role eq 1}">
+                            <c:url var="reservationLink" value="DispatchServlet">
+                                <c:param name="btAction" value="ChooseServiceReserve"/>
+                                <c:param name="serviceId" value="${service.serviceId}"/>
+                            </c:url>
+                            <div class="text-center mt-5"> 
+                                <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
+                            </div>
+                        </c:if>
                     </div>
+
                 </div>
+
             </div>
+
+            <!-- Feedback Section -->
             <div class="row d-flex mb-4">
                 <div class="col-lg-9 col-12">
                     <div class="headings d-flex justify-content-between align-items-center mb-3 ">
                         <h5>Phản hồi về dịch vụ</h5>
                     </div>
-
                     <c:choose>
                         <c:when test="${not empty requestScope.FEEDBACK_LIST}">
                             <c:forEach items="${requestScope.FEEDBACK_LIST}" var="feedbackDTO">
