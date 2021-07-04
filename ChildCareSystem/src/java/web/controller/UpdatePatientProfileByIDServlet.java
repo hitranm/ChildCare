@@ -25,7 +25,7 @@ import web.utils.DateValidatorUsingDateFormat;
 public class UpdatePatientProfileByIDServlet extends HttpServlet {
 
     private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String INVALID = "LoadPatientProfileByIDServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -41,12 +41,11 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
             String txtYear = request.getParameter("txtYear");
             String txtMonth = request.getParameter("txtMonth");
             String txtDay = request.getParameter("txtDay");
-
             String birthday = txtYear + "-" + txtMonth + "-" + txtDay;
+//            String birthday = txtDay +"/" + txtMonth +"/" + txtYear;
             boolean valid = true;
             PatientError errorObj = new PatientError();
-            DateValidator validator = new DateValidatorUsingDateFormat("dd/MM/yyyy");
-
+            DateValidator validator = new DateValidatorUsingDateFormat("yyyy-MM-dd");
             if (!validator.isValid(birthday)) {
                 errorObj.setBirthdayError("Sai thông tin về ngày tháng năm sinh. Vui lòng kiểm tra lại");
                 valid = false;

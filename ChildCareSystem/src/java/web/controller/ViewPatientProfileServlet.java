@@ -54,6 +54,8 @@ public class ViewPatientProfileServlet extends HttpServlet {
             request.setAttribute("historyList", historyList);
         } catch (Exception e) {
             log("ERROR at ViewPatientProfileServlet: " + e.getMessage());
+            request.getRequestDispatcher("systemError.html").forward(request, response);
+
         } finally {
             request.getRequestDispatcher("viewPatientProfile.jsp").forward(request, response);
         }

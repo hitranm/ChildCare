@@ -44,15 +44,17 @@ public class LoadPatientProfileByIDServlet extends HttpServlet {
             PatientDTO patient = dao1.getPatientByID(id);
             request.setAttribute("patient", patient);
             String[] slits = patient.getBirthday().split("-");
-            String year=slits[0];
-            String month=slits[1];
-            String day=slits[2];
+            String year = slits[0];
+            String month = slits[1];
+            String day = slits[2];
             request.setAttribute("patientDay", day);
             request.setAttribute("patientMonth", month);
             request.setAttribute("patientYear", year);
 
         } catch (SQLException e) {
             log("ERROR at LoadPatientProfileByIDServlet: " + e.getMessage());
+            request.getRequestDispatcher("systemError.html").forward(request, response);
+
         } finally {
             request.getRequestDispatcher("updatePatientProfile.jsp").forward(request, response);
         }

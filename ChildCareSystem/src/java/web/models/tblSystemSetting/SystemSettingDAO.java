@@ -90,7 +90,7 @@ public class SystemSettingDAO {
                         + " FROM tblSystemSetting "
                         + " WHERE SettingName=?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, name);
+                stm.setNString(1, name);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     int settingID = rs.getInt("SettingID");

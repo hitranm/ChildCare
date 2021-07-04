@@ -20,7 +20,7 @@ import web.models.tblPatient.PatientDAO;
 public class DeletePatientProfileByIDServlet extends HttpServlet {
 
     private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
