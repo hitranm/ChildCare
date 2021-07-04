@@ -64,10 +64,12 @@
                         <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Phản hồi</span></a>
                     </li>
-                    <li style="padding-left:0.25rem">
-                        <a href="ViewSystemSettingServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
-                            <span>Cấu hình hệ thống</span></a>
-                    </li>
+                    <c:if test="${sessionScope.ROLE eq 'admin'}">
+                        <li style="padding-left:0.25rem">
+                            <a href="ViewSystemSettingServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
+                                <span>Cấu hình hệ thống</span></a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
@@ -105,7 +107,7 @@
                         </div>
                     </c:if>
                 </div>
-                
+
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
@@ -118,7 +120,20 @@
                                                     <form class="col" action="UpdateSystemSettingServlet" method="POST">
                                                         <div class="card" style="text-align: center">
                                                             <div class="card-body">
-                                                                <h5 class="card-title"><strong>${dto.settingName}</strong></h5>
+                                                                <h5 class="card-title">
+                                                                    <strong>
+                                                                        <c:choose>
+                                                                            <c:when test="${dto.settingName eq 'Max Blog Post On Homepage'}">
+                                                                                Số bài blog được hiển thị tối đa trên trang chủ
+                                                                            </c:when>
+                                                                            <c:when test="${dto.settingName eq 'Max Service Post On Homepage'}">
+                                                                                Số dịch vụ được hiển thị tối đa trên trang chủ
+                                                                            </c:when>
+                                                                            <c:when test="${dto.settingName eq 'Max Patient Profile'}">
+                                                                                Số hồ sơ tối đa được phép đăng ký
+                                                                            </c:when>
+                                                                        </c:choose>
+                                                                    </strong></h5>
                                                                 <h5 class="card-title"><input type="text" name="txtID" value="${dto.settingID}" hidden></h5>
                                                                 <hr>
                                                                 <p class="card-text col-md-12" style="width: 50%;margin-left: 24%">
