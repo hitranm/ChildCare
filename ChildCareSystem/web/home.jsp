@@ -45,7 +45,7 @@
                         interval="3000"
                         >
                         <ol class="carousel-indicators">
-                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="varStatus">
+                        <%--    <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="varStatus">
                                 <li
                                     data-target="#carouselExampleIndicators"
                                     data-slide-to="${varStatus.index}"
@@ -53,11 +53,11 @@
                                         class="active"
                                     </c:if>
                                     ></li>
-                                </c:forEach>
+                                </c:forEach>--%>
                         </ol>
 
                         <div class="carousel-inner">
-                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                    <%--        <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
                                 <div
                                     <c:choose>
                                         <c:when test="${stat.count == 1}">
@@ -89,7 +89,7 @@
                                         });
                                     </script>
                                 </div>
-                            </c:forEach>
+                            </c:forEach>--%>
                         </div>
                         <a
                             class="carousel-control-prev"

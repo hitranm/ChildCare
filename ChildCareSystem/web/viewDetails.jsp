@@ -65,7 +65,7 @@
         <div class="wrapper px-5">
             <h1>Thông tin tài khoản</h1>
 
-            <form action="DispatchServlet" method="POST">
+            <form action="DispatchServlet?btAction=UpdateDetails" method="POST">
                 <div class="form-row">
                 <label for="fullNanme">IdentityID</label>
                 <input type="text" name="identityID" class="form-control" value="${userProfileDTO.identityDTO.identityID}" readonly>
@@ -116,7 +116,7 @@
                 </c:if>
                     </br>
                 <div class="text-center">
-                <button type="submit" name="btAction" class="btn btn-primary col-md-4" value="UpdateDetails"> Cập nhật</button>
+                <button type="submit" class="btn btn-primary col-md-4"> Cập nhật</button>
                 </div>
             </form>
         

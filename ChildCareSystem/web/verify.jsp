@@ -32,7 +32,7 @@
                                     <div class="mb-4">
                                         <h3>Đã gửi mã xác thực về email. Vui lòng kiểm tra email của bạn.</h3>
                                     </div>
-                                    <form action="DispatchServlet" method="post">
+                                    <form action="DispatchServlet?btAction=Verify" method="post">
                                         <div class="form-group first">
                                             <label for="email">Mã xác thực</label>
                                             <input type="text" name="authcode" value="" required="true" class="form-control" id="email">
@@ -52,7 +52,7 @@
                                         <input type="hidden" name="birthday" value="${param.birthday}">
                                         <input type="hidden" name="citizenID" value="${param.citizenID}">
                                         <input type="hidden" name="roleID" value="${param.roleID}">    
-                                        <button type="submit" class="btn btn-primary" name="btAction" value="Verify">Xác thực</button>
+                                        <button type="submit" class="btn btn-primary">Xác thực</button>
                                     </form>
                                 </div>
                             </div>
