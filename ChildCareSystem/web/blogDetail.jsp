@@ -36,43 +36,13 @@
     <body>
         <jsp:include page="header.jsp"/>
         <div class="container">
-            <div class="body-top row">
-                <div class="blog-title col-9">
+            <div class="body-top">
+                <div class="blog-title text-center">
                     <h1>${blog.title}</h1>
-                </div>
-                <div class="col-3 text-center">
-                    <c:set var="role" value="${sessionScope.ROLEID}"/>
-                    <c:if test="${role eq 2}">
-                        <div>
-                            <a class="btn btn-primary" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a><br>
-                        </div>
-                        <div>
-                            <a class="btn btn-danger mt-2" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br>
-                        </div>
-                    </c:if>
-                    <c:if test="${role eq 3}">
-                        <div class="blog-status mt-4">
-                            <form action="UpdateBlogStatusServlet" method="POST">
-                                <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
-                                <c:choose>
-                                    <c:when test="${blog.statusID eq 0}">
-                                        <button class="btn btn-outline-primary" type="submit" value="1" name="status">Duyệt bài</button>
-                                        <button class="btn btn-outline-primary" type="submit" value="2" name="status">Từ chối</button>
-                                    </c:when>
-                                    <c:when test="${blog.statusID eq 1}">
-                                        <button class="btn btn-outline-primary" type="submit" value="0" name="status">Ẩn bài đăng</button>
-                                    </c:when>
-                                    <c:when test="${blog.statusID eq 2}">
-                                        <button class="btn btn-outline-primary" type="submit" value="1" name="status">Hiện bài đăng</button>
-                                    </c:when>
-                                </c:choose>
-                            </form>
-                        </div>
-                    </c:if>
                 </div>
             </div>
             <div class="row">
-                <div class="body-left col-lg-9 col-12">
+                <div class="body-left col-12">
                     <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                     <div class="blog-date text-right">
                         ${blog.updateDate}
@@ -80,7 +50,11 @@
                     <div class="blog-cate mb-5" style="position: absolute; margin-bottom: 2em;">
                         <c:forEach items="${cate.viewBlogCategory()}" var="dto">
                             <c:if test="${blog.categotyID eq dto.categoryID}">
-                                <a class="btn btn-link btn-sm" href="#">#${dto.categoryName}</a>
+                                <c:url var="viewbycate" value = "ViewBlogByCateServlet">
+                                    <c:param name="txtCateID" value="${dto.categoryID}"/>
+                                    <c:param name="index" value="1"/>
+                                </c:url>  
+                                <a class="btn btn-link btn-sm" href="${viewbycate}">#${dto.categoryName}</a>
                             </c:if>
                         </c:forEach>
                     </div> <br><br>
@@ -92,9 +66,35 @@
                             ${blog.description}
                         </div>
                     </div>
-                    <div class="blog-author text-right mb-5">
+                    <div class="blog-author text-right mb-3">
                         <c:set var="staffID" value="${blog.authorID}"/>
                         <i>Tác giả: ${staff.getStaffName(staffID)}</i>
+                    </div>
+                    <div class="text-center mb-5">
+                        <c:set var="role" value="${sessionScope.ROLEID}"/>
+                        <c:if test="${role eq 2}">
+                            <a class="btn btn-primary col-4" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
+                            <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a>
+                        </c:if>
+                        <c:if test="${role eq 3}">
+                            <div class="blog-status mt-4">
+                                <form action="UpdateBlogStatusServlet" method="POST">
+                                    <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
+                                    <c:choose>
+                                        <c:when test="${blog.statusID eq 0}">
+                                            <button class="btn btn-outline-primary col-4" type="submit" value="1" name="status">Duyệt bài</button>
+                                            <button class="btn btn-outline-danger col-4" type="submit" value="2" name="status">Từ chối</button>
+                                        </c:when>
+                                        <c:when test="${blog.statusID eq 1}">
+                                            <button class="btn btn-outline-secondary col-4" type="submit" value="0" name="status">Ẩn bài đăng</button>
+                                        </c:when>
+                                        <c:when test="${blog.statusID eq 2}">
+                                            <button class="btn btn-outline-primary col-4" type="submit" value="1" name="status">Hiện bài đăng</button>
+                                        </c:when>
+                                    </c:choose>
+                                </form>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
 

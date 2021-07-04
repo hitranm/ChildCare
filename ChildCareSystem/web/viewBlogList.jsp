@@ -17,7 +17,7 @@
     <body>
         <jsp:include page="header.jsp"/>
         <main>
-            <div class="container py-5 mb-5">
+            <div class="container">
                 <h2 class="text-center mb-2">BÀI VIẾT</h2> 
                 <div class="body-top d-flex">
                     <div class="search col-9">
