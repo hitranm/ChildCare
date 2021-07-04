@@ -48,13 +48,13 @@
             </div>
             <div class ="sidebar-menu">
                                <ul>
-                    <c:if test="${sessionScope.ROLEID eq '3'}">
+                    <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewMainDashboard"  class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                             <span >Tổng quát</span></a>
                     </li>
                     </c:if>
-                    <c:if test="${sessionScope.ROLEID eq '3'}">
+                    <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                             <span>Tài khoản </span></a>
@@ -69,22 +69,22 @@
                             <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <c:if test="${sessionScope.ROLEID eq '3'}">
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
                         <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                         <span>Đơn đặt khám</span></a>
                         </c:if>
-                        <c:if test="${sessionScope.ROLEID eq '2'}">
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="DispatchServlet?btAction=ViewReservationForStaff" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                             <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
-                    <c:if test="${sessionScope.ROLEID eq '3'}">
+                    <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
                         <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Phản hồi</span></a>
                     </li>
                     </c:if>
-                    <c:if test="${sessionScope.ROLEID eq '4'}">
+                    <c:if test="${sessionScope.ROLE eq 'admin'}">
                     <li style="padding-left:0.25rem">
                         <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                             <span>Cấu hình hệ thống</span></a>
