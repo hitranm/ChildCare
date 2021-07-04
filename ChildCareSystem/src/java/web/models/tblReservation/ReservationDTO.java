@@ -18,12 +18,15 @@ public class ReservationDTO implements Serializable{
     private int patientId;
     private int serviceId;
     private int staffAssignId;
+    private float price;
     private int timeIntervalId;
     private String checkInDate;
     private String updatedDate;
 
     public ReservationDTO() {
     }
+    
+    
 
     public ReservationDTO(int reservationId, int customerId, int patientId, int serviceId, int staffAssignId, int timeIntervalId, String checkInDate, String updatedDate) {
         this.reservationId = reservationId;
@@ -57,6 +60,17 @@ public class ReservationDTO implements Serializable{
         this.timeIntervalId = timeIntervalId;
     }
 
+    public ReservationDTO(int customerId, int patientId, int serviceId, int staffAssignId, float price, int timeIntervalId, String checkInDate) {
+        this.customerId = customerId;
+        this.patientId = patientId;
+        this.serviceId = serviceId;
+        this.staffAssignId = staffAssignId;
+        this.price = price;
+        this.timeIntervalId = timeIntervalId;
+        this.checkInDate = checkInDate;
+    }
+    
+    
     public ReservationDTO(int customerId, int patientId, int serviceId, int staffAssignId, int timeIntervalId, String checkInDate) {
         this.customerId = customerId;
         this.patientId = patientId;
@@ -66,20 +80,22 @@ public class ReservationDTO implements Serializable{
         this.checkInDate = checkInDate;
     }
 
-    public ReservationDTO(int reservationId, int customerId, int staffAssignId, String checkInDate) {
+    public ReservationDTO(int reservationId, int customerId, int staffAssignId, String checkInDate, float price) {
         this.reservationId = reservationId;
         this.customerId = customerId;
         this.staffAssignId = staffAssignId;
         this.checkInDate = checkInDate;
+        this.price = price;
     }
 
-    public ReservationDTO(int customerId, int patientId, int serviceId, int staffAssignId, String checkInDate, int reservationId) {
+    public ReservationDTO(int customerId, int patientId, int serviceId, int staffAssignId, String checkInDate, int reservationId, float price) {
         this.customerId = customerId;
         this.patientId = patientId;
         this.serviceId = serviceId;
         this.staffAssignId = staffAssignId;
         this.checkInDate = checkInDate;
         this.reservationId = reservationId;
+        this.price = price;
     }
     
     public int getReservationId() {
@@ -145,6 +161,16 @@ public class ReservationDTO implements Serializable{
     public void setCheckInDate(String checkInDate) {
         this.checkInDate = checkInDate;
     }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+    
+    
 
     
     

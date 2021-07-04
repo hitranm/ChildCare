@@ -372,7 +372,7 @@ public class ServiceDAO implements Serializable {
                 String sql = "SELECT TOP(?) ServiceID, ServiceName,Thumbnail,CreatedDate"
                         + " FROM tblService ORDER BY CreatedDate DESC ";
                 stm = conn.prepareStatement(sql);
-                            int numberOfBlogView = 6;
+                int numberOfBlogView = 6;
                 stm.setInt(1, top);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
@@ -381,7 +381,7 @@ public class ServiceDAO implements Serializable {
                     String serviceName = rs.getString("ServiceName");
                     String thumbnail = rs.getString("Thumbnail");
                     String createdDate = rs.getString("CreatedDate");
-                    ServiceDTO dto = new ServiceDTO(serviceID,serviceName, thumbnail, createdDate);
+                    ServiceDTO dto = new ServiceDTO(serviceID, serviceName, thumbnail, createdDate);
                     result.add(dto);
                 }
             }
@@ -660,7 +660,9 @@ public class ServiceDAO implements Serializable {
             if (rs.next()) {
                 double price = rs.getFloat("Price");
                 return price;
-            } else return 0;
+            } else {
+                return 0;
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -674,9 +676,8 @@ public class ServiceDAO implements Serializable {
         }
     }
 
-
     public int countAllService() throws SQLException, NamingException {
-        int sum=0;
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -704,8 +705,9 @@ public class ServiceDAO implements Serializable {
         }
         return sum;
     }
+
     public int countServiceActive() throws SQLException, NamingException {
-        int sum=0;
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -735,8 +737,9 @@ public class ServiceDAO implements Serializable {
         }
         return sum;
     }
-     public int countServiceDeny() throws SQLException, NamingException {
-        int sum=0;
+
+    public int countServiceDeny() throws SQLException, NamingException {
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -766,8 +769,9 @@ public class ServiceDAO implements Serializable {
         }
         return sum;
     }
-     public String countMostUseService() throws SQLException, NamingException {
-        String service="";
+
+    public String countMostUseService() throws SQLException, NamingException {
+        String service = "";
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;

@@ -103,7 +103,7 @@ public class ReservationDAO implements Serializable {
             if (con != null) {
                 //2. Create query string
                 String sql = "INSERT INTO "
-                        + "tblReservation (CustomerID, PatientID, ServiceID, StaffAssignedID, IntervalTimeID, CheckInTime) "
+                        + "tblReservation (CustomerID, PatientID, ServiceID, StaffAssignedID, IntervalTimeID, CheckInTime, Price) "
                         + "VALUES (?,?,?,?,?,?)";
                 //3. Create statement and assign value
                 stm = con.prepareStatement(sql);
@@ -114,6 +114,7 @@ public class ReservationDAO implements Serializable {
                     stm.setInt(4, reservation.getStaffAssignId());
                     stm.setInt(5, reservation.getTimeIntervalId());
                     stm.setString(6, reservation.getCheckInDate());
+                    stm.setFloat(7, reservation.getPrice());
                     stm.addBatch();
                 }
                 stm.executeBatch();
@@ -148,7 +149,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
@@ -187,7 +189,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
@@ -226,7 +229,8 @@ public class ReservationDAO implements Serializable {
                     int staffAssignID = rs.getInt("StaffAssignedID");
                     String checkInDate = rs.getString("CheckInTime");
                     int reservationId = rs.getInt("ReservationID");
-                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, reservationId);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, reservationId, price);
                     return res;
                 }
             }
@@ -264,7 +268,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
@@ -304,7 +309,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
