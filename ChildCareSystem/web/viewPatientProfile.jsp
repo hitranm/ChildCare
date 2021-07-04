@@ -90,7 +90,7 @@
                 <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
                 <jsp:forward page="login.jsp"/>
             </c:if>
-            
+
             <c:if test="${sessionScope.ROLE != 'customer'}">
                 <jsp:forward page="accessDenied.jsp"/>
             </c:if>
@@ -183,7 +183,6 @@
                                         <div class="form-group row">
                                             <label for="inputBirthday" class="col-sm-2 col-form-label">Ngày sinh: </label>
                                             <div class="col-sm-6">
-                                                <!--<input type="date" class="form-control" name="txtBirthday" id="txtBirthday" value="${param.txtBirthday}" max="2022-01-01" required>-->
                                                 <div class="row">
                                                     <div class="col">
                                                         <select name="txtYear" id="year" class="form-control" size="1" required></select>

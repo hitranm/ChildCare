@@ -62,10 +62,6 @@ public class AddNewPatientProfileServlet extends HttpServlet {
                 valid = false;
             }
             PatientDAO dao = new PatientDAO();
-//            if (dao.getCategoryByID(id) != null) {
-//                errorObj.setIdError("This Category ID is existed. Choose another one");
-//                valid = false;
-//            }
             HttpSession session = request.getSession();
             String customerID = (String) session.getAttribute("CUSTOMER_ID");
             PatientDTO patient = new PatientDTO(name, gender, birthday, customerID);
@@ -86,7 +82,6 @@ public class AddNewPatientProfileServlet extends HttpServlet {
             }
         } catch (NamingException | SQLException e) {
             log("ERROR at AddNewPatientServlet: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
