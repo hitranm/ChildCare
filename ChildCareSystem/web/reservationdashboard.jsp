@@ -210,9 +210,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="tableBodyWaiting">
-                                                                <c:if test="${requestScope.ListMorning!=null}">
-                                                                    <c:set var="count" value="0"/>
-                                                                    <c:forEach items="${requestScope.ListMorning}" var="dto" >
+                                                            <c:if test="${requestScope.ListMorning!=null}">
+                                                                <c:set var="count" value="0"/>
+                                                                <c:forEach items="${requestScope.ListMorning}" var="dto" >
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -250,9 +250,9 @@
                                                         </thead>
 
                                                         <tbody id="tableBodyRejected">
-                                                                <c:if test="${requestScope.ListNoon!=null}">
-                                                                    <c:set var="count" value="0"/>
-                                                                    <c:forEach items="${requestScope.ListNoon}" var="dto" >
+                                                            <c:if test="${requestScope.ListNoon!=null}">
+                                                                <c:set var="count" value="0"/>
+                                                                <c:forEach items="${requestScope.ListNoon}" var="dto" >
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -271,8 +271,9 @@
                                                                 </c:forEach>
                                                             </c:if>
                                                         </tbody>
-                                                <tfoot></tfoot>
-                                                </table>
+                                                        <tfoot></tfoot>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -280,7 +281,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </main>
         </div>
 

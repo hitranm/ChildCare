@@ -28,8 +28,8 @@ import web.models.tblStaff.StaffDTO;
  * @author DELL
  */
 public class ViewBlogByAuthorServlet extends HttpServlet {
-    
-    private final String VIEW_BLOG = "viewBlogbyAuthor.jsp";
+
+    private final String VIEW_BLOG = "blogDashboard.jsp";
     private final String ERROR = "error.jsp";
 
     /**
@@ -48,17 +48,28 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String authorID;
         String url = VIEW_BLOG;
+        BlogDAO blogDAO = new BlogDAO();
+        StaffDAO staffDAO = new StaffDAO();
         try {
             if (session != null) {
                 String identityID = (String) session.getAttribute("IDENTITY_ID");
-                StaffDAO staffDAO = new StaffDAO();
+
                 StaffDTO staff = staffDAO.queryStaffByIdentityId(identityID);
-                BlogDAO blogDAO = new BlogDAO();
+                List<StaffDTO> staffList = staffDAO.getAllStaffProfile();
+                request.setAttribute("STAFF", staffList);
+
+                int allBlog = blogDAO.countAllBlog();
+                request.setAttribute("ALL_BLOG", allBlog);
+                int activeBlog = blogDAO.countBlogActive();
+                request.setAttribute("ACTIVE_BLOG", activeBlog);
+                int pendingBlog = blogDAO.countBlogPending();
+                request.setAttribute("PENDING_BLOG", pendingBlog);
+
                 authorID = staff.getStaffID();
                 blogDAO.queryBlogbyAuthor(authorID);
                 List<BlogDTO> blog = blogDAO.getBlogList();
                 request.setAttribute("BLOG_LIST", blog);
-                
+
             }
         } catch (NamingException | SQLException ex) {
             log("ViewBlogByAuthorServlet: " + ex.getMessage());

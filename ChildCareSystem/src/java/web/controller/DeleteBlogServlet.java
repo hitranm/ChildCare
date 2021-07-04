@@ -47,11 +47,8 @@ public class DeleteBlogServlet extends HttpServlet {
             if (result) {
                 url = VIEWBLOG;
             }
-
-        } catch (NamingException ex) {
-            Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException | SQLException ex) {
+            log("Error at DeleteBlogServlet " + ex.getMessage());
         } finally {
             response.sendRedirect(url);
             out.close();

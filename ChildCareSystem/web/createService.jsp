@@ -10,17 +10,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">          
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="css/homepage.css">
         <link rel="stylesheet" href="css/service/createService.css">
 
@@ -41,10 +30,22 @@
             });
         </script>
 
-        <title>Service</title>
+        <title>Dịch vụ</title>
     </head>
     <body>
         <jsp:include page="header.jsp" />
+        
+        <!-- Authorize -->
+        <c:if test="${empty sessionScope.ROLE}">
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
+
+        <c:if test="${sessionScope.ROLE != 'staff' or sessionScope.ROLE != 'manager'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
+        <!-- -->
+        
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <div class="service-form-wrapper">         
             <h1>Tạo mới dịch vụ</h1>

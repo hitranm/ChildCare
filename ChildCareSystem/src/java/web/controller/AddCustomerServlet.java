@@ -8,6 +8,7 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -117,8 +118,8 @@ public class AddCustomerServlet extends HttpServlet {
                 }
             }     
                 
-        } catch (Exception e) {
-            log("Error at AddCustomerServlet: " + e.toString());
+        } catch (SQLException | NamingException e) {
+            log("Error at AddCustomerServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

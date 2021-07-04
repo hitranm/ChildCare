@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Patient Profile Page</title>
+        <title>Hồ sơ bệnh nhân</title>
         <link rel="stylesheet" href="./css/patientProfile.css"/>
 
         <script src="https://code.jquery.com/jquery-latest.js"></script>

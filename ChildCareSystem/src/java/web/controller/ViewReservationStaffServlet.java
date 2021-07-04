@@ -24,7 +24,9 @@ import web.models.tblStaff.StaffDAO;
  * @author Admin
  */
 public class ViewReservationStaffServlet extends HttpServlet {
-private static final String VIEW_RESERVATION="viewReservationForStaff.jsp";
+
+    private static final String VIEW_RESERVATION = "reservationdashboard.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,19 +39,27 @@ private static final String VIEW_RESERVATION="viewReservationForStaff.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=VIEW_RESERVATION;
+        String url = VIEW_RESERVATION;
+        HttpSession session = request.getSession();
+
         try {
-            ReservationDAO reservationDAO = new ReservationDAO();
-            HttpSession session = request.getSession();
-            String identityID = (String)session.getAttribute("IDENTITY_ID");
-            StaffDAO dao = new StaffDAO();
-            String staffID = dao.queryStaff(identityID);
-            List<ReservationDTO> listReservation = reservationDAO.getReservationByStaffID(staffID);
-            request.setAttribute("ListReservation", listReservation);
-            List<ReservationDTO> listReservationMorning = reservationDAO.getReservationByIntervalTimeIDForStaff(1, 4, staffID);
-            request.setAttribute("ListMorning", listReservationMorning);
-            List<ReservationDTO> listReservationNoon = reservationDAO.getReservationByIntervalTimeIDForStaff(5, 7, staffID);
-            request.setAttribute("ListNoon", listReservationNoon);
+            if (session.getAttribute("ROLE") == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = "login.jsp";
+            } else if (session.getAttribute("ROLE") != "staff") {
+                url = "accessDenied.jsp";
+            } else {
+                ReservationDAO reservationDAO = new ReservationDAO();
+                String identityID = (String) session.getAttribute("IDENTITY_ID");
+                StaffDAO dao = new StaffDAO();
+                String staffID = dao.queryStaff(identityID);
+                List<ReservationDTO> listReservation = reservationDAO.getReservationByStaffID(staffID);
+                request.setAttribute("ListReservation", listReservation);
+                List<ReservationDTO> listReservationMorning = reservationDAO.getReservationByIntervalTimeIDForStaff(1, 4, staffID);
+                request.setAttribute("ListMorning", listReservationMorning);
+                List<ReservationDTO> listReservationNoon = reservationDAO.getReservationByIntervalTimeIDForStaff(5, 7, staffID);
+                request.setAttribute("ListNoon", listReservationNoon);
+            }
         } catch (SQLException | NamingException e) {
             log("ERROR at ViewReservationStaffServlet: " + e.getMessage());
         } finally {

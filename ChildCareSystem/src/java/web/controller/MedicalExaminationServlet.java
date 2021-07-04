@@ -37,6 +37,7 @@ public class MedicalExaminationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         String url = CREATE_EXAMINATION;
+        
         try {
             if (action.equalsIgnoreCase("Add")) {
                 url = CREATE_EXAMINATION;

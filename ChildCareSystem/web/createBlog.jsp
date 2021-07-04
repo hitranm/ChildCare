@@ -13,24 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">          
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
+        <!-- Bootstrap CSS -->       
         <link rel="stylesheet" href="css/homepage.css">
         <link rel="stylesheet" href="./css/blog/createBlog.css" />
         <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -55,6 +38,19 @@
 
     <body>
         <jsp:include page="header.jsp"/>
+
+        <!-- Authorize -->
+        <c:if test="${empty sessionScope.ROLE}">
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
+
+        <c:if test="${sessionScope.ROLE != 'staff' or sessionScope.ROLE != 'manager'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
+        <!-- -->
+        
+
         <c:set var="err" value="${requestScope.CREATE_BLOG}"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <div class="blog-wrapper">

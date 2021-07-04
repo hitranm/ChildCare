@@ -10,16 +10,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bài viết của tôi</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Bài viết</title>
+       
         <link rel="stylesheet" href="./viewAllAccounts.css">
-        <link rel="stylesheet" type="text/css"
-              href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
+        
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        
+        <!-- Authorize -->
+        <c:if test="${empty sessionScope.ROLE}">
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
+
+        <c:if test="${sessionScope.ROLE != 'staff' or sessionScope.ROLE != 'manager'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
+        <!-- -->
+        
         <main>
             <div class="blog-container">
                 <div class="userPosts__wrapper">
@@ -108,7 +118,6 @@
                                                         <td>${dto.blogID}</td>
                                                         <td>${dto.title}</td>
                                                         <td class="alert alert-danger">Từ chối</td>
-                                                        <!--                                            <td class="alert alert-success">Customer</td>-->
                                                         <td>
                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                         </td>

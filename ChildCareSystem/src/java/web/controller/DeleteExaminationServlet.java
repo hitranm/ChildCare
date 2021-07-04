@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblMedicalExamination.MedicalExaminationDAO;
 
 /**
@@ -20,7 +21,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDAO;
  * @author HOANGKHOI
  */
 public class DeleteExaminationServlet extends HttpServlet {
-    
+
     private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
     private static final String ERROR = "";
 
@@ -36,20 +37,27 @@ public class DeleteExaminationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         String strExaminationId = request.getParameter("txtExaminationId");
         String strReservationId = request.getParameter("txtReservationId");
         MedicalExaminationDAO medicalExamDAO = new MedicalExaminationDAO();
         String url = VIEW_RESERVATION;
         try {
-            int reservationId = Integer.parseInt(strReservationId);
-            url = url + reservationId;
-            int examinationId = Integer.parseInt(strExaminationId);
-            
-            boolean result = medicalExamDAO.deleteExamination(examinationId); 
-            if(result == false) {
-                url = ERROR;
+            if (session.getAttribute("ROLE") == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = "login.jsp";
+            } else if (session.getAttribute("ROLE") != "staff") {
+                url = "accessDenied.jsp";
+            } else {
+                int reservationId = Integer.parseInt(strReservationId);
+                url = url + reservationId;
+                int examinationId = Integer.parseInt(strExaminationId);
+                boolean result = medicalExamDAO.deleteExamination(examinationId);
+                if (result == false) {
+                    url = ERROR;
+                }
             }
-            
+
         } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at DeleteExaminationServlet: " + ex.getMessage());
         } finally {

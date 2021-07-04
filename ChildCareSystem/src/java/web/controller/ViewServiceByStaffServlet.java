@@ -29,7 +29,7 @@ import web.models.tblStaff.StaffDTO;
  */
 public class ViewServiceByStaffServlet extends HttpServlet {
 
-    private final String VIEW_SERVICE = "viewServicebyStaff.jsp";
+    private final String VIEW_SERVICE = "serviceDashboard.jsp";
     private final String ERROR = "error.jsp";
 
     /**
@@ -47,16 +47,23 @@ public class ViewServiceByStaffServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         PrintWriter out = response.getWriter();
         String url = VIEW_SERVICE;
+        StaffDAO staffDAO = new StaffDAO();
+        ServiceDAO serviceDAO = new ServiceDAO();
         try {
             if (session != null) {
                 String identityID = (String) session.getAttribute("IDENTITY_ID");
-                StaffDAO staffDAO = new StaffDAO();
                 StaffDTO staff = staffDAO.queryStaffByIdentityId(identityID);
-                ServiceDAO serviceDAO = new ServiceDAO();
                 String staffID = staff.getStaffID();
                 serviceDAO.getServicebyStaff(staffID);
                 List<ServiceDTO> service = serviceDAO.getServiceList();
                 request.setAttribute("SERVICE_LIST", service);
+
+                int activeServiceCount = serviceDAO.countServiceActive();
+                request.setAttribute("ACTIVE_SERVICE", activeServiceCount);
+                int allServiceCount = serviceDAO.countAllService();
+                request.setAttribute("ALL_SERVICE", allServiceCount);
+                String topServiceCount = serviceDAO.countMostUseService();
+                request.setAttribute("POPULAR_SERVICE", topServiceCount);
             }
         } catch (NamingException | SQLException ex) {
             log("ViewServiceByStaffServlet: " + ex.getMessage());

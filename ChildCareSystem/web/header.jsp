@@ -142,7 +142,11 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>   
                                             <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="ViewBlogByAuthorServlet">Xem bài viết</a>  
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="ViewServiceByStaffServlet">Xem dịch vụ</a>
                                         </div>
                                     </li>                                 
                                 </ul>
