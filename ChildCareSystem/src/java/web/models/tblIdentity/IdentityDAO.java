@@ -84,7 +84,7 @@ public class IdentityDAO {
             if (conn != null) {
                 String sql = "SELECT IdentityID, RoleID "
                         + " FROM tblIdentity "
-                        + " WHERE Email=? AND Password=?";
+                        + " WHERE Email=? AND Password=? AND StatusID = 1";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, email);
                 stm.setString(2, password);
@@ -280,7 +280,7 @@ public class IdentityDAO {
             //1. Connect DB
             con = DBHelpers.makeConnection();
             //2. Create query string
-            String sql = "SELECT Password, Email, RoleId "
+            String sql = "SELECT Password, Email, RoleId, StatusID "
                     + "From tblIdentity "
                     + "Where IdentityID=?";
             //3. Create statement and assign value
@@ -293,7 +293,8 @@ public class IdentityDAO {
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
                 String roleId = rs.getString("RoleID");
-                IdentityDTO identityDTO = new IdentityDTO(identityId, email, password, roleId);
+                int statusId = Integer.parseInt(rs.getString("StatusID"));
+                IdentityDTO identityDTO = new IdentityDTO(identityId, email, password, roleId, statusId);
                 return identityDTO;
             }
         } finally {
@@ -311,7 +312,7 @@ public class IdentityDAO {
         }
         return null;
     }
-public boolean delete(String id) throws ClassNotFoundException, SQLException {
+public boolean delete(String id) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -325,9 +326,6 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
                     return true;
                 }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -338,6 +336,7 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
         }
         return false;
     }
+
  public int countAllAccount() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
@@ -368,6 +367,7 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
         }
         return sum;
     }
+ 
   public int countCustomerAccount() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
@@ -399,6 +399,7 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
         }
         return sum;
     }
+  
    public int countStaffAccount() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
@@ -430,6 +431,7 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
         }
         return sum;
     }
+   
     public int countNewAccountMonthly() throws SQLException, NamingException {
         int sum=0;
         Connection conn = null;
@@ -459,6 +461,31 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException {
             }
         }
         return sum;
+    }
+    
+    public void deActiveAccount(int identityId) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblIdentity SET StatusID=0 WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, identityId);
+                rs = stm.executeQuery();
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 }
 

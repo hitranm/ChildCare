@@ -16,7 +16,16 @@ public class IdentityDTO implements Serializable{
     private String email;
     private String password;
     private String roleID;
+    private int statusID;
 
+    public IdentityDTO(String identityID, String email, String password, String roleID, int statusID) {
+        this.identityID = identityID;
+        this.email = email;
+        this.password = password;
+        this.roleID = roleID;
+        this.statusID = statusID;
+    }
+    
     public IdentityDTO(String identityID, String roleID) {
         this.identityID = identityID;
         this.roleID = roleID;
@@ -69,6 +78,15 @@ public class IdentityDTO implements Serializable{
         this.identityID = identityID;
     }
 
+    public int getStatusID() {
+        return statusID;
+    }
+
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
+    }
+
+    
     
     
 }
