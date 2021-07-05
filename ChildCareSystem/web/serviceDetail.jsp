@@ -45,6 +45,8 @@
                         </div>
                     </div>
                     <div class="funct-button text-center mt-5">
+                        <c:set var="author" value="${service.createPersonId}"/>
+                        <c:set var="staff" value="${requestScope.STAFFID}"/>
                         <c:if test="${role eq 1}">
                             <c:url var="reservationLink" value="DispatchServlet">
                                 <c:param name="btAction" value="ChooseServiceReserve"/>
@@ -54,7 +56,7 @@
                             <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
                             <!--                                </div>-->
                         </c:if>
-                        <c:if test="${role eq 2}">
+                        <c:if test="${role eq 2 and author eq staff}">
                             <a class="btn btn-primary mt-2 col-4" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
                             <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
                         </c:if>

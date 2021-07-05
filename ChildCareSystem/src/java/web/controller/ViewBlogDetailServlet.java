@@ -17,14 +17,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
  * @author DELL
  */
 public class ViewBlogDetailServlet extends HttpServlet {
+    
     private final String VIEWBLOGDETAIL_PAGE = "blogDetail.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,11 +45,26 @@ public class ViewBlogDetailServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String blogID = request.getParameter("id");
         HttpSession session = request.getSession();
-        String url = VIEWBLOGDETAIL_PAGE;
+        String url = ERROR_PAGE;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
+            StaffDAO staffDAO = new StaffDAO();
+            String staffID = staffDAO.queryStaff(identityID);
             BlogDAO dao = new BlogDAO();
             BlogDTO blog = dao.getBlogDetail(blogID);
-            session.setAttribute("BLOG_DETAIL", blog);
+            String authorID = blog.getAuthorID();
+            String statusID = blog.getStatusID();
+            if (role == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if ("1".equals(statusID) || ("3".equals(role) || staffID.equals(authorID))) {
+                session.setAttribute("BLOG_DETAIL", blog);
+                request.setAttribute("STAFFID", staffID);
+                url = VIEWBLOGDETAIL_PAGE;
+            } else {
+                url = DENY;
+            }
         } catch (NamingException ex) {
             log("ViewBlogDetailServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
