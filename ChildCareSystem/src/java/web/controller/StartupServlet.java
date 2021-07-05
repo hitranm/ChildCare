@@ -29,7 +29,7 @@ import web.models.tblSystemSetting.SystemSettingDTO;
  */
 public class StartupServlet extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String HOME_PAGE = "home.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -40,11 +40,11 @@ public class StartupServlet extends HttpServlet {
         try {
             SystemSettingDAO systemDAO = new SystemSettingDAO();
             BlogDAO blogDAO = new BlogDAO();
-            int numberOfBlogView =Integer.parseInt(systemDAO.getSettingByName("Max Blog Post On Homepage").getSettingValue());
+            int numberOfBlogView = Integer.parseInt(systemDAO.getSettingByName("Max Blog Post On Homepage").getSettingValue());
             List<BlogDTO> listBlog = blogDAO.getTopXBlogList(numberOfBlogView);
 
             ServiceDAO serviceDAO = new ServiceDAO();
-            int numberOfServiceView =Integer.parseInt(systemDAO.getSettingByName("Max Service Post On Homepage").getSettingValue());
+            int numberOfServiceView = Integer.parseInt(systemDAO.getSettingByName("Max Service Post On Homepage").getSettingValue());
             List<ServiceDTO> listService = serviceDAO.getTopXServiceList(numberOfServiceView);
 
             HttpSession session = request.getSession();

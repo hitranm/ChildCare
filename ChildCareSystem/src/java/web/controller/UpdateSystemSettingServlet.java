@@ -20,7 +20,7 @@ import web.models.tblSystemSetting.SystemSettingDAO;
 public class UpdateSystemSettingServlet extends HttpServlet {
 
     private static final String SUCCESS = "ViewSystemSettingServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -39,9 +39,9 @@
                 var date = new Date();
                 var cur = date.getFullYear();
 
-                seYear.append('<option value="">-- Năm --</option>');
+                seYear.append('<option value="" disabled>-- Năm --</option>');
                 for (i = cur; i >= cur - 18; i--) {
-                    seYear.append('<option value="' + i + '">' + i + '</option>');
+                    seYear.append('<option value="' + i + '">Năm ' + i + '</option>');
                 }
                 ;
 
@@ -63,7 +63,7 @@
                 month[11] = "Tháng 11";
                 month[12] = "Tháng 12";
 
-                seMonth.append('<option value="">-- Tháng --</option>');
+                seMonth.append('<option value="" disabled>-- Tháng --</option>');
                 for (i = 12; i > 0; i--) {
                     seMonth.append('<option value="' + i + '">' + month[i] + '</option>');
                 }
@@ -71,9 +71,9 @@
                 var seDay = $('#day');
                 var date = new Date();
 
-                seDay.append('<option value="">-- Ngày --</option>');
+                seDay.append('<option value="" disabled>-- Ngày --</option>');
                 for (i = 31; i > 0; i--) {
-                    seDay.append('<option value="' + i + '">' + i + '</option>');
+                    seDay.append('<option value="' + i + '">Ngày ' + i + '</option>');
                 }
                 ;
 
@@ -157,7 +157,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <select name="txtYear" id="year" class="form-control" size="1"  required>
-                                                    <option value="${patientYear}" selected hidden>${patientYear}</option>
+                                                    <option value="${patientYear}" selected hidden>Năm ${patientYear}</option>
                                             </select>
                                         </div>  
                                         <div class="col">
@@ -167,7 +167,7 @@
                                         </div>
                                         <div class="col">
                                             <select name="txtDay" id="day" class="form-control" size="1" required">
-                                                <option value="${patientDay}" selected hidden>${patientDay}</option>
+                                                <option value="${patientDay}" selected hidden>Ngày ${patientDay}</option>
                                             </select>
                                         </div>
 
@@ -178,8 +178,6 @@
                                         </div>
                                     </c:if>         
                                 </div>
-
-
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-10 offset-md-2">

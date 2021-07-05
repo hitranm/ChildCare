@@ -29,7 +29,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String ADD = "AddCustomerServlet";
     private static final String LOGIN = "LoginServlet";
     private static final String LOGOUT = "LogOutServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String VERIFY = "VerifyServlet";
     private static final String FORGOT = "ForgotPassServlet";
     private static final String RESETPASSWORD = "ResetPassServlet";
