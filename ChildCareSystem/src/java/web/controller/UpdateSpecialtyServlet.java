@@ -21,7 +21,7 @@ import web.models.tblSpecialty.SpecialtyDAO;
  */
 public class UpdateSpecialtyServlet extends HttpServlet {
 
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
     private final String VIEW_SPECIALTY = "viewSpeciaty.jsp";
 
     /**

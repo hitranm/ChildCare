@@ -7,6 +7,8 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,9 +61,8 @@ public class UpdateSystemSettingServlet extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
             }
 
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | SQLException | NamingException | ServletException e) {
             log("ERROR at UpdateSystemSettingServlet: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

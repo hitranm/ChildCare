@@ -6,24 +6,14 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import web.models.tblAdmin.AdminDAO;
-import web.models.tblAdmin.AdminDTO;
-import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
-import web.models.tblIdentity.IdentityDTO;
-import web.models.tblManager.ManagerDAO;
-import web.models.tblManager.ManagerDTO;
-import web.models.tblStaff.StaffDAO;
-import web.models.tblStaff.StaffDTO;
-import web.viewModels.UserProfile.UserProfileViewModel;
+
 
 /**
  *
@@ -31,7 +21,7 @@ import web.viewModels.UserProfile.UserProfileViewModel;
  */
 public class DeleteAccountServlet extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String SUCCESS = "ViewAccountsServlet";
 
     /**
@@ -84,6 +74,7 @@ public class DeleteAccountServlet extends HttpServlet {
 //            }
             int identityId = Integer.parseInt(identityID);
             identityDAO.deActiveAccount(identityId);
+            url = SUCCESS;
         } catch (SQLException | NamingException e) {
             log("Error at DeleteAccountServlet: " + e.toString());
             url = ERROR;

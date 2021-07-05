@@ -24,7 +24,7 @@ import web.models.tblBlogCategory.BlogCategoryDAO;
 public class DeleteCategoryServlet extends HttpServlet {
 
     private final String VIEW_CATE = "ViewCategoryServlet";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -24,7 +24,7 @@ import web.models.tblService.ServiceDTO;
 public class ViewAllServiceListServlet extends HttpServlet {
 
     private final String VIEW_SERVICE = "serviceDashboard.jsp";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

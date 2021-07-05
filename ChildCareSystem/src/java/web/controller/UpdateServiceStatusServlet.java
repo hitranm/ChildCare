@@ -21,7 +21,7 @@ import web.models.tblService.ServiceDAO;
  */
 public class UpdateServiceStatusServlet extends HttpServlet {
     private final String VIEW_SERVICE = "ViewServiceDetailServlet";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

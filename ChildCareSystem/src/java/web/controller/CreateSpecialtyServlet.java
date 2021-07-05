@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ import web.models.tblSpecialty.SpecialtyDAO;
  */
 public class CreateSpecialtyServlet extends HttpServlet {
     private final String VIEW_SPECIALTY = "viewSpeciaty.jsp";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

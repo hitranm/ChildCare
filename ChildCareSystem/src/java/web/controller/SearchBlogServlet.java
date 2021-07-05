@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +25,7 @@ import web.models.tblBlog.BlogDTO;
 public class SearchBlogServlet extends HttpServlet {
     
     private final String SEARCH_PAGE = "searchBlog.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

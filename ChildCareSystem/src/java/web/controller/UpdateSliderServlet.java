@@ -43,6 +43,7 @@ public class UpdateSliderServlet extends HttpServlet {
             
         } catch(NumberFormatException | SQLException | NamingException ex) {
             log("Error at UpdateSliderServlet");
+            response.sendRedirect("systemError.html");
         } 
         finally {
             response.sendRedirect("ViewAllBlogListServlet?status=accepted");

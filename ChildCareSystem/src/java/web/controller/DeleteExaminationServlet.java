@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDAO;
 public class DeleteExaminationServlet extends HttpServlet {
 
     private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

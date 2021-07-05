@@ -25,7 +25,7 @@ import web.models.tblService.ServiceDTO;
 public class ViewServiceListServlet extends HttpServlet {
 
     private final String VIEW_SERVICE_PAGE = "serviceList.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

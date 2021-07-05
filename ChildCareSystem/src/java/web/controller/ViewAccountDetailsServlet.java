@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +29,7 @@ import web.viewModels.UserProfile.UserProfileViewModel;
  * @author Admin
  */
 public class ViewAccountDetailsServlet extends HttpServlet {
-private static final String ERROR="error.jsp";
+private static final String ERROR="systemError.html";
     private static final String VIEW_ACCOUNT_DETAIL="viewDetails.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,6 +43,7 @@ private static final String ERROR="error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String url=VIEW_ACCOUNT_DETAIL;
         try {
             HttpSession session = request.getSession();

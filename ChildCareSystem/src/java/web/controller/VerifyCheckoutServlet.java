@@ -18,7 +18,6 @@ import web.models.Cart.CartItem;
 import web.models.Cart.CartObject;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblPatient.PatientDAO;
-import web.models.tblPatient.PatientDTO;
 import web.models.tblReservation.ReservationDAO;
 import web.models.tblReservation.ReservationDTO;
 import web.models.tblService.ServiceDAO;
@@ -32,7 +31,7 @@ import web.models.tblStaff.StaffDTO;
  */
 public class VerifyCheckoutServlet extends HttpServlet {
 
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError.html";
     private static final String SUCCESS = "successCheckout.jsp";
     private static final String EMPTY_CART = "home.jsp";
     private static final String LOGIN_PAGE = "login.jsp";

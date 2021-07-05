@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +25,7 @@ import web.models.tblBlog.BlogDTO;
 public class ViewBlogByCateServlet extends HttpServlet {
 
     private final String VIEW_BLOG = "viewBlogbyCate.jsp";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

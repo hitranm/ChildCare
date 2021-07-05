@@ -40,7 +40,7 @@ public class CreateServiceServlet extends HttpServlet {
     
     private static final String VIEW_SERVICE = "ViewServiceByStaffServlet";
     private static final String CREATE_SERVICE_PAGE = "createService.jsp";
-    private static final String ERROR_PAGE = "error.jsp";
+    private static final String ERROR_PAGE = "systemError.html";
     private static final String UPLOAD_DIR = "images/service";
 
     /**
@@ -67,19 +67,13 @@ public class CreateServiceServlet extends HttpServlet {
         String specialtyId = request.getParameter("cboSpecialty");
         String description = request.getParameter("txtServiceContent");
         double price = 0;
-        double salePrice = 0;
         try {
             price = Double.parseDouble(request.getParameter("txtPrice"));
         } catch (NumberFormatException ex) {
             foundError = true;
             createServiceErr.setPriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
         }
-        try {
-            salePrice = Double.parseDouble(request.getParameter("txtSalePrice"));
-        } catch (NumberFormatException ex) {
-            foundError = true;
-            createServiceErr.setSalePriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
-        }
+        
         String thumbnail = uploadFile(request);
         try {
             //Validate field

@@ -38,7 +38,7 @@ public class CreateBlogServlet extends HttpServlet {
 
     private final String CREATE_BLOG = "createBlog.jsp";
     private final String VIEWBLOG = "ViewBlogByAuthorServlet";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
     private static final String UPLOAD_DIR = "images/blog";
 
     /**

@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.naming.NamingException;
@@ -24,7 +23,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDAO;
 public class UpdateExaminationServlet extends HttpServlet {
 
     private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

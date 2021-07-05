@@ -8,8 +8,6 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +21,7 @@ import web.models.tblBlogCategory.BlogCategoryDAO;
  */
 public class UpdateCategoryServlet extends HttpServlet {
 
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
     private final String VIEW_CATE = "ViewCategoryServlet";
 
     /**

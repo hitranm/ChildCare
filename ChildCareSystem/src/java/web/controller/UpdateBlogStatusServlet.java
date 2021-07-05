@@ -24,7 +24,7 @@ import web.models.tblBlog.BlogDAO;
 public class UpdateBlogStatusServlet extends HttpServlet {
 
     private final String BLOG_DETAIL = "ViewBlogDetailServlet";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -25,7 +25,7 @@ import web.models.tblBlog.BlogDTO;
 public class ViewBlogServlet extends HttpServlet {
 
     private final String VIEW_BLOG_PAGE = "viewBlogList.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

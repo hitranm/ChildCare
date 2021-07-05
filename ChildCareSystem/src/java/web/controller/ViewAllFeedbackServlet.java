@@ -23,7 +23,7 @@ import web.models.tblFeedback.FeedbackDTO;
  */
 public class ViewAllFeedbackServlet extends HttpServlet {
     private static final String VIEW_FEEDBACK = "feedbackDashboard.jsp";
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

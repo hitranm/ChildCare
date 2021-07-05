@@ -37,7 +37,7 @@ import web.models.tblService.ServiceDTO;
 public class UpdateServiceServlet extends HttpServlet {
     
     private final String VIEW_SERVICE = "ViewServiceDetailServlet";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
     private final String UPDATE_SERVICE = "LoadServiceServlet";
     private static final String UPLOAD_DIR = "images/service";
 

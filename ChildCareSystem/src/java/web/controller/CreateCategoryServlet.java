@@ -22,7 +22,7 @@ import web.models.tblBlogCategory.BlogCategoryDAO;
 public class CreateCategoryServlet extends HttpServlet {
 
     private final String VIEW_CATE = "viewCategory.jsp";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

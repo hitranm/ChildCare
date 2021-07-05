@@ -6,8 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +39,6 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_BLOG = "ViewBlogServlet";
     private static final String UPDATEPROFILE = "UpdateProfileServlet";
     private static final String EDIT_BLOG = "UpdateBlogServlet";
-    private static final String SEARCH_BLOG = "SearchBlogServlet";
     private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
     private static final String VIEW_USER_PROFILE = "ViewUserProfileServlet";
     private static final String CREATE_SERVICE = "CreateServiceServlet";

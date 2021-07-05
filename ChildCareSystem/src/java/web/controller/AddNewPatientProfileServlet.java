@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.YearMonth;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +26,7 @@ import web.models.tblPatient.PatientError;
 public class AddNewPatientProfileServlet extends HttpServlet {
 
     private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String INVALID = "addNewPatient.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
