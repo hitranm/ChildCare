@@ -216,9 +216,9 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, PatientID, ServiceID, StaffAssignedID, CheckInTime, Price "
-                        + " FROM tblReservation "
-                        + " WHERE ReservationID=?";
+                String sql = "SELECT ReservationID, CustomerID, PatientID, S.ServiceID, StaffAssignedID, CheckInTime, Price "
+                        + " FROM tblReservation R , tblService S "
+                        + " WHERE R.ServiceID = S.ServiceID AND ReservationID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -257,8 +257,8 @@ public class ReservationDAO implements Serializable {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
-                        + " FROM tblReservation "
-                        + " WHERE StaffAssignedID=?";
+                        + " FROM tblReservation R, tblService S "
+                        + " WHERE R.ServiceID = S.ServiceID AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -296,8 +296,8 @@ public class ReservationDAO implements Serializable {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
-                        + " FROM tblReservation "
-                        + " WHERE IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
+                        + " FROM tblReservation R, tblService S"
+                        + " WHERE R.ServiceID = S.ServiceID AND IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, x);
                 stm.setInt(2, y);

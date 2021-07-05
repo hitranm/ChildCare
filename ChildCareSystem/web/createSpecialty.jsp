@@ -13,6 +13,14 @@
         <link rel="stylesheet" href="css/specialty/createSpecialty.css">
     </head>
     <body>
+        <c:if test="${empty sessionScope.ROLE}">
+                <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+                <jsp:forward page="login.jsp"/>
+            </c:if>
+
+            <c:if test="${sessionScope.ROLE != 'manager'}">
+                <jsp:forward page="accessDenied.jsp"/>
+            </c:if>
         <jsp:include page="header.jsp" />
         <div class="specialty-form-wrapper justify-content-between">
             <h1>Tạo chuyên khoa mới</h1>

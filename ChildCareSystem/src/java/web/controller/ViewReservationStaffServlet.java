@@ -59,6 +59,12 @@ public class ViewReservationStaffServlet extends HttpServlet {
                 request.setAttribute("ListMorning", listReservationMorning);
                 List<ReservationDTO> listReservationNoon = reservationDAO.getReservationByIntervalTimeIDForStaff(5, 7, staffID);
                 request.setAttribute("ListNoon", listReservationNoon);
+                int allRes = reservationDAO.countAllRes();
+                request.setAttribute("ALL_RES", allRes);
+                int monthlyRes = reservationDAO.countMonthlyRes();
+                request.setAttribute("MONTHLY_RES", monthlyRes);
+                int weeklyRes = reservationDAO.countWeeklyRes();
+                request.setAttribute("WEEKLY_RES", weeklyRes);
             }
         } catch (SQLException | NamingException e) {
             log("ERROR at ViewReservationStaffServlet: " + e.getMessage());

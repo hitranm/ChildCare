@@ -24,6 +24,14 @@
             />
     </head>
     <body>
+        <c:if test="${empty sessionScope.ROLE}">
+                <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+                <jsp:forward page="login.jsp"/>
+            </c:if>
+
+            <c:if test="${sessionScope.ROLE != 'manager'}">
+                <jsp:forward page="accessDenied.jsp"/>
+            </c:if>
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <jsp:include page="header.jsp" />
         <div class="container">

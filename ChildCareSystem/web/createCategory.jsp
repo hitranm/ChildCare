@@ -13,7 +13,16 @@
         <title>Chủ đề</title>
     </head>
     <body>
+        
         <jsp:include page="header.jsp" />
+        <c:if test="${empty sessionScope.ROLE}">
+                <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+                <jsp:forward page="login.jsp"/>
+            </c:if>
+
+            <c:if test="${sessionScope.ROLE != 'manager'}">
+                <jsp:forward page="accessDenied.jsp"/>
+            </c:if>
         <div class="cate-form-wrapper justify-content-between d-flex flex-column align-items-center p-5">
             <h1>Tạo chủ đề mới</h1>
             <form action="DispatchServlet" method="post" enctype="multipart/form-data" class="col-md-6 mt-4">
