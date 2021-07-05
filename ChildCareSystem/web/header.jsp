@@ -78,15 +78,8 @@
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
                                     </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Dịch vụ
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="ViewServiceListServlet?index=1">Xem tất cả dịch vụ</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt chỗ khám bệnh</a>
-                                        </div>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,6 +90,9 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="ViewPatientProfileServlet?tab=add">Tạo hồ sơ bệnh nhân</a>
                                         </div>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt chỗ khám bệnh</a>
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="ViewPatientProfileServlet?tab=order">Phản hồi</a>
@@ -133,13 +129,14 @@
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
                                     </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="DispatchServlet?btAction=ViewReservationForStaff">Xem lịch khám bệnh</a>
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Quản lí
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewReservationForStaff">Xem lịch khám bệnh</a>
-                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>   
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="ViewBlogByAuthorServlet">Xem bài viết</a>  
