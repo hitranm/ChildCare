@@ -36,7 +36,6 @@
                         <div class="service-thumb mb-3">
                             <img src="./images/service/${service.thumbnail}"/>
                         </div>
-
                         <div class="service-des">
                             ${service.description}
                         </div>
@@ -52,9 +51,8 @@
                                 <c:param name="btAction" value="ChooseServiceReserve"/>
                                 <c:param name="serviceId" value="${service.serviceId}"/>
                             </c:url>
-                            <!--                                <div class="text-center mt-5"> -->
+
                             <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
-                            <!--                                </div>-->
                         </c:if>
                         <c:if test="${role eq 2 and author eq staff}">
                             <a class="btn btn-primary mt-2 col-4" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>

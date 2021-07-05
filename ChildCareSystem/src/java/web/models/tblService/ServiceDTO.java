@@ -19,7 +19,6 @@ public class ServiceDTO implements Serializable {
     private String thumbnail;
     private String description;
     private double price;
-    private double salePrice;
     private String statusId;
     private String createPersonId;
     private String createdDate;
@@ -28,14 +27,13 @@ public class ServiceDTO implements Serializable {
     public ServiceDTO() {
     }
 
-    public ServiceDTO(String serviceId, String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate, String updatedDate) {
+    public ServiceDTO(String serviceId, String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String createPersonId, String createdDate, String updatedDate) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
         this.thumbnail = thumbnail;
         this.description = description;
         this.price = price;
-        this.salePrice = salePrice;
         this.statusId = statusId;
         this.createPersonId = createPersonId;
         this.createdDate = createdDate;
@@ -43,26 +41,24 @@ public class ServiceDTO implements Serializable {
     }
     
 
-    public ServiceDTO(String serviceID, String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate) {
+    public ServiceDTO(String serviceID, String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String createPersonId, String createdDate) {
         this.serviceId = serviceID;
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
         this.thumbnail = thumbnail;
         this.description = description;
         this.price = price;
-        this.salePrice = salePrice;
         this.statusId = statusId;
         this.createPersonId = createPersonId;
         this.createdDate = createdDate;
     }
 
-    public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate, String updatedDate) {
+    public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String createPersonId, String createdDate, String updatedDate) {
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
         this.thumbnail = thumbnail;
         this.description = description;
         this.price = price;
-        this.salePrice = salePrice;
         this.statusId = statusId;
         this.createPersonId = createPersonId;
         this.createdDate = createdDate;
@@ -70,13 +66,12 @@ public class ServiceDTO implements Serializable {
     }
 
 
-    public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String createPersonId, String createdDate) {
+    public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String createPersonId, String createdDate) {
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
         this.thumbnail = thumbnail;
         this.description = description;
         this.price = price;
-        this.salePrice = salePrice;
         this.statusId = statusId;
         this.createPersonId = createPersonId;
         this.createdDate = createdDate;
@@ -97,14 +92,13 @@ public class ServiceDTO implements Serializable {
         this.statusId = statusId;
     }
 
-    public ServiceDTO(String serviceId, String serviceName, String specialtyId, String thumbnail, String description, double price, double salePrice, String statusId, String updatedDate) {
+    public ServiceDTO(String serviceId, String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String updatedDate) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.specialtyId = specialtyId;
         this.thumbnail = thumbnail;
         this.description = description;
         this.price = price;
-        this.salePrice = salePrice;
         this.statusId = statusId;
         this.updatedDate = updatedDate;
     }
@@ -156,14 +150,6 @@ public class ServiceDTO implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public double getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(double salePrice) {
-        this.salePrice = salePrice;
     }
 
     public String getStatusId() {

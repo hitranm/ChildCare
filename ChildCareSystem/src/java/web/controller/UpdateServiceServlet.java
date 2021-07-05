@@ -62,7 +62,6 @@ public class UpdateServiceServlet extends HttpServlet {
         String description = request.getParameter("txtServiceContent");
         String thumbnail = uploadFile(request);
         double price = 0;
-        double salePrice = 0;
         String url = ERROR;
         try {
             price = Double.parseDouble(request.getParameter("txtPrice"));
@@ -70,12 +69,7 @@ public class UpdateServiceServlet extends HttpServlet {
             foundError = true;
             createServiceErr.setPriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
         }
-        try {
-            salePrice = Double.parseDouble(request.getParameter("txtSalePrice"));
-        } catch (NumberFormatException ex) {
-            foundError = true;
-            createServiceErr.setSalePriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
-        }
+        
         try {
             if (serviceName.trim().length() == 0 || serviceName.trim().length() > 100) {
                 foundError = true;
@@ -99,7 +93,7 @@ public class UpdateServiceServlet extends HttpServlet {
                     thumbnail = dto.getThumbnail();
                 }
                 ServiceDTO service = new ServiceDTO(serviceID, serviceName,
-                        specialtyId, thumbnail, description, price, salePrice,
+                        specialtyId, thumbnail, description, price,
                         "0", LocalDateTime.now().toString());
                 
                 boolean result = dao.updateService(service);

@@ -12,16 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cập nhật dịch vụ</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">          
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="css/homepage.css">
         <link rel="stylesheet" href="css/service/createService.css">
 
@@ -97,19 +87,11 @@
                         </c:if>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="service-salePrice">Nhập giá khuyến mãi</label>
-                        <input type="text" id="service-salePrice" class="form-control" value="${service.salePrice}" name="txtSalePrice"/>
-                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
-                            <div class="text-danger">
-                                <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
-                            </div>
-                        </c:if>
+                        <label for="service-image">Ảnh nền</label>
+                        <input type="file" class="form-control" id="service-image" name="fImage">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="service-image">Ảnh nền</label>
-                    <input type="file" class="form-control" id="service-image" name="fImage">
-                </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary col-6 col-md-4" name="btAction" value="UpdateService">Cập nhật</button>
                 </div>

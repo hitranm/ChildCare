@@ -107,7 +107,7 @@ public class CreateServiceServlet extends HttpServlet {
                 StaffDAO staffDAO = new StaffDAO();
                 String createPersonId = staffDAO.queryStaff(identityId);
                 ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
-                        thumbnail, description, price, salePrice, "0",
+                        thumbnail, description, price, "0",
                         createPersonId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
                 // Process to add new service
                 ServiceDAO serviceDAO = new ServiceDAO();

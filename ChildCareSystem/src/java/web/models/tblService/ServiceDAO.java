@@ -31,7 +31,7 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //2. Create query string
             String query = "INSERT INTO "
-                    + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID) "
+                    + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, UpdatedDate, CreatedPersonID) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //3 Create statement and assign value
@@ -41,11 +41,10 @@ public class ServiceDAO implements Serializable {
             stm.setString(3, serviceDTO.getThumbnail());
             stm.setString(4, serviceDTO.getDescription());
             stm.setDouble(5, serviceDTO.getPrice());
-            stm.setDouble(6, serviceDTO.getSalePrice());
-            stm.setString(7, serviceDTO.getStatusId());
-            stm.setString(8, serviceDTO.getCreatedDate());
-            stm.setString(9, serviceDTO.getUpdatedDate());
-            stm.setString(10, serviceDTO.getCreatePersonId());
+            stm.setString(6, serviceDTO.getStatusId());
+            stm.setString(7, serviceDTO.getCreatedDate());
+            stm.setString(8, serviceDTO.getUpdatedDate());
+            stm.setString(9, serviceDTO.getCreatePersonId());
 
             //4 Execute query
             int row = stm.executeUpdate();
@@ -110,7 +109,7 @@ public class ServiceDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             //if (con != null) {
-            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
                     + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
                     + "from tblService) as x "
                     + "where r between ?*5-4 and ?*5";
@@ -125,11 +124,10 @@ public class ServiceDAO implements Serializable {
                 String thumbnail = rs.getString("Thumbnail");
                 String description = rs.getString("Description");
                 Double price = rs.getDouble("Price");
-                Double sale = rs.getDouble("SalePrice");
                 String authorID = rs.getString("CreatedPersonID");
                 String date = rs.getString("CreatedDate");
                 String statusID = rs.getString("StatusID");
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, statusID, authorID, date);
                 if (this.serviceList == null) {
                     this.serviceList = new ArrayList<>();
                 }
@@ -155,7 +153,7 @@ public class ServiceDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             //if (con != null) {
-            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
                     + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
                     + "from tblService WHERE StatusID=?) as x "
                     + "where r between ?*5-4 and ?*5";
@@ -171,10 +169,9 @@ public class ServiceDAO implements Serializable {
                 String thumbnail = rs.getString("Thumbnail");
                 String description = rs.getString("Description");
                 Double price = rs.getDouble("Price");
-                Double sale = rs.getDouble("SalePrice");
                 String authorID = rs.getString("CreatedPersonID");
                 String date = rs.getString("CreatedDate");
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, statusID, authorID, date);
                 if (this.serviceList == null) {
                     this.serviceList = new ArrayList<>();
                 }
@@ -200,7 +197,7 @@ public class ServiceDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             if (con != null) {
-                String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+                String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
                         + "From tblService Where ServiceID = ?";
                 stm = con.prepareStatement(sql);
 
@@ -213,11 +210,10 @@ public class ServiceDAO implements Serializable {
                     String thumbnail = rs.getString("Thumbnail");
                     String description = rs.getString("Description");
                     Double price = rs.getDouble("Price");
-                    Double sale = rs.getDouble("SalePrice");
                     String authorID = rs.getString("CreatedPersonID");
                     String date = rs.getString("CreatedDate");
                     String statusID = rs.getString("StatusID");
-                    ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                    ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, statusID, authorID, date);
                     return dto;
                 }
             }
@@ -277,7 +273,7 @@ public class ServiceDAO implements Serializable {
         ResultSet rs = null;
         try {
             con = DBHelpers.makeConnection();
-            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, SalePrice, StatusID, CreatedDate, CreatedPersonID "
+            String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
                     + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * \n"
                     + "from tblService where ServiceName like ? AND StatusID=1) as x where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
@@ -292,11 +288,10 @@ public class ServiceDAO implements Serializable {
                 String thumbnail = rs.getString("Thumbnail");
                 String description = rs.getString("Description");
                 Double price = rs.getDouble("Price");
-                Double sale = rs.getDouble("SalePrice");
                 String authorID = rs.getString("CreatedPersonID");
                 String date = rs.getString("CreatedDate");
                 String statusID = rs.getString("StatusID");
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date);
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, statusID, authorID, date);
                 if (this.serviceList == null) {
                     this.serviceList = new ArrayList<>();
                 }
@@ -325,7 +320,7 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //if (con != null) {
             String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, "
-                    + "Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
+                    + "Description, Price, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
                     + "From tblService ORDER BY UpdatedDate DESC";
             stm = con.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -336,12 +331,11 @@ public class ServiceDAO implements Serializable {
                 String thumbnail = rs.getString("Thumbnail");
                 String description = rs.getString("Description");
                 Double price = rs.getDouble("Price");
-                Double sale = rs.getDouble("SalePrice");
                 String authorID = rs.getString("CreatedPersonID");
                 String date = rs.getString("CreatedDate");
                 String updatedDate = rs.getString("UpdatedDate");
                 String statusID = rs.getString("StatusID");
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date, updatedDate);
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, statusID, authorID, date, updatedDate);
                 if (this.serviceList == null) {
                     this.serviceList = new ArrayList<>();
                 }
@@ -512,7 +506,7 @@ public class ServiceDAO implements Serializable {
             //2. Create query string
             String query = "UPDATE tblService "
                     + "SET ServiceName=?, SpecialtyID=?, Thumbnail=?, "
-                    + "Description=?, Price=?, SalePrice=?, StatusID=?, UpdatedDate=? "
+                    + "Description=?, Price=?, StatusID=?, UpdatedDate=? "
                     + "WHERE ServiceID=?";
 
             //3 Create statement and assign value
@@ -522,10 +516,9 @@ public class ServiceDAO implements Serializable {
             stm.setString(3, serviceDTO.getThumbnail());
             stm.setString(4, serviceDTO.getDescription());
             stm.setDouble(5, serviceDTO.getPrice());
-            stm.setDouble(6, serviceDTO.getSalePrice());
-            stm.setString(7, serviceDTO.getStatusId());
-            stm.setString(8, serviceDTO.getUpdatedDate());
-            stm.setString(9, serviceDTO.getServiceId());
+            stm.setString(6, serviceDTO.getStatusId());
+            stm.setString(7, serviceDTO.getUpdatedDate());
+            stm.setString(8, serviceDTO.getServiceId());
 
             //4 Execute query
             int row = stm.executeUpdate();
@@ -607,7 +600,7 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //if (con != null) {
             String sql = "Select ServiceID, ServiceName, SpecialtyID, Thumbnail, "
-                    + "Description, Price, SalePrice, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
+                    + "Description, Price, StatusID, CreatedDate, UpdatedDate, CreatedPersonID "
                     + "From tblService WHERE CreatedPersonID=? ORDER BY UpdatedDate DESC";
             stm = con.prepareStatement(sql);
             stm.setString(1, staffID);
@@ -619,12 +612,11 @@ public class ServiceDAO implements Serializable {
                 String thumbnail = rs.getString("Thumbnail");
                 String description = rs.getString("Description");
                 Double price = rs.getDouble("Price");
-                Double sale = rs.getDouble("SalePrice");
                 String authorID = rs.getString("CreatedPersonID");
                 String date = rs.getString("CreatedDate");
                 String updatedDate = rs.getString("UpdatedDate");
                 String statusID = rs.getString("StatusID");
-                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, sale, statusID, authorID, date, updatedDate);
+                ServiceDTO dto = new ServiceDTO(serviceID, serviceName, specialtyID, thumbnail, description, price, statusID, authorID, date, updatedDate);
                 if (this.serviceList == null) {
                     this.serviceList = new ArrayList<>();
                 }
