@@ -176,7 +176,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
                         + " FROM tblReservation "
                         + " WHERE IntervalTimeID BETWEEN ? AND ?";
                 stm = conn.prepareStatement(sql);

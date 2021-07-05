@@ -7,7 +7,9 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +53,7 @@ private static final String VIEW_RESERVATION="reservationdashboard.jsp";
             request.setAttribute("MONTHLY_RES", monthlyRes);
             int weeklyRes = reservationDAO.countWeeklyRes();
             request.setAttribute("WEEKLY_RES", weeklyRes);
-        } catch (Exception e) {
+        } catch (SQLException | NamingException e) {
             log("ERROR at ViewReservationManagerServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

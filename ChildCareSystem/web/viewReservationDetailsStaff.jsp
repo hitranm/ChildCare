@@ -104,12 +104,10 @@
                                 </div>
                             </c:otherwise>
                         </c:choose>
-
                     </form>
                 </div>
             </div>
         </main>
-
 
         <jsp:include page="footer.jsp"/>        
 
