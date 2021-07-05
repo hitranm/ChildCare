@@ -46,7 +46,6 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
-        String authorID;
         String url = VIEW_BLOG;
         BlogDAO blogDAO = new BlogDAO();
         StaffDAO staffDAO = new StaffDAO();
@@ -54,7 +53,6 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
             if (session != null) {
                 String identityID = (String) session.getAttribute("IDENTITY_ID");
 
-                StaffDTO staff = staffDAO.queryStaffByIdentityId(identityID);
                 List<StaffDTO> staffList = staffDAO.getAllStaffProfile();
                 request.setAttribute("STAFF", staffList);
 
@@ -65,8 +63,7 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
                 int pendingBlog = blogDAO.countBlogPending();
                 request.setAttribute("PENDING_BLOG", pendingBlog);
 
-                authorID = staff.getStaffID();
-                blogDAO.queryBlogbyAuthor(authorID);
+                blogDAO.queryBlogbyAuthor(identityID);
                 List<BlogDTO> blog = blogDAO.getBlogList();
                 request.setAttribute("BLOG_LIST", blog);
 

@@ -56,15 +56,15 @@ public class DeleteBlogServlet extends HttpServlet {
             if (role == null) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if (!staffID.equals(authorID) || !"3".equals(role)) {
-                url = DENY;
-            } else {
+            } else if (staffID.equals(authorID) || "3".equals(role)) {
                 boolean result = dao.deleteBlog(blogID);
                 if (result) {
                     url = VIEWBLOG;
                 } else {
                     url = ERROR;
                 }
+            } else {
+                url = DENY;
             }
         } catch (NamingException | SQLException ex) {
             log("Error at DeleteBlogServlet " + ex.getMessage());

@@ -98,11 +98,9 @@ public class CreateServiceServlet extends HttpServlet {
             } else {
                 //Get identity from session
                 String identityId = (String) session.getAttribute("IDENTITY_ID");
-                StaffDAO staffDAO = new StaffDAO();
-                String createPersonId = staffDAO.queryStaff(identityId);
                 ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
                         thumbnail, description, price, "0",
-                        createPersonId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
+                        identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
                 // Process to add new service
                 ServiceDAO serviceDAO = new ServiceDAO();
                 boolean result = serviceDAO.AddNewService(serviceDTO);

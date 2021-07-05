@@ -171,7 +171,7 @@ public class ManagerDAO {
         }
         return check;
     }
-     public List<ManagerDTO> getAllManagerProfile() throws SQLException {
+    public List<ManagerDTO> getAllManagerProfile() throws SQLException {
         List<ManagerDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -207,7 +207,7 @@ public class ManagerDAO {
         }
         return result;
     }
-     public boolean delete(String id) throws ClassNotFoundException, SQLException {
+    public boolean delete(String id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -234,7 +234,7 @@ public class ManagerDAO {
         }
         return false;
     }
-      public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
+    public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -264,7 +264,7 @@ public class ManagerDAO {
         }
         return false;
     }
-       public boolean addManager(ManagerDTO man) throws ClassNotFoundException, SQLException, NamingException {
+    public boolean addManager(ManagerDTO man) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
