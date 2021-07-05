@@ -56,8 +56,9 @@
                         </ol>
 
                         <div class="carousel-inner">
-                          <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
                                 <div
+                                    onclick="clickSlider(${post.blogID})"
                                     <c:choose>
                                         <c:when test="${stat.count == 1}">
                                             class="carousel-item active"
@@ -257,6 +258,12 @@
 
 
         <!--Custom JS-->
+        <script>
+            function clickSlider(blogId) {
+                var direction = "ViewBlogDetailServlet?id=" + blogId;
+            <jsp:forward page="${direction}"/>
+            }
+        </script>
         <script>
             $(function () {
                 // Sidebar toggle behavior

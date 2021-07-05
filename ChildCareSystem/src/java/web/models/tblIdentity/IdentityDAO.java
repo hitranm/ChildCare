@@ -38,8 +38,7 @@ public class IdentityDAO {
                 }
             }
 
-        } 
-        finally {
+        } finally {
             if (stm != null) {
                 stm.close();
             }
@@ -141,7 +140,7 @@ public class IdentityDAO {
         }
         return identityID;
     }
-    
+
     public boolean checkPhoneNum(String phoneNum) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
@@ -173,7 +172,7 @@ public class IdentityDAO {
         }
         return false;
     }
-          
+
     public boolean checkDuplicatedEmail(String email) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
@@ -205,7 +204,6 @@ public class IdentityDAO {
         }
         return check;
     }
-    
 
     public boolean updatePass(String pass, String identityID) throws SQLException, NamingException {
         Connection conn = null;
@@ -233,7 +231,7 @@ public class IdentityDAO {
         }
         return false;
     }
-    
+
     public int getRoleIDByIdentityID(String identityId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -251,27 +249,27 @@ public class IdentityDAO {
             //4. Execute query
             rs = stm.executeQuery();
             //5. Process result set
-            if(rs.next()) {
+            if (rs.next()) {
                 int roleId = rs.getInt("RoleID");
                 return roleId;
             }
-            
+
         } finally {
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            
-            if(stm != null) {
+
+            if (stm != null) {
                 stm.close();
             }
-            
+
             if (con != null) {
                 con.close();
             }
         }
         return -1;
-    } 
-    
+    }
+
     public IdentityDTO getIdentityDTO(String identityId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -289,7 +287,7 @@ public class IdentityDAO {
             //4. Execute query
             rs = stm.executeQuery();
             //5. Process result set
-            if(rs.next()) {
+            if (rs.next()) {
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
                 String roleId = rs.getString("RoleID");
@@ -298,21 +296,22 @@ public class IdentityDAO {
                 return identityDTO;
             }
         } finally {
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            
-            if(stm != null) {
+
+            if (stm != null) {
                 stm.close();
             }
-            
+
             if (con != null) {
                 con.close();
             }
         }
         return null;
     }
-public boolean delete(String id) throws ClassNotFoundException, SQLException, NamingException {
+
+    public boolean delete(String id) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -337,8 +336,8 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
         return false;
     }
 
- public int countAllAccount() throws SQLException, NamingException {
-        int sum=0;
+    public int countAllAccount() throws SQLException, NamingException {
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -348,7 +347,7 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
                 String sql = "SELECT COUNT(IdentityID) as Total"
                         + " FROM tblIdentity ";
                 stm = conn.prepareStatement(sql);
-                
+
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     sum = rs.getInt("Total");
@@ -367,9 +366,9 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
         }
         return sum;
     }
- 
-  public int countCustomerAccount() throws SQLException, NamingException {
-        int sum=0;
+
+    public int countCustomerAccount() throws SQLException, NamingException {
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -399,9 +398,9 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
         }
         return sum;
     }
-  
-   public int countStaffAccount() throws SQLException, NamingException {
-        int sum=0;
+
+    public int countStaffAccount() throws SQLException, NamingException {
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -431,9 +430,9 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
         }
         return sum;
     }
-   
+
     public int countNewAccountMonthly() throws SQLException, NamingException {
-        int sum=0;
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -462,7 +461,7 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
         }
         return sum;
     }
-    
+
     public void deActiveAccount(int identityId) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -488,4 +487,3 @@ public boolean delete(String id) throws ClassNotFoundException, SQLException, Na
         }
     }
 }
-
