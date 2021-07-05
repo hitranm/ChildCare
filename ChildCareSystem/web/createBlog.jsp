@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!doctype html>
 <html lang="en">
     <head>
@@ -45,7 +46,7 @@
             <jsp:forward page="login.jsp"/>
         </c:if>
 
-        <c:if test="${sessionScope.ROLE != 'staff' or sessionScope.ROLE != 'manager'}">
+        <c:if test="${sessionScope.ROLE != 'staff' and sessionScope.ROLE != 'manager'}">
             <jsp:forward page="accessDenied.jsp"/>
         </c:if>
         <!-- -->

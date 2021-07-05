@@ -50,7 +50,7 @@
                                <ul>
                     <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
-                        <a href="DispatchServlet?btAction=ViewMainDashboard"  class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                        <a href="DispatchServlet?btAction=ViewMainDashboard" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                             <span >Tổng quát</span></a>
                     </li>
                     </c:if>
@@ -61,12 +61,24 @@
                     </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="ViewServiceByStaffServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Dịch vụ </span></a>
+                        </c:if>
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewAllServiceListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                            <span>Dịch vụ </span></a>
+                        </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Bài viết</span></a>
+                        </c:if>
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <span>Bài viết</span></a>
+                        </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager'}">
@@ -309,12 +321,12 @@
                                                                             <td>${dto.serviceId}</td>
                                                                             <td>${dto.serviceName}</td>
                                                                             <td>${dto.price}00</td>
-                                                                            <td class="alert alert-success">Đang hoạt động</td>
+                                                                            <td class="alert alert-warning">Đang chờ</td>
                                                                             <td>
                                                                                 <c:url var="viewdetails" value="ViewServiceDetailServlet">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
-                                                                                <a href="${viewdetails}">Đang chờ</a>
+                                                                                <a href="${viewdetails}">Chi tiết</a>
                                                                             </td>
                                                                             <td>
                                                                                 <c:url var="delete" value="DeleteServiceServlet">
@@ -357,7 +369,7 @@
                                                                             <td>${dto.serviceId}</td>
                                                                             <td>${dto.serviceName}</td>
                                                                             <td>${dto.price}00</td>
-                                                                            <td class="alert alert-success">Tạm ngưng</td>
+                                                                            <td class="alert alert-danger">Tạm ngưng</td>
                                                                             <td>
                                                                                 <c:url var="viewdetails" value="ViewServiceDetailServlet">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>

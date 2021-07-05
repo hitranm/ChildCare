@@ -61,12 +61,24 @@
                     </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="ViewServiceByStaffServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Dịch vụ </span></a>
+                        </c:if>
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewAllServiceListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                            <span>Dịch vụ </span></a>
+                        </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllBlogListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="ViewBlogByAuthorServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Bài viết</span></a>
+                        </c:if>
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewAllBlogListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <span>Bài viết</span></a>
+                        </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager'}">

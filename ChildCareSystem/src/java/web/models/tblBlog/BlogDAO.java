@@ -443,7 +443,7 @@ public class BlogDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT TOP(?)* FROM tblBlog ORDER BY CreatedDate DESC ";
+                String sql = "SELECT TOP(?)* FROM tblBlog WHERE StatusID=1 ORDER BY CreatedDate DESC ";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, top);
                 rs = stm.executeQuery();
