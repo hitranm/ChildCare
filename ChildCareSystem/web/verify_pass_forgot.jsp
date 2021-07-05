@@ -31,7 +31,7 @@
                                 <div class="mb-4">
                                     <h3>Đã gửi mã xác thực về email. Vui lòng kiểm tra email của bạn !</h3>
                                 </div>
-                                <form action="DispatchServlet" method="post">
+                                <form action="DispatchServlet?btAction=VerifyPass" method="post">
                                     <div class="form-group first">
                                         <label for="email">Mã xác thực</label>
                                         <input type="text" name="authcode" value="" required="true" class="form-control" id="email"> 
@@ -43,7 +43,7 @@
                                             ${requestScope.WRONG_CODE}
                                         </div>
                                     </c:if>
-                                    <button type="submit" class="btn btn-primary" name="btAction" value="VerifyPass">Xác nhận</button>
+                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
                                 </form>
                             </div>
                         </div>

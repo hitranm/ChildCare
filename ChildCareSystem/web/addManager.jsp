@@ -36,7 +36,7 @@
 
         <div class="wrapper px-5">
             <h1>Tạo account manager</h1>
-            <form action="DispatchServlet" method="POST">
+            <form action="DispatchServlet?btAction=RegisterManager" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fullNanme">Họ và tên</label>
@@ -123,7 +123,7 @@
 
                 <input type="hidden" name="roleID" value="3">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary col-md-4" name="btAction" value="RegisterManager">Đăng ký</button>
+                    <button type="submit" class="btn btn-primary col-md-4">Đăng ký</button>
                 </div>
             </form>
         </div>

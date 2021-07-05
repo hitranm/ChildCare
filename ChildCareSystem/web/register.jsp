@@ -35,7 +35,7 @@
 
         <div class="wrapper container my-5 px-4">
             <h1>Phiếu đăng ký</h1>
-            <form action="DispatchServlet" method="POST">
+            <form action="DispatchServlet?btAction=Register" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fullNanme">Họ và tên</label>
@@ -122,7 +122,7 @@
 
                 <input type="hidden" name="roleID" value="1">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary col-md-4" name="btAction" value="Register">Đăng ký</button>
+                    <button type="submit" class="btn btn-primary col-md-4">Đăng ký</button>
                 </div>
             </form>
         </div>

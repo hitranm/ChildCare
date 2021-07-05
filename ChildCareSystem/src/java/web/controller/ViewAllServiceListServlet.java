@@ -53,7 +53,8 @@ public class ViewAllServiceListServlet extends HttpServlet {
             request.setAttribute("ALL_SERVICE", allServiceCount);
             String topServiceCount = dao.countMostUseService();
             request.setAttribute("POPULAR_SERVICE", topServiceCount);
-            
+            int pending = dao.countServiceDeny();
+            request.setAttribute("DENY_SERVICE", pending);
 
         } catch (SQLException | NamingException ex) {
             log("ViewAllServiceListServletError" + ex.getMessage());

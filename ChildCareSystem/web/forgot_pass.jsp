@@ -30,7 +30,7 @@
                                 <div class="mb-4">
                                     <h3>Nhập Email để tìm kiếm tài khoản của bạn</h3>
                                 </div>
-                                <form action="DispatchServlet" method="post">
+                                <form action="DispatchServlet?btAction=Forgot" method="post">
                                     <div class="form-group first">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" value="${param.email}" required="true" class="form-control" id="email">
@@ -43,7 +43,7 @@
                                     </c:if>
 
 
-                                    <button type="submit" class="btn btn-primary" name="btAction" value="Forgot">Tra cứu</button>
+                                    <button type="submit" class="btn btn-primary">Tra cứu</button>
                                 </form>
                             </div>
                         </div>

@@ -69,7 +69,6 @@ public class LoginServlet extends HttpServlet {
 //            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
 
             HttpSession session = request.getSession();
-            session.setAttribute("ROLEID", identity.getRoleID());
 //            session.setAttribute("BLOG_LIST_TOP6", listBlog);
 //            session.setAttribute("SERVICE_LIST_TOP3", listService);
 
@@ -88,6 +87,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     session.setAttribute("ROLE", "staff");
+                    session.setAttribute("ROLEID", identity.getRoleID());
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("1")) {
@@ -96,6 +96,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     session.setAttribute("CUSTOMER_ID", customerDAO.queryCustomerID(email));
                     session.setAttribute("ROLE", "customer");
+                    session.setAttribute("ROLEID", identity.getRoleID());
                     url = SUCCESS;
                 }
                 if (identity.getRoleID().equals("4")) {
@@ -103,6 +104,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("LOGIN_USER", dto);
                     session.setAttribute("IDENTITY_ID", identity.getIdentityID());
                     session.setAttribute("ROLE", "admin");
+                    session.setAttribute("ROLEID", identity.getRoleID());
                     url = SUCCESS;
                 }
 
@@ -111,7 +113,7 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("Message", msg);
             }
         } catch (Exception e) {
-            log("Error at LoginServlet:" + e.toString());
+            log("Error at LoginServlet:" + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

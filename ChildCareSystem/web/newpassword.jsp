@@ -29,7 +29,7 @@
                                 <div class="mb-4">
                                     <h3>Đặt lại mật khẩu mới</h3>
                                 </div>
-                                <form action="DispatchServlet" method="post">
+                                <form action="DispatchServlet?btAction=ResetPass" method="post">
                                     <div class="form-group first">
                                         <label for="email">Mật khẩu mới</label>
                                         <input type="password" name="password" value="" required="true"  class="form-control" id="email">
@@ -44,7 +44,7 @@
                                         </div>
                                     </c:if>
                                     <input type="hidden" name="email" value="${param.email}">
-                                    <button type="submit" class="btn btn-primary" name="btAction" value="ResetPass">Thay đổi</button>
+                                    <button type="submit" class="btn btn-primary">Thay đổi</button>
                                 </form>
                             </div>
                         </div>

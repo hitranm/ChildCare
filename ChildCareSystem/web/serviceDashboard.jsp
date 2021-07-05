@@ -31,6 +31,14 @@
         </style>
     </head>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
+              <c:if test="${empty sessionScope.ROLE}">
+                <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+                <jsp:forward page="login.jsp"/>
+            </c:if>
+
+            <c:if test="${sessionScope.ROLE eq 'customer'}">
+                <jsp:forward page="accessDenied.jsp"/>
+            </c:if>
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
@@ -39,17 +47,21 @@
                 </a>
             </div>
             <div class ="sidebar-menu">
-                <ul>
+                               <ul>
+                    <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
-                        <a href="DispatchServlet?btAction=ViewMainDashboard" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                        <a href="DispatchServlet?btAction=ViewMainDashboard"  class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                             <span >Tổng quát</span></a>
                     </li>
+                    </c:if>
+                    <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
                         <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                             <span>Tài khoản </span></a>
                     </li>
+                    </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllServiceListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -57,17 +69,27 @@
                             <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
                         <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                        <span>Đơn đặt khám</span></a>
+                        </c:if>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="DispatchServlet?btAction=ViewReservationForStaff" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                             <span>Đơn đặt khám</span></a>
+                            </c:if>
                     </li>
+                    <c:if test="${sessionScope.ROLE eq 'manager'}">
                     <li style="padding-left:0.25rem">
                         <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                             <span>Phản hồi</span></a>
                     </li>
+                    </c:if>
+                    <c:if test="${sessionScope.ROLE eq 'admin'}">
                     <li style="padding-left:0.25rem">
                         <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                             <span>Cấu hình hệ thống</span></a>
                     </li>
+                    </c:if>
                 </ul>
             </div>
         </div>

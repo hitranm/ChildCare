@@ -20,7 +20,8 @@
     <body>
         <jsp:include page="header.jsp"/>
         <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
-
+${sessionScope.ROLE}
+${sessionScope.ROLEID}
         <style>
             .carousel-item img {
                 height: 55vh;
@@ -57,7 +58,7 @@
                         </ol>
 
                         <div class="carousel-inner">
-                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                          <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
                                 <div
                                     <c:choose>
                                         <c:when test="${stat.count == 1}">
