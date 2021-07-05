@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fullNanme">Giá</label>
-                        <input type="text" name="citizenID" class="form-control" value="${resDetail.reservationDTO.price}" readonly>
+                        <input type="text" name="citizenID" class="form-control" value="${resDetail.reservationDTO.price}00" readonly>
                     </div>
                 </div>
                 <div class="form-row col-8">
