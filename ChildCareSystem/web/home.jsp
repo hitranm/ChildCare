@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,11 +16,6 @@
         <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="css/home/phonering.css"/>
         <link rel="stylesheet" href="css/sidebar.css"/>
-    </head>
-
-    <body>
-        <jsp:include page="header.jsp"/>
-        <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
         <style>
             .carousel-item img {
                 height: 55vh;
@@ -31,7 +27,16 @@
                 overflow: hidden;
                 -webkit-box-orient: vertical;
             }
+            .carousel-item:hover {
+                cursor: pointer;
+            }
         </style>
+    </head>
+
+    <body>
+        <jsp:include page="header.jsp"/>
+        <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
+
 
         <main>
             <div class="main_wrapper px-5 py-5">
@@ -56,8 +61,9 @@
                         </ol>
 
                         <div class="carousel-inner">
-                          <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
                                 <div
+                                    onclick="clickSlider(${post.blogID})"
                                     <c:choose>
                                         <c:when test="${stat.count == 1}">
                                             class="carousel-item active"
@@ -158,7 +164,7 @@
                                 <p>
                                     Trung tâm chăm sóc trẻ em CCS hỗ trợ khách hàng đặt lịch hẹn cho dịch vụ trước khi đến để tiết kiệm thời gian.
                                 </p>
-                                <a class="cta-btn scrollto" href="#"
+                                <a class="cta-btn scrollto" href="DispatchServlet?btAction=ChooseServiceReserve"
                                    >Đặt lịch hẹn</a
                                 >
                             </div>
@@ -257,6 +263,13 @@
 
 
         <!--Custom JS-->
+        <script>
+            function clickSlider(blogId) {
+                var direction = "ViewBlogDetailServlet?id=" + blogId;
+                console.log(direction);
+                location.replace(direction);
+            }
+        </script>
         <script>
             $(function () {
                 // Sidebar toggle behavior

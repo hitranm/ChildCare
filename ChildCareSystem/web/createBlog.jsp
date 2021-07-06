@@ -93,7 +93,7 @@
                 </div>
                 <div class="text-center">                
                     <button class="btn btn-primary col-6 col-md-3" type="submit" value="CreateBlog" name="btAction">Tạo bài viết</button>
-                    <a class="btn btn-secondary col-6 col-md-3" onclick="return cancelConfirm()" href="ViewBlogServlet?index=1">Hủy</a>
+                    <a class="btn btn-secondary col-6 col-md-3" onclick="return cancelConfirm()" href="ViewBlogByAuthorServlet">Hủy</a>
                 </div>
             </form>
         </div>

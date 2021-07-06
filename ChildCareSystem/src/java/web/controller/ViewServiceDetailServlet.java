@@ -52,23 +52,20 @@ public class ViewServiceDetailServlet extends HttpServlet {
         try {
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String staffID = staffDAO.queryStaff(identityID);
             ServiceDAO dao = new ServiceDAO();
             ServiceDTO service = dao.getServiceDetail(serviceID);
             String authorID = service.getCreatePersonId();
             String statusID = service.getStatusId();
-            if (role == null) {
+            if (role == null && !statusID.equals("1")) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if ("1".equals(statusID) || "3".equals(role) || staffID.equals(authorID)) {
+            } else if ("1".equals(statusID) || "3".equals(role) || identityID.equals(authorID)) {
                 FeedbackDAO feedbackDAO = new FeedbackDAO();
                 List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackByServiceId(Integer.parseInt(serviceID), 3);
                 if (!feedbackList.isEmpty()) {
                     request.setAttribute("FEEDBACK_LIST", feedbackList);
                 }
                 request.setAttribute("SERVICE_DETAIL", service);
-                request.setAttribute("STAFFID", staffID);
                 url = SERVICE_DETAIL_PAGE;
             } else {
                 url = DENY;

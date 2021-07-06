@@ -48,7 +48,7 @@
                     <c:set var="searchValue" value="${param.txtSearchBlog}"/>
                     <c:if test="${not empty searchValue}">
                         <c:set var="searchResult" value="${requestScope.SEARCH_LIST}"/>
-                        <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
+                        <jsp:useBean id="identity" class="web.models.tblIdentity.IdentityDAO" scope="request"/>
                         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
                         <c:if test="${not empty searchResult}">
                             <c:forEach var="dto" items="${searchResult}">
@@ -73,7 +73,7 @@
                                         <div class="d-flex">
                                             <div class="author">
                                                 <c:set var="staffID" value="${dto.authorID}"/>
-                                                Tác giả: ${staff.getStaffName(staffID)}
+                                                Tác giả: ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                             </div>
                                             <div class="cate" style="position: absolute;right: 0; margin-right: 2em;">
                                                 <c:forEach items="${cate.viewBlogCategory()}" var="category">
@@ -145,9 +145,6 @@
                         <c:if test="${empty searchResult}">
                             Không tìm thấy kết quả!
                         </c:if>
-                    </c:if>
-                    <c:if test="${empty searchValue}">
-                        <jsp:forward page ="ViewBlogServlet?index=1"/>
                     </c:if>
                 </div>
 

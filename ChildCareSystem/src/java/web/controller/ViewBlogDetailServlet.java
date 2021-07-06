@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
+import web.models.tblManager.ManagerDAO;
+import web.models.tblManager.ManagerDTO;
 import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
 
 /**
  *
@@ -42,25 +45,35 @@ public class ViewBlogDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         String blogID = request.getParameter("id");
         HttpSession session = request.getSession();
         String url = ERROR_PAGE;
         try {
+            String authorName;
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String staffID = staffDAO.queryStaff(identityID);
             BlogDAO dao = new BlogDAO();
             BlogDTO blog = dao.getBlogDetail(blogID);
             String authorID = blog.getAuthorID();
             String statusID = blog.getStatusID();
-            if (role == null) {
+            StaffDAO staffDAO = new StaffDAO();
+            StaffDTO staff = staffDAO.queryStaffByIdentityId(authorID);
+            if (staff==null) {
+                ManagerDAO managerDAO = new ManagerDAO();
+                ManagerDTO managerDTO = managerDAO.queryManagerByIdentityId(authorID);
+                authorName = managerDTO.getFullName();
+            } else {
+                authorName = staff.getFullName();
+            }
+            
+            if (role == null && !statusID.equals("1")) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if ("1".equals(statusID) || ("3".equals(role) || staffID.equals(authorID))) {
+            } else if ("1".equals(statusID) || ("3".equals(role) || identityID.equals(authorID))) {
                 session.setAttribute("BLOG_DETAIL", blog);
-                request.setAttribute("STAFFID", staffID);
+                request.setAttribute("AUTHOR", authorName);
                 url = VIEWBLOGDETAIL_PAGE;
             } else {
                 url = DENY;

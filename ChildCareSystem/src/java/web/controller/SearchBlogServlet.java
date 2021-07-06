@@ -26,6 +26,7 @@ public class SearchBlogServlet extends HttpServlet {
     
     private final String SEARCH_PAGE = "searchBlog.jsp";
     private final String ERROR_PAGE = "systemError.html";
+    private final String VIEW_BLOG = "ViewBlogServlet?index=1";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,6 +59,8 @@ public class SearchBlogServlet extends HttpServlet {
                 dao.searchBlog(searchValue, index);
                 List<BlogDTO> list = dao.getBlogList();
                 request.setAttribute("SEARCH_LIST", list);
+            } else {
+                url = VIEW_BLOG;
             }
         } catch (NamingException ex) {
             log("SearchBlogServlet _ Naming: " + ex.getMessage());

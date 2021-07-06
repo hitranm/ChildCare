@@ -19,7 +19,6 @@ import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 import web.models.tblSpecialty.SpecialtyDAO;
 import web.models.tblSpecialty.SpecialtyDTO;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -51,22 +50,20 @@ public class LoadServiceServlet extends HttpServlet {
         try {
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String staffID = staffDAO.queryStaff(identityID);
             ServiceDAO serviceDao = new ServiceDAO();
             ServiceDTO service = serviceDao.getServiceDetail(serviceID);
             String authorID = service.getCreatePersonId();
             if (role == null) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if (!staffID.equals(authorID)) {
-                url = DENY;
-            } else {
+            } else if (identityID.equals(authorID)) {
                 request.setAttribute("SERVICE", service);
                 SpecialtyDAO specDao = new SpecialtyDAO();
                 List<SpecialtyDTO> specialty = specDao.viewSpecialtyList();
                 request.setAttribute("SPECIALTY", specialty);
                 url = UPDATE_SERVICE;
+            } else {
+                url = DENY;
             }
         } catch (NamingException ex) {
             log("LoadServiceServlet _ Naming: " + ex.getMessage());

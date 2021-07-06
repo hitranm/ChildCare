@@ -32,7 +32,7 @@ public class ServiceDAO implements Serializable {
             //2. Create query string
             String query = "INSERT INTO "
                     + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, UpdatedDate, CreatedPersonID) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             //3 Create statement and assign value
             stm = con.prepareStatement(query);

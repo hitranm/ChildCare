@@ -67,18 +67,20 @@
                         </div>
                     </div>
                     <div class="blog-author text-right mb-3">
-                        <c:set var="staffID" value="${blog.authorID}"/>
-                        <i>Tác giả: ${staff.getStaffName(staffID)}</i>
+                        <c:set var="author" value="${requestScope.AUTHOR}"/>
+                        <i>Tác giả: ${author}</i>
                     </div>
                     <div class="text-center mb-5">
                         <c:set var="role" value="${sessionScope.ROLEID}"/>
-                        <c:set var="staff" value="${requestScope.STAFFID}"/>
-                        <c:if test="${role eq 2 and staffID eq staff}">
+                        <c:set var="identity" value="${sessionScope.IDENTITY_ID}"/>
+                        <c:set var="authorID" value="${blog.authorID}"/>
+                        <c:if test="${role eq 2 and authorID eq identity}">
                             <a class="btn btn-primary col-4" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
                             <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a>
                         </c:if>
                         <c:if test="${role eq 3}">
                             <div class="blog-status mt-4">
+                                <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br><br>
                                 <form action="UpdateBlogStatusServlet" method="POST">
                                     <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                                     <c:choose>

@@ -31,15 +31,15 @@
         </style>
     </head>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
-      <c:if test="${empty sessionScope.ROLE}">
-                <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
-                <jsp:forward page="login.jsp"/>
-            </c:if>
+        <c:if test="${empty sessionScope.ROLE}">
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
 
-            <c:if test="${sessionScope.ROLE eq 'customer'}">
-                <jsp:forward page="accessDenied.jsp"/>
-            </c:if>
-       <input type="checkbox" id="nav-toggle">
+        <c:if test="${sessionScope.ROLE eq 'customer'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
+        <input type="checkbox" id="nav-toggle">
         <div class="sidebar" style: background="#3287a8">
             <div class ="sidebar-brand">
                 <a  href="StartupServlet" class="link-primary" style="color: white">
@@ -77,8 +77,8 @@
                         </c:if>
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Bài viết</span></a>
-                        </c:if>
+                                <span>Bài viết</span></a>
+                            </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
@@ -87,7 +87,7 @@
                         </c:if>
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="DispatchServlet?btAction=ViewReservationForStaff" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
-                            <span>Đơn đặt khám</span></a>
+                                <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
@@ -97,10 +97,10 @@
                     </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'admin'}">
-                    <li style="padding-left:0.25rem">
-                        <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
-                            <span>Cấu hình hệ thống</span></a>
-                    </li>
+                        <li style="padding-left:0.25rem">
+                            <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
+                                <span>Cấu hình hệ thống</span></a>
+                        </li>
                     </c:if>
                 </ul>
             </div>
@@ -151,6 +151,7 @@
                                 <h3>Danh sách bài viết</h3>
                             </div>
                             <div class="card-body">
+                                <jsp:useBean id="identity" class="web.models.tblIdentity.IdentityDAO" scope="request"/>
                                 <div class="userPosts__wrapper">
                                     <div class="status-dropdown px-3 mb-4">
                                         <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
@@ -160,7 +161,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
                                                  aria-orientation="vertical">
-                                                <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill" href="#all" 
+                                                <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill" href="#all"
                                                    role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
                                                    onclick="toggleButton(this)">Tất cả</a>
                                                 <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#public"
@@ -178,7 +179,7 @@
                                     <div class="col-sm-12 table__wrapper bg-white">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <c:if test="${not empty requestScope.BLOG_LIST}">
-                                                
+
                                                 <!--All-->
                                                 <div class="tab-pane fade show active bg-white" id="all" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
@@ -206,11 +207,8 @@
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
-                                                                            <c:forEach items="${requestScope.STAFF}" var="staff">
-                                                                                <c:if test="${staff.staffID eq dto.authorID}">
-                                                                                    ${staff.fullName}
-                                                                                </c:if>
-                                                                            </c:forEach>
+                                                                            <c:set var="staffID" value="${dto.authorID}"/>
+                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                                                         </td>
                                                                         <td class="alert alert-success">Chấp thuận</td>
                                                                         <td>
@@ -228,11 +226,8 @@
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
-                                                                            <c:forEach items="${requestScope.STAFF}" var="staff">
-                                                                                <c:if test="${staff.staffID eq dto.authorID}">
-                                                                                    ${staff.fullName}
-                                                                                </c:if>
-                                                                            </c:forEach>
+                                                                            <c:set var="staffID" value="${dto.authorID}"/>
+                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
@@ -250,11 +245,8 @@
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
-                                                                            <c:forEach items="${requestScope.STAFF}" var="staff">
-                                                                                <c:if test="${staff.staffID eq dto.authorID}">
-                                                                                    ${staff.fullName}
-                                                                                </c:if>
-                                                                            </c:forEach>
+                                                                            <c:set var="staffID" value="${dto.authorID}"/>
+                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
@@ -281,8 +273,12 @@
                                                                 <th>Tiêu đề</th>
                                                                 <th>Tác giả</th>
                                                                 <th>Trạng thái</th>
+                                                                    <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                                                    <th>Hiện trên slider</th>
+                                                                    </c:if>
                                                                 <th></th>
                                                                 <th></th>
+
                                                             </tr>
                                                         </thead>
 
@@ -298,13 +294,27 @@
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
-                                                                            <c:forEach items="${requestScope.STAFF}" var="staff">
-                                                                                <c:if test="${staff.staffID eq dto.authorID}">
-                                                                                    ${staff.fullName}
-                                                                                </c:if>
-                                                                            </c:forEach>
+                                                                            <c:set var="staffID" value="${dto.authorID}"/>
+                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                                                         </td>
                                                                         <td class="alert alert-success">Chấp thuận</td>
+                                                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                                                            <td>
+                                                                                <form action="DispatchServlet" method="post">
+                                                                                    <c:choose>
+                                                                                        <c:when test="${dto.onSlider}">
+                                                                                            <input type="checkbox" name="chkSlider" value="ON" checked />
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <input type="checkbox" name="chkSlider" value="ON" />
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <input name="txtBlogId" value="${dto.blogID}" hidden />
+                                                                                    <button type="submit" class="btn btn-primary" name="btAction" value="UpdateSlider">Cập nhật</button>
+                                                                                </form>
+                                                                            </td>
+                                                                        </c:if>
+
                                                                         <td>
                                                                             <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
@@ -317,7 +327,7 @@
                                                         </tbody>
                                                     </table>
 
-                                                </div>                    
+                                                </div>
                                                 <!--Pending-->
                                                 <div class="tab-pane fade show bg-white" id="pending" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
@@ -346,11 +356,8 @@
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
-                                                                            <c:forEach items="${requestScope.STAFF}" var="staff">
-                                                                                <c:if test="${staff.staffID eq dto.authorID}">
-                                                                                    ${staff.fullName}
-                                                                                </c:if>
-                                                                            </c:forEach>
+                                                                            <c:set var="staffID" value="${dto.authorID}"/>
+                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
@@ -395,11 +402,8 @@
                                                                         <td>${dto.blogID}</td>
                                                                         <td>${dto.title}</td>
                                                                         <td>
-                                                                            <c:forEach items="${requestScope.STAFF}" var="staff">
-                                                                                <c:if test="${staff.staffID eq dto.authorID}">
-                                                                                    ${staff.fullName}
-                                                                                </c:if>
-                                                                            </c:forEach>
+                                                                            <c:set var="staffID" value="${dto.authorID}"/>
+                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
@@ -443,12 +447,7 @@
         </script>
 
 
-        <script>
-            window.addEventListener('load', function () {
-                const loader = document.querySelector(".loader");
-                loader.className += " hidden"; // class "loader hidden"
-            })
-        </script>
+
         <script>
             function confirmation() {
                 var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
@@ -457,4 +456,3 @@
         </script>
     </body>
 </html>
-
