@@ -8,8 +8,6 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -51,19 +48,17 @@ public class LoadBlogServlet extends HttpServlet {
         try {
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String staffID = staffDAO.queryStaff(identityID);
             BlogDAO dao = new BlogDAO();
             BlogDTO blog = dao.getBlogDetail(blogID);
             String authorID = blog.getAuthorID();
             if (role == null) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if (!staffID.equals(authorID)) {
-                url = DENY;
-            } else {
+            } else if (identityID.equals(authorID)) {
                 request.setAttribute("BLOG", blog);
                 url = UPDATE_BLOG;
+            } else {
+                url = DENY;
             }
 
         } catch (NamingException ex) {

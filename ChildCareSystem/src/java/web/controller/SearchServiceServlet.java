@@ -28,6 +28,7 @@ public class SearchServiceServlet extends HttpServlet {
 
     private final String SEARCH_PAGE = "searchService.jsp";
     private final String ERROR_PAGE = "error.jsp";
+    private final String VIEW_SERVICE = "ViewServiceListServlet?index=1";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,6 +61,8 @@ public class SearchServiceServlet extends HttpServlet {
                 dao.searchService(searchValue, index);
                 List<ServiceDTO> list = dao.getServiceList();
                 request.setAttribute("SEARCH_LIST", list);
+            } else {
+                url = VIEW_SERVICE;
             }
         } catch (SQLException ex) {
             log("SearchServiceServlet _ SQL: " + ex.getMessage());

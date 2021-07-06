@@ -50,23 +50,21 @@ public class DeleteServiceServlet extends HttpServlet {
         try {
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String staffID = staffDAO.queryStaff(identityID);
             ServiceDAO dao = new ServiceDAO();
             ServiceDTO dto = dao.getServiceDetail(serviceID);
             String authorID = dto.getCreatePersonId();
             if (role == null) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if (!staffID.equals(authorID) || !"3".equals(role)) {
-                url = DENY;
-            } else {
+            } else if (identityID.equals(authorID) || "3".equals(role)) {
                 boolean result = dao.deleteService(serviceID);
                 if (result) {
                     url = VIEW_SERVICE;
                 } else {
                     url = ERROR;
                 }
+            } else {
+                url = DENY;
             }
         } catch (NamingException ex) {
             log("DeleteServiceServlet _ Naming: " + ex.getMessage());

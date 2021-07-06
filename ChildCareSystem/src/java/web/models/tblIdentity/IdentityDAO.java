@@ -486,4 +486,84 @@ public class IdentityDAO {
             }
         }
     }
+
+    public String getStaffNameByIdentityId(String identityId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String result;
+        try {
+            //1. Connect DB
+            con = DBHelpers.makeConnection();
+            //2. Create query string
+            String sql = "SELECT FullName "
+                    + "From tblStaff S "
+                    + "Where S.IdentityID=?";
+            //3. Create statement and assign value
+            stm = con.prepareStatement(sql);
+            stm.setString(1, identityId);
+            //4. Execute query
+            rs = stm.executeQuery();
+            //5. Process result set
+            if (rs.next()) {
+                result = rs.getString("FullName");
+                return result;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+
+    public String getStaffOrManagerNameByIdentityId(String identityId) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        String result = null;
+        try {
+            if (getStaffNameByIdentityId(identityId) != null) {
+                result = getStaffNameByIdentityId(identityId);
+            } else {
+                //1. Connect DB
+                con = DBHelpers.makeConnection();
+                //2. Create query string
+                String sql = "SELECT FullName "
+                        + "From tblManager M "
+                        + "Where M.IdentityID=?";
+                //3. Create statement and assign value
+                stm = con.prepareStatement(sql);
+                stm.setString(1, identityId);
+                //4. Execute query
+                rs = stm.executeQuery();
+                //5. Process result set
+                if (rs.next()) {
+                    result = rs.getString("FullName");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

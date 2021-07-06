@@ -47,14 +47,11 @@ public class ViewServiceByStaffServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         PrintWriter out = response.getWriter();
         String url = VIEW_SERVICE;
-        StaffDAO staffDAO = new StaffDAO();
         ServiceDAO serviceDAO = new ServiceDAO();
         try {
             if (session != null) {
                 String identityID = (String) session.getAttribute("IDENTITY_ID");
-                StaffDTO staff = staffDAO.queryStaffByIdentityId(identityID);
-                String staffID = staff.getStaffID();
-                serviceDAO.getServicebyStaff(staffID);
+                serviceDAO.getServicebyStaff(identityID);
                 List<ServiceDTO> service = serviceDAO.getServiceList();
                 request.setAttribute("SERVICE_LIST", service);
 

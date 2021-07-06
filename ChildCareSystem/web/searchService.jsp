@@ -107,9 +107,6 @@
                             Không tìm thấy kết quả!
                         </c:if>
                     </c:if>
-                    <c:if test="${empty searchValue}">
-                        <jsp:forward page="ViewServiceListServlet?index=1"/>
-                    </c:if>
                 </div>
             </div>
         </main>
