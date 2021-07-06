@@ -264,7 +264,7 @@
                             <div class="tab-pane fade" id="v-pills-history">
                                 <h2 style="text-align: center; color: #1977cc">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
                                 <div class="row">
-                                    <c:if test="${requestScope.historyList!=null}">
+                                    <c:if test="${requestScope.historyList != null}">
                                         <c:if test="${not empty requestScope.historyList}" var="testEmpty">
                                             <c:forEach items="${requestScope.historyList}" var="history">
                                                 <div class="col-md-6" style="margin-bottom: 3%">

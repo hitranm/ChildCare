@@ -105,7 +105,7 @@ public class ReservationDAO implements Serializable {
                 //2. Create query string
                 String sql = "INSERT INTO "
                         + "tblReservation (CustomerID, PatientID, ServiceID, StaffAssignedID, IntervalTimeID, CheckInTime, Price) "
-                        + "VALUES (?,?,?,?,?,?)";
+                        + "VALUES (?,?,?,?,?,?,?)";
                 //3. Create statement and assign value
                 stm = con.prepareStatement(sql);
                 for (ReservationDTO reservation : this.getWaitingList()) {
@@ -443,7 +443,7 @@ public class ReservationDAO implements Serializable {
                     String patientName = rs.getString("PatientName");
                     String serviceName = rs.getString("ServiceName");
                     String checkInTime = rs.getString("CheckInTime");
-                    String createdDate = rs.getString("CreatedDate");
+                    String createdDate = rs.getDate("CreatedDate").toString();
                     ReservationHistoryDTO history = new ReservationHistoryDTO(reservationID, patientName, serviceName, checkInTime, createdDate);
                     result.add(history);
                 }
