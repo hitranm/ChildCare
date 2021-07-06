@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.ReservationHistory.ReservationHistoryDAO;
-import web.models.ReservationHistory.ReservationHistoryDTO;
+import web.viewModels.Reservation.ReservationHistoryDTO;
 import web.models.tblPatient.PatientDAO;
 import web.models.tblPatient.PatientDTO;
+import web.models.tblReservation.ReservationDAO;
 import web.models.tblSystemSetting.SystemSettingDAO;
 
 /**
@@ -37,14 +37,14 @@ public class ViewPatientProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        ReservationDAO reservationDAO = new ReservationDAO();
+        PatientDAO dao1 = new PatientDAO();
         try {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession session = req.getSession();
             String customerID = (String) session.getAttribute("CUSTOMER_ID");
-            PatientDAO dao1 = new PatientDAO();
             List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
-            ReservationHistoryDAO history = new ReservationHistoryDAO();
-            List<ReservationHistoryDTO> historyList = history.getAllPatientReservation(customerID);
+            List<ReservationHistoryDTO> historyList = reservationDAO.getAllPatientReservation(customerID);
             SystemSettingDAO systemDAO = new SystemSettingDAO();
             int maxPatientProfileAllowed = Integer.parseInt(systemDAO.getSettingByName("Max Patient Profile").getSettingValue());
 
