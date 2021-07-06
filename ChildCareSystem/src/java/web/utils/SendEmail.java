@@ -62,10 +62,10 @@ public class SendEmail {
             mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
     		
     		//set email subject
-            mess.setSubject("User Email Verification");
+            mess.setSubject("EMAIL XÁC THỰC TÀI KHOẢN");
             
     		//set message text
-            mess.setText("Registered successfully. Please verify your account using this code: " + code);
+            mess.setText("Quý khách đã đăng ký tài khoản thành công. Vui lòng sử dụng mã này để xác thực tài khoản của quý khách: " + code);
             //send the message
             Transport.send(mess);
             
