@@ -256,7 +256,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, R.Price"
                         + " FROM tblReservation R, tblService S "
                         + " WHERE R.ServiceID = S.ServiceID AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
@@ -295,7 +295,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, R.Price"
                         + " FROM tblReservation R, tblService S"
                         + " WHERE R.ServiceID = S.ServiceID AND IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
