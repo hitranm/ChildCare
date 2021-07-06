@@ -264,8 +264,8 @@
                             <div class="tab-pane fade" id="v-pills-history">
                                 <h2 style="text-align: center; color: #1977cc">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
                                 <div class="row">
-                                    <c:if test="${requestScope.historyList != null}">
-                                        <c:if test="${not empty requestScope.historyList}" var="testEmpty">
+                                    <c:choose>
+                                        <c:when test="${not empty requestScope.historyList}" var="testEmpty">
                                             <c:forEach items="${requestScope.historyList}" var="history">
                                                 <div class="col-md-6" style="margin-bottom: 3%">
                                                     <form class="col" action="LoadPatientProfileServlet" method="POST">
@@ -299,11 +299,11 @@
                                                     </form>
                                                 </div>
                                             </c:forEach>
-                                        </c:if>
-                                        <c:if test="${!testEmpty}">
+                                        </c:when>
+                                        <c:otherwise>
                                             <h2>Hiện Chưa Có Lịch Khám Nào</h2>
-                                        </c:if>
-                                    </c:if>
+                                        </c:otherwise>>
+                                    </c:choose>
                                 </div>
                             </div>
 
