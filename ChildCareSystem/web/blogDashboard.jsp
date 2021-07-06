@@ -65,13 +65,9 @@
                             <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                                 <span>Dịch vụ </span></a>
                             </c:if>
-                            <c:if test="${sessionScope.ROLE eq 'manager'}">
+                        
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
                             <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <a href="ViewServiceByStaffServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Dịch vụ </span></a>
-                            </c:if>
-                            <c:if test="${sessionScope.ROLE eq 'manager'}">
-                            <a href="ViewAllServiceListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                                 <span>Dịch vụ </span></a>
                             </c:if>
                     </li>
@@ -452,12 +448,7 @@
         </script>
 
 
-        <script>
-            window.addEventListener('load', function () {
-                const loader = document.querySelector(".loader");
-                loader.className += " hidden"; // class "loader hidden"
-            })
-        </script>
+        
         <script>
             function confirmation() {
                 var r = confirm("Bạn có chắc muốn xóa tài khoản này?");

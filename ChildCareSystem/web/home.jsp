@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -261,7 +262,8 @@
         <script>
             function clickSlider(blogId) {
                 var direction = "ViewBlogDetailServlet?id=" + blogId;
-            <jsp:forward page="${direction}"/>
+                console.log(direction);
+                location.replace(direction);
             }
         </script>
         <script>
