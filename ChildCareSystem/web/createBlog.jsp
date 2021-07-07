@@ -17,6 +17,9 @@
         <!-- Bootstrap CSS -->       
         <link rel="stylesheet" href="css/homepage.css">
         <link rel="stylesheet" href="./css/blog/createBlog.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
             tinymce.init({
@@ -35,6 +38,11 @@
         </script>
 
         <title>Blog</title>
+        <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
 
     <body>
@@ -50,7 +58,7 @@
             <jsp:forward page="accessDenied.jsp"/>
         </c:if>
         <!-- -->
-        
+
 
         <c:set var="err" value="${requestScope.CREATE_BLOG}"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>

@@ -12,7 +12,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Success</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
             main {
                 min-height: 50vh;
             }
@@ -20,18 +26,18 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        
+
         <!-- Authorize -->
         <c:if test="${empty sessionScope.ROLE}">
             <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
             <jsp:forward page="login.jsp"/>
         </c:if>
-        
+
         <c:if test="${sessionScope.ROLE != 'customer'}">
             <jsp:forward page="accessDenied.jsp"/>
         </c:if>
         <!-- -->
-        
+
         <main>
             <div class="px-5 align-middle mt-5">
                 <div class="alert alert-success text-center" role="alert">
@@ -41,7 +47,7 @@
                     <a class="btn btn-primary" href="home.jsp" role="button">Quay về trang chủ</a>
                     <a class="btn btn-success" href="ViewPatientProfileServlet?tab=order" role="button">Xem lịch sử đặt</a>
                 </div>
-                
+
             </div>
 
         </main>

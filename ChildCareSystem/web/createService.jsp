@@ -13,6 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/homepage.css">
         <link rel="stylesheet" href="css/service/createService.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
 
         <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
@@ -30,7 +33,12 @@
                 menubar: false
             });
         </script>
-
+        
+        <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
         <title>Dịch vụ</title>
     </head>
     <body>
@@ -102,7 +110,7 @@
                         </c:if>
                     </div>
                 </div>
-                        
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary col-6 col-md-4" name="btAction" value="CreateService">Tạo mới</button>
                 </div>

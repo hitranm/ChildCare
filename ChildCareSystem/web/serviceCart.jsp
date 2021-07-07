@@ -12,13 +12,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Service carts</title>
         <link rel="stylesheet" href="css/service/serviceCart.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
     </head>
     <body>
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
             main {
                 min-height: 70vh;
             }
         </style>
+        
 
 
         <jsp:include page="header.jsp"/>

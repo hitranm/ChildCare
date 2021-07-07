@@ -22,15 +22,22 @@
               href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
 
         <link rel="stylesheet" href="./viewAllAccounts.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
             #side-bar-icon {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
         </style>
     </head>
-    <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
+    <body style="font-size: 0.75rem; font-weight: 200; ">
         <c:if test="${empty sessionScope.ROLE}">
             <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
             <jsp:forward page="login.jsp"/>
@@ -65,16 +72,16 @@
                             <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                       <c:if test="${sessionScope.ROLE eq 'staff'}">
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Bài viết</span></a>
-                        </c:if>
-                        <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
+                                <span>Bài viết</span></a>
+                            </c:if>
+                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Bài viết</span></a>
-                        </c:if>
+                                <span>Bài viết</span></a>
+                            </c:if>
                     </li>
-                    
+
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>

@@ -13,8 +13,14 @@
         <title>Bài viết</title>
        
         <link rel="stylesheet" href="./viewAllAccounts.css">
-        
-        <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>

@@ -9,32 +9,26 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="./css/blog/blogdetail.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <title>Blog | ${blog.title}</title>
+        <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <jsp:include page="header.jsp"/>
         <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
-        <link rel="stylesheet" href="./css/blog/blogdetail.css" />
-        <title>Blog | ${blog.title}</title>
-    </head>
-    <body>
-        <jsp:include page="header.jsp"/>
         <div class="container">
             <div class="body-top">
                 <div class="blog-title text-center">

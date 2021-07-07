@@ -14,13 +14,19 @@
         <title>Choose service</title>
         <link rel="stylesheet" href="css/CalendarPicker.style.css">
         <link rel="stylesheet" href="css/reservation/reservation.css" >  
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
             main {
                 min-height: 70vh;
             }
         </style>
     </head>
+    
     <body>
         <jsp:include page="header.jsp"/>
         <!-- Authorize -->
@@ -28,13 +34,13 @@
             <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
             <jsp:forward page="login.jsp"/>
         </c:if>
-        
+
         <c:if test="${sessionScope.ROLE != 'customer'}">
             <jsp:forward page="accessDenied.jsp"/>
         </c:if>
         <!-- -->
-        
-        
+
+
         <c:if test="${not empty requestScope.DUPLICATE_PATIENT}">
             <script>
                 $(document).ready(function () {

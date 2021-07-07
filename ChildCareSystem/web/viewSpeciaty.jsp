@@ -22,6 +22,14 @@
             href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
             rel="stylesheet"
             />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
     <body>
         <c:if test="${empty sessionScope.ROLE}">

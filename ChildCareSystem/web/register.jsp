@@ -13,10 +13,17 @@
         <title>Trang đăng kí</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+            
             .wrapper {
                 display: flex;
                 flex-direction: column;
@@ -59,27 +66,27 @@
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="${param.email}" required="true">
 
-                    <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedEmail}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.SIGNUP_ERROR.duplicatedEmail}
-                        </div>
-                    </c:if>
-</div>
+                        <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedEmail}">
+                            <div class="alert alert-danger" role="alert">
+                                ${requestScope.SIGNUP_ERROR.duplicatedEmail}
+                            </div>
+                        </c:if>
+                    </div>
                     <div class="form-group col-md-6">
                         <label for="phoneNumber">Số điện thoại</label>
                         <input type="text" class="form-control" id="phoneNumber" name="phoneNum" value="${param.phoneNum}" required="true">
 
-                    <c:if test="${not empty requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}
-                        </div>
-                    </c:if>
-                    <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedPhoneNum}">
-                        <div class="alert alert-danger" role="alert">
-                            ${requestScope.SIGNUP_ERROR.duplicatedPhoneNum}
-                        </div>
-                    </c:if>
-                </div>
+                        <c:if test="${not empty requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}">
+                            <div class="alert alert-danger" role="alert">
+                                ${requestScope.SIGNUP_ERROR.wrongFormatPhoneNumber}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedPhoneNum}">
+                            <div class="alert alert-danger" role="alert">
+                                ${requestScope.SIGNUP_ERROR.duplicatedPhoneNum}
+                            </div>
+                        </c:if>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

@@ -12,8 +12,14 @@
         <c:set var="service" value="${requestScope.SERVICE_DETAIL}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/service/serviceDetail.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <title>Dịch vụ | ${service.serviceName}</title>
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
             svg {
                 color: #fed330;
             }

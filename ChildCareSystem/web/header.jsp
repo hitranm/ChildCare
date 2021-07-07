@@ -30,6 +30,9 @@
             />
 
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
             .navbar-brand {
                 font-size: 1.5rem;
             }

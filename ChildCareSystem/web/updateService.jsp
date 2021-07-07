@@ -31,6 +31,11 @@
                 menubar: false
             });
         </script>
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp" />

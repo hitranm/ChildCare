@@ -19,7 +19,15 @@
               href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
         <link rel="stylesheet" href="../HomePage/HomePage.css">
         <link rel="stylesheet" href="./viewAllAccounts.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
 
     <body>

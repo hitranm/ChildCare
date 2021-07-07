@@ -10,7 +10,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <title>Tất cả bài viết</title>
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
 
     </head>
     <body>

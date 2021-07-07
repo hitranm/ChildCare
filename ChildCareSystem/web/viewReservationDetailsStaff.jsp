@@ -14,8 +14,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <title>Child Care System</title>
         <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
             .wrapper {
                 display: flex;
                 flex-direction: column;
