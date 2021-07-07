@@ -25,7 +25,7 @@ import web.utils.SendEmail;
  * @author Admin
  */
 public class AddCustomerServlet extends HttpServlet {
-
+    private static final String SYSTEM_ERROR="error.jsp";
     private static final String ERROR = "register.jsp";
     private static final String SUCCESS = "verify.jsp";
 
@@ -109,8 +109,8 @@ public class AddCustomerServlet extends HttpServlet {
                     session.setAttribute("authcode", code);
                     url = SUCCESS;
                 } else {
-                    String msg = "Vui lòng kiểm tra lại mail đăng ký có tồn tại hay không";
-                    request.setAttribute("FAIL_EMAIL", msg);
+                    url= SYSTEM_ERROR;
+                    
                 }
             }     
                 
