@@ -119,7 +119,7 @@
                             <span>Khách hàng</span>
                         </div>
                         <div>
-                            <span class="fas fa-user"</span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                     <div class="card-single">
