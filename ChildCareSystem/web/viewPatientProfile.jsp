@@ -20,17 +20,14 @@
                 var seYear = $('#year');
                 var date = new Date();
                 var cur = date.getFullYear();
-
                 seYear.append('<option value="">-- Năm --</option>');
                 for (i = cur; i >= cur - 18; i--) {
                     seYear.append('<option value="' + i + '">' + i + '</option>');
                 }
                 ;
-
                 //Tháng tự động điền vào select
                 var seMonth = $('#month');
                 var date = new Date();
-
                 var month = new Array();
                 month[1] = "Tháng 1";
                 month[2] = "Tháng 2";
@@ -44,13 +41,11 @@
                 month[10] = "Tháng 10";
                 month[11] = "Tháng 11";
                 month[12] = "Tháng 12";
-
                 seMonth.append('<option value="">-- Tháng --</option>');
                 for (i = 12; i > 0; i--) {
                     seMonth.append('<option value="' + i + '">' + month[i] + '</option>');
                 }
                 ;
-
                 //Ngày tự động điền vào select
                 function dayList(month, year) {
                     var day = new Date(year, month, 0);
@@ -62,7 +57,6 @@
                     var y = document.getElementById('year');
                     var m = document.getElementById('month');
                     var d = document.getElementById('day');
-
                     var year = y.options[y.selectedIndex].value;
                     var month = m.options[m.selectedIndex].value;
                     var day = d.options[d.selectedIndex].value;
@@ -103,6 +97,13 @@
                                 <button type="button" class="nav-link btn-outline-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;text-align: left;cursor:pointer">
                                     Thêm hồ sơ bệnh nhân
                                 </button>
+                                <c:if test="${param.tab eq 'add'}">
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#exampleModalCenter').modal('show')
+                                        });
+                                    </script>
+                                </c:if>
                             </c:if>
                             <c:if test="${empty requestScope.reachMaxPatient}">
                                 <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="tab" href="#v-pills-addPatient" role="tab" aria-selected="true">Thêm hồ sơ bệnh nhân</a>
@@ -265,7 +266,7 @@
                                 <h2 style="text-align: center; color: #1977cc">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
                                 <div class="row">
                                     <c:choose>
-                                        <c:when test="${not empty requestScope.historyList}" var="testEmpty">
+                                        <c:when test="${requestScope.historyList!= null}">
                                             <c:forEach items="${requestScope.historyList}" var="history">
                                                 <div class="col-md-6" style="margin-bottom: 3%">
                                                     <form class="col" action="LoadPatientProfileServlet" method="POST">
@@ -302,7 +303,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <h2>Hiện Chưa Có Lịch Khám Nào</h2>
-                                        </c:otherwise>>
+                                        </c:otherwise>
                                     </c:choose>
                                 </div>
                             </div>
