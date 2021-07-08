@@ -1,0 +1,239 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 16, 2021, 4:18:06 PM
+    Author     : DELL
+*/
+.top_title {
+    font-size: 2rem;
+}
+
+body {
+    background-color: rgba(var(--b3f, 250, 250, 250), 1);
+}
+.style {
+    background-color: #fff;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 12px;
+}
+.service-preview {
+    background-color: #fff;
+    padding-top: 10px;
+    border-radius: 12px;
+}
+.service-name a {
+    color: #444444;
+}
+.service-thumbnail {
+    margin: 10px;
+    display: inline-block;
+}
+
+.service-thumbnail img {
+    width: 250px;
+    height: 150px;
+    border-radius: 4px;
+}
+.service-name {
+    padding-top: 15px;
+}
+.service-name a:hover {
+    color: #1977cc;
+    text-decoration: none;
+}
+.service-descript {
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+/*----------paging----------*/
+
+.paging {
+    display: inline-block;
+    height: 40px;
+    margin-top: 10px;
+    padding: 0 25px;
+    border-radius: 35px;
+    background-color: #fff;
+}
+
+.number {
+    display: block;
+    padding: 0 15px;
+    float: left;
+    transition: 400ms ease;
+    color: #444444;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    line-height: 40px;
+    border-color: #000
+
+}
+.number:hover {
+    background-color: #1c84e3;
+    color: #F6F6F7;
+    text-decoration: none;
+}
+.number.active {
+    background-color: #1c84e3;
+    color: #F6F6F7;
+    text-decoration: none;
+}
+/*-------Footer --------*/
+
+#footer {
+    color: #444444;
+    font-size: 14px;
+}
+
+#footer .footer-top {
+    padding: 60px 0 30px 0;
+    background: #fff;
+    box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);
+}
+
+#footer .footer-top .footer-contact {
+    margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-contact h4 {
+    font-size: 22px;
+    margin: 0 0 30px 0;
+    padding: 2px 0 2px 0;
+    line-height: 1;
+    font-weight: 700;
+}
+
+#footer .footer-top .footer-contact p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 0;
+    font-family: "Raleway", sans-serif;
+    color: #777777;
+}
+
+#footer .footer-top h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444444;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+#footer .footer-top .footer-links {
+    margin-bottom: 30px;
+}
+
+#footer .footer-top .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#footer .footer-top .footer-links ul i {
+    padding-right: 2px;
+    color: #1c84e3;
+    font-size: 18px;
+    line-height: 1;
+}
+
+#footer .footer-top .footer-links ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+#footer .footer-top .footer-links ul li:first-child {
+    padding-top: 0;
+}
+
+#footer .footer-top .footer-links ul a {
+    color: #777777;
+    transition: 0.3s;
+    display: inline-block;
+    line-height: 1;
+}
+
+#footer .footer-top .footer-links ul a:hover {
+    text-decoration: none;
+    color: #1977cc;
+}
+
+#footer .footer-newsletter {
+    font-size: 15px;
+}
+
+#footer .footer-newsletter h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444444;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+#footer .footer-newsletter form {
+    margin-top: 30px;
+    background: #fff;
+    padding: 6px 10px;
+    position: relative;
+    border-radius: 50px;
+    text-align: left;
+    border: 1px solid #bfdcf7;
+}
+
+#footer .footer-newsletter form input[type="email"] {
+    border: 0;
+    padding: 4px 8px;
+    width: calc(100% - 100px);
+}
+
+#footer .footer-newsletter form input[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 0 20px;
+    background: #1977cc;
+    color: #fff;
+    transition: 0.3s;
+    border-radius: 50px;
+}
+
+#footer .footer-newsletter form input[type="submit"]:hover {
+    background: #1c84e3;
+}
+
+#footer .credits {
+    padding-top: 5px;
+    font-size: 13px;
+    color: #444444;
+}
+
+#footer .social-links a {
+    font-size: 18px;
+    display: inline-block;
+    background: #1977cc;
+    color: #fff;
+    line-height: 1;
+    padding: 8px 0;
+    margin-right: 4px;
+    border-radius: 50%;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    transition: 0.3s;
+}
+
+#footer .social-links a:hover {
+    background: #1c84e3;
+    color: #fff;
+    text-decoration: none;
+}
