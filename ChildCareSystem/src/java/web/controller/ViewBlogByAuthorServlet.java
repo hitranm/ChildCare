@@ -48,14 +48,9 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
 
         String url = VIEW_BLOG;
         BlogDAO blogDAO = new BlogDAO();
-        StaffDAO staffDAO = new StaffDAO();
         try {
             if (session != null) {
                 String identityID = (String) session.getAttribute("IDENTITY_ID");
-
-                List<StaffDTO> staffList = staffDAO.getAllStaffProfile();
-                request.setAttribute("STAFF", staffList);
-
                 int allBlog = blogDAO.countAllBlog();
                 request.setAttribute("ALL_BLOG", allBlog);
                 int activeBlog = blogDAO.countBlogActive();

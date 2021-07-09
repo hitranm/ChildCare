@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
+import web.models.tblIdentity.IdentityDAO;
 import web.models.tblManager.ManagerDAO;
 import web.models.tblManager.ManagerDTO;
 import web.models.tblStaff.StaffDAO;
@@ -51,22 +52,14 @@ public class ViewBlogDetailServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String url = ERROR_PAGE;
         try {
-            String authorName;
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
             BlogDAO dao = new BlogDAO();
             BlogDTO blog = dao.getBlogDetail(blogID);
             String authorID = blog.getAuthorID();
             String statusID = blog.getStatusID();
-            StaffDAO staffDAO = new StaffDAO();
-            StaffDTO staff = staffDAO.queryStaffByIdentityId(authorID);
-            if (staff==null) {
-                ManagerDAO managerDAO = new ManagerDAO();
-                ManagerDTO managerDTO = managerDAO.queryManagerByIdentityId(authorID);
-                authorName = managerDTO.getFullName();
-            } else {
-                authorName = staff.getFullName();
-            }
+            IdentityDAO identityDAO = new IdentityDAO();
+            String authorName = identityDAO.getStaffOrManagerNameByIdentityId(authorID);
             
             if (role == null && !statusID.equals("1")) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");

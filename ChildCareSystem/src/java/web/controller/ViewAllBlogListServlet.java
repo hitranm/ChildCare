@@ -41,9 +41,6 @@ public class ViewAllBlogListServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = VIEW_BLOG;
         try {
-            StaffDAO staffDAO = new StaffDAO();
-            List<StaffDTO> staff = staffDAO.getAllStaffProfile();
-            request.setAttribute("STAFF", staff);
             BlogDAO dao = new BlogDAO();
             dao.viewBlogList();
             List<BlogDTO> blog = dao.getBlogList();
