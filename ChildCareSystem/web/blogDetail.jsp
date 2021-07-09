@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/blog/blogdetail.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,10 +22,9 @@
             }
         </style>
     </head>
-    
+
     <body>
         <jsp:include page="header.jsp"/>
-        <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
         <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
         <jsp:useBean id="staff" class="web.models.tblStaff.StaffDAO" scope="request"/>
 
