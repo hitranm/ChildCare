@@ -429,11 +429,11 @@
             window.addEventListener('load', function () {
                 const loader = document.querySelector(".loader");
                 loader.className += " hidden"; // class "loader hidden"
-            })
+            });
         </script>
         <script>
             function confirmation() {
-                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+                var r = confirm("Bạn có chắc muốn xóa dịch vụ này?");
                 return r;
             }
         </script>

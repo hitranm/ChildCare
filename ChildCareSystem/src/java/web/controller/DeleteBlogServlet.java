@@ -48,15 +48,13 @@ public class DeleteBlogServlet extends HttpServlet {
         try {
             String role = (String) session.getAttribute("ROLEID");
             String identityID = (String) session.getAttribute("IDENTITY_ID");
-            StaffDAO staffDAO = new StaffDAO();
-            String staffID = staffDAO.queryStaff(identityID);
             BlogDAO dao = new BlogDAO();
             BlogDTO dto = dao.getBlogDetail(blogID);
             String authorID = dto.getAuthorID();
             if (role == null) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if (staffID.equals(authorID) || "3".equals(role)) {
+            } else if (identityID.equals(authorID) || "3".equals(role)) {
                 boolean result = dao.deleteBlog(blogID);
                 if (result) {
                     url = VIEWBLOG;

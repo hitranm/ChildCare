@@ -460,7 +460,7 @@
 
         <script>
             function confirmation() {
-                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+                var r = confirm("Bạn có chắc muốn xóa bài viết này?");
                 return r;
             }
         </script>
