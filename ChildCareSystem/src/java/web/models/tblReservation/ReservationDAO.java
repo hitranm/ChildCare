@@ -217,7 +217,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, PatientID, S.ServiceID, StaffAssignedID, CheckInTime, Price "
+                String sql = "SELECT ReservationID, CustomerID, PatientID, S.ServiceID, StaffAssignedID, CheckInTime, R.Price "
                         + " FROM tblReservation R , tblService S "
                         + " WHERE R.ServiceID = S.ServiceID AND ReservationID=?";
                 stm = conn.prepareStatement(sql);
