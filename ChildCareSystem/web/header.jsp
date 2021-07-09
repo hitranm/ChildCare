@@ -202,7 +202,6 @@
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="viewSpeciaty.jsp">Danh sách chuyên khoa</a>
                                             <div class="dropdown-divider"></div>
-                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="ViewCategoryServlet">Danh sách chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>                                          
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
