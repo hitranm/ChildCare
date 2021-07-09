@@ -26,6 +26,7 @@ import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 import web.models.tblSpecialty.SpecialtyDAO;
 import web.models.tblSpecialty.SpecialtyDTO;
+import web.models.tblSystemSetting.SystemSettingDAO;
 import web.viewModels.Cart.CartViewModel;
 
 /**
@@ -58,7 +59,12 @@ public class AddServiceToCartServlet extends HttpServlet {
         String date = request.getParameter("txtDate"); 
         String url = ERROR;
         OpenTimeDAO openTimeDAO = new OpenTimeDAO();
+        SystemSettingDAO systemSettingDAO = new SystemSettingDAO();
+        
+        int maxReservation;
         try {
+            maxReservation = Integer.parseInt(systemSettingDAO.getSettingByName("Max Reservation").getSettingValue());
+            
             //1. Go to cart place
             HttpSession session = request.getSession(); // get true;
 
@@ -72,7 +78,7 @@ public class AddServiceToCartServlet extends HttpServlet {
                 listCartViewModel = new ArrayList<>();
             }
             
-            if (cart.getCountItem() == 3) {  // Check max cart item
+            if (cart.getCountItem() == maxReservation) {  // Check max cart item
                 url = "DispatchServlet?btAction=ChooseServiceReserve";
                 session.setAttribute("STATUS", "MAX");
                 response.sendRedirect(url);
