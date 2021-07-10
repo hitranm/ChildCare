@@ -60,12 +60,14 @@
 
                             <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
                         </c:if>
-                        <c:if test="${role eq 2 and author eq identity}">
+                        <c:if test="${author eq identity}">
                             <a class="btn btn-primary mt-2 col-4" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
                             <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
                         </c:if>
                         <c:if test="${role eq 3}">
-                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                            <c:if test="${author != identity}">
+                                <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                            </c:if>
                             <div class="status mt-4">
                                 <form action="UpdateServiceStatusServlet" method="POST">
                                     <input type="hidden" name="txtServiceID" value="${service.serviceId}" />

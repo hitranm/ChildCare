@@ -67,13 +67,15 @@
                         <c:set var="role" value="${sessionScope.ROLEID}"/>
                         <c:set var="identity" value="${sessionScope.IDENTITY_ID}"/>
                         <c:set var="authorID" value="${blog.authorID}"/>
-                        <c:if test="${role eq 2 and authorID eq identity}">
+                        <c:if test="${authorID eq identity}">
                             <a class="btn btn-primary col-4" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
                             <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a>
                         </c:if>
                         <c:if test="${role eq 3}">
                             <div class="blog-status mt-4">
-                                <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br><br>
+                                <c:if test="${authorID != identity}">
+                                    <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br><br>
+                                </c:if>
                                 <form action="UpdateBlogStatusServlet" method="POST">
                                     <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                                     <c:choose>

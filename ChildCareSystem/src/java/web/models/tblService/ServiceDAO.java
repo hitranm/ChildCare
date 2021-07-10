@@ -110,7 +110,7 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //if (con != null) {
             String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
-                    + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
+                    + "from (select ROW_NUMBER() over (order by UpdatedDate DESC) as r, * "
                     + "from tblService) as x "
                     + "where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
@@ -154,7 +154,7 @@ public class ServiceDAO implements Serializable {
             con = DBHelpers.makeConnection();
             //if (con != null) {
             String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
-                    + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * "
+                    + "from (select ROW_NUMBER() over (order by UpdatedDate DESC) as r, * "
                     + "from tblService WHERE StatusID=?) as x "
                     + "where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
@@ -274,7 +274,7 @@ public class ServiceDAO implements Serializable {
         try {
             con = DBHelpers.makeConnection();
             String sql = "select ServiceID, ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, CreatedPersonID "
-                    + "from (select ROW_NUMBER() over (order by ServiceID asc) as r, * \n"
+                    + "from (select ROW_NUMBER() over (order by UpdatedDate DESC) as r, * \n"
                     + "from tblService where ServiceName like ? AND StatusID=1) as x where r between ?*5-4 and ?*5";
             stm = con.prepareStatement(sql);
             stm.setString(1, "%" + searchValue + "%");
