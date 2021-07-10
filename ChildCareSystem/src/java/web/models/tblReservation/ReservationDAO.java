@@ -15,6 +15,7 @@ import java.util.List;
 import javax.naming.NamingException;
 import web.models.tblBlog.BlogDTO;
 import web.utils.DBHelpers;
+import web.viewModels.Reservation.ReservationHistoryDTO;
 
 /**
  *
@@ -103,8 +104,8 @@ public class ReservationDAO implements Serializable {
             if (con != null) {
                 //2. Create query string
                 String sql = "INSERT INTO "
-                        + "tblReservation (CustomerID, PatientID, ServiceID, StaffAssignedID, IntervalTimeID, CheckInTime) "
-                        + "VALUES (?,?,?,?,?,?)";
+                        + "tblReservation (CustomerID, PatientID, ServiceID, StaffAssignedID, IntervalTimeID, CheckInTime, Price) "
+                        + "VALUES (?,?,?,?,?,?,?)";
                 //3. Create statement and assign value
                 stm = con.prepareStatement(sql);
                 for (ReservationDTO reservation : this.getWaitingList()) {
@@ -114,6 +115,7 @@ public class ReservationDAO implements Serializable {
                     stm.setInt(4, reservation.getStaffAssignId());
                     stm.setInt(5, reservation.getTimeIntervalId());
                     stm.setString(6, reservation.getCheckInDate());
+                    stm.setFloat(7, reservation.getPrice());
                     stm.addBatch();
                 }
                 stm.executeBatch();
@@ -138,7 +140,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
                         + " FROM tblReservation ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
@@ -148,7 +150,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
@@ -174,7 +177,7 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, Price"
                         + " FROM tblReservation "
                         + " WHERE IntervalTimeID BETWEEN ? AND ?";
                 stm = conn.prepareStatement(sql);
@@ -187,7 +190,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
@@ -213,9 +217,9 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, PatientID, ServiceID, StaffAssignedID, CheckInTime "
-                        + " FROM tblReservation "
-                        + " WHERE ReservationID=?";
+                String sql = "SELECT ReservationID, CustomerID, PatientID, S.ServiceID, StaffAssignedID, CheckInTime, R.Price "
+                        + " FROM tblReservation R , tblService S "
+                        + " WHERE R.ServiceID = S.ServiceID AND ReservationID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -226,7 +230,8 @@ public class ReservationDAO implements Serializable {
                     int staffAssignID = rs.getInt("StaffAssignedID");
                     String checkInDate = rs.getString("CheckInTime");
                     int reservationId = rs.getInt("ReservationID");
-                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, reservationId);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(customerID, patientID, serviceID, staffAssignID, checkInDate, reservationId, price);
                     return res;
                 }
             }
@@ -252,9 +257,9 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
-                        + " FROM tblReservation "
-                        + " WHERE StaffAssignedID=?";
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, R.Price"
+                        + " FROM tblReservation R, tblService S "
+                        + " WHERE R.ServiceID = S.ServiceID AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, id);
                 rs = stm.executeQuery();
@@ -264,7 +269,8 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
                 }
             }
@@ -290,9 +296,9 @@ public class ReservationDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime"
-                        + " FROM tblReservation "
-                        + " WHERE IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
+                String sql = "SELECT ReservationID, CustomerID, StaffAssignedID, CheckInTime, R.Price"
+                        + " FROM tblReservation R, tblService S"
+                        + " WHERE R.ServiceID = S.ServiceID AND IntervalTimeID BETWEEN ? AND ? AND StaffAssignedID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, x);
                 stm.setInt(2, y);
@@ -304,8 +310,142 @@ public class ReservationDAO implements Serializable {
                     int customerID = rs.getInt("CustomerID");
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime);
+                    float price = rs.getFloat("Price");
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
                     result.add(res);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+
+    public int countAllRes() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ReservationID) as Total"
+                        + " FROM tblReservation ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+
+    public int countMonthlyRes() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ReservationID) as Total"
+                        + " FROM tblReservation "
+                        + " WHERE MONTH(CreatedDate) = Month(GETDATE())";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+
+    public int countWeeklyRes() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(ReservationID) as Total"
+                        + " FROM tblReservation "
+                        + " WHERE CreatedDate >= dateadd(day, 1-datepart(dw, getdate()), CONVERT(date,getdate())) "
+                        + " AND CreatedDate <  dateadd(day, 8-datepart(dw, getdate()), CONVERT(date,getdate()))";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+    
+    public List<ReservationHistoryDTO> getAllPatientReservation(String customerID) throws SQLException, NamingException {
+        List<ReservationHistoryDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT R.ReservationID, P.PatientName, S.ServiceName, R.CheckInTime, R.CreatedDate "
+                        + "FROM tblCustomer C, tblPatient P, tblService S, tblReservation R "
+                        + "WHERE C.CustomerID = R.CustomerID AND P.PatientID=R.PatientID AND S.ServiceID=R.ServiceID AND R.CustomerID=? "
+                        + "ORDER BY R.CreatedDate DESC";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, customerID);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    int reservationID = rs.getInt("ReservationID");
+                    String patientName = rs.getString("PatientName");
+                    String serviceName = rs.getString("ServiceName");
+                    String checkInTime = rs.getString("CheckInTime");
+                    String createdDate = rs.getDate("CreatedDate").toString();
+                    ReservationHistoryDTO history = new ReservationHistoryDTO(reservationID, patientName, serviceName, checkInTime, createdDate);
+                    result.add(history);
                 }
             }
         } finally {

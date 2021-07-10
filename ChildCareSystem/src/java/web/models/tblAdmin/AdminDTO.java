@@ -79,6 +79,14 @@ public class AdminDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public AdminDTO(String FullName, String Address, String Birthday, String CitizenID, String phoneNumber) {
+        this.FullName = FullName;
+        this.Address = Address;
+        this.Birthday = Birthday;
+        this.CitizenID = CitizenID;
+        this.phoneNumber = phoneNumber;
+    }
+
 
     
     

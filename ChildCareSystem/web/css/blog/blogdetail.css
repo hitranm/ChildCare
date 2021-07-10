@@ -17,7 +17,7 @@ body {
     padding-right: 1rem;
 }
 .blog-thumb img {
-    width: 100%;
+    width: 1110px;
     height: auto;
 }
 
@@ -87,7 +87,6 @@ body {
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 0;
-    font-family: "Raleway", sans-serif;
     color: #777777;
 }
 

@@ -19,127 +19,20 @@
               href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
         <link rel="stylesheet" href="../HomePage/HomePage.css">
         <link rel="stylesheet" href="./viewAllAccounts.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/9ba09bf17b.js" crossorigin="anonymous"></script>
         <style>
-            .loader {
-                position: fixed;
-                z-index: 99;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .loader > img {
-                width: 100px;
-            }
-
-            .loader.hidden {
-                animation: fadeOut 1s;
-                animation-fill-mode: forwards;
-            }
-
-            @keyframes fadeOut {
-                100% {
-                    opacity: 0;
-                    visibility: hidden;
-                }
+            * {
+                font-family: 'Niramit', sans-serif;
             }
         </style>
     </head>
 
     <body>
-        <!-- <header>
-                <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-center">
-                  <a class="navbar-brand" href="../HomePage/">
-                    <img src="../img/rsz_logo_2000x2000 (1).png" alt="logo" width="40" height="40">
-                  </a>
-                  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-            
-                  <div class="collapse navbar-collapse  bg-white" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto ">
-                      <li class="nav-item bg-white">
-                        <a class="nav-link" href="../HomePage">
-                          <i class="fas fa-home"></i>
-                          Home<span class="sr-only"></span>
-                        </a>
-                      </li>
-                      <li class="nav-item bg-white">
-                        <a class="nav-link" href="../CreatePost" onclick="resetTopicId()">
-                          <i class="far fa-calendar-plus"></i>
-                          Create</a>
-                      </li>
-                      <li class="nav-item bg-white">
-                        <a class="nav-link" href="/Schedule">
-                          <i class="fas fa-calendar-alt"></i>
-                          Schedule</a>
-                      </li>
-                      <li class="nav-item dropdown bg-white">
-                        <a class="nav-link dropdown-toggle" href="#" id="userAccount" role="button" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-user"></i>
-                          
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item active" href="../UserPosts">
-                            <i class="fas fa-chart-bar"></i>
-                            User status</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="/logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout</a>
-                        </div>
-                      </li>
-                    </ul>
-        <!-- <form class="form-inline my-2 my-lg-0  bg-white">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> 
-      </div>
-    </nav>
-
-    <div class="collapse navbar-collapse  bg-white" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto ">
-        <li class="nav-item bg-white">
-          <a class="nav-link" href="../HomePage">Home <span class="sr-only"></span></a>
-        </li>
-        <li class="nav-item bg-white">
-          <a class="nav-link" href="../CreatePost/CreatePost" onclick="resetTopicId()">Create</a>
-        </li>
-        <li class="nav-item bg-white">
-          <a class="nav-link" href="../Schedule">Schedule</a>
-        </li>
-        <li class="nav-item dropdown bg-white">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Account
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item active" href="../UserPosts">User status</a>
-            <div class="dropdown-divider"></div>
-
-            <a class="dropdown-item" href="/logout">Logout</a>
-          </div>
-        </li>
-      </ul>
-        <!-- <form class="form-inline my-2 my-lg-0  bg-white">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> 
-      </div>
-      </nav>
-  </header>-->
+        
         <main>
-            <div class="loader">
-                <img src="../img/loading.gif" alt="Loading..." />
-            </div>
             <div class="userPosts__container">
                 <div class="userPosts__wrapper">
                     <h2 class="userPosts__title">Accounts List</h2>

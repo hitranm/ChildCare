@@ -7,16 +7,12 @@ package web.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import web.models.tblPatient.PatientDAO;
 import web.models.tblPatient.PatientDTO;
 
@@ -38,21 +34,24 @@ public class LoadPatientProfileByIDServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try {
             String id = request.getParameter("id");
             PatientDAO dao1 = new PatientDAO();
             PatientDTO patient = dao1.getPatientByID(id);
             request.setAttribute("patient", patient);
             String[] slits = patient.getBirthday().split("-");
-            String year=slits[0];
-            String month=slits[1];
-            String day=slits[2];
+            String year = slits[0];
+            String month = slits[1];
+            String day = slits[2];
             request.setAttribute("patientDay", day);
             request.setAttribute("patientMonth", month);
             request.setAttribute("patientYear", year);
 
         } catch (SQLException e) {
             log("ERROR at LoadPatientProfileByIDServlet: " + e.getMessage());
+            request.getRequestDispatcher("systemError.html").forward(request, response);
+
         } finally {
             request.getRequestDispatcher("updatePatientProfile.jsp").forward(request, response);
         }

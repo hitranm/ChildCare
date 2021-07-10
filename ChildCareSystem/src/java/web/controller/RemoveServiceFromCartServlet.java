@@ -6,14 +6,12 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import web.models.Cart.CartItem;
 import web.models.Cart.CartObject;
 import web.viewModels.Cart.CartViewModel;
@@ -36,6 +34,7 @@ public class RemoveServiceFromCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String url = "serviceCart.jsp";
         boolean result = false;
         int patientId = Integer.parseInt(request.getParameter("txtPatientId"));

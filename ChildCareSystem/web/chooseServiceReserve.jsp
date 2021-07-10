@@ -6,55 +6,95 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Choose service</title>
         <link rel="stylesheet" href="css/CalendarPicker.style.css">
-        <link rel="stylesheet" href="css/lobibox.css">
         <link rel="stylesheet" href="css/reservation/reservation.css" >  
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
             main {
                 min-height: 70vh;
             }
         </style>
     </head>
+    
     <body>
         <jsp:include page="header.jsp"/>
-        <script src="js/lobibox.js"></script>
-        <script src="js/notifications.js"></script>
+        <!-- Authorize -->
+        <c:if test="${empty sessionScope.ROLE}">
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
+
+        <c:if test="${sessionScope.ROLE != 'customer'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
+        <!-- -->
+
+
         <c:if test="${not empty requestScope.DUPLICATE_PATIENT}">
             <script>
-                Lobibox.alert('error', {
-                    msg: "Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.",
-                    icons: {
-                        fontAwesome: {
-                            error: 'fa fa-times-circle'
-                        }
-                    },
-                    icon: true,
-                    iconSource: 'fontAwesome',
-                    width: 600,
-                    title: "Đã có lỗi xảy ra"
+                $(document).ready(function () {
+                    $("#duplicateModal").modal("show");
                 });
             </script>
         </c:if>
         <c:if test="${not empty requestScope.MAX_RESERVATION}">
             <script>
-                Lobibox.alert('error', {
-                    msg: "Bạn chỉ có thể đặt tối đa 3 đơn trong 1 lần thanh toán.",
-                    icons: {
-                        fontAwesome: {
-                            error: 'fa fa-times-circle'
-                        }
-                    },
-                    icon: true,
-                    iconSource: 'fontAwesome'
+                $(document).ready(function () {
+                    $("#maxModal").modal("show");
                 });
             </script>
         </c:if>
+
+
+        <div class="modal" tabindex="-1" role="dialog" id="duplicateModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Đã có lỗi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="maxModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Đã có lỗi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn chỉ có thể đặt tối đa 3 đơn trong 1 lần thanh toán.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <main>
             <jsp:useBean id="service" class="web.models.tblService.ServiceDAO" scope="page"/>
             <jsp:useBean id="listTime" class="web.models.tblOpenTime.OpenTimeDAO"/>
@@ -122,7 +162,15 @@
                                 <label for="service-specialty">Dịch vụ</label>
                                 <select id="service-specialty" class="form-control" name="cboSpecialty">
                                     <c:forEach items="${service.listService}" var="dto">
-                                        <option value="${dto.serviceId}">${dto.serviceName}</option>
+                                        <c:choose>
+                                            <c:when test="${param.serviceId eq dto.serviceId}">
+                                                <option selected value="${dto.serviceId}">${dto.serviceName}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${dto.serviceId}">${dto.serviceName}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </c:forEach>                
                                 </select>
                             </div>

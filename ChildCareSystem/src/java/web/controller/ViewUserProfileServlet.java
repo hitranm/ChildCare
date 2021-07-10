@@ -31,7 +31,7 @@ import web.viewModels.UserProfile.UserProfileViewModel;
 public class ViewUserProfileServlet extends HttpServlet {
     private static final String VIEW_USER_PROFILE_PAGE = "viewProfile.jsp";
     private static final String HOME_PAGE = "home.jsp";
-    private static final String ERROR_PAGE = "error.jsp";
+    private static final String ERROR_PAGE = "systemError.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

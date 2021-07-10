@@ -8,17 +8,14 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
-import web.models.tblCustomer.CustomerError;
 import web.models.tblIdentity.IdentityDAO;
-import web.models.tblIdentity.IdentityDTO;
-import web.models.tblIdentity.IdentityError;
 import web.utils.CheckValidHelper;
 import web.utils.RegisterValidation;
 import web.utils.SendEmail;
@@ -28,7 +25,7 @@ import web.utils.SendEmail;
  * @author Admin
  */
 public class AddCustomerServlet extends HttpServlet {
-
+    private static final String SYSTEM_ERROR="error.jsp";
     private static final String ERROR = "register.jsp";
     private static final String SUCCESS = "verify.jsp";
 
@@ -112,13 +109,13 @@ public class AddCustomerServlet extends HttpServlet {
                     session.setAttribute("authcode", code);
                     url = SUCCESS;
                 } else {
-                    String msg = "Vui lòng kiểm tra lại mail đăng ký có tồn tại hay không";
-                    request.setAttribute("FAIL_EMAIL", msg);
+                    url= SYSTEM_ERROR;
+                    
                 }
             }     
                 
-        } catch (Exception e) {
-            log("Error at AddCustomerServlet: " + e.toString());
+        } catch (SQLException | NamingException e) {
+            log("Error at AddCustomerServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

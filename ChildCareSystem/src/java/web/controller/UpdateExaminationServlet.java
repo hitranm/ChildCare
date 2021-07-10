@@ -6,7 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.naming.NamingException;
@@ -14,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblMedicalExamination.MedicalExaminationDAO;
 
 /**
@@ -23,7 +23,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDAO;
 public class UpdateExaminationServlet extends HttpServlet {
 
     private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,24 +38,30 @@ public class UpdateExaminationServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
         String strExaminationId = request.getParameter("txtExaminationId");
         String strReservationId = request.getParameter("txtReservationId");
         String prescription = request.getParameter("txtPrescription");
         MedicalExaminationDAO medicalExamDAO = new MedicalExaminationDAO();
         String url = VIEW_RESERVATION;
         try {
-            int reservationId = Integer.parseInt(strReservationId);
-            url = url + reservationId;
-            LocalDate updatedDate = LocalDate.now();
-            java.sql.Date sqlDate = java.sql.Date.valueOf(updatedDate);
-            int examinationId = Integer.parseInt(strExaminationId);
-            if (!prescription.equals("")) {
-                boolean result = medicalExamDAO.updateExamination(examinationId, prescription, sqlDate);
-                if (result == false) {
-                    url = ERROR;
+            if (session.getAttribute("ROLE") == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+            } else if (session.getAttribute("ROLE") != "staff") {
+                url = "accessDenied.jsp";
+            } else {
+                int reservationId = Integer.parseInt(strReservationId);
+                url = url + reservationId;
+                LocalDate updatedDate = LocalDate.now();
+                java.sql.Date sqlDate = java.sql.Date.valueOf(updatedDate);
+                int examinationId = Integer.parseInt(strExaminationId);
+                if (!prescription.equals("")) {
+                    boolean result = medicalExamDAO.updateExamination(examinationId, prescription, sqlDate);
+                    if (result == false) {
+                        url = ERROR;
+                    }
                 }
             }
-
         } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at UpdateExaminationServlet: " + ex.getMessage());
         } finally {

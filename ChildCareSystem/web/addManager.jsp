@@ -11,12 +11,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tạo acc manager</title>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
             .wrapper {
                 display: flex;
                 flex-direction: column;
@@ -36,7 +42,7 @@
 
         <div class="wrapper px-5">
             <h1>Tạo account manager</h1>
-            <form action="DispatchServlet" method="POST">
+            <form action="DispatchServlet?btAction=RegisterManager" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fullNanme">Họ và tên</label>
@@ -123,7 +129,7 @@
 
                 <input type="hidden" name="roleID" value="3">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary col-md-4" name="btAction" value="RegisterManager">Đăng ký</button>
+                    <button type="submit" class="btn btn-primary col-md-4">Đăng ký</button>
                 </div>
             </form>
         </div>

@@ -6,14 +6,13 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.tblCustomer.CustomerDAO;
-import web.models.tblCustomer.CustomerDTO;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblManager.ManagerDAO;
@@ -109,7 +108,7 @@ private static final String SUCCESS="home.jsp";
                     }
                 }     
             }   
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException | NamingException e) {
             log("Error at AddCustomerServlet: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

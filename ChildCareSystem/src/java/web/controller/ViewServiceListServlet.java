@@ -25,7 +25,7 @@ import web.models.tblService.ServiceDTO;
 public class ViewServiceListServlet extends HttpServlet {
 
     private final String VIEW_SERVICE_PAGE = "serviceList.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,7 +52,7 @@ public class ViewServiceListServlet extends HttpServlet {
             request.setAttribute("PAGE", endPage);
             String indexString = request.getParameter("index");
             int index = Integer.parseInt(indexString);
-            dao.viewServiceList(index);
+            dao.viewServicebyStatus(index,"1");
             List<ServiceDTO> result = dao.getServiceList();
             request.setAttribute("SERVICE_LIST", result);
         } catch (NamingException ex) {

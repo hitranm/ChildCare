@@ -6,21 +6,14 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.tblCustomer.CustomerDAO;
-
-import web.models.tblCustomer.CustomerDTO;
-import web.models.tblCustomer.CustomerError;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
-import web.models.tblIdentity.IdentityError;
 import web.models.tblStaff.StaffDAO;
-import web.models.tblStaff.StaffDTO;
 import web.utils.CheckValidHelper;
 import web.utils.RegisterValidation;
 

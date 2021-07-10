@@ -18,7 +18,7 @@ public class PatientDTO implements Serializable{
     private String gender;
     private String birthday;
     private String customerID;
-    
+    private int statusID;
     public PatientDTO(){
         
     }
@@ -31,11 +31,28 @@ public class PatientDTO implements Serializable{
         this.customerID = customerID;
     }
 
+    public PatientDTO(String patientID, String patientName, String gender, String birthday, String customerID, int statusID) {
+        this.patientID = patientID;
+        this.patientName = patientName;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.customerID = customerID;
+        this.statusID = statusID;
+    }
+
     public PatientDTO(String patientName, String gender, String birthday, String customerID) {
         this.patientName = patientName;
         this.gender = gender;
         this.birthday = birthday;
         this.customerID = customerID;
+    }
+
+    public int getStatusID() {
+        return statusID;
+    }
+
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
     }
     
     

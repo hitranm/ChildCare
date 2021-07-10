@@ -5,31 +5,40 @@
  */
 package web.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import web.models.tblBlog.BlogDAO;
+import web.models.tblBlog.BlogDTO;
 import web.models.tblBlog.BlogError;
-import web.models.tblBlogCategory.BlogCategoryDAO;
-import web.models.tblBlogCategory.BlogCategoryDTO;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
  * @author DELL
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 50,
+        maxRequestSize = 1024 * 1024 * 100
+)
 public class UpdateBlogServlet extends HttpServlet {
-
-    private final String EDITBLOG_PAGE = "updateBlog.jsp";
-    private final String VIEWBLOG = "blogDetail.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    
+    private final String EDITBLOG_PAGE = "LoadBlogServlet";
+    private final String VIEWBLOG = "ViewBlogDetailServlet";
+    private final String ERROR_PAGE = "systemError.html";
+    private static final String UPLOAD_DIR = "images/blog";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,33 +58,42 @@ public class UpdateBlogServlet extends HttpServlet {
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
         String categoryID = request.getParameter("category");
+        String imageURL = uploadFile(request);
         BlogError err = new BlogError();
         boolean foundErr = false;
         try {
             if (title.trim().isEmpty()) {
                 foundErr = true;
-                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
+                err.setTitleLengthErr("Vui lòng nhập nội dung cho tiêu đề");
             }
             if (body.trim().isEmpty()) {
                 foundErr = true;
-                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
+                err.setDescriptionErr("Vui lòng nhập nội dung cho bài viết");
             }
+            
             if (foundErr) {
-                request.setAttribute("CREATE_ERROR", err);
+                url = EDITBLOG_PAGE + "?id=" + blogID;
+                request.setAttribute("BLOG_ERROR", err);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
                 BlogDAO dao = new BlogDAO();
+                BlogDTO dto = dao.getBlogDetail(blogID);
+                if (imageURL.trim().isEmpty()) {
+                    imageURL = dto.getThumbnail();
+                }
 //                BlogCategoryDAO blogDAO = new BlogCategoryDAO();
 //                blogDAO.viewBlogCategory();
 //                List<BlogCategoryDTO> blogCate = blogDAO.getBlogCategoryList();
 //                request.setAttribute("CATE_LIST", blogCate);
-                boolean result = dao.updateBlog(blogID, title, body, categoryID);
+                boolean result = dao.updateBlog(blogID, title, imageURL, body, categoryID);
                 if (result) {
-                    url = VIEWBLOG;
+                    url = VIEWBLOG + "?id=" + blogID;
                 } else {
                     url = ERROR_PAGE;
                 }
+                response.sendRedirect(url);
             }
-
         } catch (SQLException ex) {
             log("UpdateBlogServlet _ SQL: " + ex.getMessage());
             url = ERROR_PAGE;
@@ -83,10 +101,53 @@ public class UpdateBlogServlet extends HttpServlet {
             log("UpdateBlogServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
             out.close();
         }
+    }
+    
+    private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
+        String fileName;
+        try {
+            Part filePart = request.getPart("imageURL");
+            fileName = (String) getFileName(filePart);
+            String applicationPath = request.getServletContext().getRealPath("");
+            int end = applicationPath.lastIndexOf("build");
+            String truePath = applicationPath.substring(0, end) + "web";
+            String basePath = truePath + File.separator + UPLOAD_DIR + File.separator;
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            try {
+                File outputFilePath = new File(basePath + fileName);
+                inputStream = filePart.getInputStream();
+                outputStream = new FileOutputStream(outputFilePath);
+                int read = 0;
+                final byte[] bytes = new byte[1024];
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            }
+            
+        } catch (Exception e) {
+            fileName = "";
+        }
+        return fileName;
+    }
+    
+    private String getFileName(Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -7,7 +7,9 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import web.models.tblReservation.ReservationDTO;
  * @author Admin
  */
 public class ViewReservationManagerServlet extends HttpServlet {
-private static final String VIEW_RESERVATION="viewReservationForManager.jsp";
+private static final String VIEW_RESERVATION="reservationdashboard.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,14 +38,21 @@ private static final String VIEW_RESERVATION="viewReservationForManager.jsp";
         String url=VIEW_RESERVATION;
         try {
             ReservationDAO reservationDAO = new ReservationDAO();
-            
+
+
             List<ReservationDTO> listReservation = reservationDAO.getAllReservation();
             request.setAttribute("ListReservation", listReservation);
             List<ReservationDTO> listReservationMorning = reservationDAO.getAllReservationByIntervalTimeID(1, 4);
             request.setAttribute("ListMorning", listReservationMorning);
             List<ReservationDTO> listReservationNoon = reservationDAO.getAllReservationByIntervalTimeID(5, 7);
             request.setAttribute("ListNoon", listReservationNoon);
-        } catch (Exception e) {
+            int allRes = reservationDAO.countAllRes();
+            request.setAttribute("ALL_RES", allRes);
+            int monthlyRes = reservationDAO.countMonthlyRes();
+            request.setAttribute("MONTHLY_RES", monthlyRes);
+            int weeklyRes = reservationDAO.countWeeklyRes();
+            request.setAttribute("WEEKLY_RES", weeklyRes);
+        } catch (SQLException | NamingException e) {
             log("ERROR at ViewReservationManagerServlet: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

@@ -6,6 +6,7 @@
 package web.models.tblBlog;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  *
@@ -18,14 +19,28 @@ public class BlogDTO implements Serializable{
     private String AuthorID;
     private String Description;
     private String CategotyID;
-    private String createdDate;
-    private String updateDate;
+    private Date createdDate;
+    private Date updateDate;
     private String StatusID;
+    private boolean onSlider;
 
     public BlogDTO() {
     }
 
-    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String createdDate, String updateDate, String StatusID) {
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, Date createdDate, Date updateDate, String StatusID, boolean onSlider) {
+        this.BlogID = BlogID;
+        this.Thumbnail = Thumbnail;
+        this.title = title;
+        this.AuthorID = AuthorID;
+        this.Description = Description;
+        this.CategotyID = CategotyID;
+        this.createdDate = createdDate;
+        this.updateDate = updateDate;
+        this.StatusID = StatusID;
+        this.onSlider = onSlider;
+    }
+
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, Date createdDate, Date updateDate, String StatusID) {
         this.BlogID = BlogID;
         this.Thumbnail = Thumbnail;
         this.title = title;
@@ -37,7 +52,9 @@ public class BlogDTO implements Serializable{
         this.StatusID = StatusID;
     }
 
-    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID) {
+
+
+    public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID, boolean onSlider) {
         this.BlogID = BlogID;
         this.Thumbnail = Thumbnail;
         this.title = title;
@@ -45,6 +62,7 @@ public class BlogDTO implements Serializable{
         this.Description = Description;
         this.CategotyID = CategotyID;
         this.StatusID = StatusID;
+        this.onSlider = onSlider;
     }
     /**
      * @return the BlogID
@@ -130,34 +148,38 @@ public class BlogDTO implements Serializable{
         this.CategotyID = CategotyID;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public String getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
-    /**
-     * @return the StatusID
-     */
     public String getStatusID() {
         return StatusID;
     }
 
-    /**
-     * @param StatusID the StatusID to set
-     */
     public void setStatusID(String StatusID) {
         this.StatusID = StatusID;
     }
-    
+
+    public boolean isOnSlider() {
+        return onSlider;
+    }
+
+    public void setOnSlider(boolean onSlider) {
+        this.onSlider = onSlider;
+    }
+
+
+
 }

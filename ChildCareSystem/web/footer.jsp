@@ -15,6 +15,14 @@
             rel="stylesheet"
             />
         <link rel="stylesheet" href="css/footer.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <style>
+            *{
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
     <body>
         <footer id="footer">

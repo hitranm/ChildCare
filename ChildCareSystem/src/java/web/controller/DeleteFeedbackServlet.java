@@ -7,6 +7,8 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +45,7 @@ public class DeleteFeedbackServlet extends HttpServlet {
             if(result) {
                 url = SUCCESS;
             }
-        } catch (Exception ex) {
+        } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at DeleteFeedbackServlet: " + ex.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

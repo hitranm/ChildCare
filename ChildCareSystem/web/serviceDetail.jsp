@@ -9,80 +9,131 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:set var="service" value="${sessionScope.SERVICE_DETAIL}"/>
+        <c:set var="service" value="${requestScope.SERVICE_DETAIL}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="./css/service/serviceDetail.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <title>Dịch vụ | ${service.serviceName}</title>
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+            svg {
+                color: #fed330;
+            }
+
+        </style>
+
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         <div class="container">
-            <div class="body-top row">
-                <div class="service-name text-center col-9 mb-2">
-                    <h1>${service.serviceName}</h1>
+            <div class="body-top mt-3">
+                <div class="service-name text-center mb-4">
+                    <h2>${service.serviceName}</h2>
                 </div>
-                <div class="col-3 text-center">
-                    <a class="btn btn-primary mt-2" href="#" name="btAction">Đặt dịch vụ</a><br>
-                </div>
+                <c:set var="role" value="${sessionScope.ROLEID}"/>
             </div>
-            <div class="body-left col-lg-9 col-12 d-flex mb-5">
-                <div class="service-thumb mr-3">
-                    <img src="${service.thumbnail}"/>
-                </div>
-                <div>
-                    <div class="service-des">
-                        ${service.description}
+            <div class="row mb-5">
+                <div class="body-left col-12">
+                    <div>
+                        <div class="service-thumb mb-3">
+                            <img src="./images/service/${service.thumbnail}"/>
+                        </div>
+                        <div class="service-des">
+                            ${service.description}
+                        </div>
+                        <div class="price text-center float-right">
+                            ${service.price}00đ
+                        </div>
                     </div>
-                    <div class="text-center d-flex float-right">
-                        <c:if test="${service.price eq service.salePrice}">
-                            <div class="sale-price">
-                                ${service.price}đ
+                    <div class="funct-button text-center mt-5">
+                        <c:set var="author" value="${service.createPersonId}"/>
+                        <c:set var="identity" value="${sessionScope.IDENTITY_ID}"/>
+                        <c:if test="${role eq 1}">
+                            <c:url var="reservationLink" value="DispatchServlet">
+                                <c:param name="btAction" value="ChooseServiceReserve"/>
+                                <c:param name="serviceId" value="${service.serviceId}"/>
+                            </c:url>
+
+                            <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
+                        </c:if>
+                        <c:if test="${author eq identity}">
+                            <a class="btn btn-primary mt-2 col-4" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
+                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                        </c:if>
+                        <c:if test="${role eq 3}">
+                            <c:if test="${author != identity}">
+                                <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                            </c:if>
+                            <div class="status mt-4">
+                                <form action="UpdateServiceStatusServlet" method="POST">
+                                    <input type="hidden" name="txtServiceID" value="${service.serviceId}" />
+                                    <c:choose>
+                                        <c:when test="${service.statusId eq 0}">
+                                            <button class="btn btn-outline-primary col-4" type="submit" value="1" name="status">Duyệt dịch vụ</button>
+                                            <button class="btn btn-outline-danger col-4" type="submit" value="2" name="status">Từ chối</button>
+                                        </c:when>
+                                        <c:when test="${service.statusId eq 1}">
+                                            <button class="btn btn-outline-secondary col-4" type="submit" value="0" name="status">Ẩn dịch vụ</button>
+                                        </c:when>
+                                        <c:when test="${service.statusId eq 2}">
+                                            <button class="btn btn-outline-primary col-4" type="submit" value="1" name="status">Hiện bài đăng</button>
+                                        </c:when>
+                                    </c:choose>
+                                </form>
                             </div>
                         </c:if>
-                        <c:if test="${service.price != service.salePrice}">
-                            <div class="price">
-                                <strike>${service.price}đ</strike>
-                            </div>
-                            <div class="sale-price ml-3">
-                                ${service.salePrice}đ
-                            </div>
-                        </c:if>
                     </div>
+
+
                 </div>
+
             </div>
-            <div class="form-group col-lg-9 col-12 mb-5">
-                <textarea class="form-control" placeholder="Đánh giá dịch vụ" rows="2"></textarea>
-                <button class="btn btn-primary float-right mt-1">Đăng</button>
+
+            <!-- Feedback Section -->
+            <div class="row d-flex mb-4">
+                <div class="col-12">
+                    <div class="headings d-flex justify-content-between align-items-center mb-3 ">
+                        <h5>Phản hồi về dịch vụ</h5>
+                    </div>
+                    <c:choose>
+                        <c:when test="${not empty requestScope.FEEDBACK_LIST}">
+                            <c:forEach items="${requestScope.FEEDBACK_LIST}" var="feedbackDTO">
+                                <div class="card p-3 mt-2 bg-light">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="user d-flex flex-row align-items-center"> 
+                                            <span>
+                                                <small class="font-weight-bold">${feedbackDTO.comment}</small>
+                                            </span> 
+                                        </div> 
+                                        <div>
+                                            ${feedbackDTO.rate}
+                                            <svg
+                                                width="1.1em"
+                                                height="1.1em"
+                                                viewBox="0 0 16 16"
+                                                class="bi bi-star-fill"
+                                                fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg"                      
+                                                >
+                                            <path
+                                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                                                />
+                                            </svg>                                         
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </div>
             </div>
         </div>
         <jsp:include page="footer.jsp"/>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
-        ></script>
-        <script>
-            $("#navbarDropdown").click(function () {
-                $('.dropdown-toggle').dropdown();
-            })
-        </script>
         <script src="./js/main.js"></script>
     </body>
 </html>

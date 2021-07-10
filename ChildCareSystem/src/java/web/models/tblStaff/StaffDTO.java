@@ -34,7 +34,7 @@ public class StaffDTO {
         this.CitizenID = CitizenID;
         this.SpecialtyID = SpecialtyID;
     }
-    
+
     public StaffDTO(String IdentityID, String FullName, String phoneNumber) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;

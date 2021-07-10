@@ -6,23 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">          
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="css/homepage.css">
         <link rel="stylesheet" href="css/service/createService.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
 
         <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
@@ -40,11 +33,27 @@
                 menubar: false
             });
         </script>
-
-        <title>Service</title>
+        
+        <style>
+            body {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
+        <title>Dịch vụ</title>
     </head>
     <body>
         <jsp:include page="header.jsp" />
+
+        <!-- Authorize -->
+        <c:if test="${empty sessionScope.ROLE}">
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
+
+        <c:if test="${sessionScope.ROLE != 'staff' and sessionScope.ROLE != 'manager'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
+        <!-- -->
 
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <div class="service-form-wrapper">         
@@ -53,13 +62,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-title">Tiêu đề</label>
-                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="">              
+                        <input type="text" class="form-control" id="service-title" name="txtTitle" value="${param.txtTitle}">              
+                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
+                            <div class="text-danger">
+                                <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
+                            </div>
+                        </c:if>
                     </div>
-                    <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.titleLengthError}">
-                        <div class="text-danger">
-                            <small>${requestScope.CREATE_SERVICE_ERROR.titleLengthError}</small>
-                        </div>
-                    </c:if>
+
                     <div class="form-group col-md-6">
                         <label for="service-specialty">Chuyên khoa</label>
                         <select id="service-specialty" class="form-control" name="cboSpecialty">
@@ -72,7 +82,7 @@
 
                 <div class="form-group">
                     <label for="service-content">Nội dụng</label>
-                    <textarea id="service-content" name="txtServiceContent"></textarea>
+                    <textarea id="service-content" name="txtServiceContent">${param.txtServiceContent}</textarea>
                     <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}">
                         <div class="text-danger">
                             <small>${requestScope.CREATE_SERVICE_ERROR.descriptionLengthError}</small>
@@ -83,7 +93,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="service-price">Nhập giá tiền</label>
-                        <input type="text" id="service-price" class="form-control" value="" name="txtPrice"/>
+                        <input type="text" id="service-price" class="form-control" value="${param.txtPrice}" name="txtPrice"/>
                         <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.priceFormat}">
                             <div class="text-danger">
                                 <small>${requestScope.CREATE_SERVICE_ERROR.priceFormat}</small>
@@ -91,29 +101,25 @@
                         </c:if>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="service-salePrice">Nhập giá khuyến mãi</label>
-                        <input type="text" id="service-salePrice" class="form-control" value="" name="txtSalePrice"/>
-                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.salePriceFormat}">
+                        <label for="service-image">Ảnh nền</label>
+                        <input type="file" class="form-control" id="service-image" name="fImage">
+                        <c:if test="${not empty requestScope.CREATE_SERVICE_ERROR.imageError}">
                             <div class="text-danger">
-                                <small>${requestScope.CREATE_SERVICE_ERROR.salePriceFormat}</small>
+                                <small>${requestScope.CREATE_SERVICE_ERROR.imageError}</small>
                             </div>
                         </c:if>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="service-image">Ảnh nền</label>
-                    <input type="file" class="form-control" id="service-image" name="fImage">
-                </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary col-6 col-md-4" name="btAction" value="CreateService">Tạo mới</button>
                 </div>
-                
+
             </form>
         </div>
 
         <jsp:include page="footer.jsp"/>
 
-        
+
     </body>
 </html>

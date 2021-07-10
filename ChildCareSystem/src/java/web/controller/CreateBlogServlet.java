@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,7 +23,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogError;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -34,8 +35,9 @@ import web.models.tblStaff.StaffDAO;
 )
 public class CreateBlogServlet extends HttpServlet {
 
-    private final String VIEWBLOG = "ViewBlogServlet?index=1";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String CREATE_BLOG = "createBlog.jsp";
+    private final String VIEWBLOG = "ViewBlogByAuthorServlet";
+    private final String ERROR_PAGE = "systemError.html";
     private static final String UPLOAD_DIR = "images/blog";
 
     /**
@@ -49,54 +51,65 @@ public class CreateBlogServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-
         HttpSession session = request.getSession(false);
         String url = ERROR_PAGE;
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");
         String categoryID = request.getParameter("category");
-        String authorID;
-        String imageURL = uploadFile(request);
-        BlogError err = new BlogError();
-
+//        String authorID = null;
         boolean foundErr = false;
+        BlogError err = new BlogError();
+        String imageURL = uploadFile(request);
         try {
-            if (title.trim().isEmpty()) {
+            if (title.trim().length() == 0) {
                 foundErr = true;
-                err.setTitleLengthErr("Bạn không được để trống Tiêu đề!");
+                err.setTitleLengthErr("Vui lòng điền nội dung cho tiêu đề");
             }
-            if (body.trim().isEmpty()) {
+            if (body.trim().length() == 0) {
                 foundErr = true;
-                err.setDescriptionErr("Bạn không được để trống Nội dụng!");
+                err.setDescriptionErr("Vui lòng điền nội dung cho bài viết");
             }
-
+            if (imageURL.trim().isEmpty()) {
+                foundErr = true;
+                err.setImgErr("Vui lòng tải ảnh lên");
+            }
             if (foundErr) {
-                request.setAttribute("CREATE_ERROR", err);
+                url = CREATE_BLOG;
+                request.setAttribute("CREATE_BLOG", err);
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
-                BlogDAO dao = new BlogDAO();             
+                BlogDAO dao = new BlogDAO();
                 if (session != null) {
                     String identityID = (String) session.getAttribute("IDENTITY_ID");
-                    StaffDAO staffDAO = new StaffDAO();
-                    authorID = staffDAO.queryStaff(identityID);
-                    boolean result = dao.createBlog(imageURL, title, authorID, body, categoryID);
+//                    String roleID = (String) session.getAttribute("ROLEID");
+//                    if (roleID.equals("2")) {
+//                        StaffDAO staffDAO = new StaffDAO();
+//                        authorID = staffDAO.queryStaff(identityID);
+//                    } else if (roleID.equals("3")) {
+//                        ManagerDAO managerDAO = new ManagerDAO();
+//                        authorID = managerDAO.queryManagerID(identityID);
+//                    }
+                    boolean result = dao.createBlog(imageURL, title, identityID, body, categoryID);
                     if (result) {
                         url = VIEWBLOG;
+                    } else {
+                        url = ERROR_PAGE;
                     }
                 }
+                response.sendRedirect(url);
             }
-        }  catch (Exception ex) {
+        } catch (NamingException | SQLException ex) {
             log("CreateBlogServlet: " + ex.getMessage());
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
             out.close();
         }
     }
-    
+
     private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
         String fileName = "";
         try {
@@ -117,9 +130,6 @@ public class CreateBlogServlet extends HttpServlet {
                 while ((read = inputStream.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                fileName = "";
             } finally {
                 if (inputStream != null) {
                     inputStream.close();
@@ -134,7 +144,7 @@ public class CreateBlogServlet extends HttpServlet {
         }
         return fileName;
     }
-    
+
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : part.getHeader("content-disposition").split(";")) {

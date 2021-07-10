@@ -8,14 +8,15 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
+import web.models.tblBlog.BlogDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -24,7 +25,9 @@ import web.models.tblBlog.BlogDAO;
 public class DeleteBlogServlet extends HttpServlet {
 
     private final String VIEWBLOG = "ViewBlogServlet?index=1";
-    private final String ERROR = "error.jsp";
+    private final String ERROR = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,21 +42,32 @@ public class DeleteBlogServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String blogID = request.getParameter("id");
         String url = ERROR;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
             BlogDAO dao = new BlogDAO();
-            boolean result = dao.deleteBlog(blogID);
-            if (result) {
-                url = VIEWBLOG;
+            BlogDTO dto = dao.getBlogDetail(blogID);
+            String authorID = dto.getAuthorID();
+            if (role == null) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if (identityID.equals(authorID) || "3".equals(role)) {
+                boolean result = dao.deleteBlog(blogID);
+                if (result) {
+                    url = VIEWBLOG;
+                } else {
+                    url = ERROR;
+                }
+            } else {
+                url = DENY;
             }
-
-        } catch (NamingException ex) {
-            Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DeleteBlogServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException | SQLException ex) {
+            log("Error at DeleteBlogServlet " + ex.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
             out.close();
 
         }

@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import web.models.ReservationHistory.ReservationHistoryDAO;
-import web.models.ReservationHistory.ReservationHistoryDTO;
+import web.viewModels.Reservation.ReservationHistoryDTO;
 import web.models.tblPatient.PatientDAO;
 import web.models.tblPatient.PatientDTO;
+import web.models.tblReservation.ReservationDAO;
+import web.models.tblSystemSetting.SystemSettingDAO;
 
 /**
  *
@@ -35,21 +36,27 @@ public class ViewPatientProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        ReservationDAO reservationDAO = new ReservationDAO();
+        PatientDAO dao1 = new PatientDAO();
         try {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession session = req.getSession();
             String customerID = (String) session.getAttribute("CUSTOMER_ID");
-            PatientDAO dao1 = new PatientDAO();
             List<PatientDTO> listPatients = dao1.getAllPatientProfile(customerID);
-            ReservationHistoryDAO history = new ReservationHistoryDAO();
-            List<ReservationHistoryDTO> historyList = history.getAllPatientReservation(customerID);
-            if (listPatients.size() == 6) {
+            List<ReservationHistoryDTO> historyList = reservationDAO.getAllPatientReservation(customerID);
+            SystemSettingDAO systemDAO = new SystemSettingDAO();
+            int maxPatientProfileAllowed = Integer.parseInt(systemDAO.getSettingByName("Max Patient Profile").getSettingValue());
+
+            if (listPatients.size() >= maxPatientProfileAllowed) {
                 request.setAttribute("reachMaxPatient", "Số hồ số bệnh nhân đã đạt tối đa mà hệ thống cho phép.");
             }
             request.setAttribute("listPatients", listPatients);
             request.setAttribute("historyList", historyList);
         } catch (Exception e) {
             log("ERROR at ViewPatientProfileServlet: " + e.getMessage());
+            request.getRequestDispatcher("systemError.html").forward(request, response);
+
         } finally {
             request.getRequestDispatcher("viewPatientProfile.jsp").forward(request, response);
         }

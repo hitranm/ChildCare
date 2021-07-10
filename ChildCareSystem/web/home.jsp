@@ -6,19 +6,43 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page autoFlush="true" buffer="1094kb"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Child Care System</title>   
+        <title>Child Care System</title>
         <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="css/home/phonering.css"/>
         <link rel="stylesheet" href="css/sidebar.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+            .carousel-item img {
+                height: 55vh;
+            }
+
+            .carousel-description {
+                -webkit-line-clamp: 3;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+            }
+            .carousel-item:hover {
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
         <jsp:include page="header.jsp"/>
+        <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
+
 
         <main>
             <div class="main_wrapper px-5 py-5">
@@ -31,79 +55,52 @@
                         interval="3000"
                         >
                         <ol class="carousel-indicators">
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="0"
-                                class="active"
-                                ></li>
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="1"
-                                ></li>
-                            <li
-                                data-target="#carouselExampleIndicators"
-                                data-slide-to="2"
-                                ></li>
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="varStatus">
+                                <li
+                                    data-target="#carouselExampleIndicators"
+                                    data-slide-to="${varStatus.index}"
+                                    <c:if test="${varStatus.count == 1}">
+                                        class="active"
+                                    </c:if>
+                                    ></li>
+                                </c:forEach>
                         </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/tan-tam-nang-dong.jpg"
-                                    alt="First slide"
-                                    />
 
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
+                        <div class="carousel-inner">
+                            <c:forEach var="post" items="${sliderPost.sliderList}" varStatus="stat">
+                                <div
+                                    onclick="clickSlider(${post.blogID})"
+                                    <c:choose>
+                                        <c:when test="${stat.count == 1}">
+                                            class="carousel-item active"
+                                        </c:when>
+                                        <c:otherwise>
+                                            class="carousel-item"
+                                        </c:otherwise>
+                                    </c:choose>
+                                    >
+
+                                    <img
+                                        class="d-block w-100 img-fluid"
+                                        src="./images/blog/${post.thumbnail}"
+                                        alt="slide"
+                                        />
+                                    <div class="carousel_caption-overlay d-none d-lg-flex">
+                                        <h5>
+                                            ${post.title}
+                                        </h5>
+                                        <div class="carousel-description mb-3">
+                                            ${post.description}
+                                        </div>
                                     </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $(".carousel-description").find('span').removeAttr("style");
+                                        });
+                                    </script>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/tan-tam.jpg"
-                                    alt="Second slide"
-                                    />
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img
-                                    class="d-block w-100"
-                                    src="./images/nang-dong.jpg"
-                                    alt="Second slide"
-                                    />
-                                <div class="carousel_caption-overlay d-none d-lg-flex">
-                                    <h5>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </h5>
-                                    <div>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Enim accusantium commodi deleniti excepturi voluptates quas
-                                        voluptatibus expedita laboriosam ipsam tempore saepe beatae
-                                        non velit, labore pariatur, ipsum autem consequatur!
-                                        Consequatur.
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                         <a
                             class="carousel-control-prev"
@@ -140,17 +137,17 @@
                         <div class="blog_wrapper">
                             <c:if test="${sessionScope.BLOG_LIST_VIEW != null}">
                                 <c:if test="${not empty sessionScope.BLOG_LIST_VIEW}" var="testEmpty">
-                                    <c:forEach items="${sessionScope.BLOG_LIST_VIEW}" var="dto">
-                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewBlogDetailServlet?id=${dto.blogID}'">
+                                    <c:forEach items="${sessionScope.BLOG_LIST_VIEW}" var="dtoBlog">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewBlogDetailServlet?id=${dtoBlog.blogID}'">
                                             <article>
                                                 <div class="blog_thumbnail">
-                                                    <img src="./images/blog/${dto.thumbnail}" />
+                                                    <img src="./images/blog/${dtoBlog.thumbnail}" />
                                                 </div>
                                                 <div class="blog_content px-2">
                                                     <h2>
-                                                        ${dto.title}
+                                                        ${dtoBlog.title}
                                                     </h2>
-                                                    <div class="blog_date">24 Tháng Năm, 2021</div>
+                                                    <div class="blog_date">${dtoBlog.createdDate}</div>
                                                 </div>
                                             </article>
                                         </div>
@@ -159,9 +156,9 @@
                                 <c:if test="${!testEmpty}">
                                     <h2>Hiện chưa có bài viết nào.</h2>
                                 </c:if>
-                            </c:if> 
+                            </c:if>
                         </div>
-                        <a href="#" class="section_moredetail pr-4">Xem thêm</a>
+                        <a href="ViewBlogServlet?index=1" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
                     <!--End post section-->
 
@@ -173,7 +170,7 @@
                                 <p>
                                     Trung tâm chăm sóc trẻ em CCS hỗ trợ khách hàng đặt lịch hẹn cho dịch vụ trước khi đến để tiết kiệm thời gian.
                                 </p>
-                                <a class="cta-btn scrollto" href="#"
+                                <a class="cta-btn scrollto" href="DispatchServlet?btAction=ChooseServiceReserve"
                                    >Đặt lịch hẹn</a
                                 >
                             </div>
@@ -189,17 +186,17 @@
                         <div class="blog_wrapper">
                             <c:if test="${sessionScope.SERVICE_LIST_VIEW!=null}">
                                 <c:if test="${not empty sessionScope.SERVICE_LIST_VIEW}" var="testEmpty">
-                                    <c:forEach items="${sessionScope.SERVICE_LIST_VIEW}" var="dto">
-                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2">
+                                    <c:forEach items="${sessionScope.SERVICE_LIST_VIEW}" var="dtoService">
+                                        <div class="blog_card col-xs-12 col-sm-6 col-md-4 pb-2" onclick="location.href = 'ViewServiceDetailServlet?id=${dtoService.serviceId}'">
                                             <article>
                                                 <div class="blog_thumbnail">
-                                                    <img src="./images/service/${dto.thumbnail}" />
+                                                    <img src="./images/service/${dtoService.thumbnail}" />
                                                 </div>
                                                 <div class="blog_content px-2">
                                                     <h2>
-                                                        ${dto.serviceName}
+                                                        ${dtoService.serviceName}
                                                     </h2>
-                                                    <div class="blog_date">${dto.createdDate}</div>
+                                                    <div class="blog_date">${dtoService.createdDate}</div>
                                                 </div>
                                             </article>
                                         </div>
@@ -212,7 +209,7 @@
 
 
                         </div>
-                        <a href="#" class="section_moredetail pr-4">Xem thêm</a>
+                        <a href="ViewServiceListServlet?index=1" class="section_moredetail pr-4">Xem thêm</a>
                     </div>
                     <!--End service section-->
                 </div>
@@ -246,13 +243,13 @@
                     <div class="right-map-section my-3">
                         <iframe
                             style="border: 0; width: 100%; height: 250px;"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4854095316514!2d105.52487561540214!3d21.01325499368218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b465a4e65fb%3A0xaae6040cfabe8fe!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1623417301225!5m2!1svi!2s"          
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.4854095316514!2d105.52487561540214!3d21.01325499368218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b465a4e65fb%3A0xaae6040cfabe8fe!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQ!5e0!3m2!1svi!2s!4v1623417301225!5m2!1svi!2s"
                             allowfullscreen="true"
                             loading="lazy"
                             ></iframe>
                     </div>
 
-                    <div class="ring-wrapper">                      
+                    <div class="ring-wrapper">
                         <div class="ring my-5">
                             <div class="ring-phoneNum mr-4"> 0909998888</div>
                             <div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show">
@@ -272,6 +269,13 @@
 
 
         <!--Custom JS-->
+        <script>
+            function clickSlider(blogId) {
+                var direction = "ViewBlogDetailServlet?id=" + blogId;
+                console.log(direction);
+                location.replace(direction);
+            }
+        </script>
         <script>
             $(function () {
                 // Sidebar toggle behavior

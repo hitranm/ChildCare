@@ -16,15 +16,25 @@ public class CreateServiceError implements Serializable{
     private String salePriceFormat;
     private String titleLengthError;
     private String descriptionLengthError;
+    private String imageError;
 
     public CreateServiceError() {
     }
 
-    public CreateServiceError(String priceFormat, String salePriceFormat, String titleLengthError, String descriptionLengthError) {
+    public CreateServiceError(String priceFormat, String salePriceFormat, String titleLengthError, String descriptionLengthError, String imageError) {
         this.priceFormat = priceFormat;
         this.salePriceFormat = salePriceFormat;
         this.titleLengthError = titleLengthError;
         this.descriptionLengthError = descriptionLengthError;
+        this.imageError = imageError;
+    }
+
+    public String getImageError() {
+        return imageError;
+    }
+
+    public void setImageError(String imageError) {
+        this.imageError = imageError;
     }
 
     public String getPriceFormat() {

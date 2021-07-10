@@ -11,15 +11,18 @@ and open the template in the editor.
 .top_title {
     font-size: 2rem;
 }
-
 .price {
-    color: #777777;
-}
-.sale-price {
     font-size: 20px;
 }
+
 body {
     background-color: rgba(var(--b3f, 250, 250, 250), 1);
+}
+
+.service-thumb img {
+    width: 1110px;
+    height: auto;
+    border-radius: 15px;
 }
 /*-------Footer --------*/
 
@@ -50,7 +53,6 @@ body {
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 0;
-    font-family: "Raleway", sans-serif;
     color: #777777;
 }
 

@@ -7,6 +7,8 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import web.models.tblPatient.PatientDAO;
 public class DeletePatientProfileByIDServlet extends HttpServlet {
 
     private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,7 +39,7 @@ public class DeletePatientProfileByIDServlet extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
 
             }
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException | SQLException | NamingException | ServletException e) {
             log("ERROR at DeletePatientProfileByIDServlet: " + e.getMessage());
             response.sendRedirect(url);
 

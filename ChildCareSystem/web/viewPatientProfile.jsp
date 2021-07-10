@@ -10,9 +10,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Patient Profile Page</title>
+        <title>Hồ sơ bệnh nhân</title>
         <link rel="stylesheet" href="./css/patientProfile.css"/>
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
         <script src="https://code.jquery.com/jquery-latest.js"></script>
         <script>
             $(function () {
@@ -20,17 +27,14 @@
                 var seYear = $('#year');
                 var date = new Date();
                 var cur = date.getFullYear();
-
                 seYear.append('<option value="">-- Năm --</option>');
                 for (i = cur; i >= cur - 18; i--) {
                     seYear.append('<option value="' + i + '">' + i + '</option>');
                 }
                 ;
-
                 //Tháng tự động điền vào select
                 var seMonth = $('#month');
                 var date = new Date();
-
                 var month = new Array();
                 month[1] = "Tháng 1";
                 month[2] = "Tháng 2";
@@ -44,13 +48,11 @@
                 month[10] = "Tháng 10";
                 month[11] = "Tháng 11";
                 month[12] = "Tháng 12";
-
                 seMonth.append('<option value="">-- Tháng --</option>');
                 for (i = 12; i > 0; i--) {
                     seMonth.append('<option value="' + i + '">' + month[i] + '</option>');
                 }
                 ;
-
                 //Ngày tự động điền vào select
                 function dayList(month, year) {
                     var day = new Date(year, month, 0);
@@ -62,7 +64,6 @@
                     var y = document.getElementById('year');
                     var m = document.getElementById('month');
                     var d = document.getElementById('day');
-
                     var year = y.options[y.selectedIndex].value;
                     var month = m.options[m.selectedIndex].value;
                     var day = d.options[d.selectedIndex].value;
@@ -91,6 +92,10 @@
                 <jsp:forward page="login.jsp"/>
             </c:if>
 
+            <c:if test="${sessionScope.ROLE != 'customer'}">
+                <jsp:forward page="accessDenied.jsp"/>
+            </c:if>
+
             <c:if test="${sessionScope.ROLE eq 'customer'}">
                 <div class="row">
                     <div class="col-md-12 col-lg-3">
@@ -99,6 +104,13 @@
                                 <button type="button" class="nav-link btn-outline-success btn-lg" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;text-align: left;cursor:pointer">
                                     Thêm hồ sơ bệnh nhân
                                 </button>
+                                <c:if test="${param.tab eq 'add'}">
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#exampleModalCenter').modal('show')
+                                        });
+                                    </script>
+                                </c:if>
                             </c:if>
                             <c:if test="${empty requestScope.reachMaxPatient}">
                                 <a class="nav-link btn-outline-success btn-lg" id="v-pills-addPatient-tab" data-toggle="tab" href="#v-pills-addPatient" role="tab" aria-selected="true">Thêm hồ sơ bệnh nhân</a>
@@ -179,7 +191,6 @@
                                         <div class="form-group row">
                                             <label for="inputBirthday" class="col-sm-2 col-form-label">Ngày sinh: </label>
                                             <div class="col-sm-6">
-                                                <!--<input type="date" class="form-control" name="txtBirthday" id="txtBirthday" value="${param.txtBirthday}" max="2022-01-01" required>-->
                                                 <div class="row">
                                                     <div class="col">
                                                         <select name="txtYear" id="year" class="form-control" size="1" required></select>
@@ -259,17 +270,17 @@
                             <!-------------------------------------------------------------------------------->
 
                             <div class="tab-pane fade" id="v-pills-history">
-                                <h2 style="text-align: center; color: #ffbd3f">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
+                                <h2 style="text-align: center; color: #1977cc">LỊCH SỬ ĐẶT LỊCH KHÁM</h2>
                                 <div class="row">
-                                    <c:if test="${requestScope.historyList!=null}">
-                                        <c:if test="${not empty requestScope.historyList}" var="testEmpty">
+                                    <c:choose>
+                                        <c:when test="${requestScope.historyList!= null}">
                                             <c:forEach items="${requestScope.historyList}" var="history">
                                                 <div class="col-md-6" style="margin-bottom: 3%">
                                                     <form class="col" action="LoadPatientProfileServlet" method="POST">
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <h5 class="card-title"><strong>${history.patientName}</strong></h5>
-                                                                <hr> 
+                                                                <hr>
                                                                 <p class="card-text">
                                                                     <strong>Dịch vụ đã chọn:</strong> ${history.serviceName}
                                                                 </p>
@@ -284,9 +295,9 @@
 
                                                                 <c:url value="DispatchServlet" var="infoLink">
                                                                     <c:param name="resid" value="${history.reservationID}"/>
-                                                                    <c:param name="btAction" value="ViewReservationDetails"/>                                                                 
+                                                                    <c:param name="btAction" value="ViewReservationDetails"/>
                                                                 </c:url>
-                                                                <a class="btn btn-success" href="${infoLink}" role="button">Xem chi tiết</a>                                                              
+                                                                <a class="btn btn-success" href="${infoLink}" role="button">Xem chi tiết</a>
                                                                 <p class="card-text" style="text-align: right; font-size: smaller">
                                                                     ${history.createdDate}
                                                                 </p>
@@ -296,11 +307,11 @@
                                                     </form>
                                                 </div>
                                             </c:forEach>
-                                        </c:if>
-                                        <c:if test="${!testEmpty}">
+                                        </c:when>
+                                        <c:otherwise>
                                             <h2>Hiện Chưa Có Lịch Khám Nào</h2>
-                                        </c:if>
-                                    </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
 

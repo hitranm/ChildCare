@@ -7,7 +7,9 @@ package web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,7 @@ import web.models.tblSpecialty.SpecialtyDTO;
 public class LoadSpecialtyListServlet extends HttpServlet {
     private final String CREATE_STAFF_PAGE = "createStaff.jsp";
     private final String CREATE_SERVVICE_PAGE = "createService.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,7 +45,7 @@ public class LoadSpecialtyListServlet extends HttpServlet {
             specialtyDAO.displaySpecialtyList();
             List<SpecialtyDTO> specialtyList = specialtyDAO.getListSpecialty();
             request.setAttribute("SPECIALTY_LIST", specialtyList);
-        } catch (Exception e) {
+        } catch (SQLException | NamingException e) {
             log("Error at LoadSpecialtyListServlet:" + e.toString());
             url = ERROR_PAGE;
         } finally {

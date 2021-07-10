@@ -14,7 +14,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://cdn.tiny.cloud/1/2t4he0yxbmprjqhk0y813ygaxy9y5u0mjixyrmjobarrfcvj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
             tinymce.init({
@@ -31,41 +33,30 @@
                 menubar: false
             });
         </script>
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
         <link rel="stylesheet" href="./css/createBlog.css" />
         <title>Update Blog</title>
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
 
     <body>
         <jsp:include page="header.jsp"/>
+        <c:set var="err" value="${requestScope.BLOG_ERROR}"/>
+        <c:set var="blog" value="${requestScope.BLOG}"/>
         <div class="container mt-4 mb-4">
             <div class="row justify-content-md-center">
                 <div class="col-md-12 col-lg-8">
                     <h1 class="h2 mb-4 text-center">Chỉnh sửa bài viết</h1>
                     <jsp:useBean id="cate" class="web.models.tblBlogCategory.BlogCategoryDAO" scope="request"/>
-                    <form action="DispatchServlet" method="POST">
-                        <c:set var="err" value="${requestScope.CREATE_ERROR}"/>
-                        <c:set var="blog" value="${sessionScope.BLOG_DETAIL}"/>
+                    <form action="DispatchServlet" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="title">Tiêu đề:</label>
-                                <input class="form-control" type="text" name="txtTitle" value="${blog.title}" />
+                                <input class="form-control" type="text" name="txtTitle" value="${blog.title}">
                                 <c:if test="${not empty err.titleLengthErr}">
                                     <font color="red">${err.titleLengthErr}</font>
                                 </c:if>
@@ -73,7 +64,6 @@
                             <div class="form-group col-md-6">
                                 <label for="category">Thể loại:</label>
                                 <select class="form-control" name="category" id="category">
-
                                     <c:forEach items="${cate.viewBlogCategory()}" var="dto">
                                         <c:if test="${blog.categotyID eq dto.categoryID}">
                                             <option value="${dto.categoryID}" selected>${dto.categoryName}</option>
@@ -89,11 +79,15 @@
 
                         <label>Nội dung bài viết</label>
                         <div class="form-group" name="txtBody">
-                            <textarea id="editor" name="txtBody" value="${blog.description}"></textarea>
+                            <textarea id="editor" name="txtBody">${blog.description}</textarea>
                         </div>
                         <c:if test="${not empty err.descriptionErr}">
                             <font color="red">${err.descriptionErr}</font>
                         </c:if><br>
+                        <div class="form-group">
+                            <label for="service-image">Ảnh nền</label>
+                            <input type="file" class="form-control" id="service-image" name="imageURL">
+                        </div>
                         <a class="btn btn-secondary float-right ml-2" onclick="return cancelConfirm()" href="ViewBlogDetailServlet?id=${blog.blogID}">Hủy</a>
                         <button class="btn btn-primary float-right" type="submit" value="UpdateBlog" name="btAction">Cập nhật</button>
                     </form>

@@ -29,7 +29,7 @@ import web.viewModels.UserProfile.UserProfileViewModel;
  * @author Admin
  */
 public class UpdateAccountDetailsServlet extends HttpServlet {
-private static final String ERROR="error.jsp";
+private static final String ERROR="systemError.html";
 private static final String SUCCESS="viewDetails.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

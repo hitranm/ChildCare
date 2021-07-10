@@ -11,26 +11,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Patient Profile Page</title>
 
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
-            />
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-            crossorigin="anonymous"
-            />
-        <link
-            href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-            rel="stylesheet"
-            />
-
         <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="./css/patientProfile.css"/>
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.js"></script>
         <script>
             $(function () {
@@ -39,9 +24,9 @@
                 var date = new Date();
                 var cur = date.getFullYear();
 
-                seYear.append('<option value="">-- Năm --</option>');
+                seYear.append('<option value="" disabled>-- Năm --</option>');
                 for (i = cur; i >= cur - 18; i--) {
-                    seYear.append('<option value="' + i + '">' + i + '</option>');
+                    seYear.append('<option value="' + i + '">Năm ' + i + '</option>');
                 }
                 ;
 
@@ -63,7 +48,7 @@
                 month[11] = "Tháng 11";
                 month[12] = "Tháng 12";
 
-                seMonth.append('<option value="">-- Tháng --</option>');
+                seMonth.append('<option value="" disabled>-- Tháng --</option>');
                 for (i = 12; i > 0; i--) {
                     seMonth.append('<option value="' + i + '">' + month[i] + '</option>');
                 }
@@ -71,9 +56,9 @@
                 var seDay = $('#day');
                 var date = new Date();
 
-                seDay.append('<option value="">-- Ngày --</option>');
+                seDay.append('<option value="" disabled>-- Ngày --</option>');
                 for (i = 31; i > 0; i--) {
-                    seDay.append('<option value="' + i + '">' + i + '</option>');
+                    seDay.append('<option value="' + i + '">Ngày ' + i + '</option>');
                 }
                 ;
 
@@ -103,6 +88,11 @@
             });
         </script>
 
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -157,7 +147,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <select name="txtYear" id="year" class="form-control" size="1"  required>
-                                                    <option value="${patientYear}" selected hidden>${patientYear}</option>
+                                                    <option value="${patientYear}" selected hidden>Năm ${patientYear}</option>
                                             </select>
                                         </div>  
                                         <div class="col">
@@ -167,7 +157,7 @@
                                         </div>
                                         <div class="col">
                                             <select name="txtDay" id="day" class="form-control" size="1" required">
-                                                <option value="${patientDay}" selected hidden>${patientDay}</option>
+                                                <option value="${patientDay}" selected hidden>Ngày ${patientDay}</option>
                                             </select>
                                         </div>
 
@@ -178,8 +168,6 @@
                                         </div>
                                     </c:if>         
                                 </div>
-
-
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-10 offset-md-2">

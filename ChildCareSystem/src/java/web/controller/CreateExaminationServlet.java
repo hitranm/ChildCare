@@ -8,9 +8,6 @@ package web.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +22,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDTO;
  */
 public class CreateExaminationServlet extends HttpServlet {
     private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,6 +60,7 @@ public class CreateExaminationServlet extends HttpServlet {
             }
         } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at CreateExaminationServlet " + ex.getMessage());
+            url = ERROR;
         } finally {
             response.sendRedirect(url);
         }

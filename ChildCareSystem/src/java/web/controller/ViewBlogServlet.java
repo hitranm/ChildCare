@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
 
@@ -30,7 +27,7 @@ import web.models.tblBlog.BlogDTO;
 public class ViewBlogServlet extends HttpServlet {
 
     private final String VIEW_BLOG_PAGE = "viewBlogList.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,7 +46,7 @@ public class ViewBlogServlet extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             BlogDAO dao = new BlogDAO();
-            int count = dao.countBlog();
+            int count = dao.countPublicBlog();
             int pageSize = 5;
             int endPage = count / pageSize;
             if (count % pageSize != 0) {
@@ -58,7 +55,7 @@ public class ViewBlogServlet extends HttpServlet {
             request.setAttribute("PAGE", endPage);
             String indexString = request.getParameter("index");
             int index = Integer.parseInt(indexString);
-            dao.viewBlogList(index);
+            dao.queryBlogListbyStatus(index, "1");
             List<BlogDTO> result = dao.getBlogList();
             request.setAttribute("BLOG_LIST", result);
             

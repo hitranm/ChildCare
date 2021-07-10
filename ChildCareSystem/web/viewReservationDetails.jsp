@@ -14,24 +14,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Child Care System</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
+        <title>Đơn khám</title>
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+            
+            .wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3rem 0 6rem 0;
 
+            }
 
+        </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+
+        
         <main> 
             <c:set var="resDetail" value="${requestScope.RES_DETAIL}"/>
-            <style>
-                .wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 3rem 0 6rem 0;
 
-                }
-
-            </style>
             <div class="wrapper px-5">
                 <h2>Thông tin đơn khám</h2>
                 <div class="form-row col-8">
@@ -62,7 +70,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fullNanme">Giá</label>
-                        <input type="text" name="citizenID" class="form-control" value="${resDetail.serviceDTO.price}" readonly>
+                        <input type="text" name="citizenID" class="form-control" value="${resDetail.reservationDTO.price}00" readonly>
                     </div>
                 </div>
                 <div class="form-row col-8">
@@ -72,7 +80,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fullNanme">Chuyên khoa</label> 
-                        <input type="text" name="lmao" class="form-control" value="${resDetail.specialtyName}" readonly>
+                        <input type="text" name="specialty" class="form-control" value="${resDetail.specialtyName}" readonly>
                     </div>
                 </div>
 
@@ -90,9 +98,6 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-
-
-
             </div>
         </main>
 

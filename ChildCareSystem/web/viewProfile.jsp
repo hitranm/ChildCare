@@ -10,8 +10,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/homepage.css">
+        <style>
+            * {
+                font-family: 'Niramit', sans-serif;
+            }
+        </style>
         <title>Profile Page</title>
     </head>
     <body>
@@ -40,7 +47,7 @@
         <div class="wrapper px-5">
             <h1>Thông tin tài khoản</h1>
 
-            <form action="DispatchServlet" method="POST">
+            <form action="DispatchServlet?btAction=UpdateProfile" method="POST">
                 <div class="form-row">
                     <label for="fullNanme">Họ và tên</label>
                     <input type="text" name="fullName" class="form-control" value="${userProfileDTO.fullName}" required="true"></div>
@@ -84,7 +91,7 @@
                 </c:if>
                 <input type="hidden" name="identityID" value="${userProfileDTO.identityDTO.identityID}"> </br>
                 <div class="text-center">
-                    <button type="submit" name="btAction" class="btn btn-primary col-md-4" value="UpdateProfile">Cập nhật</button>
+                    <button type="submit" class="btn btn-primary col-md-4">Cập nhật</button>
                 </div>
             </form>
             <c:if test="${requestScope.SUCCESS !=null}">

@@ -18,7 +18,6 @@ import web.models.Cart.CartItem;
 import web.models.Cart.CartObject;
 import web.models.tblCustomer.CustomerDAO;
 import web.models.tblPatient.PatientDAO;
-import web.models.tblPatient.PatientDTO;
 import web.models.tblReservation.ReservationDAO;
 import web.models.tblReservation.ReservationDTO;
 import web.models.tblService.ServiceDAO;
@@ -32,7 +31,7 @@ import web.models.tblStaff.StaffDTO;
  */
 public class VerifyCheckoutServlet extends HttpServlet {
 
-    private static final String ERROR = "";
+    private static final String ERROR = "systemError.html";
     private static final String SUCCESS = "successCheckout.jsp";
     private static final String EMPTY_CART = "home.jsp";
     private static final String LOGIN_PAGE = "login.jsp";
@@ -71,6 +70,8 @@ public class VerifyCheckoutServlet extends HttpServlet {
                         String checkInTime = reservation.getCheckInTime();
                         ServiceDTO serviceDTO = serviceDAO.getServiceInfo(serviecId);
                         int specialtyId = Integer.parseInt(serviceDTO.getSpecialtyId());
+                        double price = serviceDAO.getServicePriceById(serviecId);
+                        
                         boolean isExistedReservation
                                 = reservationDAO.checkExistedReervation(reservation.getPatientId(), reservation.getServiceId(), reservation.getCheckInTime());
                         if (isExistedReservation) {
@@ -95,8 +96,10 @@ public class VerifyCheckoutServlet extends HttpServlet {
                                 int staffId = Integer.parseInt(staff.getStaffID());
                                 boolean IsAssignedService = reservationDAO.getReservationByInfo(staffId, serviecId, checkInTime);
                                 if (IsAssignedService == false) {
+                                    
                                     ReservationDTO reservationDTO
-                                            = new ReservationDTO(Integer.parseInt(customerId), reservation.getPatientId(), serviecId, staffId, reservation.getTimeIntervalId(), checkInTime);
+                                            = new ReservationDTO(Integer.parseInt(customerId), reservation.getPatientId(), serviecId, staffId, (float) price, reservation.getTimeIntervalId(), checkInTime);
+                                    
                                     // Add to waiting list
                                     reservationDAO.getWaitingList().add(reservationDTO);
                                     foundStaff = true;

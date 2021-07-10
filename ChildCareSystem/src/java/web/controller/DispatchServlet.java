@@ -6,8 +6,6 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +27,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String ADD = "AddCustomerServlet";
     private static final String LOGIN = "LoginServlet";
     private static final String LOGOUT = "LogOutServlet";
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String VERIFY = "VerifyServlet";
     private static final String FORGOT = "ForgotPassServlet";
     private static final String RESETPASSWORD = "ResetPassServlet";
@@ -41,10 +39,10 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_BLOG = "ViewBlogServlet";
     private static final String UPDATEPROFILE = "UpdateProfileServlet";
     private static final String EDIT_BLOG = "UpdateBlogServlet";
-    private static final String SEARCH_BLOG = "SearchBlogServlet";
     private static final String LOAD_SPECIALTY = "LoadSpecialtyListServlet";
     private static final String VIEW_USER_PROFILE = "ViewUserProfileServlet";
     private static final String CREATE_SERVICE = "CreateServiceServlet";
+    private static final String UPDATE_SERVICE = "UpdateServiceServlet";
     private static final String VIEW_ACCOUNT = "ViewAccountsServlet";
     private static final String VIEW_DETAILS = "ViewAccountDetailsServlet";
     private static final String UPDATE_DETAILS = "UpdateAccountDetailsServlet";
@@ -56,6 +54,12 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_RESERVATION_DETAILS = "ViewReservationDetailServlet";
     private static final String VIEW_RESERVATION_STAFF = "ViewReservationStaffServlet";
     private static final String VIEW_RESERVATION_DETAILS_STAFF = "ViewReservationDetailStaffServlet";
+    private static final String CREATE_SPECIALTY = "CreateSpecialtyServlet";
+    private static final String UPDATE_SPECIALTY = "UpdateSpecialtyServlet";
+    private static final String CREATE_CATEGORY = "CreateCategoryServlet";
+    private static final String UPDATE_CATEGORY = "UpdateCategoryServlet";
+    private static final String VIEW_MAIN_DASHBOARD = "MainDashBoardServlet";
+    private static final String UPDATE_SLIDER = "UpdateSliderServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -133,6 +137,20 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_RESERVATION_STAFF;
             } else if (button.equalsIgnoreCase("ViewReservationDetailsStaff")) {
                 url = VIEW_RESERVATION_DETAILS_STAFF;
+            } else if (button.equalsIgnoreCase("CreateSpecialty")) {
+                url = CREATE_SPECIALTY;
+            } else if (button.equalsIgnoreCase("UpdateSpecialty")) {
+                url = UPDATE_SPECIALTY;
+            } else if (button.equalsIgnoreCase("CreateCate")) {
+                url = CREATE_CATEGORY;
+            } else if (button.equalsIgnoreCase("UpdateCate")) {
+                url = UPDATE_CATEGORY;
+            } else if (button.equalsIgnoreCase("UpdateService")) {
+                url = UPDATE_SERVICE;
+            } else if (button.equalsIgnoreCase("ViewMainDashboard")) {
+                url = VIEW_MAIN_DASHBOARD;
+            } else if (button.equalsIgnoreCase("UpdateSlider")) {
+                url = UPDATE_SLIDER;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

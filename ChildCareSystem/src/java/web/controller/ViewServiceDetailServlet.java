@@ -8,8 +8,7 @@ package web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.tblFeedback.FeedbackDAO;
+import web.models.tblFeedback.FeedbackDTO;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
+import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -27,7 +29,9 @@ import web.models.tblService.ServiceDTO;
 public class ViewServiceDetailServlet extends HttpServlet {
 
     private final String SERVICE_DETAIL_PAGE = "serviceDetail.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,14 +45,31 @@ public class ViewServiceDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String serviceID = request.getParameter("id");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
+        String serviceID = request.getParameter("id");
         String url = SERVICE_DETAIL_PAGE;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
             ServiceDAO dao = new ServiceDAO();
             ServiceDTO service = dao.getServiceDetail(serviceID);
-            session.setAttribute("SERVICE_DETAIL", service);
+            String authorID = service.getCreatePersonId();
+            String statusID = service.getStatusId();
+            if (role == null && !statusID.equals("1")) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if ("1".equals(statusID) || "3".equals(role) || identityID.equals(authorID)) {
+                FeedbackDAO feedbackDAO = new FeedbackDAO();
+                List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackByServiceId(Integer.parseInt(serviceID), 3);
+                if (!feedbackList.isEmpty()) {
+                    request.setAttribute("FEEDBACK_LIST", feedbackList);
+                }
+                request.setAttribute("SERVICE_DETAIL", service);
+                url = SERVICE_DETAIL_PAGE;
+            } else {
+                url = DENY;
+            }
         } catch (NamingException ex) {
             log("ViewServiceDetailServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;
@@ -58,7 +79,6 @@ public class ViewServiceDetailServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            out.close();
         }
     }
 

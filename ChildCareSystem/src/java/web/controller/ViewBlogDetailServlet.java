@@ -17,14 +17,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
+import web.models.tblIdentity.IdentityDAO;
+import web.models.tblManager.ManagerDAO;
+import web.models.tblManager.ManagerDTO;
+import web.models.tblStaff.StaffDAO;
+import web.models.tblStaff.StaffDTO;
 
 /**
  *
  * @author DELL
  */
 public class ViewBlogDetailServlet extends HttpServlet {
+    
     private final String VIEWBLOGDETAIL_PAGE = "blogDetail.jsp";
-    private final String ERROR_PAGE = "error.jsp";
+    private final String ERROR_PAGE = "systemError.html";
+    private final String DENY = "accessDenied.jsp";
+    private final String LOGIN = "login.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,14 +46,31 @@ public class ViewBlogDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         String blogID = request.getParameter("id");
         HttpSession session = request.getSession();
-        String url = VIEWBLOGDETAIL_PAGE;
+        String url = ERROR_PAGE;
         try {
+            String role = (String) session.getAttribute("ROLEID");
+            String identityID = (String) session.getAttribute("IDENTITY_ID");
             BlogDAO dao = new BlogDAO();
             BlogDTO blog = dao.getBlogDetail(blogID);
-            session.setAttribute("BLOG_DETAIL", blog);
+            String authorID = blog.getAuthorID();
+            String statusID = blog.getStatusID();
+            IdentityDAO identityDAO = new IdentityDAO();
+            String authorName = identityDAO.getStaffOrManagerNameByIdentityId(authorID);
+            
+            if (role == null && !statusID.equals("1")) {
+                request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
+                url = LOGIN;
+            } else if ("1".equals(statusID) || ("3".equals(role) || identityID.equals(authorID))) {
+                session.setAttribute("BLOG_DETAIL", blog);
+                request.setAttribute("AUTHOR", authorName);
+                url = VIEWBLOGDETAIL_PAGE;
+            } else {
+                url = DENY;
+            }
         } catch (NamingException ex) {
             log("ViewBlogDetailServlet _ Naming: " + ex.getMessage());
             url = ERROR_PAGE;

@@ -21,12 +21,9 @@ body {
     border-radius: 12px;
 }
 .service-preview {
-    display: inline;
     background-color: #fff;
-    padding: 5px;
     padding-top: 10px;
     border-radius: 12px;
-    margin-bottom: 1rem;
 }
 .service-name a {
     color: #444444;
@@ -48,23 +45,44 @@ body {
     color: #1977cc;
     text-decoration: none;
 }
+.service-descript {
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
 /*----------paging----------*/
 
 .paging {
-    padding-top: 20px;
+    display: inline-block;
+    height: 40px;
+    margin-top: 10px;
+    padding: 0 25px;
+    border-radius: 35px;
+    background-color: #fff;
 }
 
-.paging a {
-    color: #fff;
-    background-color: #007bff;
-    border-radius: 7px;
-    padding-left: 4px;
-    padding-right: 4px;
+.number {
+    display: block;
+    padding: 0 15px;
+    float: left;
+    transition: 400ms ease;
+    color: #444444;
     font-size: 16px;
-}
+    letter-spacing: 0.1em;
+    line-height: 40px;
+    border-color: #000
 
-.paging a:hover {
-    background-color: #55a3f7;
+}
+.number:hover {
+    background-color: #1c84e3;
+    color: #F6F6F7;
+    text-decoration: none;
+}
+.number.active {
+    background-color: #1c84e3;
+    color: #F6F6F7;
+    text-decoration: none;
 }
 /*-------Footer --------*/
 
@@ -95,7 +113,6 @@ body {
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 0;
-    font-family: "Raleway", sans-serif;
     color: #777777;
 }
 

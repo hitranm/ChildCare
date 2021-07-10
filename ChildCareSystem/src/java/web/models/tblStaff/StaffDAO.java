@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import web.models.tblBlog.BlogDAO;
-
 
 import web.utils.DBHelpers;
 
@@ -101,7 +99,7 @@ public class StaffDAO implements Serializable {
         }
         return check;
     }
-    
+
     public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -164,7 +162,6 @@ public class StaffDAO implements Serializable {
 //        }
 //        return check;
 //    }
-
     public String queryStaff(String identityID) throws NamingException, SQLException {
 
         Connection con = null;
@@ -198,7 +195,7 @@ public class StaffDAO implements Serializable {
         }
         return staffID;
     }
-    
+
     public StaffDTO queryStaffByIdentityId(String identityId) throws SQLException, NamingException {
         String fullName;
         String phoneNum;
@@ -206,26 +203,28 @@ public class StaffDAO implements Serializable {
         String birthday;
         String citizenID;
         String specialtyID;
+        String staffID;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
+                String sql = "SELECT StaffID, FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
                         + " FROM tblStaff S "
                         + " WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, identityId);
                 rs = stm.executeQuery();
                 if (rs.next()) {
+                    staffID = rs.getString("StaffID");
                     fullName = rs.getString("FullName");
                     phoneNum = rs.getString("PhoneNumber");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
                     citizenID = rs.getString("CitizenID");
                     specialtyID = rs.getString("SpecialtyID");
-                    StaffDTO staff = new StaffDTO(identityId, fullName, phoneNum, address, birthday, citizenID, specialtyID);
+                    StaffDTO staff = new StaffDTO(identityId, staffID, fullName, phoneNum, address, birthday, citizenID, specialtyID);
                     return staff;
                 }
             }
@@ -242,8 +241,6 @@ public class StaffDAO implements Serializable {
         }
         return null;
     }
-    
-    
 
     public boolean update(StaffDTO staff) throws SQLException, NamingException {
         boolean check = false;
@@ -261,7 +258,6 @@ public class StaffDAO implements Serializable {
                 stm.setString(3, staff.getBirthday());
                 stm.setString(4, staff.getSpecialtyID());
                 stm.setString(5, staff.getIdentityID());
-                
 
                 check = stm.executeUpdate() > 0 ? true : false;
             }
@@ -280,7 +276,7 @@ public class StaffDAO implements Serializable {
 
         return check;
     }
-    
+
     public List<StaffDTO> getAllStaffProfile() throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;
@@ -289,16 +285,21 @@ public class StaffDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, FullName, PhoneNumber "
-                        + " FROM tblStaff " ;
+                String sql = "SELECT IdentityID, StaffID, FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
+                        + " FROM tblStaff ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
                 while (rs.next()) {
                     String identityID = rs.getString("IdentityID");
+                    String staffID = rs.getString("StaffID");
                     String fullName = rs.getString("FullName");
-                    String phoneNumber = rs.getString("PhoneNumber");
-                    StaffDTO staff = new StaffDTO(identityID, fullName, phoneNumber);
+                    String phoneNum = rs.getString("PhoneNumber");
+                    String address = rs.getString("Address");
+                    String birthday = rs.getString("Birthday");
+                    String citizenID = rs.getString("CitizenID");
+                    String specialtyID = rs.getString("SpecialtyID");
+                    StaffDTO staff = new StaffDTO(identityID, staffID, fullName, phoneNum, address, birthday, citizenID, specialtyID);
                     result.add(staff);
                 }
             }
@@ -315,7 +316,7 @@ public class StaffDAO implements Serializable {
         }
         return result;
     }
-    
+
     public List<StaffDTO> getStaffListBySpecialtyId(int specialtyID) throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;
@@ -357,7 +358,8 @@ public class StaffDAO implements Serializable {
         }
         return result;
     }
-    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+
+    public boolean delete(String id) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -371,9 +373,6 @@ public class StaffDAO implements Serializable {
                     return true;
                 }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (stm != null) {
                 stm.close();
@@ -384,8 +383,9 @@ public class StaffDAO implements Serializable {
         }
         return false;
     }
-      public StaffDTO queryStaffById(int id) throws SQLException, NamingException {
-       
+
+    public StaffDTO queryStaffById(int id) throws SQLException, NamingException {
+
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -400,10 +400,44 @@ public class StaffDAO implements Serializable {
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     String fullName = rs.getString("FullName");
-                    
+
                     String specialtyID = rs.getString("SpecialtyID");
                     StaffDTO staff = new StaffDTO(fullName, specialtyID);
                     return staff;
+                }
+            }
+        } finally {
+            if(rs != null) {
+                rs.close();
+            }
+            
+            if(stm != null) {
+                stm.close();
+            }
+            
+            if(conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public String getStaffName(String staffID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "SELECT FullName "
+                        + " FROM tblStaff "
+                        + "Where StaffID=?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, staffID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String staffName = rs.getString("FullName");
+                    return staffName;
                 }
             }
         } finally {
@@ -413,8 +447,9 @@ public class StaffDAO implements Serializable {
             if (stm != null) {
                 stm.close();
             }
-            if (conn != null) {
-                conn.close();
+
+            if (con != null) {
+                con.close();
             }
         }
         return null;

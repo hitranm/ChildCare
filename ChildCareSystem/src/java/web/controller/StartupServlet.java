@@ -6,11 +6,11 @@
 package web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +20,8 @@ import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
+import web.models.tblSystemSetting.SystemSettingDAO;
+import web.models.tblSystemSetting.SystemSettingDTO;
 
 /**
  *
@@ -27,30 +29,34 @@ import web.models.tblService.ServiceDTO;
  */
 public class StartupServlet extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "systemError.html";
     private static final String HOME_PAGE = "home.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
+            SystemSettingDAO systemDAO = new SystemSettingDAO();
             BlogDAO blogDAO = new BlogDAO();
-            List<BlogDTO> listBlog = blogDAO.getTop6BlogList();
+            int numberOfBlogView = Integer.parseInt(systemDAO.getSettingByName("Max Blog Post On Homepage").getSettingValue());
+            List<BlogDTO> listBlog = blogDAO.getTopXBlogList(numberOfBlogView);
 
             ServiceDAO serviceDAO = new ServiceDAO();
-            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
-            
-            HttpSession session = request.getSession();
+            int numberOfServiceView = Integer.parseInt(systemDAO.getSettingByName("Max Service Post On Homepage").getSettingValue());
+            List<ServiceDTO> listService = serviceDAO.getTopXServiceList(numberOfServiceView);
 
+            HttpSession session = request.getSession();
+            session.removeAttribute("BLOG_LIST_VIEW");
+            session.removeAttribute("SERVICE_LIST_VIEW");
             session.setAttribute("BLOG_LIST_VIEW", listBlog);
             session.setAttribute("SERVICE_LIST_VIEW", listService);
-            url =HOME_PAGE;
-        } catch (Exception ex) {
+            url = HOME_PAGE;
+        } catch (SQLException | NamingException ex) {
             log("Error at StartupServelt: " + ex.getMessage());
-        } finally{
-//            request.getRequestDispatcher(url).forward(request, response);
+        } finally {
+           // request.getRequestDispatcher(url).forward(request, response);
             response.sendRedirect(url);
         }
     }
@@ -71,6 +77,8 @@ public class StartupServlet extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -88,6 +96,8 @@ public class StartupServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(StartupServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

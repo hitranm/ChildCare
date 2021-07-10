@@ -18,7 +18,6 @@ and open the template in the editor.
 */
 
 body {
-  font-family: "Roboto", sans-serif;
   background-color: #f8fafb; }
 
 p {
@@ -27,7 +26,6 @@ p {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Roboto", sans-serif; 
   font-size: 1vw;
 }
 
@@ -161,7 +159,6 @@ h2 {
   pointer-events: none; }
 
 .control__indicator:after {
-  font-family: 'icomoon';
   content: '\e5ca';
   position: absolute;
   display: none;
