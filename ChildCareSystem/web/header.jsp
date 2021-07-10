@@ -79,26 +79,26 @@
                                             ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                        <a class="nav-link" href="bai-viet?trang=1">Bài viết</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                        <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Hồ sơ bệnh nhân
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="ViewPatientProfileServlet">Xem hồ sơ bệnh nhân của bạn</a>
+                                            <a class="dropdown-item" href="ho-so-benh-nhan">Xem hồ sơ bệnh nhân của bạn</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewPatientProfileServlet?tab=add">Tạo hồ sơ bệnh nhân</a>
+                                            <a class="dropdown-item" href="tao-ho-so-benh-nhan">Tạo hồ sơ bệnh nhân</a>
                                         </div>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="DispatchServlet?btAction=ChooseServiceReserve">Đặt chỗ khám bệnh</a>
+                                        <a class="nav-link" href="dat-cho-kham-benh">Đặt chỗ khám bệnh</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewPatientProfileServlet?tab=order">Phản hồi</a>
+                                        <a class="nav-link" href="phan-hoi">Phản hồi</a>
                                     </li>
                                 </ul>
                                 <ul class="navbar-nav pr-5">
@@ -107,13 +107,13 @@
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="ViewPatientProfileServlet?tab=order">Xem lịch sử đặt khám</a>  
+                                            <a class="dropdown-item" href="xem-lich-su-kham">Xem lịch sử đặt khám</a>  
                                             <div class="dropdown-divider"></div> 
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>                                              
+                                            <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>                                              
                                             <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                            <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -251,7 +251,7 @@
                                             <div class="dropdown-divider"></div>                                                   
                                             <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                            <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -265,18 +265,18 @@
                                             ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                        <a class="nav-link" href="bai-viet?trang=1">Bài viết</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                        <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>
                                 </ul>
                                 <ul class="navbar-nav pr-5">
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="login">Đăng nhập</a>
+                                        <a class="nav-link" href="dang-nhap">Đăng nhập</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="register.jsp">Đăng ký</a>
+                                        <a class="nav-link" href="dang-ky">Đăng ký</a>
                                     </li>
                                 </ul>
                             </c:otherwise>

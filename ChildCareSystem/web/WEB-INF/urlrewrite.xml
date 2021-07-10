@@ -7,18 +7,65 @@
 
 <urlrewrite use-query-string="true">
     <rule match-type="wildcard">
-       <from>/login</from>
+       <from>/trang-chu</from>
+       <to type="forward">/home.jsp</to>
+    </rule>
+    <rule match-type="wildcard">
+       <from>/dang-nhap</from>
        <to type="forward">/login.jsp</to>
     </rule>
-    
     <rule match-type="wildcard">
-       <from>/ho-so-benh-nhan</from>
-       <to type="forward">/ViewPatientProfileServlet</to>
+       <from>/dang-nhap-loi</from>
+       <to type="forward">/LoginServlet</to>
+    </rule>
+    <rule match-type="wildcard">
+       <from>/dang-ky</from>
+       <to type="forward">/register.jsp</to>
+    </rule>  
+    <rule match-type="wildcard">
+       <from>/dang-ky</from>
+       <to type="forward">/register.jsp</to>
+    </rule>
+    <rule match-type="wildcard">
+       <from>/dang-xuat</from>
+       <to type="forward">/LogOutServlet</to>
+    </rule>
+    <rule match-type="wildcard">
+        <from>/doi-mat-khau</from>
+        <to type="forward">/newpassword.jsp</to>
+    </rule>
+    <rule>
+        <from>/thong-tin-ca-nhan</from>
+        <to type="forward">/DispatchServlet?btAction=ViewUserProfile</to>
     </rule>
     
     <rule>
         <from>/bai-viet\?trang=([0-9]+)</from>
         <to type="forward">/ViewBlogServlet?index=$1</to>
+    </rule>   
+    <rule>
+        <from>/dich-vu\?trang=([0-9]+)</from>
+        <to type="forward">/ViewServiceListServlet?index=$1</to>
+    </rule>  
+    <rule>
+        <from>/tao-ho-so-benh-nhan</from>
+        <to type="forward">/ViewPatientProfileServlet?tab=add</to>
+    </rule>
+    <rule>
+        <from>/ho-so-benh-nhan</from>
+        <to type="forward">/ViewPatientProfileServlet</to>
+    </rule>
+    <rule>
+        <from>/xem-lich-su-kham</from>
+        <to type="forward">/ViewPatientProfileServlet?tab=order</to>
+    </rule>
+    <rule>
+        <from>/phan-hoi</from>
+        <to type="forward">/ViewPatientProfileServlet?tab=order</to>
+    </rule>
+    <rule>
+        <from>/dat-cho-kham-benh</from>
+        <to type="forward">/DispatchServlet?btAction=ChooseServiceReserve</to>
     </rule>
     
     

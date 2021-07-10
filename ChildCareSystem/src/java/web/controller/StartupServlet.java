@@ -21,7 +21,6 @@ import web.models.tblBlog.BlogDTO;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 import web.models.tblSystemSetting.SystemSettingDAO;
-import web.models.tblSystemSetting.SystemSettingDTO;
 
 /**
  *
@@ -30,7 +29,7 @@ import web.models.tblSystemSetting.SystemSettingDTO;
 public class StartupServlet extends HttpServlet {
 
     private static final String ERROR = "systemError.html";
-    private static final String HOME_PAGE = "home.jsp";
+    private static final String HOME_PAGE = "trang-chu";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
