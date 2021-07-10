@@ -282,6 +282,8 @@
                                                                                 </c:url>
                                                                                 <a href="${viewdetails}">Chi tiết</a>
                                                                             </td>
+                                                                            <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                                                                
                                                                             <td>
                                                                                 <c:url var="delete" value="DispatchServlet">
                                                                                     <c:param name="btAction" value="DeleteAccount"></c:param>
@@ -291,6 +293,7 @@
                                                                                 </c:url>
                                                                                 <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                                             </td>
+                                                                            </c:if>
                                                                         </tr>
                                                                     </c:forEach>
                                                                 </c:if>
@@ -432,6 +435,7 @@
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
                                                                         </td>
+                                                                        <c:if test="${sessionScope.ROLE eq 'admin'}">
                                                                         <td>
                                                                             <c:url var="delete" value="DispatchServlet">
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
@@ -439,6 +443,7 @@
                                                                             </c:url>
                                                                             <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
                                                                         </td>
+                                                                        </c:if>
                                                                     </tr>
                                                                 </c:forEach>
                                                             </c:if>

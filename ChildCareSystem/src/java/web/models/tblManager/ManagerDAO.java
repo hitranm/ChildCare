@@ -171,7 +171,7 @@ public class ManagerDAO {
         }
         return check;
     }
-    public List<ManagerDTO> getAllManagerProfile() throws SQLException {
+    public List<ManagerDTO> getAllActiveManagerProfile() throws SQLException {
         List<ManagerDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -179,15 +179,16 @@ public class ManagerDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, FullName, PhoneNumber "
-                        + " FROM tblManager ";
+                String sql = "SELECT M.IdentityID, FullName, PhoneNumber "
+                        + " FROM tblManager M, tblIdentity I "
+                        + " WHERE M.IdentityID = I.IdentityID AND StatusID=1";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
                 while (rs.next()) {
                     String identityID = rs.getString("IdentityID");
                     String fullName = rs.getString("FullName");
-                    String phoneNumber = rs.getString("PhoneNumber");
+                    String phoneNumber = rs.getString("PhoneNumber"); 
                     ManagerDTO man = new ManagerDTO(identityID, fullName, phoneNumber);
                     result.add(man);
                 }

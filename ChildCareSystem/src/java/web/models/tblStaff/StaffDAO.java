@@ -277,7 +277,7 @@ public class StaffDAO implements Serializable {
         return check;
     }
 
-    public List<StaffDTO> getAllStaffProfile() throws SQLException, NamingException {
+    public List<StaffDTO> getAllActiveStaffProfile() throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -285,8 +285,9 @@ public class StaffDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, StaffID, FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
-                        + " FROM tblStaff ";
+                String sql = "SELECT S.IdentityID, StaffID, FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
+                        + " FROM tblStaff S, tblIdentity I "
+                        + " WHERE S.IdentityID = I.IdentityID AND StatusID=1";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();

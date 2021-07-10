@@ -312,7 +312,7 @@ public class CustomerDAO implements Serializable {
 
         return check;
     }
-     public List<CustomerDTO> getAllCustomerProfile() throws SQLException {
+     public List<CustomerDTO> getAllActiveCustomerProfile() throws SQLException {
         List<CustomerDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -320,8 +320,9 @@ public class CustomerDAO implements Serializable {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, FullName, PhoneNumber "
-                        + " FROM tblCustomer ";
+                String sql = "SELECT C.IdentityID, FullName, PhoneNumber "
+                        + " FROM tblCustomer C, tblIdentity I "
+                        + " WHERE C.IdentityID = I.IdentityID AND StatusID=1";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
