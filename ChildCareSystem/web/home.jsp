@@ -43,7 +43,6 @@
         <jsp:include page="header.jsp"/>
         <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
 
-
         <main>
             <div class="main_wrapper px-5 py-5">
                 <div class="main_left col-12 col-lg-9">
