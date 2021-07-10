@@ -6,29 +6,30 @@
 
 
 <urlrewrite use-query-string="true">
+<!--    Common-->
     <rule match-type="wildcard">
-       <from>/trang-chu</from>
-       <to type="forward">/home.jsp</to>
+        <from>/trang-chu</from>
+        <to type="forward">/home.jsp</to>
     </rule>
     <rule match-type="wildcard">
-       <from>/dang-nhap</from>
-       <to type="forward">/login.jsp</to>
+        <from>/dang-nhap</from>
+        <to type="forward">/login.jsp</to>
     </rule>
     <rule match-type="wildcard">
-       <from>/dang-nhap-loi</from>
-       <to type="forward">/LoginServlet</to>
+        <from>/dang-nhap-loi</from>
+        <to type="forward">/LoginServlet</to>
     </rule>
     <rule match-type="wildcard">
-       <from>/dang-ky</from>
-       <to type="forward">/register.jsp</to>
+        <from>/dang-ky</from>
+        <to type="forward">/register.jsp</to>
     </rule>  
     <rule match-type="wildcard">
-       <from>/dang-ky</from>
-       <to type="forward">/register.jsp</to>
+        <from>/dang-ky</from>
+        <to type="forward">/register.jsp</to>
     </rule>
     <rule match-type="wildcard">
-       <from>/dang-xuat</from>
-       <to type="forward">/LogOutServlet</to>
+        <from>/dang-xuat</from>
+        <to type="forward">/LogOutServlet</to>
     </rule>
     <rule match-type="wildcard">
         <from>/doi-mat-khau</from>
@@ -38,7 +39,6 @@
         <from>/thong-tin-ca-nhan</from>
         <to type="forward">/DispatchServlet?btAction=ViewUserProfile</to>
     </rule>
-    
     <rule>
         <from>/bai-viet\?trang=([0-9]+)</from>
         <to type="forward">/ViewBlogServlet?index=$1</to>
@@ -47,6 +47,10 @@
         <from>/dich-vu\?trang=([0-9]+)</from>
         <to type="forward">/ViewServiceListServlet?index=$1</to>
     </rule>  
+    
+   
+    
+    <!--    Customer-->
     <rule>
         <from>/tao-ho-so-benh-nhan</from>
         <to type="forward">/ViewPatientProfileServlet?tab=add</to>
@@ -67,6 +71,15 @@
         <from>/dat-cho-kham-benh</from>
         <to type="forward">/DispatchServlet?btAction=ChooseServiceReserve</to>
     </rule>
+
+
+    <!--    Staff-->
+
+
+    <!--    Manager-->
+
+
+    <!--    Admin-->
     
     
     
