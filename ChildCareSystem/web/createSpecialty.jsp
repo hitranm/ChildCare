@@ -3,8 +3,10 @@
     Created on : Jun 23, 2021, 9:57:24 AM
     Author     : DELL
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page autoFlush="true" buffer="1094kb"%>
+
 <!DOCTYPE html>
 <html>
     <head>
