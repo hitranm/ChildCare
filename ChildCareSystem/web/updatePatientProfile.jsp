@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update Patient Profile Page</title>
+        <title>Cập nhật hồ sơ bệnh nhân</title>
 
         <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="./css/patientProfile.css"/>
@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.js"></script>
         <script>
-            $(function () {
+            $(function () {S
                 //Năm tự động điền vào select
                 var seYear = $('#year');
                 var date = new Date();
@@ -101,7 +101,7 @@
 
                 <div class="col-md-12 col-lg-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link btn-outline-success btn-lg" id="v-pills-viewPatient-tab" href="ViewPatientProfileServlet" role="tab" aria-controls="v-pills-home" aria-selected="true">Danh sách hồ sơ bệnh nhân</a>
+                        <a class="nav-link btn-outline-success btn-lg" id="v-pills-viewPatient-tab" href="ho-so-benh-nhan" role="tab" aria-controls="v-pills-home" aria-selected="true">Danh sách hồ sơ bệnh nhân</a>
 
                         <br>
                         <a class="nav-link active" id="v-pills-updatePatient-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hồ sơ bệnh nhân</a>

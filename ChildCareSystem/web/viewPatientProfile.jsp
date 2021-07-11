@@ -246,7 +246,7 @@
                                                                     <strong>Ngày sinh:</strong> ${dto2.birthday}
                                                                 </p>
                                                                 <hr>
-                                                                <c:url value="LoadPatientProfileByIDServlet" var="updateLink">
+                                                                <c:url value="cap-nhat-ho-so-benh-nhan" var="updateLink">
                                                                     <c:param name="id" value="${dto2.patientID}"/>
                                                                 </c:url>
                                                                 <a class="btn btn-primary" href="${updateLink}" role="button">Chính sửa hồ sơ</a>

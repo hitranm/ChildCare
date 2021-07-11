@@ -15,7 +15,7 @@ var date = $("#checkInTime").text();
 const chooseDate = new Date(date);
 
 const myCalender = new CalendarPicker('#myCalendarWrapper', {
-    min: today,
+    min: tomorrow,
     max: new Date(nextYear, 1),
     selectedDate: chooseDate
 });

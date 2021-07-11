@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update</title>
+        <title>Cập nhật đơn khám</title>
         <link rel="stylesheet" href="css/CalendarPicker.style.css">
         <link rel="stylesheet" href="css/reservation/reservation.css" >  
         <link rel="preconnect" href="https://fonts.googleapis.com">

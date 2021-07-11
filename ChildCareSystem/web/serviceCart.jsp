@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Service carts</title>
+        <title>Xem các đơn đặt khám</title>
         <link rel="stylesheet" href="css/service/serviceCart.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,8 +92,8 @@
                                                                         <td>${reservation.cartItem.checkInTime}</td>
                                                                         <td>${reservation.serviceDTO.price}00</td>
                                                                         <td>
-                                                                            <c:url var="urlUpdate" value="LoadUpdateReservationServlet">
-                                                                                <c:param name="txtPatientId" value="${reservation.patientDTO.patientID}"/>
+                                                                            <c:url var="urlUpdate" value="cap-nhat-don-kham">
+                                                                                <c:param name="id" value="${reservation.patientDTO.patientID}"/>
                                                                             </c:url>
                                                                             <a href="${urlUpdate}" role="button" class="btn btn-outline-primary">Chỉnh sửa</a>
                                                                         </td>

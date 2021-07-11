@@ -23,8 +23,8 @@ import web.utils.DateValidatorUsingDateFormat;
  */
 public class UpdatePatientProfileByIDServlet extends HttpServlet {
 
-    private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "systemError.html";
+    private static final String SUCCESS = "ho-so-benh-nhan";
+    private static final String ERROR = "loi-he-thong";
     private static final String INVALID = "LoadPatientProfileByIDServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -75,7 +75,6 @@ public class UpdatePatientProfileByIDServlet extends HttpServlet {
             }
         } catch (Exception e) {
             log("ERROR at UpdateUserController: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

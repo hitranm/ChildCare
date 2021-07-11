@@ -32,7 +32,7 @@ import web.viewModels.Cart.CartViewModel;
  * @author HOANGKHOI
  */
 public class UpdateReservationServlet extends HttpServlet {
-    private static final String SUCCESS = "serviceCart.jsp";
+    private static final String SUCCESS = "xem-don-dat-kham";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

@@ -35,7 +35,7 @@ public class RemoveServiceFromCartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url = "serviceCart.jsp";
+        String url = "xem-don-dat-kham";
         boolean result = false;
         int patientId = Integer.parseInt(request.getParameter("txtPatientId"));
         try {

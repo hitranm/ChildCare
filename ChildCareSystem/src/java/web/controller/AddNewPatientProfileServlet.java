@@ -25,7 +25,7 @@ import web.models.tblPatient.PatientError;
  */
 public class AddNewPatientProfileServlet extends HttpServlet {
 
-    private static final String SUCCESS = "ViewPatientProfileServlet";
+    private static final String SUCCESS = "ho-so-benh-nhan";
     private static final String ERROR = "systemError.html";
     private static final String INVALID = "addNewPatient.jsp";
 

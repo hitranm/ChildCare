@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Success</title>
+        <title>Thanh toán thành công</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
@@ -44,8 +44,8 @@
                     <h3>Đặt dịch vụ thành công</h3>
                 </div>
                 <div class="text-center">
-                    <a class="btn btn-primary" href="home.jsp" role="button">Quay về trang chủ</a>
-                    <a class="btn btn-success" href="ViewPatientProfileServlet?tab=order" role="button">Xem lịch sử đặt</a>
+                    <a class="btn btn-primary" href="trang-chu" role="button">Quay về trang chủ</a>
+                    <a class="btn btn-success" href="xem-lich-su-kham" role="button">Xem lịch sử đặt</a>
                 </div>
 
             </div>

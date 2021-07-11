@@ -24,9 +24,10 @@
         <to type="forward">/register.jsp</to>
     </rule>  
     <rule match-type="wildcard">
-        <from>/dang-ky</from>
-        <to type="forward">/register.jsp</to>
-    </rule>
+        <from>/loi-he-thong</from>
+        <to type="forward">/systemError.html</to>
+    </rule>  
+    
     <rule match-type="wildcard">
         <from>/dang-xuat</from>
         <to type="forward">/LogOutServlet</to>
@@ -56,6 +57,14 @@
         <to type="forward">/ViewPatientProfileServlet?tab=add</to>
     </rule>
     <rule>
+        <from>/cap-nhat-ho-so-benh-nhan\?id=([0-9]+)</from>
+        <to type="forward">/LoadPatientProfileByIDServlet?id=$1</to>
+    </rule>
+    <rule>
+        <from>/them-ho-so-benh-nhan</from>
+        <to type="forward">/LoadPatientProfileByIDServlet?tab=add</to>
+    </rule>
+    <rule>
         <from>/ho-so-benh-nhan</from>
         <to type="forward">/ViewPatientProfileServlet</to>
     </rule>
@@ -71,6 +80,18 @@
         <from>/dat-cho-kham-benh</from>
         <to type="forward">/DispatchServlet?btAction=ChooseServiceReserve</to>
     </rule>
+    <rule match-type="wildcard">
+        <from>/xem-don-dat-kham</from>
+        <to type="forward">/serviceCart.jsp</to>
+    </rule>  
+    <rule>
+        <from>/cap-nhat-don-kham\?id=([0-9]+)</from>
+        <to type="forward">/LoadUpdateReservationServlet?txtPatientId=$1</to>
+    </rule>
+    <rule match-type="wildcard">
+        <from>/thanh-toan-thanh-cong</from>
+        <to type="forward">/successCheckout.jsp</to>
+    </rule>  
 
 
     <!--    Staff-->

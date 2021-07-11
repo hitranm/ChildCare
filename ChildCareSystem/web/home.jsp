@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Child Care System</title>
+        <title>Trung tâm chăm sóc trẻ em CCS</title>
         <link rel="stylesheet" href="./css/homepage.css" />
         <link rel="stylesheet" href="css/home/phonering.css"/>
         <link rel="stylesheet" href="css/sidebar.css"/>

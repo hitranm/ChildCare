@@ -31,11 +31,11 @@ import web.models.tblStaff.StaffDTO;
  */
 public class VerifyCheckoutServlet extends HttpServlet {
 
-    private static final String ERROR = "systemError.html";
-    private static final String SUCCESS = "successCheckout.jsp";
-    private static final String EMPTY_CART = "home.jsp";
-    private static final String LOGIN_PAGE = "login.jsp";
-    private static final String SERVICE_CART = "serviceCart.jsp";
+    private static final String ERROR = "loi-he-thong";
+    private static final String SUCCESS = "thanh-toan-thanh-cong";
+    private static final String EMPTY_CART = "trang-chu";
+    private static final String LOGIN_PAGE = "dang-nhap";
+    private static final String SERVICE_CART = "xem-don-dat-kham";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

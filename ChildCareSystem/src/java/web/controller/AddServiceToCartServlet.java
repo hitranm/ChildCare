@@ -35,7 +35,7 @@ import web.viewModels.Cart.CartViewModel;
  */
 public class AddServiceToCartServlet extends HttpServlet {
     
-    private static final String SUCCESS = "serviceCart.jsp";
+    private static final String SUCCESS = "xem-don-dat-kham";
     private static final String ERROR = "chooseServiceReserve.jsp";
 
     /**
