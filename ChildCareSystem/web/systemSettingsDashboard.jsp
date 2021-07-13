@@ -56,43 +56,43 @@
                 <ul>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="DispatchServlet?btAction=ViewMainDashboard"   class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <a href="thong-ke-tong-quat" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                                 <span >Tổng quát</span></a>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
+                            <a href="thong-ke-tai-khoan"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                                 <span>Tài khoản </span></a>
                         </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                        <a href="thong-ke-Dich-vu"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                        <a href="thong-ke-bai-viet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                             <span>Bài viết</span></a>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                            <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="thong-ke-Don-dat-kham" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="DispatchServlet?btAction=ViewReservationForStaff" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="don-kham-benh-cua-nhan-vien" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
+                            <a href="thong-ke-phan-hoi" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                                 <span>Phản hồi</span></a>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="ViewSystemSettingServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
+                            <a href="cau-hinh-he-thong" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                                 <span>Cấu hình hệ thống</span></a>
                         </li>
                     </c:if>
@@ -143,7 +143,7 @@
                                         <c:if test="${not empty requestScope.settingList}" var="testEmpty">
                                             <c:forEach items="${requestScope.settingList}" var="dto">
                                                 <div class="col-md-6" style="margin-bottom: 3%">
-                                                    <form class="col" action="UpdateSystemSettingServlet" method="POST">
+                                                    <form class="col" action="cap-nhat-cau-hinh-he-thong" method="POST">
                                                         <div class="card" style="text-align: center">
                                                             <div class="card-body">
                                                                 <h5 class="card-title"><strong>${dto.settingName}</strong></h5>
@@ -153,7 +153,7 @@
                                                                     <strong>Giá trị cài đặt</strong><input placeholder="Nhập giá trị" required type="number" name="txtValue" value="${dto.settingValue}" min="0" max="15" step="1"/>
                                                                 </p>
                                                                 <hr>
-                                                                <c:url value="UpdateSystemSettingServlet" var="updateLink">
+                                                                <c:url value="cap-nhat-cau-hinh-he-thong" var="updateLink">
                                                                     <c:param name="id" value="${dto.settingID}"/>
                                                                 </c:url>
                                                                 <button type="submit" class="btn btn-primary" href="${updateLink}">Cập nhật</button>

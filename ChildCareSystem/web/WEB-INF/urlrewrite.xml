@@ -101,7 +101,42 @@
 
 
     <!--    Admin-->
-    
+    <rule>
+        <from>/thong-ke-tong-quat</from>
+        <to type="forward">/DispatchServlet?btAction=ViewMainDashboard</to>
+    </rule>
+    <rule>
+        <from>/thong-ke-tai-khoan</from>
+        <to type="forward">/DispatchServlet?btAction=ViewAccount</to>
+    </rule>
+    <rule>
+        <from>/thong-ke-Dich-vu</from>
+        <to type="forward">/ViewAllServiceListServlet</to>
+    </rule>
+    <rule>
+        <from>/thong-ke-bai-viet</from>
+        <to type="forward">/ViewAllBlogListServlet</to>
+    </rule>
+    <rule>
+        <from>/thong-ke-Don-dat-kham</from>
+        <to type="forward">/DispatchServlet?btAction=ViewReservationForManager</to>
+    </rule>
+    <rule>
+        <from>/don-kham-benh-cua-nhan-vien</from>
+        <to type="forward">/DispatchServlet?btAction=ViewReservationForStaff</to>
+    </rule>
+    <rule>
+        <from>/thong-ke-phan-hoi</from>
+        <to type="forward">/ViewAllFeedbackServlet</to>
+    </rule>
+    <rule>
+        <from>/cau-hinh-he-thong</from>
+        <to type="forward">/ViewSystemSettingServlet</to>
+    </rule>
+    <rule>
+        <from>/cap-nhat-cau-hinh-he-thong</from>
+        <to type="forward">/UpdateSystemSettingServlet</to>
+    </rule>
     
     
 </urlrewrite>
