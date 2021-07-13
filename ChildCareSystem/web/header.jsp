@@ -204,7 +204,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="ViewCategoryServlet">Danh sách chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>                                          
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
+                                            <a class="dropdown-item" href="thong-ke-tong-quat">Thống kê</a>
                                         </div>
                                     </li>   
                                 </ul>
