@@ -14,7 +14,6 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>DispatchServlet</servlet-name>
         <servlet-class>web.controller.DispatchServlet</servlet-class>
@@ -319,6 +318,10 @@
         <servlet-name>ViewAllFeedbackServlet</servlet-name>
         <servlet-class>web.controller.ViewAllFeedbackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActiveAccountServlet</servlet-name>
+        <servlet-class>web.controller.ActiveAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DispatchServlet</servlet-name>
         <url-pattern>/DispatchServlet</url-pattern>
@@ -618,6 +621,10 @@
     <servlet-mapping>
         <servlet-name>ViewAllFeedbackServlet</servlet-name>
         <url-pattern>/ViewAllFeedbackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActiveAccountServlet</servlet-name>
+        <url-pattern>/ActiveAccountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

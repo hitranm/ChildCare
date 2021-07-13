@@ -6,6 +6,7 @@
 package web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -14,16 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import web.models.tblIdentity.IdentityDAO;
 
-
 /**
  *
  * @author Admin
  */
-public class DeleteAccountServlet extends HttpServlet {
-
-    private static final String ERROR = "systemError.html";
+public class ActiveAccountServlet extends HttpServlet {
+ private static final String ERROR = "systemError.html";
     private static final String SUCCESS = "ViewAccountsServlet";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,53 +34,22 @@ public class DeleteAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+   String url = ERROR;
         String identityID = request.getParameter("id");
         IdentityDAO identityDAO = new IdentityDAO();
         try {
-//            int roleID = identityDAO.getRoleIDByIdentityID(identityID);
-//            if(roleID == 4) {
-//                   AdminDAO adminDAO = new AdminDAO();
-//                   boolean check = adminDAO.delete(identityID);
-//                   boolean check2= identityDAO.delete(identityID);
-//                   if(check && check2){
-//                    url=SUCCESS;   
-//                   }
-//            }
-//            if(roleID == 3){
-//                 ManagerDAO managerDAO = new ManagerDAO();
-//                 boolean check = managerDAO.delete(identityID);
-//                   boolean check2= identityDAO.delete(identityID);
-//                   if(check && check2){
-//                    url=SUCCESS;   
-//                   }
-//            }
-//            if(roleID == 2){
-//                   StaffDAO staffDAO = new StaffDAO();
-//                   boolean check = staffDAO.delete(identityID);
-//                   boolean check2= identityDAO.delete(identityID);
-//                   if(check && check2){
-//                    url=SUCCESS;   
-//                   }
-//            }
-//            if(roleID == 1){
-//                    
-//                   boolean check= identityDAO.delete(identityID);
-//                   if(check){
-//                    url=SUCCESS;   
-//                   }
-//            }
             int identityId = Integer.parseInt(identityID);
-            boolean check = identityDAO.deActiveAccount(identityId);
+            boolean check = identityDAO.activeAccount(identityId);
             if(check){
             url = SUCCESS;
             }
         } catch (SQLException | NamingException e) {
-            log("Error at DeleteAccountServlet: " + e.toString());
+            log("Error at ActiveAccountServlet: " + e.toString());
             url = ERROR;
         } finally {
             response.sendRedirect(url);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

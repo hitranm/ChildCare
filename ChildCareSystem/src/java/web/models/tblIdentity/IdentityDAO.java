@@ -366,6 +366,68 @@ public class IdentityDAO {
         }
         return sum;
     }
+    public int countAllActiveAccount() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(IdentityID) as Total"
+                        + " FROM tblIdentity "
+                        + " WHERE StatusID=1 ";
+                stm = conn.prepareStatement(sql);
+
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
+    public int countAllDeactiveAccount() throws SQLException, NamingException {
+        int sum = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT COUNT(IdentityID) as Total"
+                        + " FROM tblIdentity "
+                        + " WHERE StatusID=0 ";
+                stm = conn.prepareStatement(sql);
+
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    sum = rs.getInt("Total");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return sum;
+    }
 
     public int countCustomerAccount() throws SQLException, NamingException {
         int sum = 0;
@@ -462,22 +524,23 @@ public class IdentityDAO {
         return sum;
     }
 
-    public void deActiveAccount(int identityId) throws NamingException, SQLException {
+    public boolean deActiveAccount(int identityId) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
-        ResultSet rs = null;
+
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "UPDATE tblIdentity SET StatusID=0 WHERE IdentityID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, identityId);
-                rs = stm.executeQuery();
+                int row = stm.executeUpdate();
+                if(row > 0){
+                    return true;
+                }
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
+          
             if (stm != null) {
                 stm.close();
             }
@@ -485,6 +548,33 @@ public class IdentityDAO {
                 conn.close();
             }
         }
+        return false;
+    }
+    public boolean activeAccount(int identityId) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblIdentity SET StatusID=1 WHERE IdentityID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, identityId);
+                int row = stm.executeUpdate();
+                if(row > 0){
+                    return true;
+                }
+            }
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 
     public String getStaffNameByIdentityId(String identityId) throws NamingException, SQLException {

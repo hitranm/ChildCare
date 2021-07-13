@@ -60,7 +60,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String UPDATE_CATEGORY = "UpdateCategoryServlet";
     private static final String VIEW_MAIN_DASHBOARD = "MainDashBoardServlet";
     private static final String UPDATE_SLIDER = "UpdateSliderServlet";
-
+    private static final String ACTIVE_ACCOUNT = "ActiveAccountServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -151,6 +151,8 @@ public class DispatchServlet extends HttpServlet {
                 url = VIEW_MAIN_DASHBOARD;
             } else if (button.equalsIgnoreCase("UpdateSlider")) {
                 url = UPDATE_SLIDER;
+            } else if (button.equalsIgnoreCase("ActiveAccount")) {
+                url = ACTIVE_ACCOUNT;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

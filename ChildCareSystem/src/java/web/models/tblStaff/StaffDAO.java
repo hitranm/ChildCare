@@ -317,7 +317,46 @@ public class StaffDAO implements Serializable {
         }
         return result;
     }
-
+public List<StaffDTO> getAllDeactiveStaffProfile() throws SQLException, NamingException {
+        List<StaffDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT S.IdentityID, StaffID, FullName, PhoneNumber, Address, Birthday, CitizenID, SpecialtyID "
+                        + " FROM tblStaff S, tblIdentity I "
+                        + " WHERE S.IdentityID = I.IdentityID AND StatusID=0";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String identityID = rs.getString("IdentityID");
+                    String staffID = rs.getString("StaffID");
+                    String fullName = rs.getString("FullName");
+                    String phoneNum = rs.getString("PhoneNumber");
+                    String address = rs.getString("Address");
+                    String birthday = rs.getString("Birthday");
+                    String citizenID = rs.getString("CitizenID");
+                    String specialtyID = rs.getString("SpecialtyID");
+                    StaffDTO staff = new StaffDTO(identityID, staffID, fullName, phoneNum, address, birthday, citizenID, specialtyID);
+                    result.add(staff);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
     public List<StaffDTO> getStaffListBySpecialtyId(int specialtyID) throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;

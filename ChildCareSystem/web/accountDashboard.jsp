@@ -120,6 +120,24 @@
                             <span class="fas fa-users"></span>
                         </div>
                     </div>
+                            <div class="card-single">
+                        <div>
+                            <h1>${requestScope.ACTIVE_ACCOUNT}</h1>
+                            <span>Đưa vào hoạt động</span>
+                        </div>
+                        <div>
+                            <span class="fas fa-check-circle"></span>
+                        </div>
+                    </div>
+                            <div class="card-single">
+                        <div>
+                            <h1>${requestScope.DEACT_ACCOUNT}</h1>
+                            <span>Vô hiệu hóa</span>
+                        </div>
+                        <div>
+                            <span class="fas fa-ban"></span>
+                        </div>
+                    </div>
                     <div class="card-single">
                         <div>
                             <h1>${requestScope.CUSTOMER_ACCOUNT}</h1>
@@ -154,7 +172,7 @@
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Danh sách tài khoản</h3>
+                                <h3>Danh sách tài khoản đưa vào hoạt động</h3>
 
                             </div>
                             <div class="card-body">
@@ -171,15 +189,15 @@
                                                 <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
                                                      aria-orientation="vertical">
                                                     <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
-                                                       href="#allList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
+                                                       href="#allActiveList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
                                                        onclick="toggleButton(this)">Tất cả</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#customerList"
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#ActivecustomerList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                        onclick="toggleButton(this)">Khách hàng</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#staffList"
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#ActivestaffList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                        onclick="toggleButton(this)">Nhân viên</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#managerList"
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#ActivemanagerList"
                                                        role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
                                                        onclick="toggleButton(this)">Quản lí</a>
                                                 </div>
@@ -189,7 +207,7 @@
                                         <div class="col-sm-12 table__wrapper bg-white">
                                             <div class="tab-content" id="v-pills-tabContent">
                                                 <!--All List-->
-                                                <div class="tab-pane fade show active bg-white" id="allList" role="tabpanel"
+                                                <div class="tab-pane fade show active bg-white" id="allActiveList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
 
                                                     <table class="table table-striped table-bordered mydatatable">
@@ -205,9 +223,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="tableBodyAccepted">
-                                                            <c:if test="${requestScope.ListCustomer!=null}">
+                                                            <c:if test="${requestScope.ListActiveCustomer!=null}">
                                                                 <c:set var="count" value="0"/>
-                                                                <c:forEach items="${requestScope.ListCustomer}" var="dto" >
+                                                                <c:forEach items="${requestScope.ListActiveCustomer}" var="dto" >
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -227,13 +245,13 @@
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
 
-                                                                <c:if test="${requestScope.ListStaff!=null}">
-                                                                    <c:forEach items="${requestScope.ListStaff}" var="dto" >
+                                                                <c:if test="${requestScope.ListActiveStaff!=null}">
+                                                                    <c:forEach items="${requestScope.ListActiveStaff}" var="dto" >
                                                                         <c:set var="count" value="${count+1}"/>
                                                                     <td>${count}</td>
 
@@ -257,13 +275,13 @@
 
 
                                                                         </c:url>
-                                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
+                                                                        <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                     </td>
                                                                     </tr>
                                                                 </c:forEach>  
-                                                                <c:if test="${requestScope.ListManager!=null}">
+                                                                <c:if test="${requestScope.ListActiveManager!=null}">
 
-                                                                    <c:forEach items="${requestScope.ListManager}" var="dto" >
+                                                                    <c:forEach items="${requestScope.ListActiveManager}" var="dto" >
 
                                                                         <tr>
                                                                             <c:set var="count" value="${count+1}"/>
@@ -291,7 +309,7 @@
 
 
                                                                                 </c:url>
-                                                                                <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
+                                                                                <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                             </td>
                                                                             </c:if>
                                                                         </tr>
@@ -304,7 +322,7 @@
                                                 </div>
 
                                                 <!--Customer list-->
-                                                <div class="tab-pane fade bg-white" id="customerList" role="tabpanel"
+                                                <div class="tab-pane fade bg-white" id="ActivecustomerList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
@@ -320,9 +338,9 @@
                                                         </thead>
                                                         <tbody id="tableBodyWaiting">
                                                             <tr>
-                                                                <c:if test="${requestScope.ListCustomer!=null}">
+                                                                <c:if test="${requestScope.ListActiveCustomer!=null}">
                                                                     <c:set var="count" value="0"/>
-                                                                    <c:forEach items="${requestScope.ListCustomer}" var="dto" >
+                                                                    <c:forEach items="${requestScope.ListActiveCustomer}" var="dto" >
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
                                                                         <td>${dto.identityID}</td>
@@ -341,7 +359,7 @@
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
-                                                                            <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
+                                                                            <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
@@ -352,7 +370,7 @@
                                                 </div>
 
                                                 <!--staff list-->
-                                                <div class="tab-pane fade bg-white" id="staffList" role="tabpanel"
+                                                <div class="tab-pane fade bg-white" id="ActivestaffList" role="tabpanel"
                                                      aria-labelledby="v-pills-changePassword-tab">
                                                     <table class="table table-striped table-bordered mydatatable">
                                                         <thead>
@@ -367,9 +385,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="tableBodyRejected">
-                                                            <c:if test="${requestScope.ListStaff!=null}">
+                                                            <c:if test="${requestScope.ListActiveStaff!=null}">
                                                                 <c:set var="count" value="0"/>
-                                                                <c:forEach items="${requestScope.ListStaff}" var="dto" >
+                                                                <c:forEach items="${requestScope.ListActiveStaff}" var="dto" >
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -389,7 +407,7 @@
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
-                                                                            <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
+                                                                            <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
@@ -399,7 +417,7 @@
                                                 </div>
 
                                                 <!--Manager list-->
-                                                <div class="tab-pane fade bg-white" id="managerList" role="tabpanel"
+                                                <div class="tab-pane fade bg-white" id="ActivemanagerList" role="tabpanel"
                                                      >
                                                     <table class="table table-striped table-bordered mydatatable" id="tableAll">
                                                         <thead>
@@ -415,9 +433,9 @@
                                                         </thead>
 
                                                         <tbody id="tableBodyAll">
-                                                            <c:if test="${requestScope.ListManager!=null}">
+                                                            <c:if test="${requestScope.ListActiveManager!=null}">
                                                                 <c:set var="count" value="0"/>
-                                                                <c:forEach items="${requestScope.ListManager}" var="dto" >
+                                                                <c:forEach items="${requestScope.ListActiveManager}" var="dto" >
                                                                     <tr>
                                                                         <c:set var="count" value="${count+1}"/>
                                                                         <td>${count}</td>
@@ -441,7 +459,7 @@
                                                                                 <c:param name="btAction" value="DeleteAccount"></c:param>
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
-                                                                            <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Xóa</a>
+                                                                            <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                         </td>
                                                                         </c:if>
                                                                     </tr>
@@ -456,6 +474,316 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <!--Deactive List -->
+                        <div class="recent-grid">
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Danh sách tài khoản bị vô hiệu hóa</h3>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="userPosts__container">
+                                    <div class="userPosts__wrapper">
+                                        <h2 class="userPosts__title"></h2>
+                                        <div class="dropdownButton__wrapper px-3 mb-4">
+                                            <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Vai trò
+                                            </button>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
+                                                     aria-orientation="vertical">
+                                                    <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
+                                                       href="#allDeactList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
+                                                       onclick="toggleButton(this)">Tất cả</a>
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#DeactcustomerList"
+                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                       onclick="toggleButton(this)">Khách hàng</a>
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#DeactstaffList"
+                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                       onclick="toggleButton(this)">Nhân viên</a>
+                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#DeactmanagerList"
+                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                       onclick="toggleButton(this)">Quản lí</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 table__wrapper bg-white">
+                                            <div class="tab-content" id="v-pills-tabContent">
+                                                <!--All List-->
+                                                <div class="tab-pane fade show active bg-white" id="allDeactList" role="tabpanel"
+                                                     aria-labelledby="v-pills-changePassword-tab">
+
+                                                    <table class="table table-striped table-bordered mydatatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tableBodyAccepted">
+                                                            <c:if test="${requestScope.ListDeactiveCustomer!=null}">
+                                                                <c:set var="count" value="0"/>
+                                                                <c:forEach items="${requestScope.ListDeactiveCustomer}" var="dto" >
+                                                                    <tr>
+                                                                        <c:set var="count" value="${count+1}"/>
+                                                                        <td>${count}</td>
+                                                                        <td>${dto.identityID}</td>
+                                                                        <td>${dto.fullName}</td>
+                                                                        <td>${dto.phoneNumber}</td>
+                                                                        <td class="alert alert-success">Customer</td>
+                                                                        <td>
+                                                                            <c:url var="viewdetails" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <c:url var="delete" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ActiveAccount"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a class="btn btn-success" onclick="return confirmation1()" href="${delete}" role="button">Kích hoạt</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+
+                                                                <c:if test="${requestScope.ListDeactiveStaff!=null}">
+                                                                    <c:forEach items="${requestScope.ListDeactiveStaff}" var="dto" >
+                                                                        <c:set var="count" value="${count+1}"/>
+                                                                    <td>${count}</td>
+
+                                                                    <td>${dto.identityID}</td>
+                                                                    <td>${dto.fullName}</td>
+                                                                    <td>${dto.phoneNumber}</td>
+                                                                    <td class="alert alert-warning">Staff</td>
+                                                                    <td>
+                                                                        <c:url var="viewdetails" value="DispatchServlet">
+                                                                            <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                        </c:url>
+                                                                        <a href="${viewdetails}">Chi tiết</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <c:url var="delete" value="DispatchServlet">
+                                                                            <c:param name="btAction" value="ActiveAccount"></c:param>
+                                                                            <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                        </c:url>
+                                                                        <a onclick="return confirmation1()" class="btn btn-success" href="${delete}" role="button">Kích hoạt</a>
+                                                                    </td>
+                                                                    </tr>
+                                                                </c:forEach>  
+                                                                <c:if test="${requestScope.ListDeactiveManager!=null}">
+
+                                                                    <c:forEach items="${requestScope.ListDeactiveManager}" var="dto" >
+
+                                                                        <tr>
+                                                                            <c:set var="count" value="${count+1}"/>
+                                                                            <td>${count}</td>
+
+                                                                            <td>${dto.identityID}</td>
+                                                                            <td>${dto.fullName}</td>
+                                                                            <td>${dto.phoneNumber}</td>
+                                                                            <td class="alert alert-danger">Manager</td>
+                                                                            <td>
+                                                                                <c:url var="viewdetails" value="DispatchServlet">
+                                                                                    <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                    <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                                </c:url>
+                                                                                <a href="${viewdetails}">Chi tiết</a>
+                                                                            </td>
+                                                                            <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                                                                
+                                                                            <td>
+                                                                                <c:url var="delete" value="DispatchServlet">
+                                                                                    <c:param name="btAction" value="ActiveAccount"></c:param>
+                                                                                    <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                                </c:url>
+                                                                                <a onclick="return confirmation1()" class="btn btn-success" href="${delete}" role="button">Kích hoạt</a>
+                                                                            </td>
+                                                                            </c:if>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </c:if>
+                                                            </c:if>
+                                                        </c:if>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!--Customer list-->
+                                                <div class="tab-pane fade bg-white" id="DeactcustomerList" role="tabpanel"
+                                                     aria-labelledby="v-pills-changePassword-tab">
+                                                    <table class="table table-striped table-bordered mydatatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tableBodyWaiting">
+                                                            <tr>
+                                                                <c:if test="${requestScope.ListDeactiveCustomer!=null}">
+                                                                    <c:set var="count" value="0"/>
+                                                                    <c:forEach items="${requestScope.ListDeactiveCustomer}" var="dto" >
+                                                                        <c:set var="count" value="${count+1}"/>
+                                                                        <td>${count}</td>
+                                                                        <td>${dto.identityID}</td>
+                                                                        <td>${dto.fullName}</td>
+                                                                        <td>${dto.phoneNumber}</td>
+                                                                        <td class="alert alert-success">Khách hàng</td>
+                                                                        <td>
+                                                                            <c:url var="viewdetails" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <c:url var="delete" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ActiveAccount"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a onclick="return confirmation1()" class="btn btn-success" href="${delete}" role="button">Kích hoạt</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+
+                                                <!--staff list-->
+                                                <div class="tab-pane fade bg-white" id="DeactstaffList" role="tabpanel"
+                                                     aria-labelledby="v-pills-changePassword-tab">
+                                                    <table class="table table-striped table-bordered mydatatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tableBodyRejected">
+                                                            <c:if test="${requestScope.ListDeactiveStaff!=null}">
+                                                                <c:set var="count" value="0"/>
+                                                                <c:forEach items="${requestScope.ListDeactiveStaff}" var="dto" >
+                                                                    <tr>
+                                                                        <c:set var="count" value="${count+1}"/>
+                                                                        <td>${count}</td>
+                                                                        <td>${dto.identityID}</td>
+                                                                        <td>${dto.fullName}</td>
+                                                                        <td>${dto.phoneNumber}</td>
+                                                                        <td class="alert alert-warning">Nhân viên</td>
+                                                                        <td>
+                                                                            <c:url var="viewdetails" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <c:url var="delete" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ActiveAccount"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a onclick="return confirmation1()" class="btn btn-success" href="${delete}" role="button">Kích hoạt</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!--Manager list-->
+                                                <div class="tab-pane fade bg-white" id="DeactmanagerList" role="tabpanel"
+                                                     >
+                                                    <table class="table table-striped table-bordered mydatatable" id="tableAll">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>STT</th>
+                                                                <th>ID</th>
+                                                                <th>Họ tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Vai trò</th>
+                                                                <th>Xem chi tiết</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="tableBodyAll">
+                                                            <c:if test="${requestScope.ListDeactiveManager!=null}">
+                                                                <c:set var="count" value="0"/>
+                                                                <c:forEach items="${requestScope.ListDeactiveManager}" var="dto" >
+                                                                    <tr>
+                                                                        <c:set var="count" value="${count+1}"/>
+                                                                        <td>${count}</td>
+
+                                                                        <td>${dto.identityID}</td>
+                                                                        <td>${dto.fullName}</td>
+                                                                        <td>${dto.phoneNumber}</td>
+                                                                        <td class="alert alert-danger">Quản lí</td>
+                                                                        <td>
+                                                                            <c:url var="viewdetails" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+
+
+                                                                            </c:url>
+                                                                            <a href="${viewdetails}">Chi tiết</a>
+                                                                        </td>
+                                                                        <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                                                        <td>
+                                                                            <c:url var="delete" value="DispatchServlet">
+                                                                                <c:param name="btAction" value="ActiveAccount"></c:param>
+                                                                                <c:param name="id" value="${dto.identityID}"></c:param>
+                                                                            </c:url>
+                                                                            <a onclick="return confirmation1()" class="btn btn-success" href="${delete}" role="button">Kích hoạt</a>
+                                                                        </td>
+                                                                        </c:if>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </tbody>
+                                                        <tfoot></tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -488,7 +816,13 @@
         </script>
         <script>
             function confirmation() {
-                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+                var r = confirm("Bạn có chắc muốn vô hiệu hóa tài khoản này?");
+                return r;
+            }
+        </script>
+         <script>
+            function confirmation1() {
+                var r = confirm("Bạn có chắc muốn kích hoạt tài khoản này?");
                 return r;
             }
         </script>

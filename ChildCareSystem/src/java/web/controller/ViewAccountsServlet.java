@@ -53,12 +53,18 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
             CustomerDAO customerDAO = new CustomerDAO();
             StaffDAO staffDAO = new StaffDAO();
             ManagerDAO managerDAO = new ManagerDAO();
-            List<CustomerDTO> listCustomer = customerDAO.getAllActiveCustomerProfile();
-            request.setAttribute("ListCustomer", listCustomer);
-            List<StaffDTO> listStaff = staffDAO.getAllActiveStaffProfile();
-            request.setAttribute("ListStaff", listStaff);
-            List<ManagerDTO> listManager = managerDAO.getAllActiveManagerProfile();
-            request.setAttribute("ListManager", listManager);
+            List<CustomerDTO> listActiveCustomer = customerDAO.getAllActiveCustomerProfile();
+            request.setAttribute("ListActiveCustomer", listActiveCustomer);
+            List<StaffDTO> listActiveStaff = staffDAO.getAllActiveStaffProfile();
+            request.setAttribute("ListActiveStaff", listActiveStaff);
+            List<ManagerDTO> listActiveManager = managerDAO.getAllActiveManagerProfile();
+            request.setAttribute("ListActiveManager", listActiveManager);
+            List<CustomerDTO> listDeactiveCustomer = customerDAO.getAllDeactiveCustomerProfile();
+            request.setAttribute("ListDeactiveCustomer", listDeactiveCustomer);
+            List<StaffDTO> listDeactiveStaff = staffDAO.getAllDeactiveStaffProfile();
+            request.setAttribute("ListDeactiveStaff", listDeactiveStaff);
+            List<ManagerDTO> listDeactiveManager = managerDAO.getAllDeactiveManagerProfile();
+            request.setAttribute("ListDeactiveManager", listDeactiveManager);
             int sum = identityDAO.countAllAccount();
             request.setAttribute("TOTAL_ACCOUNT", sum);
             int customers = identityDAO.countCustomerAccount();
@@ -67,19 +73,13 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
             request.setAttribute("STAFF_ACCOUNT", staffs);
             int newaccs = identityDAO.countNewAccountMonthly();
             request.setAttribute("MONTHLY_ACCOUNT", newaccs);
-            int allService = dao.countAllService();
-            request.setAttribute("ALL_SERVICE", allService);
-            int activeService = dao.countServiceActive();
-            request.setAttribute("ACTIVE_SERVICE", activeService);
-            int denyService = dao.countServiceDeny();
-            request.setAttribute("DENY_SERVICE", denyService);
-            String service = dao.countMostUseService();
-            request.setAttribute("POPULAR_SERVICE", service);
+            int sumActive = identityDAO.countAllActiveAccount();
+            request.setAttribute("ACTIVE_ACCOUNT", sumActive);
+            int sumDeact = identityDAO.countAllDeactiveAccount();
+            request.setAttribute("DEACT_ACCOUNT", sumDeact);
             
-            int allfb = feedbackDAO.countAllFeedback();
-            request.setAttribute("ALL_FB", allfb);
-            float result = feedbackDAO.calcAvgStar();
-            request.setAttribute("AVG_STAR", result);
+            
+           
 
         } catch (Exception e) {
             log("ERROR at ViewAccountsServlet: " + e.getMessage());

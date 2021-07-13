@@ -295,4 +295,41 @@ public class ManagerDAO {
         }
         return false;
     }
+     public List<ManagerDTO> getAllDeactiveManagerProfile() throws SQLException {
+        List<ManagerDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT M.IdentityID, FullName, PhoneNumber "
+                        + " FROM tblManager M, tblIdentity I "
+                        + " WHERE M.IdentityID = I.IdentityID AND StatusID=0";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String identityID = rs.getString("IdentityID");
+                    String fullName = rs.getString("FullName");
+                    String phoneNumber = rs.getString("PhoneNumber"); 
+                    ManagerDTO man = new ManagerDTO(identityID, fullName, phoneNumber);
+                    result.add(man);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
 }

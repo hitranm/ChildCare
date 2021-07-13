@@ -349,6 +349,43 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
+      public List<CustomerDTO> getAllDeactiveCustomerProfile() throws SQLException {
+        List<CustomerDTO> result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT C.IdentityID, FullName, PhoneNumber "
+                        + " FROM tblCustomer C, tblIdentity I "
+                        + " WHERE C.IdentityID = I.IdentityID AND StatusID=0";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                result = new ArrayList<>();
+                while (rs.next()) {
+                    String identityID = rs.getString("IdentityID");
+                    String fullName = rs.getString("FullName");
+                    String phoneNumber = rs.getString("PhoneNumber");
+                    CustomerDTO cus = new CustomerDTO(identityID, fullName, phoneNumber);
+                    result.add(cus);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
      public boolean delete(String id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
