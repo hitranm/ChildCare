@@ -21,7 +21,7 @@ import web.models.tblBlogCategory.BlogCategoryDAO;
  */
 public class CreateCategoryServlet extends HttpServlet {
 
-    private final String VIEW_CATE = "viewCategory.jsp";
+    private final String VIEW_CATE = "xem-danh-sach-chu-de";//viewCategory.jsp";
     private final String ERROR = "systemError.html";
 
     /**

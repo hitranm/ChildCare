@@ -35,7 +35,7 @@ import web.models.tblBlog.BlogError;
 )
 public class CreateBlogServlet extends HttpServlet {
 
-    private final String CREATE_BLOG = "createBlog.jsp";
+    private final String CREATE_BLOG = "tao-bai-viet"; //createBlog.jsp
     private final String VIEWBLOG = "ViewBlogByAuthorServlet";
     private final String ERROR_PAGE = "systemError.html";
     private static final String UPLOAD_DIR = "images/blog";
@@ -55,7 +55,7 @@ public class CreateBlogServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         String url = ERROR_PAGE;
         String title = request.getParameter("txtTitle");
         String body = request.getParameter("txtBody");

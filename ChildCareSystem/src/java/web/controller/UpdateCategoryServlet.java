@@ -22,7 +22,7 @@ import web.models.tblBlogCategory.BlogCategoryDAO;
 public class UpdateCategoryServlet extends HttpServlet {
 
     private final String ERROR = "systemError.html";
-    private final String VIEW_CATE = "ViewCategoryServlet";
+    private final String VIEW_CATE = "Xem-danh-sach-chu-de"; //ViewCategoryServlet
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

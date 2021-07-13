@@ -22,7 +22,7 @@ import web.models.tblSpecialty.SpecialtyDAO;
 public class UpdateSpecialtyServlet extends HttpServlet {
 
     private final String ERROR = "systemError.html";
-    private final String VIEW_SPECIALTY = "viewSpeciaty.jsp";
+    private final String VIEW_SPECIALTY = "xem-danh-sach-Chuyen-khoa";//viewSpeciaty.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

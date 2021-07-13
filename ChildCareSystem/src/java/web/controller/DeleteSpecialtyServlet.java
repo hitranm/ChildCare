@@ -21,7 +21,7 @@ import web.models.tblSpecialty.SpecialtyDAO;
  */
 public class DeleteSpecialtyServlet extends HttpServlet {
     
-    private final String VIEW_SPECIALTY = "viewSpeciaty.jsp";
+    private final String VIEW_SPECIALTY = "xem-danh-sach-Chuyen-khoa";//viewSpeciaty.jsp
     private final String ERROR = "systemError.html";
 
     /**

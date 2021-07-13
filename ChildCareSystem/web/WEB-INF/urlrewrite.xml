@@ -6,7 +6,7 @@
 
 
 <urlrewrite use-query-string="true">
-<!--    Common-->
+    <!--    Common-->
     <rule match-type="wildcard">
         <from>/trang-chu</from>
         <to type="forward">/home.jsp</to>
@@ -98,8 +98,41 @@
 
 
     <!--    Manager-->
-
-
+        <rule match-type="wildcard">
+        <from>/tao-chuyen-khoa-moi</from>
+        <to type="forward">/createSpecialty.jsp</to>
+    </rule>
+<rule match-type="wildcard">
+        <from>/tao-chu-de-moi</from>
+        <to type="forward">/createCategory.jsp</to>
+    </rule>
+    <rule match-type="wildcard">
+        <from>/tao-bai-viet</from>
+        <to type="forward">/createBlog.jsp</to>
+    </rule>
+    <!-- can hoi -->
+<!--    <rule match-type="wildcard">
+        <from>/dang-tao-bai-viet</from>
+        <to type="forward">/DispatchServlet?btAction=CreateBlog</to>
+    </rule>-->
+ 
+    
+    <rule match-type="wildcard">
+        <from>/tao-dich-vu</from>
+        <to type="forward">/createService.jsp</to>
+    </rule>
+    <rule match-type="wildcard">
+        <from>/xem-danh-sach-chu-de</from>
+        <to type="forward">/viewCategory.jsp</to>
+    </rule>
+    <rule match-type="wildcard">
+        <from>/xem-danh-sach-Chuyen-khoa</from>
+        <to type="forward">/viewSpeciaty.jsp</to>
+    </rule>
+    <rule match-type="wildcard">
+        <from>/Xem-danh-sach-chu-de</from>
+        <to type="forward">/ViewCategoryServlet</to>
+    </rule>
     <!--    Admin-->
     
     

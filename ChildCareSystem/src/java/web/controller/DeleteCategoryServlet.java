@@ -23,7 +23,7 @@ import web.models.tblBlogCategory.BlogCategoryDAO;
  */
 public class DeleteCategoryServlet extends HttpServlet {
 
-    private final String VIEW_CATE = "ViewCategoryServlet";
+    private final String VIEW_CATE = "Xem-danh-sach-chu-de"; // ViewCategoryServlet
     private final String ERROR = "systemError.html";
 
     /**

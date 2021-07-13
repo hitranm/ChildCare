@@ -184,13 +184,13 @@
                                             Thêm mới
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                           
-                                            <a class="dropdown-item" href="createSpecialty.jsp">Thêm chuyên khoa</a>
+                                            <a class="dropdown-item" href="tao-chuyen-khoa-moi">Thêm chuyên khoa</a>
                                             <div class="dropdown-divider"></div>                                          
-                                            <a class="dropdown-item" href="createCategory.jsp">Thêm chủ đề bài viết</a>
+                                            <a class="dropdown-item" href="tao-chu-de-moi">Thêm chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>  
+                                            <a class="dropdown-item" href="tao-bai-viet">Tạo bài viết</a>  
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <a class="dropdown-item" href="tao-dich-vu">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="createStaff.jsp">Tạo tài khoản nhân viên</a>       
                                         </div>
@@ -200,9 +200,9 @@
                                             Quản lí
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="viewSpeciaty.jsp">Danh sách chuyên khoa</a>
+                                            <a class="dropdown-item" href="xem-danh-sach-Chuyen-khoa">Danh sách chuyên khoa</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewCategoryServlet">Danh sách chủ đề bài viết</a>
+                                            <a class="dropdown-item" href="Xem-danh-sach-chu-de">Danh sách chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>                                          
                                             <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
                                         </div>
