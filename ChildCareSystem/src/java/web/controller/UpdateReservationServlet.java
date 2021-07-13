@@ -93,8 +93,7 @@ public class UpdateReservationServlet extends HttpServlet {
                     }
                     listCartViewModel.remove(deleteViewModel);
                     listCartViewModel.add(cartViewModel);
-                    session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
-                    response.sendRedirect(url);
+                    session.setAttribute("CART_VIEW_MODEL", listCartViewModel);     
                 }
 
             } else {
@@ -106,7 +105,7 @@ public class UpdateReservationServlet extends HttpServlet {
         } catch (Exception ex) {
             log("Error at UpdateReservationServlet: " + ex.getMessage());
         } finally {
-
+            response.sendRedirect(url);
         }
     }
 
