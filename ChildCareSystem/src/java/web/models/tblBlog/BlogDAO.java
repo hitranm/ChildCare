@@ -55,6 +55,39 @@ public class BlogDAO implements Serializable {
         }
         return false;
     }
+
+    public boolean createBlogforManager(String thumbnail, String title, String authorID, String description, String categoryID) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelpers.makeConnection();
+            if (con != null) {
+                String sql = "Insert into "
+                        + "tblBlog (Thumbnail, Title, AuthorID, Description, CategoryID, StatusID, UpdatedDate) "
+                        + "Values(?,?,?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, thumbnail);
+                stm.setString(2, title);
+                stm.setString(3, authorID);
+                stm.setString(4, description);
+                stm.setString(5, categoryID);
+                stm.setString(6, "1");
+                stm.setString(7, LocalDateTime.now().toString());
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
     private List<BlogDTO> blogList;
 
     public List<BlogDTO> getBlogList() {
@@ -631,6 +664,7 @@ public class BlogDAO implements Serializable {
             }
         }
     }
+
     public void updateSlider(int blogId, String onSlider) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -662,7 +696,7 @@ public class BlogDAO implements Serializable {
     }
 
     public int countAllBlog() throws SQLException, NamingException {
-        int sum=0;
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -692,7 +726,7 @@ public class BlogDAO implements Serializable {
     }
 
     public int countBlogActive() throws SQLException, NamingException {
-        int sum=0;
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -724,7 +758,7 @@ public class BlogDAO implements Serializable {
     }
 
     public int countBlogPending() throws SQLException, NamingException {
-        int sum=0;
+        int sum = 0;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -754,7 +788,7 @@ public class BlogDAO implements Serializable {
         }
         return sum;
     }
-    
+
     public List<BlogDTO> getSliderList() throws NamingException, SQLException {
         List<BlogDTO> result = null;
         Connection conn = null;

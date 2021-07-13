@@ -86,15 +86,13 @@ public class CreateBlogServlet extends HttpServlet {
                 BlogDAO dao = new BlogDAO();
                 if (session != null) {
                     String identityID = (String) session.getAttribute("IDENTITY_ID");
-//                    String roleID = (String) session.getAttribute("ROLEID");
-//                    if (roleID.equals("2")) {
-//                        StaffDAO staffDAO = new StaffDAO();
-//                        authorID = staffDAO.queryStaff(identityID);
-//                    } else if (roleID.equals("3")) {
-//                        ManagerDAO managerDAO = new ManagerDAO();
-//                        authorID = managerDAO.queryManagerID(identityID);
-//                    }
-                    boolean result = dao.createBlog(imageURL, title, identityID, body, categoryID);
+                    String roleID = (String) session.getAttribute("ROLEID");
+                    boolean result;
+                    if ("3".equals(roleID)) {
+                        result = dao.createBlogforManager(imageURL, title, identityID, body, categoryID);
+                    } else {
+                        result = dao.createBlog(imageURL, title, identityID, body, categoryID);
+                    }
                     if (result) {
                         url = VIEWBLOG;
                     } else {

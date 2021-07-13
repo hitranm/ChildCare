@@ -25,7 +25,6 @@ import javax.servlet.http.Part;
 import web.models.tblService.CreateServiceError;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -37,7 +36,7 @@ import web.models.tblStaff.StaffDAO;
         maxRequestSize = 1024 * 1024 * 100
 )
 public class CreateServiceServlet extends HttpServlet {
-    
+
     private static final String VIEW_SERVICE = "ViewServiceByStaffServlet";
     private static final String CREATE_SERVICE_PAGE = "createService.jsp";
     private static final String ERROR_PAGE = "systemError.html";
@@ -73,7 +72,7 @@ public class CreateServiceServlet extends HttpServlet {
             foundError = true;
             createServiceErr.setPriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
         }
-        
+
         String thumbnail = uploadFile(request);
         try {
             //Validate field
@@ -81,7 +80,7 @@ public class CreateServiceServlet extends HttpServlet {
                 foundError = true;
                 createServiceErr.setTitleLengthError("Tiêu đề không được để trống và có nhiều nhất 100 kí tự.");
             }
-            
+
             if (description.trim().length() == 0 || description.trim().length() > 300) {
                 foundError = true;
                 createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
@@ -98,12 +97,21 @@ public class CreateServiceServlet extends HttpServlet {
             } else {
                 //Get identity from session
                 String identityId = (String) session.getAttribute("IDENTITY_ID");
-                ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
-                        thumbnail, description, price, "0",
-                        identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
-                // Process to add new service
+                String roleID = (String) session.getAttribute("ROLEID");
                 ServiceDAO serviceDAO = new ServiceDAO();
-                boolean result = serviceDAO.AddNewService(serviceDTO);
+                boolean result;
+                if (roleID.equals("3")) {
+                    ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
+                            thumbnail, description, price, "1",
+                            identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
+                    result = serviceDAO.createServicebyManager(serviceDTO);
+                } else {
+                    ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
+                            thumbnail, description, price, "0",
+                            identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
+                    result = serviceDAO.AddNewService(serviceDTO);
+                }
+                // Process to add new service
                 if (result) {
                     url = VIEW_SERVICE;
                 } else {
@@ -117,7 +125,7 @@ public class CreateServiceServlet extends HttpServlet {
             out.close();
         }
     }
-    
+
     private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
         String fileName;
         try {
@@ -146,16 +154,16 @@ public class CreateServiceServlet extends HttpServlet {
                     outputStream.close();
                 }
             }
-            
+
         } catch (Exception e) {
             fileName = "";
         }
         return fileName;
     }
-    
+
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
-        
+
         for (String content : part.getHeader("content-disposition").split(";")) {
             if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
