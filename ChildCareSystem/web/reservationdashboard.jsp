@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>Child care System Dashboard </title>
+        <title>Thống kê đơn đặt khám - Reservation Dashboard</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link rel="stylesheet" href="css\dashboard.css">
@@ -57,50 +57,43 @@
                 <ul>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="DispatchServlet?btAction=ViewMainDashboard"   class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <a href="thong-ke-tong-quat" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                                 <span >Tổng quát</span></a>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
+                            <a href="thong-ke-tai-khoan"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                                 <span>Tài khoản </span></a>
                         </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="ViewAllServiceListServlet"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                        <a href="thong-ke-Dich-vu"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                             <span>Dịch vụ </span></a>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Bài viết</span></a>
-                            </c:if>
-                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                            <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Bài viết</span></a>
-                            </c:if>
+                        <a href="thong-ke-bai-viet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <span>Bài viết</span></a>
                     </li>
-
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                            <a href="DispatchServlet?btAction=ViewReservationForManager" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="thong-ke-Don-dat-kham" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="DispatchServlet?btAction=ViewReservationForStaff" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="don-kham-benh-cua-nhan-vien" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
+                            <a href="thong-ke-phan-hoi" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                                 <span>Phản hồi</span></a>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
+                            <a href="cau-hinh-he-thong" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                                 <span>Cấu hình hệ thống</span></a>
                         </li>
                     </c:if>

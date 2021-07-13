@@ -43,7 +43,7 @@
             <div class="header_wrapper px-5 py-2">
                 <div class="header_top">
                     <nav class="navbar navbar-light bg-light">
-                        <a class="navbar-brand top_title" href="home.jsp">
+                        <a class="navbar-brand top_title" href="trang-chu">
                             <img
                                 src="./images/logo.png"
                                 width="60"
@@ -133,7 +133,7 @@
                                         <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="DispatchServlet?btAction=ViewReservationForStaff">Xem lịch khám bệnh</a>
+                                        <a class="nav-link" href="don-kham-benh-cua-nhan-vien">Xem lịch khám bệnh</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -204,7 +204,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="Xem-danh-sach-chu-de">Danh sách chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>                                          
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewMainDashboard">Thống kê</a>
+                                            <a class="dropdown-item" href="thong-ke-tong-quat">Thống kê</a>
                                         </div>
                                     </li>   
                                 </ul>
@@ -238,7 +238,7 @@
                                         <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
                                     </li>                                    
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="DispatchServlet?btAction=ViewMainDashboard">Quản lí</a>
+                                        <a class="nav-link" href="thong-ke-tong-quat">Quản lí</a>
                                     </li>                                      
                                 </ul>
                                 <ul class="navbar-nav pr-5">
