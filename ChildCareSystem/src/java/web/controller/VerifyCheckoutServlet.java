@@ -134,6 +134,7 @@ public class VerifyCheckoutServlet extends HttpServlet {
             }
         } catch (IOException | SQLException | NamingException ex) {
             log("Error at VerifyCheckoutServlet: " + ex.getMessage());
+            ex.printStackTrace();
         } finally {
 
         }
