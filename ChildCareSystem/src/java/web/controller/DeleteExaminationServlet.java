@@ -21,7 +21,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDAO;
  */
 public class DeleteExaminationServlet extends HttpServlet {
 
-    private static final String VIEW_RESERVATION = "DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
+    private static final String VIEW_RESERVATION = "xem-don-chi-tiet?resid=";//"DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
     private static final String ERROR = "systemError.html";
 
     /**

@@ -98,20 +98,20 @@
 
 
     <!--    Manager-->
-        <rule match-type="wildcard">
+    <rule match-type="wildcard">
         <from>/tao-chuyen-khoa-moi</from>
         <to type="forward">/createSpecialty.jsp</to>
     </rule>
-<rule match-type="wildcard">
+    <rule match-type="wildcard">
         <from>/tao-chu-de-moi</from>
         <to type="forward">/createCategory.jsp</to>
     </rule>
-<rule match-type="wildcard">
+    <rule match-type="wildcard">
         <from>/tao-bai-viet-moi</from>
         <to type="forward">/createBlog.jsp</to>
     </rule>
     <!-- can hoi -->
-<!--    <rule match-type="wildcard">
+    <!--    <rule match-type="wildcard">
         <from>/dang-tao-bai-viet</from>
         <to type="forward">/DispatchServlet?btAction=CreateBlog</to>
     </rule>-->
@@ -141,8 +141,35 @@
         <from>/xem-dich-vu-cua-nhan-vien</from>
         <to type="forward">/ViewServiceByStaffServlet</to>
     </rule>
-    
-    
+    <rule>
+        <from>/thong-tin-bai-viet\?id=([0-9]+)</from>
+        <to type="forward">/ViewBlogDetailServlet?id=$1</to>
+    </rule>
+    <rule>
+        <from>/cap-nhat-bai-viet\?id=([0-9]+)</from>
+        <to type="forward">/LoadBlogServlet?id=$1</to>
+    </rule>
+    <rule>
+        <from>/xem-thong-tin-dich-vu\?id=([0-9]+)</from>
+        <to type="forward">/ViewServiceDetailServlet?id=$1</to>
+    </rule>
+    <rule>
+        <from>/cap-nhat-dich-vu\?id=([0-9]+)</from>
+        <to type="forward">/LoadServiceServlet?id=$1</to>
+    </rule>
+    <rule>
+        <from>/xem-chi-tiet-don\?resid=([0-9]+)</from>
+        <to type="forward">/ViewReservationDetailServlet?resid=$1</to>
+    </rule>
+    <rule>
+        <from>/xem-don-chi-tiet\?resid=([0-9]+)</from>
+        <to type="forward">/ViewReservationDetailStaffServlet?resid=$1</to>
+    </rule>
+       <rule match-type="wildcard">
+        <from>/loi-bai-viet</from>
+        <to type="forward">/CreateBlogServlet</to>
+    </rule>
+
     
     <!--    Admin-->
     <rule>

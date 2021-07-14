@@ -222,7 +222,7 @@
                                                                             </c:when>
                                                                         </c:choose>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                            <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
                                                                                 <c:param name="id" value="${dto.serviceId}"/>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Xem chi tiết</a>
@@ -268,7 +268,7 @@
                                                                             <td>${dto.price}00</td>
                                                                             <td class="alert alert-success">Đang hoạt động</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a href="${viewdetails}">Xem chi tiết</a>
@@ -317,10 +317,10 @@
                                                                             <td>${dto.price}00</td>
                                                                             <td class="alert alert-warning">Đang chờ</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
-                                                                                <a href="${viewdetails}">Chi tiết</a>
+                                                                                <a href="${viewdetails}">Xem chi tiết</a>
                                                                             </td>
                                                                             <td>
                                                                                 <c:url var="delete" value="DeleteServiceServlet">
@@ -365,7 +365,7 @@
                                                                             <td>${dto.price}00</td>
                                                                             <td class="alert alert-danger">Tạm ngưng</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a href="${viewdetails}">Xem chi tiết</a>

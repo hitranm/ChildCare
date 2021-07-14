@@ -20,7 +20,7 @@ import web.models.tblService.ServiceDAO;
  * @author DELL
  */
 public class UpdateServiceStatusServlet extends HttpServlet {
-    private final String VIEW_SERVICE = "ViewServiceDetailServlet";
+    private final String VIEW_SERVICE = "xem-thong-tin-dich-vu";//"ViewServiceDetailServlet";
     private final String ERROR = "systemError.html";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

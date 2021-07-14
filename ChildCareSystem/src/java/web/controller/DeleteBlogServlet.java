@@ -24,7 +24,7 @@ import web.models.tblStaff.StaffDAO;
  */
 public class DeleteBlogServlet extends HttpServlet {
 
-    private final String VIEWBLOG = "ViewBlogServlet?index=1";
+    private final String VIEWBLOG = "bai-viet?trang=1";//"ViewBlogServlet?index=1";
     private final String ERROR = "systemError.html";
     private final String DENY = "accessDenied.jsp";
     private final String LOGIN = "login.jsp";

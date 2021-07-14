@@ -210,7 +210,7 @@
                                                                         </td>
                                                                         <td class="alert alert-success">Chấp thuận</td>
                                                                         <td>
-                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -229,7 +229,7 @@
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
-                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -248,7 +248,7 @@
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
-                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -314,7 +314,7 @@
                                                                         </c:if>
 
                                                                         <td>
-                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -359,7 +359,7 @@
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
-                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -405,7 +405,7 @@
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
-                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>

@@ -21,8 +21,8 @@ import web.models.tblFeedback.FeedbackDAO;
  */
 public class DeleteFeedbackServlet extends HttpServlet {
 
-    private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "feedback.jsp";
+    private static final String SUCCESS = "ViewAllFeedbackServlet";
+    private static final String ERROR = "systemError.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

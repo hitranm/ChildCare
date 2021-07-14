@@ -43,7 +43,7 @@
                                     </c:if>
                                     <h3 class="text-center">Đăng nhập</h3>
                                 </div>
-                                <form action="LoginServlet" method="post" id="registerForm" onsubmit="submitForm(); return false;">
+                                <form action="dang-nhap-loi" method="post" id="registerForm" onsubmit="submitForm(); return false;">
                                     <div class="form-group col-12 first">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" value="" class="form-control" id="email">

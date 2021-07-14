@@ -68,7 +68,7 @@
                         <c:set var="identity" value="${sessionScope.IDENTITY_ID}"/>
                         <c:set var="authorID" value="${blog.authorID}"/>
                         <c:if test="${authorID eq identity}">
-                            <a class="btn btn-primary col-4" href="LoadBlogServlet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
+                            <a class="btn btn-primary col-4" href="cap-nhat-bai-viet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
                             <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a>
                         </c:if>
                         <c:if test="${role eq 3}">

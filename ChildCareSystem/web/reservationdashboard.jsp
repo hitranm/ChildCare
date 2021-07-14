@@ -209,14 +209,14 @@
                                                                         <td>         
                                                                             <c:choose>
                                                                                 <c:when test="${sessionScope.ROLE eq 'staff'}">
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewReservationDetailsStaff"></c:param>
+                                                                                    <c:url var="viewdetails" value="xem-don-chi-tiet">
+                                                                                       
                                                                                         <c:param name="resid" value="${dto.reservationId}"></c:param>
                                                                                     </c:url>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                                                    <c:url var="viewdetails" value="xem-chi-tiet-don">
+                                                                                        
                                                                                         <c:param name="resid" value="${dto.reservationId}"></c:param>
                                                                                     </c:url>
                                                                                 </c:otherwise>
@@ -262,14 +262,14 @@
                                                                         <td>
                                                                             <c:choose>
                                                                                 <c:when test="${sessionScope.ROLE eq 'staff'}">
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewReservationDetailsStaff"></c:param>
+                                                                                    <c:url var="viewdetails" value="xem-don-chi-tiet">
+                                                                                        
                                                                                         <c:param name="resid" value="${dto.reservationId}"></c:param>
                                                                                     </c:url>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                                                    <c:url var="viewdetails" value="xem-chi-tiet-don">
+                                                                                       
                                                                                         <c:param name="resid" value="${dto.reservationId}"></c:param>
                                                                                     </c:url>
                                                                                 </c:otherwise>
@@ -312,14 +312,14 @@
                                                                         <td>
                                                                             <c:choose>
                                                                                 <c:when test="${sessionScope.ROLE eq 'staff'}">
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewReservationDetailsStaff"></c:param>
+                                                                                    <c:url var="viewdetails" value="xem-don-chi-tiet">
+                                                                                        
                                                                                         <c:param name="resid" value="${dto.reservationId}"></c:param>
                                                                                     </c:url>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <c:url var="viewdetails" value="DispatchServlet">
-                                                                                        <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                                                    <c:url var="viewdetails" value="xem-chi-tiet-don">
+                                                                                        
                                                                                         <c:param name="resid" value="${dto.reservationId}"></c:param>
                                                                                     </c:url>
                                                                                 </c:otherwise>
