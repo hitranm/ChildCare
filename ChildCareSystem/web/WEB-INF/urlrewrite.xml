@@ -181,6 +181,9 @@
         <from>/cap-nhat-cau-hinh-he-thong</from>
         <to type="forward">/UpdateSystemSettingServlet</to>
     </rule>
-    
+    <rule>
+        <from>/thong-tin-tai-khoan\?id=([0-9]+)</from>
+        <to type="forward">/ViewAccountDetailsServlet?id=$1</to>
+    </rule>
     
 </urlrewrite>

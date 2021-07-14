@@ -234,8 +234,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-success">Customer</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
@@ -260,8 +259,7 @@
                                                                     <td>${dto.phoneNumber}</td>
                                                                     <td class="alert alert-warning">Staff</td>
                                                                     <td>
-                                                                        <c:url var="viewdetails" value="DispatchServlet">
-                                                                            <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                        <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                             <c:param name="id" value="${dto.identityID}"></c:param>
 
 
@@ -292,8 +290,7 @@
                                                                             <td>${dto.phoneNumber}</td>
                                                                             <td class="alert alert-danger">Manager</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="DispatchServlet">
-                                                                                    <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                     <c:param name="id" value="${dto.identityID}"></c:param>
 
 
@@ -348,8 +345,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-success">Khách hàng</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
@@ -396,8 +392,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-warning">Nhân viên</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
@@ -445,8 +440,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-danger">Quản lí</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
 
 
@@ -542,8 +536,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-success">Customer</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
@@ -568,8 +561,7 @@
                                                                     <td>${dto.phoneNumber}</td>
                                                                     <td class="alert alert-warning">Staff</td>
                                                                     <td>
-                                                                        <c:url var="viewdetails" value="DispatchServlet">
-                                                                            <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                        <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                             <c:param name="id" value="${dto.identityID}"></c:param>
 
 
@@ -600,8 +592,7 @@
                                                                             <td>${dto.phoneNumber}</td>
                                                                             <td class="alert alert-danger">Manager</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="DispatchServlet">
-                                                                                    <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                                <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                     <c:param name="id" value="${dto.identityID}"></c:param>
 
 
@@ -656,8 +647,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-success">Khách hàng</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
@@ -704,8 +694,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-warning">Nhân viên</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Chi tiết</a>
@@ -753,8 +742,7 @@
                                                                         <td>${dto.phoneNumber}</td>
                                                                         <td class="alert alert-danger">Quản lí</td>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                                                <c:param name="btAction" value="ViewDetails"></c:param>
+                                                                            <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
 
 

@@ -22,7 +22,7 @@ import web.models.tblIdentity.IdentityDAO;
 public class DeleteAccountServlet extends HttpServlet {
 
     private static final String ERROR = "systemError.html";
-    private static final String SUCCESS = "ViewAccountsServlet";
+    private static final String SUCCESS = "thong-ke-tai-khoan"; //"ViewAccountsServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
