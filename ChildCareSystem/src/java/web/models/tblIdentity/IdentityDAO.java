@@ -81,9 +81,9 @@ public class IdentityDAO {
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "SELECT IdentityID, RoleID "
+                String sql = "SELECT IdentityID, RoleID, StatusID "
                         + " FROM tblIdentity "
-                        + " WHERE Email=? AND Password=? AND StatusID = 1";
+                        + " WHERE Email=? AND Password=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, email);
                 stm.setString(2, password);
@@ -91,7 +91,8 @@ public class IdentityDAO {
                 if (rs.next()) {
                     String identityID = rs.getString("IdentityID");
                     String roleID = rs.getString("RoleID");
-                    identity = new IdentityDTO(identityID, roleID);
+                    int statusID = rs.getInt("StatusID");
+                    identity = new IdentityDTO(identityID, roleID, statusID);
                     return identity;
                 }
             }

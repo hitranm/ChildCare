@@ -106,8 +106,8 @@
         <from>/tao-chu-de-moi</from>
         <to type="forward">/createCategory.jsp</to>
     </rule>
-    <rule match-type="wildcard">
-        <from>/tao-bai-viet</from>
+<rule match-type="wildcard">
+        <from>/tao-bai-viet-moi</from>
         <to type="forward">/createBlog.jsp</to>
     </rule>
     <!-- can hoi -->
@@ -133,6 +133,17 @@
         <from>/Xem-danh-sach-chu-de</from>
         <to type="forward">/ViewCategoryServlet</to>
     </rule>
+    <rule>
+        <from>/xem-bai-viet-cua-toi</from>
+        <to type="forward">/ViewBlogByAuthorServlet</to>
+    </rule>
+    <rule>
+        <from>/xem-dich-vu-cua-nhan-vien</from>
+        <to type="forward">/ViewServiceByStaffServlet</to>
+    </rule>
+    
+    
+    
     <!--    Admin-->
     <rule>
         <from>/thong-ke-tong-quat</from>

@@ -127,10 +127,10 @@
                                             ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                        <a class="nav-link" href="bai-viet?trang=1">Bài viết</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                        <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="don-kham-benh-cua-nhan-vien">Xem lịch khám bệnh</a>
@@ -140,13 +140,13 @@
                                             Quản lí
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>   
+                                            <a class="dropdown-item" href="tao-bai-viet-moi">Tạo bài viết</a>   
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewBlogByAuthorServlet">Xem bài viết</a>  
+                                            <a class="dropdown-item" href="xem-bai-viet-cua-toi">Xem bài viết</a>  
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <a class="dropdown-item" href="tao-dich-vu">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewServiceByStaffServlet">Xem dịch vụ</a>
+                                            <a class="dropdown-item" href="xem-dich-vu-cua-nhan-vien">Xem dịch vụ</a>
                                         </div>
                                     </li>                                 
                                 </ul>
@@ -156,11 +156,11 @@
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
                                             <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>                                              
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                            <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -174,10 +174,10 @@
                                             ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                        <a class="nav-link" href="bai-viet?trang=1">Bài viết</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                        <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -188,7 +188,7 @@
                                             <div class="dropdown-divider"></div>                                          
                                             <a class="dropdown-item" href="tao-chu-de-moi">Thêm chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="tao-bai-viet">Tạo bài viết</a>  
+                                            <a class="dropdown-item" href="tao-bai-viet-moi">Tạo bài viết</a>  
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="tao-dich-vu">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
@@ -214,11 +214,11 @@
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
                                             <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>                                              
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="LogOutServlet">Đăng xuất</a>
+                                            <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -232,10 +232,10 @@
                                             ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                        <a class="nav-link" href="bai-viet?trang=1">Bài viết</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                        <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>                                    
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="thong-ke-tong-quat">Quản lí</a>
@@ -247,9 +247,9 @@
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="DispatchServlet?btAction=ViewUserProfile">Xem thông tin cá nhân</a>
+                                            <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
                                             <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="newpassword.jsp">Đổi mật khẩu</a>                                              
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>                                              
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>

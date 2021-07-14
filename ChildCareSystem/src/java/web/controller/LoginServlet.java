@@ -67,12 +67,16 @@ public class LoginServlet extends HttpServlet {
 //
 //            ServiceDAO serviceDAO = new ServiceDAO();
 //            List<ServiceDTO> listService = serviceDAO.getTop3ServiceList();
-
             HttpSession session = request.getSession();
 //            session.setAttribute("BLOG_LIST_TOP6", listBlog);
 //            session.setAttribute("SERVICE_LIST_TOP3", listService);
 
             if (identity != null) {
+                if (identity.getStatusID() == 0) {
+                    String msg = "Tài khoản của bạn đã bị vô hiệu hóa! Vui lòng liên hệ tới email @ để biết thêm chi tiết!";
+                    request.setAttribute("Message", msg);
+                }
+                if(identity.getStatusID() == 1){
                 if (identity.getRoleID().equals("3")) {
                     ManagerDTO dto = new ManagerDTO();
                     dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
@@ -107,7 +111,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("ROLEID", identity.getRoleID());
                     url = SUCCESS;
                 }
-
+                }
             } else {
                 String msg = "Email hoặc mật khẩu không chính xác!";
                 request.setAttribute("Message", msg);

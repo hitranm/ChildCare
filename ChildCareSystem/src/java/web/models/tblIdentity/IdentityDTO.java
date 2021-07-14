@@ -36,6 +36,13 @@ public class IdentityDTO implements Serializable{
         this.password = password;
         this.roleID = roleID;
     }
+
+    public IdentityDTO(String identityID, String roleID, int statusID) {
+        this.identityID = identityID;
+        this.roleID = roleID;
+        this.statusID = statusID;
+    }
+    
     
     
 

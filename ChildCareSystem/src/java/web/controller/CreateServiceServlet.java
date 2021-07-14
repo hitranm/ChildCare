@@ -38,7 +38,7 @@ import web.models.tblStaff.StaffDAO;
 )
 public class CreateServiceServlet extends HttpServlet {
     
-    private static final String VIEW_SERVICE = "ViewServiceByStaffServlet";
+    private static final String VIEW_SERVICE = "xem-dich-vu-cua-nhan-vien";//"ViewServiceByStaffServlet";
     private static final String CREATE_SERVICE_PAGE = "createService.jsp";
     private static final String ERROR_PAGE = "systemError.html";
     private static final String UPLOAD_DIR = "images/service";
