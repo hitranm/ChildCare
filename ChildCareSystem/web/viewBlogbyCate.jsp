@@ -42,7 +42,7 @@
                             <c:forEach items="${cate.viewBlogCategory()}" var="category">
                                 <c:if test="${category.categoryID eq param.txtCateID}">
                                     Chủ đề: ${category.categoryName}
-                                    <a href="ViewBlogServlet?index=1" class="fas fa-times-circle"></a>
+                                    <a href="bai-viet?trang=1" class="fas fa-times-circle"></a>
                                 </c:if>
                             </c:forEach>
                         </div>
@@ -57,13 +57,13 @@
                                 <c:forEach var="dto" items="${list}">
                                     <div class="blog-preview d-flex">
                                         <div class="blog-thumbnail">
-                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">
+                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">
                                                 <img src="./images/blog/${dto.thumbnail}" />
                                             </a>
                                         </div>
                                         <div>
                                             <div class="preview-title ">
-                                                <a href="ViewBlogDetailServlet?id=${dto.blogID}">
+                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">
                                                     <h4>${dto.title}</h4>
                                                 </a>
                                             </div>
@@ -91,7 +91,7 @@
                                     </div>
                                 </c:forEach>
                                 <nav aria-label="Paging">
-                                    <c:url var="viewbycate" value = "ViewBlogByCateServlet">
+                                    <c:url var="viewbycate" value = "bai-viet-chu-de">
                                         <c:param name="txtCateID" value="${param.txtCateID}"/>
                                     </c:url>    
                                     <c:set var="page" value="${requestScope.PAGE}"/>

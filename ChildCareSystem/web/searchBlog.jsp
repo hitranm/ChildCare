@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Search Blog</title>
+        <title>Tìm kiếm bài viết</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="./css/blog/viewblog.css" />
@@ -29,7 +29,8 @@
             <h1 class="text-center mb-2">BÀI VIẾT</h1>
             <div class="body-top d-flex">
                 <div class="search col-9">
-                    <form action="SearchBlogServlet?idx=1" method="POST">
+                    <form action="tim-kiem-bai-viet" method="POST">
+                        <input type="hidden" name="idx" value="1" />
                         <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchBlog" value="${param.txtSearchBlog}" />
                         <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
                             <i class="fas fa-search"></i>
@@ -48,13 +49,13 @@
                             <c:forEach var="dto" items="${searchResult}">
                                 <div class="blog-preview d-flex">
                                     <div class="blog-thumbnail">
-                                        <a href="ViewBlogDetailServlet?id=${dto.blogID}">
+                                        <a href="chi-tiet-bai-viet?id=${dto.blogID}">
                                             <img src="./images/blog/${dto.thumbnail}" />
                                         </a>
                                     </div>
                                     <div>
                                         <div class="preview-title">
-                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">
+                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">
                                                 <h4>${dto.title}</h4>
                                             </a>
                                         </div>
@@ -85,12 +86,15 @@
                                 </div>
                             </c:forEach>
                             <nav aria-label="Paging">
+                                <c:url var="searchBlog" value="tim-kiem-bai-viet">
+                                    <c:param name="txtSearchBlog" value="${param.txtSearchBlog}"/>
+                                </c:url>
                                 <c:set var="page" value="${requestScope.PAGE}"/>
                                 <ul class="pagination justify-content-center">
                                     <c:set var="index" value="${param.idx}"/>
                                     <c:if test="${index-1 != 0}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ViewBlogServlet?index=${index-1}" aria-label="Previous">
+                                            <a class="page-link" href="${searchBlog}&idx=${index-1}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
@@ -108,12 +112,12 @@
                                     <c:forEach begin="1" end="${PAGE}" var="i">                                            
                                         <c:if test="${i eq index}">
                                             <li class="page-item active">
-                                                <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                                <a class="page-link" href="${searchBlog}&idx=${i}">${i}</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${i != index}">
                                             <li class="page-item">
-                                                <a class="page-link" href="ViewBlogServlet?index=${i}">${i}</a>
+                                                <a class="page-link" href="${searchBlog}&idx=${i}">${i}</a>
                                             </li>
                                         </c:if>
                                     </c:forEach>
@@ -127,7 +131,7 @@
                                     </c:if>
                                     <c:if test="${index != page}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ViewBlogServlet?index=${index+1}" aria-label="Next">
+                                            <a class="page-link" href="${searchBlog}&idx=${index+1}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </a>

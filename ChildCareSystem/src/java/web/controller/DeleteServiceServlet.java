@@ -56,7 +56,7 @@ public class DeleteServiceServlet extends HttpServlet {
             if (role == null) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if (identityID.equals(authorID) || "3".equals(role)) {
+            } else if (identityID.equals(authorID) || "3".equals(role) || "4".equals(role)) {
                 boolean result = dao.deleteService(serviceID);
                 if (result) {
                     url = VIEW_SERVICE;

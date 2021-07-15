@@ -321,7 +321,7 @@ public class BlogDAO implements Serializable {
                 //2. create sql string
                 String sql = "Select count(*) "
                         + "From tblBlog "
-                        + "Where Title Like ?";
+                        + "Where Title Like ? AND StatusID=1";
                 //3. create statement and assign value to parameters
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + searchValue + "%");

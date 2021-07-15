@@ -127,26 +127,26 @@
                                             ></a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewBlogServlet?index=1">Bài viết</a>
+                                        <a class="nav-link" href="bai-viet?trang=1">Bài viết</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="ViewServiceListServlet?index=1">Dịch vụ</a>
+                                        <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="DispatchServlet?btAction=ViewReservationForStaff">Xem lịch khám bệnh</a>
+                                        <a class="nav-link" href="lich-kham-benh">Xem lịch khám bệnh</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Quản lí
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="createBlog.jsp">Tạo bài viết</a>   
+                                            <a class="dropdown-item" href="tao-bai-viet">Tạo bài viết</a>   
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewBlogByAuthorServlet">Xem bài viết</a>  
+                                            <a class="dropdown-item" href="bai-viet-cua-ban">Xem bài viết</a>  
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createService.jsp">Tạo dịch vụ</a>
+                                            <a class="dropdown-item" href="tao-dich-vu">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="ViewServiceByStaffServlet">Xem dịch vụ</a>
+                                            <a class="dropdown-item" href="dich-vu-cua-ban">Xem dịch vụ</a>
                                         </div>
                                     </li>                                 
                                 </ul>

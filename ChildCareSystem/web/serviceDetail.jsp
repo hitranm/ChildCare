@@ -61,12 +61,12 @@
                             <a class="btn btn-primary col-4" href="${reservationLink}">Đặt dịch vụ</a><br>
                         </c:if>
                         <c:if test="${author eq identity}">
-                            <a class="btn btn-primary mt-2 col-4" href="LoadServiceServlet?id=${service.serviceId}">Cập nhật</a>
-                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                            <a class="btn btn-primary mt-2 col-4" href="cap-nhat-dich-vu?id=${service.serviceId}">Cập nhật</a>
+                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="xoa-dich-vu?id=${service.serviceId}" name="btAction">Xóa</a><br>
                         </c:if>
                         <c:if test="${role eq 3}">
                             <c:if test="${author != identity}">
-                                <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                                <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="xoa-dich-vu?id=${service.serviceId}" name="btAction">Xóa</a><br>
                             </c:if>
                             <div class="status mt-4">
                                 <form action="UpdateServiceStatusServlet" method="POST">
@@ -85,6 +85,9 @@
                                     </c:choose>
                                 </form>
                             </div>
+                        </c:if>
+                        <c:if test="${role eq 4}">
+                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="xoa-dich-vu?id=${service.serviceId}" name="btAction">Xóa</a><br>
                         </c:if>
                     </div>
 

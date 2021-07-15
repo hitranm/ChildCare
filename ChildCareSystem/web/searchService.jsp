@@ -27,7 +27,8 @@
             <div class="container">
                 <h1 class="text-center mb-2">DỊCH VỤ</h1>
                 <div class="search p-2">
-                    <form action="SearchServiceServlet?index=1" method="POST">
+                    <form action="tim-kiem-dich-vu" method="POST">
+                        <input type="hidden" name="index" value="1" />
                         <input type="text" class="form-group" placeholder="Tìm kiếm" name="txtSearchService" value="${param.txtSearchService}" />
                         <button id="search-button" type="text" value="Search" class="btn btn-primary" name="btAction">
                             <i class="fas fa-search"></i>
@@ -43,13 +44,13 @@
                             <c:forEach var="dto" items="${list}">
                                 <div class="service-preview d-flex">
                                     <div class="service-thumbnail">
-                                        <a href="ViewServiceDetailServlet?id=${dto.serviceId}">
+                                        <a href="chi-tiet-dich-vu?id=${dto.serviceId}">
                                             <img src="./images/service/${dto.thumbnail}"/>
                                         </a>
                                     </div>
                                     <div>
                                         <div class="service-name">
-                                            <a href="ViewServiceDetailServlet?id=${dto.serviceId}">
+                                            <a href="chi-tiet-dich-vu?id=${dto.serviceId}">
                                                 <h4>${dto.serviceName}</h4>
                                             </a>
                                         </div>
@@ -60,12 +61,15 @@
                                 </div>
                             </c:forEach>
                             <nav aria-label="Paging">
+                                <c:url var="searchService" value="tim-kiem-dich-vu">
+                                    <c:param name="txtSearchService" value="${param.txtSearchService}"/>
+                                </c:url>
                                 <c:set var="page" value="${requestScope.PAGE}"/>
                                 <ul class="pagination justify-content-center">
                                     <c:set var="index" value="${param.index}"/>
                                     <c:if test="${index-1 != 0}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ViewServiceListServlet?index=${index-1}" aria-label="Previous">
+                                            <a class="page-link" href="${searchService}&index=${index-1}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
@@ -83,12 +87,12 @@
                                     <c:forEach begin="1" end="${PAGE}" var="i">                                            
                                         <c:if test="${i eq index}">
                                             <li class="page-item active">
-                                                <a class="page-link" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                                <a class="page-link" href="${searchService}&index=${i}">${i}</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${i != index}">
                                             <li class="page-item">
-                                                <a class="page-link" href="ViewServiceListServlet?index=${i}">${i}</a>
+                                                <a class="page-link" href="${searchService}&index=${i}">${i}</a>
                                             </li>
                                         </c:if>
                                     </c:forEach>
@@ -102,7 +106,7 @@
                                     </c:if>
                                     <c:if test="${index != page}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ViewServiceListServlet?index=${index+1}" aria-label="Next">
+                                            <a class="page-link" href="${searchService}&index=${index+1}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </a>

@@ -27,7 +27,7 @@ import web.models.tblStaff.StaffDAO;
  * @author DELL
  */
 public class ViewServiceDetailServlet extends HttpServlet {
-
+    
     private final String SERVICE_DETAIL_PAGE = "serviceDetail.jsp";
     private final String ERROR_PAGE = "systemError.html";
     private final String DENY = "accessDenied.jsp";
@@ -59,7 +59,7 @@ public class ViewServiceDetailServlet extends HttpServlet {
             if (role == null && !statusID.equals("1")) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if ("1".equals(statusID) || "3".equals(role) || identityID.equals(authorID)) {
+            } else if ("1".equals(statusID) || "3".equals(role) || "4".equals(role) || identityID.equals(authorID)) {
                 FeedbackDAO feedbackDAO = new FeedbackDAO();
                 List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackByServiceId(Integer.parseInt(serviceID), 3);
                 if (!feedbackList.isEmpty()) {
