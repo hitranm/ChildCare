@@ -35,8 +35,8 @@ import web.models.tblBlog.BlogError;
 )
 public class UpdateBlogServlet extends HttpServlet {
 
-    private final String EDITBLOG_PAGE = "cap-nhat-bai-viet";//"LoadBlogServlet";
-    private final String VIEWBLOG = "thong-tin-bai-viet";//"ViewBlogDetailServlet";
+    private final String EDITBLOG_PAGE = "cap-nhat-bai-viet"; //LoadBlogServlet
+    private final String VIEWBLOG = "chi-tiet-bai-viet"; //ViewBlogDetailServlet
     private final String ERROR_PAGE = "systemError.html";
     private static final String UPLOAD_DIR = "images/blog";
 

@@ -66,7 +66,7 @@
                                 <button class="btn btn-outline-primary" type="submit" value="UpdateSpecialty" name="btAction">Cập nhật</button>
                             </td>
                             <td>
-                                <a class="btn btn-outline-danger" href="DeleteSpecialtyServlet?id=${dto.specialtyId}">Xóa</a>
+                                <a class="btn btn-outline-danger" onclick="return confirmation()" href="DeleteSpecialtyServlet?id=${dto.specialtyId}">Xóa</a>
                             </td>
                         </tr>
                     </form>
@@ -75,5 +75,11 @@
             </table>
         </div>
         <jsp:include page="footer.jsp"/>
+        <script>
+            function confirmation() {
+                var r = confirm("Bạn có chắc muốn xóa chuyên khoa này?");
+                return r;
+            }
+        </script>
     </body>
 </html>

@@ -62,11 +62,11 @@
                         </c:if>
                         <c:if test="${author eq identity}">
                             <a class="btn btn-primary mt-2 col-4" href="cap-nhat-dich-vu?id=${service.serviceId}">Cập nhật</a>
-                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="xoa-dich-vu?id=${service.serviceId}" name="btAction">Xóa</a><br>
                         </c:if>
                         <c:if test="${role eq 3}">
                             <c:if test="${author != identity}">
-                                <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="DeleteServiceServlet?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                                <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="xoa-dich-vu?id=${service.serviceId}" name="btAction">Xóa</a><br>
                             </c:if>
                             <div class="status mt-4">
                                 <form action="UpdateServiceStatusServlet" method="POST">
@@ -86,6 +86,9 @@
                                 </form>
                             </div>
                         </c:if>
+                        <c:if test="${role eq 4}">
+                            <a class="btn btn-danger mt-2 col-4" onclick="return deleteConfirm()" href="xoa-dich-vu?id=${service.serviceId}" name="btAction">Xóa</a><br>
+                        </c:if>
                     </div>
 
 
@@ -104,11 +107,11 @@
                             <c:forEach items="${requestScope.FEEDBACK_LIST}" var="feedbackDTO">
                                 <div class="card p-3 mt-2 bg-light">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="user d-flex flex-row align-items-center"> 
+                                        <div class="user d-flex flex-row align-items-center">
                                             <span>
                                                 <small class="font-weight-bold">${feedbackDTO.comment}</small>
-                                            </span> 
-                                        </div> 
+                                            </span>
+                                        </div>
                                         <div>
                                             ${feedbackDTO.rate}
                                             <svg
@@ -117,12 +120,12 @@
                                                 viewBox="0 0 16 16"
                                                 class="bi bi-star-fill"
                                                 fill="currentColor"
-                                                xmlns="http://www.w3.org/2000/svg"                      
+                                                xmlns="http://www.w3.org/2000/svg"
                                                 >
                                             <path
                                                 d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
                                                 />
-                                            </svg>                                         
+                                            </svg>
                                         </div>
 
                                     </div>

@@ -22,12 +22,15 @@
     <rule match-type="wildcard">
         <from>/dang-ky</from>
         <to type="forward">/register.jsp</to>
-    </rule>  
+    </rule>
     <rule match-type="wildcard">
         <from>/loi-he-thong</from>
         <to type="forward">/systemError.html</to>
-    </rule>  
-    
+    </rule>
+    <rule>
+        <from>/dang-ky</from>
+        <to type="forward">/register.jsp</to>
+    </rule>
     <rule match-type="wildcard">
         <from>/dang-xuat</from>
         <to type="forward">/LogOutServlet</to>
@@ -43,14 +46,14 @@
     <rule>
         <from>/bai-viet\?trang=([0-9]+)</from>
         <to type="forward">/ViewBlogServlet?index=$1</to>
-    </rule>   
+    </rule>
     <rule>
         <from>/dich-vu\?trang=([0-9]+)</from>
         <to type="forward">/ViewServiceListServlet?index=$1</to>
-    </rule>  
-    
-   
-    
+    </rule>
+
+
+
     <!--    Customer-->
     <rule>
         <from>/tao-ho-so-benh-nhan</from>
@@ -83,7 +86,7 @@
     <rule match-type="wildcard">
         <from>/xem-don-dat-kham</from>
         <to type="forward">/serviceCart.jsp</to>
-    </rule>  
+    </rule>
     <rule>
         <from>/cap-nhat-don-kham\?id=([0-9]+)</from>
         <to type="forward">/LoadUpdateReservationServlet?txtPatientId=$1</to>
@@ -91,7 +94,7 @@
     <rule match-type="wildcard">
         <from>/thanh-toan-thanh-cong</from>
         <to type="forward">/successCheckout.jsp</to>
-    </rule>  
+    </rule>
 
 
     <!--    Staff-->
@@ -115,8 +118,44 @@
         <from>/dang-tao-bai-viet</from>
         <to type="forward">/DispatchServlet?btAction=CreateBlog</to>
     </rule>-->
- 
-    
+
+
+    <rule>
+        <from>/tao-bai-viet</from>
+        <to type="forward">/createBlog.jsp</to>
+    </rule>
+
+    <rule match-type="wildcard">
+        <from>/bai-viet-cua-ban</from>
+        <to type="forward">/ViewBlogByAuthorServlet</to>
+    </rule>
+    <rule>
+        <from>/chi-tiet-bai-viet\?id=([0-9]+)</from>
+        <to type="forward">/ViewBlogDetailServlet?id$1</to>
+    </rule>
+    <rule>
+        <from>/cap-nhat-bai-viet\?id=([0-9]+)</from>
+        <to type="forward">/LoadBlogServlet?id$1</to>
+    </rule>
+    <rule>
+        <from>/xoa-bai-viet\?id=([0-9]+)</from>
+        <to type="forward">/DeleteBlogServlet?id$1</to>
+    </rule>
+    <rule>
+        <from>/tim-kiem-bai-viet</from>
+        <to type="forward">/SearchBlogServlet</to>
+    </rule>
+    <rule>
+        <from>/bai-viet-chu-de</from>
+        <to type="forward">/ViewBlogByCateServlet</to>
+    </rule>
+
+    <rule>
+        <from>/lich-kham-benh</from>
+        <to type="forward">/DispatchServlet?btAction=ViewReservationForStaff</to>
+    </rule>
+
+
     <rule match-type="wildcard">
         <from>/tao-dich-vu</from>
         <to type="forward">/createService.jsp</to>
@@ -170,7 +209,7 @@
         <to type="forward">/CreateBlogServlet</to>
     </rule>
 
-    
+
     <!--    Admin-->
     <rule>
         <from>/thong-ke-tong-quat</from>
@@ -212,5 +251,25 @@
         <from>/thong-tin-tai-khoan\?id=([0-9]+)</from>
         <to type="forward">/ViewAccountDetailsServlet?id=$1</to>
     </rule>
-    
+
+    <rule>
+        <from>/dich-vu-cua-ban</from>
+        <to type="forward">/ViewServiceByStaffServlet</to>
+    </rule>
+    <rule>
+        <from>/chi-tiet-dich-vu\?id=([0-9]+)</from>
+        <to type="forward">/ViewServiceDetailServlet?id$1</to>
+    </rule>
+    <rule>
+        <from>/cap-nhat-dich-vu\?id=([0-9]+)</from>
+        <to type="forward">/LoadServiceServlet?id$1</to>
+    </rule>
+    <rule>
+        <from>/xoa-dich-vu\?id=([0-9]+)</from>
+        <to type="forward">/DeleteServiceServlet?id$1</to>
+    </rule>
+    <rule>
+        <from>/tim-kiem-dich-vu</from>
+        <to type="forward">/SearchServiceServlet</to>
+    </rule>
 </urlrewrite>

@@ -15,7 +15,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
-        <title>Blog | ${blog.title}</title>
+        <title>Bài viết | ${blog.title}</title>
         <style>
             body {
                 font-family: 'Niramit', sans-serif;
@@ -43,10 +43,10 @@
                     <div class="blog-cate mb-5" style="position: absolute; margin-bottom: 2em;">
                         <c:forEach items="${cate.viewBlogCategory()}" var="dto">
                             <c:if test="${blog.categotyID eq dto.categoryID}">
-                                <c:url var="viewbycate" value = "ViewBlogByCateServlet">
+                                <c:url var="viewbycate" value = "bai-viet-chu-de">
                                     <c:param name="txtCateID" value="${dto.categoryID}"/>
                                     <c:param name="index" value="1"/>
-                                </c:url>  
+                                </c:url>
                                 <a class="btn btn-link btn-sm" href="${viewbycate}">#${dto.categoryName}</a>
                             </c:if>
                         </c:forEach>
@@ -69,12 +69,12 @@
                         <c:set var="authorID" value="${blog.authorID}"/>
                         <c:if test="${authorID eq identity}">
                             <a class="btn btn-primary col-4" href="cap-nhat-bai-viet?id=${blog.blogID}" name="btAction">Cập nhật bài viết</a>
-                            <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a>
+                            <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="xoa-bai-viet?id=${blog.blogID}" name="btAction">Xóa</a>
                         </c:if>
                         <c:if test="${role eq 3}">
                             <div class="blog-status mt-4">
                                 <c:if test="${authorID != identity}">
-                                    <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="DeleteBlogServlet?id=${blog.blogID}" name="btAction">Xóa</a><br><br>
+                                    <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="xoa-bai-viet?id=${blog.blogID}" name="btAction">Xóa</a><br><br>
                                 </c:if>
                                 <form action="UpdateBlogStatusServlet" method="POST">
                                     <input type="hidden" name="txtBlogID" value="${blog.blogID}" />
@@ -92,6 +92,9 @@
                                     </c:choose>
                                 </form>
                             </div>
+                        </c:if>
+                        <c:if test="${role eq 4}">
+                            <a class="btn btn-danger col-4" onclick="return deleteConfirm()" href="xoa-bai-viet?id=${blog.blogID}" name="btAction">Xóa</a><br><br>
                         </c:if>
                     </div>
                 </div>

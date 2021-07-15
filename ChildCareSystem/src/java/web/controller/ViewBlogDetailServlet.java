@@ -64,7 +64,7 @@ public class ViewBlogDetailServlet extends HttpServlet {
             if (role == null && !statusID.equals("1")) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;
-            } else if ("1".equals(statusID) || ("3".equals(role) || identityID.equals(authorID))) {
+            } else if ("1".equals(statusID) || "3".equals(role) || "4".equals(role) || identityID.equals(authorID)) {
                 session.setAttribute("BLOG_DETAIL", blog);
                 request.setAttribute("AUTHOR", authorName);
                 url = VIEWBLOGDETAIL_PAGE;

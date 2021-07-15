@@ -67,9 +67,9 @@
                         </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'staff'}">
-                            <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" class="active" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Dịch vụ của tôi</span></a>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="dich-vu-cua-ban" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                                <span>Dịch vụ </span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -86,8 +86,8 @@
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Bài viết của tôi</span></a>
+                            <a href="bai-viet-cua-ban" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                                <span>Bài viết</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
@@ -100,7 +100,7 @@
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="don-kham-benh-cua-nhan-vien" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="lich-kham-benh" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
@@ -242,13 +242,13 @@
                                                                             </c:when>
                                                                         </c:choose>
                                                                         <td>
-                                                                            <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
+                                                                            <c:url var="viewdetails" value="chi-tiet-dich-vu">
                                                                                 <c:param name="id" value="${dto.serviceId}"/>
                                                                             </c:url>
                                                                             <a href="${viewdetails}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <c:url var="delete" value="DeleteServiceServlet">
+                                                                            <c:url var="delete" value="xoa-dich-vu">
                                                                                 <c:param name="id" value="${dto.serviceId}"/>
                                                                             </c:url>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
@@ -288,13 +288,13 @@
                                                                             <td>${dto.price}00</td>
                                                                             <td class="alert alert-success">Đang hoạt động</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
+                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a href="${viewdetails}">Xem chi tiết</a>
                                                                             </td>
                                                                             <td>
-                                                                                <c:url var="delete" value="DeleteServiceServlet">
+                                                                                <c:url var="delete" value="xoa-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
@@ -337,13 +337,13 @@
                                                                             <td>${dto.price}00</td>
                                                                             <td class="alert alert-warning">Đang chờ</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
+                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a href="${viewdetails}">Xem chi tiết</a>
                                                                             </td>
                                                                             <td>
-                                                                                <c:url var="delete" value="DeleteServiceServlet">
+                                                                                <c:url var="delete" value="xoa-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
@@ -385,13 +385,13 @@
                                                                             <td>${dto.price}00</td>
                                                                             <td class="alert alert-danger">Tạm ngưng</td>
                                                                             <td>
-                                                                                <c:url var="viewdetails" value="xem-thong-tin-dich-vu">
+                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a href="${viewdetails}">Xem chi tiết</a>
                                                                             </td>
                                                                             <td>
-                                                                                <c:url var="delete" value="DeleteServiceServlet">
+                                                                                <c:url var="delete" value="xoa-dich-vu">
                                                                                     <c:param name="id" value="${dto.serviceId}"/>
                                                                                 </c:url>
                                                                                 <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>

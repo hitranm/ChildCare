@@ -107,10 +107,10 @@
                                             ${sessionScope.LOGIN_USER.fullName}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="xem-lich-su-kham">Xem lịch sử đặt khám</a>  
-                                            <div class="dropdown-divider"></div> 
-                                            <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>                                              
-                                            <div class="dropdown-divider"></div>                                                   
+                                            <a class="dropdown-item" href="xem-lich-su-kham">Xem lịch sử đặt khám</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
@@ -133,22 +133,22 @@
                                         <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
                                     </li>
                                     <li class="nav-item px-3">
-                                        <a class="nav-link" href="don-kham-benh-cua-nhan-vien">Xem lịch khám bệnh</a>
+                                        <a class="nav-link" href="lich-kham-benh">Xem lịch khám bệnh</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Quản lí
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="tao-bai-viet-moi">Tạo bài viết</a>   
+                                            <a class="dropdown-item" href="tao-bai-viet">Tạo bài viết</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="xem-bai-viet-cua-toi">Xem bài viết</a>  
+                                            <a class="dropdown-item" href="bai-viet-cua-ban">Xem bài viết</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="tao-dich-vu">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="xem-dich-vu-cua-nhan-vien">Xem dịch vụ</a>
+                                            <a class="dropdown-item" href="dich-vu-cua-ban">Xem dịch vụ</a>
                                         </div>
-                                    </li>                                 
+                                    </li>
                                 </ul>
                                 <ul class="navbar-nav pr-5">
                                     <li class="nav-item dropdown">
@@ -157,8 +157,8 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
-                                            <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>                                              
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
@@ -183,18 +183,18 @@
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Thêm mới
                                         </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                           
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="tao-chuyen-khoa-moi">Thêm chuyên khoa</a>
-                                            <div class="dropdown-divider"></div>                                          
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="tao-chu-de-moi">Thêm chủ đề bài viết</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="tao-bai-viet-moi">Tạo bài viết</a>  
+                                            <a class="dropdown-item" href="tao-bai-viet-moi">Tạo bài viết</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="tao-dich-vu">Tạo dịch vụ</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="createStaff.jsp">Tạo tài khoản nhân viên</a>       
+                                            <a class="dropdown-item" href="createStaff.jsp">Tạo tài khoản nhân viên</a>
                                         </div>
-                                    </li>  
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Quản lí
@@ -203,10 +203,10 @@
                                             <a class="dropdown-item" href="xem-danh-sach-Chuyen-khoa">Danh sách chuyên khoa</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="Xem-danh-sach-chu-de">Danh sách chủ đề bài viết</a>
-                                            <div class="dropdown-divider"></div>                                          
+                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="thong-ke-tong-quat">Thống kê</a>
                                         </div>
-                                    </li>   
+                                    </li>
                                 </ul>
                                 <ul class="navbar-nav pr-5">
                                     <li class="nav-item dropdown">
@@ -215,8 +215,8 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
-                                            <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>                                              
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
@@ -236,10 +236,10 @@
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="dich-vu?trang=1">Dịch vụ</a>
-                                    </li>                                    
+                                    </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="thong-ke-tong-quat">Quản lí</a>
-                                    </li>                                      
+                                    </li>
                                 </ul>
                                 <ul class="navbar-nav pr-5">
                                     <li class="nav-item dropdown">
@@ -248,8 +248,8 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="thong-tin-ca-nhan">Xem thông tin cá nhân</a>
-                                            <div class="dropdown-divider"></div>                                                   
-                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>                                              
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="doi-mat-khau">Đổi mật khẩu</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="dang-xuat">Đăng xuất</a>
                                         </div>
@@ -280,7 +280,7 @@
                                     </li>
                                 </ul>
                             </c:otherwise>
-                        </c:choose>                       
+                        </c:choose>
                     </div>
                 </nav>
             </div>

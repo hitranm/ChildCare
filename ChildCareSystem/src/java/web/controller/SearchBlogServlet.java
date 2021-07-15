@@ -26,7 +26,7 @@ public class SearchBlogServlet extends HttpServlet {
 
     private final String SEARCH_PAGE = "searchBlog.jsp";
     private final String ERROR_PAGE = "systemError.html";
-    private final String VIEW_BLOG = "ViewBlogServlet?index=1";
+    private final String VIEW_BLOG = "bai-viet?trang=1";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

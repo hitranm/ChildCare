@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : dashboard
     Created on : Jul 1, 2021, 1:15:32 AM
     Author     : Admin
@@ -78,8 +78,8 @@
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Dịch vụ của tôi</span></a>
+                            <a href="dich-vu-cua-ban" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                                <span>Dịch vụ </span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
@@ -87,9 +87,9 @@
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'staff'}">
-                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Bài viết của tôi</span></a>
+                        <c:if test="${sessionScope.ROLE eq 'staff'}">
+                            <a href="bai-viet-cua-ban" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                                <span>Bài viết</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -108,7 +108,7 @@
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="don-kham-benh-cua-nhan-vien" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="lich-kham-benh" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
@@ -234,10 +234,10 @@
                                                                         </td>
                                                                         <td class="alert alert-success">Chấp thuận</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
                                                                         </td>
                                                                     </c:if>
                                                                     <c:if test="${dto.statusID eq 0}">
@@ -253,10 +253,10 @@
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
                                                                         </td>
                                                                     </c:if>
                                                                     <c:if test="${dto.statusID eq 2}">
@@ -272,10 +272,10 @@
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
                                                                         </td>
                                                                     </c:if>
                                                                 </tr>
@@ -338,10 +338,10 @@
                                                                         </c:if>
 
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:if>
@@ -383,10 +383,10 @@
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:if>
@@ -429,10 +429,10 @@
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
                                                                         </td>
                                                                     </tr>
                                                                 </c:if>
