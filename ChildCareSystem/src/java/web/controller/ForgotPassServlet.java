@@ -37,14 +37,14 @@ public class ForgotPassServlet extends HttpServlet {
         String url = ERROR;
         request.setCharacterEncoding("UTF-8");
         try {
-           String email = request.getParameter("email");
-           IdentityDAO dao = new IdentityDAO();
-           HttpSession session = request.getSession();
-           boolean check = dao.checkDuplicatedEmail(email);
+            String email = request.getParameter("email");
+            IdentityDAO dao = new IdentityDAO();
+            HttpSession session = request.getSession();
+            boolean check = dao.checkDuplicatedEmail(email);
             if (check) {
                 SendEmail sm = new SendEmail();
                 String code = sm.getRandom();
-           //     CustomerDTO cus = new CustomerDTO(email, code);
+                //     CustomerDTO cus = new CustomerDTO(email, code);
                 boolean test = sm.sendEmail(code, email);
 
                 //check if the email send successfully

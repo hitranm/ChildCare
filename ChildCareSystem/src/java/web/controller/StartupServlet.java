@@ -55,7 +55,7 @@ public class StartupServlet extends HttpServlet {
         } catch (SQLException | NamingException ex) {
             log("Error at StartupServelt: " + ex.getMessage());
         } finally {
-           // request.getRequestDispatcher(url).forward(request, response);
+            // request.getRequestDispatcher(url).forward(request, response);
             response.sendRedirect(url);
         }
     }

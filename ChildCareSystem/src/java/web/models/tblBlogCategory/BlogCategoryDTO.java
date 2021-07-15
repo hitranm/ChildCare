@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author DELL
  */
 public class BlogCategoryDTO implements Serializable {
+
     private String categoryID;
     private String categoryName;
 
@@ -38,5 +39,5 @@ public class BlogCategoryDTO implements Serializable {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-    
+
 }

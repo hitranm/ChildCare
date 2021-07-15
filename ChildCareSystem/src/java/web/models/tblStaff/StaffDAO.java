@@ -317,7 +317,8 @@ public class StaffDAO implements Serializable {
         }
         return result;
     }
-public List<StaffDTO> getAllDeactiveStaffProfile() throws SQLException, NamingException {
+
+    public List<StaffDTO> getAllDeactiveStaffProfile() throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -357,6 +358,7 @@ public List<StaffDTO> getAllDeactiveStaffProfile() throws SQLException, NamingEx
         }
         return result;
     }
+
     public List<StaffDTO> getStaffListBySpecialtyId(int specialtyID) throws SQLException, NamingException {
         List<StaffDTO> result = null;
         Connection conn = null;
@@ -447,15 +449,15 @@ public List<StaffDTO> getAllDeactiveStaffProfile() throws SQLException, NamingEx
                 }
             }
         } finally {
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            
-            if(stm != null) {
+
+            if (stm != null) {
                 stm.close();
             }
-            
-            if(conn != null) {
+
+            if (conn != null) {
                 conn.close();
             }
         }

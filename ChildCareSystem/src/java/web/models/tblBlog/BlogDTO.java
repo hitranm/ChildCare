@@ -12,7 +12,8 @@ import java.sql.Date;
  *
  * @author DELL
  */
-public class BlogDTO implements Serializable{
+public class BlogDTO implements Serializable {
+
     private String BlogID;
     private String Thumbnail;
     private String title;
@@ -52,8 +53,6 @@ public class BlogDTO implements Serializable{
         this.StatusID = StatusID;
     }
 
-
-
     public BlogDTO(String BlogID, String Thumbnail, String title, String AuthorID, String Description, String CategotyID, String StatusID, boolean onSlider) {
         this.BlogID = BlogID;
         this.Thumbnail = Thumbnail;
@@ -64,6 +63,7 @@ public class BlogDTO implements Serializable{
         this.StatusID = StatusID;
         this.onSlider = onSlider;
     }
+
     /**
      * @return the BlogID
      */
@@ -179,7 +179,5 @@ public class BlogDTO implements Serializable{
     public void setOnSlider(boolean onSlider) {
         this.onSlider = onSlider;
     }
-
-
 
 }

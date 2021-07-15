@@ -12,7 +12,8 @@ import java.util.logging.Logger;
  *
  * @author HOANGKHOI
  */
-public class ReservationDTO implements Serializable{
+public class ReservationDTO implements Serializable {
+
     private int reservationId;
     private int customerId;
     private int patientId;
@@ -25,8 +26,6 @@ public class ReservationDTO implements Serializable{
 
     public ReservationDTO() {
     }
-    
-    
 
     public ReservationDTO(int reservationId, int customerId, int patientId, int serviceId, int staffAssignId, int timeIntervalId, String checkInDate, String updatedDate) {
         this.reservationId = reservationId;
@@ -69,8 +68,7 @@ public class ReservationDTO implements Serializable{
         this.timeIntervalId = timeIntervalId;
         this.checkInDate = checkInDate;
     }
-    
-    
+
     public ReservationDTO(int customerId, int patientId, int serviceId, int staffAssignId, int timeIntervalId, String checkInDate) {
         this.customerId = customerId;
         this.patientId = patientId;
@@ -97,7 +95,7 @@ public class ReservationDTO implements Serializable{
         this.reservationId = reservationId;
         this.price = price;
     }
-    
+
     public int getReservationId() {
         return reservationId;
     }
@@ -169,19 +167,5 @@ public class ReservationDTO implements Serializable{
     public void setPrice(float price) {
         this.price = price;
     }
-    
-    
 
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

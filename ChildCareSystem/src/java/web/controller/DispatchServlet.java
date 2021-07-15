@@ -61,6 +61,7 @@ public class DispatchServlet extends HttpServlet {
     private static final String VIEW_MAIN_DASHBOARD = "MainDashBoardServlet";
     private static final String UPDATE_SLIDER = "UpdateSliderServlet";
     private static final String ACTIVE_ACCOUNT = "ActiveAccountServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

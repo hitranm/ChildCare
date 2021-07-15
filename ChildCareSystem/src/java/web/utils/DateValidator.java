@@ -10,5 +10,6 @@ package web.utils;
  * @author nguye
  */
 public interface DateValidator {
-   boolean isValid(String dateStr);
+
+    boolean isValid(String dateStr);
 }

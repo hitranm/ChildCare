@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author nguye
  */
-public class PatientDTO implements Serializable{
+public class PatientDTO implements Serializable {
 
     private String patientID;
     private String patientName;
@@ -19,8 +19,9 @@ public class PatientDTO implements Serializable{
     private String birthday;
     private String customerID;
     private int statusID;
-    public PatientDTO(){
-        
+
+    public PatientDTO() {
+
     }
 
     public PatientDTO(String patientID, String patientName, String gender, String birthday, String customerID) {
@@ -54,8 +55,7 @@ public class PatientDTO implements Serializable{
     public void setStatusID(int statusID) {
         this.statusID = statusID;
     }
-    
-    
+
     public String getPatientID() {
         return patientID;
     }
@@ -95,5 +95,5 @@ public class PatientDTO implements Serializable{
     public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
-    
+
 }

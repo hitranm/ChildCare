@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import web.models.tblIdentity.IdentityDAO;
 
-
 /**
  *
  * @author Admin
@@ -74,8 +73,8 @@ public class DeleteAccountServlet extends HttpServlet {
 //            }
             int identityId = Integer.parseInt(identityID);
             boolean check = identityDAO.deActiveAccount(identityId);
-            if(check){
-            url = SUCCESS;
+            if (check) {
+                url = SUCCESS;
             }
         } catch (SQLException | NamingException e) {
             log("Error at DeleteAccountServlet: " + e.toString());

@@ -29,9 +29,11 @@ import web.viewModels.UserProfile.UserProfileViewModel;
  * @author HOANGKHOI
  */
 public class ViewUserProfileServlet extends HttpServlet {
+
     private static final String VIEW_USER_PROFILE_PAGE = "viewProfile.jsp";
     private static final String HOME_PAGE = "home.jsp";
     private static final String ERROR_PAGE = "systemError.html";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,70 +48,69 @@ public class ViewUserProfileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String url = VIEW_USER_PROFILE_PAGE;
-        
+
         try {
             HttpSession session = request.getSession();
-            String currentIdentityID = (String)session.getAttribute("IDENTITY_ID");
+            String currentIdentityID = (String) session.getAttribute("IDENTITY_ID");
             if (currentIdentityID != null) {
                 IdentityDAO identityDAO = new IdentityDAO();
                 IdentityDTO identityDTO = identityDAO.getIdentityDTO(currentIdentityID);
                 int roleId = identityDAO.getRoleIDByIdentityID(currentIdentityID);
-                switch(roleId) {
+                switch (roleId) {
                     case 1:
                         CustomerDAO customerDAO = new CustomerDAO();
                         CustomerDTO customerDTO = customerDAO.queryCustomerByIdentityId(currentIdentityID);
-                        
+
                         UserProfileViewModel userProfileViewModelCus = new UserProfileViewModel(identityDTO,
-                                                                                            customerDTO.getFullName(),
-                                                                                            customerDTO.getPhoneNumber(),
-                                                                                            customerDTO.getAddress(),
-                                                                                            customerDTO.getBirthday(),
-                                                                                            customerDTO.getCitizenID());
+                                customerDTO.getFullName(),
+                                customerDTO.getPhoneNumber(),
+                                customerDTO.getAddress(),
+                                customerDTO.getBirthday(),
+                                customerDTO.getCitizenID());
                         session.setAttribute("USER_PROFILE", userProfileViewModelCus);
                         break;
                     case 2:
                         StaffDAO staffDAO = new StaffDAO();
                         StaffDTO staffDTO = staffDAO.queryStaffByIdentityId(currentIdentityID);
-                        
-                        UserProfileViewModel userProfileViewModelStaff = new UserProfileViewModel (identityDTO, staffDTO.getFullName(), staffDTO.getPhoneNumber(), staffDTO.getAddress(), staffDTO.getBirthday(), staffDTO.getCitizenID(), staffDTO.getSpecialtyID());
+
+                        UserProfileViewModel userProfileViewModelStaff = new UserProfileViewModel(identityDTO, staffDTO.getFullName(), staffDTO.getPhoneNumber(), staffDTO.getAddress(), staffDTO.getBirthday(), staffDTO.getCitizenID(), staffDTO.getSpecialtyID());
                         session.setAttribute("USER_PROFILE", userProfileViewModelStaff);
                         break;
-                    case 3: 
+                    case 3:
                         ManagerDAO managerDAO = new ManagerDAO();
                         ManagerDTO managerDTO = managerDAO.queryManagerByIdentityId(currentIdentityID);
                         UserProfileViewModel userProfileViewModelManager = new UserProfileViewModel(identityDTO,
-                                                                                            managerDTO.getFullName(),
-                                                                                            managerDTO.getPhoneNumber(),
-                                                                                            managerDTO.getAddress(),
-                                                                                            managerDTO.getBirthday(),
-                                                                                            managerDTO.getCitizenID());
+                                managerDTO.getFullName(),
+                                managerDTO.getPhoneNumber(),
+                                managerDTO.getAddress(),
+                                managerDTO.getBirthday(),
+                                managerDTO.getCitizenID());
                         session.setAttribute("USER_PROFILE", userProfileViewModelManager);
                         break;
                     case 4:
                         AdminDAO adminDAO = new AdminDAO();
                         AdminDTO adminDTO = adminDAO.queryAdminByIdentityId(currentIdentityID);
                         UserProfileViewModel userProfileViewModelAdmin = new UserProfileViewModel(identityDTO,
-                                                                                            adminDTO.getFullName(),
-                                                                                            adminDTO.getPhoneNumber(),
-                                                                                            adminDTO.getAddress(),
-                                                                                            adminDTO.getBirthday(),
-                                                                                            adminDTO.getCitizenID());
+                                adminDTO.getFullName(),
+                                adminDTO.getPhoneNumber(),
+                                adminDTO.getAddress(),
+                                adminDTO.getBirthday(),
+                                adminDTO.getCitizenID());
                         session.setAttribute("USER_PROFILE", userProfileViewModelAdmin);
                         break;
-                    
+
                 }
             } else {
                 url = HOME_PAGE;
             }
-            
-            
+
         } catch (Exception e) {
             log("Error at ViewUserProfileServlet: " + e.getMessage());
             url = ERROR_PAGE;
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            
+
         }
     }
 

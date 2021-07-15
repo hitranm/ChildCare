@@ -46,10 +46,10 @@ public class ViewAllServiceListServlet extends HttpServlet {
             dao.viewServiceList();
             List<ServiceDTO> service = dao.getServiceList();
             request.setAttribute("SERVICE_LIST", service);
-            
+
             int activeServiceCount = dao.countServiceActive();
             request.setAttribute("ACTIVE_SERVICE", activeServiceCount);
-            
+
             int allServiceCount = dao.countAllService();
             request.setAttribute("ALL_SERVICE", allServiceCount);
             String topServiceCount = dao.countMostUseService();

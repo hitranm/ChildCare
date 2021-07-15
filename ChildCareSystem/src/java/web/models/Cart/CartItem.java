@@ -12,12 +12,13 @@ import java.io.Serializable;
  * @author HOANGKHOI
  */
 public class CartItem implements Serializable {
-    private int customerId;    
+
+    private int customerId;
     private int patientId;
     private int serviceId;
     private int timeIntervalId;
     private String checkInTime;
-   
+
     public CartItem() {
     }
 
@@ -28,8 +29,6 @@ public class CartItem implements Serializable {
         this.timeIntervalId = timeIntervalId;
         this.checkInTime = checkInTime;
     }
-    
-    
 
     public CartItem(int customerId, int patientId, int serviceId, String checkInTime) {
         this.customerId = customerId;
@@ -37,7 +36,7 @@ public class CartItem implements Serializable {
         this.serviceId = serviceId;
         this.checkInTime = checkInTime;
     }
-    
+
     public CartItem(int customerId, int patientId, int serviceId, int timeIntervalId) {
         this.customerId = customerId;
         this.patientId = patientId;
@@ -84,22 +83,5 @@ public class CartItem implements Serializable {
     public void setCheckInTime(String checkInTime) {
         this.checkInTime = checkInTime;
     }
-    
-    
 
-    
-    
-   
-
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
 }

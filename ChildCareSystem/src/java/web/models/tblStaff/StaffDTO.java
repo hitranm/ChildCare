@@ -10,6 +10,7 @@ package web.models.tblStaff;
  * @author DELL
  */
 public class StaffDTO {
+
     private String IdentityID;
     private String StaffID;
     private String FullName;
@@ -18,8 +19,6 @@ public class StaffDTO {
     private String Birthday;
     private String CitizenID;
     private String SpecialtyID;
-    
-    
 
     public StaffDTO() {
     }
@@ -45,7 +44,7 @@ public class StaffDTO {
         this.FullName = FullName;
         this.SpecialtyID = SpecialtyID;
     }
-    
+
     public StaffDTO(String IdentityID, String FullName, String phoneNumber, String Address, String Birthday, String CitizenID, String SpecialtyID) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
@@ -55,7 +54,7 @@ public class StaffDTO {
         this.CitizenID = CitizenID;
         this.SpecialtyID = SpecialtyID;
     }
- 
+
     public StaffDTO(String IdentityID, String FullName, String Address, String Birthday) {
         this.IdentityID = IdentityID;
         this.FullName = FullName;
@@ -74,7 +73,7 @@ public class StaffDTO {
     public String getFullName() {
         return FullName;
     }
-    
+
     public void setFullName(String FullName) {
         this.FullName = FullName;
     }
@@ -114,7 +113,7 @@ public class StaffDTO {
     public String getSpecialtyID() {
         return SpecialtyID;
     }
-    
+
     public void setSpecialtyID(String SpecialtyID) {
         this.SpecialtyID = SpecialtyID;
     }
@@ -127,11 +126,4 @@ public class StaffDTO {
         this.StaffID = StaffID;
     }
 
-    
-
-    
-
-    
-    
-    
 }

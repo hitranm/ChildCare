@@ -10,6 +10,7 @@ package web.models.tblIdentity;
  * @author Admin
  */
 public class IdentityError {
+
     private String phoneNumDupError;
 
     public String getPhoneNumDupError() {
@@ -19,5 +20,5 @@ public class IdentityError {
     public void setPhoneNumDupError(String phoneNumDupError) {
         this.phoneNumDupError = phoneNumDupError;
     }
-    
+
 }

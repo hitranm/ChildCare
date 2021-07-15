@@ -20,7 +20,7 @@ import web.utils.DBHelpers;
  * @author DELL
  */
 public class BlogCategoryDAO implements Serializable {
-    
+
     public List<BlogCategoryDTO> viewBlogCategory() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -52,6 +52,7 @@ public class BlogCategoryDAO implements Serializable {
             }
         }
     }
+
     public boolean addCategory(String cateName) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -77,6 +78,7 @@ public class BlogCategoryDAO implements Serializable {
         }
         return false;
     }
+
     public boolean deleteCategory(String cateID) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;

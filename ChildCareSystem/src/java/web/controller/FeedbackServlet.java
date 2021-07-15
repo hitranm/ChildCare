@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author HOANGKHOI
  */
 public class FeedbackServlet extends HttpServlet {
+
     private static final String CREATE_FEEDBACK = "CreateFeedbackServlet";
-    private static  final String UPDATE_FEEDBACK = "UpdateFeedbackServlet";
+    private static final String UPDATE_FEEDBACK = "UpdateFeedbackServlet";
     private static final String DELETE_FEEDBACK = "DeleteFeedbackServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,15 +37,15 @@ public class FeedbackServlet extends HttpServlet {
         String action = request.getParameter("action");
         String url = CREATE_FEEDBACK;
         try {
-           if(action == null) {
-               
-           } else if (action.equalsIgnoreCase("Create")) {
-               url = CREATE_FEEDBACK;
-           } else if(action.equalsIgnoreCase("update")) {
-               url = UPDATE_FEEDBACK;
-           } else if(action.equalsIgnoreCase("delete")) {
-               url = DELETE_FEEDBACK;
-           }
+            if (action == null) {
+
+            } else if (action.equalsIgnoreCase("Create")) {
+                url = CREATE_FEEDBACK;
+            } else if (action.equalsIgnoreCase("update")) {
+                url = UPDATE_FEEDBACK;
+            } else if (action.equalsIgnoreCase("delete")) {
+                url = DELETE_FEEDBACK;
+            }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -17,7 +17,8 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class AdminDAO {
-/*     public AdminDTO queryAdmin(String phoneNum) throws SQLException, NamingException {
+
+    /*     public AdminDTO queryAdmin(String phoneNum) throws SQLException, NamingException {
         String fullName = "";
         String email="";
         String address="";
@@ -62,35 +63,41 @@ public class AdminDAO {
         }
         return null;
     }*/
-     public boolean update(AdminDTO admin) throws SQLException, NamingException{
-        boolean check=false;
-        Connection conn=null;
-        PreparedStatement stm=null;
-        ResultSet rs=null;
-        try{
-            conn=DBHelpers.makeConnection();
-            if(conn!=null){
-                String sql= "UPDATE tblAdmin SET FullName=?, Address=?, Birthday=? "
+    public boolean update(AdminDTO admin) throws SQLException, NamingException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblAdmin SET FullName=?, Address=?, Birthday=? "
                         + " WHERE IdentityID=?";
-                stm=conn.prepareStatement(sql);
+                stm = conn.prepareStatement(sql);
                 stm.setString(1, admin.getFullName());
                 stm.setString(2, admin.getAddress());
                 stm.setString(3, admin.getBirthday());
                 stm.setString(4, admin.getIdentityID());
-                
-                check= stm.executeUpdate()>0?true:false;
+
+                check = stm.executeUpdate() > 0 ? true : false;
             }
-            
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
-        finally{
-             if(rs!=null) rs.close();
-            if(stm!=null) stm.close();
-            if(conn!=null) conn.close();
-        }
-        
-       return check;
-}
-      public boolean checkCitizenID(String citizenID) throws SQLException, NamingException {
+
+        return check;
+    }
+
+    public boolean checkCitizenID(String citizenID) throws SQLException, NamingException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -121,7 +128,8 @@ public class AdminDAO {
         }
         return check;
     }
-       public AdminDTO queryAdminByIdentityId(String identityId) throws SQLException, NamingException {
+
+    public AdminDTO queryAdminByIdentityId(String identityId) throws SQLException, NamingException {
         String fullName;
         String phoneNum;
         String address;
@@ -162,7 +170,8 @@ public class AdminDAO {
         }
         return null;
     }
-       public boolean delete(String id) throws ClassNotFoundException, SQLException {
+
+    public boolean delete(String id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {

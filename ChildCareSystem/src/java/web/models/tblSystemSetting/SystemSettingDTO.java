@@ -10,15 +10,16 @@ package web.models.tblSystemSetting;
  * @author nguye
  */
 public class SystemSettingDTO {
+
     private int settingID;
     private String settingName;
     private String settingValue;
     private int adminID;
     private String createdDate;
     private String updatedDate;
-    
-    public SystemSettingDTO(){
-        
+
+    public SystemSettingDTO() {
+
     }
 
     public SystemSettingDTO(int settingID, String settingName, String settingValue, int adminID, String createdDate, String updatedDate) {
@@ -83,6 +84,5 @@ public class SystemSettingDTO {
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
-    
+
 }

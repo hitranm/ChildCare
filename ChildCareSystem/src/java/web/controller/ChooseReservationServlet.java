@@ -28,7 +28,7 @@ import web.viewModels.Reservation.ReservationViewModel;
  * @author HOANGKHOI
  */
 public class ChooseReservationServlet extends HttpServlet {
-    
+
     private static final String CHOOSE_SERVICE_PAGE = "chooseServiceReserve.jsp";
 
     /**
@@ -51,7 +51,7 @@ public class ChooseReservationServlet extends HttpServlet {
             IdentityDAO identityDAO = new IdentityDAO();
             CustomerDAO customerDAO = new CustomerDAO();
             PatientDAO patientDAO = new PatientDAO();
-            
+
             String identityId = (String) session.getAttribute("IDENTITY_ID");
             if (identityId != null) {
                 // Get customerId if any
@@ -63,8 +63,8 @@ public class ChooseReservationServlet extends HttpServlet {
                     ReservationViewModel reservationViewModel = new ReservationViewModel(customerDTO, listPatient, identityDTO);
                     request.setAttribute("VIEW_MODEL", reservationViewModel);
                     String status = (String) session.getAttribute("STATUS");
-                    if(status != null) {
-                        if(status.equals("DUPLICATED")) {
+                    if (status != null) {
+                        if (status.equals("DUPLICATED")) {
                             request.setAttribute("DUPLICATE_PATIENT", "Đơn đặt khám của bệnh nhân này đang chờ được thanh toán.");
                         } else if (status.equals("MAX")) {
                             request.setAttribute("MAX_RESERVATION", "Bạn chỉ có thể đặt tối đa 3 đơn trong 1 lần thanh toán.");

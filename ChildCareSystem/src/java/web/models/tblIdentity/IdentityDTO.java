@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author Admin
  */
-public class IdentityDTO implements Serializable{
+public class IdentityDTO implements Serializable {
+
     private String identityID;
     private String email;
     private String password;
@@ -25,7 +26,7 @@ public class IdentityDTO implements Serializable{
         this.roleID = roleID;
         this.statusID = statusID;
     }
-    
+
     public IdentityDTO(String identityID, String roleID) {
         this.identityID = identityID;
         this.roleID = roleID;
@@ -42,9 +43,6 @@ public class IdentityDTO implements Serializable{
         this.roleID = roleID;
         this.statusID = statusID;
     }
-    
-    
-    
 
     public IdentityDTO(String identityID, String email, String password, String roleID) {
         this.identityID = identityID;
@@ -60,7 +58,7 @@ public class IdentityDTO implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -68,7 +66,7 @@ public class IdentityDTO implements Serializable{
     public String getRoleID() {
         return roleID;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -93,7 +91,4 @@ public class IdentityDTO implements Serializable{
         this.statusID = statusID;
     }
 
-    
-    
-    
 }

@@ -28,7 +28,7 @@ import web.models.tblStaff.StaffDTO;
  * @author DELL
  */
 public class ViewBlogDetailServlet extends HttpServlet {
-    
+
     private final String VIEWBLOGDETAIL_PAGE = "blogDetail.jsp";
     private final String ERROR_PAGE = "systemError.html";
     private final String DENY = "accessDenied.jsp";
@@ -60,7 +60,7 @@ public class ViewBlogDetailServlet extends HttpServlet {
             String statusID = blog.getStatusID();
             IdentityDAO identityDAO = new IdentityDAO();
             String authorName = identityDAO.getStaffOrManagerNameByIdentityId(authorID);
-            
+
             if (role == null && !statusID.equals("1")) {
                 request.setAttribute("DID_LOGIN", "Bạn cần đăng nhập để thực hiện thao tác này");
                 url = LOGIN;

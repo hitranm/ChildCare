@@ -191,9 +191,9 @@ public class FeedbackDAO implements Serializable {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
                 String sql = "SELECT * "
-                        + " FROM tblFeedback";        
+                        + " FROM tblFeedback";
                 stm = conn.prepareStatement(sql);
-                
+
                 rs = stm.executeQuery();
                 result = new ArrayList<>();
                 while (rs.next()) {
@@ -220,7 +220,7 @@ public class FeedbackDAO implements Serializable {
         }
         return result;
     }
-    
+
     public float calcAvgStar() throws SQLException, NamingException {
         float sum = 0;
         float rate = 0;

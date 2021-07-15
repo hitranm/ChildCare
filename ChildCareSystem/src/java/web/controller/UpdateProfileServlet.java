@@ -61,60 +61,60 @@ public class UpdateProfileServlet extends HttpServlet {
             HttpSession session = request.getSession();
             String identityID = (String) session.getAttribute("IDENTITY_ID");
             int roleID = identityDAO.getRoleIDByIdentityID(identityID);
-            if(roleID == 4) {
-                    AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
-                   boolean check= dao0.update(dto);
-                   if(check){
+            if (roleID == 4) {
+                AdminDTO dto = new AdminDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
+                boolean check = dao0.update(dto);
+                if (check) {
 
                     IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
                     session.setAttribute("USER_PROFILE", userProfile);
                     session.setAttribute("LOGIN_USER", dto);
-                    String msg="Cập nhật thành công";
+                    String msg = "Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
-                    url=SUCCESS;
-                   }
-            }
-            if(roleID == 3){
-                    ManagerDTO dto = new ManagerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
-                   boolean check= dao1.update(dto);
-                   if(check){
-                      // session.setAttribute("USER_PROFILE", dto);
-                      IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
-                    UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
-                    session.setAttribute("USER_PROFILE", userProfile);
-                       session.setAttribute("LOGIN_USER", dto);
-                       String msg="Cập nhật thành công";
-                    request.setAttribute("SUCCESS", msg);
-                       url=SUCCESS;
+                    url = SUCCESS;
                 }
             }
-            if(roleID == 2){
-                    StaffDTO dto = new StaffDTO(identityID, fullName, phoneNumber, address, birthday, citizenID, specialtyID);
-                    boolean check = dao2.update(dto);
-                    if(check){
-                       // session.setAttribute("USER_PROFILE", dto);
-                       IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+            if (roleID == 3) {
+                ManagerDTO dto = new ManagerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
+                boolean check = dao1.update(dto);
+                if (check) {
+                    // session.setAttribute("USER_PROFILE", dto);
+                    IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+                    UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
+                    session.setAttribute("USER_PROFILE", userProfile);
+                    session.setAttribute("LOGIN_USER", dto);
+                    String msg = "Cập nhật thành công";
+                    request.setAttribute("SUCCESS", msg);
+                    url = SUCCESS;
+                }
+            }
+            if (roleID == 2) {
+                StaffDTO dto = new StaffDTO(identityID, fullName, phoneNumber, address, birthday, citizenID, specialtyID);
+                boolean check = dao2.update(dto);
+                if (check) {
+                    // session.setAttribute("USER_PROFILE", dto);
+                    IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID(), dto.getSpecialtyID());
                     session.setAttribute("USER_PROFILE", userProfile);
-                        session.setAttribute("LOGIN_USER", dto);
-                        String msg="Cập nhật thành công";
+                    session.setAttribute("LOGIN_USER", dto);
+                    String msg = "Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
-                        url=SUCCESS;
+                    url = SUCCESS;
                 }
             }
-            if(roleID == 1){
-                    CustomerDTO dto = new CustomerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
-                    boolean check = dao3.update(dto);
-                    if(check){
-                       // session.setAttribute("USER_PROFILE", dto);
-                       IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
+            if (roleID == 1) {
+                CustomerDTO dto = new CustomerDTO(identityID, fullName, phoneNumber, address, birthday, citizenID);
+                boolean check = dao3.update(dto);
+                if (check) {
+                    // session.setAttribute("USER_PROFILE", dto);
+                    IdentityDTO identityDTO = identityDAO.getIdentityDTO(identityID);
                     UserProfileViewModel userProfile = new UserProfileViewModel(identityDTO, dto.getFullName(), dto.getPhoneNumber(), dto.getAddress(), dto.getBirthday(), dto.getCitizenID());
                     session.setAttribute("USER_PROFILE", userProfile);
-                       session.setAttribute("LOGIN_USER", dto);
-                       String msg="Cập nhật thành công";
+                    session.setAttribute("LOGIN_USER", dto);
+                    String msg = "Cập nhật thành công";
                     request.setAttribute("SUCCESS", msg);
-                        url=SUCCESS;
+                    url = SUCCESS;
 
                 }
             }

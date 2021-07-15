@@ -22,8 +22,10 @@ import web.models.tblFeedback.FeedbackDTO;
  * @author HOANGKHOI
  */
 public class ViewAllFeedbackServlet extends HttpServlet {
+
     private static final String VIEW_FEEDBACK = "feedbackDashboard.jsp";
     private static final String ERROR = "systemError";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,16 +45,15 @@ public class ViewAllFeedbackServlet extends HttpServlet {
             List<FeedbackDTO> feedbackList = feedbackDAO.getFeedbackList();
             float averageStar = feedbackDAO.calcAvgStar();
             int total = feedbackDAO.countAllFeedback();
-            
+
             request.setAttribute("FEEDBACK_LIST", feedbackList);
             request.setAttribute("ALL_FB", total);
             request.setAttribute("AVG_STAR", averageStar);
-            
-        } catch(SQLException | NamingException ex) {
+
+        } catch (SQLException | NamingException ex) {
             log("Error at ViewAllFeedbackServlet: " + ex.getMessage());
             url = ERROR;
-        } 
-        finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

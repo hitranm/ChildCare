@@ -20,8 +20,10 @@ import web.models.tblSpecialty.SpecialtyDAO;
  * @author DELL
  */
 public class CreateSpecialtyServlet extends HttpServlet {
+
     private final String VIEW_SPECIALTY = "xem-danh-sach-Chuyen-khoa"; //viewSpeciaty.jsp
     private final String ERROR = "systemError.html";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,8 +50,7 @@ public class CreateSpecialtyServlet extends HttpServlet {
             }
         } catch (NamingException | SQLException ex) {
             log("Error at CreateServiceServlet: " + ex.getMessage());
-        } 
-        finally {
+        } finally {
             response.sendRedirect(url);
             out.close();
         }

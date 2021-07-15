@@ -24,13 +24,14 @@ import web.models.tblService.ServiceDAO;
 import web.models.tblStaff.StaffDAO;
 import web.models.tblStaff.StaffDTO;
 
-
 /**
  *
  * @author Admin
  */
 public class ViewAccountsServlet extends HttpServlet {
-private static final String VIEW_ACCOUNT="accountDashboard.jsp";
+
+    private static final String VIEW_ACCOUNT = "accountDashboard.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +45,7 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url=VIEW_ACCOUNT;
+        String url = VIEW_ACCOUNT;
         try {
             FeedbackDAO feedbackDAO = new FeedbackDAO();
             ServiceDAO dao = new ServiceDAO();
@@ -77,9 +78,6 @@ private static final String VIEW_ACCOUNT="accountDashboard.jsp";
             request.setAttribute("ACTIVE_ACCOUNT", sumActive);
             int sumDeact = identityDAO.countAllDeactiveAccount();
             request.setAttribute("DEACT_ACCOUNT", sumDeact);
-            
-            
-           
 
         } catch (Exception e) {
             log("ERROR at ViewAccountsServlet: " + e.getMessage());

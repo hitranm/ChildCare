@@ -12,6 +12,7 @@ import web.models.tblIdentity.IdentityDTO;
  * @author HOANGKHOI
  */
 public class UserProfileViewModel {
+
     private IdentityDTO identityDTO;
     private String fullName;
     private String phoneNumber;
@@ -102,5 +103,5 @@ public class UserProfileViewModel {
     public String toString() {
         return "UserProfileViewModel{" + "identityDTO=" + identityDTO + ", fullName=" + fullName + ", phoneNum=" + phoneNumber + ", address=" + address + ", birthday=" + birthday + ", citizenId=" + citizenID + ", specialtyId=" + specialtyID + '}';
     }
-    
+
 }

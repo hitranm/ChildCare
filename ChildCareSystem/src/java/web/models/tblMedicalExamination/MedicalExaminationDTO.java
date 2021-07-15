@@ -8,19 +8,19 @@ package web.models.tblMedicalExamination;
 import java.io.Serializable;
 import java.sql.Date;
 
-
 /**
  *
  * @author HOANGKHOI
  */
-public class MedicalExaminationDTO implements Serializable{
+public class MedicalExaminationDTO implements Serializable {
+
     private int examinationId;
     private int reservationId;
     private int serviceId;
     private String prescription;
     private Date updatedDate;
     private Date createdDate;
-    
+
     public MedicalExaminationDTO() {
     }
 
@@ -89,7 +89,4 @@ public class MedicalExaminationDTO implements Serializable{
         this.createdDate = createdDate;
     }
 
-    
-    
-    
 }

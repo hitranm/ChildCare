@@ -138,7 +138,7 @@ public class SystemSettingDAO {
                     int adminID = rs.getInt("AdminID");
                     String createdDate = rs.getString("CreatedDate");
                     String updatedDate = rs.getString("UpdatedDate");
-                    String updatedDate_format = updatedDate.substring(0, updatedDate.length()-2);
+                    String updatedDate_format = updatedDate.substring(0, updatedDate.length() - 2);
                     SystemSettingDTO setting = new SystemSettingDTO(settingID, settingName, settingValue, adminID, createdDate, updatedDate_format);
                     result.add(setting);
                 }

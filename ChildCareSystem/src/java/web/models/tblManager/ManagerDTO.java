@@ -10,13 +10,14 @@ package web.models.tblManager;
  * @author Admin
  */
 public class ManagerDTO {
+
     private String IdentityID;
     private String FullName;
     private String Address;
     private String Birthday;
     private String CitizenID;
     private String phoneNumber;
-    
+
     public ManagerDTO() {
     }
 
@@ -42,8 +43,7 @@ public class ManagerDTO {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-    
+
     public String getIdentityID() {
         return IdentityID;
     }
@@ -51,8 +51,6 @@ public class ManagerDTO {
     public String getFullName() {
         return FullName;
     }
-
-    
 
     public String getAddress() {
         return Address;

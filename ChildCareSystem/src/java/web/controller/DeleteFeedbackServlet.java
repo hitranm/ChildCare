@@ -42,7 +42,7 @@ public class DeleteFeedbackServlet extends HttpServlet {
         try {
             int feedbackId = Integer.parseInt(strFeedbackId);
             boolean result = feedbackDAO.deleteFeedback(feedbackId);
-            if(result) {
+            if (result) {
                 url = SUCCESS;
             }
         } catch (NumberFormatException | SQLException | NamingException ex) {

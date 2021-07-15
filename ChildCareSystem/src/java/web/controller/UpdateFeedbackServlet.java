@@ -17,8 +17,10 @@ import web.models.tblFeedback.FeedbackDAO;
  * @author HOANGKHOI
  */
 public class UpdateFeedbackServlet extends HttpServlet {
+
     private static final String SUCCESS = "ViewPatientProfileServlet";
     private static final String ERROR = "feedback.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,13 +44,12 @@ public class UpdateFeedbackServlet extends HttpServlet {
             int feedbackId = Integer.parseInt(strFeedbackId);
             int rate = Integer.parseInt(strStar);
             boolean result = feedbackDAO.updateFeedback(feedbackId, strComment, rate);
-            if(result) {
+            if (result) {
                 url = SUCCESS;
             }
-        } catch (Exception ex) { 
+        } catch (Exception ex) {
             log("Error at UpdateFeedbackServlet: " + ex.getMessage());
-        }
-        finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

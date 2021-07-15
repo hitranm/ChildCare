@@ -29,7 +29,9 @@ import web.viewModels.Feedback.FeedbackViewModel;
  * @author HOANGKHOI
  */
 public class LoadFeedbackServlet extends HttpServlet {
+
     private static final String FEEDBACK_PAGE = "feedback.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,7 +52,7 @@ public class LoadFeedbackServlet extends HttpServlet {
         CustomerDAO customerDAO = new CustomerDAO();
         FeedbackDAO feedbackDAO = new FeedbackDAO();
         String url = FEEDBACK_PAGE;
-                
+
         try {
             //Get reservation
             ReservationDTO reservationDTO = reservationDAO.queryResById(reservationId);
@@ -60,15 +62,14 @@ public class LoadFeedbackServlet extends HttpServlet {
             CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(reservationDTO.getCustomerId());
             FeedbackViewModel viewModel = new FeedbackViewModel(patientDTO, serviceDTO, reservationDTO, customerDTO);
             FeedbackDTO previousFeedback = feedbackDAO.getFeedbackByReservationId(reservationDTO.getReservationId());
-            if(previousFeedback != null) {
+            if (previousFeedback != null) {
                 request.setAttribute("PREVIOUS_FEEDBACK", previousFeedback);
             }
             request.setAttribute("FEEDBACK_VIEW_MODEL", viewModel);
-            
+
         } catch (SQLException | NamingException ex) {
             log("Error at LoadFeedbackServlet: " + ex.getMessage());
-        }
-        finally {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

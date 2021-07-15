@@ -35,7 +35,7 @@ import web.models.tblService.ServiceDTO;
         maxRequestSize = 1024 * 1024 * 100
 )
 public class UpdateServiceServlet extends HttpServlet {
-    
+
     private final String VIEW_SERVICE = "xem-thong-tin-dich-vu";//"ViewServiceDetailServlet";
     private final String ERROR = "systemError.html";
     private final String UPDATE_SERVICE = "LoadServiceServlet";
@@ -70,18 +70,18 @@ public class UpdateServiceServlet extends HttpServlet {
             foundError = true;
             createServiceErr.setPriceFormat("Vui lòng nhập số cho giá của dịch vụ.");
         }
-        
+
         try {
             if (serviceName.trim().length() == 0 || serviceName.trim().length() > 100) {
                 foundError = true;
                 createServiceErr.setTitleLengthError("Tiêu đề không được để trống và có nhiều nhất 100 kí tự.");
             }
-            
+
             if (description.trim().length() == 0 || description.trim().length() > 300) {
                 foundError = true;
                 createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
             }
-            
+
             if (foundError) {
                 request.setAttribute("CREATE_SERVICE_ERROR", createServiceErr);
                 url = UPDATE_SERVICE + "?id=" + serviceID;
@@ -96,7 +96,7 @@ public class UpdateServiceServlet extends HttpServlet {
                 ServiceDTO service = new ServiceDTO(serviceID, serviceName,
                         specialtyId, thumbnail, description, price,
                         "0", LocalDateTime.now().toString());
-                
+
                 boolean result = dao.updateService(service);
                 if (result) {
                     url = VIEW_SERVICE + "?id=" + serviceID;
@@ -113,7 +113,7 @@ public class UpdateServiceServlet extends HttpServlet {
             out.close();
         }
     }
-    
+
     private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
         String fileName;
         try {
@@ -142,16 +142,16 @@ public class UpdateServiceServlet extends HttpServlet {
                     outputStream.close();
                 }
             }
-            
+
         } catch (Exception e) {
             fileName = "";
         }
         return fileName;
     }
-    
+
     private String getFileName(Part part) {
         final String partHeader = part.getHeader("content-disposition");
-        
+
         for (String content : part.getHeader("content-disposition").split(";")) {
             if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");

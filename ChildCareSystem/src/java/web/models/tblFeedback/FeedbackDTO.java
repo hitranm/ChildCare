@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author HOANGKHOI
  */
-public class FeedbackDTO implements Serializable{
+public class FeedbackDTO implements Serializable {
+
     private int feedbackId;
     private int serviceId;
     private int customerId;
@@ -86,7 +87,5 @@ public class FeedbackDTO implements Serializable{
     public void setRate(int rate) {
         this.rate = rate;
     }
-    
-    
-   
+
 }

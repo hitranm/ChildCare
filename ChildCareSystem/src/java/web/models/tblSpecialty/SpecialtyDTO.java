@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author HOANGKHOI
  */
 public class SpecialtyDTO implements Serializable {
+
     private int specialtyId;
     private String specialtyName;
 
@@ -38,6 +39,5 @@ public class SpecialtyDTO implements Serializable {
     public void setSpecialtyName(String specialtyName) {
         this.specialtyName = specialtyName;
     }
-    
-    
+
 }

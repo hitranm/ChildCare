@@ -367,6 +367,7 @@ public class IdentityDAO {
         }
         return sum;
     }
+
     public int countAllActiveAccount() throws SQLException, NamingException {
         int sum = 0;
         Connection conn = null;
@@ -398,6 +399,7 @@ public class IdentityDAO {
         }
         return sum;
     }
+
     public int countAllDeactiveAccount() throws SQLException, NamingException {
         int sum = 0;
         Connection conn = null;
@@ -536,12 +538,12 @@ public class IdentityDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, identityId);
                 int row = stm.executeUpdate();
-                if(row > 0){
+                if (row > 0) {
                     return true;
                 }
             }
         } finally {
-          
+
             if (stm != null) {
                 stm.close();
             }
@@ -551,6 +553,7 @@ public class IdentityDAO {
         }
         return false;
     }
+
     public boolean activeAccount(int identityId) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -562,7 +565,7 @@ public class IdentityDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, identityId);
                 int row = stm.executeUpdate();
-                if(row > 0){
+                if (row > 0) {
                     return true;
                 }
             }

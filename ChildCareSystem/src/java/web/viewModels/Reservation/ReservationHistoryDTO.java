@@ -10,6 +10,7 @@ package web.viewModels.Reservation;
  * @author nguye
  */
 public class ReservationHistoryDTO {
+
     private int reservationID;
     private String patientName;
     private String serviceName;
@@ -67,6 +68,4 @@ public class ReservationHistoryDTO {
         this.createdDate = createdDate;
     }
 
-   
-    
 }

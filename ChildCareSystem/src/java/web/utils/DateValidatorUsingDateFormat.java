@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat;
  *
  * @author nguye
  */
-
 public class DateValidatorUsingDateFormat implements DateValidator {
+
     private String dateFormat;
 
     public DateValidatorUsingDateFormat(String dateFormat) {

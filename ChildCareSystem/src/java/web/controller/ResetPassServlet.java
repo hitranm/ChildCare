@@ -17,8 +17,10 @@ import javax.servlet.http.HttpSession;
  * @author Admin
  */
 public class ResetPassServlet extends HttpServlet {
-private static final String ERROR="verify_pass_forgot.jsp";
-private static final String SUCCESS="newpassword.jsp";
+
+    private static final String ERROR = "verify_pass_forgot.jsp";
+    private static final String SUCCESS = "newpassword.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,23 +34,23 @@ private static final String SUCCESS="newpassword.jsp";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url=ERROR;
-        try{
+        String url = ERROR;
+        try {
             HttpSession session = request.getSession();
             String verifyCode = (String) session.getAttribute("authcode");
             String code = request.getParameter("authcode");
             if (code.equals(verifyCode)) {
-                url=SUCCESS;
-            } else{
-                 String msg= "Mã số xác thực không đúng vui lòng kiểm tra lại";
+                url = SUCCESS;
+            } else {
+                String msg = "Mã số xác thực không đúng vui lòng kiểm tra lại";
                 request.setAttribute("WRONG_CODE", msg);
             }
-        }catch(Exception e){
-            log("Error at ResetPassServlet: "+e.toString());
-        }finally{
+        } catch (Exception e) {
+            log("Error at ResetPassServlet: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-                
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -35,18 +35,17 @@ public class UpdateSliderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String chkOnSlider = request.getParameter("chkSlider");
-        String strBlogId = request.getParameter("txtBlogId");              
+        String strBlogId = request.getParameter("txtBlogId");
         BlogDAO blogDAO = new BlogDAO();
-        
+
         try {
             int blogId = Integer.parseInt(strBlogId);
             blogDAO.updateSlider(blogId, chkOnSlider);
-            
-        } catch(NumberFormatException | SQLException | NamingException ex) {
+
+        } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at UpdateSliderServlet");
             response.sendRedirect("systemError.html");
-        } 
-        finally {
+        } finally {
             response.sendRedirect("ViewAllBlogListServlet?status=accepted");
         }
     }

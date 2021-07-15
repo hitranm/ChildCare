@@ -20,8 +20,10 @@ import web.models.tblFeedback.FeedbackDTO;
  * @author HOANGKHOI
  */
 public class CreateFeedbackServlet extends HttpServlet {
+
     private static final String SUCCESS = "ViewPatientProfileServlet?tab=order";
     private static final String ERROR = "feedback.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,12 +54,11 @@ public class CreateFeedbackServlet extends HttpServlet {
             if (result) {
                 url = SUCCESS;
             }
-            
+
         } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at CreateFeedbackServlet: " + ex.getMessage());
             url = ERROR;
-        }
-        finally {
+        } finally {
             response.sendRedirect(url);
         }
     }

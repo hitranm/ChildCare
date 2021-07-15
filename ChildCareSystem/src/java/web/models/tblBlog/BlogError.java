@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author DELL
  */
 public class BlogError implements Serializable {
+
     private String titleLengthErr;
     private String descriptionErr;
     private String imgErr;
@@ -33,7 +34,6 @@ public class BlogError implements Serializable {
         this.imgErr = imgErr;
     }
 
-    
     public String getTitleLengthErr() {
         return titleLengthErr;
     }
@@ -49,5 +49,5 @@ public class BlogError implements Serializable {
     public void setDescriptionErr(String descriptionErr) {
         this.descriptionErr = descriptionErr;
     }
-    
+
 }

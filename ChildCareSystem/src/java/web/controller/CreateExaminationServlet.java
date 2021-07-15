@@ -21,6 +21,7 @@ import web.models.tblMedicalExamination.MedicalExaminationDTO;
  * @author HOANGKHOI
  */
 public class CreateExaminationServlet extends HttpServlet {
+
     private static final String VIEW_RESERVATION = "xem-don-chi-tiet?resid=";//"DispatchServlet?btAction=ViewReservationDetailsStaff&resid=";
     private static final String ERROR = "systemError.html";
 
@@ -48,7 +49,7 @@ public class CreateExaminationServlet extends HttpServlet {
             int serviceId = Integer.parseInt(strServiceId);
             LocalDate createdDate = LocalDate.now();
             java.sql.Date sqlDate = java.sql.Date.valueOf(createdDate);
-            
+
             url = url + reservationId;
             if (!prescription.equals("")) {
                 MedicalExaminationDTO examination

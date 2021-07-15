@@ -72,7 +72,7 @@ public class ViewReservationDetailStaffServlet extends HttpServlet {
             request.setAttribute("RES_DETAIL", resViewModel);
             //---------
             MedicalExaminationDTO previousExam = medicalExamDAO.getExaminationByReservationId(Integer.parseInt(id));
-            if(previousExam != null) {
+            if (previousExam != null) {
                 request.setAttribute("PRE_EXAM", previousExam);
             }
 

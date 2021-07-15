@@ -171,6 +171,7 @@ public class ManagerDAO {
         }
         return check;
     }
+
     public List<ManagerDTO> getAllActiveManagerProfile() throws SQLException {
         List<ManagerDTO> result = null;
         Connection conn = null;
@@ -188,7 +189,7 @@ public class ManagerDAO {
                 while (rs.next()) {
                     String identityID = rs.getString("IdentityID");
                     String fullName = rs.getString("FullName");
-                    String phoneNumber = rs.getString("PhoneNumber"); 
+                    String phoneNumber = rs.getString("PhoneNumber");
                     ManagerDTO man = new ManagerDTO(identityID, fullName, phoneNumber);
                     result.add(man);
                 }
@@ -208,6 +209,7 @@ public class ManagerDAO {
         }
         return result;
     }
+
     public boolean delete(String id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -235,6 +237,7 @@ public class ManagerDAO {
         }
         return false;
     }
+
     public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -265,6 +268,7 @@ public class ManagerDAO {
         }
         return false;
     }
+
     public boolean addManager(ManagerDTO man) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -295,7 +299,8 @@ public class ManagerDAO {
         }
         return false;
     }
-     public List<ManagerDTO> getAllDeactiveManagerProfile() throws SQLException {
+
+    public List<ManagerDTO> getAllDeactiveManagerProfile() throws SQLException {
         List<ManagerDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -312,7 +317,7 @@ public class ManagerDAO {
                 while (rs.next()) {
                     String identityID = rs.getString("IdentityID");
                     String fullName = rs.getString("FullName");
-                    String phoneNumber = rs.getString("PhoneNumber"); 
+                    String phoneNumber = rs.getString("PhoneNumber");
                     ManagerDTO man = new ManagerDTO(identityID, fullName, phoneNumber);
                     result.add(man);
                 }

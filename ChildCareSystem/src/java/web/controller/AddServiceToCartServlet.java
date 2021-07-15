@@ -34,7 +34,7 @@ import web.viewModels.Cart.CartViewModel;
  * @author HOANGKHOI
  */
 public class AddServiceToCartServlet extends HttpServlet {
-    
+
     private static final String SUCCESS = "xem-don-dat-kham";
     private static final String ERROR = "chooseServiceReserve.jsp";
 
@@ -56,15 +56,15 @@ public class AddServiceToCartServlet extends HttpServlet {
         int patientId = Integer.parseInt(request.getParameter("txtPatientId"));
         int serviceId = Integer.parseInt(request.getParameter("txtServiceId"));
         int timeIntervalId = Integer.parseInt(request.getParameter("txtTimeId"));
-        String date = request.getParameter("txtDate"); 
+        String date = request.getParameter("txtDate");
         String url = ERROR;
         OpenTimeDAO openTimeDAO = new OpenTimeDAO();
         SystemSettingDAO systemSettingDAO = new SystemSettingDAO();
-        
+
         int maxReservation;
         try {
             maxReservation = Integer.parseInt(systemSettingDAO.getSettingByName("Max Reservation").getSettingValue());
-            
+
             //1. Go to cart place
             HttpSession session = request.getSession(); // get true;
 
@@ -77,7 +77,7 @@ public class AddServiceToCartServlet extends HttpServlet {
             if (listCartViewModel == null) {
                 listCartViewModel = new ArrayList<>();
             }
-            
+
             if (cart.getCountItem() == maxReservation) {  // Check max cart item
                 url = "DispatchServlet?btAction=ChooseServiceReserve";
                 session.setAttribute("STATUS", "MAX");
@@ -92,22 +92,22 @@ public class AddServiceToCartServlet extends HttpServlet {
                 double totalPrice = cart.getTotalPrice();
                 DecimalFormat df = new DecimalFormat("#.000");
                 String total = df.format(totalPrice);
-                
+
                 if (result == true) {
                     //Setup viewmodel
                     CustomerDAO customerDAO = new CustomerDAO();
                     CustomerDTO customerDTO = customerDAO.queryCustomerByCustomerId(customerId);
-                    
+
                     PatientDAO patientDAO = new PatientDAO();
                     PatientDTO patientDTO = patientDAO.getPatientByID(String.valueOf(patientId));
-                    
+
                     ServiceDAO serviceDAO = new ServiceDAO();
                     ServiceDTO serviceDTO = serviceDAO.getServiceInfo(serviceId);
-                    
+
                     SpecialtyDAO specialtyDAO = new SpecialtyDAO();
                     int specialtyId = Integer.parseInt(serviceDTO.getSpecialtyId());
                     SpecialtyDTO specialtyDTO = specialtyDAO.getSpecialtyById(specialtyId);
-                    
+
                     CartViewModel cartViewModel = new CartViewModel(customerDTO, patientDTO, serviceDTO, specialtyDTO, reservation);
                     listCartViewModel.add(cartViewModel);
                     session.setAttribute("CART", cart);
@@ -118,7 +118,7 @@ public class AddServiceToCartServlet extends HttpServlet {
                     response.sendRedirect(url);
                 } else {
                     url = "DispatchServlet?btAction=ChooseServiceReserve";
-                    session.setAttribute("STATUS", "DUPLICATED");                    
+                    session.setAttribute("STATUS", "DUPLICATED");
                     response.sendRedirect(url);
                 }
             }

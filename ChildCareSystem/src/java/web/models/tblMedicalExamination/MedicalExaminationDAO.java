@@ -19,6 +19,7 @@ import web.utils.DBHelpers;
  * @author HOANGKHOI
  */
 public class MedicalExaminationDAO implements Serializable {
+
     public boolean addExamination(MedicalExaminationDTO examination) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -48,7 +49,7 @@ public class MedicalExaminationDAO implements Serializable {
         }
         return false;
     }
-    
+
     public boolean deleteExamination(int id) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -73,8 +74,7 @@ public class MedicalExaminationDAO implements Serializable {
         }
         return false;
     }
-    
-    
+
     public boolean updateExamination(int examinationId, String prescription, Date updatedDate) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -102,7 +102,7 @@ public class MedicalExaminationDAO implements Serializable {
         }
         return false;
     }
-    
+
     public MedicalExaminationDTO getExaminationByReservationId(int id) throws SQLException, NamingException {
         MedicalExaminationDTO result = null;
         Connection conn = null;
@@ -117,7 +117,7 @@ public class MedicalExaminationDAO implements Serializable {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, id);
                 rs = stm.executeQuery();
-                
+
                 if (rs.next()) {
                     String prescription = rs.getString("Prescription");
                     int examinationId = rs.getInt("ExaminationID");
@@ -140,5 +140,5 @@ public class MedicalExaminationDAO implements Serializable {
         }
         return result;
     }
-    
+
 }

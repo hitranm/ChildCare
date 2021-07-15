@@ -10,6 +10,7 @@ package web.utils;
  * @author Admin
  */
 public class RegisterValidation {
+
     private String wrongFormatPhoneNumber;
     private String wrongFormatPassword;
     private String wrongFormatCitizenId;
@@ -73,12 +74,5 @@ public class RegisterValidation {
     public void setConfirmPasswordNotMatch(String confirmPasswordNotMatch) {
         this.confirmPasswordNotMatch = confirmPasswordNotMatch;
     }
-    
-    
 
-
-    
-    
-    
-    
 }

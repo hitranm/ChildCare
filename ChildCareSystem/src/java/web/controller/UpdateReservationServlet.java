@@ -32,7 +32,9 @@ import web.viewModels.Cart.CartViewModel;
  * @author HOANGKHOI
  */
 public class UpdateReservationServlet extends HttpServlet {
+
     private static final String SUCCESS = "xem-don-dat-kham";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -94,7 +96,7 @@ public class UpdateReservationServlet extends HttpServlet {
                     }
                     listCartViewModel.remove(deleteViewModel);
                     listCartViewModel.add(cartViewModel);
-                    session.setAttribute("CART_VIEW_MODEL", listCartViewModel);     
+                    session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
                 }
 
             } else {

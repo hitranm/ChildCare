@@ -29,11 +29,11 @@ public class CheckValidHelper implements Serializable {
     public static boolean IsFormatPassword(String password) {
         return password.matches("(?!.*[!@#&()–[{}]:;',?/*~$^+=<>])[a-z0-9A-Z_-]{6,}$");
     }
-    
+
     public static boolean IsValidCitizenIdLength(String citizenId) {
         return citizenId.length() == 9 || citizenId.length() == 12;
     }
-    
+
     public static boolean IsValidPhoneNumberLength(String phoneNum) {
         return phoneNum.length() == 10;
     }

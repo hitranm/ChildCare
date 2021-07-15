@@ -20,8 +20,10 @@ import web.models.tblIdentity.IdentityDAO;
  * @author Admin
  */
 public class ActiveAccountServlet extends HttpServlet {
- private static final String ERROR = "systemError.html";
+
+    private static final String ERROR = "systemError.html";
     private static final String SUCCESS = "thong-ke-tai-khoan"; //"ViewAccountsServlet";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,14 +36,15 @@ public class ActiveAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-   String url = ERROR;
+        request.setCharacterEncoding("UTF-8");
+        String url = ERROR;
         String identityID = request.getParameter("id");
         IdentityDAO identityDAO = new IdentityDAO();
         try {
             int identityId = Integer.parseInt(identityID);
             boolean check = identityDAO.activeAccount(identityId);
-            if(check){
-            url = SUCCESS;
+            if (check) {
+                url = SUCCESS;
             }
         } catch (SQLException | NamingException e) {
             log("Error at ActiveAccountServlet: " + e.toString());
@@ -49,7 +52,7 @@ public class ActiveAccountServlet extends HttpServlet {
         } finally {
             response.sendRedirect(url);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -38,6 +38,5 @@ public class PatientError {
     public void setBirthdayError(String birthdayError) {
         this.birthdayError = birthdayError;
     }
-    
 
 }

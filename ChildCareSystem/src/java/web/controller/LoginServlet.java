@@ -76,41 +76,41 @@ public class LoginServlet extends HttpServlet {
                     String msg = "Tài khoản của bạn đã bị vô hiệu hóa! Vui lòng liên hệ tới email @ để biết thêm chi tiết!";
                     request.setAttribute("Message", msg);
                 }
-                if(identity.getStatusID() == 1){
-                if (identity.getRoleID().equals("3")) {
-                    ManagerDTO dto = new ManagerDTO();
-                    dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
-                    session.setAttribute("ROLE", "manager");
-                    session.setAttribute("ROLEID", identity.getRoleID());
-                    url = SUCCESS;
-                }
-                if (identity.getRoleID().equals("2")) {
-                    StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
-                    session.setAttribute("ROLE", "staff");
-                    session.setAttribute("ROLEID", identity.getRoleID());
-                    url = SUCCESS;
-                }
-                if (identity.getRoleID().equals("1")) {
-                    CustomerDTO dto = customerDAO.queryCustomerByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
-                    session.setAttribute("CUSTOMER_ID", customerDAO.queryCustomerID(email));
-                    session.setAttribute("ROLE", "customer");
-                    session.setAttribute("ROLEID", identity.getRoleID());
-                    url = SUCCESS;
-                }
-                if (identity.getRoleID().equals("4")) {
-                    AdminDTO dto = adminDAO.queryAdminByIdentityId(identity.getIdentityID());
-                    session.setAttribute("LOGIN_USER", dto);
-                    session.setAttribute("IDENTITY_ID", identity.getIdentityID());
-                    session.setAttribute("ROLE", "admin");
-                    session.setAttribute("ROLEID", identity.getRoleID());
-                    url = SUCCESS;
-                }
+                if (identity.getStatusID() == 1) {
+                    if (identity.getRoleID().equals("3")) {
+                        ManagerDTO dto = new ManagerDTO();
+                        dto = managerDAO.queryManagerByIdentityId(identity.getIdentityID());
+                        session.setAttribute("LOGIN_USER", dto);
+                        session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                        session.setAttribute("ROLE", "manager");
+                        session.setAttribute("ROLEID", identity.getRoleID());
+                        url = SUCCESS;
+                    }
+                    if (identity.getRoleID().equals("2")) {
+                        StaffDTO dto = staffDAO.queryStaffByIdentityId(identity.getIdentityID());
+                        session.setAttribute("LOGIN_USER", dto);
+                        session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                        session.setAttribute("ROLE", "staff");
+                        session.setAttribute("ROLEID", identity.getRoleID());
+                        url = SUCCESS;
+                    }
+                    if (identity.getRoleID().equals("1")) {
+                        CustomerDTO dto = customerDAO.queryCustomerByIdentityId(identity.getIdentityID());
+                        session.setAttribute("LOGIN_USER", dto);
+                        session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                        session.setAttribute("CUSTOMER_ID", customerDAO.queryCustomerID(email));
+                        session.setAttribute("ROLE", "customer");
+                        session.setAttribute("ROLEID", identity.getRoleID());
+                        url = SUCCESS;
+                    }
+                    if (identity.getRoleID().equals("4")) {
+                        AdminDTO dto = adminDAO.queryAdminByIdentityId(identity.getIdentityID());
+                        session.setAttribute("LOGIN_USER", dto);
+                        session.setAttribute("IDENTITY_ID", identity.getIdentityID());
+                        session.setAttribute("ROLE", "admin");
+                        session.setAttribute("ROLEID", identity.getRoleID());
+                        url = SUCCESS;
+                    }
                 }
             } else {
                 String msg = "Email hoặc mật khẩu không chính xác!";

@@ -70,7 +70,7 @@ public class ViewBlogByAuthorServlet extends HttpServlet {
         } finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-            
+
         }
     }
 

@@ -15,7 +15,8 @@ import web.models.tblService.ServiceDTO;
  *
  * @author HOANGKHOI
  */
-public class FeedbackViewModel implements Serializable{
+public class FeedbackViewModel implements Serializable {
+
     private PatientDTO patientDTO;
     private ServiceDTO serviceDTO;
     private ReservationDTO reservationDTO;
@@ -62,8 +63,5 @@ public class FeedbackViewModel implements Serializable{
     public void setCustomerDTO(CustomerDTO customerDTO) {
         this.customerDTO = customerDTO;
     }
-    
-    
-    
-    
+
 }

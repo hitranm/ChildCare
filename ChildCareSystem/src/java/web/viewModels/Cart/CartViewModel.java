@@ -17,13 +17,14 @@ import web.models.tblSpecialty.SpecialtyDTO;
  *
  * @author HOANGKHOI
  */
-public class CartViewModel implements Serializable{
+public class CartViewModel implements Serializable {
+
     private CustomerDTO customerDTO;
     private PatientDTO patientDTO;
     private ServiceDTO serviceDTO;
     private SpecialtyDTO specialtyDTO;
     private CartItem cartItem;
-    
+
     public CartViewModel() {
     }
 
@@ -35,7 +36,6 @@ public class CartViewModel implements Serializable{
         this.cartItem = cartItem;
     }
 
-    
     public CartViewModel(CustomerDTO customerDTO, PatientDTO patientDTO, ServiceDTO serviceDTO, CartItem cartItem) {
         this.customerDTO = customerDTO;
         this.patientDTO = patientDTO;
@@ -74,10 +74,6 @@ public class CartViewModel implements Serializable{
     public void setSpecialtyDTO(SpecialtyDTO specialtyDTO) {
         this.specialtyDTO = specialtyDTO;
     }
-    
-    
-    
-    
 
     public CartItem getCartItem() {
         return cartItem;
@@ -86,11 +82,5 @@ public class CartViewModel implements Serializable{
     public void setCartItem(CartItem cartItem) {
         this.cartItem = cartItem;
     }
-    
-    
 
-    
-    
-    
-    
 }

@@ -12,6 +12,7 @@ import web.models.tblBlog.BlogDTO;
  * @author HOANGKHOI
  */
 public class BlogViewModel {
+
     private BlogDTO blogDTO;
     private String authorName;
 
@@ -38,6 +39,5 @@ public class BlogViewModel {
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
-    
-    
+
 }

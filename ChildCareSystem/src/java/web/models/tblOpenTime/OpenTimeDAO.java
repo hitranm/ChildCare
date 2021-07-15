@@ -22,7 +22,8 @@ import web.utils.DBHelpers;
  *
  * @author HOANGKHOI
  */
-public class OpenTimeDAO implements Serializable{
+public class OpenTimeDAO implements Serializable {
+
     private List<OpenTimeDTO> listTime;
 
     public List<OpenTimeDTO> getListTime() {
@@ -60,7 +61,7 @@ public class OpenTimeDAO implements Serializable{
             }
         }
     }
-    
+
     public String getTimeString(int openTimeId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -78,7 +79,7 @@ public class OpenTimeDAO implements Serializable{
                 openTime = rs.getTime("OpenTime").toString();
                 return openTime;
             }
-            
+
         } finally {
             if (rs != null) {
                 rs.close();

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class AdminDTO {
+
     private String IdentityID;
     private String FullName;
     private String Address;
@@ -26,8 +27,6 @@ public class AdminDTO {
     public String getFullName() {
         return FullName;
     }
-
-
 
     public String getAddress() {
         return Address;
@@ -48,7 +47,6 @@ public class AdminDTO {
     public void setFullName(String FullName) {
         this.FullName = FullName;
     }
-
 
     public void setAddress(String Address) {
         this.Address = Address;
@@ -87,8 +85,4 @@ public class AdminDTO {
         this.phoneNumber = phoneNumber;
     }
 
-
-    
-    
-    
 }

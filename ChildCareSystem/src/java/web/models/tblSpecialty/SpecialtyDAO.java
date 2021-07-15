@@ -135,6 +135,7 @@ public class SpecialtyDAO implements Serializable {
             }
         }
     }
+
     public SpecialtyDTO getSpecialtyName(String specialtyId) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -153,7 +154,9 @@ public class SpecialtyDAO implements Serializable {
                 String specialName = rs.getString("SpecialtyName");
                 SpecialtyDTO dto = new SpecialtyDTO(specialID, specialName);
                 return dto;
-            } else return null;
+            } else {
+                return null;
+            }
 
         } finally {
             if (rs != null) {

@@ -23,7 +23,6 @@ import web.models.tblBlog.BlogDTO;
  *
  * @author DELL
  */
-
 public class ViewBlogServlet extends HttpServlet {
 
     private final String VIEW_BLOG_PAGE = "viewBlogList.jsp";
@@ -59,7 +58,7 @@ public class ViewBlogServlet extends HttpServlet {
             dao.queryBlogListbyStatus(index, "1");
             List<BlogDTO> result = dao.getBlogList();
             request.setAttribute("BLOG_LIST", result);
-            
+
         } catch (SQLException ex) {
             log("ViewBlogServlet _ SQL: " + ex.getMessage());
             url = ERROR_PAGE;

@@ -20,15 +20,17 @@ import web.utils.DBHelpers;
  * @author Admin
  */
 public class CustomerDAO implements Serializable {
+
     private CustomerDTO customer;
+
     public CustomerDTO getCustomer() {
         return this.customer;
-    } 
+    }
 
     public void setCustomer(CustomerDTO customer) {
         this.customer = customer;
     }
-    
+
     public boolean addCustomer(CustomerDTO cus) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -91,7 +93,7 @@ public class CustomerDAO implements Serializable {
         }
         return check;
     }
-    
+
     public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
@@ -143,18 +145,18 @@ public class CustomerDAO implements Serializable {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, identityId);
                 rs = stm.executeQuery();
-                if (rs.next()) {                 
+                if (rs.next()) {
                     customerID = rs.getString("CustomerID");
                     identityID = rs.getString("IdentityID");
                     fullName = rs.getString("FullName");
                     phoneNum = rs.getString("PhoneNumber");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
-                    citizenID = rs.getString("CitizenID");   
-                    
+                    citizenID = rs.getString("CitizenID");
+
                     CustomerDTO cus = new CustomerDTO(customerID, identityID, fullName, address, birthday, citizenID, phoneNum);
                     return cus;
-                } 
+                }
             }
         } finally {
             if (rs != null) {
@@ -169,7 +171,7 @@ public class CustomerDAO implements Serializable {
         }
         return null;
     }
-    
+
     public CustomerDTO queryCustomerByCustomerId(int customerId) throws SQLException, NamingException {
         String identityId;
         String fullName;
@@ -190,17 +192,17 @@ public class CustomerDAO implements Serializable {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, customerId);
                 rs = stm.executeQuery();
-                if (rs.next()) {                 
+                if (rs.next()) {
                     identityId = rs.getString("IdentityID");
                     fullName = rs.getString("FullName");
                     phoneNum = rs.getString("PhoneNumber");
                     address = rs.getString("Address");
                     birthday = rs.getString("Birthday");
-                    citizenID = rs.getString("CitizenID");   
+                    citizenID = rs.getString("CitizenID");
                     stringId = rs.getString("CustomerID");
                     CustomerDTO cus = new CustomerDTO(stringId, identityId, fullName, phoneNum, address, birthday, citizenID);
                     return cus;
-                } 
+                }
             }
         } finally {
             if (rs != null) {
@@ -247,7 +249,7 @@ public class CustomerDAO implements Serializable {
         }
         return CustomerID;
     }
-    
+
     public String getCustomerIdByIdentity(String identityId) throws SQLException, NamingException {
         String CustomerID = "";
         Connection conn = null;
@@ -312,7 +314,8 @@ public class CustomerDAO implements Serializable {
 
         return check;
     }
-     public List<CustomerDTO> getAllActiveCustomerProfile() throws SQLException {
+
+    public List<CustomerDTO> getAllActiveCustomerProfile() throws SQLException {
         List<CustomerDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -349,7 +352,8 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-      public List<CustomerDTO> getAllDeactiveCustomerProfile() throws SQLException {
+
+    public List<CustomerDTO> getAllDeactiveCustomerProfile() throws SQLException {
         List<CustomerDTO> result = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -386,7 +390,8 @@ public class CustomerDAO implements Serializable {
         }
         return result;
     }
-     public boolean delete(String id) throws ClassNotFoundException, SQLException {
+
+    public boolean delete(String id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {

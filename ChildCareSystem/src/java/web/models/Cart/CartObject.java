@@ -42,22 +42,22 @@ public class CartObject implements Serializable {
         this.cartItems.add(reservation);
         return true;
     }
-    
+
     public int getCountItem() {
-        if(this.cartItems == null) {
+        if (this.cartItems == null) {
             this.cartItems = new ArrayList<>();
         }
         return this.cartItems.size();
     }
-    
+
     public double getTotalPrice() throws SQLException, NamingException {
         double total = 0;
         ServiceDAO serviceDAO = new ServiceDAO();
-        if(this.cartItems == null) {
+        if (this.cartItems == null) {
             this.cartItems = new ArrayList<>();
         }
-        
-        for(CartItem item : this.cartItems) {
+
+        for (CartItem item : this.cartItems) {
             total += serviceDAO.getServicePriceById(item.getServiceId());
         }
         return total;
@@ -75,8 +75,8 @@ public class CartObject implements Serializable {
             if (item.getPatientId() == patientId) {
                 deleteItem = item;
             }
-        }      
-        if(deleteItem != null) {
+        }
+        if (deleteItem != null) {
             status = this.cartItems.remove(deleteItem);
         }
         // If the cart is empty, delete it
@@ -85,33 +85,35 @@ public class CartObject implements Serializable {
         }
         return status;
     }
-    
+
     public CartItem getCartItem(int patientId) {
         //1 Check exist cart
         if (this.cartItems == null) {
             this.cartItems = new ArrayList<>();
         }
-        
-        for(CartItem item : this.cartItems) {
-            if(item.getPatientId() == patientId) {
+
+        for (CartItem item : this.cartItems) {
+            if (item.getPatientId() == patientId) {
                 return item;
             }
         }
         return null;
     }
-    
+
     public boolean UpdateCartItem(CartItem updateItem) {
         //1 Check exist cart
         if (this.cartItems == null) {
             this.cartItems = new ArrayList<>();
         }
-        
+
         CartItem targetItem = getCartItem(updateItem.getPatientId());
-        if(targetItem != null) {
+        if (targetItem != null) {
             targetItem.setServiceId(updateItem.getServiceId());
             targetItem.setTimeIntervalId(updateItem.getTimeIntervalId());
             targetItem.setCheckInTime(updateItem.getCheckInTime());
             return true;
-        } else return false; // not found
+        } else {
+            return false; // not found
+        }
     }
 }

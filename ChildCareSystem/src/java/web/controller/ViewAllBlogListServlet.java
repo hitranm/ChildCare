@@ -24,8 +24,10 @@ import web.models.tblStaff.StaffDTO;
  * @author DELL
  */
 public class ViewAllBlogListServlet extends HttpServlet {
+
     private final String VIEW_BLOG = "blogDashboard.jsp";
     private final String ERROR = "systemError.html";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

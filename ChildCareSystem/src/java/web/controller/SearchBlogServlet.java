@@ -23,7 +23,7 @@ import web.models.tblBlog.BlogDTO;
  * @author DELL
  */
 public class SearchBlogServlet extends HttpServlet {
-    
+
     private final String SEARCH_PAGE = "searchBlog.jsp";
     private final String ERROR_PAGE = "systemError.html";
     private final String VIEW_BLOG = "ViewBlogServlet?index=1";

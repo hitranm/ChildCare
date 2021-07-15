@@ -22,7 +22,9 @@ import web.models.tblReservation.ReservationDTO;
  * @author Admin
  */
 public class ViewReservationManagerServlet extends HttpServlet {
-private static final String VIEW_RESERVATION="reservationdashboard.jsp";
+
+    private static final String VIEW_RESERVATION = "reservationdashboard.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,10 +38,9 @@ private static final String VIEW_RESERVATION="reservationdashboard.jsp";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String url=VIEW_RESERVATION;
+        String url = VIEW_RESERVATION;
         try {
             ReservationDAO reservationDAO = new ReservationDAO();
-
 
             List<ReservationDTO> listReservation = reservationDAO.getAllReservation();
             request.setAttribute("ListReservation", listReservation);

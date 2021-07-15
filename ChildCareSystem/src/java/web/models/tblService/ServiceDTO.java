@@ -39,7 +39,6 @@ public class ServiceDTO implements Serializable {
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
     }
-    
 
     public ServiceDTO(String serviceID, String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String createPersonId, String createdDate) {
         this.serviceId = serviceID;
@@ -64,7 +63,6 @@ public class ServiceDTO implements Serializable {
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
     }
-
 
     public ServiceDTO(String serviceName, String specialtyId, String thumbnail, String description, double price, String statusId, String createPersonId, String createdDate) {
         this.serviceName = serviceName;
@@ -102,7 +100,6 @@ public class ServiceDTO implements Serializable {
         this.statusId = statusId;
         this.updatedDate = updatedDate;
     }
-
 
     public String getServiceId() {
         return serviceId;
@@ -183,8 +180,5 @@ public class ServiceDTO implements Serializable {
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
-    
-
 
 }

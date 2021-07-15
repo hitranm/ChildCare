@@ -10,6 +10,7 @@ package web.models.tblCustomer;
  * @author Admin
  */
 public class CustomerError {
+
     private String citizenIDDupError;
     private String passwordError;
     private String emailDupError;
@@ -40,5 +41,5 @@ public class CustomerError {
     public void setEmailDupError(String emailDupError) {
         this.emailDupError = emailDupError;
     }
-    
+
 }

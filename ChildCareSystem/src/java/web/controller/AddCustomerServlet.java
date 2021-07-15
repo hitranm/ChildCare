@@ -25,7 +25,8 @@ import web.utils.SendEmail;
  * @author Admin
  */
 public class AddCustomerServlet extends HttpServlet {
-    private static final String SYSTEM_ERROR="error.jsp";
+
+    private static final String SYSTEM_ERROR = "error.jsp";
     private static final String ERROR = "register.jsp";
     private static final String SUCCESS = "verify.jsp";
 
@@ -67,28 +68,28 @@ public class AddCustomerServlet extends HttpServlet {
                 foundError = true;
                 registerValidation.setWrongFormatPassword("Mật khẩu không đúng định dạng!");
             }
-            
+
             if (!CheckValidHelper.IsValidCitizenIdLength(citizenID)) {
                 foundError = true;
                 registerValidation.setDuplicatedCitizenId("CCCD không đúng định dạng!");
             }
-            
+
             if (!CheckValidHelper.checkConfirmPassword(password, cpassword)) {
                 foundError = true;
                 registerValidation.setConfirmPasswordNotMatch("Mật khẩu xác nhận không trùng khớp!");
             }
-            
-            if(identityDAO.checkDuplicatedEmail(email)) {
+
+            if (identityDAO.checkDuplicatedEmail(email)) {
                 foundError = true;
                 registerValidation.setDuplicatedEmail("Email này đã được sử dụng!");
             }
-            
+
             /* -------- Following errors are depend on each role --------*/
-            if(customerDAO.checkCitizenID(citizenID)) {
+            if (customerDAO.checkCitizenID(citizenID)) {
                 foundError = true;
                 registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
             }
-            
+
             if (customerDAO.checkDuplicatedPhoneNumber(phoneNum)) {
                 foundError = true;
                 registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
@@ -109,11 +110,11 @@ public class AddCustomerServlet extends HttpServlet {
                     session.setAttribute("authcode", code);
                     url = SUCCESS;
                 } else {
-                    url= SYSTEM_ERROR;
-                    
+                    url = SYSTEM_ERROR;
+
                 }
-            }     
-                
+            }
+
         } catch (SQLException | NamingException e) {
             log("Error at AddCustomerServlet: " + e.getMessage());
         } finally {

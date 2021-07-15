@@ -44,7 +44,7 @@ public class ViewSystemSettingServlet extends HttpServlet {
             SystemSettingDAO dao = new SystemSettingDAO();
             List<SystemSettingDTO> settingList = dao.getAllSystemSettings();
             request.setAttribute("settingList", settingList);
-            
+
         } catch (SQLException | NamingException e) {
             log("ERROR at ViewSystemSettingServlet: " + e.getMessage());
         } finally {

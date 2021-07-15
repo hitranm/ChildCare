@@ -15,7 +15,8 @@ import web.models.tblPatient.PatientDTO;
  *
  * @author HOANGKHOI
  */
-public class ReservationViewModel implements Serializable{
+public class ReservationViewModel implements Serializable {
+
     private CustomerDTO customerDTO;
     private IdentityDTO identityDTO;
     private List<PatientDTO> listPatient;
@@ -33,7 +34,6 @@ public class ReservationViewModel implements Serializable{
         this.customerDTO = customerDTO;
     }
 
-    
     public CustomerDTO getCustomerDTO() {
         return customerDTO;
     }
@@ -57,10 +57,5 @@ public class ReservationViewModel implements Serializable{
     public void setIdentityDTO(IdentityDTO identityDTO) {
         this.identityDTO = identityDTO;
     }
-    
-    
 
-    
-    
-    
 }

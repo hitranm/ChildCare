@@ -65,14 +65,14 @@ public class SendEmail {
             mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
             //set email subject
-           String mailSubject= "EMAIL VERIFICATION FOR CHILDCARE SYSTEM";
-           String mailText = "<font size =\"3\"> Quý khách đã đăng ký tài khoản thành công. Vui lòng sử dụng mã này để xác thực tài khoản của quý khách: </font>";
-           String codeBold = "<h1><strong>"+ code + "</strong></h1>";
+            String mailSubject = "EMAIL VERIFICATION FOR CHILDCARE SYSTEM";
+            String mailText = "<font size =\"3\"> Quý khách đã đăng ký tài khoản thành công. Vui lòng sử dụng mã này để xác thực tài khoản của quý khách: </font>";
+            String codeBold = "<h1><strong>" + code + "</strong></h1>";
 
             mess.setSubject(mailSubject);
             mess.setContent(mailText + codeBold, "text/html; charset=utf-8");
             //set message text
-    
+
             mess.saveChanges();
             //send the message
             Transport.send(mess);

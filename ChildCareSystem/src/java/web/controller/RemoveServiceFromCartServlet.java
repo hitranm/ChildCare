@@ -49,15 +49,15 @@ public class RemoveServiceFromCartServlet extends HttpServlet {
                     //3. Customer get item
                     List<CartItem> items = cart.getCartItems();
                     if (items != null) {
-                        
-                        result = cart.removeServiceFromCart(patientId);    
+
+                        result = cart.removeServiceFromCart(patientId);
                     }
                     if (result) {
                         session.setAttribute("CART", cart);
                         //Remove trong Cart View Model
                         CartViewModel deleteViewModel = null;
-                        for(CartViewModel viewModel : listCartViewModel) {
-                            if(Integer.parseInt(viewModel.getPatientDTO().getPatientID()) == patientId) {
+                        for (CartViewModel viewModel : listCartViewModel) {
+                            if (Integer.parseInt(viewModel.getPatientDTO().getPatientID()) == patientId) {
                                 deleteViewModel = viewModel;
                             }
                         }

@@ -25,8 +25,10 @@ import web.utils.RegisterValidation;
  * @author Admin
  */
 public class AddManagerServlet extends HttpServlet {
-private static final String ERROR="addManager.jsp";
-private static final String SUCCESS="home.jsp";
+
+    private static final String ERROR = "addManager.jsp";
+    private static final String SUCCESS = "home.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,28 +67,28 @@ private static final String SUCCESS="home.jsp";
                 foundError = true;
                 registerValidation.setWrongFormatPassword("Mật khẩu không đúng định dạng!");
             }
-            
+
             if (!CheckValidHelper.IsValidCitizenIdLength(citizenID)) {
                 foundError = true;
                 registerValidation.setDuplicatedCitizenId("CCCD không đúng định dạng!");
             }
-            
+
             if (!CheckValidHelper.checkConfirmPassword(password, cpassword)) {
                 foundError = true;
                 registerValidation.setConfirmPasswordNotMatch("Mật khẩu xác nhận không trùng khớp!");
             }
-            
-            if(identityDAO.checkDuplicatedEmail(email)) {
+
+            if (identityDAO.checkDuplicatedEmail(email)) {
                 foundError = true;
                 registerValidation.setDuplicatedEmail("Email này đã được sử dụng!");
             }
-            
+
             /* -------- Following errors are depend on each role --------*/
-            if(managerDAO.checkCitizenID(citizenID)) {
+            if (managerDAO.checkCitizenID(citizenID)) {
                 foundError = true;
                 registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
             }
-            
+
             if (managerDAO.checkDuplicatedPhoneNumber(phoneNum)) {
                 foundError = true;
                 registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
@@ -105,16 +107,16 @@ private static final String SUCCESS="home.jsp";
                     ManagerDTO man = new ManagerDTO(identityID, fullName, address, birthday, citizenID, phoneNum);
                     boolean flag1 = managerDAO.addManager(man);
                     if (flag1) {
-                        url=SUCCESS;
+                        url = SUCCESS;
                     }
-                }     
-            }   
+                }
+            }
         } catch (ClassNotFoundException | SQLException | NamingException e) {
             log("Error at AddCustomerServlet: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-            
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

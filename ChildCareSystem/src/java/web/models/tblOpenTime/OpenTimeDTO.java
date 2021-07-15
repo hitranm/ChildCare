@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author HOANGKHOI
  */
-public class OpenTimeDTO implements Serializable{
+public class OpenTimeDTO implements Serializable {
+
     private int openTimeId;
     private String openTime;
 
@@ -22,7 +23,7 @@ public class OpenTimeDTO implements Serializable{
         this.openTimeId = openTimeId;
         this.openTime = openTime;
     }
-    
+
     public int getOpenTimeId() {
         return openTimeId;
     }
@@ -38,6 +39,5 @@ public class OpenTimeDTO implements Serializable{
     public void setOpenTime(String openTime) {
         this.openTime = openTime;
     }
-    
-    
+
 }

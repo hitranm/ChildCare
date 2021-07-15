@@ -23,6 +23,7 @@ import web.models.tblSpecialty.SpecialtyDTO;
  * @author HOANGKHOI
  */
 public class LoadSpecialtyListServlet extends HttpServlet {
+
     private final String CREATE_STAFF_PAGE = "createStaff.jsp";
     private final String CREATE_SERVVICE_PAGE = "createService.jsp";
     private final String ERROR_PAGE = "systemError.jsp";
@@ -32,14 +33,14 @@ public class LoadSpecialtyListServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("view");
-        String url  = "";
+        String url = "";
 //        if (action.equalsIgnoreCase("CreateStaff")) {
 //            url = CREATE_STAFF_PAGE;
 //        } else if (action.equalsIgnoreCase("CreateService")) {
 //            url = CREATE_SERVVICE_PAGE;
 //        }
-         url = CREATE_SERVVICE_PAGE;
-        
+        url = CREATE_SERVVICE_PAGE;
+
         try {
             SpecialtyDAO specialtyDAO = new SpecialtyDAO();
             specialtyDAO.displaySpecialtyList();

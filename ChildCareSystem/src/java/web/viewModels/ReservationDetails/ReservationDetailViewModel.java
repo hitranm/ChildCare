@@ -16,6 +16,7 @@ import web.models.tblStaff.StaffDTO;
  * @author Admin
  */
 public class ReservationDetailViewModel {
+
     private CustomerDTO customerDTO;
     private PatientDTO patientDTO;
     private ServiceDTO serviceDTO;
@@ -82,5 +83,5 @@ public class ReservationDetailViewModel {
     public void setReservationDTO(ReservationDTO reservationDTO) {
         this.reservationDTO = reservationDTO;
     }
-    
+
 }

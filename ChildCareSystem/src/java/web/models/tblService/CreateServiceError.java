@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author HOANGKHOI
  */
-public class CreateServiceError implements Serializable{
+public class CreateServiceError implements Serializable {
+
     private String priceFormat;
     private String salePriceFormat;
     private String titleLengthError;
@@ -53,7 +54,6 @@ public class CreateServiceError implements Serializable{
         this.salePriceFormat = salePriceFormat;
     }
 
-   
     public String getTitleLengthError() {
         return titleLengthError;
     }
@@ -69,6 +69,5 @@ public class CreateServiceError implements Serializable{
     public void setDescriptionLengthError(String descriptionLengthError) {
         this.descriptionLengthError = descriptionLengthError;
     }
-    
-    
+
 }
