@@ -25,7 +25,7 @@
     <body>
 
 
-        <form action="DispatchServlet" method="POST">
+       
             <div class="content">
                 <div class="container">
                     <div class="row">
@@ -38,7 +38,7 @@
                                     <div class="mb-4">
                                         <h3>Đã gửi mã xác thực về email. Vui lòng kiểm tra email của bạn.</h3>
                                     </div>
-                                    <form action="DispatchServlet?btAction=Verify" method="post">
+                                    <form action="VerifyServlet" method="post">
                                         <div class="form-group first">
                                             <label for="email">Mã xác thực</label>
                                             <input type="text" name="authcode" value="" required="true" class="form-control" id="email">
@@ -71,12 +71,7 @@
 
 
 
-            <!--  Nhập mã xác thực email <input type="text" name="authcode" ></br>
-              <button type="submit" name="btAction" value="Verify">Xác thực </button>
-  
-  
-          </form>
-            -->
+            
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

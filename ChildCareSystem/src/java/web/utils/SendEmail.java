@@ -9,6 +9,8 @@ package web.utils;
  *
  * @author Admin
  */
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.Authenticator;
@@ -18,8 +20,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import web.models.tblCustomer.CustomerDTO;
+
 public class SendEmail {
+
     public String getRandom() {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
@@ -44,7 +47,7 @@ public class SendEmail {
             pr.setProperty("mail.smtp.starttls.enable", "true");
             pr.put("mail.smtp.socketFactory.port", "587");
             pr.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
- 
+
             //get session to authenticate the host email address and password
             Session session = Session.getInstance(pr, new Authenticator() {
                 @Override
@@ -56,21 +59,26 @@ public class SendEmail {
             //set email message details
             Message mess = new MimeMessage(session);
 
-    		//set from email address
+            //set from email address
             mess.setFrom(new InternetAddress(fromEmail));
-    		//set to email address or destination email address
+            //set to email address or destination email address
             mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-    		
-    		//set email subject
-            mess.setSubject("EMAIL XÁC THỰC TÀI KHOẢN");
-            
-    		//set message text
-            mess.setText("Quý khách đã đăng ký tài khoản thành công. Vui lòng sử dụng mã này để xác thực tài khoản của quý khách: " + code);
+
+            //set email subject
+           String mailSubject= "EMAIL VERIFICATION FOR CHILDCARE SYSTEM";
+           String mailText = "<font size =\"3\"> Quý khách đã đăng ký tài khoản thành công. Vui lòng sử dụng mã này để xác thực tài khoản của quý khách: </font>";
+           String codeBold = "<h1><strong>"+ code + "</strong></h1>";
+
+            mess.setSubject(mailSubject);
+            mess.setContent(mailText + codeBold, "text/html; charset=utf-8");
+            //set message text
+    
+            mess.saveChanges();
             //send the message
             Transport.send(mess);
-            
-            test=true;
-            
+
+            test = true;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
