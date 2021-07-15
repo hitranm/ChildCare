@@ -211,15 +211,7 @@ main{
     align-items: center;
     border-bottom: 1px solid #f0f0f0;
 }
-.card-header button {
-    background: var(--main-color);
-    border-radius: 10px;
-    color: #fff;
-    font-size: .8rem;
-    padding: .5rem 1rem;
-    border: 1px solid var(--main-color);
-    
-}
+
 table{
     border-collapse: collapse;
 }

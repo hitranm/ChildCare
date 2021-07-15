@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tạo acc manager</title>
+        <title>Tạo tài khoản quản lí</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
 
 
         <div class="wrapper px-5">
-            <h1>Tạo account manager</h1>
+            <h1>Tạo tài khoản quản lí</h1>
             <form action="DispatchServlet?btAction=RegisterManager" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -126,8 +126,18 @@
                         </c:if>
                     </div>
                 </div>
+                <div class="form-row"
+                     <div class="form-group col-md-4">
+                        <label>Vai trò</label>
 
-                <input type="hidden" name="roleID" value="3">
+                        <select class="form-control justify-content-center" name="roleID">
+
+                            <option value="3">Manager</option>
+                            <option value="4">Admin</option>
+
+                        </select>
+                    </div>
+                </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary col-md-4">Đăng ký</button>
                 </div>

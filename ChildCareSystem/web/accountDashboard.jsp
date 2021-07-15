@@ -173,7 +173,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Danh sách tài khoản đưa vào hoạt động</h3>
-
+                                <div><a href="addManager.jsp" class="btn btn-primary">Tạo mới tài khoản  <span class="fas fa-plus"></span></a></div>
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">
