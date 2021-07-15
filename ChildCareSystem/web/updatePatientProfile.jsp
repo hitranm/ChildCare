@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-latest.js"></script>
         <script>
-            $(function () {S
+            $(function () {
                 //Năm tự động điền vào select
                 var seYear = $('#year');
                 var date = new Date();
