@@ -126,18 +126,18 @@
                         </c:if>
                     </div>
                 </div>
-                <div class="form-row"
-                     <div class="form-group col-md-4">
-                        <label>Vai trò</label>
-
+                <div class="form-row justify-content-center">
+                    
+                    <div class="form-group col-md-4">
+                        <p class="justify-content-center" style="text-align: center">Vai trò</p>
                         <select class="form-control justify-content-center" name="roleID">
-
                             <option value="3">Manager</option>
                             <option value="4">Admin</option>
-
                         </select>
+                        <hr>
                     </div>
                 </div>
+                 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary col-md-4">Đăng ký</button>
                 </div>
