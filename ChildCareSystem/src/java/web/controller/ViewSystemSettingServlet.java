@@ -39,6 +39,7 @@ public class ViewSystemSettingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try {
             SystemSettingDAO dao = new SystemSettingDAO();
             List<SystemSettingDTO> settingList = dao.getAllSystemSettings();

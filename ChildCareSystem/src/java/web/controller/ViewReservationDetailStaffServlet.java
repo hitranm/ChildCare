@@ -49,7 +49,7 @@ public class ViewReservationDetailStaffServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("resid");
         String url = VIEW_RESERVATION_DETAIL;
         ReservationDAO resDAO = new ReservationDAO();

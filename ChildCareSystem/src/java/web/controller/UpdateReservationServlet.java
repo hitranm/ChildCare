@@ -45,6 +45,7 @@ public class UpdateReservationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         int customerId = Integer.parseInt(request.getParameter("txtCustomerId"));
         int patientId = Integer.parseInt(request.getParameter("txtPatientId"));
         int serviceId = Integer.parseInt(request.getParameter("txtServiceId"));

@@ -35,6 +35,7 @@ public class ForgotPassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
+        request.setCharacterEncoding("UTF-8");
         try {
            String email = request.getParameter("email");
            IdentityDAO dao = new IdentityDAO();
