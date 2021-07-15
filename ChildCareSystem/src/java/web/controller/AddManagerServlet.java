@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import web.models.tblAdmin.AdminDAO;
+import web.models.tblAdmin.AdminDTO;
 import web.models.tblIdentity.IdentityDAO;
 import web.models.tblIdentity.IdentityDTO;
 import web.models.tblManager.ManagerDAO;
@@ -53,8 +55,10 @@ public class AddManagerServlet extends HttpServlet {
             String birthday = request.getParameter("birthday");
             String citizenID = request.getParameter("citizenID");
             String roleID = request.getParameter("roleID");
+            int roleId = Integer.parseInt(roleID);
             HttpSession session = request.getSession();
             ManagerDAO managerDAO = new ManagerDAO();
+            AdminDAO adminDAO = new AdminDAO();
             IdentityDAO identityDAO = new IdentityDAO();
             RegisterValidation registerValidation = new RegisterValidation();
             boolean foundError = false;
@@ -84,14 +88,29 @@ public class AddManagerServlet extends HttpServlet {
             }
 
             /* -------- Following errors are depend on each role --------*/
-            if (managerDAO.checkCitizenID(citizenID)) {
-                foundError = true;
-                registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
-            }
+            switch (roleId) {
+                case 3:
+                    if (managerDAO.checkCitizenID(citizenID)) {
+                        foundError = true;
+                        registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
+                    }
 
-            if (managerDAO.checkDuplicatedPhoneNumber(phoneNum)) {
-                foundError = true;
-                registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
+                    if (managerDAO.checkDuplicatedPhoneNumber(phoneNum)) {
+                        foundError = true;
+                        registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
+                    }
+                    break;
+                case 4:
+                    if (adminDAO.checkCitizenID(citizenID)) {
+                        foundError = true;
+                        registerValidation.setDuplicatedCitizenId("Căn cước công dân này đã được sử dụng.");
+                    }
+
+                    if (adminDAO.checkDuplicatedPhoneNumber(phoneNum)) {
+                        foundError = true;
+                        registerValidation.setDuplicatedPhoneNum("Số điện thoại này đã được sử dụng!");
+                    }
+                    break;
             }
             /*------------------------------------------------------------*/
 
@@ -104,10 +123,19 @@ public class AddManagerServlet extends HttpServlet {
                 boolean resultAddIdentity = identityDAO.addIdentity(identity);
                 if (resultAddIdentity) {
                     String identityID = identityDAO.queryIDByEmail(email);
-                    ManagerDTO man = new ManagerDTO(identityID, fullName, address, birthday, citizenID, phoneNum);
-                    boolean flag1 = managerDAO.addManager(man);
-                    if (flag1) {
-                        url = SUCCESS;
+                    if (roleID.equals("3")) {
+                        ManagerDTO man = new ManagerDTO(identityID, fullName, address, birthday, citizenID, phoneNum);
+                        boolean flag1 = managerDAO.addManager(man);
+                        if (flag1) {
+                            url = SUCCESS;
+                        }
+                    }
+                    if (roleID.equals("4")) {
+                        AdminDTO admin = new AdminDTO(identityID, fullName, address, birthday, citizenID, phoneNum);
+                        boolean check = adminDAO.addAdmin(admin);
+                        if (check) {
+                            url = SUCCESS;
+                        }
                     }
                 }
             }

@@ -51,13 +51,14 @@
 
                     <div class="form-group col-md-6">
                         <label for="citizenID">Căn cước công dân</label>
+                        <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedCitizenId}">
+                             <span class="text-danger" role="alert" style="text-align:right">
+                                ${requestScope.SIGNUP_ERROR.duplicatedCitizenId}
+                            </span>
+                        </c:if>
                         <input type="text" class="form-control" id="citizenID" name="citizenID" aria-describedby="citizenIDHelp" value="${param.citizenID}" required="true">
                         <small id="citizenIDHelp" class="form-text text-muted">Gồm 12 số</small>
-                        <c:if test="${not empty requestScope.SIGNUP_ERROR.duplicatedCitizenId}">
-                            <small class="text-danger" role="alert">
-                                ${requestScope.SIGNUP_ERROR.duplicatedCitizenId}
-                            </small>
-                        </c:if>
+                        
                     </div>
                 </div>
 

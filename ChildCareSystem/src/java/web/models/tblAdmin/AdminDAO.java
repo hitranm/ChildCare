@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.NamingException;
+import web.models.tblManager.ManagerDTO;
 import web.utils.DBHelpers;
 
 /**
@@ -171,24 +172,84 @@ public class AdminDAO {
         return null;
     }
 
-    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+//    public boolean delete(String id) throws ClassNotFoundException, SQLException {
+//        Connection conn = null;
+//        PreparedStatement stm = null;
+//        try {
+//            conn = DBHelpers.makeConnection();
+//            if (conn != null) {
+//                String sql = "DELETE FROM tblAdmin WHERE IdentityID=?";
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, id);
+//                int row = stm.executeUpdate();
+//                if (row > 0) {
+//                    return true;
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (stm != null) {
+//                stm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//        return false;
+//    }
+     public boolean addAdmin(AdminDTO ad) throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBHelpers.makeConnection();
             if (conn != null) {
-                String sql = "DELETE FROM tblAdmin WHERE IdentityID=?";
+                String sql = "INSERT INTO tblAdmin(IdentityID, FullName, PhoneNumber, Address, Birthday, CitizenID) VALUES(?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, id);
+                stm.setString(1, ad.getIdentityID());
+                stm.setString(2, ad.getFullName());
+                stm.setString(3, ad.getPhoneNumber());
+                stm.setString(4, ad.getAddress());
+                stm.setString(5, ad.getBirthday());
+                stm.setString(6, ad.getCitizenID());
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+     public boolean checkDuplicatedPhoneNumber(String phoneNum) throws SQLException, NamingException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT PhoneNumber "
+                        + " FROM tblAdmin"
+                        + " WHERE PhoneNumber=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, phoneNum);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (stm != null) {
                 stm.close();
             }
