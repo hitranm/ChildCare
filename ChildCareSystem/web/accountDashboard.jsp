@@ -30,7 +30,7 @@
             body {
                 font-family: 'Niramit', sans-serif;
             }
-            
+
             #side-bar-icon {
                 padding-left: 1rem;
                 padding-right: 1rem;
@@ -68,12 +68,28 @@
                         </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="thong-ke-Dich-vu"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <span>Dịch vụ </span></a>
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                                <span>Dịch vụ của tôi</span></a>
+                            </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="thong-ke-bai-viet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Bài viết</span></a>
+                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
+                            <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                                <span>Tất cả dịch vụ </span></a>
+                            </c:if>
+                    </li>
+                    <li style="padding-left:0.25rem">
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                                <span>Bài viết của tôi</span></a>
+                            </c:if>
+                    </li>
+                    <li style="padding-left:0.25rem">
+                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
+                            <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                                <span>Tất cả bài viết</span></a>
+                            </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
@@ -276,7 +292,7 @@
                                                                         <a onclick="return confirmation()" class="btn btn-danger" href="${delete}" role="button">Vô hiệu hóa</a>
                                                                     </td>
                                                                     </tr>
-                                                                </c:forEach>  
+                                                                </c:forEach>
                                                                 <c:if test="${requestScope.ListActiveManager!=null}">
 
                                                                     <c:forEach items="${requestScope.ListActiveManager}" var="dto" >
@@ -298,7 +314,7 @@
                                                                                 <a href="${viewdetails}">Chi tiết</a>
                                                                             </td>
                                                                             <c:if test="${sessionScope.ROLE eq 'admin'}">
-                                                                                
+
                                                                             <td>
                                                                                 <c:url var="delete" value="DispatchServlet">
                                                                                     <c:param name="btAction" value="DeleteAccount"></c:param>
@@ -578,7 +594,7 @@
                                                                         <a onclick="return confirmation1()" class="btn btn-success" href="${delete}" role="button">Kích hoạt</a>
                                                                     </td>
                                                                     </tr>
-                                                                </c:forEach>  
+                                                                </c:forEach>
                                                                 <c:if test="${requestScope.ListDeactiveManager!=null}">
 
                                                                     <c:forEach items="${requestScope.ListDeactiveManager}" var="dto" >
@@ -600,7 +616,7 @@
                                                                                 <a href="${viewdetails}">Chi tiết</a>
                                                                             </td>
                                                                             <c:if test="${sessionScope.ROLE eq 'admin'}">
-                                                                                
+
                                                                             <td>
                                                                                 <c:url var="delete" value="DispatchServlet">
                                                                                     <c:param name="btAction" value="ActiveAccount"></c:param>

@@ -29,7 +29,7 @@ import web.models.tblStaff.StaffDTO;
  */
 public class ViewBlogByAuthorServlet extends HttpServlet {
 
-    private final String VIEW_BLOG = "blogDashboard.jsp";
+    private final String VIEW_BLOG = "blogDashboardforAuthor.jsp";
     private final String ERROR = "systemError.html";
 
     /**

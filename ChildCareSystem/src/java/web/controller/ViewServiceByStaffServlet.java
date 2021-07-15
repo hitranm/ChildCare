@@ -29,7 +29,7 @@ import web.models.tblStaff.StaffDTO;
  */
 public class ViewServiceByStaffServlet extends HttpServlet {
 
-    private final String VIEW_SERVICE = "serviceDashboard.jsp";
+    private final String VIEW_SERVICE = "serviceDashboardforCreator.jsp";
     private final String ERROR = "systemError.html";
 
     /**

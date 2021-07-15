@@ -63,6 +63,47 @@ public class ServiceDAO implements Serializable {
         return false;
     }
 
+    public boolean createServicebyManager(ServiceDTO serviceDTO) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            //1. Connect Db;
+            con = DBHelpers.makeConnection();
+            //2. Create query string
+            String query = "INSERT INTO "
+                    + "tblService (ServiceName, SpecialtyID, Thumbnail, Description, Price, StatusID, CreatedDate, UpdatedDate, CreatedPersonID) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            //3 Create statement and assign value
+            stm = con.prepareStatement(query);
+            stm.setString(1, serviceDTO.getServiceName());
+            stm.setString(2, serviceDTO.getSpecialtyId());
+            stm.setString(3, serviceDTO.getThumbnail());
+            stm.setString(4, serviceDTO.getDescription());
+            stm.setDouble(5, serviceDTO.getPrice());
+            stm.setString(6, serviceDTO.getStatusId());
+            stm.setString(7, serviceDTO.getCreatedDate());
+            stm.setString(8, serviceDTO.getUpdatedDate());
+            stm.setString(9, serviceDTO.getCreatePersonId());
+
+            //4 Execute query
+            int row = stm.executeUpdate();
+            if (row > 0) {
+                return true;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
     public int countService() throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;

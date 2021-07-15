@@ -25,7 +25,6 @@ import javax.servlet.http.Part;
 import web.models.tblService.CreateServiceError;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
-import web.models.tblStaff.StaffDAO;
 
 /**
  *
@@ -98,12 +97,21 @@ public class CreateServiceServlet extends HttpServlet {
             } else {
                 //Get identity from session
                 String identityId = (String) session.getAttribute("IDENTITY_ID");
-                ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
-                        thumbnail, description, price, "0",
-                        identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
-                // Process to add new service
+                String roleID = (String) session.getAttribute("ROLEID");
                 ServiceDAO serviceDAO = new ServiceDAO();
-                boolean result = serviceDAO.AddNewService(serviceDTO);
+                boolean result;
+                if (roleID.equals("3")) {
+                    ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
+                            thumbnail, description, price, "1",
+                            identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
+                    result = serviceDAO.createServicebyManager(serviceDTO);
+                } else {
+                    ServiceDTO serviceDTO = new ServiceDTO(serviceName, specialtyId,
+                            thumbnail, description, price, "0",
+                            identityId, LocalDateTime.now().toString(), LocalDateTime.now().toString());
+                    result = serviceDAO.AddNewService(serviceDTO);
+                }
+                // Process to add new service
                 if (result) {
                     url = VIEW_SERVICE;
                 } else {

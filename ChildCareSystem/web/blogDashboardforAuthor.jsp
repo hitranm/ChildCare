@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>Thống kê bài viết - Blog Dashboard</title>
+        <title>Child care System Dashboard </title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link rel="stylesheet" href="css\dashboard.css">
@@ -38,8 +38,8 @@
             }
         </style>
     </head>
-
-
+    
+    
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
         <c:if test="${empty sessionScope.ROLE}">
             <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
@@ -60,13 +60,13 @@
                 <ul>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="thong-ke-tong-quat" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
+                            <a href="DispatchServlet?btAction=ViewMainDashboard"   class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-tv"></span>
                                 <span >Tổng quát</span></a>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="thong-ke-tai-khoan"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
+                            <a href="DispatchServlet?btAction=ViewAccount"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-users"></span>
                                 <span>Tài khoản </span></a>
                         </li>
                     </c:if>
@@ -88,7 +88,7 @@
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'staff'}">
-                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <a href="ViewBlogByAuthorServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Bài viết của tôi</span></a>
                             </c:if>
                     </li>
@@ -98,29 +98,29 @@
                                 <span>Bài viết của tôi</span></a>
                         </c:if>--%>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                                <a href="ViewAllBlogListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Tất cả bài viết</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                            <a href="thong-ke-Don-dat-kham" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="DispatchServlet?btAction=ViewReservationForManager" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'staff'}">
-                            <a href="don-kham-benh-cua-nhan-vien" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
+                            <a href="DispatchServlet?btAction=ViewReservationForStaff" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-notes-medical"></span>
                                 <span>Đơn đặt khám</span></a>
                             </c:if>
                     </li>
                     <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="thong-ke-phan-hoi" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
+                            <a href="ViewAllFeedbackServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="far fa-comments"></span>
                                 <span>Phản hồi</span></a>
                         </li>
                     </c:if>
                     <c:if test="${sessionScope.ROLE eq 'admin'}">
                         <li style="padding-left:0.25rem">
-                            <a href="cau-hinh-he-thong" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
+                            <a href="ViewSystemSettingServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-cogs"></span>
                                 <span>Cấu hình hệ thống</span></a>
                         </li>
                     </c:if>
@@ -234,7 +234,7 @@
                                                                         </td>
                                                                         <td class="alert alert-success">Chấp thuận</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -253,7 +253,7 @@
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -272,7 +272,7 @@
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -338,7 +338,7 @@
                                                                         </c:if>
 
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -383,7 +383,7 @@
                                                                         </td>
                                                                         <td class="alert alert-warning">Đang chờ</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
@@ -429,7 +429,7 @@
                                                                         </td>
                                                                         <td class="alert alert-danger">Từ chối</td>
                                                                         <td>
-                                                                            <a href="thong-tin-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                            <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
                                                                         </td>
                                                                         <td>
                                                                             <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>

@@ -67,12 +67,28 @@
                         </li>
                     </c:if>
                     <li style="padding-left:0.25rem">
-                        <a href="thong-ke-Dich-vu"  class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                            <span>Dịch vụ </span></a>
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                                <span>Dịch vụ của tôi</span></a>
+                            </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
-                        <a href="thong-ke-bai-viet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                            <span>Bài viết</span></a>
+                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
+                            <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                                <span>Tất cả dịch vụ </span></a>
+                            </c:if>
+                    </li>
+                    <li style="padding-left:0.25rem">
+                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                            <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                                <span>Bài viết của tôi</span></a>
+                            </c:if>
+                    </li>
+                    <li style="padding-left:0.25rem">
+                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
+                            <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                                <span>Tất cả bài viết</span></a>
+                            </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
@@ -165,7 +181,7 @@
                                                                     <c:if test="${feedbackDTO.serviceId == serviceDTO.serviceId}">
                                                                         <td>${serviceDTO.serviceName}</td>
                                                                     </c:if>
-                                                                </c:forEach>                                                              
+                                                                </c:forEach>
                                                                 <td>${feedbackDTO.reservationId}</td>
                                                                 <td>${feedbackDTO.customerId}</td>
                                                                 <td>${feedbackDTO.comment}</td>
@@ -231,4 +247,3 @@
         </script>
     </body>
 </html>
-
