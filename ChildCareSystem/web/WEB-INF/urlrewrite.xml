@@ -95,6 +95,10 @@
         <from>/thanh-toan-thanh-cong</from>
         <to type="forward">/successCheckout.jsp</to>
     </rule>
+    <rule>
+        <from>/gop-y-dich-vu\?id=([0-9]+)</from>
+        <to type="forward">/LoadFeedbackServlet?id=$1</to>
+    </rule>
 
 
     <!--    Staff-->

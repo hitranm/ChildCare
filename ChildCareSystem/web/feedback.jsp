@@ -97,20 +97,7 @@
                                 ></textarea>
                             <small class="text-danger" hidden id="comment-error">Bạn chưa nhập đánh giá</small>
                         </div>
-                        <!-- If there is previous feedback -->
-                        <c:if test="${not empty requestScope.PREVIOUS_FEEDBACK}">
-                            <script>
-                                document.getElementById("comment").innerHTML = "${requestScope.PREVIOUS_FEEDBACK.comment}";
-                                let star = ${requestScope.PREVIOUS_FEEDBACK.rate};
-                                for (var i = 0; i < 5; i++) {
-                                    if (i < star) {
-                                        document.getElementById(i + 1 + "one").style.color = "#fed330";
-                                    } else {
-                                        document.getElementById(i + 1 + "one").style.color = "black";
-                                    }
-                                }
-                            </script>
-                        </c:if>
+
 
                         <form action="FeedbackServlet" class="my-4" id="feedbackForm" method="post">
                             <input hidden name="txtrReservationId" value="${reservationDTO.reservationId}"/>
@@ -143,5 +130,19 @@
 
         <jsp:include page="footer.jsp"/>
         <script src="js/feedback.js"></script>
+        <!-- If there is previous feedback -->
+        <c:if test="${not empty requestScope.PREVIOUS_FEEDBACK}">
+            <script>
+                                    document.getElementById("comment").innerHTML = "${requestScope.PREVIOUS_FEEDBACK.comment}";
+                                    count = ${requestScope.PREVIOUS_FEEDBACK.rate};
+                                    for (var i = 0; i < 5; i++) {
+                                        if (i < count) {
+                                            document.getElementById(i + 1 + "one").style.color = "#fed330";
+                                        } else {
+                                            document.getElementById(i + 1 + "one").style.color = "black";
+                                        }
+                                    }
+            </script>
+        </c:if>
     </body>
 </html>

@@ -18,8 +18,8 @@ import web.models.tblFeedback.FeedbackDAO;
  */
 public class UpdateFeedbackServlet extends HttpServlet {
 
-    private static final String SUCCESS = "ViewPatientProfileServlet";
-    private static final String ERROR = "feedback.jsp";
+    private static final String SUCCESS = "phan-hoi";
+    private static final String ERROR = "loi-he-thong";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +50,7 @@ public class UpdateFeedbackServlet extends HttpServlet {
         } catch (Exception ex) {
             log("Error at UpdateFeedbackServlet: " + ex.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
