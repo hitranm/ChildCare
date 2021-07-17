@@ -463,7 +463,6 @@
                                                                                     $(".mydatatable").DataTable();
         </script>
 
-
         <script>
             window.addEventListener('load', function () {
                 const loader = document.querySelector(".loader");

@@ -134,7 +134,7 @@
                                     <button type="submit" name="action" value="Delete" class="btn btn-danger col-4">Xóa</button>
                                 </div>
                             </c:when>
-                                
+
                             <c:otherwise>
                                 <div class="text-center">
                                     <button type="submit" name="action" value="Add" class="btn btn-success col-4">Lưu</button>
@@ -147,7 +147,12 @@
         </main>
 
         <jsp:include page="footer.jsp"/>        
-
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
     </body>
 </html>
 

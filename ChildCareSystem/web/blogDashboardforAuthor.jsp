@@ -498,8 +498,12 @@
                                                                                 $(".mydatatable").DataTable();
         </script>
 
-
-
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
         <script>
             function confirmation() {
                 var r = confirm("Bạn có chắc muốn xóa bài viết này?");

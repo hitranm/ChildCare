@@ -298,7 +298,6 @@
                                             <c:if test="${requestScope.ListStaff!=null}">
                                                 <c:set var="count" value="0"/>
                                                 <c:forEach items="${requestScope.ListStaff}" var="dto" >
-
                                                 <tr>
                                                     <c:set var="count" value="${count+1}"/>
                                                     <td>${count}</td>
@@ -311,8 +310,6 @@
                                                         <c:url var="viewdetails" value="DispatchServlet">
                                                             <c:param name="btAction" value="ViewDetails"></c:param>
                                                             <c:param name="id" value="${dto.identityID}"></c:param>
-
-
                                                         </c:url>
                                                         <a href="${viewdetails}">See details</a>
                                                     </td>
@@ -427,6 +424,12 @@
                 var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
                 return r;
             }
+        </script>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
         </script>
 
     </body>

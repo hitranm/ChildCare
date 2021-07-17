@@ -33,13 +33,13 @@
     </head>
     <body>
         <c:if test="${empty sessionScope.ROLE}">
-                <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
-                <jsp:forward page="login.jsp"/>
-            </c:if>
+            <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
+            <jsp:forward page="login.jsp"/>
+        </c:if>
 
-            <c:if test="${sessionScope.ROLE != 'manager'}">
-                <jsp:forward page="accessDenied.jsp"/>
-            </c:if>
+        <c:if test="${sessionScope.ROLE != 'manager'}">
+            <jsp:forward page="accessDenied.jsp"/>
+        </c:if>
         <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
         <jsp:include page="header.jsp" />
         <div class="container">
@@ -80,6 +80,12 @@
                 var r = confirm("Bạn có chắc muốn xóa chuyên khoa này?");
                 return r;
             }
+        </script>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
         </script>
     </body>
 </html>

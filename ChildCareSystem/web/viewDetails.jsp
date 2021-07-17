@@ -29,22 +29,22 @@
                 font-family: 'Niramit', sans-serif;
             }
             .wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 4rem 0 6rem 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 4rem 0 6rem 0;
 
-                }
+            }
 
-                .wrapper form {
-                    width: 30%;
+            .wrapper form {
+                width: 30%;
 
-                }
+            }
 
-                .wrapper h1 {
-                    margin-bottom: 20px;
-                }
-                .loader {
+            .wrapper h1 {
+                margin-bottom: 20px;
+            }
+            .loader {
                 position: fixed;
                 z-index: 99;
                 top: 0;
@@ -82,7 +82,7 @@
             </div>
             <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
             <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE1}"/>
-            
+
             <div class="wrapper px-5">
                 <h1>Thông tin tài khoản</h1>
 
@@ -182,6 +182,12 @@
             $('.dropdown-toggle').dropdown();
         })
 
+    </script>
+    <script>
+        window.addEventListener('load', function () {
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden"; // class "loader hidden"
+        });
     </script>
 
 </body>

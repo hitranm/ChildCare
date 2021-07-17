@@ -106,35 +106,35 @@
                                     </thead>
 
                                     <tbody id="tableBodyAccepted">
-                                    <c:if test="${requestScope.ListReservation!=null}">
-                                        <c:set var="count" value="0"/>
-                                        <c:forEach items="${requestScope.ListReservation}" var="dto" >
+                                        <c:if test="${requestScope.ListReservation!=null}">
+                                            <c:set var="count" value="0"/>
+                                            <c:forEach items="${requestScope.ListReservation}" var="dto" >
 
-                                            <tr>
-                                            <c:set var="count" value="${count+1}"/>
-                                            <td>${count}</td>
+                                                <tr>
+                                                    <c:set var="count" value="${count+1}"/>
+                                                    <td>${count}</td>
 
-                                            <td>${dto.reservationId}</td>
-                                            <td>${dto.customerId}</td>
-                                            <td>${dto.staffAssignId}</td>
-                                            <td>${dto.checkInDate}</td>
+                                                    <td>${dto.reservationId}</td>
+                                                    <td>${dto.customerId}</td>
+                                                    <td>${dto.staffAssignId}</td>
+                                                    <td>${dto.checkInDate}</td>
 
-                                            <td>
-                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                <c:param name="btAction" value="ViewReservationDetails"></c:param>
-                                                <c:param name="resid" value="${dto.reservationId}"></c:param>
-
-
-                                            </c:url>
-                                            <a href="${viewdetails}">See details</a>
-                                            </td>
-
-                                            </tr>
-                                        </c:forEach>
+                                                    <td>
+                                                        <c:url var="viewdetails" value="DispatchServlet">
+                                                            <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                            <c:param name="resid" value="${dto.reservationId}"></c:param>
 
 
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
 
-                                    </c:if>
+                                                </tr>
+                                            </c:forEach>
+
+
+
+                                        </c:if>
                                     </tbody>
                                 </table>
 
@@ -158,32 +158,32 @@
                                     </thead>
                                     <tbody id="tableBodyWaiting">
                                         <tr>
-                                    <c:if test="${requestScope.ListMorning!=null}">
-                                        <c:set var="count" value="0"/>
-                                        <c:forEach items="${requestScope.ListMorning}" var="dto" >
+                                            <c:if test="${requestScope.ListMorning!=null}">
+                                                <c:set var="count" value="0"/>
+                                                <c:forEach items="${requestScope.ListMorning}" var="dto" >
 
-                                            <tr>
-                                            <c:set var="count" value="${count+1}"/>
-                                            <td>${count}</td>
-                                            <td>${dto.reservationId}</td>
-                                            <td>${dto.customerId}</td>
-                                            <td>${dto.staffAssignId}</td>
-                                            <td>${dto.checkInDate}</td>
+                                                <tr>
+                                                    <c:set var="count" value="${count+1}"/>
+                                                    <td>${count}</td>
+                                                    <td>${dto.reservationId}</td>
+                                                    <td>${dto.customerId}</td>
+                                                    <td>${dto.staffAssignId}</td>
+                                                    <td>${dto.checkInDate}</td>
 
-                                            <td>
-                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                <c:param name="btAction" value="ViewReservationDetails"></c:param>
-                                                <c:param name="resid" value="${dto.reservationId}"></c:param>
+                                                    <td>
+                                                        <c:url var="viewdetails" value="DispatchServlet">
+                                                            <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                            <c:param name="resid" value="${dto.reservationId}"></c:param>
 
 
-                                            </c:url>
-                                            <a href="${viewdetails}">See details</a>
-                                            </td>
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
 
-                                            </tr>
-                                        </c:forEach>
+                                                </tr>
+                                            </c:forEach>
 
-                                    </c:if>
+                                        </c:if>
                                     </tbody>
                                 </table>
 
@@ -209,80 +209,86 @@
 
                                     <tbody id="tableBodyRejected">
                                         <tr>
-                                    <c:if test="${requestScope.ListNoon!=null}">
-                                        <c:set var="count" value="0"/>
-                                        <c:forEach items="${requestScope.ListNoon}" var="dto" >
+                                            <c:if test="${requestScope.ListNoon!=null}">
+                                                <c:set var="count" value="0"/>
+                                                <c:forEach items="${requestScope.ListNoon}" var="dto" >
 
-                                            <tr>
-                                            <c:set var="count" value="${count+1}"/>
-                                            <td>${count}</td>
-                                            <td>${dto.reservationId}</td>
-                                            <td>${dto.customerId}</td>
-                                            <td>${dto.staffAssignId}</td>
-                                            <td>${dto.checkInDate}</td>
+                                                <tr>
+                                                    <c:set var="count" value="${count+1}"/>
+                                                    <td>${count}</td>
+                                                    <td>${dto.reservationId}</td>
+                                                    <td>${dto.customerId}</td>
+                                                    <td>${dto.staffAssignId}</td>
+                                                    <td>${dto.checkInDate}</td>
 
-                                            <td>
-                                            <c:url var="viewdetails" value="DispatchServlet">
-                                                <c:param name="btAction" value="ViewReservationDetails"></c:param>
-                                                <c:param name="resid" value="${dto.reservationId}"></c:param>
+                                                    <td>
+                                                        <c:url var="viewdetails" value="DispatchServlet">
+                                                            <c:param name="btAction" value="ViewReservationDetails"></c:param>
+                                                            <c:param name="resid" value="${dto.reservationId}"></c:param>
 
 
-                                            </c:url>
-                                            <a href="${viewdetails}">See details</a>
-                                            </td>
-                                            
-                                            </tr>
-                                        </c:forEach>
-                                    </c:if>
+                                                        </c:url>
+                                                        <a href="${viewdetails}">See details</a>
+                                                    </td>
+
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
                                     </tbody>
                                 </table>
 
                             </div>
 
                             <!--All-->
-                            
-                                    </tbody>
-                                    <tfoot></tfoot>
-                                </table>
 
-                            </div>
+                            </tbody>
+                            <tfoot></tfoot>
+                            </table>
+
                         </div>
                     </div>
                 </div>
-
             </div>
-        </main>
 
-        <!--JQuery-->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        </div>
+    </main>
 
-        <!--Custom JS-->
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script>
-                                                $(".mydatatable").DataTable();
-        </script>
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+    <!--Custom JS-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+                                       $(".mydatatable").DataTable();
+    </script>
 
 
-        <script>
-            window.addEventListener('load', function () {
-                const loader = document.querySelector(".loader");
-                loader.className += " hidden"; // class "loader hidden"
-            })
-        </script>
-        <script>
-            function confirmation() {
-                var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
-                return r;
-            }
-        </script>
-    </body>
+    <script>
+        window.addEventListener('load', function () {
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden"; // class "loader hidden"
+        })
+    </script>
+    <script>
+        function confirmation() {
+            var r = confirm("Bạn có chắc muốn xóa tài khoản này?");
+            return r;
+        }
+    </script>
+    <script>
+        window.addEventListener('load', function () {
+            const loader = document.querySelector(".loader");
+            loader.className += " hidden"; // class "loader hidden"
+        });
+    </script>
+</body>
 </html>

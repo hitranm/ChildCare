@@ -22,7 +22,7 @@
             * {
                 font-family: 'Niramit', sans-serif;
             }
-            
+
             .wrapper {
                 display: flex;
                 flex-direction: column;
@@ -129,8 +129,12 @@
         </main>
 
         <jsp:include page="footer.jsp"/>        
-
-
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
 
     </body>
 </html>

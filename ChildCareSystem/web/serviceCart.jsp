@@ -24,6 +24,10 @@
             main {
                 min-height: 70vh;
             }
+            .no-service {
+                margin-left: auto;
+                margin-right: auto;
+            }
             .loader {
                 position: fixed;
                 z-index: 99;
@@ -53,7 +57,7 @@
                 }
             }
         </style>
-        
+
         <jsp:include page="header.jsp"/>
         <div class="loader">
             <img src="images/loading.gif" alt="Loading..." />
@@ -160,12 +164,20 @@
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
-
+                                                    <div class="alert alert-danger text-center col-11 my-5 no-service" role="alert">
+                                                        Không có dịch vụ nào đang chờ thanh toán
+                                                    </div>
                                                 </c:otherwise>
                                             </c:choose>
 
                                             </main>
 
                                             <jsp:include page="footer.jsp"/>
+                                            <script>
+                                                window.addEventListener('load', function () {
+                                                    const loader = document.querySelector(".loader");
+                                                    loader.className += " hidden"; // class "loader hidden"
+                                                });
+                                            </script>
                                             </body>
                                             </html>

@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bài viết</title>
-       
+
         <link rel="stylesheet" href="./viewAllAccounts.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +65,7 @@
             <jsp:forward page="accessDenied.jsp"/>
         </c:if>
         <!-- -->
-        
+
         <main>
             <div class="blog-container">
                 <div class="userPosts__wrapper">
@@ -300,5 +300,11 @@
         </script>
 
         <jsp:include page="footer.jsp"/>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
     </body>
 </html>

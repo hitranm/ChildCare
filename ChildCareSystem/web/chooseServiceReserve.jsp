@@ -251,6 +251,12 @@
 
         <script src="js/CalendarPicker.js"></script>
         <script src="js/reservation.js"></script>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
         <jsp:include page="footer.jsp"/>
 
     </body>
