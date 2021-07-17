@@ -322,7 +322,7 @@
                                                                 <c:url value="gop-y-dich-vu" var="feedbackLink">
                                                                     <c:param name="id" value="${history.reservationID}"/>
                                                                 </c:url>
-                                                                <a class="btn btn-primary" href="${feedbackLink}" role="button" onclick="feedback('${history.checkInTime}', '${history.reservationID}')">Góp ý dịch vụ</a>
+                                                                <a class="btn btn-primary" href="#" role="button" onclick="feedback('${history.checkInTime}', '${history.reservationID}')">Góp ý dịch vụ</a>
 
                                                                 <c:url value="DispatchServlet" var="infoLink">
                                                                     <c:param name="resid" value="${history.reservationID}"/>
@@ -363,10 +363,10 @@
         <!--Custom JS-->
         <script src="./js/main.js"></script>
         <script>
-                    window.addEventListener('load', function () {
-                        const loader = document.querySelector(".loader");
-                        loader.className += " hidden"; // class "loader hidden"
-                    });
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
         </script>
     </body>
 </html>

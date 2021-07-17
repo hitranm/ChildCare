@@ -29,7 +29,7 @@ function feedback(time, id) {
     var today = new Date();
     var timeInterval = today - reservationDate;
     if(timeInterval > 0) {
-        location.replace(`LoadFeedbackServlet?id=${id}`);
+        location.replace(`gop-y-dich-vu?id=${id}`);
     } else {
         $(`#${id}`).attr("hidden", false);
     }
