@@ -17,15 +17,46 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Niramit&display=swap" rel="stylesheet">
-        
+
         <style>
             body {
                 font-family: 'Niramit', sans-serif;
+            }
+            .loader {
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader > img {
+                width: 100px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeOut {
+                100% {
+                    opacity: 0;
+                    visibility: hidden;
+                }
             }
         </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <div class="loader">
+            <img src="images/loading.gif" alt="Loading..." />
+        </div>
         <main>
             <div class="blog-container">
                 <div class="userPosts__wrapper">

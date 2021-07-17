@@ -27,12 +27,42 @@
             * {
                 font-family: 'Niramit', sans-serif;
             }
+            .loader {
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader > img {
+                width: 100px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeOut {
+                100% {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
         </style>
     </head>
 
-    <body>
-        
+    <body>      
         <main>
+            <div class="loader">
+                <img src="images/loading.gif" alt="Loading..." />
+            </div>
             <div class="userPosts__container">
                 <div class="userPosts__wrapper">
                     <h2 class="userPosts__title">Accounts List</h2>
@@ -259,7 +289,7 @@
                                             <th>Role</th>
                                             <th>View details</th>
                                             <th></th>
-                                            
+
                                         </tr>
                                     </thead>
 
@@ -297,10 +327,10 @@
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-                                            </c:if>
-                                        </tbody>
-                                    </table>
-                                
+                                        </c:if>
+                                    </tbody>
+                                </table>
+
                             </div>
 
                             <!--All-->
@@ -316,7 +346,7 @@
                                             <th>Role</th>
                                             <th>View details</th>
                                             <th></th>
-                                            
+
                                         </tr>
                                     </thead>
 
@@ -354,11 +384,11 @@
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-                                             </c:if>
-                                        </tbody>
-                                        <tfoot></tfoot>
-                                    </table>
-                               
+                                        </c:if>
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+
                             </div>
                         </div>
                     </div>

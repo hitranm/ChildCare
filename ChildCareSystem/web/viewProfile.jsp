@@ -18,15 +18,6 @@
             * {
                 font-family: 'Niramit', sans-serif;
             }
-        </style>
-        <title>Profile Page</title>
-    </head>
-    <body>
-        <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
-        <jsp:include page="header.jsp"/>
-
-        <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
-        <style>
             .wrapper {
                 display: flex;
                 flex-direction: column;
@@ -43,8 +34,46 @@
             .wrapper h1 {
                 margin-bottom: 20px;
             }
+            .loader {
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader > img {
+                width: 100px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeOut {
+                100% {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
         </style>
+        <title>Profile Page</title>
+    </head>
+    <body>
+        <jsp:useBean id="specialty" class="web.models.tblSpecialty.SpecialtyDAO" scope="request"/>
+        <jsp:include page="header.jsp"/>
+
+        <c:set var="userProfileDTO" value="${sessionScope.USER_PROFILE}"/>
         <div class="wrapper px-5">
+            <div class="loader">
+                <img src="images/loading.gif" alt="Loading..." />
+            </div>
             <h1>Thông tin tài khoản</h1>
 
             <form action="DispatchServlet?btAction=UpdateProfile" method="POST">

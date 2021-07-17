@@ -36,10 +36,40 @@
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
+            .loader {
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader > img {
+                width: 100px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeOut {
+                100% {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
         </style>
     </head>
-    
-    
+
+    <div class="loader">
+        <img src="images/loading.gif" alt="Loading..." />
+    </div>
     <body style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 200; ">
         <c:if test="${empty sessionScope.ROLE}">
             <c:set var="DID_LOGIN" scope="request" value="Bạn cần đăng nhập để thực hiện thao tác này"/>
@@ -97,7 +127,7 @@
                             <a href="ViewBlogByAuthorServlet" class="" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Bài viết của tôi</span></a>
                         </c:if>--%>
-                            <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
+                        <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Tất cả bài viết</span></a>
                             </c:if>

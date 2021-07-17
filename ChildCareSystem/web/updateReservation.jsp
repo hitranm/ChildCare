@@ -25,7 +25,9 @@
     
     <body>
         <jsp:include page="header.jsp"/>
-        
+        <div class="loader">
+            <img src="images/loading.gif" alt="Loading..." />
+        </div>
         <main>
             <jsp:useBean id="service" class="web.models.tblService.ServiceDAO" scope="page"/>
             <jsp:useBean id="listTime" class="web.models.tblOpenTime.OpenTimeDAO"/>

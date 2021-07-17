@@ -39,6 +39,9 @@
     </head>
     <body>
         <jsp:include page="header.jsp" />
+        <div class="loader">
+            <img src="images/loading.gif" alt="Loading..." />
+        </div>
         <c:set var="service" value="${requestScope.SERVICE}"/>
         <c:set var="spec" value="${requestScope.SPECIALTY}"/>
         <div class="service-form-wrapper">         

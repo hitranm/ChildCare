@@ -36,6 +36,34 @@
             .carousel-item:hover {
                 cursor: pointer;
             }
+            .loader {
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader > img {
+                width: 100px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeOut {
+                100% {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
         </style>
     </head>
 
@@ -44,6 +72,10 @@
         <jsp:useBean id="sliderPost" class="web.models.tblBlog.BlogDAO" scope="request"/>
 
         <main>
+            <div class="loader">
+                <img src="images/loading.gif" alt="Loading..." />
+            </div>
+
             <div class="main_wrapper px-5 py-5">
                 <div class="main_left col-12 col-lg-9">
                     <!--Carousel-->
@@ -284,6 +316,12 @@
             });
         </script>
         <script src="./js/main.js"></script>
+        <script>
+            window.addEventListener('load', function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden"; // class "loader hidden"
+            });
+        </script>
 
     </body>
 </html>

@@ -21,10 +21,41 @@
             * {
                 font-family: 'Niramit', sans-serif;
             }
+            .loader {
+                position: fixed;
+                z-index: 99;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .loader > img {
+                width: 100px;
+            }
+
+            .loader.hidden {
+                animation: fadeOut 1s;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes fadeOut {
+                100% {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
         </style>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <div class="loader">
+            <img src="images/loading.gif" alt="Loading..." />
+        </div>
         <div class="container">
             <h1 class="text-center mb-2">BÀI VIẾT</h1>
             <div class="body-top d-flex">
