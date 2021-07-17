@@ -330,7 +330,7 @@
                                                                 </c:url>
                                                                 <a class="btn btn-success" href="${infoLink}" role="button">Xem chi tiết</a>
                                                                 <p class="card-text" style="text-align: right; font-size: smaller">
-                                                                    ${history.createdDate}
+                                                                    Ngày tạo đơn khám: ${history.createdDate}
                                                                 </p>
                                                                 <small class="text-danger" hidden id="${history.reservationID}">(* Đánh giá sẽ được mở sau khi khám bệnh)</small>
                                                             </div>
