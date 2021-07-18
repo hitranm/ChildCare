@@ -139,10 +139,11 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-9">
-                    <br><br><br>
-                    <h3>CẬP NHẬT HỒ SƠ BỆNH NHÂN </h3>
+                    
 
                     <div class="tab-pane fade show active" id="v-pills-updatePatient" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <h2 style="text-align: center; color: #7b7b7b">CẬP NHẬT HỒ SƠ BỆNH NHÂN</h2>
+
                         <form action="DispatchServlet" method="POST" name="f1">
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Họ tên bệnh nhân: </label>
@@ -202,7 +203,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-10 offset-md-2">
-                                    <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePatientProfile">Đăng ký</button>
+                                    <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePatientProfile">Cập nhật</button>
                                     <button type="reset" class="btn btn-secondary" >Đặt lại</button>
 
                                 </div>

@@ -224,7 +224,7 @@
         crossorigin="anonymous"></script>
         <script src="./js/bootstrap-input-spinner.js"></script>
         <script>
-            $("input[type='number']").inputSpinner()
+            $("input[type='number']").inputSpinner();
         </script>
         <!--Custom JS-->
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>

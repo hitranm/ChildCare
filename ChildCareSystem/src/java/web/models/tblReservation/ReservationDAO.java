@@ -275,7 +275,9 @@ public class ReservationDAO implements Serializable {
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
                     float price = rs.getFloat("Price");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
+                    String checkInTime_format = checkInTime.substring(0, checkInTime.length() - 2);
+
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime_format, price);
                     result.add(res);
                 }
             }
@@ -316,7 +318,9 @@ public class ReservationDAO implements Serializable {
                     int staffAssignedID = rs.getInt("StaffAssignedID");
                     String checkInTime = rs.getString("CheckInTime");
                     float price = rs.getFloat("Price");
-                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime, price);
+                    String checkInTime_format = checkInTime.substring(0, checkInTime.length() - 2);
+
+                    ReservationDTO res = new ReservationDTO(reservationID, customerID, staffAssignedID, checkInTime_format, price);
                     result.add(res);
                 }
             }
