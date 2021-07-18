@@ -70,7 +70,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <c:choose>
-
                             <c:when test="${sessionScope.ROLE eq 'customer'}">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item px-3">
@@ -96,6 +95,9 @@
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="dat-cho-kham-benh">Đặt chỗ khám bệnh</a>
+                                    </li>
+                                    <li class="nav-item px-3">
+                                        <a class="nav-link" href="xem-don-dat-kham">Xem đơn khám đang chờ</a>
                                     </li>
                                     <li class="nav-item px-3">
                                         <a class="nav-link" href="phan-hoi">Phản hồi</a>
