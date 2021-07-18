@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblService.ServiceDAO;
 import web.models.tblService.ServiceDTO;
 
@@ -39,6 +40,7 @@ public class ViewAllServiceListServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
         PrintWriter out = response.getWriter();
         String url = VIEW_SERVICE;
         try {
@@ -56,7 +58,14 @@ public class ViewAllServiceListServlet extends HttpServlet {
             request.setAttribute("POPULAR_SERVICE", topServiceCount);
             int pending = dao.countServiceDeny();
             request.setAttribute("DENY_SERVICE", pending);
+            ServiceDAO serviceDAO = new ServiceDAO();
 
+            if (session != null) {
+                String identityID = (String) session.getAttribute("IDENTITY_ID");
+                serviceDAO.getServicebyStaff(identityID);
+                List<ServiceDTO> serviceForManager = serviceDAO.getServiceList();
+                request.setAttribute("SERVICE_LIST_MANAGER", serviceForManager);
+            }
         } catch (SQLException | NamingException ex) {
             log("ViewAllServiceListServletError" + ex.getMessage());
             url = ERROR;

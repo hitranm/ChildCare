@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import web.models.tblBlog.BlogDAO;
 import web.models.tblBlog.BlogDTO;
 import web.models.tblStaff.StaffDAO;
@@ -42,6 +43,7 @@ public class ViewAllBlogListServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String url = VIEW_BLOG;
         try {
             BlogDAO dao = new BlogDAO();
@@ -54,6 +56,16 @@ public class ViewAllBlogListServlet extends HttpServlet {
             request.setAttribute("ACTIVE_BLOG", activeBlog);
             int pendingBlog = dao.countBlogPending();
             request.setAttribute("PENDING_BLOG", pendingBlog);
+
+            BlogDAO blogDAO = new BlogDAO();
+            if (session != null) {
+                String identityID = (String) session.getAttribute("IDENTITY_ID");
+                
+                blogDAO.queryBlogbyAuthor(identityID);
+                List<BlogDTO> blogForManager = blogDAO.getBlogList();
+                request.setAttribute("BLOG_LIST_MANAGER", blogForManager);
+
+            }
         } catch (SQLException | NamingException ex) {
             log("ViewAllBlogListServletError" + ex.getMessage());
             url = ERROR;

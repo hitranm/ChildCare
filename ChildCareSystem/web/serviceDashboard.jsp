@@ -100,21 +100,21 @@
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="dich-vu-cua-ban" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Dịch vụ </span></a>
+                                <span>Dịch vụ của tôi </span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllServiceListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Tất cả dịch vụ </span></a>
+                                <span>Dịch vụ </span></a>
                             </c:if>
                     </li>
-                    <li style="padding-left:0.25rem">
+<!--                    <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager'}">
                             <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Bài viết của tôi</span></a>
                             </c:if>
-                    </li>
+                    </li>-->
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="bai-viet-cua-ban" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
@@ -122,7 +122,7 @@
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Tất cả bài viết</span></a>
+                                <span>Bài viết</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -197,252 +197,525 @@
                             <span class="fas fa-chart-line"></span>
                         </div>
                     </div>
-
-
                 </div>
+
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Danh sách dịch vụ</h3>
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="font-size: large">
+                                        <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                            <a class="nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">Tất cả dịch vụ</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                            <a class="nav-link" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">Tất cả dịch vụ</a>
+                                            <a class="nav-link active" id="nav-individual-tab" data-toggle="tab" href="#nav-individual" role="tab" aria-controls="nav-individual" aria-selected="true">Dịch vụ của tôi</a>
+                                        </c:if>
+
+                                    </div>
+                                </nav>
                             </div>
                             <div class="card-body">
-                                <div class="userPosts__container">
-                                    <div class="userPosts__wrapper">
-                                        <h2 class="userPosts__title"></h2>
-                                        <div class="dropdownButton__wrapper px-3 my-4">
-                                            <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Trạng thái
-                                            </button>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <c:if test="${sessionScope.ROLE eq 'manager'}">
 
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
-                                                     aria-orientation="vertical">
-                                                    <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
-                                                       href="#allList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
-                                                       onclick="toggleButton(this)">Tất cả</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#publicList"
-                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Đang hoạt động</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#waitingList"
-                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Đang chờ</a>
-                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#rejectList"
-                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                       onclick="toggleButton(this)">Tạm ngưng</a>
+                                        <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                                        </c:if>
+                                        <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                                            </c:if>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3>Danh sách dịch vụ</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="userPosts__container">
+                                                        <div class="userPosts__wrapper">
+                                                            <h2 class="userPosts__title"></h2>
+                                                            <div class="dropdownButton__wrapper px-3 my-4">
+                                                                <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
+                                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Trạng thái
+                                                                </button>
+
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                                    <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
+                                                                         aria-orientation="vertical">
+                                                                        <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
+                                                                           href="#allList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
+                                                                           onclick="toggleButton(this)">Tất cả</a>
+                                                                        <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#publicList"
+                                                                           role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                           onclick="toggleButton(this)">Đang hoạt động</a>
+                                                                        <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#waitingList"
+                                                                           role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                           onclick="toggleButton(this)">Đang chờ</a>
+                                                                        <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#rejectList"
+                                                                           role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                           onclick="toggleButton(this)">Tạm ngưng</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12 table__wrapper bg-white">
+                                                                <div class="tab-content" id="v-pills-tabContent">
+
+                                                                    <!--All List-->
+                                                                    <div class="tab-pane fade show active bg-white" id="allList" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>STT</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Dịch vụ</th>
+                                                                                    <th>Giá tiền</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:if test="${not empty requestScope.SERVICE_LIST}">
+                                                                                    <c:forEach items="${requestScope.SERVICE_LIST}" var="dto" varStatus="countVar">
+                                                                                        <tr>
+                                                                                            <td>${countVar.count}</td>
+                                                                                            <td>${dto.serviceId}</td>
+                                                                                            <td>${dto.serviceName}</td>
+                                                                                            <td>${dto.price}00</td>
+                                                                                            <c:choose>
+                                                                                                <c:when test="${dto.statusId eq 0}">
+                                                                                                    <td class="alert alert-warning">Đang chờ</td>
+                                                                                                </c:when>
+                                                                                                <c:when test="${dto.statusId eq 1}">
+                                                                                                    <td class="alert alert-success">Đang hoạt động</td>
+                                                                                                </c:when>
+                                                                                                <c:when test="${dto.statusId eq 2}">
+                                                                                                    <td class="alert alert-danger">Từ chối</td>
+                                                                                                </c:when>
+                                                                                            </c:choose>
+                                                                                            <td>
+                                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
+                                                                                                    <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                </c:url>
+                                                                                                <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <c:url var="delete" value="xoa-dich-vu">
+                                                                                                    <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                </c:url>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </c:forEach>
+                                                                                </c:if>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <!--Public list-->
+                                                                    <div class="tab-pane fade bg-white" id="publicList" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>STT</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Dịch vụ</th>
+                                                                                    <th>Giá tiền</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:if test="${not empty requestScope.SERVICE_LIST}">
+                                                                                    <c:forEach items="${requestScope.SERVICE_LIST}" var="dto">
+                                                                                        <c:if test="${dto.statusId eq 1}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <tr>
+                                                                                                <td>${count}</td>
+                                                                                                <td>${dto.serviceId}</td>
+                                                                                                <td>${dto.serviceName}</td>
+                                                                                                <td>${dto.price}00</td>
+                                                                                                <td class="alert alert-success">Đang hoạt động</td>
+                                                                                                <td>
+                                                                                                    <c:url var="viewdetails" value="chi-tiet-dich-vu">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <c:url var="delete" value="xoa-dich-vu">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:if>
+
+                                                                                    </c:forEach>
+                                                                                </c:if>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+
+                                                                    <!-- Waiting list -->
+                                                                    <div class="tab-pane fade bg-white" id="waitingList" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>STT</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Dịch vụ</th>
+                                                                                    <th>Giá tiền</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:if test="${not empty requestScope.SERVICE_LIST}">
+                                                                                    <c:forEach items="${requestScope.SERVICE_LIST}" var="dto">
+                                                                                        <c:if test="${dto.statusId eq 0}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <tr>
+                                                                                                <td>${count}</td>
+                                                                                                <td>${dto.serviceId}</td>
+                                                                                                <td>${dto.serviceName}</td>
+                                                                                                <td>${dto.price}00</td>
+                                                                                                <td class="alert alert-warning">Đang chờ</td>
+                                                                                                <td>
+                                                                                                    <c:url var="viewdetails" value="chi-tiet-dich-vu">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <c:url var="delete" value="xoa-dich-vu">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:if>
+
+                                                                                    </c:forEach>
+                                                                                </c:if>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <!--RejectedList-->
+                                                                    <div class="tab-pane fade bg-white" id="rejectList" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>STT</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Dịch vụ</th>
+                                                                                    <th>Giá tiền</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:if test="${not empty requestScope.SERVICE_LIST}">
+                                                                                    <c:forEach items="${requestScope.SERVICE_LIST}" var="dto">
+                                                                                        <c:if test="${dto.statusId eq 2}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <tr>
+                                                                                                <td>${count}</td>
+                                                                                                <td>${dto.serviceId}</td>
+                                                                                                <td>${dto.serviceName}</td>
+                                                                                                <td>${dto.price}00</td>
+                                                                                                <td class="alert alert-danger">Tạm ngưng</td>
+                                                                                                <td>
+                                                                                                    <c:url var="viewdetails" value="chi-tiet-dich-vu">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <c:url var="delete" value="xoa-dich-vu">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:if>
+                                                                                    </c:forEach>
+                                                                                </c:if>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         </div>
+                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
 
-                                        <div class="col-sm-12 table__wrapper bg-white">
-                                            <div class="tab-content" id="v-pills-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-individual" role="tabpanel" aria-labelledby="nav-individual-tab">
 
-                                                <!--All List-->
-                                                <div class="tab-pane fade show active bg-white" id="allList" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>ID</th>
-                                                                <th>Dịch vụ</th>
-                                                                <th>Giá tiền</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:if test="${not empty requestScope.SERVICE_LIST}">
-                                                                <c:forEach items="${requestScope.SERVICE_LIST}" var="dto" varStatus="countVar">
-                                                                    <tr>
-                                                                        <td>${countVar.count}</td>
-                                                                        <td>${dto.serviceId}</td>
-                                                                        <td>${dto.serviceName}</td>
-                                                                        <td>${dto.price}00</td>
-                                                                        <c:choose>
-                                                                            <c:when test="${dto.statusId eq 0}">
-                                                                                <td class="alert alert-warning">Đang chờ</td>
-                                                                            </c:when>
-                                                                            <c:when test="${dto.statusId eq 1}">
-                                                                                <td class="alert alert-success">Đang hoạt động</td>
-                                                                            </c:when>
-                                                                            <c:when test="${dto.statusId eq 2}">
-                                                                                <td class="alert alert-danger">Từ chối</td>
-                                                                            </c:when>
-                                                                        </c:choose>
-                                                                        <td>
-                                                                            <c:url var="viewdetails" value="chi-tiet-dich-vu">
-                                                                                <c:param name="id" value="${dto.serviceId}"/>
-                                                                            </c:url>
-                                                                            <a href="${viewdetails}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <c:url var="delete" value="xoa-dich-vu">
-                                                                                <c:param name="id" value="${dto.serviceId}"/>
-                                                                            </c:url>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:forEach>
-                                                            </c:if>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3>Danh sách dịch vụ của tôi</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="userPosts__container">
+                                                            <div class="userPosts__wrapper">
+                                                                <h2 class="userPosts__title"></h2>
+                                                                <div class="dropdownButton__wrapper px-3 my-4">
+                                                                    <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
+                                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Trạng thái
+                                                                    </button>
 
-                                                <!--Public list-->
-                                                <div class="tab-pane fade bg-white" id="publicList" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>ID</th>
-                                                                <th>Dịch vụ</th>
-                                                                <th>Giá tiền</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:if test="${not empty requestScope.SERVICE_LIST}">
-                                                                <c:forEach items="${requestScope.SERVICE_LIST}" var="dto">
-                                                                    <c:if test="${dto.statusId eq 1}">
-                                                                        <c:set var="count" value="${count+1}"/>
-                                                                        <tr>
-                                                                            <td>${count}</td>
-                                                                            <td>${dto.serviceId}</td>
-                                                                            <td>${dto.serviceName}</td>
-                                                                            <td>${dto.price}00</td>
-                                                                            <td class="alert alert-success">Đang hoạt động</td>
-                                                                            <td>
-                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
-                                                                                    <c:param name="id" value="${dto.serviceId}"/>
-                                                                                </c:url>
-                                                                                <a href="${viewdetails}">Xem chi tiết</a>
-                                                                            </td>
-                                                                            <td>
-                                                                                <c:url var="delete" value="xoa-dich-vu">
-                                                                                    <c:param name="id" value="${dto.serviceId}"/>
-                                                                                </c:url>
-                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </c:if>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                                        <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
+                                                                             aria-orientation="vertical">
+                                                                            <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill"
+                                                                               href="#allList" role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
+                                                                               onclick="toggleButton(this)">Tất cả</a>
+                                                                            <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#publicList"
+                                                                               role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                               onclick="toggleButton(this)">Đang hoạt động</a>
+                                                                            <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#waitingList"
+                                                                               role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                               onclick="toggleButton(this)">Đang chờ</a>
+                                                                            <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#rejectList"
+                                                                               role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                               onclick="toggleButton(this)">Tạm ngưng</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                                </c:forEach>
-                                                            </c:if>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                                <div class="col-sm-12 table__wrapper bg-white">
+                                                                    <div class="tab-content" id="v-pills-tabContent">
+
+                                                                        <!--All List-->
+                                                                        <div class="tab-pane fade show active bg-white" id="allList" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>STT</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Dịch vụ</th>
+                                                                                        <th>Giá tiền</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:if test="${not empty requestScope.SERVICE_LIST_MANAGER}">
+                                                                                        <c:forEach items="${requestScope.SERVICE_LIST_MANAGER}" var="dto" varStatus="countVar">
+                                                                                            <tr>
+                                                                                                <td>${countVar.count}</td>
+                                                                                                <td>${dto.serviceId}</td>
+                                                                                                <td>${dto.serviceName}</td>
+                                                                                                <td>${dto.price}00</td>
+                                                                                                <c:choose>
+                                                                                                    <c:when test="${dto.statusId eq 0}">
+                                                                                                        <td class="alert alert-warning">Đang chờ</td>
+                                                                                                    </c:when>
+                                                                                                    <c:when test="${dto.statusId eq 1}">
+                                                                                                        <td class="alert alert-success">Đang hoạt động</td>
+                                                                                                    </c:when>
+                                                                                                    <c:when test="${dto.statusId eq 2}">
+                                                                                                        <td class="alert alert-danger">Từ chối</td>
+                                                                                                    </c:when>
+                                                                                                </c:choose>
+                                                                                                <td>
+                                                                                                    <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <c:url var="delete" value="DeleteServiceServlet">
+                                                                                                        <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                    </c:url>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:forEach>
+                                                                                    </c:if>                                                              
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+
+                                                                        <!--Public list-->
+                                                                        <div class="tab-pane fade bg-white" id="publicList" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>STT</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Dịch vụ</th>
+                                                                                        <th>Giá tiền</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:if test="${not empty requestScope.SERVICE_LIST_MANAGER}">
+                                                                                        <c:forEach items="${requestScope.SERVICE_LIST_MANAGER}" var="dto">
+                                                                                            <c:if test="${dto.statusId eq 1}">
+                                                                                                <c:set var="count" value="${count+1}"/>
+                                                                                                <tr>
+                                                                                                    <td>${count}</td>
+                                                                                                    <td>${dto.serviceId}</td>
+                                                                                                    <td>${dto.serviceName}</td>
+                                                                                                    <td>${dto.price}00</td>
+                                                                                                    <td class="alert alert-success">Đang hoạt động</td>
+                                                                                                    <td>
+                                                                                                        <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                                            <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                        </c:url>
+                                                                                                        <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <c:url var="delete" value="DeleteServiceServlet">
+                                                                                                            <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                        </c:url>
+                                                                                                        <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </c:if>
+
+                                                                                        </c:forEach>
+                                                                                    </c:if>                                                              
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
 
 
-                                                <!-- Waiting list -->
-                                                <div class="tab-pane fade bg-white" id="waitingList" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>ID</th>
-                                                                <th>Dịch vụ</th>
-                                                                <th>Giá tiền</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:if test="${not empty requestScope.SERVICE_LIST}">
-                                                                <c:forEach items="${requestScope.SERVICE_LIST}" var="dto">
-                                                                    <c:if test="${dto.statusId eq 0}">
-                                                                        <c:set var="count" value="${count+1}"/>
-                                                                        <tr>
-                                                                            <td>${count}</td>
-                                                                            <td>${dto.serviceId}</td>
-                                                                            <td>${dto.serviceName}</td>
-                                                                            <td>${dto.price}00</td>
-                                                                            <td class="alert alert-warning">Đang chờ</td>
-                                                                            <td>
-                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
-                                                                                    <c:param name="id" value="${dto.serviceId}"/>
-                                                                                </c:url>
-                                                                                <a href="${viewdetails}">Xem chi tiết</a>
-                                                                            </td>
-                                                                            <td>
-                                                                                <c:url var="delete" value="xoa-dich-vu">
-                                                                                    <c:param name="id" value="${dto.serviceId}"/>
-                                                                                </c:url>
-                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </c:if>
+                                                                        <!-- Waiting list -->
+                                                                        <div class="tab-pane fade bg-white" id="waitingList" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>STT</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Dịch vụ</th>
+                                                                                        <th>Giá tiền</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:if test="${not empty requestScope.SERVICE_LIST_MANAGER}">
+                                                                                        <c:forEach items="${requestScope.SERVICE_LIST_MANAGER}" var="dto">
+                                                                                            <c:if test="${dto.statusId eq 0}">
+                                                                                                <c:set var="count" value="${count+1}"/>
+                                                                                                <tr>
+                                                                                                    <td>${count}</td>
+                                                                                                    <td>${dto.serviceId}</td>
+                                                                                                    <td>${dto.serviceName}</td>
+                                                                                                    <td>${dto.price}00</td>
+                                                                                                    <td class="alert alert-warning">Đang chờ</td>
+                                                                                                    <td>
+                                                                                                        <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                                            <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                        </c:url>
+                                                                                                        <a href="${viewdetails}">Chi tiết</a>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <c:url var="delete" value="DeleteServiceServlet">
+                                                                                                            <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                        </c:url>
+                                                                                                        <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </c:if>
 
-                                                                </c:forEach>
-                                                            </c:if>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                                                        </c:forEach>
+                                                                                    </c:if>                                                              
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
 
-                                                <!--RejectedList-->
-                                                <div class="tab-pane fade bg-white" id="rejectList" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>STT</th>
-                                                                <th>ID</th>
-                                                                <th>Dịch vụ</th>
-                                                                <th>Giá tiền</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:if test="${not empty requestScope.SERVICE_LIST}">
-                                                                <c:forEach items="${requestScope.SERVICE_LIST}" var="dto">
-                                                                    <c:if test="${dto.statusId eq 2}">
-                                                                        <c:set var="count" value="${count+1}"/>
-                                                                        <tr>
-                                                                            <td>${count}</td>
-                                                                            <td>${dto.serviceId}</td>
-                                                                            <td>${dto.serviceName}</td>
-                                                                            <td>${dto.price}00</td>
-                                                                            <td class="alert alert-danger">Tạm ngưng</td>
-                                                                            <td>
-                                                                                <c:url var="viewdetails" value="chi-tiet-dich-vu">
-                                                                                    <c:param name="id" value="${dto.serviceId}"/>
-                                                                                </c:url>
-                                                                                <a href="${viewdetails}">Xem chi tiết</a>
-                                                                            </td>
-                                                                            <td>
-                                                                                <c:url var="delete" value="xoa-dich-vu">
-                                                                                    <c:param name="id" value="${dto.serviceId}"/>
-                                                                                </c:url>
-                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </c:if>
-                                                        </tbody>
-                                                    </table>
+                                                                        <!--RejectedList-->
+                                                                        <div class="tab-pane fade bg-white" id="rejectList" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>STT</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Dịch vụ</th>
+                                                                                        <th>Giá tiền</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:if test="${not empty requestScope.SERVICE_LIST_MANAGER}">
+                                                                                        <c:forEach items="${requestScope.SERVICE_LIST_MANAGER}" var="dto">
+                                                                                            <c:if test="${dto.statusId eq 2}">
+                                                                                                <c:set var="count" value="${count+1}"/>
+                                                                                                <tr>
+                                                                                                    <td>${count}</td>
+                                                                                                    <td>${dto.serviceId}</td>
+                                                                                                    <td>${dto.serviceName}</td>
+                                                                                                    <td>${dto.price}00</td>
+                                                                                                    <td class="alert alert-danger">Tạm ngưng</td>
+                                                                                                    <td>
+                                                                                                        <c:url var="viewdetails" value="ViewServiceDetailServlet">
+                                                                                                            <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                        </c:url>
+                                                                                                        <a href="${viewdetails}">Xem chi tiết</a>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <c:url var="delete" value="DeleteServiceServlet">
+                                                                                                            <c:param name="id" value="${dto.serviceId}"/>
+                                                                                                        </c:url>
+                                                                                                        <a class="btn btn-danger" onclick="return confirmation()" href="${delete}" role="button">Xóa</a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </c:if>
+                                                                                        </c:forEach>
+                                                                                    </c:if>                                                              
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </c:if>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
+
             </main>
         </div>
         <!--JQuery-->
@@ -460,7 +733,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                                                                                    $(".mydatatable").DataTable();
+                                                                                                            $(".mydatatable").DataTable();
         </script>
 
 

@@ -100,26 +100,26 @@
                                 <span>Tài khoản </span></a>
                         </li>
                     </c:if>
-                    <li style="padding-left:0.25rem">
+<!--                    <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager'}">
                             <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                                 <span>Dịch vụ của tôi</span></a>
                             </c:if>
-                    </li>
+                    </li>-->
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="dich-vu-cua-ban" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Dịch vụ </span></a>
+                                <span>Dịch vụ của tôi</span></a>
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Tất cả dịch vụ </span></a>
+                                <span>Dịch vụ</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="bai-viet-cua-ban" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Bài viết</span></a>
+                                <span>Bài viết của tôi</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -129,7 +129,7 @@
                         </c:if>--%>
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="active" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Tất cả bài viết</span></a>
+                                <span>Bài viết</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
@@ -200,281 +200,597 @@
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Danh sách bài viết</h3>
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="font-size: large">
+                                        <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                            <a class="nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">Tất cả bài viết</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                            <a class="nav-link" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="false">Tất cả bài viết</a>
+                                            <a class="nav-link active" id="nav-individual-tab" data-toggle="tab" href="#nav-individual" role="tab" aria-controls="nav-individual" aria-selected="true">Bài viết của tôi</a>
+                                        </c:if>
+
+                                    </div>
+                                </nav>
                             </div>
                             <div class="card-body">
-                                <jsp:useBean id="identity" class="web.models.tblIdentity.IdentityDAO" scope="request"/>
-                                <div class="userPosts__wrapper">
-                                    <div class="status-dropdown px-3 mb-4">
-                                        <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Trạng thái
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
-                                                 aria-orientation="vertical">
-                                                <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill" href="#all"
-                                                   role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
-                                                   onclick="toggleButton(this)">Tất cả</a>
-                                                <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#public"
-                                                   role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                   onclick="toggleButton(this)">Chấp thuận</a>
-                                                <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#pending"
-                                                   role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                   onclick="toggleButton(this)">Đang chờ</a>
-                                                <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#deny"
-                                                   role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
-                                                   onclick="toggleButton(this)">Từ chối</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 table__wrapper bg-white">
-                                        <div class="tab-content" id="v-pills-tabContent">
-                                            <c:if test="${not empty requestScope.BLOG_LIST}">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <c:if test="${sessionScope.ROLE eq 'manager'}">
 
-                                                <!--All-->
-                                                <div class="tab-pane fade show active bg-white" id="all" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Tiêu đề</th>
-                                                                <th>Tác giả</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:forEach items="${requestScope.BLOG_LIST}" var="dto">
-                                                                <tr>
-                                                                    <c:if test="${dto.statusID eq 1}">
-                                                                        <c:set var="count" value="${count+1}"/>
-                                                                        <td>
-                                                                            ${count}
-                                                                        </td>
-                                                                        <td>${dto.blogID}</td>
-                                                                        <td>${dto.title}</td>
-                                                                        <td>
-                                                                            <c:set var="staffID" value="${dto.authorID}"/>
-                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
-                                                                        </td>
-                                                                        <td class="alert alert-success">Chấp thuận</td>
-                                                                        <td>
-                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </c:if>
-                                                                    <c:if test="${dto.statusID eq 0}">
-                                                                        <c:set var="count" value="${count+1}"/>
-                                                                        <td>
-                                                                            ${count}
-                                                                        </td>
-                                                                        <td>${dto.blogID}</td>
-                                                                        <td>${dto.title}</td>
-                                                                        <td>
-                                                                            <c:set var="staffID" value="${dto.authorID}"/>
-                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
-                                                                        </td>
-                                                                        <td class="alert alert-warning">Đang chờ</td>
-                                                                        <td>
-                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </c:if>
-                                                                    <c:if test="${dto.statusID eq 2}">
-                                                                        <c:set var="count" value="${count+1}"/>
-                                                                        <td>
-                                                                            ${count}
-                                                                        </td>
-                                                                        <td>${dto.blogID}</td>
-                                                                        <td>${dto.title}</td>
-                                                                        <td>
-                                                                            <c:set var="staffID" value="${dto.authorID}"/>
-                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
-                                                                        </td>
-                                                                        <td class="alert alert-danger">Từ chối</td>
-                                                                        <td>
-                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </c:if>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-
-                                                <!--Public-->
-                                                <div class="tab-pane fade show bg-white" id="public" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Tiêu đề</th>
-                                                                <th>Tác giả</th>
-                                                                <th>Trạng thái</th>
-                                                                    <c:if test="${sessionScope.ROLE eq 'manager'}">
-                                                                    <th>Hiện trên slider</th>
-                                                                    </c:if>
-                                                                <th></th>
-                                                                <th></th>
-
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
-                                                                <c:if test="${dto.statusID eq 1}">
-                                                                    <c:set var="count" value="${count+1}"/>
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${count}
-                                                                        </td>
-                                                                        <td>${dto.blogID}</td>
-                                                                        <td>${dto.title}</td>
-                                                                        <td>
-                                                                            <c:set var="staffID" value="${dto.authorID}"/>
-                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
-                                                                        </td>
-                                                                        <td class="alert alert-success">Chấp thuận</td>
-                                                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
-                                                                            <td>
-                                                                                <form action="DispatchServlet" method="post">
-                                                                                    <c:choose>
-                                                                                        <c:when test="${dto.onSlider}">
-                                                                                            <input type="checkbox" name="chkSlider" value="ON" checked />
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
-                                                                                            <input type="checkbox" name="chkSlider" value="ON" />
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                    <input name="txtBlogId" value="${dto.blogID}" hidden />
-                                                                                    <button type="submit" class="btn btn-primary" name="btAction" value="UpdateSlider">Cập nhật</button>
-                                                                                </form>
-                                                                            </td>
-                                                                        </c:if>
-
-                                                                        <td>
-                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-
-                                                </div>
-                                                <!--Pending-->
-                                                <div class="tab-pane fade show bg-white" id="pending" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Tiêu đề</th>
-                                                                <th>Tác giả</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
-                                                                <c:if test="${dto.statusID eq 0}">
-                                                                    <c:set var="count" value="${count+1}"/>
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${count}
-                                                                        </td>
-                                                                        <td>${dto.blogID}</td>
-                                                                        <td>${dto.title}</td>
-                                                                        <td>
-                                                                            <c:set var="staffID" value="${dto.authorID}"/>
-                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
-                                                                        </td>
-                                                                        <td class="alert alert-warning">Đang chờ</td>
-                                                                        <td>
-                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-
-                                                </div>
-                                                <!--deny-->
-                                                <div class="tab-pane fade show bg-white" id="deny" role="tabpanel"
-                                                     aria-labelledby="v-pills-changePassword-tab">
-
-                                                    <table class="table table-striped table-bordered mydatatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Tiêu đề</th>
-                                                                <th>Tác giả</th>
-                                                                <th>Trạng thái</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody id="tableBodyAccepted">
-                                                            <c:set var="count" value="0"/>
-                                                            <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
-                                                                <c:if test="${dto.statusID eq 2}">
-                                                                    <c:set var="count" value="${count+1}"/>
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${count}
-                                                                        </td>
-                                                                        <td>${dto.blogID}</td>
-                                                                        <td>${dto.title}</td>
-                                                                        <td>
-                                                                            <c:set var="staffID" value="${dto.authorID}"/>
-                                                                            ${identity.getStaffOrManagerNameByIdentityId(staffID)}
-                                                                        </td>
-                                                                        <td class="alert alert-danger">Từ chối</td>
-                                                                        <td>
-                                                                            <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                        <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                                        </c:if>
+                                        <c:if test="${sessionScope.ROLE eq 'admin'}">
+                                            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                                             </c:if>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3>Danh sách bài viết</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <jsp:useBean id="identity" class="web.models.tblIdentity.IdentityDAO" scope="request"/>
+                                                    <div class="userPosts__wrapper">
+                                                        <div class="status-dropdown px-3 mb-4">
+                                                            <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
+                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Trạng thái
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                                <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
+                                                                     aria-orientation="vertical">
+                                                                    <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill" href="#all"
+                                                                       role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
+                                                                       onclick="toggleButton(this)">Tất cả</a>
+                                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#public"
+                                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                       onclick="toggleButton(this)">Chấp thuận</a>
+                                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#pending"
+                                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                       onclick="toggleButton(this)">Đang chờ</a>
+                                                                    <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#deny"
+                                                                       role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                       onclick="toggleButton(this)">Từ chối</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 table__wrapper bg-white">
+                                                            <div class="tab-content" id="v-pills-tabContent">
+                                                                <c:if test="${not empty requestScope.BLOG_LIST}">
+
+                                                                    <!--All-->
+                                                                    <div class="tab-pane fade show active bg-white" id="all" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>No</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Tiêu đề</th>
+                                                                                    <th>Tác giả</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:forEach items="${requestScope.BLOG_LIST}" var="dto">
+                                                                                    <tr>
+                                                                                        <c:if test="${dto.statusID eq 1}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <td>
+                                                                                                ${count}
+                                                                                            </td>
+                                                                                            <td>${dto.blogID}</td>
+                                                                                            <td>${dto.title}</td>
+                                                                                            <td>
+                                                                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                ${identity.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                            </td>
+                                                                                            <td class="alert alert-success">Chấp thuận</td>
+                                                                                            <td>
+                                                                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </c:if>
+                                                                                        <c:if test="${dto.statusID eq 0}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <td>
+                                                                                                ${count}
+                                                                                            </td>
+                                                                                            <td>${dto.blogID}</td>
+                                                                                            <td>${dto.title}</td>
+                                                                                            <td>
+                                                                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                ${identity.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                            </td>
+                                                                                            <td class="alert alert-warning">Đang chờ</td>
+                                                                                            <td>
+                                                                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </c:if>
+                                                                                        <c:if test="${dto.statusID eq 2}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <td>
+                                                                                                ${count}
+                                                                                            </td>
+                                                                                            <td>${dto.blogID}</td>
+                                                                                            <td>${dto.title}</td>
+                                                                                            <td>
+                                                                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                ${identity.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                            </td>
+                                                                                            <td class="alert alert-danger">Từ chối</td>
+                                                                                            <td>
+                                                                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </c:if>
+                                                                                    </tr>
+                                                                                </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <!--Public-->
+                                                                    <div class="tab-pane fade show bg-white" id="public" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>No</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Tiêu đề</th>
+                                                                                    <th>Tác giả</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                                                                        <th>Hiện trên slider</th>
+                                                                                        </c:if>
+                                                                                    <th></th>
+                                                                                    <th></th>
+
+                                                                                </tr>
+                                                                            </thead>
+
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
+                                                                                    <c:if test="${dto.statusID eq 1}">
+                                                                                        <c:set var="count" value="${count+1}"/>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                ${count}
+                                                                                            </td>
+                                                                                            <td>${dto.blogID}</td>
+                                                                                            <td>${dto.title}</td>
+                                                                                            <td>
+                                                                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                ${identity.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                            </td>
+                                                                                            <td class="alert alert-success">Chấp thuận</td>
+                                                                                            <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                                                                                <td>
+                                                                                                    <form action="DispatchServlet" method="post">
+                                                                                                        <c:choose>
+                                                                                                            <c:when test="${dto.onSlider}">
+                                                                                                                <input type="checkbox" name="chkSlider" value="ON" checked />
+                                                                                                            </c:when>
+                                                                                                            <c:otherwise>
+                                                                                                                <input type="checkbox" name="chkSlider" value="ON" />
+                                                                                                            </c:otherwise>
+                                                                                                        </c:choose>
+                                                                                                        <input name="txtBlogId" value="${dto.blogID}" hidden />
+                                                                                                        <button type="submit" class="btn btn-primary" name="btAction" value="UpdateSlider">Cập nhật</button>
+                                                                                                    </form>
+                                                                                                </td>
+                                                                                            </c:if>
+
+                                                                                            <td>
+                                                                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
+
+                                                                    </div>
+                                                                    <!--Pending-->
+                                                                    <div class="tab-pane fade show bg-white" id="pending" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>No</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Tiêu đề</th>
+                                                                                    <th>Tác giả</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
+                                                                                    <c:if test="${dto.statusID eq 0}">
+                                                                                        <c:set var="count" value="${count+1}"/>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                ${count}
+                                                                                            </td>
+                                                                                            <td>${dto.blogID}</td>
+                                                                                            <td>${dto.title}</td>
+                                                                                            <td>
+                                                                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                ${identity.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                            </td>
+                                                                                            <td class="alert alert-warning">Đang chờ</td>
+                                                                                            <td>
+                                                                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
+
+                                                                    </div>
+                                                                    <!--deny-->
+                                                                    <div class="tab-pane fade show bg-white" id="deny" role="tabpanel"
+                                                                         aria-labelledby="v-pills-changePassword-tab">
+
+                                                                        <table class="table table-striped table-bordered mydatatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>No</th>
+                                                                                    <th>ID</th>
+                                                                                    <th>Tiêu đề</th>
+                                                                                    <th>Tác giả</th>
+                                                                                    <th>Trạng thái</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+
+                                                                            <tbody id="tableBodyAccepted">
+                                                                                <c:set var="count" value="0"/>
+                                                                                <c:forEach items="${requestScope.BLOG_LIST}" var="dto" varStatus="counter">
+                                                                                    <c:if test="${dto.statusID eq 2}">
+                                                                                        <c:set var="count" value="${count+1}"/>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                ${count}
+                                                                                            </td>
+                                                                                            <td>${dto.blogID}</td>
+                                                                                            <td>${dto.title}</td>
+                                                                                            <td>
+                                                                                                <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                ${identity.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                            </td>
+                                                                                            <td class="alert alert-danger">Từ chối</td>
+                                                                                            <td>
+                                                                                                <a href="chi-tiet-bai-viet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a class="btn btn-danger" onclick="return confirmation()" href="xoa-bai-viet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </c:if>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <c:if test="${sessionScope.ROLE eq 'manager'}">
+
+                                            <div class="tab-pane fade show active" id="nav-individual" role="tabpanel" aria-labelledby="nav-individual-tab">
+
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3>Danh sách bài viết của tôi</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <jsp:useBean id="identity1" class="web.models.tblIdentity.IdentityDAO" scope="request"/>
+                                                        <div class="userPosts__wrapper">
+                                                            <div class="status-dropdown px-3 mb-4">
+                                                                <button class="btn btn-primary dropdown-toggle selectButton" type="button" id="dropdownMenu2"
+                                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Trạng thái
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                                    <div class="nav flex-column nav-pills navbar-expand-lg bg-white" id="v-pills-tab" role="tablist"
+                                                                         aria-orientation="vertical">
+                                                                        <a class="nav-link" id="v-pills-changeUsername-tab" data-toggle="pill" href="#all"
+                                                                           role="tab" aria-controls="v-pills-changeUsername" aria-selected="true"
+                                                                           onclick="toggleButton(this)">Tất cả</a>
+                                                                        <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#public"
+                                                                           role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                           onclick="toggleButton(this)">Chấp thuận</a>
+                                                                        <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#pending"
+                                                                           role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                           onclick="toggleButton(this)">Đang chờ</a>
+                                                                        <a class="nav-link" id="v-pills-changePassword-tab" data-toggle="pill" href="#deny"
+                                                                           role="tab" aria-controls="v-pills-changePassword" aria-selected="false"
+                                                                           onclick="toggleButton(this)">Từ chối</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 table__wrapper bg-white">
+                                                                <div class="tab-content" id="v-pills-tabContent">
+                                                                    <c:if test="${not empty requestScope.BLOG_LIST_MANAGER}">
+
+                                                                        <!--All-->
+                                                                        <div class="tab-pane fade show active bg-white" id="all" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>No</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Tiêu đề</th>
+                                                                                        <th>Tác giả</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:forEach items="${requestScope.BLOG_LIST_MANAGER}" var="dto">
+                                                                                        <tr>
+                                                                                            <c:if test="${dto.statusID eq 1}">
+                                                                                                <c:set var="count" value="${count+1}"/>
+                                                                                                <td>
+                                                                                                    ${count}
+                                                                                                </td>
+                                                                                                <td>${dto.blogID}</td>
+                                                                                                <td>${dto.title}</td>
+                                                                                                <td>
+                                                                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                    ${identity1.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                                </td>
+                                                                                                <td class="alert alert-success">Chấp thuận</td>
+                                                                                                <td>
+                                                                                                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </c:if>
+                                                                                            <c:if test="${dto.statusID eq 0}">
+                                                                                                <c:set var="count" value="${count+1}"/>
+                                                                                                <td>
+                                                                                                    ${count}
+                                                                                                </td>
+                                                                                                <td>${dto.blogID}</td>
+                                                                                                <td>${dto.title}</td>
+                                                                                                <td>
+                                                                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                    ${identity1.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                                </td>
+                                                                                                <td class="alert alert-warning">Đang chờ</td>
+                                                                                                <td>
+                                                                                                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </c:if>
+                                                                                            <c:if test="${dto.statusID eq 2}">
+                                                                                                <c:set var="count" value="${count+1}"/>
+                                                                                                <td>
+                                                                                                    ${count}
+                                                                                                </td>
+                                                                                                <td>${dto.blogID}</td>
+                                                                                                <td>${dto.title}</td>
+                                                                                                <td>
+                                                                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                    ${identity1.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                                </td>
+                                                                                                <td class="alert alert-danger">Từ chối</td>
+                                                                                                <td>
+                                                                                                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </c:if>
+                                                                                        </tr>
+                                                                                    </c:forEach>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+
+                                                                        <!--Public-->
+                                                                        <div class="tab-pane fade show bg-white" id="public" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>No</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Tiêu đề</th>
+                                                                                        <th>Tác giả</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                            <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                                                                            <th>Hiện trên slider</th>
+                                                                                            </c:if>
+                                                                                        <th></th>
+                                                                                        <th></th>
+
+                                                                                    </tr>
+                                                                                </thead>
+
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:forEach items="${requestScope.BLOG_LIST_MANAGER}" var="dto" varStatus="counter">
+                                                                                        <c:if test="${dto.statusID eq 1}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    ${count}
+                                                                                                </td>
+                                                                                                <td>${dto.blogID}</td>
+                                                                                                <td>${dto.title}</td>
+                                                                                                <td>
+                                                                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                    ${identity1.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                                </td>
+                                                                                                <td class="alert alert-success">Chấp thuận</td>
+                                                                                                <c:if test="${sessionScope.ROLE eq 'manager'}">
+                                                                                                    <td>
+                                                                                                        <form action="DispatchServlet" method="post">
+                                                                                                            <c:choose>
+                                                                                                                <c:when test="${dto.onSlider}">
+                                                                                                                    <input type="checkbox" name="chkSlider" value="ON" checked />
+                                                                                                                </c:when>
+                                                                                                                <c:otherwise>
+                                                                                                                    <input type="checkbox" name="chkSlider" value="ON" />
+                                                                                                                </c:otherwise>
+                                                                                                            </c:choose>
+                                                                                                            <input name="txtBlogId" value="${dto.blogID}" hidden />
+                                                                                                            <button type="submit" class="btn btn-primary" name="btAction" value="UpdateSlider">Cập nhật</button>
+                                                                                                        </form>
+                                                                                                    </td>
+                                                                                                </c:if>
+
+                                                                                                <td>
+                                                                                                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:if>
+                                                                                    </c:forEach>
+                                                                                </tbody>
+                                                                            </table>
+
+                                                                        </div>
+                                                                        <!--Pending-->
+                                                                        <div class="tab-pane fade show bg-white" id="pending" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>No</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Tiêu đề</th>
+                                                                                        <th>Tác giả</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:forEach items="${requestScope.BLOG_LIST_MANAGER}" var="dto" varStatus="counter">
+                                                                                        <c:if test="${dto.statusID eq 0}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    ${count}
+                                                                                                </td>
+                                                                                                <td>${dto.blogID}</td>
+                                                                                                <td>${dto.title}</td>
+                                                                                                <td>
+                                                                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                    ${identity1.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                                </td>
+                                                                                                <td class="alert alert-warning">Đang chờ</td>
+                                                                                                <td>
+                                                                                                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:if>
+                                                                                    </c:forEach>
+                                                                                </tbody>
+                                                                            </table>
+
+                                                                        </div>
+                                                                        <!--deny-->
+                                                                        <div class="tab-pane fade show bg-white" id="deny" role="tabpanel"
+                                                                             aria-labelledby="v-pills-changePassword-tab">
+
+                                                                            <table class="table table-striped table-bordered mydatatable">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>No</th>
+                                                                                        <th>ID</th>
+                                                                                        <th>Tiêu đề</th>
+                                                                                        <th>Tác giả</th>
+                                                                                        <th>Trạng thái</th>
+                                                                                        <th></th>
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+
+                                                                                <tbody id="tableBodyAccepted">
+                                                                                    <c:set var="count" value="0"/>
+                                                                                    <c:forEach items="${requestScope.BLOG_LIST_MANAGER}" var="dto" varStatus="counter">
+                                                                                        <c:if test="${dto.statusID eq 2}">
+                                                                                            <c:set var="count" value="${count+1}"/>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    ${count}
+                                                                                                </td>
+                                                                                                <td>${dto.blogID}</td>
+                                                                                                <td>${dto.title}</td>
+                                                                                                <td>
+                                                                                                    <c:set var="staffID" value="${dto.authorID}"/>
+                                                                                                    ${identity1.getStaffOrManagerNameByIdentityId(staffID)}
+                                                                                                </td>
+                                                                                                <td class="alert alert-danger">Từ chối</td>
+                                                                                                <td>
+                                                                                                    <a href="ViewBlogDetailServlet?id=${dto.blogID}">Xem chi tiết</a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="btn btn-danger" onclick="return confirmation()" href="DeleteBlogServlet?id=${dto.blogID}" role="button">Xóa</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </c:if>
+                                                                                    </c:forEach>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
+
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -495,7 +811,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                                                                                $(".mydatatable").DataTable();
+                                                                                                        $(".mydatatable").DataTable();
         </script>
 
 

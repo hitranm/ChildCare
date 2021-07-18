@@ -98,12 +98,12 @@
                                 <span>Tài khoản </span></a>
                         </li>
                     </c:if>
-                    <li style="padding-left:0.25rem">
+<!--                    <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager'}">
                             <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                                 <span>Dịch vụ của tôi</span></a>
                             </c:if>
-                    </li>
+                    </li>-->
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="ViewServiceByStaffServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
@@ -111,15 +111,15 @@
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
-                                <span>Tất cả dịch vụ </span></a>
+                                <span>Dịch vụ </span></a>
                             </c:if>
                     </li>
-                    <li style="padding-left:0.25rem">
+<!--                    <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager'}">
                             <a href="ViewBlogByAuthorServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Bài viết của tôi</span></a>
                             </c:if>
-                    </li>
+                    </li>-->
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'staff'}">
                             <a href="bai-viet-cua-ban" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
@@ -127,7 +127,7 @@
                             </c:if>
                             <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
                             <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
-                                <span>Tất cả bài viết</span></a>
+                                <span>Bài viết</span></a>
                             </c:if>
                     </li>
                     <li style="padding-left:0.25rem">
