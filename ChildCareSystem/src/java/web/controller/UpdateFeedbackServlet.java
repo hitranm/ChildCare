@@ -6,6 +6,8 @@
 package web.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import web.models.tblFeedback.FeedbackDAO;
  */
 public class UpdateFeedbackServlet extends HttpServlet {
 
-    private static final String SUCCESS = "phan-hoi";
+    private static final String SUCCESS = "gop-y-dich-vu?id=";
     private static final String ERROR = "loi-he-thong";
 
     /**
@@ -42,12 +44,13 @@ public class UpdateFeedbackServlet extends HttpServlet {
         FeedbackDAO feedbackDAO = new FeedbackDAO();
         try {
             int feedbackId = Integer.parseInt(strFeedbackId);
+            int reservationId = feedbackDAO.getFeedbackById(feedbackId).getReservationId();
             int rate = Integer.parseInt(strStar);
             boolean result = feedbackDAO.updateFeedback(feedbackId, strComment, rate);
             if (result) {
-                url = SUCCESS;
+                url = SUCCESS + reservationId;
             }
-        } catch (Exception ex) {
+        } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at UpdateFeedbackServlet: " + ex.getMessage());
         } finally {
             response.sendRedirect(url);

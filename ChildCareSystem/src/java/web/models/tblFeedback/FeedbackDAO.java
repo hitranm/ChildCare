@@ -140,6 +140,44 @@ public class FeedbackDAO implements Serializable {
         }
         return result;
     }
+    
+    public FeedbackDTO getFeedbackById(int id) throws SQLException, NamingException {
+        FeedbackDTO result = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBHelpers.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT * "
+                        + " FROM tblFeedback "
+                        + " WHERE FeedbackID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String comment = rs.getString("Comment");
+                    int rate = rs.getInt("Rate");
+                    int serviceId = rs.getInt("ServiceID");
+                    int customerId = rs.getInt("CustomerID");
+                    int feedbackId = rs.getInt("FeedbackID");
+                    int reservationId = rs.getInt("ReservationID");
+                    result = new FeedbackDTO(feedbackId, serviceId, customerId, reservationId, comment, rate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
 
     public List<FeedbackDTO> getFeedbackByServiceId(int id, int top) throws SQLException, NamingException {
         List<FeedbackDTO> result = null;
@@ -181,6 +219,8 @@ public class FeedbackDAO implements Serializable {
         }
         return result;
     }
+    
+    
 
     public List<FeedbackDTO> getFeedbackList() throws SQLException, NamingException {
         List<FeedbackDTO> result = null;

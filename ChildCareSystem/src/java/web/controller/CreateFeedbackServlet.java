@@ -21,7 +21,7 @@ import web.models.tblFeedback.FeedbackDTO;
  */
 public class CreateFeedbackServlet extends HttpServlet {
 
-    private static final String SUCCESS = "xem-lich-su-kham";
+    private static final String SUCCESS = "gop-y-dich-vu?id=";
     private static final String ERROR = "loi-he-thong";
 
     /**
@@ -52,7 +52,7 @@ public class CreateFeedbackServlet extends HttpServlet {
             FeedbackDTO feedbackDTO = new FeedbackDTO(serviceId, customerId, reservationId, strComment, star);
             boolean result = feedbackDAO.addFeedback(feedbackDTO);
             if (result) {
-                url = SUCCESS;
+                url = SUCCESS + reservationId;
             }
 
         } catch (NumberFormatException | SQLException | NamingException ex) {

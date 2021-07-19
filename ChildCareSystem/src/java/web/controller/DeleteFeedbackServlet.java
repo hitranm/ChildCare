@@ -21,7 +21,7 @@ import web.models.tblFeedback.FeedbackDAO;
  */
 public class DeleteFeedbackServlet extends HttpServlet {
 
-    private static final String SUCCESS = "ViewAllFeedbackServlet";
+    private static final String SUCCESS = "gop-y-dich-vu?id=";
     private static final String ERROR = "systemError.jsp";
 
     /**
@@ -41,14 +41,16 @@ public class DeleteFeedbackServlet extends HttpServlet {
         String url = ERROR;
         try {
             int feedbackId = Integer.parseInt(strFeedbackId);
+            int reservationId = feedbackDAO.getFeedbackById(feedbackId).getReservationId();
             boolean result = feedbackDAO.deleteFeedback(feedbackId);
             if (result) {
-                url = SUCCESS;
+
+                url = SUCCESS + reservationId;
             }
         } catch (NumberFormatException | SQLException | NamingException ex) {
             log("Error at DeleteFeedbackServlet: " + ex.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
     }
 
