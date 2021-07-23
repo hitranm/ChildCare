@@ -81,9 +81,9 @@ public class CreateServiceServlet extends HttpServlet {
                 createServiceErr.setTitleLengthError("Tiêu đề không được để trống và có nhiều nhất 100 kí tự.");
             }
 
-            if (description.trim().length() == 0 || description.trim().length() > 300) {
+            if (description.trim().length() == 0 || description.trim().length() > 2000) {
                 foundError = true;
-                createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 300 kí tự.");
+                createServiceErr.setDescriptionLengthError("Nội dung không được để trống và có nhiều nhất 2000 kí tự.");
             }
             if (thumbnail.trim().isEmpty()) {
                 foundError = true;
