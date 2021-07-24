@@ -7,6 +7,7 @@ package web.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -94,6 +95,11 @@ public class UpdateReservationServlet extends HttpServlet {
                             deleteViewModel = viewModel;
                         }
                     }
+                    double totalPrice = cart.getTotalPrice();
+                    DecimalFormat df = new DecimalFormat("#.000");
+                    String total = df.format(totalPrice);
+                    session.setAttribute("TOTAL_PRICE", total);
+                    
                     listCartViewModel.remove(deleteViewModel);
                     listCartViewModel.add(cartViewModel);
                     session.setAttribute("CART_VIEW_MODEL", listCartViewModel);

@@ -112,7 +112,7 @@ public class AddServiceToCartServlet extends HttpServlet {
                     listCartViewModel.add(cartViewModel);
                     session.setAttribute("CART", cart);
                     session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
-                    session.setAttribute(("TOTAL_PRICE"), total);
+                    session.setAttribute("TOTAL_PRICE", total);
                     url = SUCCESS;
                     session.removeAttribute("DUPLICATE_PATIENT");
                     response.sendRedirect(url);
