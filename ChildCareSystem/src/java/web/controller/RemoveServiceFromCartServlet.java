@@ -6,7 +6,10 @@
 package web.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -61,13 +64,18 @@ public class RemoveServiceFromCartServlet extends HttpServlet {
                                 deleteViewModel = viewModel;
                             }
                         }
+                        double totalPrice = cart.getTotalPrice();
+                        DecimalFormat df = new DecimalFormat("#.000");
+                        String total = df.format(totalPrice);
+                        session.setAttribute("TOTAL_PRICE", total);
+
                         listCartViewModel.remove(deleteViewModel);
                         session.setAttribute("CART_VIEW_MODEL", listCartViewModel);
                         response.sendRedirect(url);
                     }
                 }
             }
-        } catch (IOException | NumberFormatException ex) {
+        } catch (IOException | NumberFormatException | SQLException | NamingException ex) {
             log("Error at RemoveServiceFromCartServlet " + ex.getMessage());
         }
     }
