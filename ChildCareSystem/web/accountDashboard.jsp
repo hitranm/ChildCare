@@ -107,7 +107,7 @@
                     </li>-->
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                            <a href="ViewAllServiceListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
+                            <a href="thong-ke-Dich-vu" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-first-aid"></span>
                                 <span>Dịch vụ </span></a>
                             </c:if>
                     </li>
@@ -119,7 +119,7 @@
                     </li>-->
                     <li style="padding-left:0.25rem">
                         <c:if test="${sessionScope.ROLE eq 'manager' || sessionScope.ROLE eq 'admin'}">
-                            <a href="ViewAllBlogListServlet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
+                            <a href="thong-ke-bai-viet" class="btn btn-outline-light" style="border: none; border-radius: 30px 0px 0px 30px;text-align: left"><span id="side-bar-icon" class="fas fa-file-alt"></span>
                                 <span>Bài viết</span></a>
                             </c:if>
                     </li>
@@ -221,7 +221,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Danh sách tài khoản đưa vào hoạt động</h3>
+                                <c:if test="${sessionScope.ROLE eq 'admin'}">
                                 <div><a href="addManager.jsp" class="btn btn-primary">Tạo mới tài khoản  <span class="fas fa-plus"></span></a></div>
+                                </c:if>
                             </div>
                             <div class="card-body">
                                 <div class="userPosts__container">
@@ -280,7 +282,7 @@
                                                                         <td>${dto.identityID}</td>
                                                                         <td>${dto.fullName}</td>
                                                                         <td>${dto.phoneNumber}</td>
-                                                                        <td class="alert alert-success">Customer</td>
+                                                                        <td class="alert alert-success">Khách hàng</td>
                                                                         <td>
                                                                             <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                 <c:param name="id" value="${dto.identityID}"></c:param>
@@ -305,7 +307,7 @@
                                                                     <td>${dto.identityID}</td>
                                                                     <td>${dto.fullName}</td>
                                                                     <td>${dto.phoneNumber}</td>
-                                                                    <td class="alert alert-warning">Staff</td>
+                                                                    <td class="alert alert-warning">Nhân viên</td>
                                                                     <td>
                                                                         <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                             <c:param name="id" value="${dto.identityID}"></c:param>
@@ -336,7 +338,7 @@
                                                                             <td>${dto.identityID}</td>
                                                                             <td>${dto.fullName}</td>
                                                                             <td>${dto.phoneNumber}</td>
-                                                                            <td class="alert alert-danger">Manager</td>
+                                                                            <td class="alert alert-danger">Quản lí</td>
                                                                             <td>
                                                                                 <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                     <c:param name="id" value="${dto.identityID}"></c:param>
@@ -582,7 +584,7 @@
                                                                                 <td>${dto.identityID}</td>
                                                                                 <td>${dto.fullName}</td>
                                                                                 <td>${dto.phoneNumber}</td>
-                                                                                <td class="alert alert-success">Customer</td>
+                                                                                <td class="alert alert-success">Khách hàng</td>
                                                                                 <td>
                                                                                     <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                         <c:param name="id" value="${dto.identityID}"></c:param>
@@ -607,7 +609,7 @@
                                                                             <td>${dto.identityID}</td>
                                                                             <td>${dto.fullName}</td>
                                                                             <td>${dto.phoneNumber}</td>
-                                                                            <td class="alert alert-warning">Staff</td>
+                                                                            <td class="alert alert-warning">Nhân viên</td>
                                                                             <td>
                                                                                 <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                     <c:param name="id" value="${dto.identityID}"></c:param>
@@ -638,7 +640,7 @@
                                                                                     <td>${dto.identityID}</td>
                                                                                     <td>${dto.fullName}</td>
                                                                                     <td>${dto.phoneNumber}</td>
-                                                                                    <td class="alert alert-danger">Manager</td>
+                                                                                    <td class="alert alert-danger">Quản lí</td>
                                                                                     <td>
                                                                                         <c:url var="viewdetails" value="thong-tin-tai-khoan">
                                                                                             <c:param name="id" value="${dto.identityID}"></c:param>
